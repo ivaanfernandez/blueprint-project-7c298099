@@ -9,12 +9,12 @@ const BiometricScan = ({ onComplete }: BiometricScanProps) => {
 
   useEffect(() => {
     const timers = [
-      setTimeout(() => setPhase(1), 200),
-      setTimeout(() => setPhase(2), 1500),
-      setTimeout(() => setPhase(3), 1700),
-      setTimeout(() => setPhase(4), 9000),
-      setTimeout(() => setPhase(5), 12000),
-      setTimeout(() => onComplete(), 14000),
+      setTimeout(() => setPhase(1), 0),
+      setTimeout(() => setPhase(2), 600),
+      setTimeout(() => setPhase(3), 1200),
+      setTimeout(() => setPhase(4), 3200),
+      setTimeout(() => setPhase(5), 4200),
+      setTimeout(() => onComplete(), 5000),
     ];
     return () => timers.forEach(clearTimeout);
   }, [onComplete]);
