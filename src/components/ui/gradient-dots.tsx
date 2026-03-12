@@ -20,9 +20,9 @@ export function GradientDots({
       className={`absolute inset-0 ${className}`}
       style={{
         backgroundColor: '#000000',
-        backgroundImage: `radial-gradient(circle, #1A6BFF 1px, transparent 1px)`,
-        backgroundSize: `${spacing}px ${spacing}px`,
-        opacity: 0.45,
+        backgroundImage: `radial-gradient(circle, #1A6BFF 1.5px, transparent 1.5px)`,
+        backgroundSize: `20px 20px`,
+        opacity: 0.7,
       }}
       {...props}
     />
