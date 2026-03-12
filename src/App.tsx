@@ -1,4 +1,4 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Toaster as Sonner } from "@/components/ui/sonner";
@@ -15,7 +15,15 @@ const queryClient = new QueryClient();
 
 const App = () => {
   const [introComplete, setIntroComplete] = useState(false);
+  const [showDock, setShowDock] = useState(false);
   const handleComplete = useCallback(() => setIntroComplete(true), []);
+
+  useEffect(() => {
+    if (introComplete) {
+      const timer = setTimeout(() => setShowDock(true), 100);
+      return () => clearTimeout(timer);
+    }
+  }, [introComplete]);
 
   return (
     <QueryClientProvider client={queryClient}>
@@ -25,7 +33,7 @@ const App = () => {
         {!introComplete && <BiometricScan onComplete={handleComplete} />}
         <BrowserRouter>
           <Routes>
-            <Route path="/" element={<MainLanding />} />
+            <Route path="/" element={<MainLanding showDock={showDock} />} />
             <Route path="/huella-azul" element={<HuellaAzul />} />
             <Route path="/huella-roja" element={<HuellaRoja />} />
             <Route path="/huella-verde" element={<HuellaVerde />} />

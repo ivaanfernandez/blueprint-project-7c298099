@@ -117,15 +117,16 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
           <span
             style={{
               display: "block",
-              fontSize: "clamp(48px, 8vw, 100px)",
+              whiteSpace: "nowrap",
+              fontSize: "clamp(28px, 7vw, 100px)",
               fontWeight: 800,
               color: "#FFFFFF",
             }}
           >
-            THIS ISN'T A GYM,
+            THIS ISN'T A GYM
           </span>
           <WordRotate
-            words={["IT'S A SYSTEM.", "IT'S A COMMUNITY.", "IT'S A MINDSET."]}
+            words={["IT'S A SYSTEM", "IT'S A COMMUNITY", "IT'S A MINDSET", "THIS IS BLUEPRINT"]}
             duration={2500}
             framerProps={{
               initial: { opacity: 0, y: 50 },
@@ -133,7 +134,8 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
               exit: { opacity: 0, y: -50 },
               transition: { duration: 0.4, ease: "easeOut" },
               style: {
-                fontSize: "clamp(48px, 8vw, 100px)",
+                display: "block",
+                fontSize: "clamp(28px, 7vw, 100px)",
                 fontWeight: 800,
                 color: "#1A6BFF",
                 lineHeight: 0.95,
