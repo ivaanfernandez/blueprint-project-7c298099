@@ -114,7 +114,7 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
       <section className="relative z-10 flex min-h-screen flex-col items-center md:items-center" style={{ paddingBottom: "80px" }}>
         {/* Headline */}
         <div
-          className="hero-headline-wrapper text-center flex flex-col md:flex-row md:items-center md:justify-center"
+          className="hero-headline-wrapper text-center flex flex-col md:flex-row md:items-center md:justify-center md:flex-nowrap"
           style={{ lineHeight: 0.95, paddingTop: "120px" }}
         >
           <style>{`
@@ -133,28 +133,31 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
               whiteSpace: "nowrap",
               fontWeight: 800,
               color: "#FFFFFF",
+              flexShrink: 0,
             }}
           >
             THIS ISN'T A GYM,
           </span>
-          <WordRotate
-            words={["IT'S A SYSTEM", "IT'S A COMMUNITY", "IT'S A MINDSET", "THIS IS BLUEPRINT"]}
-            duration={2500}
-            framerProps={{
-              initial: { opacity: 0, y: 50 },
-              animate: { opacity: 1, y: 0 },
-              exit: { opacity: 0, y: -50 },
-              transition: { duration: 0.4, ease: "easeOut" },
-              style: {
-                display: "block",
-                whiteSpace: "nowrap",
-                fontWeight: 800,
-                color: "#1A6BFF",
-                lineHeight: 0.95,
-              },
-            }}
-            className="text-center hero-line"
-          />
+          <div style={{ minWidth: "14ch", textAlign: "left" }}>
+            <WordRotate
+              words={["IT'S A SYSTEM", "IT'S A COMMUNITY", "IT'S A MINDSET", "THIS IS BLUEPRINT"]}
+              duration={2500}
+              framerProps={{
+                initial: { opacity: 0, y: 50 },
+                animate: { opacity: 1, y: 0 },
+                exit: { opacity: 0, y: -50 },
+                transition: { duration: 0.4, ease: "easeOut" },
+                style: {
+                  display: "block",
+                  whiteSpace: "nowrap",
+                  fontWeight: 800,
+                  color: "#1A6BFF",
+                  lineHeight: 0.95,
+                },
+              }}
+              className="text-left hero-line"
+            />
+          </div>
         </div>
 
 
