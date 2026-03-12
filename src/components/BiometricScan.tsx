@@ -43,6 +43,12 @@ const BiometricScan = ({ onComplete }: BiometricScanProps) => {
           0% { opacity: 1; }
           100% { opacity: 0; }
         }
+        @media (min-width: 768px) {
+          .bs-wordmark { font-size: 24px !important; }
+          .bs-fingerprint-container { width: 220px !important; height: 220px !important; }
+          .bs-fingerprint-svg { width: 220px !important; height: 220px !important; }
+          .bs-status-text { font-size: 13px !important; }
+        }
       `}</style>
       <div
         className="fixed inset-0 z-50 flex flex-col items-center justify-center"
@@ -54,6 +60,7 @@ const BiometricScan = ({ onComplete }: BiometricScanProps) => {
       >
         {/* Wordmark */}
         <p
+          className="bs-wordmark"
           style={{
             fontSize: "clamp(14px, 4vw, 18px)",
             letterSpacing: "0.3em",
@@ -71,6 +78,7 @@ const BiometricScan = ({ onComplete }: BiometricScanProps) => {
 
         {/* Fingerprint container */}
         <div
+          className="bs-fingerprint-container"
           style={{
             position: "relative",
             width: "140px",
@@ -82,6 +90,7 @@ const BiometricScan = ({ onComplete }: BiometricScanProps) => {
           }}
         >
           <svg
+            className="bs-fingerprint-svg"
             viewBox="0 0 140 140"
             width="140"
             height="140"
@@ -175,6 +184,7 @@ const BiometricScan = ({ onComplete }: BiometricScanProps) => {
         {/* Scanning text */}
         {phase === 3 && (
           <p
+            className="bs-status-text"
             style={{
               marginTop: "24px",
               fontSize: "10px",
@@ -183,13 +193,14 @@ const BiometricScan = ({ onComplete }: BiometricScanProps) => {
               animation: "bs-fade-in 0.5s ease forwards",
             }}
           >
-            ESCANEANDO HUELLA...
+            SCANNING PRINT...
           </p>
         )}
 
         {/* Access granted text */}
         {phase === 4 && (
           <p
+            className="bs-status-text"
             style={{
               marginTop: "24px",
               fontSize: "10px",
@@ -198,7 +209,7 @@ const BiometricScan = ({ onComplete }: BiometricScanProps) => {
               animation: "bs-fade-in 0.5s ease forwards",
             }}
           >
-            ACCESO CONCEDIDO
+            ACCESS GRANTED
           </p>
         )}
       </div>
