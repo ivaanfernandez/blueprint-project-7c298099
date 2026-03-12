@@ -60,11 +60,13 @@ const BiometricScan = ({ onComplete }: BiometricScanProps) => {
             color: "#FFFFFF",
             textTransform: "uppercase" as const,
             opacity: phase >= 1 ? 1 : 0,
-            transition: "opacity 1s ease",
+            transition: "opacity 1.5s ease",
             marginBottom: "32px",
+            textAlign: "center",
+            width: "100%",
           }}
         >
-          ACCESS TO BLUEPRINT PROJECT
+          ACCESSING BLUEPRINT PROJECT
         </p>
 
         {/* Fingerprint container */}
@@ -73,8 +75,8 @@ const BiometricScan = ({ onComplete }: BiometricScanProps) => {
             position: "relative",
             width: "140px",
             height: "140px",
-            opacity: phase >= 2 ? 1 : 0,
-            transition: "opacity 0.8s ease",
+            opacity: phase >= 1 ? 1 : 0,
+            transition: "opacity 1.5s ease",
             animation: phase === 3 ? "bs-glow-pulse 3s ease-in-out infinite" : undefined,
             filter: phase >= 2 ? "drop-shadow(0 0 12px #1A6BFF)" : undefined,
           }}
