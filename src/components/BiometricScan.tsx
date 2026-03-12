@@ -9,12 +9,12 @@ const BiometricScan = ({ onComplete }: BiometricScanProps) => {
 
   useEffect(() => {
     const timers = [
-      setTimeout(() => setPhase(1), 100),
-      setTimeout(() => setPhase(2), 1500),
-      setTimeout(() => setPhase(3), 2500),
-      setTimeout(() => setPhase(4), 4500),
-      setTimeout(() => setPhase(5), 6000),
-      setTimeout(() => onComplete(), 7000),
+      setTimeout(() => setPhase(1), 200),
+      setTimeout(() => setPhase(2), 3000),
+      setTimeout(() => setPhase(3), 5000),
+      setTimeout(() => setPhase(4), 9000),
+      setTimeout(() => setPhase(5), 12000),
+      setTimeout(() => onComplete(), 14000),
     ];
     return () => timers.forEach(clearTimeout);
   }, [onComplete]);
@@ -29,9 +29,11 @@ const BiometricScan = ({ onComplete }: BiometricScanProps) => {
           50% { top: calc(100% - 2px); }
           100% { top: 0; }
         }
+
         @keyframes bs-glow-pulse {
           0%, 100% { filter: drop-shadow(0 0 8px #1A6BFF); }
           50% { filter: drop-shadow(0 0 20px #1A6BFF) drop-shadow(0 0 40px #1A6BFF); }
+
         }
         @keyframes bs-ripple {
           0% { transform: translate(-50%, -50%) scale(0); opacity: 0.6; }
@@ -47,13 +49,13 @@ const BiometricScan = ({ onComplete }: BiometricScanProps) => {
         style={{
           backgroundColor: "#000000",
           fontFamily: "'Space Grotesk', sans-serif",
-          animation: phase >= 5 ? "bs-screen-fade 1s ease-in forwards" : undefined,
+          animation: phase >= 5 ? "bs-screen-fade 2s ease-in forwards" : undefined,
         }}
       >
         {/* Wordmark */}
         <p
           style={{
-            fontSize: "13px",
+            fontSize: "18px",
             letterSpacing: "0.3em",
             color: "#FFFFFF",
             textTransform: "uppercase" as const,
@@ -62,7 +64,7 @@ const BiometricScan = ({ onComplete }: BiometricScanProps) => {
             marginBottom: "32px",
           }}
         >
-          BLUEPRINT PROJECT
+          ACCESS TO BLUEPRINT PROJECT
         </p>
 
         {/* Fingerprint container */}
@@ -73,7 +75,7 @@ const BiometricScan = ({ onComplete }: BiometricScanProps) => {
             height: "140px",
             opacity: phase >= 2 ? 1 : 0,
             transition: "opacity 0.8s ease",
-            animation: phase === 3 ? "bs-glow-pulse 1.5s ease-in-out infinite" : undefined,
+            animation: phase === 3 ? "bs-glow-pulse 3s ease-in-out infinite" : undefined,
             filter: phase >= 2 ? "drop-shadow(0 0 12px #1A6BFF)" : undefined,
           }}
         >
@@ -139,7 +141,7 @@ const BiometricScan = ({ onComplete }: BiometricScanProps) => {
                 height: "2px",
                 backgroundColor: "#1A6BFF",
                 opacity: 0.9,
-                animation: "bs-scan-line 2s linear",
+                animation: "bs-scan-line 4s linear",
                 boxShadow: "0 0 8px #1A6BFF",
               }}
             />
@@ -159,7 +161,7 @@ const BiometricScan = ({ onComplete }: BiometricScanProps) => {
                     height: "60px",
                     borderRadius: "50%",
                     border: "1px solid #1A6BFF",
-                    animation: `bs-ripple 1.2s ease-out ${delay}s forwards`,
+                    animation: `bs-ripple 2.4s ease-out ${delay * 2}s forwards`,
                     pointerEvents: "none",
                   }}
                 />
