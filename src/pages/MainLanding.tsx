@@ -112,30 +112,29 @@ const MainLanding = () => {
 
       {/* HERO */}
       <section className="relative z-10 flex min-h-screen flex-col items-center justify-center" style={{ paddingBottom: "80px" }}>
-        {/* Eyebrow */}
-        <p style={{ fontSize: "11px", letterSpacing: "0.35em", color: "#1A6BFF", marginBottom: "24px" }}>
-          EL SISTEMA OPERATIVO
-        </p>
-
         {/* Headline */}
         <div className="text-center" style={{ lineHeight: 0.95 }}>
-          {HEADLINE_WORDS.map((w, i) => (
-            <motion.span
-              key={w.text}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: i * 0.15, duration: 0.6 }}
-              style={{
-                display: i === 2 ? "block" : "inline-block",
-                fontSize: "clamp(56px, 10vw, 120px)",
-                fontWeight: 800,
-                color: w.color,
-                marginRight: i < 1 ? "0.25em" : undefined,
-              }}
-            >
-              {w.text}
-            </motion.span>
-          ))}
+          <span
+            style={{
+              display: "block",
+              fontSize: "clamp(48px, 8vw, 100px)",
+              fontWeight: 800,
+              color: "#FFFFFF",
+            }}
+          >
+            THIS ISN'T A GYM,
+          </span>
+          <WordRotate
+            words={["IT'S A SYSTEM.", "IT'S A COMMUNITY.", "IT'S A MINDSET."]}
+            duration={2500}
+            framerProps={{
+              initial: { opacity: 0, y: 50 },
+              animate: { opacity: 1, y: 0 },
+              exit: { opacity: 0, y: -50 },
+              transition: { duration: 0.4, ease: "easeOut" },
+            }}
+            className="text-center"
+          />
         </div>
 
         {/* Subheadline */}
