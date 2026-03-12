@@ -85,7 +85,7 @@ const HuellaCard = ({ h }: { h: typeof HUELLAS[0] }) => (
   </div>
 );
 
-const MainLanding = () => {
+const MainLanding = ({ showDock }: { showDock: boolean }) => {
   const navigate = useNavigate();
 
   return (
