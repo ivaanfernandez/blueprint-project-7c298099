@@ -163,7 +163,7 @@ const BiometricScan = ({ onComplete }: BiometricScanProps) => {
                     height: "60px",
                     borderRadius: "50%",
                     border: "1px solid #1A6BFF",
-                    animation: `bs-ripple 2.4s ease-out ${delay * 2}s forwards`,
+                    animation: `bs-ripple 1s ease-out ${delay}s forwards`,
                     pointerEvents: "none",
                   }}
                 />
