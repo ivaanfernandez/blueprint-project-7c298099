@@ -115,7 +115,7 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
         {/* Headline */}
         <div
           className="hero-headline-wrapper"
-          style={{ lineHeight: 0.95, paddingTop: "120px", position: "relative", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", flexWrap: "nowrap", width: "100%" }}
+          style={{ lineHeight: 0.95, paddingTop: "120px", position: "relative", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", flexWrap: "nowrap", width: "100%", boxSizing: "border-box" as const, overflow: "visible" }}
         >
           <style>{`
             @media (min-width: 768px) {
