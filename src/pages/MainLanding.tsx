@@ -119,7 +119,7 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
         >
           <style>{`
             @media (min-width: 768px) {
-              .hero-headline-wrapper { padding-top: 0px !important; gap: 16px; }
+              .hero-headline-wrapper { padding-top: 140px !important; gap: 16px; }
               .hero-line { font-size: clamp(36px, 5vw, 72px) !important; }
             }
             @media (max-width: 767px) {
