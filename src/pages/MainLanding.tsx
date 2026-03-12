@@ -120,7 +120,7 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
           <style>{`
             @media (min-width: 768px) {
               .hero-headline-wrapper { padding-top: 140px !important; flex-direction: row !important; }
-              .hero-line { font-size: clamp(36px, 5vw, 72px) !important; }
+              .hero-line { font-size: clamp(28px, 3.5vw, 52px) !important; }
             }
             @media (max-width: 767px) {
               .hero-line { font-size: clamp(44px, 11vw, 64px) !important; }
@@ -142,7 +142,7 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
           <span className="hero-spacer" style={{ flexShrink: 0 }}>&nbsp;</span>
           <div
             className="hero-rotate-wrapper"
-            style={{ display: "inline-block", width: "22ch", flexShrink: 0, overflow: "hidden", textAlign: "left" }}
+            style={{ display: "inline-block", width: "18ch", flexShrink: 0, overflow: "hidden", textAlign: "left" }}
           >
             <WordRotate
               words={["IT'S A SYSTEM", "IT'S A COMMUNITY", "IT'S A MINDSET", "THIS IS BLUEPRINT"]}
