@@ -49,7 +49,7 @@ const BiometricScan = ({ onComplete }: BiometricScanProps) => {
         style={{
           backgroundColor: "#000000",
           fontFamily: "'Space Grotesk', sans-serif",
-          animation: phase >= 5 ? "bs-screen-fade 1s ease-in forwards" : undefined,
+          animation: phase >= 5 ? "bs-screen-fade 2s ease-in forwards" : undefined,
         }}
       >
         {/* Wordmark */}
