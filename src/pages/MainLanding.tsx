@@ -98,7 +98,7 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
       <ProceduralBackground />
 
       {/* FIXED DOCK NAV */}
-      <div className="fixed top-0 left-0 right-0 z-50 flex justify-center" style={{ paddingTop: "20px" }}>
+      <div className="fixed top-0 left-0 right-0 z-50 flex justify-center" style={{ paddingTop: "20px", opacity: showDock ? 1 : 0, pointerEvents: showDock ? "auto" : "none", transition: "opacity 0.8s ease" }}>
         <Dock>
           {HUELLAS.map((h) => (
             <DockIcon key={h.route} tooltip={h.tooltip} onClick={() => navigate(h.route)}>
