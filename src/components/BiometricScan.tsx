@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { GradientDots } from "@/components/ui/gradient-dots";
 
 interface BiometricScanProps {
   onComplete: () => void;
