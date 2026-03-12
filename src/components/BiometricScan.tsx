@@ -64,7 +64,7 @@ const BiometricScan = ({ onComplete }: BiometricScanProps) => {
             marginBottom: "32px",
           }}
         >
-          BLUEPRINT PROJECT
+          ACCESS TO BLUEPRINT PROJECT
         </p>
 
         {/* Fingerprint container */}
