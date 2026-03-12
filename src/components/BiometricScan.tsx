@@ -55,7 +55,7 @@ const BiometricScan = ({ onComplete }: BiometricScanProps) => {
         {/* Wordmark */}
         <p
           style={{
-            fontSize: "13px",
+            fontSize: "18px",
             letterSpacing: "0.3em",
             color: "#FFFFFF",
             textTransform: "uppercase" as const,
