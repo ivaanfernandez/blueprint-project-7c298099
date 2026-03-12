@@ -101,6 +101,19 @@ const MainLanding = () => {
     >
       <ProceduralBackground />
 
+      {/* FIXED DOCK NAV */}
+      <div className="fixed top-0 left-0 right-0 z-50 flex justify-center" style={{ paddingTop: "20px" }}>
+        <Dock>
+          {HUELLAS.map((h) => (
+            <DockIcon key={h.route} tooltip={h.tooltip} onClick={() => navigate(h.route)}>
+              <div className="flex items-center justify-center w-full h-full" style={{ filter: `drop-shadow(0 0 8px ${h.glow})` }}>
+                <FingerprintSVG color={h.color} size={40} />
+              </div>
+            </DockIcon>
+          ))}
+        </Dock>
+      </div>
+
       {/* HERO */}
       <section className="relative z-10 flex min-h-screen flex-col items-center justify-center" style={{ paddingBottom: "80px" }}>
         {/* Eyebrow */}
