@@ -147,18 +147,6 @@ const MainLanding = () => {
           Tres huellas digitales. Un sistema unificado.
         </p>
 
-        {/* Dock */}
-        <div style={{ marginTop: "64px" }}>
-          <Dock>
-            {HUELLAS.map((h) => (
-              <DockIcon key={h.route} tooltip={h.tooltip} onClick={() => navigate(h.route)}>
-                <div className="flex items-center justify-center w-full h-full" style={{ filter: `drop-shadow(0 0 8px ${h.glow})` }}>
-                  <FingerprintSVG color={h.color} size={40} />
-                </div>
-              </DockIcon>
-            ))}
-          </Dock>
-        </div>
 
         {/* Scroll indicator */}
         <div className="absolute bottom-8 flex flex-col items-center gap-2">
