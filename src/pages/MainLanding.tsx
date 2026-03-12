@@ -111,7 +111,7 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
       </div>
 
       {/* HERO */}
-      <section className="relative z-10 flex min-h-screen flex-col items-center md:justify-center" style={{ paddingBottom: "80px" }}>
+      <section className="relative z-10 flex min-h-screen flex-col items-center md:items-center" style={{ paddingBottom: "80px" }}>
         {/* Headline */}
         <div
           className="hero-headline-wrapper text-center flex flex-col md:flex-row md:items-center md:justify-center"
@@ -119,7 +119,7 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
         >
           <style>{`
             @media (min-width: 768px) {
-              .hero-headline-wrapper { padding-top: 0px !important; gap: 16px; }
+              .hero-headline-wrapper { padding-top: 140px !important; gap: 16px; }
               .hero-line { font-size: clamp(36px, 5vw, 72px) !important; }
             }
             @media (max-width: 767px) {
@@ -159,7 +159,7 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
 
 
         {/* Scroll indicator */}
-        <div className="absolute bottom-8 flex flex-col items-center gap-2">
+        <div className="flex flex-col items-center gap-2" style={{ position: "absolute", bottom: "40px", left: "50%", transform: "translateX(-50%)" }}>
           <div
             style={{
               width: "1px",
