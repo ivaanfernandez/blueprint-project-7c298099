@@ -60,11 +60,13 @@ const BiometricScan = ({ onComplete }: BiometricScanProps) => {
             color: "#FFFFFF",
             textTransform: "uppercase" as const,
             opacity: phase >= 1 ? 1 : 0,
-            transition: "opacity 1s ease",
+            transition: "opacity 1.5s ease",
             marginBottom: "32px",
+            textAlign: "center",
+            width: "100%",
           }}
         >
-          ACCESS TO BLUEPRINT PROJECT
+          ACCESSING BLUEPRINT PROJECT
         </p>
 
         {/* Fingerprint container */}
