@@ -76,8 +76,8 @@ const BiometricScan = ({ onComplete }: BiometricScanProps) => {
             width: "140px",
             height: "140px",
             opacity: phase >= 1 ? 1 : 0,
-            transition: "opacity 1.5s ease",
-            animation: phase === 3 ? "bs-glow-pulse 3s ease-in-out infinite" : undefined,
+            transition: "opacity 0.6s ease",
+            animation: phase === 3 ? "bs-glow-pulse 2s ease-in-out infinite" : undefined,
             filter: phase >= 2 ? "drop-shadow(0 0 12px #1A6BFF)" : undefined,
           }}
         >
