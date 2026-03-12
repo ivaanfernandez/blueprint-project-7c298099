@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { BeamsBackground } from "@/components/ui/beams-background";
 
 interface BiometricScanProps {
   onComplete: () => void;
@@ -45,15 +46,18 @@ const BiometricScan = ({ onComplete }: BiometricScanProps) => {
         }
       `}</style>
       <div
-        className="fixed inset-0 z-50 flex flex-col items-center justify-center"
+        className="fixed inset-0 z-50 flex flex-col items-center justify-center relative"
         style={{
           backgroundColor: "#000000",
           fontFamily: "'Space Grotesk', sans-serif",
           animation: phase >= 5 ? "bs-screen-fade 0.8s ease-in forwards" : undefined,
         }}
       >
+        <BeamsBackground className="absolute inset-0 z-0" />
+
         {/* Wordmark */}
         <p
+          className="relative z-10"
           style={{
             fontSize: "clamp(14px, 4vw, 18px)",
             letterSpacing: "0.3em",
@@ -71,6 +75,7 @@ const BiometricScan = ({ onComplete }: BiometricScanProps) => {
 
         {/* Fingerprint container */}
         <div
+          className="relative z-10"
           style={{
             position: "relative",
             width: "140px",
@@ -175,6 +180,7 @@ const BiometricScan = ({ onComplete }: BiometricScanProps) => {
         {/* Scanning text */}
         {phase === 3 && (
           <p
+            className="relative z-10"
             style={{
               marginTop: "24px",
               fontSize: "10px",
@@ -190,6 +196,7 @@ const BiometricScan = ({ onComplete }: BiometricScanProps) => {
         {/* Access granted text */}
         {phase === 4 && (
           <p
+            className="relative z-10"
             style={{
               marginTop: "24px",
               fontSize: "10px",
