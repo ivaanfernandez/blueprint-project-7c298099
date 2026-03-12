@@ -142,7 +142,7 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
           <span className="hero-spacer" style={{ flexShrink: 0 }}>&nbsp;</span>
           <div
             className="hero-rotate-wrapper"
-            style={{ display: "inline-block", width: "22ch", flexShrink: 0, overflow: "hidden", textAlign: "left" }}
+            style={{ display: "inline-block", width: "18ch", flexShrink: 0, overflow: "hidden", textAlign: "left" }}
           >
             <WordRotate
               words={["IT'S A SYSTEM", "IT'S A COMMUNITY", "IT'S A MINDSET", "THIS IS BLUEPRINT"]}
