@@ -114,22 +114,23 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
       <section className="relative z-10 flex min-h-screen flex-col items-center md:items-center" style={{ paddingBottom: "80px" }}>
         {/* Headline */}
         <div
-          className="hero-headline-wrapper text-center flex flex-col md:flex-row md:items-center md:justify-center md:flex-nowrap"
-          style={{ lineHeight: 0.95, paddingTop: "120px" }}
+          className="hero-headline-wrapper"
+          style={{ lineHeight: 0.95, paddingTop: "120px", position: "relative", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", flexWrap: "nowrap", width: "100%" }}
         >
           <style>{`
             @media (min-width: 768px) {
-              .hero-headline-wrapper { padding-top: 140px !important; gap: 16px; }
+              .hero-headline-wrapper { padding-top: 140px !important; flex-direction: row !important; }
               .hero-line { font-size: clamp(36px, 5vw, 72px) !important; }
             }
             @media (max-width: 767px) {
               .hero-line { font-size: clamp(44px, 11vw, 64px) !important; }
+              .hero-spacer { display: none !important; }
+              .hero-rotate-wrapper { width: auto !important; text-align: center !important; }
             }
           `}</style>
           <span
             className="hero-line"
             style={{
-              display: "block",
               whiteSpace: "nowrap",
               fontWeight: 800,
               color: "#FFFFFF",
@@ -138,7 +139,11 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
           >
             THIS ISN'T A GYM,
           </span>
-          <div style={{ minWidth: "14ch", textAlign: "left" }}>
+          <span className="hero-spacer" style={{ flexShrink: 0 }}>&nbsp;</span>
+          <div
+            className="hero-rotate-wrapper"
+            style={{ display: "inline-block", width: "14ch", flexShrink: 0, overflow: "hidden", textAlign: "left" }}
+          >
             <WordRotate
               words={["IT'S A SYSTEM", "IT'S A COMMUNITY", "IT'S A MINDSET", "THIS IS BLUEPRINT"]}
               duration={2500}
@@ -148,14 +153,14 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
                 exit: { opacity: 0, y: -50 },
                 transition: { duration: 0.4, ease: "easeOut" },
                 style: {
-                  display: "block",
                   whiteSpace: "nowrap",
+                  position: "relative",
                   fontWeight: 800,
                   color: "#1A6BFF",
                   lineHeight: 0.95,
                 },
               }}
-              className="text-left hero-line"
+              className="hero-line"
             />
           </div>
         </div>
