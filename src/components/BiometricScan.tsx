@@ -33,6 +33,7 @@ const BiometricScan = ({ onComplete }: BiometricScanProps) => {
         @keyframes bs-glow-pulse {
           0%, 100% { filter: drop-shadow(0 0 8px #1A6BFF); }
           50% { filter: drop-shadow(0 0 20px #1A6BFF) drop-shadow(0 0 40px #1A6BFF); }
+
         }
         @keyframes bs-ripple {
           0% { transform: translate(-50%, -50%) scale(0); opacity: 0.6; }
