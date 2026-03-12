@@ -111,14 +111,26 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
       </div>
 
       {/* HERO */}
-      <section className="relative z-10 flex min-h-screen flex-col items-center justify-center" style={{ paddingBottom: "80px" }}>
+      <section className="relative z-10 flex min-h-screen flex-col items-center md:justify-center" style={{ paddingBottom: "80px" }}>
         {/* Headline */}
-        <div className="text-center" style={{ lineHeight: 0.95 }}>
+        <div
+          className="text-center flex flex-col md:flex-row md:items-center md:justify-center"
+          style={{ lineHeight: 0.95, paddingTop: "120px" }}
+        >
+          <style>{`
+            @media (min-width: 768px) {
+              .hero-headline-wrapper { padding-top: 0px !important; gap: 16px; }
+              .hero-line { font-size: clamp(36px, 5vw, 72px) !important; }
+            }
+            @media (max-width: 767px) {
+              .hero-line { font-size: clamp(44px, 11vw, 64px) !important; }
+            }
+          `}</style>
           <span
+            className="hero-line"
             style={{
               display: "block",
               whiteSpace: "nowrap",
-              fontSize: "clamp(28px, 7vw, 100px)",
               fontWeight: 800,
               color: "#FFFFFF",
             }}
@@ -135,20 +147,15 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
               transition: { duration: 0.4, ease: "easeOut" },
               style: {
                 display: "block",
-                fontSize: "clamp(28px, 7vw, 100px)",
+                whiteSpace: "nowrap",
                 fontWeight: 800,
                 color: "#1A6BFF",
                 lineHeight: 0.95,
               },
             }}
-            className="text-center"
+            className="text-center hero-line"
           />
         </div>
-
-        {/* Subheadline */}
-        <p style={{ fontSize: "16px", color: "rgba(255,255,255,0.6)", marginTop: "32px", letterSpacing: "0.05em" }}>
-          Tres huellas digitales. Un sistema unificado.
-        </p>
 
 
         {/* Scroll indicator */}
