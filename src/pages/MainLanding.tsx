@@ -114,7 +114,7 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
       <section className="relative z-10 flex min-h-screen flex-col items-center md:justify-center" style={{ paddingBottom: "80px" }}>
         {/* Headline */}
         <div
-          className="text-center flex flex-col md:flex-row md:items-center md:justify-center"
+          className="hero-headline-wrapper text-center flex flex-col md:flex-row md:items-center md:justify-center"
           style={{ lineHeight: 0.95, paddingTop: "120px" }}
         >
           <style>{`
