@@ -199,7 +199,6 @@ const BiometricScan = ({ onComplete }: BiometricScanProps) => {
             ACCESO CONCEDIDO
           </p>
         )}
-        </div>
       </div>
     </>
   );
