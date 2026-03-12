@@ -115,11 +115,11 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
         {/* Headline */}
         <div
           className="hero-headline-wrapper"
-          style={{ lineHeight: 0.95, paddingTop: "120px", position: "relative", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", flexWrap: "nowrap", width: "100%" }}
+          style={{ lineHeight: 0.95, paddingTop: "120px", position: "relative", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", flexWrap: "nowrap", width: "100%", boxSizing: "border-box" as const, overflow: "visible" }}
         >
           <style>{`
             @media (min-width: 768px) {
-              .hero-headline-wrapper { padding-top: 140px !important; flex-direction: row !important; }
+              .hero-headline-wrapper { padding-top: 140px !important; flex-direction: row !important; padding-left: 40px !important; padding-right: 40px !important; }
               .hero-line { font-size: clamp(28px, 3.5vw, 52px) !important; }
             }
             @media (max-width: 767px) {
@@ -142,7 +142,7 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
           <span className="hero-spacer" style={{ flexShrink: 0 }}>&nbsp;</span>
           <div
             className="hero-rotate-wrapper"
-            style={{ display: "inline-block", width: "18ch", flexShrink: 0, overflow: "hidden", textAlign: "left" }}
+            style={{ display: "inline-block", width: "auto", flexShrink: 0, overflow: "visible", textAlign: "left" }}
           >
             <WordRotate
               words={["IT'S A SYSTEM", "IT'S A COMMUNITY", "IT'S A MINDSET", "THIS IS BLUEPRINT"]}
