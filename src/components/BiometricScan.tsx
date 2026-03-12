@@ -54,7 +54,6 @@ const BiometricScan = ({ onComplete }: BiometricScanProps) => {
       >
         {/* Wordmark */}
         <p
-          className="relative z-10"
           style={{
             fontSize: "18px",
             letterSpacing: "0.3em",
