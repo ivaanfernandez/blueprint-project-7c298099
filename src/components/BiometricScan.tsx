@@ -9,12 +9,12 @@ const BiometricScan = ({ onComplete }: BiometricScanProps) => {
 
   useEffect(() => {
     const timers = [
-      setTimeout(() => setPhase(1), 200),
-      setTimeout(() => setPhase(2), 1500),
-      setTimeout(() => setPhase(3), 1700),
-      setTimeout(() => setPhase(4), 9000),
-      setTimeout(() => setPhase(5), 12000),
-      setTimeout(() => onComplete(), 14000),
+      setTimeout(() => setPhase(1), 0),
+      setTimeout(() => setPhase(2), 600),
+      setTimeout(() => setPhase(3), 1200),
+      setTimeout(() => setPhase(4), 3200),
+      setTimeout(() => setPhase(5), 4200),
+      setTimeout(() => onComplete(), 5000),
     ];
     return () => timers.forEach(clearTimeout);
   }, [onComplete]);
@@ -49,7 +49,7 @@ const BiometricScan = ({ onComplete }: BiometricScanProps) => {
         style={{
           backgroundColor: "#000000",
           fontFamily: "'Space Grotesk', sans-serif",
-          animation: phase >= 5 ? "bs-screen-fade 2s ease-in forwards" : undefined,
+          animation: phase >= 5 ? "bs-screen-fade 0.8s ease-in forwards" : undefined,
         }}
       >
         {/* Wordmark */}
@@ -60,7 +60,7 @@ const BiometricScan = ({ onComplete }: BiometricScanProps) => {
             color: "#FFFFFF",
             textTransform: "uppercase" as const,
             opacity: phase >= 1 ? 1 : 0,
-            transition: "opacity 1.5s ease",
+            transition: "opacity 0.6s ease",
             marginBottom: "32px",
             textAlign: "center",
             width: "100%",
@@ -76,8 +76,8 @@ const BiometricScan = ({ onComplete }: BiometricScanProps) => {
             width: "140px",
             height: "140px",
             opacity: phase >= 1 ? 1 : 0,
-            transition: "opacity 1.5s ease",
-            animation: phase === 3 ? "bs-glow-pulse 3s ease-in-out infinite" : undefined,
+            transition: "opacity 0.6s ease",
+            animation: phase === 3 ? "bs-glow-pulse 2s ease-in-out infinite" : undefined,
             filter: phase >= 2 ? "drop-shadow(0 0 12px #1A6BFF)" : undefined,
           }}
         >
@@ -143,7 +143,7 @@ const BiometricScan = ({ onComplete }: BiometricScanProps) => {
                 height: "2px",
                 backgroundColor: "#1A6BFF",
                 opacity: 0.9,
-                animation: "bs-scan-line 4s linear",
+                animation: "bs-scan-line 2s linear",
                 boxShadow: "0 0 8px #1A6BFF",
               }}
             />
@@ -163,7 +163,7 @@ const BiometricScan = ({ onComplete }: BiometricScanProps) => {
                     height: "60px",
                     borderRadius: "50%",
                     border: "1px solid #1A6BFF",
-                    animation: `bs-ripple 2.4s ease-out ${delay * 2}s forwards`,
+                    animation: `bs-ripple 1s ease-out ${delay}s forwards`,
                     pointerEvents: "none",
                   }}
                 />
