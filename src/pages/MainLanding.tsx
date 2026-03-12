@@ -58,11 +58,6 @@ const HUELLAS = [
   },
 ];
 
-const HEADLINE_WORDS = [
-  { text: "TU", color: "#FFFFFF" },
-  { text: "PRÓXIMA", color: "#FFFFFF" },
-  { text: "VERSIÓN", color: "#1A6BFF" },
-];
 
 const HuellaCard = ({ h }: { h: typeof HUELLAS[0] }) => (
   <div
