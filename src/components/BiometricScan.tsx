@@ -29,6 +29,7 @@ const BiometricScan = ({ onComplete }: BiometricScanProps) => {
           50% { top: calc(100% - 2px); }
           100% { top: 0; }
         }
+
         @keyframes bs-glow-pulse {
           0%, 100% { filter: drop-shadow(0 0 8px #1A6BFF); }
           50% { filter: drop-shadow(0 0 20px #1A6BFF) drop-shadow(0 0 40px #1A6BFF); }
