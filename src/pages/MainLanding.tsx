@@ -135,7 +135,7 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
               color: "#FFFFFF",
             }}
           >
-            THIS ISN'T A GYM
+            THIS ISN'T A GYM,
           </span>
           <WordRotate
             words={["IT'S A SYSTEM", "IT'S A COMMUNITY", "IT'S A MINDSET", "THIS IS BLUEPRINT"]}
