@@ -132,6 +132,12 @@ const MainLanding = () => {
               animate: { opacity: 1, y: 0 },
               exit: { opacity: 0, y: -50 },
               transition: { duration: 0.4, ease: "easeOut" },
+              style: {
+                fontSize: "clamp(48px, 8vw, 100px)",
+                fontWeight: 800,
+                color: "#1A6BFF",
+                lineHeight: 0.95,
+              },
             }}
             className="text-center"
           />
