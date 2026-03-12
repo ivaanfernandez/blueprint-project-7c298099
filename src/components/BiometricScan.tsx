@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { BeamsBackground } from "@/components/ui/beams-background";
 
 interface BiometricScanProps {
   onComplete: () => void;
