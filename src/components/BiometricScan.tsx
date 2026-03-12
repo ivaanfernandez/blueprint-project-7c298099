@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { GradientDots } from "@/components/ui/gradient-dots";
 
 interface BiometricScanProps {
   onComplete: () => void;
@@ -45,15 +46,19 @@ const BiometricScan = ({ onComplete }: BiometricScanProps) => {
         }
       `}</style>
       <div
-        className="fixed inset-0 z-50 flex flex-col items-center justify-center"
+        className="fixed inset-0 z-50"
         style={{
           backgroundColor: "#000000",
           fontFamily: "'Space Grotesk', sans-serif",
           animation: phase >= 5 ? "bs-screen-fade 2s ease-in forwards" : undefined,
+          position: "relative",
         }}
       >
+        <GradientDots style={{ zIndex: 0 }} />
+        <div className="relative z-10 flex flex-col items-center justify-center w-full h-full">
         {/* Wordmark */}
         <p
+          className="relative z-10"
           style={{
             fontSize: "18px",
             letterSpacing: "0.3em",
@@ -199,6 +204,7 @@ const BiometricScan = ({ onComplete }: BiometricScanProps) => {
             ACCESO CONCEDIDO
           </p>
         )}
+        </div>
       </div>
     </>
   );
