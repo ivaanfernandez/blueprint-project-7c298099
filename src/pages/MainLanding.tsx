@@ -85,7 +85,7 @@ const HuellaCard = ({ h }: { h: typeof HUELLAS[0] }) => (
   </div>
 );
 
-const MainLanding = () => {
+const MainLanding = ({ showDock }: { showDock: boolean }) => {
   const navigate = useNavigate();
 
   return (
@@ -98,7 +98,7 @@ const MainLanding = () => {
       <ProceduralBackground />
 
       {/* FIXED DOCK NAV */}
-      <div className="fixed top-0 left-0 right-0 z-50 flex justify-center" style={{ paddingTop: "20px" }}>
+      <div className="fixed top-0 left-0 right-0 z-50 flex justify-center" style={{ paddingTop: "20px", opacity: showDock ? 1 : 0, pointerEvents: showDock ? "auto" : "none", transition: "opacity 0.8s ease" }}>
         <Dock>
           {HUELLAS.map((h) => (
             <DockIcon key={h.route} tooltip={h.tooltip} onClick={() => navigate(h.route)}>
@@ -117,15 +117,16 @@ const MainLanding = () => {
           <span
             style={{
               display: "block",
-              fontSize: "clamp(48px, 8vw, 100px)",
+              whiteSpace: "nowrap",
+              fontSize: "clamp(28px, 7vw, 100px)",
               fontWeight: 800,
               color: "#FFFFFF",
             }}
           >
-            THIS ISN'T A GYM,
+            THIS ISN'T A GYM
           </span>
           <WordRotate
-            words={["IT'S A SYSTEM.", "IT'S A COMMUNITY.", "IT'S A MINDSET."]}
+            words={["IT'S A SYSTEM", "IT'S A COMMUNITY", "IT'S A MINDSET", "THIS IS BLUEPRINT"]}
             duration={2500}
             framerProps={{
               initial: { opacity: 0, y: 50 },
@@ -133,7 +134,8 @@ const MainLanding = () => {
               exit: { opacity: 0, y: -50 },
               transition: { duration: 0.4, ease: "easeOut" },
               style: {
-                fontSize: "clamp(48px, 8vw, 100px)",
+                display: "block",
+                fontSize: "clamp(28px, 7vw, 100px)",
                 fontWeight: 800,
                 color: "#1A6BFF",
                 lineHeight: 0.95,
