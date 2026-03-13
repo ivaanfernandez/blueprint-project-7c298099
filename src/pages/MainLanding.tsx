@@ -48,7 +48,7 @@ const HUELLAS = [
     glow: "rgba(34,197,94,0.8)",
     route: "/huella-verde",
     tooltip: "RECUPERACIÓN",
-    tag: "HUELLA VERDE",
+    tag: "RESET",
     title: "RECUPERACIÓN",
     body: "La huella verde cierra el ciclo. Sin recuperación no hay progreso. Descanso estratégico, sueño optimizado, restauración completa.",
     borderBase: "rgba(34,197,94,0.3)",
