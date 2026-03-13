@@ -22,7 +22,7 @@ const HUELLAS = [
     glow: "rgba(26,107,255,0.8)",
     route: "/huella-azul",
     tooltip: "ENTRENAMIENTO",
-    tag: "HUELLA AZUL",
+    tag: "BLUEPRINT PROJECT",
     title: "ENTRENAMIENTO",
     body: "La huella azul es donde la acción sucede. El cuerpo se convierte en el primer punto de orden. Fuerza construida repetición a repetición.",
     borderBase: "rgba(26,107,255,0.3)",
