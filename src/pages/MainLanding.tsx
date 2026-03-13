@@ -35,7 +35,7 @@ const HUELLAS = [
     glow: "rgba(255,59,59,0.8)",
     route: "/huella-roja",
     tooltip: "NUTRICIÓN",
-    tag: "HUELLA ROJA",
+    tag: "HACK BAR",
     title: "NUTRICIÓN",
     body: "La huella roja alimenta el sistema. Cada comida es una señal que le envías a tu cuerpo. Precisión en lo que consumes, transformación en lo que produces.",
     borderBase: "rgba(255,59,59,0.3)",
