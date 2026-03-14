@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import ProceduralBackground from "@/components/ProceduralBackground";
 import { WordRotate } from "@/components/ui/word-rotate";
 import { Dock, DockIcon } from "@/components/ui/dock";
+import gymHero from '@/assets/blueprint-gym.jpg';
 
 const FingerprintSVG = ({ color, size = 48 }: { color: string; size?: number }) => (
   <svg viewBox="0 0 140 140" width={size} height={size} fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -112,15 +113,16 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
       <section style={{ position: "relative", height: "100vh", overflow: "hidden" }} className="flex flex-col items-center md:items-center">
         {/* Hero background image */}
         <img
-          src="/gym-interior.jpg"
-          alt="Blueprint gym interior"
-          style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", objectPosition: "center" }}
+          src={gymHero}
+          alt="Blueprint Project"
+          style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", objectPosition: "center", zIndex: 0 }}
         />
         {/* Dark gradient overlay */}
         <div
           style={{
             position: "absolute",
             inset: 0,
+            zIndex: 1,
             background: "linear-gradient(to bottom, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.3) 50%, rgba(0,0,0,0.75) 100%)",
           }}
         />
