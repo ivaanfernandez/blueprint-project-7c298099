@@ -384,6 +384,13 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
           .hero-section {
             height: 62vh !important;
           }
+          .hero-bg-mobile {
+            display: none !important;
+          }
+          .hero-bg-desktop {
+            display: block !important;
+            object-position: center 30% !important;
+          }
           .hero-bg-image {
             object-position: center 40% !important;
           }
