@@ -182,6 +182,22 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
           </div>
         </div>
 
+        <p style={{
+          color: 'rgba(255,255,255,0.6)',
+          fontSize: '15px',
+          fontFamily: 'Space Grotesk, sans-serif',
+          fontWeight: '400',
+          letterSpacing: '0.04em',
+          lineHeight: '1.7',
+          textAlign: 'center',
+          maxWidth: '580px',
+          margin: '24px auto 0',
+          position: 'relative',
+          zIndex: 10
+        }}>
+          Three fingerprints. One operating system. Blueprint is where physical mastery, biological fuel, and deep recovery converge into a single elite experience.
+        </p>
+
         {/* CTA Button */}
         <div style={{ marginTop: "48px", display: "flex", justifyContent: "center" }}>
           <ShinyButton>HAVE YOUR BLUEPRINT</ShinyButton>
