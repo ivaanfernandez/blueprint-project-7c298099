@@ -398,6 +398,10 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
           .hero-subtext-desktop {
             display: none !important;
           }
+          /* Hide second phrase on mobile */
+          .hero-subtext-hide-mobile {
+            display: none !important;
+          }
         }
       `}</style>
     </motion.div>
