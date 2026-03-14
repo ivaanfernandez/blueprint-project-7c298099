@@ -4,6 +4,7 @@ import ProceduralBackground from "@/components/ProceduralBackground";
 import { WordRotate } from "@/components/ui/word-rotate";
 import { Dock, DockIcon } from "@/components/ui/dock";
 import gymHero from '@/assets/blueprint-gym.jpg';
+import { PulseBeams } from '@/components/ui/pulse-beams';
 
 const FingerprintSVG = ({ color, size = 48 }: { color: string; size?: number }) => (
   <svg viewBox="0 0 140 140" width={size} height={size} fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -59,6 +60,26 @@ const HUELLAS = [
   },
 ];
 
+const heroBeams = [
+  {
+    path: "M0 80 H160",
+    gradientConfig: {
+      initial: { x1: "0%", x2: "0%", y1: "0%", y2: "0%" },
+      animate: { x1: ["0%","100%","100%"], x2: ["20%","120%","120%"], y1: ["0%","0%","0%"], y2: ["0%","0%","0%"] },
+      transition: { duration: 2, repeat: Infinity, repeatType: "loop" as const, ease: "linear", repeatDelay: 1 },
+    },
+    connectionPoints: [{ cx: 0, cy: 80, r: 3 }, { cx: 160, cy: 80, r: 3 }]
+  },
+  {
+    path: "M400 80 H240",
+    gradientConfig: {
+      initial: { x1: "100%", x2: "100%", y1: "0%", y2: "0%" },
+      animate: { x1: ["100%","0%","0%"], x2: ["80%","-20%","-20%"], y1: ["0%","0%","0%"], y2: ["0%","0%","0%"] },
+      transition: { duration: 2, repeat: Infinity, repeatType: "loop" as const, ease: "linear", repeatDelay: 1, delay: 0.5 },
+    },
+    connectionPoints: [{ cx: 400, cy: 80, r: 3 }, { cx: 240, cy: 80, r: 3 }]
+  }
+];
 
 const HuellaCard = ({ h }: { h: typeof HUELLAS[0] }) => (
   <div
@@ -180,6 +201,41 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
           </div>
         </div>
 
+        {/* CTA Button with PulseBeams */}
+        <div style={{ marginTop: "48px", display: "flex", justifyContent: "center" }}>
+          <PulseBeams beams={heroBeams} width={400} height={160}>
+            <button
+              style={{
+                background: 'transparent',
+                border: '1px solid rgba(26,107,255,0.7)',
+                borderRadius: '4px',
+                padding: '16px 40px',
+                color: '#FFFFFF',
+                fontSize: '11px',
+                fontFamily: 'Space Grotesk, sans-serif',
+                fontWeight: '600',
+                letterSpacing: '0.3em',
+                cursor: 'pointer',
+                position: 'relative',
+                zIndex: 10,
+                transition: 'all 0.3s ease',
+                boxShadow: '0 0 20px rgba(26,107,255,0.15)',
+              }}
+              onMouseEnter={e => {
+                e.currentTarget.style.background = 'rgba(26,107,255,0.1)';
+                e.currentTarget.style.boxShadow = '0 0 30px rgba(26,107,255,0.4)';
+                e.currentTarget.style.borderColor = 'rgba(26,107,255,1)';
+              }}
+              onMouseLeave={e => {
+                e.currentTarget.style.background = 'transparent';
+                e.currentTarget.style.boxShadow = '0 0 20px rgba(26,107,255,0.15)';
+                e.currentTarget.style.borderColor = 'rgba(26,107,255,0.7)';
+              }}
+            >
+              OBTÉN TU HUELLA
+            </button>
+          </PulseBeams>
+        </div>
 
         {/* Scroll indicator */}
         <div className="flex flex-col items-center gap-2" style={{ position: "absolute", bottom: "40px", left: "50%", transform: "translateX(-50%)" }}>
