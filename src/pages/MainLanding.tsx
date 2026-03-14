@@ -343,6 +343,20 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
         .hero-no-comma {
           display: none;
         }
+        /* Desktop hero styles */
+        @media (min-width: 768px) {
+          .hero-section {
+            height: 70vh !important;
+          }
+          .hero-bg-image {
+            object-position: center 20% !important;
+          }
+          .hero-content-wrapper {
+            padding-top: 100px !important;
+            align-items: flex-start !important;
+            justify-content: flex-start !important;
+          }
+        }
         .hero-subtext-mobile {
           display: none;
         }
