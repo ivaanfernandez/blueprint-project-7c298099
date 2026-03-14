@@ -222,11 +222,11 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
             </span>
           </div>
           {[
-            { text: "We're here to reprogram you physically, mentally, and energetically.", delay: 0.25 },
+            { text: "We're here to reprogram you physically, mentally, and energetically.", delay: 0.25, mobileClass: "hero-subtext-hide-mobile" },
             { text: "This is where discipline meets design.", delay: 0.4 },
             { text: "Welcome to the future of self mastery.", delay: 0.55 },
           ].map((item) => (
-            <div key={item.text} className="hero-subtext-line" style={{
+            <div key={item.text} className={`hero-subtext-line ${item.mobileClass || ''}`} style={{
               color: 'rgba(255,255,255,0.6)',
               fontSize: 'clamp(10px, 1vw, 15px)',
               fontFamily: 'Space Grotesk, sans-serif',
@@ -396,6 +396,10 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
             display: inline !important;
           }
           .hero-subtext-desktop {
+            display: none !important;
+          }
+          /* Hide second phrase on mobile */
+          .hero-subtext-hide-mobile {
             display: none !important;
           }
         }
