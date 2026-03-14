@@ -359,6 +359,14 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
           white-space: nowrap !important;
           padding: 1rem 2rem !important;
         }
+        @media (max-width: 767px) {
+          .hero-shiny-btn {
+            font-size: 10px !important;
+            padding: 0.7rem 1.5rem !important;
+            width: auto !important;
+            display: inline-block !important;
+          }
+        }
         .hero-no-comma {
           display: none;
         }
@@ -368,7 +376,7 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
             height: 85vh !important;
           }
           .hero-bg-image {
-            object-position: center 20% !important;
+            object-position: center 40% !important;
           }
           .hero-content-wrapper {
             padding-top: 40px !important;
