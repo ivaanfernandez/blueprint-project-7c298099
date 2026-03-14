@@ -210,7 +210,7 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
         </div>
 
         {/* Scroll indicator */}
-        <div className="flex flex-col items-center gap-2" style={{ position: "absolute", bottom: "40px", left: "50%", transform: "translateX(-50%)" }}>
+        <div className="scroll-indicator flex flex-col items-center gap-2" style={{ position: "absolute", bottom: "40px", left: "50%", transform: "translateX(-50%)" }}>
           <div
             style={{
               width: "1px",
