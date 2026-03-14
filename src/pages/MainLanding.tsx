@@ -131,7 +131,7 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
         />
         {/* Hero content - on top of image */}
         <div className="hero-content-wrapper" style={{ position: "relative", zIndex: 10, width: "100%", height: "100%", display: "flex", flexDirection: "column", alignItems: "center" }}>
-<div style={{
+<div className="hero-headline-wrapper" style={{
           display: 'flex',
           flexDirection: 'row',
           alignItems: 'center',
@@ -144,22 +144,22 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
           zIndex: 10,
           paddingTop: '140px'
         }}>
-          <span style={{
+          <span className="hero-headline-white" style={{
             color: '#FFFFFF',
             fontFamily: 'Rajdhani, sans-serif',
             fontWeight: 700,
-            fontSize: 'clamp(52px, 6.5vw, 90px)',
+            fontSize: 'clamp(44px, 5.5vw, 76px)',
             whiteSpace: 'nowrap',
             flexShrink: 0,
             lineHeight: 1
           }}>
             THIS ISN'T A GYM,&nbsp;
           </span>
-          <span style={{
+          <span className="hero-headline-blue" style={{
             color: '#1A6BFF',
             fontFamily: 'Rajdhani, sans-serif',
             fontWeight: 700,
-            fontSize: 'clamp(52px, 6.5vw, 90px)',
+            fontSize: 'clamp(44px, 5.5vw, 76px)',
             whiteSpace: 'nowrap',
             lineHeight: 1,
             flexShrink: 0
@@ -185,13 +185,13 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
 
         <p className="hero-subtext" style={{
           color: 'rgba(255,255,255,0.6)',
-          fontSize: '15px',
+          fontSize: '18px',
           fontFamily: 'Space Grotesk, sans-serif',
           fontWeight: '400',
           letterSpacing: '0.04em',
-          lineHeight: '1.7',
+          lineHeight: '1.8',
           textAlign: 'center',
-          maxWidth: '700px',
+          maxWidth: '760px',
           margin: '20px auto 0',
           position: 'relative',
           zIndex: 10
@@ -201,7 +201,7 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
 
         {/* CTA Button */}
         <div className="hero-cta-button" style={{ marginTop: "48px", display: "flex", justifyContent: "center", width: "auto", maxWidth: "280px" }}>
-          <ShinyButton fontSize="15px">HAVE YOUR BLUEPRINT</ShinyButton>
+          <ShinyButton fontSize="13px" className="hero-shiny-btn">HAVE YOUR BLUEPRINT</ShinyButton>
         </div>
 
         {/* Scroll indicator */}
@@ -247,6 +247,31 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
         @keyframes pulse-line {
           0%, 100% { opacity: 1; }
           50% { opacity: 0.2; }
+        }
+        .hero-shiny-btn {
+          white-space: nowrap !important;
+          padding: 1rem 2rem !important;
+        }
+        @media (max-width: 767px) {
+          .hero-headline-wrapper {
+            flex-wrap: wrap !important;
+            text-align: left !important;
+            padding-left: 20px !important;
+            padding-right: 20px !important;
+          }
+          .hero-headline-white {
+            width: 100% !important;
+            font-size: clamp(36px, 9vw, 48px) !important;
+          }
+          .hero-headline-blue {
+            font-size: clamp(36px, 9vw, 48px) !important;
+          }
+          .hero-subtext {
+            font-size: 14px !important;
+            max-width: 100% !important;
+            padding-left: 24px !important;
+            padding-right: 24px !important;
+          }
         }
       `}</style>
     </motion.div>
