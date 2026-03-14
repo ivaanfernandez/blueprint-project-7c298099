@@ -207,19 +207,8 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
           <ShinyButton fontSize="13px" className="hero-shiny-btn">HAVE YOUR BLUEPRINT</ShinyButton>
         </div>
 
-        {/* Scroll indicator */}
-        <div className="scroll-indicator flex flex-col items-center gap-2" style={{ position: "absolute", bottom: "40px", left: "50%", transform: "translateX(-50%)" }}>
-          <div
-            style={{
-              width: "1px",
-              height: "40px",
-              backgroundColor: "#1A6BFF",
-              animation: "pulse-line 2s ease-in-out infinite",
-            }}
-          />
-          <p style={{ fontSize: "9px", letterSpacing: "0.3em", color: "rgba(255,255,255,0.4)" }}>SCROLL</p>
-        </div>
-        </div>
+
+
       </section>
 
       <ProceduralBackground />
