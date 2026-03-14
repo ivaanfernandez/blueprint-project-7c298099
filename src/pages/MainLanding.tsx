@@ -112,11 +112,12 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
       </div>
 
       {/* HERO */}
-      <section style={{ position: "relative", height: "100vh", overflow: "hidden", zIndex: 2 }} className="flex flex-col items-center md:items-center">
+      <section className="hero-section flex flex-col items-center md:items-center" style={{ position: "relative", height: "100vh", overflow: "hidden", zIndex: 2 }}>
         {/* Hero background image */}
         <img
           src={gymHero}
           alt="Blueprint Project"
+          className="hero-bg-image"
           style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", objectPosition: "center", zIndex: 0 }}
         />
         {/* Dark gradient overlay */}
@@ -138,7 +139,9 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
             @media (min-width: 768px) {
               .hero-headline-wrapper { padding-top: 140px !important; flex-direction: row !important; padding-left: 40px !important; padding-right: 40px !important; }
               .hero-line { font-size: clamp(52px, 6.5vw, 90px) !important; white-space: nowrap !important; }
-              .hero-subtext { font-size: 17px !important; }
+              .hero-subtext { font-size: 17px !important; max-width: 700px !important; }
+              .hero-section { height: 80vh !important; }
+              .hero-bg-image { object-position: center 30% !important; }
               .scroll-indicator { display: none !important; }
             }
             @media (max-width: 767px) {
@@ -161,7 +164,7 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
               flexShrink: 0,
             }}
           >
-            THIS ISN'T A GYM
+            THIS ISN'T A GYM,
           </span>
           <span className="hero-spacer" style={{ flexShrink: 0 }}>&nbsp;</span>
           <div
@@ -197,8 +200,8 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
           letterSpacing: '0.04em',
           lineHeight: '1.7',
           textAlign: 'center',
-          maxWidth: '580px',
-          margin: '24px auto 0',
+          maxWidth: '700px',
+          margin: '20px auto 0',
           position: 'relative',
           zIndex: 10
         }}>
@@ -207,7 +210,7 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
 
         {/* CTA Button */}
         <div className="hero-cta-button" style={{ marginTop: "48px", display: "flex", justifyContent: "center", width: "auto", maxWidth: "280px" }}>
-          <ShinyButton>HAVE YOUR BLUEPRINT</ShinyButton>
+          <ShinyButton fontSize="15px">HAVE YOUR BLUEPRINT</ShinyButton>
         </div>
 
         {/* Scroll indicator */}
