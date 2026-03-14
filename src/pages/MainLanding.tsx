@@ -184,7 +184,7 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
 
         {/* CTA Button */}
         <div style={{ marginTop: "48px", display: "flex", justifyContent: "center" }}>
-          <ShinyButton>OBTÉN TU HUELLA</ShinyButton>
+          <ShinyButton>HAVE YOUR BLUEPRINT</ShinyButton>
         </div>
 
         {/* Scroll indicator */}
