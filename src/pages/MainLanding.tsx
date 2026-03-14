@@ -60,26 +60,7 @@ const HUELLAS = [
   },
 ];
 
-const heroBeams = [
-  {
-    path: "M0 80 H160",
-    gradientConfig: {
-      initial: { x1: "0%", x2: "0%", y1: "0%", y2: "0%" },
-      animate: { x1: ["0%","100%","100%"], x2: ["20%","120%","120%"], y1: ["0%","0%","0%"], y2: ["0%","0%","0%"] },
-      transition: { duration: 2, repeat: Infinity, repeatType: "loop" as const, ease: "linear", repeatDelay: 1 },
-    },
-    connectionPoints: [{ cx: 0, cy: 80, r: 3 }, { cx: 160, cy: 80, r: 3 }]
-  },
-  {
-    path: "M400 80 H240",
-    gradientConfig: {
-      initial: { x1: "100%", x2: "100%", y1: "0%", y2: "0%" },
-      animate: { x1: ["100%","0%","0%"], x2: ["80%","-20%","-20%"], y1: ["0%","0%","0%"], y2: ["0%","0%","0%"] },
-      transition: { duration: 2, repeat: Infinity, repeatType: "loop" as const, ease: "linear", repeatDelay: 1, delay: 0.5 },
-    },
-    connectionPoints: [{ cx: 400, cy: 80, r: 3 }, { cx: 240, cy: 80, r: 3 }]
-  }
-];
+
 
 const HuellaCard = ({ h }: { h: typeof HUELLAS[0] }) => (
   <div
