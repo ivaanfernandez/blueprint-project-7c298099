@@ -261,7 +261,7 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
         </div>
 
         {/* CTA Button */}
-        <div className="hero-cta-button" style={{ marginTop: "24px", display: "flex", justifyContent: "center", width: "auto", maxWidth: "280px" }}>
+        <div className="hero-cta-button" style={{ marginTop: "24px", display: "flex", justifyContent: "center", width: "100%" }}>
           <ShinyButton fontSize="13px" className="hero-shiny-btn">HAVE YOUR BLUEPRINT</ShinyButton>
         </div>
 
@@ -371,8 +371,8 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
             object-position: center 20% !important;
           }
           .hero-content-wrapper {
-            padding-top: 100px !important;
-            align-items: flex-start !important;
+            padding-top: 110px !important;
+            align-items: center !important;
             justify-content: flex-start !important;
           }
         }
