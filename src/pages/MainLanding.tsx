@@ -371,7 +371,7 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
             object-position: center 20% !important;
           }
           .hero-content-wrapper {
-            padding-top: 80px !important;
+            padding-top: 40px !important;
             align-items: center !important;
             justify-content: flex-start !important;
           }
