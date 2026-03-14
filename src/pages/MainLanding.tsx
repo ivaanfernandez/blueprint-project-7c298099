@@ -137,7 +137,7 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
           alignItems: 'center',
           justifyContent: 'flex-start',
           width: '100%',
-          paddingLeft: '40px',
+          paddingLeft: '80px',
           paddingRight: '40px',
           boxSizing: 'border-box',
           position: 'relative',
