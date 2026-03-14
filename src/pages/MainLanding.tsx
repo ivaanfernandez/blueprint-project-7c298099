@@ -137,7 +137,7 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
           alignItems: 'center',
           justifyContent: 'flex-start',
           width: '100%',
-          paddingLeft: '40px',
+          paddingLeft: '80px',
           paddingRight: '40px',
           boxSizing: 'border-box',
           position: 'relative',
@@ -153,7 +153,8 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
             flexShrink: 0,
             lineHeight: 1
           }}>
-            THIS ISN'T A GYM,&nbsp;
+            <span className="hero-comma">THIS ISN'T A GYM,&nbsp;</span>
+            <span className="hero-no-comma">THIS ISN'T A GYM&nbsp;</span>
           </span>
           <span className="hero-headline-blue" style={{
             color: '#1A6BFF',
@@ -185,18 +186,20 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
 
         <p className="hero-subtext" style={{
           color: 'rgba(255,255,255,0.6)',
-          fontSize: '18px',
+          fontSize: 'clamp(14px, 1.4vw, 18px)',
           fontFamily: 'Space Grotesk, sans-serif',
           fontWeight: '400',
           letterSpacing: '0.04em',
           lineHeight: '1.8',
           textAlign: 'center',
-          maxWidth: '760px',
+          maxWidth: '900px',
           margin: '20px auto 0',
           position: 'relative',
-          zIndex: 10
+          zIndex: 10,
+          whiteSpace: 'nowrap'
         }}>
-          Three fingerprints. One operating system.<br />Blueprint is where physical mastery, biological fuel, and deep recovery converge into one.
+          <span className="hero-subtext-desktop">Three fingerprints. One operating system. Blueprint is where physical mastery, biological fuel, and deep recovery converge into one.</span>
+          <span className="hero-subtext-mobile">Three fingerprints. One operating system.<br/>Blueprint is where physical mastery,<br/>biological fuel, and deep recovery converge into one.</span>
         </p>
 
         {/* CTA Button */}
@@ -252,10 +255,17 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
           white-space: nowrap !important;
           padding: 1rem 2rem !important;
         }
+        .hero-no-comma {
+          display: none;
+        }
+        .hero-subtext-mobile {
+          display: none;
+        }
         @media (max-width: 767px) {
           .hero-headline-wrapper {
             flex-wrap: wrap !important;
-            text-align: left !important;
+            text-align: center !important;
+            justify-content: center !important;
             padding-left: 20px !important;
             padding-right: 20px !important;
           }
@@ -266,11 +276,25 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
           .hero-headline-blue {
             font-size: clamp(36px, 9vw, 48px) !important;
           }
+          .hero-comma {
+            display: none !important;
+          }
+          .hero-no-comma {
+            display: inline !important;
+          }
           .hero-subtext {
             font-size: 14px !important;
             max-width: 100% !important;
             padding-left: 24px !important;
             padding-right: 24px !important;
+            white-space: normal !important;
+            text-align: center !important;
+          }
+          .hero-subtext-desktop {
+            display: none !important;
+          }
+          .hero-subtext-mobile {
+            display: inline !important;
           }
         }
       `}</style>
