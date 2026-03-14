@@ -200,8 +200,8 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
           letterSpacing: '0.04em',
           lineHeight: '1.7',
           textAlign: 'center',
-          maxWidth: '580px',
-          margin: '24px auto 0',
+          maxWidth: '700px',
+          margin: '20px auto 0',
           position: 'relative',
           zIndex: 10
         }}>

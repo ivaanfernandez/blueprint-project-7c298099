@@ -5,9 +5,10 @@ interface ShinyButtonProps {
   children: React.ReactNode
   onClick?: () => void
   className?: string
+  fontSize?: string
 }
 
-export function ShinyButton({ children, onClick, className = "" }: ShinyButtonProps) {
+export function ShinyButton({ children, onClick, className = "", fontSize = "11px" }: ShinyButtonProps) {
   return (
     <>
       <style>{`
@@ -48,7 +49,7 @@ export function ShinyButton({ children, onClick, className = "" }: ShinyButtonPr
           outline-offset: 4px;
           padding: 1.25rem 2.5rem;
           font-family: "Space Grotesk", sans-serif;
-          font-size: 11px;
+          font-size: ${fontSize};
           letter-spacing: 0.3em;
           font-weight: 600;
           border: 1px solid transparent;
