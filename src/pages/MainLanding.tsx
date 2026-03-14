@@ -207,7 +207,7 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
           <ShinyButton fontSize="13px" className="hero-shiny-btn">HAVE YOUR BLUEPRINT</ShinyButton>
         </div>
 
-
+        </div>
 
       </section>
 
