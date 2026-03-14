@@ -153,6 +153,7 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
               .hero-subtext { font-size: 13px !important; padding: 0 24px !important; max-width: 100% !important; }
               .hero-content-wrapper { padding-top: 72px !important; padding-bottom: 40px !important; }
               .hero-cta-button { width: auto !important; max-width: 280px !important; margin: 32px auto 0 !important; }
+              .scroll-indicator { display: none !important; }
             }
           `}</style>
           <span
