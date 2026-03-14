@@ -163,7 +163,7 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
               flexShrink: 0,
             }}
           >
-            THIS ISN'T A GYM
+            THIS ISN'T A GYM,
           </span>
           <span className="hero-spacer" style={{ flexShrink: 0 }}>&nbsp;</span>
           <div
