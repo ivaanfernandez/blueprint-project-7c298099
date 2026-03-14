@@ -5,6 +5,7 @@ import { WordRotate } from "@/components/ui/word-rotate";
 import { Dock, DockIcon } from "@/components/ui/dock";
 import gymHero from '@/assets/blueprint-gym.jpg';
 import { ShinyButton } from '@/components/ui/shiny-button';
+import { LocationMap } from '@/components/ui/expand-map';
 
 const FingerprintSVG = ({ color, size = 48 }: { color: string; size?: number }) => (
   <svg viewBox="0 0 140 140" width={size} height={size} fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -233,6 +234,44 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
             <HuellaCard key={h.tag} h={h} />
           ))}
         </div>
+      </section>
+
+      {/* LOCATION */}
+      <section className="relative z-10" style={{ padding: "120px 24px" }}>
+        <div className="text-center">
+          <p style={{ fontSize: "11px", letterSpacing: "0.35em", color: "#1A6BFF" }}>ENCUÉNTRANOS</p>
+          <h2 style={{ fontSize: "clamp(40px, 6vw, 72px)", fontWeight: 800, color: "#fff", marginTop: "16px" }}>
+            LOCATION
+          </h2>
+          <p style={{ fontSize: "16px", color: "rgba(255,255,255,0.5)", marginTop: "16px" }}>
+            Santurce, Puerto Rico
+          </p>
+        </div>
+
+        <div className="mx-auto mt-16 flex flex-col gap-4" style={{ maxWidth: "700px" }}>
+          <LocationMap
+            title="BLUEPRINT PROJECT"
+            address="1951 Calle Loíza, Santurce, PR 00911"
+            hours="Lun–Vie 5:00 AM – 10:00 PM · Sáb–Dom 7:00 AM – 6:00 PM"
+            mapUrl="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3785.5!2d-66.05!3d18.45!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2sSanturce%2C+PR!5e0!3m2!1sen!2sus!4v1"
+          />
+          <LocationMap
+            title="HACK BAR"
+            address="1953 Calle Loíza, Santurce, PR 00911"
+            hours="Lun–Sáb 6:00 AM – 8:00 PM · Dom 8:00 AM – 4:00 PM"
+            mapUrl="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3785.5!2d-66.05!3d18.45!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2sSanturce%2C+PR!5e0!3m2!1sen!2sus!4v1"
+          />
+          <LocationMap
+            title="RESET"
+            address="1955 Calle Loíza, Santurce, PR 00911"
+            hours="Lun–Dom 8:00 AM – 9:00 PM"
+            mapUrl="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3785.5!2d-66.05!3d18.45!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2sSanturce%2C+PR!5e0!3m2!1sen!2sus!4v1"
+          />
+        </div>
+
+        <p className="text-center" style={{ fontSize: "10px", letterSpacing: "0.3em", color: "rgba(255,255,255,0.3)", marginTop: "32px" }}>
+          CLICK ON EACH LOCATION TO EXPAND
+        </p>
       </section>
 
       <style>{`
