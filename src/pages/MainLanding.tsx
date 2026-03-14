@@ -346,6 +346,9 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
         .hero-subtext-mobile {
           display: none;
         }
+        .hero-subtext-desktop {
+          display: inline;
+        }
         @media (max-width: 767px) {
           .hero-headline-wrapper {
             flex-wrap: wrap !important;
