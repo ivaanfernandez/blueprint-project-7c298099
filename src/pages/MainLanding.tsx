@@ -357,7 +357,8 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
         }
         .hero-shiny-btn {
           white-space: nowrap !important;
-          padding: 1rem 2rem !important;
+          padding: 0.7rem 1.8rem !important;
+          font-size: 12px !important;
         }
         @media (max-width: 767px) {
           .hero-shiny-btn {
@@ -373,7 +374,7 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
         /* Desktop hero styles */
         @media (min-width: 768px) {
           .hero-section {
-            height: 85vh !important;
+            height: 75vh !important;
           }
           .hero-bg-image {
             object-position: center 40% !important;
@@ -405,7 +406,7 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
         }
 @media (max-width: 767px) {
           .hero-section {
-            height: 115vh !important;
+            height: 95vh !important;
           }
           .hero-headline-wrapper {
             flex-wrap: wrap !important;
