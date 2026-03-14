@@ -190,8 +190,8 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
-          gap: '4px',
-          margin: '20px auto 0',
+          gap: '2px',
+          margin: '12px auto 0',
           position: 'relative',
           zIndex: 10,
           textAlign: 'center'
