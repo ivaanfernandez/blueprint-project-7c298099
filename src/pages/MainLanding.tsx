@@ -188,7 +188,7 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
           </div>
         </div>
 
-        <p style={{
+        <p className="hero-subtext" style={{
           color: 'rgba(255,255,255,0.6)',
           fontSize: '15px',
           fontFamily: 'Space Grotesk, sans-serif',
