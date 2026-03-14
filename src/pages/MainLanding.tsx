@@ -113,9 +113,9 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
       <section style={{ position: "relative", height: "100vh", overflow: "hidden" }} className="flex flex-col items-center md:items-center">
         {/* Hero background image */}
         <img
-          src="/gym-interior.jpg"
-          alt="Blueprint gym interior"
-          style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", objectPosition: "center" }}
+          src={gymHero}
+          alt="Blueprint Project"
+          style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", objectPosition: "center", zIndex: 0 }}
         />
         {/* Dark gradient overlay */}
         <div
