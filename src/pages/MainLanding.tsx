@@ -186,7 +186,7 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
           </span>
         </div>
 
-        <div style={{
+        <div className="hero-subtext-container" style={{
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
@@ -196,13 +196,27 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
           zIndex: 10,
           textAlign: 'center'
         }}>
+          <div className="hero-subtext-line hero-subtext-line1" style={{
+            color: 'rgba(255,255,255,0.6)',
+            fontSize: 'clamp(10px, 1vw, 15px)',
+            fontFamily: 'Space Grotesk, sans-serif',
+            whiteSpace: 'nowrap',
+            letterSpacing: '0.04em',
+            lineHeight: '2'
+          }}>
+            <FadeText
+              direction="up"
+              text="Every detail, from the space to the mindset, is engineered for performance, recovery and mental clarity."
+              framerProps={{ show: { transition: { delay: 0.1, type: 'spring' } } }}
+              className=""
+            />
+          </div>
           {[
-            { text: "Every detail, from the space to the mindset, is engineered for performance, recovery and mental clarity.", delay: 0.1 },
             { text: "We're here to reprogram you physically, mentally, and energetically.", delay: 0.25 },
             { text: "This is where discipline meets design.", delay: 0.4 },
             { text: "Welcome to the future of self mastery.", delay: 0.55 },
           ].map((item) => (
-            <div key={item.text} style={{
+            <div key={item.text} className="hero-subtext-line" style={{
               color: 'rgba(255,255,255,0.6)',
               fontSize: 'clamp(10px, 1vw, 15px)',
               fontFamily: 'Space Grotesk, sans-serif',
@@ -218,7 +232,7 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
               />
             </div>
           ))}
-          <div style={{
+          <div className="hero-subtext-line" style={{
             color: '#1A6BFF',
             fontSize: 'clamp(10px, 1vw, 15px)',
             fontFamily: 'Space Grotesk, sans-serif',
