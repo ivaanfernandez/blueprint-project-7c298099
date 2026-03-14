@@ -129,7 +129,7 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
           }}
         />
         {/* Hero content - on top of image */}
-        <div style={{ position: "relative", zIndex: 10, width: "100%", height: "100%", display: "flex", flexDirection: "column", alignItems: "center" }}>
+        <div className="hero-content-wrapper" style={{ position: "relative", zIndex: 10, width: "100%", height: "100%", display: "flex", flexDirection: "column", alignItems: "center" }}>
         <div
           className="hero-headline-wrapper"
           style={{ lineHeight: 0.95, paddingTop: "120px", position: "relative", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", flexWrap: "nowrap", width: "100%", boxSizing: "border-box" as const, overflow: "visible", fontFamily: "'Jost', sans-serif" }}
@@ -140,13 +140,19 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
               .hero-line { font-size: clamp(28px, 3.5vw, 52px) !important; }
             }
             @media (max-width: 767px) {
-              .hero-line { font-size: clamp(44px, 11vw, 64px) !important; }
+              .hero-headline-wrapper { padding: 100px 16px 0 !important; }
+              .hero-line { font-size: clamp(28px, 8vw, 40px) !important; }
+              .hero-line-static { white-space: nowrap !important; }
               .hero-spacer { display: none !important; }
-              .hero-rotate-wrapper { width: auto !important; text-align: center !important; }
+              .hero-rotate-wrapper { width: auto !important; text-align: center !important; white-space: normal !important; }
+              .hero-subtext { font-size: 13px !important; padding: 0 24px !important; max-width: 100% !important; }
+              .hero-content-wrapper { padding-top: 100px !important; padding-bottom: 40px !important; }
+              .scroll-indicator { display: none !important; }
+              .hero-cta-button { width: auto !important; max-width: 280px !important; margin: 0 auto !important; }
             }
           `}</style>
           <span
-            className="hero-line"
+            className="hero-line hero-line-static"
             style={{
               whiteSpace: "nowrap",
               fontWeight: 800,
@@ -182,7 +188,7 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
           </div>
         </div>
 
-        <p style={{
+        <p className="hero-subtext" style={{
           color: 'rgba(255,255,255,0.6)',
           fontSize: '15px',
           fontFamily: 'Space Grotesk, sans-serif',
@@ -199,12 +205,12 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
         </p>
 
         {/* CTA Button */}
-        <div style={{ marginTop: "48px", display: "flex", justifyContent: "center" }}>
+        <div className="hero-cta-button" style={{ marginTop: "48px", display: "flex", justifyContent: "center", width: "auto", maxWidth: "280px" }}>
           <ShinyButton>HAVE YOUR BLUEPRINT</ShinyButton>
         </div>
 
         {/* Scroll indicator */}
-        <div className="flex flex-col items-center gap-2" style={{ position: "absolute", bottom: "40px", left: "50%", transform: "translateX(-50%)" }}>
+        <div className="scroll-indicator flex flex-col items-center gap-2" style={{ position: "absolute", bottom: "40px", left: "50%", transform: "translateX(-50%)" }}>
           <div
             style={{
               width: "1px",
