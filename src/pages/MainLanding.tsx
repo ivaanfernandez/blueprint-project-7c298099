@@ -204,12 +204,22 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
             letterSpacing: '0.04em',
             lineHeight: '2'
           }}>
-            <FadeText
-              direction="up"
-              text="Every detail, from the space to the mindset, is engineered for performance, recovery and mental clarity."
-              framerProps={{ show: { transition: { delay: 0.1, type: 'spring' } } }}
-              className=""
-            />
+            <span className="hero-subtext-desktop">
+              <FadeText
+                direction="up"
+                text="Every detail, from the space to the mindset, is engineered for performance, recovery and mental clarity."
+                framerProps={{ show: { transition: { delay: 0.1, type: 'spring' } } }}
+                className=""
+              />
+            </span>
+            <span className="hero-subtext-mobile">
+              <FadeText
+                direction="up"
+                text="Mindset. Performance. Recovery"
+                framerProps={{ show: { transition: { delay: 0.1, type: 'spring' } } }}
+                className=""
+              />
+            </span>
           </div>
           {[
             { text: "We're here to reprogram you physically, mentally, and energetically.", delay: 0.25 },
@@ -336,6 +346,9 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
         .hero-subtext-mobile {
           display: none;
         }
+        .hero-subtext-desktop {
+          display: inline;
+        }
         @media (max-width: 767px) {
           .hero-headline-wrapper {
             flex-wrap: wrap !important;
@@ -377,6 +390,13 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
             display: flex !important;
             justify-content: center !important;
             width: 100% !important;
+          }
+          /* Show mobile text, hide desktop on mobile */
+          .hero-subtext-mobile {
+            display: inline !important;
+          }
+          .hero-subtext-desktop {
+            display: none !important;
           }
         }
       `}</style>
