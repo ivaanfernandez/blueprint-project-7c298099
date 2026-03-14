@@ -152,7 +152,7 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
             }
           `}</style>
           <span
-            className="hero-line"
+            className="hero-line hero-line-static"
             style={{
               whiteSpace: "nowrap",
               fontWeight: 800,
