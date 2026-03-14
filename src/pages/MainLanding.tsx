@@ -258,6 +258,9 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
         .hero-no-comma {
           display: none;
         }
+        .hero-subtext-mobile {
+          display: none;
+        }
         @media (max-width: 767px) {
           .hero-headline-wrapper {
             flex-wrap: wrap !important;
@@ -286,6 +289,12 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
             padding-right: 24px !important;
             white-space: normal !important;
             text-align: center !important;
+          }
+          .hero-subtext-desktop {
+            display: none !important;
+          }
+          .hero-subtext-mobile {
+            display: inline !important;
           }
         }
       `}</style>
