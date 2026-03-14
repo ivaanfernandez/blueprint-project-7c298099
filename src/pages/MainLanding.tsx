@@ -365,15 +365,27 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
         /* Desktop hero styles */
         @media (min-width: 768px) {
           .hero-section {
-            height: 70vh !important;
+            height: 85vh !important;
           }
           .hero-bg-image {
             object-position: center 20% !important;
           }
           .hero-content-wrapper {
-            padding-top: 110px !important;
+            padding-top: 80px !important;
             align-items: center !important;
             justify-content: flex-start !important;
+          }
+          .hero-headline-wrapper {
+            justify-content: center !important;
+            padding-left: 0 !important;
+            padding-right: 0 !important;
+            text-align: left !important;
+          }
+          .hero-subtext-container {
+            margin-top: 16px !important;
+          }
+          .hero-cta-button {
+            margin-top: 20px !important;
           }
         }
         .hero-subtext-mobile {
