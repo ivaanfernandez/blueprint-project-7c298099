@@ -391,6 +391,13 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
             justify-content: center !important;
             width: 100% !important;
           }
+          /* Show mobile text, hide desktop on mobile */
+          .hero-subtext-mobile {
+            display: inline !important;
+          }
+          .hero-subtext-desktop {
+            display: none !important;
+          }
         }
       `}</style>
     </motion.div>
