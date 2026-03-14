@@ -192,13 +192,13 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
           letterSpacing: '0.04em',
           lineHeight: '1.8',
           textAlign: 'center',
-          maxWidth: '900px',
+          maxWidth: '860px',
           margin: '20px auto 0',
           position: 'relative',
           zIndex: 10,
-          whiteSpace: 'nowrap'
+          whiteSpace: 'normal'
         }}>
-          <span className="hero-subtext-desktop">Three fingerprints. One operating system. Blueprint is where physical mastery, biological fuel, and deep recovery converge into one.</span>
+          <span className="hero-subtext-desktop">Three fingerprints. One operating system.<br/>Blueprint is where physical mastery, biological fuel, and deep recovery converge into one.</span>
           <span className="hero-subtext-mobile">Three fingerprints. One operating system.<br/>Blueprint is where physical mastery,<br/>biological fuel, and deep recovery converge into one.</span>
         </p>
 
