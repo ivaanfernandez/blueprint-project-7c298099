@@ -254,10 +254,14 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
           white-space: nowrap !important;
           padding: 1rem 2rem !important;
         }
+        .hero-no-comma {
+          display: none;
+        }
         @media (max-width: 767px) {
           .hero-headline-wrapper {
             flex-wrap: wrap !important;
-            text-align: left !important;
+            text-align: center !important;
+            justify-content: center !important;
             padding-left: 20px !important;
             padding-right: 20px !important;
           }
@@ -268,11 +272,19 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
           .hero-headline-blue {
             font-size: clamp(36px, 9vw, 48px) !important;
           }
+          .hero-comma {
+            display: none !important;
+          }
+          .hero-no-comma {
+            display: inline !important;
+          }
           .hero-subtext {
             font-size: 14px !important;
             max-width: 100% !important;
             padding-left: 24px !important;
             padding-right: 24px !important;
+            white-space: normal !important;
+            text-align: center !important;
           }
         }
       `}</style>
