@@ -191,7 +191,10 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
           />
           <p style={{ fontSize: "9px", letterSpacing: "0.3em", color: "rgba(255,255,255,0.4)" }}>SCROLL</p>
         </div>
+        </div>
       </section>
+
+      <ProceduralBackground />
 
       {/* TRES HUELLAS */}
       <section className="relative z-10" style={{ padding: "120px 24px" }}>
