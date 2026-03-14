@@ -162,12 +162,6 @@ export function ShinyButton({ children, onClick, className = "", fontSize = "11p
           from, to { scale: 1; }
           50% { scale: 1.2; }
         }
-        @media (max-width: 767px) {
-          .shiny-cta {
-            font-size: 12px !important;
-            padding: 1rem 2rem !important;
-          }
-        }
       `}</style>
       <button className={`shiny-cta ${className}`} 
               onClick={onClick}>
