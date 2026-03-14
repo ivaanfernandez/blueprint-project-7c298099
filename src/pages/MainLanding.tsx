@@ -95,8 +95,6 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
       transition={{ duration: 1 }}
       style={{ backgroundColor: "#000", fontFamily: "'Space Grotesk', sans-serif" }}
     >
-      <ProceduralBackground />
-
       {/* FIXED DOCK NAV */}
       <div className="fixed top-0 left-0 right-0 z-50 flex justify-center" style={{ paddingTop: "20px", opacity: showDock ? 1 : 0, pointerEvents: showDock ? "auto" : "none", transition: "opacity 0.8s ease" }}>
         <Dock>
@@ -111,8 +109,23 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
       </div>
 
       {/* HERO */}
-      <section className="relative z-10 flex min-h-screen flex-col items-center md:items-center" style={{ paddingBottom: "80px" }}>
-        {/* Headline */}
+      <section style={{ position: "relative", height: "100vh", overflow: "hidden" }} className="flex flex-col items-center md:items-center">
+        {/* Hero background image */}
+        <img
+          src="/gym-interior.jpg"
+          alt="Blueprint gym interior"
+          style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", objectPosition: "center" }}
+        />
+        {/* Dark gradient overlay */}
+        <div
+          style={{
+            position: "absolute",
+            inset: 0,
+            background: "linear-gradient(to bottom, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.3) 50%, rgba(0,0,0,0.75) 100%)",
+          }}
+        />
+        {/* Hero content - on top of image */}
+        <div style={{ position: "relative", zIndex: 10, width: "100%", height: "100%", display: "flex", flexDirection: "column", alignItems: "center" }}>
         <div
           className="hero-headline-wrapper"
           style={{ lineHeight: 0.95, paddingTop: "120px", position: "relative", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", flexWrap: "nowrap", width: "100%", boxSizing: "border-box" as const, overflow: "visible" }}
@@ -178,7 +191,10 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
           />
           <p style={{ fontSize: "9px", letterSpacing: "0.3em", color: "rgba(255,255,255,0.4)" }}>SCROLL</p>
         </div>
+        </div>
       </section>
+
+      <ProceduralBackground />
 
       {/* TRES HUELLAS */}
       <section className="relative z-10" style={{ padding: "120px 24px" }}>
