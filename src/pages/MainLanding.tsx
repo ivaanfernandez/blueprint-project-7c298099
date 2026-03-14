@@ -403,7 +403,10 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
         .hero-subtext-desktop {
           display: inline;
         }
-        @media (max-width: 767px) {
+@media (max-width: 767px) {
+          .hero-section {
+            height: 115vh !important;
+          }
           .hero-headline-wrapper {
             flex-wrap: wrap !important;
             text-align: center !important;
