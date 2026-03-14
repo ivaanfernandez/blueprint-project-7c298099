@@ -419,9 +419,15 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
         .hero-subtext-desktop {
           display: inline;
         }
-@media (max-width: 767px) {
+        @media (max-width: 767px) {
           .hero-section {
             height: 95vh !important;
+          }
+          .hero-bg-desktop {
+            display: none !important;
+          }
+          .hero-bg-mobile {
+            display: block !important;
           }
           .hero-headline-wrapper {
             flex-wrap: wrap !important;
