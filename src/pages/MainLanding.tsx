@@ -116,11 +116,18 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
 
       {/* HERO */}
       <section className="hero-section flex flex-col items-center md:items-center" style={{ position: "relative", overflow: "hidden", zIndex: 2 }}>
-        {/* Hero background image */}
+        {/* Mobile background image */}
         <img
           src={gymHero}
           alt="Blueprint Project"
-          className="hero-bg-image"
+          className="hero-bg-image hero-bg-mobile"
+          style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", zIndex: 0 }}
+        />
+        {/* Desktop background image */}
+        <img
+          src={gymDesktop}
+          alt="Blueprint Project"
+          className="hero-bg-image hero-bg-desktop"
           style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", zIndex: 0 }}
         />
         {/* Dark gradient overlay */}
