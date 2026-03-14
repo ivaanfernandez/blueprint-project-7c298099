@@ -132,7 +132,7 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
         <div className="hero-content-wrapper" style={{ position: "relative", zIndex: 10, width: "100%", height: "100%", display: "flex", flexDirection: "column", alignItems: "center" }}>
         <div
           className="hero-headline-wrapper"
-          style={{ lineHeight: 0.95, paddingTop: "120px", position: "relative", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", flexWrap: "nowrap", width: "100%", boxSizing: "border-box" as const, overflow: "visible", fontFamily: "'Jost', sans-serif" }}
+          style={{ lineHeight: 0.95, paddingTop: "120px", position: "relative", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", flexWrap: "nowrap", width: "100%", boxSizing: "border-box" as const, overflow: "visible", fontFamily: "'Barlow Condensed', sans-serif" }}
         >
           <style>{`
             @media (min-width: 768px) {
