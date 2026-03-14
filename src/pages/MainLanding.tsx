@@ -186,18 +186,19 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
 
         <p className="hero-subtext" style={{
           color: 'rgba(255,255,255,0.6)',
-          fontSize: '18px',
+          fontSize: 'clamp(14px, 1.4vw, 18px)',
           fontFamily: 'Space Grotesk, sans-serif',
           fontWeight: '400',
           letterSpacing: '0.04em',
           lineHeight: '1.8',
           textAlign: 'center',
-          maxWidth: '760px',
+          maxWidth: '900px',
           margin: '20px auto 0',
           position: 'relative',
-          zIndex: 10
+          zIndex: 10,
+          whiteSpace: 'nowrap'
         }}>
-          Three fingerprints. One operating system.<br />Blueprint is where physical mastery, biological fuel, and deep recovery converge into one.
+          Three fingerprints. One operating system. Blueprint is where physical mastery, biological fuel, and deep recovery converge into one.
         </p>
 
         {/* CTA Button */}
