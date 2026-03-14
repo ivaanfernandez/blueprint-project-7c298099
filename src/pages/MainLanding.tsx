@@ -99,7 +99,7 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
       style={{ backgroundColor: "#000", fontFamily: "'Space Grotesk', sans-serif" }}
     >
       {/* FIXED DOCK NAV */}
-      <div className="fixed top-0 left-0 right-0 z-50 flex justify-center" style={{ paddingTop: "20px", opacity: showDock ? 1 : 0, pointerEvents: showDock ? "auto" : "none", transition: "opacity 0.8s ease" }}>
+      <div className="fixed z-50" style={{ top: 0, left: 0, right: 0, display: "flex", justifyContent: "center", alignItems: "center", paddingTop: "20px", opacity: showDock ? 1 : 0, pointerEvents: showDock ? "auto" : "none", transition: "opacity 0.8s ease" }}>
         <Dock>
           {HUELLAS.map((h) => (
             <DockIcon key={h.route} tooltip={h.tooltip} onClick={() => navigate(h.route)}>
