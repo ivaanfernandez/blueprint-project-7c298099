@@ -5,6 +5,7 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import BiometricScan from "./components/BiometricScan";
+import ScaleReveal from "./components/ScaleReveal";
 import MainLanding from "./pages/MainLanding";
 import HuellaAzul from "./pages/HuellaAzul";
 import HuellaRoja from "./pages/HuellaRoja";
@@ -13,33 +14,42 @@ import NotFound from "./pages/NotFound.tsx";
 
 const queryClient = new QueryClient();
 
+type Phase = "scan" | "reveal" | "landing";
+
 const App = () => {
-  const [introComplete, setIntroComplete] = useState(false);
+  const [phase, setPhase] = useState<Phase>("scan");
   const [showDock, setShowDock] = useState(false);
-  const handleComplete = useCallback(() => setIntroComplete(true), []);
+
+  const handleScanComplete = useCallback(() => setPhase("reveal"), []);
+  const handleRevealComplete = useCallback(() => setPhase("landing"), []);
 
   useEffect(() => {
-    if (introComplete) {
+    if (phase === "landing") {
       const timer = setTimeout(() => setShowDock(true), 100);
       return () => clearTimeout(timer);
     }
-  }, [introComplete]);
+  }, [phase]);
 
   return (
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
         <Toaster />
         <Sonner />
-        {!introComplete && <BiometricScan onComplete={handleComplete} />}
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<MainLanding showDock={showDock} />} />
-            <Route path="/huella-azul" element={<HuellaAzul />} />
-            <Route path="/huella-roja" element={<HuellaRoja />} />
-            <Route path="/huella-verde" element={<HuellaVerde />} />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </BrowserRouter>
+        <div style={{ backgroundColor: "#000", minHeight: "100vh" }}>
+          {phase === "scan" && <BiometricScan onComplete={handleScanComplete} />}
+          {phase === "reveal" && <ScaleReveal onComplete={handleRevealComplete} />}
+          {phase === "landing" && (
+            <BrowserRouter>
+              <Routes>
+                <Route path="/" element={<MainLanding showDock={showDock} />} />
+                <Route path="/huella-azul" element={<HuellaAzul />} />
+                <Route path="/huella-roja" element={<HuellaRoja />} />
+                <Route path="/huella-verde" element={<HuellaVerde />} />
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+            </BrowserRouter>
+          )}
+        </div>
       </TooltipProvider>
     </QueryClientProvider>
   );
