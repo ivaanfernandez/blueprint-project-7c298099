@@ -374,7 +374,7 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
         /* Desktop hero styles */
         @media (min-width: 768px) {
           .hero-section {
-            height: 75vh !important;
+            height: 62vh !important;
           }
           .hero-bg-image {
             object-position: center 40% !important;
