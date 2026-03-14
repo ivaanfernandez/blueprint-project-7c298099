@@ -4,6 +4,7 @@ import ProceduralBackground from "@/components/ProceduralBackground";
 import { WordRotate } from "@/components/ui/word-rotate";
 import { Dock, DockIcon } from "@/components/ui/dock";
 import gymHero from '@/assets/blueprint-gym.jpg';
+import gymDesktop from '@/assets/blueprint-gym-desktop.jpg';
 import { ShinyButton } from '@/components/ui/shiny-button';
 import { LocationMap } from '@/components/ui/expand-map';
 import { FadeText } from '@/components/ui/fade-text';
