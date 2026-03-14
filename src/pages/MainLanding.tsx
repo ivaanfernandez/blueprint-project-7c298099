@@ -138,7 +138,9 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
             @media (min-width: 768px) {
               .hero-headline-wrapper { padding-top: 140px !important; flex-direction: row !important; padding-left: 40px !important; padding-right: 40px !important; }
               .hero-line { font-size: clamp(52px, 6.5vw, 90px) !important; white-space: nowrap !important; }
-              .hero-subtext { font-size: 17px !important; }
+              .hero-subtext { font-size: 17px !important; max-width: 700px !important; }
+              .hero-section { height: 80vh !important; }
+              .hero-bg-image { object-position: center 30% !important; }
               .scroll-indicator { display: none !important; }
             }
             @media (max-width: 767px) {
