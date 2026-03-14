@@ -152,7 +152,7 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
             whiteSpace: 'nowrap',
             flexShrink: 0,
             lineHeight: 1
-          >
+          }}>
             <span className="hero-comma">THIS ISN'T A GYM,&nbsp;</span>
             <span className="hero-no-comma">THIS ISN'T A GYM&nbsp;</span>
           </span>
