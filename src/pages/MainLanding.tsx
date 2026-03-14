@@ -4,6 +4,7 @@ import ProceduralBackground from "@/components/ProceduralBackground";
 import { WordRotate } from "@/components/ui/word-rotate";
 import { Dock, DockIcon } from "@/components/ui/dock";
 import gymHero from '@/assets/blueprint-gym.jpg';
+import gymDesktop from '@/assets/blueprint-gym-desktop.jpg';
 import { ShinyButton } from '@/components/ui/shiny-button';
 import { LocationMap } from '@/components/ui/expand-map';
 import { FadeText } from '@/components/ui/fade-text';
@@ -115,11 +116,18 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
 
       {/* HERO */}
       <section className="hero-section flex flex-col items-center md:items-center" style={{ position: "relative", overflow: "hidden", zIndex: 2 }}>
-        {/* Hero background image */}
+        {/* Mobile background image */}
         <img
           src={gymHero}
           alt="Blueprint Project"
-          className="hero-bg-image"
+          className="hero-bg-image hero-bg-mobile"
+          style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", zIndex: 0 }}
+        />
+        {/* Desktop background image */}
+        <img
+          src={gymDesktop}
+          alt="Blueprint Project"
+          className="hero-bg-image hero-bg-desktop"
           style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", zIndex: 0 }}
         />
         {/* Dark gradient overlay */}
@@ -376,6 +384,13 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
           .hero-section {
             height: 62vh !important;
           }
+          .hero-bg-mobile {
+            display: none !important;
+          }
+          .hero-bg-desktop {
+            display: block !important;
+            object-position: center 30% !important;
+          }
           .hero-bg-image {
             object-position: center 40% !important;
           }
@@ -404,9 +419,15 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
         .hero-subtext-desktop {
           display: inline;
         }
-@media (max-width: 767px) {
+        @media (max-width: 767px) {
           .hero-section {
             height: 95vh !important;
+          }
+          .hero-bg-desktop {
+            display: none !important;
+          }
+          .hero-bg-mobile {
+            display: block !important;
           }
           .hero-headline-wrapper {
             flex-wrap: wrap !important;
