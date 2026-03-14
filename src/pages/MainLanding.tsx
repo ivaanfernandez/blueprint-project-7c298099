@@ -6,6 +6,7 @@ import { Dock, DockIcon } from "@/components/ui/dock";
 import gymHero from '@/assets/blueprint-gym.jpg';
 import { ShinyButton } from '@/components/ui/shiny-button';
 import { LocationMap } from '@/components/ui/expand-map';
+import { FadeText } from '@/components/ui/fade-text';
 
 const FingerprintSVG = ({ color, size = 48 }: { color: string; size?: number }) => (
   <svg viewBox="0 0 140 140" width={size} height={size} fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -185,23 +186,55 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
           </span>
         </div>
 
-        <p className="hero-subtext" style={{
-          color: 'rgba(255,255,255,0.6)',
-          fontSize: 'clamp(14px, 1.4vw, 18px)',
-          fontFamily: 'Space Grotesk, sans-serif',
-          fontWeight: '400',
-          letterSpacing: '0.04em',
-          lineHeight: '1.8',
-          textAlign: 'center',
-          maxWidth: '860px',
+        <div style={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          gap: '4px',
           margin: '20px auto 0',
           position: 'relative',
           zIndex: 10,
-          whiteSpace: 'normal'
+          textAlign: 'center'
         }}>
-          <span className="hero-subtext-desktop">Three fingerprints. One operating system.<br/>Blueprint is where physical mastery, biological fuel, and deep recovery converge into one.</span>
-          <span className="hero-subtext-mobile">Three fingerprints. One operating system.<br/>Blueprint is where physical mastery,<br/>biological fuel, and deep recovery converge into one.</span>
-        </p>
+          {[
+            { text: "Every detail, from the space to the mindset, is engineered for performance, recovery and mental clarity.", delay: 0.1 },
+            { text: "We're here to reprogram you physically, mentally, and energetically.", delay: 0.25 },
+            { text: "This is where discipline meets design.", delay: 0.4 },
+            { text: "Welcome to the future of self mastery.", delay: 0.55 },
+          ].map((item) => (
+            <div key={item.text} style={{
+              color: 'rgba(255,255,255,0.6)',
+              fontSize: 'clamp(10px, 1vw, 15px)',
+              fontFamily: 'Space Grotesk, sans-serif',
+              whiteSpace: 'nowrap',
+              letterSpacing: '0.04em',
+              lineHeight: '2'
+            }}>
+              <FadeText
+                direction="up"
+                text={item.text}
+                framerProps={{ show: { transition: { delay: item.delay, type: 'spring' } } }}
+                className=""
+              />
+            </div>
+          ))}
+          <div style={{
+            color: '#1A6BFF',
+            fontSize: 'clamp(10px, 1vw, 15px)',
+            fontFamily: 'Space Grotesk, sans-serif',
+            fontWeight: '600',
+            whiteSpace: 'nowrap',
+            letterSpacing: '0.04em',
+            lineHeight: '2'
+          }}>
+            <FadeText
+              direction="up"
+              text="Follow the BLUEPRINT."
+              framerProps={{ show: { transition: { delay: 0.7, type: 'spring' } } }}
+              className=""
+            />
+          </div>
+        </div>
 
         {/* CTA Button */}
         <div className="hero-cta-button" style={{ marginTop: "48px", display: "flex", justifyContent: "center", width: "auto", maxWidth: "280px" }}>
