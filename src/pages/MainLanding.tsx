@@ -140,9 +140,15 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
               .hero-line { font-size: clamp(28px, 3.5vw, 52px) !important; }
             }
             @media (max-width: 767px) {
-              .hero-line { font-size: clamp(44px, 11vw, 64px) !important; }
+              .hero-headline-wrapper { padding: 100px 16px 0 !important; }
+              .hero-line { font-size: clamp(28px, 8vw, 40px) !important; }
+              .hero-line-static { white-space: nowrap !important; }
               .hero-spacer { display: none !important; }
-              .hero-rotate-wrapper { width: auto !important; text-align: center !important; }
+              .hero-rotate-wrapper { width: auto !important; text-align: center !important; white-space: normal !important; }
+              .hero-subtext { font-size: 13px !important; padding: 0 24px !important; max-width: 100% !important; }
+              .hero-content-wrapper { padding-top: 100px !important; padding-bottom: 40px !important; }
+              .scroll-indicator { display: none !important; }
+              .hero-cta-button { width: auto !important; max-width: 280px !important; margin: 0 auto !important; }
             }
           `}</style>
           <span
