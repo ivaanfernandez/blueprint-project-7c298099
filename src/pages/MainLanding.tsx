@@ -137,18 +137,19 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
           <style>{`
             @media (min-width: 768px) {
               .hero-headline-wrapper { padding-top: 140px !important; flex-direction: row !important; padding-left: 40px !important; padding-right: 40px !important; }
-              .hero-line { font-size: clamp(28px, 3.5vw, 52px) !important; }
+              .hero-line { font-size: clamp(52px, 6.5vw, 90px) !important; white-space: nowrap !important; }
+              .hero-subtext { font-size: 17px !important; }
+              .scroll-indicator { display: none !important; }
             }
             @media (max-width: 767px) {
-              .hero-headline-wrapper { padding: 100px 16px 0 !important; }
-              .hero-line { font-size: clamp(28px, 8vw, 40px) !important; }
-              .hero-line-static { white-space: nowrap !important; }
+              .hero-headline-wrapper { padding: 72px 16px 0 !important; text-align: center !important; }
+              .hero-line { font-size: clamp(38px, 10vw, 52px) !important; }
+              .hero-line-static { white-space: normal !important; }
               .hero-spacer { display: none !important; }
               .hero-rotate-wrapper { width: auto !important; text-align: center !important; white-space: normal !important; }
               .hero-subtext { font-size: 13px !important; padding: 0 24px !important; max-width: 100% !important; }
-              .hero-content-wrapper { padding-top: 100px !important; padding-bottom: 40px !important; }
-              .scroll-indicator { display: none !important; }
-              .hero-cta-button { width: auto !important; max-width: 280px !important; margin: 0 auto !important; }
+              .hero-content-wrapper { padding-top: 72px !important; padding-bottom: 40px !important; }
+              .hero-cta-button { width: auto !important; max-width: 280px !important; margin: 32px auto 0 !important; }
             }
           `}</style>
           <span
