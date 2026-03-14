@@ -112,7 +112,7 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
       </div>
 
       {/* HERO */}
-      <section style={{ position: "relative", height: "100vh", overflow: "hidden", zIndex: 2 }} className="flex flex-col items-center md:items-center">
+      <section className="hero-section" style={{ position: "relative", height: "100vh", overflow: "hidden", zIndex: 2 }} className="flex flex-col items-center md:items-center">
         {/* Hero background image */}
         <img
           src={gymHero}
