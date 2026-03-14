@@ -201,6 +201,41 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
           </div>
         </div>
 
+        {/* CTA Button with PulseBeams */}
+        <div style={{ marginTop: "48px", display: "flex", justifyContent: "center" }}>
+          <PulseBeams beams={heroBeams} width={400} height={160}>
+            <button
+              style={{
+                background: 'transparent',
+                border: '1px solid rgba(26,107,255,0.7)',
+                borderRadius: '4px',
+                padding: '16px 40px',
+                color: '#FFFFFF',
+                fontSize: '11px',
+                fontFamily: 'Space Grotesk, sans-serif',
+                fontWeight: '600',
+                letterSpacing: '0.3em',
+                cursor: 'pointer',
+                position: 'relative',
+                zIndex: 10,
+                transition: 'all 0.3s ease',
+                boxShadow: '0 0 20px rgba(26,107,255,0.15)',
+              }}
+              onMouseEnter={e => {
+                e.currentTarget.style.background = 'rgba(26,107,255,0.1)';
+                e.currentTarget.style.boxShadow = '0 0 30px rgba(26,107,255,0.4)';
+                e.currentTarget.style.borderColor = 'rgba(26,107,255,1)';
+              }}
+              onMouseLeave={e => {
+                e.currentTarget.style.background = 'transparent';
+                e.currentTarget.style.boxShadow = '0 0 20px rgba(26,107,255,0.15)';
+                e.currentTarget.style.borderColor = 'rgba(26,107,255,0.7)';
+              }}
+            >
+              OBTÉN TU HUELLA
+            </button>
+          </PulseBeams>
+        </div>
 
         {/* Scroll indicator */}
         <div className="flex flex-col items-center gap-2" style={{ position: "absolute", bottom: "40px", left: "50%", transform: "translateX(-50%)" }}>
