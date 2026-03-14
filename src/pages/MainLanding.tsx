@@ -6,6 +6,7 @@ import { Dock, DockIcon } from "@/components/ui/dock";
 import gymHero from '@/assets/blueprint-gym.jpg';
 import { ShinyButton } from '@/components/ui/shiny-button';
 import { LocationMap } from '@/components/ui/expand-map';
+import { FadeText } from '@/components/ui/fade-text';
 
 const FingerprintSVG = ({ color, size = 48 }: { color: string; size?: number }) => (
   <svg viewBox="0 0 140 140" width={size} height={size} fill="none" xmlns="http://www.w3.org/2000/svg">
