@@ -117,6 +117,7 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
         <img
           src={gymHero}
           alt="Blueprint Project"
+          className="hero-bg-image"
           style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", objectPosition: "center", zIndex: 0 }}
         />
         {/* Dark gradient overlay */}
