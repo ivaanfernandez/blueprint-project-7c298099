@@ -99,7 +99,7 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
       style={{ backgroundColor: "#000", fontFamily: "'Space Grotesk', sans-serif" }}
     >
       {/* FIXED DOCK NAV */}
-      <div className="fixed top-0 left-0 right-0 z-50 flex justify-center" style={{ paddingTop: "20px", opacity: showDock ? 1 : 0, pointerEvents: showDock ? "auto" : "none", transition: "opacity 0.8s ease" }}>
+      <div className="fixed z-50" style={{ top: 0, left: 0, right: 0, display: "flex", justifyContent: "center", alignItems: "center", paddingTop: "20px", opacity: showDock ? 1 : 0, pointerEvents: showDock ? "auto" : "none", transition: "opacity 0.8s ease" }}>
         <Dock>
           {HUELLAS.map((h) => (
             <DockIcon key={h.route} tooltip={h.tooltip} onClick={() => navigate(h.route)}>
@@ -137,18 +137,19 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
           <style>{`
             @media (min-width: 768px) {
               .hero-headline-wrapper { padding-top: 140px !important; flex-direction: row !important; padding-left: 40px !important; padding-right: 40px !important; }
-              .hero-line { font-size: clamp(28px, 3.5vw, 52px) !important; }
+              .hero-line { font-size: clamp(52px, 6.5vw, 90px) !important; white-space: nowrap !important; }
+              .hero-subtext { font-size: 17px !important; }
+              .scroll-indicator { display: none !important; }
             }
             @media (max-width: 767px) {
-              .hero-headline-wrapper { padding: 100px 16px 0 !important; }
-              .hero-line { font-size: clamp(28px, 8vw, 40px) !important; }
-              .hero-line-static { white-space: nowrap !important; }
+              .hero-headline-wrapper { padding: 72px 16px 0 !important; text-align: center !important; }
+              .hero-line { font-size: clamp(38px, 10vw, 52px) !important; }
+              .hero-line-static { white-space: normal !important; }
               .hero-spacer { display: none !important; }
               .hero-rotate-wrapper { width: auto !important; text-align: center !important; white-space: normal !important; }
               .hero-subtext { font-size: 13px !important; padding: 0 24px !important; max-width: 100% !important; }
-              .hero-content-wrapper { padding-top: 100px !important; padding-bottom: 40px !important; }
-              .scroll-indicator { display: none !important; }
-              .hero-cta-button { width: auto !important; max-width: 280px !important; margin: 0 auto !important; }
+              .hero-content-wrapper { padding-top: 72px !important; padding-bottom: 40px !important; }
+              .hero-cta-button { width: auto !important; max-width: 280px !important; margin: 32px auto 0 !important; }
             }
           `}</style>
           <span
@@ -160,7 +161,7 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
               flexShrink: 0,
             }}
           >
-            THIS ISN'T A GYM,
+            THIS ISN'T A GYM
           </span>
           <span className="hero-spacer" style={{ flexShrink: 0 }}>&nbsp;</span>
           <div
@@ -201,7 +202,7 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
           position: 'relative',
           zIndex: 10
         }}>
-          Three fingerprints. One operating system. Blueprint is where physical mastery, biological fuel, and deep recovery converge into a single elite experience.
+          Three fingerprints. One operating system.<br />Blueprint is where physical mastery, biological fuel, and deep recovery converge into one.
         </p>
 
         {/* CTA Button */}
