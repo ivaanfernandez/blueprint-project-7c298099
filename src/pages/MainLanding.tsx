@@ -357,19 +357,26 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
           .hero-no-comma {
             display: inline !important;
           }
-          .hero-subtext {
-            font-size: 14px !important;
-            max-width: 100% !important;
-            padding-left: 24px !important;
-            padding-right: 24px !important;
-            white-space: normal !important;
+          /* Subtext container mobile */
+          .hero-subtext-container {
             text-align: center !important;
+            align-items: center !important;
+            padding: 0 20px !important;
+            width: 100% !important;
           }
-          .hero-subtext-desktop {
-            display: none !important;
+          /* Line 1 mobile: wrap into 2 lines */
+          .hero-subtext-line1 {
+            white-space: normal !important;
+            max-width: 320px !important;
           }
-          .hero-subtext-mobile {
-            display: inline !important;
+          /* Lines 2-5 mobile: smaller font, keep nowrap, center */
+          .hero-subtext-line {
+            white-space: nowrap !important;
+            font-size: clamp(9px, 2.8vw, 12px) !important;
+            text-align: center !important;
+            display: flex !important;
+            justify-content: center !important;
+            width: 100% !important;
           }
         }
       `}</style>
