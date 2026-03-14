@@ -202,7 +202,7 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
           position: 'relative',
           zIndex: 10
         }}>
-          Three fingerprints. One operating system. Blueprint is where physical mastery, biological fuel, and deep recovery converge into a single elite experience.
+          Three fingerprints. One operating system.<br />Blueprint is where physical mastery, biological fuel, and deep recovery converge into one.
         </p>
 
         {/* CTA Button */}
