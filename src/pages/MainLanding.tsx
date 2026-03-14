@@ -131,66 +131,56 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
         />
         {/* Hero content - on top of image */}
         <div className="hero-content-wrapper" style={{ position: "relative", zIndex: 10, width: "100%", height: "100%", display: "flex", flexDirection: "column", alignItems: "center" }}>
-        <div
-          className="hero-headline-wrapper"
-          style={{ lineHeight: 0.95, paddingTop: "120px", position: "relative", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", flexWrap: "nowrap", width: "100%", boxSizing: "border-box" as const, overflow: "visible", fontFamily: "'Rajdhani', sans-serif", fontWeight: 700 }}
-        >
-          <style>{`
-            @media (min-width: 768px) {
-              .hero-headline-wrapper { padding-top: 140px !important; flex-direction: row !important; padding-left: 40px !important; padding-right: 40px !important; }
-              .hero-line { font-size: clamp(52px, 6.5vw, 90px) !important; white-space: nowrap !important; }
-              .hero-subtext { font-size: 17px !important; max-width: 700px !important; }
-              .hero-section { height: 80vh !important; }
-              .hero-bg-image { object-position: center 30% !important; }
-              .scroll-indicator { display: none !important; }
-            }
-            @media (max-width: 767px) {
-              .hero-headline-wrapper { padding: 72px 16px 0 !important; text-align: center !important; }
-              .hero-line { font-size: clamp(38px, 10vw, 52px) !important; }
-              .hero-line-static { white-space: normal !important; }
-              .hero-spacer { display: none !important; }
-              .hero-rotate-wrapper { width: auto !important; text-align: center !important; white-space: normal !important; }
-              .hero-subtext { font-size: 13px !important; padding: 0 24px !important; max-width: 100% !important; }
-              .hero-content-wrapper { padding-top: 72px !important; padding-bottom: 40px !important; }
-              .hero-cta-button { width: auto !important; max-width: 280px !important; margin: 32px auto 0 !important; }
-              .scroll-indicator { display: none !important; }
-            }
-          `}</style>
-          <span
-            className="hero-line hero-line-static"
-            style={{
-              whiteSpace: "nowrap",
-              fontWeight: 800,
-              color: "#FFFFFF",
-              flexShrink: 0,
-            }}
-          >
-            THIS ISN'T A GYM,
+<div style={{
+          display: 'flex',
+          flexDirection: 'row',
+          alignItems: 'center',
+          justifyContent: 'flex-start',
+          width: '100%',
+          paddingLeft: '40px',
+          paddingRight: '40px',
+          boxSizing: 'border-box',
+          position: 'relative',
+          zIndex: 10,
+          paddingTop: '140px'
+        }}>
+          <span style={{
+            color: '#FFFFFF',
+            fontFamily: 'Rajdhani, sans-serif',
+            fontWeight: 700,
+            fontSize: 'clamp(52px, 6.5vw, 90px)',
+            whiteSpace: 'nowrap',
+            flexShrink: 0,
+            lineHeight: 1
+          }}>
+            THIS ISN'T A GYM,&nbsp;
           </span>
-          <span className="hero-spacer" style={{ flexShrink: 0 }}>&nbsp;</span>
-          <div
-            className="hero-rotate-wrapper"
-            style={{ display: "inline-block", width: "auto", flexShrink: 0, overflow: "visible", textAlign: "left" }}
-          >
+          <span style={{
+            color: '#1A6BFF',
+            fontFamily: 'Rajdhani, sans-serif',
+            fontWeight: 700,
+            fontSize: 'clamp(52px, 6.5vw, 90px)',
+            whiteSpace: 'nowrap',
+            lineHeight: 1,
+            flexShrink: 0
+          }}>
             <WordRotate
-              words={["IT'S A SYSTEM", "IT'S A COMMUNITY", "IT'S A MINDSET", "THIS IS BLUEPRINT"]}
+              words={[
+                "IT'S A SYSTEM",
+                "IT'S A COMMUNITY",
+                "IT'S A MINDSET",
+                "THIS IS BLUEPRINT"
+              ]}
               duration={2500}
+              className=""
               framerProps={{
-                initial: { opacity: 0, y: 50 },
+                initial: { opacity: 0, y: -30 },
                 animate: { opacity: 1, y: 0 },
-                exit: { opacity: 0, y: -50 },
-                transition: { duration: 0.4, ease: "easeOut" },
-                style: {
-                  whiteSpace: "nowrap",
-                  position: "relative",
-                  fontWeight: 800,
-                  color: "#1A6BFF",
-                  lineHeight: 0.95,
-                },
+                exit: { opacity: 0, y: 30 },
+                transition: { duration: 0.25, ease: "easeOut" }
               }}
-              className="hero-line"
             />
-          </div>
+          </span>
         </div>
 
         <p className="hero-subtext" style={{
