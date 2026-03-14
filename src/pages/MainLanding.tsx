@@ -114,13 +114,13 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
       </div>
 
       {/* HERO */}
-      <section className="hero-section flex flex-col items-center md:items-center" style={{ position: "relative", height: "100vh", overflow: "hidden", zIndex: 2 }}>
+      <section className="hero-section flex flex-col items-center md:items-center" style={{ position: "relative", overflow: "hidden", zIndex: 2 }}>
         {/* Hero background image */}
         <img
           src={gymHero}
           alt="Blueprint Project"
           className="hero-bg-image"
-          style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", objectPosition: "center", zIndex: 0 }}
+          style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", zIndex: 0 }}
         />
         {/* Dark gradient overlay */}
         <div
@@ -132,7 +132,7 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
           }}
         />
         {/* Hero content - on top of image */}
-        <div className="hero-content-wrapper" style={{ position: "relative", zIndex: 10, width: "100%", height: "100%", display: "flex", flexDirection: "column", alignItems: "center" }}>
+        <div className="hero-content-wrapper" style={{ position: "relative", zIndex: 10, width: "100%", display: "flex", flexDirection: "column" }}>
 <div className="hero-headline-wrapper" style={{
           display: 'flex',
           flexDirection: 'row',
@@ -190,8 +190,8 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
-          gap: '4px',
-          margin: '20px auto 0',
+          gap: '2px',
+          margin: '12px auto 0',
           position: 'relative',
           zIndex: 10,
           textAlign: 'center'
@@ -261,7 +261,7 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
         </div>
 
         {/* CTA Button */}
-        <div className="hero-cta-button" style={{ marginTop: "48px", display: "flex", justifyContent: "center", width: "auto", maxWidth: "280px" }}>
+        <div className="hero-cta-button" style={{ marginTop: "24px", display: "flex", justifyContent: "center", width: "auto", maxWidth: "280px" }}>
           <ShinyButton fontSize="13px" className="hero-shiny-btn">HAVE YOUR BLUEPRINT</ShinyButton>
         </div>
 
@@ -342,6 +342,20 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
         }
         .hero-no-comma {
           display: none;
+        }
+        /* Desktop hero styles */
+        @media (min-width: 768px) {
+          .hero-section {
+            height: 70vh !important;
+          }
+          .hero-bg-image {
+            object-position: center 20% !important;
+          }
+          .hero-content-wrapper {
+            padding-top: 100px !important;
+            align-items: flex-start !important;
+            justify-content: flex-start !important;
+          }
         }
         .hero-subtext-mobile {
           display: none;
