@@ -9,6 +9,7 @@ import { ShinyButton } from '@/components/ui/shiny-button';
 import { LocationMap } from '@/components/ui/expand-map';
 import { FadeText } from '@/components/ui/fade-text';
 import { ImageAutoSlider } from '@/components/ui/image-auto-slider';
+import { InteractiveImageAccordion } from '@/components/ui/interactive-image-accordion';
 import slider1 from '@/assets/slider/slider-1.jpg';
 import slider2 from '@/assets/slider/slider-2.jpg';
 import slider3 from '@/assets/slider/slider-3.jpg';
