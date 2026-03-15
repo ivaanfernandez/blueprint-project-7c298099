@@ -219,7 +219,7 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
           }}
         />
         {/* Hero content - on top of image */}
-        <div className="hero-content-wrapper" style={{ position: "relative", zIndex: 10, width: "100%", display: "flex", flexDirection: "column", paddingTop: "90px" }}>
+        <div className="hero-content-wrapper" style={{ position: "relative", zIndex: 10, width: "100%", display: "flex", flexDirection: "column", paddingTop: "110px" }}>
 <div className="hero-headline-wrapper" style={{
           display: 'flex',
           flexDirection: 'row',
@@ -359,7 +359,7 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
       <ProceduralBackground />
 
       {/* IMAGE AUTO-SLIDER */}
-      <div style={{ marginTop: '-40px', position: 'relative', zIndex: 2, background: 'transparent' }}>
+      <div style={{ marginTop: '-40px', position: 'relative', zIndex: 2, background: 'transparent', marginBottom: 0, paddingBottom: 0 }}>
         <ImageAutoSlider images={GYM_SLIDER_IMAGES} />
       </div>
 
@@ -526,7 +526,7 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
             display: block !important;
           }
           .hero-content-wrapper {
-            padding-top: 40px !important;
+            padding-top: 80px !important;
           }
           .hero-headline-wrapper {
             flex-wrap: wrap !important;

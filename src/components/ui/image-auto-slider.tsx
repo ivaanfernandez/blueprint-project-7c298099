@@ -21,13 +21,13 @@ export const ImageAutoSlider: React.FC<ImageAutoSliderProps> = ({ images }) => {
         pointerEvents: "none",
       }}
     >
-      <div className="flex gap-6 animate-[scroll-right_20s_linear_infinite] w-max">
+      <div className="flex gap-4 animate-[scroll-right_20s_linear_infinite] w-max">
         {doubled.map((img, i) => (
           <img
             key={i}
             src={img.src}
             alt={img.alt}
-            className="w-48 h-48 md:w-64 md:h-64 lg:w-80 lg:h-80 rounded-xl object-cover flex-shrink-0 transition-all duration-300 hover:scale-105 hover:brightness-110"
+            className="w-64 h-40 md:w-80 md:h-52 lg:w-96 lg:h-60 rounded-xl object-cover flex-shrink-0 transition-all duration-300 hover:scale-105 hover:brightness-110"
             loading="lazy"
           />
         ))}
