@@ -3,6 +3,7 @@ import { useState } from "react";
 
 interface AccordionItem {
   label: string;
+  title: string;
   description: string;
   accentColor: string;
 }
@@ -10,18 +11,21 @@ interface AccordionItem {
 const ACCORDION_ITEMS: AccordionItem[] = [
   {
     label: "EL FUNDADOR",
+    title: "ABOUT THE FOUNDER",
     description:
       "Christian 'Goldie' Latorre created Blueprint Project with one mission: build a system where training, nutrition, and recovery work as one. This isn't just a gym — it's his vision brought to life.",
     accentColor: "#1A6BFF",
   },
   {
     label: "LA VISIÓN",
+    title: "OUR VISION",
     description:
       "Blueprint Project exists to redefine what a fitness space can be. Where science meets discipline, and every detail is designed to unlock your potential.",
     accentColor: "#22C55E",
   },
   {
     label: "SERVICIOS",
+    title: "OUR SERVICES",
     description:
       "From personalized training programs to recovery protocols and nutrition guidance — every service at Blueprint is built to work together as a complete system.",
     accentColor: "#FF3B3B",
