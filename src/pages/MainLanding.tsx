@@ -39,6 +39,7 @@ const HUELLAS = [
     color: "#1A6BFF",
     glow: "rgba(26,107,255,0.8)",
     route: "/huella-azul",
+    sectionId: "huella-azul",
     tooltip: "ENTRENAMIENTO",
     tag: "BLUEPRINT PROJECT",
     title: "ENTRENAMIENTO",
@@ -52,6 +53,7 @@ const HUELLAS = [
     color: "#FF3B3B",
     glow: "rgba(255,59,59,0.8)",
     route: "/huella-roja",
+    sectionId: "huella-roja",
     tooltip: "NUTRICIÓN",
     tag: "HACK BAR",
     title: "NUTRICIÓN",
@@ -65,6 +67,7 @@ const HUELLAS = [
     color: "#22C55E",
     glow: "rgba(34,197,94,0.8)",
     route: "/huella-verde",
+    sectionId: "huella-verde",
     tooltip: "RECUPERACIÓN",
     tag: "RESET",
     title: "RECUPERACIÓN",
@@ -130,7 +133,14 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
         <div style={{ pointerEvents: showDock ? 'all' : 'none' }}>
           <Dock>
             {HUELLAS.map((h) => (
-              <DockIcon key={h.route} tooltip={h.tooltip} onClick={() => navigate(h.route)}>
+              <DockIcon key={h.route} tooltip={h.tooltip} onClick={() => {
+                const el = document.getElementById(h.sectionId);
+                if (el) {
+                  el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                } else {
+                  navigate(h.route);
+                }
+              }}>
                 <div 
                   className="dock-fingerprint-wrapper"
                   style={{ 
@@ -347,7 +357,9 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
           style={{ maxWidth: "1100px", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))" }}
         >
           {HUELLAS.map((h) => (
-            <HuellaCard key={h.tag} h={h} />
+            <div key={h.tag} id={h.sectionId}>
+              <HuellaCard h={h} />
+            </div>
           ))}
         </div>
       </section>
