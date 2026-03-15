@@ -212,14 +212,16 @@ const MobileAccordion: React.FC = () => (
           borderRadius: 12,
           position: "relative",
           overflow: "hidden",
-          background: `linear-gradient(135deg, #0a0a0a 0%, ${item.accentColor}26 100%)`,
+          backgroundImage: `url(${item.image})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
         }}
       >
         <div
           style={{
             position: "absolute",
             inset: 0,
-            background: "linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 60%)",
+            background: "linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.3) 60%, transparent 100%)",
             zIndex: 1,
           }}
         />
