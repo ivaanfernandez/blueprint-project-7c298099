@@ -124,9 +124,10 @@ const DesktopAccordion: React.FC = () => {
                 cursor: "pointer",
                 position: "relative",
                 transition: "all 700ms cubic-bezier(0.4, 0, 0.2, 1)",
-                background: isActive
-                  ? `linear-gradient(135deg, #0a0a0a 0%, ${item.accentColor}26 100%)`
-                  : "#111",
+                background: !isActive ? "#111" : undefined,
+                backgroundImage: isActive ? `url(${item.image})` : undefined,
+                backgroundSize: "cover",
+                backgroundPosition: "center",
                 boxShadow: isActive ? `0 0 30px ${item.accentColor}20` : "none",
                 borderLeft: !isActive ? `2px solid ${item.accentColor}4D` : "none",
                 flexShrink: 0,
@@ -138,7 +139,7 @@ const DesktopAccordion: React.FC = () => {
                   style={{
                     position: "absolute",
                     inset: 0,
-                    background: "linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 60%)",
+                    background: "linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.3) 60%, transparent 100%)",
                     zIndex: 1,
                   }}
                 />
