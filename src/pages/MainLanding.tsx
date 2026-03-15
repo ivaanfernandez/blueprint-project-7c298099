@@ -186,7 +186,7 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
           src={gymHero}
           alt="Blueprint Project"
           className="hero-bg-image hero-bg-mobile"
-          style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", zIndex: 0 }}
+          style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", objectPosition: "center center", zIndex: 0 }}
         />
         {/* Desktop background image */}
         <img
