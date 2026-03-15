@@ -359,7 +359,7 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
       <ProceduralBackground />
 
       {/* IMAGE AUTO-SLIDER */}
-      <div style={{ marginTop: '-40px', position: 'relative', zIndex: 2, background: 'transparent' }}>
+      <div style={{ marginTop: '-40px', position: 'relative', zIndex: 2, background: 'transparent', marginBottom: 0, paddingBottom: 0 }}>
         <ImageAutoSlider images={GYM_SLIDER_IMAGES} />
       </div>
 
