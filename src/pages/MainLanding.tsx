@@ -197,6 +197,7 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
         />
         {/* Dark gradient overlay */}
         <div
+          className="hero-overlay"
           style={{
             position: "absolute",
             inset: 0,
