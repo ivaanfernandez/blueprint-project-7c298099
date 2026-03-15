@@ -39,6 +39,7 @@ const HUELLAS = [
     color: "#1A6BFF",
     glow: "rgba(26,107,255,0.8)",
     route: "/huella-azul",
+    sectionId: "huella-azul",
     tooltip: "ENTRENAMIENTO",
     tag: "BLUEPRINT PROJECT",
     title: "ENTRENAMIENTO",
