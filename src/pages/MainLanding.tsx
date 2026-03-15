@@ -364,6 +364,8 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
         <ImageAutoSlider images={GYM_SLIDER_IMAGES} />
       </div>
 
+      <InteractiveImageAccordion />
+
       {/* TRES HUELLAS */}
       <section className="relative z-10" style={{ padding: "120px 24px" }}>
         <div className="text-center">
