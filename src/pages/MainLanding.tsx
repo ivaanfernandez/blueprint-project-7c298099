@@ -493,8 +493,14 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
           .hero-cta-button {
             margin-bottom: 28px !important;
           }
+          .dock-container {
+            height: 52px !important;
+            padding: 8px 12px !important;
+            border-radius: 14px !important;
+            gap: 12px !important;
+          }
           .dock-fingerprint-wrapper {
-            transform: scale(1.38) !important;
+            transform: scale(0.85) !important;
           }
           .hero-comma {
             display: none !important;
