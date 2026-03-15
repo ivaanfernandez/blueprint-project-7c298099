@@ -3,6 +3,7 @@ import { useState } from "react";
 
 interface AccordionItem {
   label: string;
+  title: string;
   description: string;
   accentColor: string;
 }
@@ -10,18 +11,21 @@ interface AccordionItem {
 const ACCORDION_ITEMS: AccordionItem[] = [
   {
     label: "EL FUNDADOR",
+    title: "ABOUT THE FOUNDER",
     description:
       "Christian 'Goldie' Latorre created Blueprint Project with one mission: build a system where training, nutrition, and recovery work as one. This isn't just a gym — it's his vision brought to life.",
     accentColor: "#1A6BFF",
   },
   {
     label: "LA VISIÓN",
+    title: "OUR VISION",
     description:
       "Blueprint Project exists to redefine what a fitness space can be. Where science meets discipline, and every detail is designed to unlock your potential.",
     accentColor: "#22C55E",
   },
   {
     label: "SERVICIOS",
+    title: "OUR SERVICES",
     description:
       "From personalized training programs to recovery protocols and nutrition guidance — every service at Blueprint is built to work together as a complete system.",
     accentColor: "#FF3B3B",
@@ -35,30 +39,55 @@ const DesktopAccordion: React.FC = () => {
     <div className="hidden md:flex flex-row items-center gap-0" style={{ maxWidth: 1100, margin: "0 auto", width: "100%" }}>
       {/* Left text column */}
       <div style={{ width: "40%", paddingRight: 48, display: "flex", flexDirection: "column", justifyContent: "center", minHeight: 450 }}>
-        <div key={active} className="animate-fade-in">
+        <div
+          key={active}
+          style={{
+            animation: "accordion-text-fade 300ms ease-out",
+          }}
+        >
           <p
             style={{
-              fontSize: 12,
+              fontSize: 13,
               letterSpacing: "0.2em",
               color: ACCORDION_ITEMS[active].accentColor,
               fontFamily: "Space Grotesk, sans-serif",
               textTransform: "uppercase",
-              marginBottom: 16,
+              fontWeight: 600,
+              marginBottom: 12,
             }}
           >
             {ACCORDION_ITEMS[active].label}
           </p>
+          <h3
+            style={{
+              fontFamily: "Bebas Neue, sans-serif",
+              fontSize: "clamp(32px, 4vw, 40px)",
+              color: "#fff",
+              fontWeight: 400,
+              lineHeight: 1.1,
+              marginBottom: 16,
+            }}
+          >
+            {ACCORDION_ITEMS[active].title}
+          </h3>
           <p
             style={{
               fontSize: 16,
-              color: "rgba(255,255,255,0.7)",
+              color: "rgba(255,255,255,0.65)",
               fontFamily: "Space Grotesk, sans-serif",
               lineHeight: 1.8,
+              maxWidth: 448,
             }}
           >
             {ACCORDION_ITEMS[active].description}
           </p>
         </div>
+        <style>{`
+          @keyframes accordion-text-fade {
+            from { opacity: 0; transform: translateY(6px); }
+            to { opacity: 1; transform: translateY(0); }
+          }
+        `}</style>
       </div>
 
       {/* Right accordion column */}
