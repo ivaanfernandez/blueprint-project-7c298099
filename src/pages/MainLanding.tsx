@@ -353,7 +353,7 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
       <ProceduralBackground />
 
       {/* IMAGE AUTO-SLIDER */}
-      <div className="bg-black py-8 md:py-12">
+      <div style={{ marginTop: '-40px', position: 'relative', zIndex: 2, background: 'transparent' }}>
         <ImageAutoSlider images={GYM_SLIDER_IMAGES} />
       </div>
 
