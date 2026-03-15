@@ -33,6 +33,7 @@ export const Dock = ({ children, magnification = DEFAULT_MAGNIFICATION, distance
           borderRadius: "20px",
           padding: "12px 20px",
           height: "84px",
+          pointerEvents: "all",
         }}
       >
         {children}
