@@ -34,29 +34,46 @@ const ACCORDION_ITEMS: AccordionItem[] = [
 
 const DesktopAccordion: React.FC = () => {
   const [active, setActive] = useState(0);
+  const [displayed, setDisplayed] = useState(0);
+  const [fading, setFading] = useState(false);
+  const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  useEffect(() => {
+    if (active === displayed) return;
+    setFading(true);
+    if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    timeoutRef.current = setTimeout(() => {
+      setDisplayed(active);
+      setFading(false);
+    }, 150);
+    return () => { if (timeoutRef.current) clearTimeout(timeoutRef.current); };
+  }, [active, displayed]);
+
+  const item = ACCORDION_ITEMS[displayed];
 
   return (
-    <div className="hidden md:flex flex-row items-center gap-0" style={{ maxWidth: 1100, margin: "0 auto", width: "100%" }}>
+    <div className="hidden md:flex flex-row items-center gap-0" style={{ maxWidth: 1100, margin: "0 auto", width: "100%", paddingLeft: 24, paddingRight: 24 }}>
       {/* Left text column */}
       <div style={{ width: "40%", paddingRight: 48, display: "flex", flexDirection: "column", justifyContent: "center", minHeight: 450 }}>
         <div
-          key={active}
           style={{
-            animation: "accordion-text-fade 300ms ease-out",
+            opacity: fading ? 0 : 1,
+            transform: fading ? "translateY(6px)" : "translateY(0)",
+            transition: "opacity 300ms ease, transform 300ms ease",
           }}
         >
           <p
             style={{
               fontSize: 13,
               letterSpacing: "0.2em",
-              color: ACCORDION_ITEMS[active].accentColor,
+              color: item.accentColor,
               fontFamily: "Space Grotesk, sans-serif",
               textTransform: "uppercase",
               fontWeight: 600,
               marginBottom: 12,
             }}
           >
-            {ACCORDION_ITEMS[active].label}
+            {item.label}
           </p>
           <h3
             style={{
@@ -68,7 +85,7 @@ const DesktopAccordion: React.FC = () => {
               marginBottom: 16,
             }}
           >
-            {ACCORDION_ITEMS[active].title}
+            {item.title}
           </h3>
           <p
             style={{
@@ -79,15 +96,9 @@ const DesktopAccordion: React.FC = () => {
               maxWidth: 448,
             }}
           >
-            {ACCORDION_ITEMS[active].description}
+            {item.description}
           </p>
         </div>
-        <style>{`
-          @keyframes accordion-text-fade {
-            from { opacity: 0; transform: translateY(6px); }
-            to { opacity: 1; transform: translateY(0); }
-          }
-        `}</style>
       </div>
 
       {/* Right accordion column */}
