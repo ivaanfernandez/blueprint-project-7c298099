@@ -131,14 +131,17 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
           <Dock>
             {HUELLAS.map((h) => (
               <DockIcon key={h.route} tooltip={h.tooltip} onClick={() => navigate(h.route)}>
-                <div style={{ 
-                  display: 'flex', 
-                  alignItems: 'center', 
-                  justifyContent: 'center', 
-                  width: '100%', 
-                  height: '100%', 
-                  filter: `drop-shadow(0 0 8px ${h.glow})` 
-                }}>
+                <div 
+                  className="dock-fingerprint-wrapper"
+                  style={{ 
+                    display: 'flex', 
+                    alignItems: 'center', 
+                    justifyContent: 'center', 
+                    width: '100%', 
+                    height: '100%', 
+                    filter: `drop-shadow(0 0 8px ${h.glow})` 
+                  }}
+                >
                   <FingerprintSVG color={h.color} size={44} />
                 </div>
               </DockIcon>
@@ -482,13 +485,16 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
           }
           .hero-headline-white {
             width: 100% !important;
-            font-size: clamp(42px, 10.5vw, 56px) !important;
+            font-size: clamp(56px, 14.5vw, 76px) !important;
           }
           .hero-headline-blue {
-            font-size: clamp(42px, 10.5vw, 56px) !important;
+            font-size: clamp(56px, 14.5vw, 76px) !important;
           }
           .hero-cta-button {
             margin-bottom: 28px !important;
+          }
+          .dock-fingerprint-wrapper {
+            transform: scale(1.38) !important;
           }
           .hero-comma {
             display: none !important;
