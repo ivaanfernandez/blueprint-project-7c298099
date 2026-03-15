@@ -1,34 +1,41 @@
 import * as React from "react";
 import { useState, useRef, useEffect } from "react";
+import founderImage from "@/assets/accordion/accordion-founder.jpg";
+import visionImage from "@/assets/accordion/accordion-vision.jpg";
+import servicesImage from "@/assets/accordion/accordion-services.jpg";
 
 interface AccordionItem {
   label: string;
   title: string;
   description: string;
   accentColor: string;
+  image: string;
 }
 
 const ACCORDION_ITEMS: AccordionItem[] = [
   {
-    label: "EL FUNDADOR",
+    label: "ABOUT THE FOUNDER",
     title: "ABOUT THE FOUNDER",
     description:
       "Christian 'Goldie' Latorre created Blueprint Project with one mission: build a system where training, nutrition, and recovery work as one. This isn't just a gym — it's his vision brought to life.",
     accentColor: "#1A6BFF",
+    image: founderImage,
   },
   {
-    label: "LA VISIÓN",
-    title: "OUR VISION",
+    label: "VISION",
+    title: "VISION",
     description:
       "Blueprint Project exists to redefine what a fitness space can be. Where science meets discipline, and every detail is designed to unlock your potential.",
     accentColor: "#22C55E",
+    image: visionImage,
   },
   {
-    label: "SERVICIOS",
-    title: "OUR SERVICES",
+    label: "SERVICES",
+    title: "SERVICES",
     description:
       "From personalized training programs to recovery protocols and nutrition guidance — every service at Blueprint is built to work together as a complete system.",
     accentColor: "#FF3B3B",
+    image: servicesImage,
   },
 ];
 
@@ -117,9 +124,10 @@ const DesktopAccordion: React.FC = () => {
                 cursor: "pointer",
                 position: "relative",
                 transition: "all 700ms cubic-bezier(0.4, 0, 0.2, 1)",
-                background: isActive
-                  ? `linear-gradient(135deg, #0a0a0a 0%, ${item.accentColor}26 100%)`
-                  : "#111",
+                background: !isActive ? "#111" : undefined,
+                backgroundImage: isActive ? `url(${item.image})` : undefined,
+                backgroundSize: "cover",
+                backgroundPosition: "center",
                 boxShadow: isActive ? `0 0 30px ${item.accentColor}20` : "none",
                 borderLeft: !isActive ? `2px solid ${item.accentColor}4D` : "none",
                 flexShrink: 0,
@@ -131,7 +139,7 @@ const DesktopAccordion: React.FC = () => {
                   style={{
                     position: "absolute",
                     inset: 0,
-                    background: "linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 60%)",
+                    background: "linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.3) 60%, transparent 100%)",
                     zIndex: 1,
                   }}
                 />
@@ -204,14 +212,16 @@ const MobileAccordion: React.FC = () => (
           borderRadius: 12,
           position: "relative",
           overflow: "hidden",
-          background: `linear-gradient(135deg, #0a0a0a 0%, ${item.accentColor}26 100%)`,
+          backgroundImage: `url(${item.image})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
         }}
       >
         <div
           style={{
             position: "absolute",
             inset: 0,
-            background: "linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 60%)",
+            background: "linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.3) 60%, transparent 100%)",
             zIndex: 1,
           }}
         />
