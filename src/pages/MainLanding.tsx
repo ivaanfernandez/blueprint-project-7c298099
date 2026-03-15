@@ -8,6 +8,18 @@ import gymDesktop from '@/assets/blueprint-gym-desktop.jpg';
 import { ShinyButton } from '@/components/ui/shiny-button';
 import { LocationMap } from '@/components/ui/expand-map';
 import { FadeText } from '@/components/ui/fade-text';
+import { ImageAutoSlider } from '@/components/ui/image-auto-slider';
+
+const GYM_SLIDER_IMAGES = [
+  { src: "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=600&h=600&fit=crop", alt: "Blueprint Project — Gym facility 1" },
+  { src: "https://images.unsplash.com/photo-1540497077202-7c8a3999166f?w=600&h=600&fit=crop", alt: "Blueprint Project — Gym facility 2" },
+  { src: "https://images.unsplash.com/photo-1571902943202-507ec2618e8f?w=600&h=600&fit=crop", alt: "Blueprint Project — Gym facility 3" },
+  { src: "https://images.unsplash.com/photo-1593079831268-3381b0db4a77?w=600&h=600&fit=crop", alt: "Blueprint Project — Gym facility 4" },
+  { src: "https://images.unsplash.com/photo-1558611848-73f7eb4001a1?w=600&h=600&fit=crop", alt: "Blueprint Project — Gym facility 5" },
+  { src: "https://images.unsplash.com/photo-1637666062717-1c6bcfa4a4df?w=600&h=600&fit=crop", alt: "Blueprint Project — Gym facility 6" },
+  { src: "https://images.unsplash.com/photo-1623874514711-0f321325f318?w=600&h=600&fit=crop", alt: "Blueprint Project — Gym facility 7" },
+  { src: "https://images.unsplash.com/photo-1576678927484-cc907957088c?w=600&h=600&fit=crop", alt: "Blueprint Project — Gym facility 8" },
+];
 
 const FingerprintSVG = ({ color, size = 48 }: { color: string; size?: number }) => (
   <svg 
@@ -339,6 +351,11 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
       </section>
 
       <ProceduralBackground />
+
+      {/* IMAGE AUTO-SLIDER */}
+      <div className="bg-black py-8 md:py-12">
+        <ImageAutoSlider images={GYM_SLIDER_IMAGES} />
+      </div>
 
       {/* TRES HUELLAS */}
       <section className="relative z-10" style={{ padding: "120px 24px" }}>
