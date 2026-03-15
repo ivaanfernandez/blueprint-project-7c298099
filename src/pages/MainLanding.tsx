@@ -133,7 +133,14 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
         <div style={{ pointerEvents: showDock ? 'all' : 'none' }}>
           <Dock>
             {HUELLAS.map((h) => (
-              <DockIcon key={h.route} tooltip={h.tooltip} onClick={() => navigate(h.route)}>
+              <DockIcon key={h.route} tooltip={h.tooltip} onClick={() => {
+                const el = document.getElementById(h.sectionId);
+                if (el) {
+                  el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                } else {
+                  navigate(h.route);
+                }
+              }}>
                 <div 
                   className="dock-fingerprint-wrapper"
                   style={{ 
