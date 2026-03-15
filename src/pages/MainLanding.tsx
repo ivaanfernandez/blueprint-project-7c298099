@@ -102,13 +102,13 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
       style={{ backgroundColor: "#000", fontFamily: "'Space Grotesk', sans-serif" }}
     >
       {/* FIXED DOCK NAV */}
-      <div style={{ position: "fixed", top: "20px", left: 0, right: 0, width: "100vw", display: "flex", justifyContent: "center", alignItems: "center", zIndex: 50, pointerEvents: "none", margin: 0, padding: 0, boxSizing: "border-box", opacity: showDock ? 1 : 0, transition: "opacity 0.8s ease" }}>
-        <div style={{ pointerEvents: showDock ? "all" : "none" }}>
+      <div style={{ position: "fixed", top: "16px", left: 0, right: 0, width: "100vw", display: "flex", justifyContent: "center", alignItems: "center", zIndex: 50, pointerEvents: "none", margin: 0, padding: 0, opacity: showDock ? 1 : 0, transition: "opacity 0.8s ease" }}>
+        <div style={{ height: "52px", padding: "8px 14px", gap: "12px", pointerEvents: showDock ? "all" : "none" }}>
           <Dock>
             {HUELLAS.map((h) => (
               <DockIcon key={h.route} tooltip={h.tooltip} onClick={() => navigate(h.route)}>
                 <div className="flex items-center justify-center w-full h-full" style={{ filter: `drop-shadow(0 0 8px ${h.glow})` }}>
-                  <FingerprintSVG color={h.color} size={44} />
+                  <FingerprintSVG color={h.color} size={28} />
                 </div>
               </DockIcon>
             ))}
