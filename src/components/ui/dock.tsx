@@ -1,7 +1,7 @@
 import { useRef, PropsWithChildren, createContext, useContext } from "react";
 import { motion, useMotionValue, useSpring, useTransform, MotionValue } from "framer-motion";
 
-const DEFAULT_MAGNIFICATION = 72;
+const DEFAULT_MAGNIFICATION = 88;
 const DEFAULT_DISTANCE = 120;
 
 interface DockContextType {
@@ -32,7 +32,7 @@ export const Dock = ({ children, magnification = DEFAULT_MAGNIFICATION, distance
           backdropFilter: "blur(12px)",
           borderRadius: "20px",
           padding: "12px 20px",
-          height: "72px",
+          height: "84px",
         }}
       >
         {children}

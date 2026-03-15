@@ -107,7 +107,7 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
           {HUELLAS.map((h) => (
             <DockIcon key={h.route} tooltip={h.tooltip} onClick={() => navigate(h.route)}>
               <div className="flex items-center justify-center w-full h-full" style={{ filter: `drop-shadow(0 0 8px ${h.glow})` }}>
-                <FingerprintSVG color={h.color} size={40} />
+                <FingerprintSVG color={h.color} size={44} />
               </div>
             </DockIcon>
           ))}
@@ -136,7 +136,7 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
             position: "absolute",
             inset: 0,
             zIndex: 1,
-            background: "linear-gradient(to bottom, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.3) 50%, rgba(0,0,0,0.75) 100%)",
+            background: "linear-gradient(to bottom, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0.15) 40%, rgba(0,0,0,0.55) 100%)",
           }}
         />
         {/* Hero content - on top of image */}
@@ -158,7 +158,7 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
             color: '#FFFFFF',
             fontFamily: 'Bebas Neue, sans-serif',
             fontWeight: 400,
-            fontSize: 'clamp(44px, 5.5vw, 76px)',
+            fontSize: 'clamp(56px, 7vw, 100px)',
             whiteSpace: 'nowrap',
             flexShrink: 0,
             lineHeight: 1
@@ -170,7 +170,7 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
             color: '#1A6BFF',
             fontFamily: 'Bebas Neue, sans-serif',
             fontWeight: 400,
-            fontSize: 'clamp(44px, 5.5vw, 76px)',
+            fontSize: 'clamp(56px, 7vw, 100px)',
             whiteSpace: 'nowrap',
             lineHeight: 1,
             flexShrink: 0
@@ -382,7 +382,8 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
         /* Desktop hero styles */
         @media (min-width: 768px) {
           .hero-section {
-            height: 62vh !important;
+            height: 58vh !important;
+            overflow: hidden !important;
           }
           .hero-bg-mobile {
             display: none !important;
