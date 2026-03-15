@@ -168,8 +168,8 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
           </span>
           <span className="hero-headline-blue" style={{
             color: '#1A6BFF',
-            fontFamily: 'Rajdhani, sans-serif',
-            fontWeight: 700,
+            fontFamily: 'Bebas Neue, sans-serif',
+            fontWeight: 400,
             fontSize: 'clamp(44px, 5.5vw, 76px)',
             whiteSpace: 'nowrap',
             lineHeight: 1,
