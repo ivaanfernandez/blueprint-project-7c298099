@@ -478,6 +478,9 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
           display: inline;
         }
         @media (max-width: 767px) {
+          .hero-bottom-fade {
+            display: block !important;
+          }
           .hero-section {
             height: 95vh !important;
           }
