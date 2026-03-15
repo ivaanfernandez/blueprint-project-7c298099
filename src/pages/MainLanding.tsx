@@ -469,19 +469,26 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
           .hero-bg-mobile {
             display: block !important;
           }
+          .hero-content-wrapper {
+            padding-top: 70px !important;
+          }
           .hero-headline-wrapper {
             flex-wrap: wrap !important;
             text-align: center !important;
             justify-content: center !important;
             padding-left: 20px !important;
             padding-right: 20px !important;
+            padding-top: 100px !important;
           }
           .hero-headline-white {
             width: 100% !important;
-            font-size: clamp(36px, 9vw, 48px) !important;
+            font-size: clamp(42px, 10.5vw, 56px) !important;
           }
           .hero-headline-blue {
-            font-size: clamp(36px, 9vw, 48px) !important;
+            font-size: clamp(42px, 10.5vw, 56px) !important;
+          }
+          .hero-cta-button {
+            margin-bottom: 28px !important;
           }
           .hero-comma {
             display: none !important;
