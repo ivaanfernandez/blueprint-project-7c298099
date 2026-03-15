@@ -32,7 +32,7 @@ export const Dock = ({ children, magnification = DEFAULT_MAGNIFICATION, distance
           backdropFilter: "blur(12px)",
           borderRadius: "20px",
           padding: "12px 20px",
-          height: "72px",
+          height: "84px",
         }}
       >
         {children}

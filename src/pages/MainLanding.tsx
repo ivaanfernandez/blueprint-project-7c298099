@@ -382,7 +382,8 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
         /* Desktop hero styles */
         @media (min-width: 768px) {
           .hero-section {
-            height: 62vh !important;
+            height: 58vh !important;
+            overflow: hidden !important;
           }
           .hero-bg-mobile {
             display: none !important;
