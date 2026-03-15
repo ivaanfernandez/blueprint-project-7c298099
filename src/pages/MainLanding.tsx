@@ -107,7 +107,7 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
           {HUELLAS.map((h) => (
             <DockIcon key={h.route} tooltip={h.tooltip} onClick={() => navigate(h.route)}>
               <div className="flex items-center justify-center w-full h-full" style={{ filter: `drop-shadow(0 0 8px ${h.glow})` }}>
-                <FingerprintSVG color={h.color} size={40} />
+                <FingerprintSVG color={h.color} size={44} />
               </div>
             </DockIcon>
           ))}
