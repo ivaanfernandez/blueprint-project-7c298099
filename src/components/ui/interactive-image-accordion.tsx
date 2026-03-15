@@ -14,7 +14,7 @@ interface AccordionItem {
 
 const ACCORDION_ITEMS: AccordionItem[] = [
   {
-    label: "ABOUT THE FOUNDER",
+    label: "CHRISTIAN 'GOLDIE' LATORRE",
     title: "ABOUT THE FOUNDER",
     description:
       "Christian 'Goldie' Latorre created Blueprint Project with one mission: build a system where training, nutrition, and recovery work as one. This isn't just a gym — it's his vision brought to life.",
