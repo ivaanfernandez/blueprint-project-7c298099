@@ -53,6 +53,7 @@ const HUELLAS = [
     color: "#FF3B3B",
     glow: "rgba(255,59,59,0.8)",
     route: "/huella-roja",
+    sectionId: "huella-roja",
     tooltip: "NUTRICIÓN",
     tag: "HACK BAR",
     title: "NUTRICIÓN",
