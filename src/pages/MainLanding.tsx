@@ -67,6 +67,7 @@ const HUELLAS = [
     color: "#22C55E",
     glow: "rgba(34,197,94,0.8)",
     route: "/huella-verde",
+    sectionId: "huella-verde",
     tooltip: "RECUPERACIÓN",
     tag: "RESET",
     title: "RECUPERACIÓN",
