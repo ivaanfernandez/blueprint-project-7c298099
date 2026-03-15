@@ -526,7 +526,7 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
             display: block !important;
           }
           .hero-content-wrapper {
-            padding-top: 40px !important;
+            padding-top: 80px !important;
           }
           .hero-headline-wrapper {
             flex-wrap: wrap !important;
