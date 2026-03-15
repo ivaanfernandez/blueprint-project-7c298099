@@ -446,8 +446,11 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
           .hero-subtext-container {
             margin-top: 16px !important;
           }
+          .hero-subtext-line {
+            font-size: clamp(14px, 1.5vw, 20px) !important;
+          }
           .hero-cta-button {
-            margin-top: 40px !important;
+            margin-top: 64px !important;
           }
         }
         .hero-subtext-mobile {
