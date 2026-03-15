@@ -529,6 +529,9 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
           .hero-bg-mobile {
             display: block !important;
           }
+          .hero-overlay {
+            background: linear-gradient(to bottom, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.55) 40%, rgba(0,0,0,0.7) 70%, rgba(0,0,0,0.95) 100%) !important;
+          }
           .hero-content-wrapper {
             padding-top: 80px !important;
           }
