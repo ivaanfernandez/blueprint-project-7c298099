@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import ProceduralBackground from "@/components/ProceduralBackground";
 import { WordRotate } from "@/components/ui/word-rotate";
 import { Dock, DockIcon } from "@/components/ui/dock";
-import gymHero from '@/assets/blueprint-gym.jpg';
+import gymHero from '@/assets/blueprint-gym-hero.jpg';
 import gymDesktop from '@/assets/blueprint-gym-desktop.jpg';
 import { ShinyButton } from '@/components/ui/shiny-button';
 import { LocationMap } from '@/components/ui/expand-map';
@@ -186,7 +186,7 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
           src={gymHero}
           alt="Blueprint Project"
           className="hero-bg-image hero-bg-mobile"
-          style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", zIndex: 0 }}
+          style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", objectPosition: "center center", zIndex: 0 }}
         />
         {/* Desktop background image */}
         <img
@@ -197,6 +197,7 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
         />
         {/* Dark gradient overlay */}
         <div
+          className="hero-overlay"
           style={{
             position: "absolute",
             inset: 0,
@@ -527,6 +528,9 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
           }
           .hero-bg-mobile {
             display: block !important;
+          }
+          .hero-overlay {
+            background: linear-gradient(to bottom, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.55) 40%, rgba(0,0,0,0.7) 70%, rgba(0,0,0,0.95) 100%) !important;
           }
           .hero-content-wrapper {
             padding-top: 80px !important;
