@@ -352,6 +352,11 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
 
       <ProceduralBackground />
 
+      {/* IMAGE AUTO-SLIDER */}
+      <div className="bg-black py-8 md:py-12">
+        <ImageAutoSlider images={GYM_SLIDER_IMAGES} />
+      </div>
+
       {/* TRES HUELLAS */}
       <section className="relative z-10" style={{ padding: "120px 24px" }}>
         <div className="text-center">
