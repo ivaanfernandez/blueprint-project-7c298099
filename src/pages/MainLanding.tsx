@@ -170,7 +170,7 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
             color: '#1A6BFF',
             fontFamily: 'Bebas Neue, sans-serif',
             fontWeight: 400,
-            fontSize: 'clamp(44px, 5.5vw, 76px)',
+            fontSize: 'clamp(56px, 7vw, 100px)',
             whiteSpace: 'nowrap',
             lineHeight: 1,
             flexShrink: 0
