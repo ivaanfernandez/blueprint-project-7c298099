@@ -1,7 +1,7 @@
 import { useRef, PropsWithChildren, createContext, useContext } from "react";
 import { motion, useMotionValue, useSpring, useTransform, MotionValue } from "framer-motion";
 
-const DEFAULT_MAGNIFICATION = 72;
+const DEFAULT_MAGNIFICATION = 88;
 const DEFAULT_DISTANCE = 120;
 
 interface DockContextType {
