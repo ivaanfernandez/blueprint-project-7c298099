@@ -136,7 +136,7 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
             position: "absolute",
             inset: 0,
             zIndex: 1,
-            background: "linear-gradient(to bottom, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.3) 50%, rgba(0,0,0,0.75) 100%)",
+            background: "linear-gradient(to bottom, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0.15) 40%, rgba(0,0,0,0.55) 100%)",
           }}
         />
         {/* Hero content - on top of image */}
