@@ -25,7 +25,7 @@ export const Dock = ({ children, magnification = DEFAULT_MAGNIFICATION, distance
       <motion.div
         onMouseMove={(e) => mouseX.set(e.pageX)}
         onMouseLeave={() => mouseX.set(Infinity)}
-        className="flex items-end gap-5"
+        className="flex items-center gap-5 dock-container"
         style={{
           background: "rgba(255,255,255,0.04)",
           border: "1px solid rgba(26,107,255,0.25)",
