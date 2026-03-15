@@ -521,7 +521,12 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
             font-size: clamp(56px, 14.5vw, 76px) !important;
           }
           .hero-cta-button {
+            margin-top: 48px !important;
             margin-bottom: 28px !important;
+          }
+          .hero-shiny-btn {
+            font-size: 12px !important;
+            padding: 0.9rem 2.2rem !important;
           }
           .dock-container {
             height: 52px !important;
@@ -550,10 +555,10 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
             white-space: normal !important;
             max-width: 320px !important;
           }
-          /* Lines 2-5 mobile: smaller font, keep nowrap, center */
+          /* Lines 2-5 mobile: larger font, keep nowrap, center */
           .hero-subtext-line {
             white-space: nowrap !important;
-            font-size: clamp(9px, 2.8vw, 12px) !important;
+            font-size: clamp(10.5px, 3.2vw, 14px) !important;
             text-align: center !important;
             display: flex !important;
             justify-content: center !important;
