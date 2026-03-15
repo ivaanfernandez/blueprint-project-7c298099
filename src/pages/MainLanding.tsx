@@ -357,7 +357,9 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
           style={{ maxWidth: "1100px", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))" }}
         >
           {HUELLAS.map((h) => (
-            <HuellaCard key={h.tag} h={h} />
+            <div key={h.tag} id={h.sectionId}>
+              <HuellaCard h={h} />
+            </div>
           ))}
         </div>
       </section>
