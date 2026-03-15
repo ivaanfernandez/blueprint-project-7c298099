@@ -384,7 +384,8 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
         /* Desktop hero styles */
         @media (min-width: 768px) {
           .hero-section {
-            height: 82vh !important;
+            height: 100vh !important;
+            width: 100vw !important;
             overflow: hidden !important;
           }
           .hero-bg-mobile {
@@ -392,13 +393,15 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
           }
           .hero-bg-desktop {
             display: block !important;
-            object-position: center 30% !important;
+            width: 100% !important;
+            height: 100% !important;
+            object-fit: cover !important;
+            object-position: center 40% !important;
           }
           .hero-bg-image {
             object-position: center 40% !important;
           }
           .hero-content-wrapper {
-            padding-top: 40px !important;
             align-items: center !important;
             justify-content: flex-start !important;
           }
