@@ -158,7 +158,7 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
             color: '#FFFFFF',
             fontFamily: 'Bebas Neue, sans-serif',
             fontWeight: 400,
-            fontSize: 'clamp(44px, 5.5vw, 76px)',
+            fontSize: 'clamp(56px, 7vw, 100px)',
             whiteSpace: 'nowrap',
             flexShrink: 0,
             lineHeight: 1
