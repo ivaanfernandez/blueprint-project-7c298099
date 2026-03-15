@@ -102,16 +102,18 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
       style={{ backgroundColor: "#000", fontFamily: "'Space Grotesk', sans-serif" }}
     >
       {/* FIXED DOCK NAV */}
-      <div style={{ position: "fixed", top: "20px", left: "50%", transform: "translateX(-50%)", zIndex: 50, opacity: showDock ? 1 : 0, pointerEvents: showDock ? "auto" : "none", transition: "opacity 0.8s ease" }}>
-        <Dock>
-          {HUELLAS.map((h) => (
-            <DockIcon key={h.route} tooltip={h.tooltip} onClick={() => navigate(h.route)}>
-              <div className="flex items-center justify-center w-full h-full" style={{ filter: `drop-shadow(0 0 8px ${h.glow})` }}>
-                <FingerprintSVG color={h.color} size={44} />
-              </div>
-            </DockIcon>
-          ))}
-        </Dock>
+      <div style={{ position: "fixed", top: "20px", left: 0, right: 0, width: "100vw", display: "flex", justifyContent: "center", alignItems: "center", zIndex: 50, pointerEvents: "none", margin: 0, padding: 0, boxSizing: "border-box", opacity: showDock ? 1 : 0, transition: "opacity 0.8s ease" }}>
+        <div style={{ pointerEvents: showDock ? "all" : "none" }}>
+          <Dock>
+            {HUELLAS.map((h) => (
+              <DockIcon key={h.route} tooltip={h.tooltip} onClick={() => navigate(h.route)}>
+                <div className="flex items-center justify-center w-full h-full" style={{ filter: `drop-shadow(0 0 8px ${h.glow})` }}>
+                  <FingerprintSVG color={h.color} size={44} />
+                </div>
+              </DockIcon>
+            ))}
+          </Dock>
+        </div>
       </div>
 
       {/* HERO */}
@@ -382,7 +384,7 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
         /* Desktop hero styles */
         @media (min-width: 768px) {
           .hero-section {
-            height: 72vh !important;
+            height: 82vh !important;
             overflow: hidden !important;
           }
           .hero-bg-mobile {
