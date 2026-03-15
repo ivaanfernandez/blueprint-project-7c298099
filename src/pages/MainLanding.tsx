@@ -175,6 +175,21 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
             background: "linear-gradient(to bottom, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0.15) 40%, rgba(0,0,0,0.55) 100%)",
           }}
         />
+        {/* Bottom fade gradient - mobile only */}
+        <div
+          className="hero-bottom-fade"
+          style={{
+            position: "absolute",
+            bottom: 0,
+            left: 0,
+            right: 0,
+            height: "160px",
+            background: "linear-gradient(to bottom, transparent 0%, #000000 100%)",
+            pointerEvents: "none",
+            zIndex: 5,
+            display: "none",
+          }}
+        />
         {/* Hero content - on top of image */}
         <div className="hero-content-wrapper" style={{ position: "relative", zIndex: 10, width: "100%", display: "flex", flexDirection: "column", paddingTop: "90px" }}>
 <div className="hero-headline-wrapper" style={{
@@ -463,6 +478,9 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
           display: inline;
         }
         @media (max-width: 767px) {
+          .hero-bottom-fade {
+            display: block !important;
+          }
           .hero-section {
             height: 95vh !important;
           }
