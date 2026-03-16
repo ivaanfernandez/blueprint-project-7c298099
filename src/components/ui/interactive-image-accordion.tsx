@@ -16,6 +16,7 @@ interface AccordionItem {
 const ACCORDION_ITEMS: AccordionItem[] = [
   {
     label: "CHRISTIAN 'GOLDIE' LATORRE",
+    stripLabel: "ABOUT THE FOUNDER",
     title: "ABOUT THE FOUNDER",
     description:
       "Christian 'Goldie' Latorre created Blueprint Project with one mission: build a system where training, nutrition, and recovery work as one. This isn't just a gym — it's his vision brought to life.",
@@ -24,6 +25,7 @@ const ACCORDION_ITEMS: AccordionItem[] = [
   },
   {
     label: "VISION",
+    stripLabel: "VISION",
     title: "VISION",
     description:
       "Blueprint Project exists to redefine what a fitness space can be. Where science meets discipline, and every detail is designed to unlock your potential.",
@@ -32,6 +34,7 @@ const ACCORDION_ITEMS: AccordionItem[] = [
   },
   {
     label: "SERVICES",
+    stripLabel: "SERVICES",
     title: "SERVICES",
     description:
       "From personalized training programs to recovery protocols and nutrition guidance — every service at Blueprint is built to work together as a complete system.",
