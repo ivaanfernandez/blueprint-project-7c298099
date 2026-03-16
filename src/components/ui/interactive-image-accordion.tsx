@@ -121,7 +121,7 @@ const DesktopAccordion: React.FC = () => {
               key={item.label}
               onMouseEnter={() => setActive(i)}
               style={{
-                width: isActive ? 400 : 60,
+                width: isActive ? 550 : 60,
                 height: "100%",
                 borderRadius: 16,
                 overflow: "hidden",
