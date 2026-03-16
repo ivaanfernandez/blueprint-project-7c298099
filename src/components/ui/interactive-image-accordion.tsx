@@ -206,21 +206,34 @@ const DesktopAccordion: React.FC = () => {
 
 };
 
+const MOBILE_BORDER_COLORS = [
+  { primary: '#0a1628', secondary: '#1A6BFF', accent: '#5a9fff' },
+  { primary: '#0a2816', secondary: '#22C55E', accent: '#5aea8a' },
+  { primary: '#280a0a', secondary: '#FF3B3B', accent: '#ff7a7a' },
+];
+
 const MobileAccordion: React.FC = () =>
 <div className="flex md:hidden flex-col gap-4 px-6">
-    {ACCORDION_ITEMS.map((item) =>
-  <div
+    {ACCORDION_ITEMS.map((item, index) =>
+  <BorderRotate
     key={item.label}
-    style={{
-      width: "100%",
-      height: 192,
-      borderRadius: 12,
-      position: "relative",
-      overflow: "hidden",
-      backgroundImage: `url(${item.image})`,
-      backgroundSize: "cover",
-      backgroundPosition: "center"
-    }}>
+    gradientColors={MOBILE_BORDER_COLORS[index]}
+    backgroundColor="#0a0a0a"
+    borderWidth={2}
+    borderRadius={16}
+    animationSpeed={4}
+  >
+    <div
+      style={{
+        width: "100%",
+        height: 192,
+        borderRadius: 14,
+        position: "relative",
+        overflow: "hidden",
+        backgroundImage: `url(${item.image})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center"
+      }}>
     
         <div
       style={{
@@ -255,6 +268,7 @@ const MobileAccordion: React.FC = () =>
           </p>
         </div>
       </div>
+  </BorderRotate>
   )}
   </div>;
 
