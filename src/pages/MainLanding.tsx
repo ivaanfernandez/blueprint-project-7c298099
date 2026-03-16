@@ -508,6 +508,7 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
           }
           .hero-cta-button {
             margin-top: 64px !important;
+            margin-bottom: 100px !important;
           }
         }
         .hero-subtext-mobile {
