@@ -63,9 +63,9 @@ const DesktopAccordion: React.FC = () => {
   const item = ACCORDION_ITEMS[displayed];
 
   return (
-    <div className="hidden md:flex flex-row items-center gap-0" style={{ maxWidth: 1100, margin: "0 auto", width: "100%", paddingLeft: 24, paddingRight: 24 }}>
+    <div className="hidden md:flex flex-row items-center gap-0" style={{ maxWidth: "92vw", margin: "0 auto", width: "95%", paddingLeft: 24, paddingRight: 24 }}>
       {/* Left text column */}
-      <div style={{ width: "40%", paddingRight: 48, display: "flex", flexDirection: "column", justifyContent: "center", minHeight: 450 }}>
+      <div style={{ width: "35%", paddingRight: 48, display: "flex", flexDirection: "column", justifyContent: "center", minHeight: 500 }}>
         <div
           style={{
             opacity: fading ? 0 : 1,
@@ -113,7 +113,7 @@ const DesktopAccordion: React.FC = () => {
       </div>
 
       {/* Right accordion column */}
-      <div style={{ width: "60%", display: "flex", flexDirection: "row", gap: 12, height: 450 }}>
+      <div style={{ width: "65%", display: "flex", flexDirection: "row", gap: 12, height: 500 }}>
         {ACCORDION_ITEMS.map((item, i) => {
           const isActive = i === active;
           return (
@@ -121,7 +121,7 @@ const DesktopAccordion: React.FC = () => {
               key={item.label}
               onMouseEnter={() => setActive(i)}
               style={{
-                width: isActive ? 400 : 60,
+                width: isActive ? 550 : 60,
                 height: "100%",
                 borderRadius: 16,
                 overflow: "hidden",
