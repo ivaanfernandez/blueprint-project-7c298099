@@ -193,7 +193,7 @@ const DesktopAccordion: React.FC = () => {
                       letterSpacing: "0.1em",
                     }}
                   >
-                    {item.label}
+                    {item.stripLabel}
                   </span>
                 </div>
               )}
