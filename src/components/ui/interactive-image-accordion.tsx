@@ -63,9 +63,9 @@ const DesktopAccordion: React.FC = () => {
   const item = ACCORDION_ITEMS[displayed];
 
   return (
-    <div className="hidden md:flex flex-row items-center gap-0" style={{ maxWidth: 1100, margin: "0 auto", width: "100%", paddingLeft: 24, paddingRight: 24 }}>
+    <div className="hidden md:flex flex-row items-center gap-0" style={{ maxWidth: "92vw", margin: "0 auto", width: "95%", paddingLeft: 24, paddingRight: 24 }}>
       {/* Left text column */}
-      <div style={{ width: "40%", paddingRight: 48, display: "flex", flexDirection: "column", justifyContent: "center", minHeight: 450 }}>
+      <div style={{ width: "35%", paddingRight: 48, display: "flex", flexDirection: "column", justifyContent: "center", minHeight: 500 }}>
         <div
           style={{
             opacity: fading ? 0 : 1,
