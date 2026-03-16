@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useId } from "react";
 
 interface BorderRotateProps {
   children: React.ReactNode;
@@ -17,25 +18,41 @@ interface BorderRotateProps {
 export const BorderRotate: React.FC<BorderRotateProps> = ({
   children,
   className = "",
-  animationSpeed = 5,
+  animationSpeed = 4,
   gradientColors,
   backgroundColor = "#0a0a0a",
   borderWidth = 2,
   borderRadius = 20,
 }) => {
+  const id = useId().replace(/:/g, "");
+
   return (
-    <div
-      className={`gradient-border-auto ${className}`}
-      style={{
-        borderRadius,
-        padding: borderWidth,
-        backgroundImage: `linear-gradient(${backgroundColor}, ${backgroundColor}), conic-gradient(from var(--gradient-angle), ${gradientColors.primary}, ${gradientColors.secondary}, ${gradientColors.accent}, ${gradientColors.secondary}, ${gradientColors.primary})`,
-        backgroundOrigin: "padding-box, border-box",
-        backgroundClip: "padding-box, border-box",
-        animationDuration: `${animationSpeed}s`,
-      }}
-    >
-      {children}
-    </div>
+    <>
+      <div
+        className={`border-rotate-${id} ${className}`}
+        style={{
+          borderRadius,
+          padding: borderWidth,
+          position: "relative",
+          background: `linear-gradient(${backgroundColor}, ${backgroundColor}) padding-box, conic-gradient(from var(--gradient-angle-${id}, 0deg), ${gradientColors.primary}, ${gradientColors.secondary}, ${gradientColors.accent}, ${gradientColors.secondary}, ${gradientColors.primary}) border-box`,
+        }}
+      >
+        {children}
+      </div>
+      <style>{`
+        @property --gradient-angle-${id} {
+          syntax: "<angle>";
+          initial-value: 0deg;
+          inherits: false;
+        }
+        @keyframes gradient-rotate-${id} {
+          from { --gradient-angle-${id}: 0deg; }
+          to { --gradient-angle-${id}: 360deg; }
+        }
+        .border-rotate-${id} {
+          animation: gradient-rotate-${id} ${animationSpeed}s linear infinite;
+        }
+      `}</style>
+    </>
   );
 };
