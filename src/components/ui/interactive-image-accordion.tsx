@@ -113,7 +113,7 @@ const DesktopAccordion: React.FC = () => {
       </div>
 
       {/* Right accordion column */}
-      <div style={{ width: "60%", display: "flex", flexDirection: "row", gap: 12, height: 450 }}>
+      <div style={{ width: "65%", display: "flex", flexDirection: "row", gap: 12, height: 500 }}>
         {ACCORDION_ITEMS.map((item, i) => {
           const isActive = i === active;
           return (
