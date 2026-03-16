@@ -259,7 +259,7 @@ const MobileAccordion: React.FC = () => (
 );
 
 export const InteractiveImageAccordion: React.FC = () => (
-  <section style={{ backgroundColor: "#000", paddingTop: 64, paddingBottom: 64 }} className="md:py-24">
+  <section style={{ backgroundColor: "#000", paddingTop: 0, paddingBottom: 64 }} className="md:pb-24">
     <p
       style={{
         fontSize: 12,
