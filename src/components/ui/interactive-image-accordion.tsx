@@ -273,18 +273,18 @@ export const InteractiveImageAccordion: React.FC = () =>
 
 
   
-    <h2
-    style={{
-      fontFamily: "Bebas Neue, sans-serif",
-      color: "#fff",
-      textAlign: "center",
-      fontSize: "clamp(36px, 5vw, 48px)",
-      fontWeight: 400,
-      marginBottom: 48
-    }}>
     
-      THE BLUEPRINT SYSTEM
-    </h2>
+
+
+
+
+
+
+
+
+
+
+  
     <DesktopAccordion />
     <MobileAccordion />
   </section>;
