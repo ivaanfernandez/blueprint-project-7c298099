@@ -3,8 +3,7 @@ import { motion } from "framer-motion";
 import ProceduralBackground from "@/components/ProceduralBackground";
 import { WordRotate } from "@/components/ui/word-rotate";
 import { Dock, DockIcon } from "@/components/ui/dock";
-import gymHero from '@/assets/blueprint-gym.jpg';
-import gymDesktop from '@/assets/blueprint-gym-desktop.jpg';
+import gymHero from '@/assets/blueprint-gym-hero.jpg';
 import { ShinyButton } from '@/components/ui/shiny-button';
 import { LocationMap } from '@/components/ui/expand-map';
 import { FadeText } from '@/components/ui/fade-text';
@@ -186,14 +185,14 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
           src={gymHero}
           alt="Blueprint Project"
           className="hero-bg-image hero-bg-mobile"
-          style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", zIndex: 0 }}
+          style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", objectPosition: "center center", zIndex: 0 }}
         />
         {/* Desktop background image */}
         <img
-          src={gymDesktop}
+          src={gymHero}
           alt="Blueprint Project"
           className="hero-bg-image hero-bg-desktop"
-          style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", zIndex: 0 }}
+          style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", objectPosition: "center center", zIndex: 0 }}
         />
         {/* Dark gradient overlay */}
         <div
@@ -201,7 +200,7 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
             position: "absolute",
             inset: 0,
             zIndex: 1,
-            background: "linear-gradient(to bottom, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0.15) 40%, rgba(0,0,0,0.55) 100%)",
+            background: "linear-gradient(to bottom, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.2) 40%, rgba(0,0,0,0.4) 70%, rgba(0,0,0,0.85) 100%)",
           }}
         />
         {/* Bottom fade gradient - mobile only */}
