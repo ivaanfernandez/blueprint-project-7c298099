@@ -14,34 +14,34 @@ interface AccordionItem {
 }
 
 const ACCORDION_ITEMS: AccordionItem[] = [
-  {
-    label: "CHRISTIAN 'GOLDIE' LATORRE",
-    stripLabel: "ABOUT THE FOUNDER",
-    title: "ABOUT THE FOUNDER",
-    description:
-      "Christian 'Goldie' Latorre created Blueprint Project with one mission: build a system where training, nutrition, and recovery work as one. This isn't just a gym — it's his vision brought to life.",
-    accentColor: "#1A6BFF",
-    image: founderImage,
-  },
-  {
-    label: "VISION",
-    stripLabel: "VISION",
-    title: "VISION",
-    description:
-      "Blueprint Project exists to redefine what a fitness space can be. Where science meets discipline, and every detail is designed to unlock your potential.",
-    accentColor: "#22C55E",
-    image: visionImage,
-  },
-  {
-    label: "SERVICES",
-    stripLabel: "SERVICES",
-    title: "SERVICES",
-    description:
-      "From personalized training programs to recovery protocols and nutrition guidance — every service at Blueprint is built to work together as a complete system.",
-    accentColor: "#FF3B3B",
-    image: servicesImage,
-  },
-];
+{
+  label: "CHRISTIAN 'GOLDIE' LATORRE",
+  stripLabel: "ABOUT THE FOUNDER",
+  title: "ABOUT THE FOUNDER",
+  description:
+  "Christian 'Goldie' Latorre created Blueprint Project with one mission: build a system where training, nutrition, and recovery work as one. This isn't just a gym — it's his vision brought to life.",
+  accentColor: "#1A6BFF",
+  image: founderImage
+},
+{
+  label: "VISION",
+  stripLabel: "VISION",
+  title: "VISION",
+  description:
+  "Blueprint Project exists to redefine what a fitness space can be. Where science meets discipline, and every detail is designed to unlock your potential.",
+  accentColor: "#22C55E",
+  image: visionImage
+},
+{
+  label: "SERVICES",
+  stripLabel: "SERVICES",
+  title: "SERVICES",
+  description:
+  "From personalized training programs to recovery protocols and nutrition guidance — every service at Blueprint is built to work together as a complete system.",
+  accentColor: "#FF3B3B",
+  image: servicesImage
+}];
+
 
 const DesktopAccordion: React.FC = () => {
   const [active, setActive] = useState(0);
@@ -57,7 +57,7 @@ const DesktopAccordion: React.FC = () => {
       setDisplayed(active);
       setFading(false);
     }, 150);
-    return () => { if (timeoutRef.current) clearTimeout(timeoutRef.current); };
+    return () => {if (timeoutRef.current) clearTimeout(timeoutRef.current);};
   }, [active, displayed]);
 
   const item = ACCORDION_ITEMS[displayed];
@@ -70,9 +70,9 @@ const DesktopAccordion: React.FC = () => {
           style={{
             opacity: fading ? 0 : 1,
             transform: fading ? "translateY(6px)" : "translateY(0)",
-            transition: "opacity 300ms ease, transform 300ms ease",
-          }}
-        >
+            transition: "opacity 300ms ease, transform 300ms ease"
+          }}>
+          
           <p
             style={{
               fontSize: 13,
@@ -81,9 +81,9 @@ const DesktopAccordion: React.FC = () => {
               fontFamily: "Space Grotesk, sans-serif",
               textTransform: "uppercase",
               fontWeight: 600,
-              marginBottom: 12,
-            }}
-          >
+              marginBottom: 12
+            }}>
+            
             {item.label}
           </p>
           <h3
@@ -93,9 +93,9 @@ const DesktopAccordion: React.FC = () => {
               color: "#fff",
               fontWeight: 400,
               lineHeight: 1.1,
-              marginBottom: 16,
-            }}
-          >
+              marginBottom: 16
+            }}>
+            
             {item.title}
           </h3>
           <p
@@ -104,9 +104,9 @@ const DesktopAccordion: React.FC = () => {
               color: "rgba(255,255,255,0.65)",
               fontFamily: "Space Grotesk, sans-serif",
               lineHeight: 1.8,
-              maxWidth: 448,
-            }}
-          >
+              maxWidth: 448
+            }}>
+            
             {item.description}
           </p>
         </div>
@@ -134,158 +134,157 @@ const DesktopAccordion: React.FC = () => {
                 backgroundPosition: "center",
                 boxShadow: isActive ? `0 0 30px ${item.accentColor}20` : "none",
                 borderLeft: !isActive ? `2px solid ${item.accentColor}4D` : "none",
-                flexShrink: 0,
-              }}
-            >
+                flexShrink: 0
+              }}>
+              
               {/* Active overlay gradient */}
-              {isActive && (
-                <div
-                  style={{
-                    position: "absolute",
-                    inset: 0,
-                    background: "linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.3) 60%, transparent 100%)",
-                    zIndex: 1,
-                  }}
-                />
-              )}
+              {isActive &&
+              <div
+                style={{
+                  position: "absolute",
+                  inset: 0,
+                  background: "linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.3) 60%, transparent 100%)",
+                  zIndex: 1
+                }} />
+
+              }
 
               {/* Active label */}
-              {isActive && (
-                <span
-                  style={{
-                    position: "absolute",
-                    bottom: 24,
-                    left: 0,
-                    right: 0,
-                    textAlign: "center",
-                    color: "#fff",
-                    fontSize: 18,
-                    fontWeight: 600,
-                    fontFamily: "Space Grotesk, sans-serif",
-                    zIndex: 2,
-                    letterSpacing: "0.05em",
-                  }}
-                >
+              {isActive &&
+              <span
+                style={{
+                  position: "absolute",
+                  bottom: 24,
+                  left: 0,
+                  right: 0,
+                  textAlign: "center",
+                  color: "#fff",
+                  fontSize: 18,
+                  fontWeight: 600,
+                  fontFamily: "Space Grotesk, sans-serif",
+                  zIndex: 2,
+                  letterSpacing: "0.05em"
+                }}>
+                
                   {item.stripLabel}
                 </span>
-              )}
+              }
 
               {/* Inactive rotated label */}
-              {!isActive && (
-                <div
-                  style={{
-                    position: "absolute",
-                    inset: 0,
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                  }}
-                >
+              {!isActive &&
+              <div
+                style={{
+                  position: "absolute",
+                  inset: 0,
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center"
+                }}>
+                
                   <span
-                    style={{
-                      color: "#fff",
-                      fontSize: 13,
-                      fontWeight: 600,
-                      fontFamily: "Space Grotesk, sans-serif",
-                      whiteSpace: "nowrap",
-                      writingMode: "vertical-rl",
-                      transform: "rotate(180deg)",
-                      letterSpacing: "0.1em",
-                    }}
-                  >
+                  style={{
+                    color: "#fff",
+                    fontSize: 13,
+                    fontWeight: 600,
+                    fontFamily: "Space Grotesk, sans-serif",
+                    whiteSpace: "nowrap",
+                    writingMode: "vertical-rl",
+                    transform: "rotate(180deg)",
+                    letterSpacing: "0.1em"
+                  }}>
+                  
                     {item.stripLabel}
                   </span>
                 </div>
-              )}
-            </div>
-          );
+              }
+            </div>);
+
         })}
       </div>
-    </div>
-  );
+    </div>);
+
 };
 
-const MobileAccordion: React.FC = () => (
-  <div className="flex md:hidden flex-col gap-4 px-6">
-    {ACCORDION_ITEMS.map((item) => (
-      <div
-        key={item.label}
-        style={{
-          width: "100%",
-          height: 192,
-          borderRadius: 12,
-          position: "relative",
-          overflow: "hidden",
-          backgroundImage: `url(${item.image})`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-        }}
-      >
+const MobileAccordion: React.FC = () =>
+<div className="flex md:hidden flex-col gap-4 px-6">
+    {ACCORDION_ITEMS.map((item) =>
+  <div
+    key={item.label}
+    style={{
+      width: "100%",
+      height: 192,
+      borderRadius: 12,
+      position: "relative",
+      overflow: "hidden",
+      backgroundImage: `url(${item.image})`,
+      backgroundSize: "cover",
+      backgroundPosition: "center"
+    }}>
+    
         <div
-          style={{
-            position: "absolute",
-            inset: 0,
-            background: "linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.3) 60%, transparent 100%)",
-            zIndex: 1,
-          }}
-        />
+      style={{
+        position: "absolute",
+        inset: 0,
+        background: "linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.3) 60%, transparent 100%)",
+        zIndex: 1
+      }} />
+    
         <div style={{ position: "relative", zIndex: 2, padding: 24, display: "flex", flexDirection: "column", justifyContent: "flex-end", height: "100%" }}>
           <p
-            style={{
-              fontSize: 12,
-              letterSpacing: "0.2em",
-              color: item.accentColor,
-              fontFamily: "Space Grotesk, sans-serif",
-              textTransform: "uppercase",
-              marginBottom: 8,
-            }}
-          >
+        style={{
+          fontSize: 12,
+          letterSpacing: "0.2em",
+          color: item.accentColor,
+          fontFamily: "Space Grotesk, sans-serif",
+          textTransform: "uppercase",
+          marginBottom: 8
+        }}>
+        
             {item.label}
           </p>
           <p
-            style={{
-              fontSize: 13,
-              color: "rgba(255,255,255,0.7)",
-              fontFamily: "Space Grotesk, sans-serif",
-              lineHeight: 1.6,
-            }}
-          >
+        style={{
+          fontSize: 13,
+          color: "rgba(255,255,255,0.7)",
+          fontFamily: "Space Grotesk, sans-serif",
+          lineHeight: 1.6
+        }}>
+        
             {item.description}
           </p>
         </div>
       </div>
-    ))}
-  </div>
-);
+  )}
+  </div>;
 
-export const InteractiveImageAccordion: React.FC = () => (
-  <section style={{ backgroundColor: "#000", paddingTop: 0, paddingBottom: 64 }} className="md:pb-24">
-    <p
-      style={{
-        fontSize: 12,
-        letterSpacing: "0.2em",
-        color: "#1A6BFF",
-        fontFamily: "Space Grotesk, sans-serif",
-        textAlign: "center",
-        textTransform: "uppercase",
-        marginBottom: 16,
-      }}
-    >
-      CONÓCENOS
-    </p>
+
+export const InteractiveImageAccordion: React.FC = () =>
+<section style={{ backgroundColor: "#000", paddingTop: 0, paddingBottom: 64 }} className="md:pb-24">
+    
+
+
+
+
+
+
+
+
+
+
+
+  
     <h2
-      style={{
-        fontFamily: "Bebas Neue, sans-serif",
-        color: "#fff",
-        textAlign: "center",
-        fontSize: "clamp(36px, 5vw, 48px)",
-        fontWeight: 400,
-        marginBottom: 48,
-      }}
-    >
+    style={{
+      fontFamily: "Bebas Neue, sans-serif",
+      color: "#fff",
+      textAlign: "center",
+      fontSize: "clamp(36px, 5vw, 48px)",
+      fontWeight: 400,
+      marginBottom: 48
+    }}>
+    
       THE BLUEPRINT SYSTEM
     </h2>
     <DesktopAccordion />
     <MobileAccordion />
-  </section>
-);
+  </section>;
