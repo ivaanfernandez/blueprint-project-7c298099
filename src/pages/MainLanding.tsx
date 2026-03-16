@@ -360,11 +360,13 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
       <ProceduralBackground />
 
       {/* IMAGE AUTO-SLIDER */}
-      <div style={{ marginTop: '-40px', position: 'relative', zIndex: 2, background: 'transparent', marginBottom: 0, paddingBottom: 0 }}>
+      <div style={{ marginTop: '-40px', position: 'relative', zIndex: 10, background: '#000', marginBottom: 0, paddingBottom: 0 }}>
         <ImageAutoSlider images={GYM_SLIDER_IMAGES} />
       </div>
 
-      <InteractiveImageAccordion />
+      <div style={{ position: 'relative', zIndex: 10, marginTop: '-2px', background: '#000' }}>
+        <InteractiveImageAccordion />
+      </div>
 
       {/* TRES HUELLAS */}
       <section className="relative z-10" style={{ padding: "120px 24px" }}>
