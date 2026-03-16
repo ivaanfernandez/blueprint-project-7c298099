@@ -6,6 +6,7 @@ import servicesImage from "@/assets/accordion/accordion-services.jpg";
 
 interface AccordionItem {
   label: string;
+  stripLabel: string;
   title: string;
   description: string;
   accentColor: string;
