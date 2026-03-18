@@ -218,101 +218,61 @@ const DesktopAccordion: React.FC = () => {
 
 };
 
-const TAB_LABELS = ["FOUNDER", "VISION", "SERVICES"];
-const ACCENT_RGB = ["26,107,255", "34,197,94", "255,59,59"];
-
 const MobileAccordion: React.FC = () => {
-  const [active, setActive] = useState(0);
-  const [displayed, setDisplayed] = useState(0);
-  const [fading, setFading] = useState(false);
-  const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-
-  useEffect(() => {
-    if (active === displayed) return;
-    setFading(true);
-    if (timeoutRef.current) clearTimeout(timeoutRef.current);
-    timeoutRef.current = setTimeout(() => {
-      setDisplayed(active);
-      setFading(false);
-    }, 150);
-    return () => { if (timeoutRef.current) clearTimeout(timeoutRef.current); };
-  }, [active, displayed]);
-
-  const item = ACCORDION_ITEMS[displayed];
-
   return (
-    <div className="flex md:hidden flex-col mx-4">
-      <div style={{ background: "#0a0a0a", borderRadius: 24, border: "0.5px solid rgba(255,255,255,0.1)", overflow: "hidden" }}>
-        {/* Tab bar */}
-        <div style={{ display: "flex", borderBottom: "1px solid rgba(255,255,255,0.1)" }}>
-          {ACCORDION_ITEMS.map((tabItem, i) => {
-            const isActive = i === active;
-            return (
-              <button
-                key={tabItem.label}
-                onClick={() => setActive(i)}
-                style={{
-                  flex: 1,
-                  padding: "14px 0",
-                  fontSize: 10,
-                  letterSpacing: "0.15em",
-                  fontWeight: 600,
-                  textTransform: "uppercase" as const,
-                  fontFamily: "Space Grotesk, sans-serif",
-                  color: tabItem.accentColor,
-                  opacity: isActive ? 1 : 0.45,
-                  background: isActive ? `rgba(${ACCENT_RGB[i]}, 0.08)` : "transparent",
-                  border: "none",
-                  borderBottom: isActive ? `2px solid ${tabItem.accentColor}` : "2px solid transparent",
-                  cursor: "pointer",
-                  transition: "opacity 200ms ease, background 200ms ease",
-                }}
-              >
-                {TAB_LABELS[i]}
-              </button>
-            );
-          })}
-        </div>
-
-        {/* Image area */}
-        <div style={{ position: "relative", width: "100%", height: 300, overflow: "hidden" }}>
+    <div className="flex md:hidden flex-col gap-6 mx-4">
+      {ACCORDION_ITEMS.map((item) => (
+        <div
+          key={item.label}
+          style={{
+            position: "relative",
+            height: 360,
+            borderRadius: 20,
+            overflow: "hidden",
+            border: "0.5px solid rgba(255,255,255,0.1)",
+            background: "#0a0a0a",
+          }}
+        >
+          {/* Image */}
           <img
             src={item.image}
-            alt={item.stripLabel}
+            alt={item.title}
             style={{
-              position: "absolute", inset: 0, width: "100%", height: "100%",
-              objectFit: "cover", objectPosition: item.objectPosition || "center center",
-              opacity: fading ? 0 : 1, transition: "opacity 300ms ease",
+              position: "absolute",
+              inset: 0,
+              width: "100%",
+              height: "100%",
+              objectFit: "cover",
+              objectPosition: item.objectPosition || "center center",
             }}
           />
-          <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.3) 40%, transparent 100%)", zIndex: 1 }} />
-          <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, padding: "0 20px 20px", zIndex: 2, opacity: fading ? 0 : 1, transition: "opacity 300ms ease" }}>
-            <h3 style={{ fontFamily: "Bebas Neue, sans-serif", fontSize: 24, color: "#fff", fontWeight: 700, lineHeight: 1.1, marginBottom: 8 }}>
+
+          {/* Glass panel */}
+          <div
+            style={{
+              position: "absolute",
+              bottom: 0,
+              left: 0,
+              right: 0,
+              padding: 20,
+              background: "rgba(10, 10, 10, 0.6)",
+              backdropFilter: "blur(16px)",
+              WebkitBackdropFilter: "blur(16px)",
+              borderTop: "0.5px solid rgba(255,255,255,0.1)",
+            }}
+          >
+            <h3 style={{ fontFamily: "Bebas Neue, sans-serif", fontSize: 20, color: "#fff", fontWeight: 700, marginBottom: 8 }}>
               {item.title}
             </h3>
-            <p style={{ fontSize: 12, color: "rgba(255,255,255,0.55)", fontFamily: "Space Grotesk, sans-serif", lineHeight: 1.6 }}>
+            <p style={{ fontFamily: "Space Grotesk, sans-serif", fontSize: 12, color: "rgba(255,255,255,0.6)", lineHeight: 1.6 }}>
               {item.description}
             </p>
           </div>
-        </div>
 
-        {/* Bottom indicator bar */}
-        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "12px 20px" }}>
-          <div style={{ display: "flex", gap: 8 }}>
-            {ACCORDION_ITEMS.map((dotItem, i) => (
-              <div key={i} style={{ width: 8, height: 8, borderRadius: "50%", backgroundColor: dotItem.accentColor, opacity: i === active ? 1 : 0.3, transition: "opacity 300ms ease" }} />
-            ))}
-          </div>
-          <span style={{ fontSize: 11, color: "rgba(255,255,255,0.35)", fontFamily: "Space Grotesk, sans-serif" }}>Swipe or tap tabs</span>
+          {/* Accent bar */}
+          <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, height: 3, backgroundColor: item.accentColor }} />
         </div>
-
-        {/* Color accent bar */}
-        <div style={{ display: "flex", width: "100%", height: 3 }}>
-          <div style={{ flex: 1, backgroundColor: "#1A6BFF", opacity: active === 0 ? 1 : 0.3, transition: "opacity 300ms ease" }} />
-          <div style={{ flex: 1, backgroundColor: "#22C55E", opacity: active === 1 ? 1 : 0.3, transition: "opacity 300ms ease" }} />
-          <div style={{ flex: 1, backgroundColor: "#FF3B3B", opacity: active === 2 ? 1 : 0.3, transition: "opacity 300ms ease" }} />
-        </div>
-      </div>
+      ))}
     </div>
   );
 };
