@@ -4,18 +4,6 @@ import instagram3d from "@/assets/instagram-3d.png";
 
 const FINGERPRINT_CARDS = [
   {
-    color: "#1A6BFF",
-    borderColor: "rgba(26,107,255,0.25)",
-    bgColor: "rgba(26,107,255,0.04)",
-    hoverBorder: "rgba(26,107,255,0.45)",
-    hoverBg: "rgba(26,107,255,0.07)",
-    bracketColor: "rgba(26,107,255,0.5)",
-    bracketHover: "rgba(26,107,255,0.8)",
-    delay: "0s",
-    tag: "BLUEPRINT PROJECT",
-    title: "BLUEPRINT",
-  },
-  {
     color: "#22C55E",
     borderColor: "rgba(34,197,94,0.25)",
     bgColor: "rgba(34,197,94,0.04)",
