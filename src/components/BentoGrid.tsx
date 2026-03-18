@@ -60,7 +60,7 @@ const FingerprintScan = ({ color, delay }: { color: string; delay: string }) => 
 const FingerprintCard = ({ card }: { card: typeof FINGERPRINT_CARDS[0] }) => (
   <motion.div
     className="bento-cell group"
-    style={{ background: card.bgColor, border: `0.5px solid ${card.borderColor}` }}
+    style={{ background: card.bgColor, border: `0.5px solid ${card.borderColor}`, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", height: "100%" }}
     onMouseEnter={e => { e.currentTarget.style.borderColor = card.hoverBorder; e.currentTarget.style.background = card.hoverBg; }}
     onMouseLeave={e => { e.currentTarget.style.borderColor = card.borderColor; e.currentTarget.style.background = card.bgColor; }}
     whileHover={{ scale: 1.04, y: -4 }}
@@ -72,6 +72,7 @@ const FingerprintCard = ({ card }: { card: typeof FINGERPRINT_CARDS[0] }) => (
     <p style={{ fontSize: 16, fontWeight: 700, color: card.color, textAlign: "center", fontFamily: "Bebas Neue, sans-serif", marginTop: 4 }}>{card.title}</p>
   </motion.div>
 );
+
 
 const MapCell = () => {
   const [expanded, setExpanded] = useState(false);
