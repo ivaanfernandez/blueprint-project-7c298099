@@ -284,37 +284,11 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
           zIndex: 10,
           textAlign: 'center'
         }}>
-          <div className="hero-subtext-line hero-subtext-line1" style={{
-            color: 'rgba(255,255,255,0.6)',
-            fontSize: 'clamp(10px, 1vw, 15px)',
-            fontFamily: 'Space Grotesk, sans-serif',
-            whiteSpace: 'nowrap',
-            letterSpacing: '0.04em',
-            lineHeight: '2'
-          }}>
-            <span className="hero-subtext-desktop">
-              <FadeText
-                direction="up"
-                text="Every detail, from the space to the mindset, is engineered for performance, recovery and mental clarity."
-                framerProps={{ show: { transition: { delay: 0.1, type: 'spring' } } }}
-                className=""
-              />
-            </span>
-            <span className="hero-subtext-mobile">
-              <FadeText
-                direction="up"
-                text="Mindset. Performance. Recovery"
-                framerProps={{ show: { transition: { delay: 0.1, type: 'spring' } } }}
-                className=""
-              />
-            </span>
-          </div>
           {[
-            { text: "We're here to reprogram you physically, mentally, and energetically.", delay: 0.25, mobileClass: "hero-subtext-hide-mobile" },
-            { text: "This is where discipline meets design.", delay: 0.4 },
-            { text: "Welcome to the future of self mastery.", delay: 0.55 },
+            { text: "This is where discipline meets design.", delay: 0.1 },
+            { text: "Welcome to the future of self mastery.", delay: 0.25 },
           ].map((item) => (
-            <div key={item.text} className={`hero-subtext-line ${item.mobileClass || ''}`} style={{
+            <div key={item.text} className="hero-subtext-line" style={{
               color: 'rgba(255,255,255,0.6)',
               fontSize: 'clamp(10px, 1vw, 15px)',
               fontFamily: 'Space Grotesk, sans-serif',
@@ -342,7 +316,7 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
             <FadeText
               direction="up"
               text="Follow the BLUEPRINT."
-              framerProps={{ show: { transition: { delay: 0.7, type: 'spring' } } }}
+              framerProps={{ show: { transition: { delay: 0.4, type: 'spring' } } }}
               className=""
             />
           </div>
@@ -351,6 +325,11 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
         {/* CTA Button */}
         <div className="hero-cta-button" style={{ marginTop: "24px", display: "flex", justifyContent: "center", width: "100%" }}>
           <ShinyButton fontSize="15px" className="hero-shiny-btn">HAVE YOUR BLUEPRINT</ShinyButton>
+        </div>
+
+        {/* Scroll indicator */}
+        <div style={{ marginTop: 24, display: 'flex', justifyContent: 'center', width: '100%', pointerEvents: 'none' }}>
+          <ChevronDown size={24} style={{ color: 'rgba(255,255,255,0.3)', animation: 'hero-bounce 2s ease-in-out infinite' }} />
         </div>
 
         </div>
