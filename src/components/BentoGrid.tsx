@@ -59,7 +59,7 @@ const FingerprintScan = ({ color, delay }: { color: string; delay: string }) => 
 
 const FingerprintCard = ({ card }: { card: typeof FINGERPRINT_CARDS[0] }) => (
   <div
-    className="bento-cell group col-span-2 md:col-span-1"
+    className="bento-cell group col-span-2 md:col-span-2"
     style={{ background: card.bgColor, border: `0.5px solid ${card.borderColor}` }}
     onMouseEnter={e => { e.currentTarget.style.borderColor = card.hoverBorder; e.currentTarget.style.background = card.hoverBg; }}
     onMouseLeave={e => { e.currentTarget.style.borderColor = card.borderColor; e.currentTarget.style.background = card.bgColor; }}
