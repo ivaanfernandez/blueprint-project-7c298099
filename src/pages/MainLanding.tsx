@@ -222,38 +222,37 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
         <div className="hero-content-wrapper" style={{ position: "relative", zIndex: 10, width: "100%", display: "flex", flexDirection: "column", paddingTop: "110px" }}>
 <div className="hero-headline-wrapper" style={{
           display: 'flex',
-          flexDirection: 'column',
+          flexDirection: 'row',
           alignItems: 'center',
-          justifyContent: 'center',
+          justifyContent: 'flex-start',
           width: '100%',
-          paddingLeft: '20px',
-          paddingRight: '20px',
+          paddingLeft: '80px',
+          paddingRight: '40px',
           boxSizing: 'border-box',
           position: 'relative',
           zIndex: 10,
           paddingTop: '140px'
         }}>
           <span className="hero-headline-white" style={{
-            display: 'block',
             color: '#FFFFFF',
             fontFamily: 'Bebas Neue, sans-serif',
             fontWeight: 400,
             fontSize: 'clamp(56px, 7vw, 100px)',
-            lineHeight: 1,
-            textAlign: 'center',
-            marginBottom: '4px'
+            whiteSpace: 'nowrap',
+            flexShrink: 0,
+            lineHeight: 1
           }}>
-            THIS ISN'T A GYM,
+            <span className="hero-comma">THIS ISN'T A GYM,&nbsp;</span>
+            <span className="hero-no-comma">THIS ISN'T A GYM&nbsp;</span>
           </span>
-          <div className="hero-headline-blue" style={{
-            display: 'block',
+          <span className="hero-headline-blue" style={{
             color: '#1A6BFF',
             fontFamily: 'Bebas Neue, sans-serif',
             fontWeight: 400,
             fontSize: 'clamp(56px, 7vw, 100px)',
+            whiteSpace: 'nowrap',
             lineHeight: 1,
-            textAlign: 'center',
-            minHeight: '1.1em',
+            flexShrink: 0
           }}>
             <WordRotate
               words={[
@@ -265,13 +264,13 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
               duration={2500}
               className=""
               framerProps={{
-                initial: { opacity: 0 },
-                animate: { opacity: 1 },
-                exit: { opacity: 0 },
-                transition: { duration: 0.3, ease: "easeOut" }
+                initial: { opacity: 0, y: -30 },
+                animate: { opacity: 1, y: 0 },
+                exit: { opacity: 0, y: 30 },
+                transition: { duration: 0.25, ease: "easeOut" }
               }}
             />
-          </div>
+          </span>
         </div>
 
         <div className="hero-subtext-container" style={{
@@ -397,6 +396,9 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
             display: inline-block !important;
           }
         }
+        .hero-no-comma {
+          display: none;
+        }
         /* Desktop hero styles */
         @media (min-width: 768px) {
           .hero-section {
@@ -422,6 +424,10 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
             justify-content: flex-start !important;
           }
           .hero-headline-wrapper {
+            justify-content: center !important;
+            padding-left: 0 !important;
+            padding-right: 0 !important;
+            text-align: left !important;
             padding-top: 80px !important;
           }
           .hero-subtext-container {
@@ -458,9 +464,15 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
             padding-top: 80px !important;
           }
           .hero-headline-wrapper {
+            flex-wrap: wrap !important;
+            text-align: center !important;
+            justify-content: center !important;
+            padding-left: 20px !important;
+            padding-right: 20px !important;
             padding-top: 55px !important;
           }
           .hero-headline-white {
+            width: 100% !important;
             font-size: clamp(56px, 14.5vw, 76px) !important;
           }
           .hero-headline-blue {
@@ -485,6 +497,12 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
           }
           .dock-fingerprint-wrapper {
             transform: scale(0.85) !important;
+          }
+          .hero-comma {
+            display: none !important;
+          }
+          .hero-no-comma {
+            display: inline !important;
           }
           /* Subtext container mobile */
           .hero-subtext-container {
