@@ -112,9 +112,17 @@ const PricingCard = ({ plan, isYearly }: { plan: Plan; isYearly: boolean }) => {
         </span>
       )}
 
-      <div className="flex justify-center mb-4">
-        <FingerprintSVG color={plan.color} size={64} />
-      </div>
+      {plan.name === "BLUEPRINT" ? (
+        <div className="flex justify-center mb-4">
+          <FingerprintSVG color={plan.color} size={64} />
+        </div>
+      ) : (
+        <div className="flex justify-center items-center gap-3 mb-4">
+          <FingerprintSVG color="#1A6BFF" size={40} />
+          <FingerprintSVG color="#22C55E" size={40} />
+          <FingerprintSVG color="#FF3B3B" size={40} />
+        </div>
+      )}
 
       <p className="text-center text-lg font-semibold tracking-wide text-white" style={{ fontFamily: "Rajdhani, sans-serif" }}>
         {plan.name}
