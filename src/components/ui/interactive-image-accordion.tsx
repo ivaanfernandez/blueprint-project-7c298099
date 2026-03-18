@@ -12,6 +12,7 @@ interface AccordionItem {
   description: string;
   accentColor: string;
   image: string;
+  objectPosition?: string;
 }
 
 const ACCORDION_ITEMS: AccordionItem[] = [
