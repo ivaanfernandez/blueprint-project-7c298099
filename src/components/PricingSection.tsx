@@ -90,7 +90,7 @@ const PricingCard = ({ plan, isYearly }: { plan: Plan; isYearly: boolean }) => {
 
   return (
     <div
-      className={`relative rounded-2xl p-8 transition-all duration-300 ${plan.featured ? "md:scale-105 md:py-10" : ""}`}
+      className="relative rounded-2xl p-8 transition-all duration-300 flex flex-col h-full"
       style={{
         background: "rgba(255,255,255,0.05)",
         backdropFilter: "blur(20px)",
