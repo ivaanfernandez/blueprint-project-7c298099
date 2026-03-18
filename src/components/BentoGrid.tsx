@@ -37,8 +37,8 @@ const FINGERPRINT_CARDS = [
     bracketHover: "rgba(255,59,59,0.8)",
     delay: "1.6s",
     tag: "RESET",
-    title: "Recovery",
-    description: "Full-spectrum protocols to restore and rebuild.",
+    title: "RESET",
+    description: "",
   },
 ];
 
