@@ -250,7 +250,11 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
             display: 'inline-block',
             minWidth: '600px',
             textAlign: 'left',
-            verticalAlign: 'baseline'
+            verticalAlign: 'baseline',
+            position: 'relative',
+            top: '2px',
+            padding: 0,
+            margin: 0
           }}>
             <WordRotate
               words={[
