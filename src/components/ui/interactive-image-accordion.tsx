@@ -261,11 +261,11 @@ const MobileAccordion: React.FC = () => {
                   fontFamily: "Space Grotesk, sans-serif",
                   color: tabItem.accentColor,
                   opacity: isActive ? 1 : 0.45,
-                  background: isActive ? `rgba(${ACCENT_RGB[i]}, 0.08)` : "transparent",
+                  background: isActive ? `rgba(${ACCENT_RGB[i]}, 0.15)` : "transparent",
                   border: "none",
                   borderBottom: isActive ? `2px solid ${tabItem.accentColor}` : "2px solid transparent",
                   cursor: "pointer",
-                  transition: "opacity 200ms ease, background 200ms ease",
+                  transition: "all 300ms ease",
                 }}
               >
                 {TAB_LABELS[i]}
