@@ -79,9 +79,7 @@ const FingerprintCard = ({ card }: { card: typeof FINGERPRINT_CARDS[0] }) => (
   >
     <CornerBrackets color={card.bracketColor} />
     <FingerprintScan color={card.color} delay={card.delay} />
-    <p style={{ fontSize: 10, letterSpacing: "0.2em", color: card.color, opacity: 0.6, textAlign: "center" }}>{card.tag}</p>
-    <p style={{ fontSize: 16, fontWeight: 700, color: "#e8e8e8", textAlign: "center", marginTop: 4 }}>{card.title}</p>
-    <p style={{ fontSize: 11, color: "rgba(255,255,255,0.4)", textAlign: "center", marginTop: 6, lineHeight: 1.5 }}>{card.description}</p>
+    <p style={{ fontSize: 20, fontWeight: 700, color: card.color, textAlign: "center", fontFamily: "Bebas Neue, sans-serif", marginTop: 4 }}>{card.title}</p>
   </div>
 );
 
