@@ -367,92 +367,12 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
         <InteractiveImageAccordion />
       </div>
 
-      {/* TRES HUELLAS */}
-      <section className="relative z-10" style={{ padding: "120px 24px" }}>
-        <div className="text-center">
-          <p style={{ fontSize: "11px", letterSpacing: "0.35em", color: "#1A6BFF" }}>EL SISTEMA</p>
-          <h2 style={{ fontSize: "clamp(40px, 6vw, 72px)", fontWeight: 800, color: "#fff", marginTop: "16px" }}>
-            TRES HUELLAS.
-          </h2>
-          <p style={{ fontSize: "16px", color: "rgba(255,255,255,0.5)", marginTop: "16px" }}>
-            No son servicios separados. Es un sistema operativo.
-          </p>
-        </div>
-
-        <div
-          className="mx-auto mt-16 grid gap-6"
-          style={{ maxWidth: "1100px", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))" }}
-        >
-          {HUELLAS.map((h) => (
-            <div key={h.tag} id={h.sectionId}>
-              <HuellaCard h={h} />
-            </div>
-          ))}
-        </div>
-      </section>
 
       {/* PRICING */}
       <PricingSection />
 
       {/* BENTO GRID */}
       <BentoGrid />
-
-      {/* LOCATION */}
-      <section style={{
-        width: '100%',
-        padding: '120px 0',
-        position: 'relative',
-        zIndex: 10,
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        gap: '64px'
-      }}>
-        <div style={{ textAlign: 'center' }}>
-          <p style={{
-            fontSize: '11px',
-            letterSpacing: '0.35em',
-            color: '#1A6BFF',
-            fontFamily: 'Space Grotesk, sans-serif',
-            marginBottom: '16px'
-          }}>
-            ENCUÉNTRANOS
-          </p>
-          <h2 style={{
-            fontSize: 'clamp(36px, 5vw, 64px)',
-            fontWeight: 800,
-            color: '#FFFFFF',
-            fontFamily: 'Rajdhani, sans-serif',
-            lineHeight: 1,
-            margin: 0
-          }}>
-            LOCATION
-          </h2>
-          <p style={{
-            fontSize: '15px',
-            color: 'rgba(255,255,255,0.5)',
-            fontFamily: 'Space Grotesk, sans-serif',
-            marginTop: '16px'
-          }}>
-            Santurce, Puerto Rico
-          </p>
-        </div>
-
-        <LocationMap
-          location="Blueprint Project — Santurce, PR"
-          coordinates="1951 Calle Loíza, Santurce, PR 00911"
-        />
-
-        <p style={{
-          fontSize: '11px',
-          letterSpacing: '0.25em',
-          color: 'rgba(255,255,255,0.3)',
-          fontFamily: 'Space Grotesk, sans-serif',
-          textAlign: 'center'
-        }}>
-          CLICK TO EXPAND
-        </p>
-      </section>
 
       <style>{`
         @keyframes pulse-line {
