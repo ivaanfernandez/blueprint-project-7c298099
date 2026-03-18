@@ -10,6 +10,7 @@ import { FadeText } from '@/components/ui/fade-text';
 import { ImageAutoSlider } from '@/components/ui/image-auto-slider';
 import { InteractiveImageAccordion } from '@/components/ui/interactive-image-accordion';
 import PricingSection from '@/components/PricingSection';
+import BentoGrid from '@/components/BentoGrid';
 import slider1 from '@/assets/slider/slider-1.jpg';
 import slider2 from '@/assets/slider/slider-2.jpg';
 import slider3 from '@/assets/slider/slider-3.jpg';
