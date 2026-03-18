@@ -389,6 +389,9 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
         </div>
       </section>
 
+      {/* PRICING */}
+      <PricingSection />
+
       {/* LOCATION */}
       <section style={{
         width: '100%',
