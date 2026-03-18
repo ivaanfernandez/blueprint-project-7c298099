@@ -455,8 +455,10 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
         }
         .hero-shiny-btn {
           white-space: nowrap !important;
-          padding: 0.7rem 1.8rem !important;
-          font-size: 12px !important;
+          padding: 1.25rem 3rem !important;
+          font-size: 15px !important;
+          min-width: 280px !important;
+          letter-spacing: 0.15em !important;
         }
         @media (max-width: 767px) {
           .hero-shiny-btn {
