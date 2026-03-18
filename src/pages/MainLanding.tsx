@@ -221,12 +221,13 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
         />
         {/* Hero content - on top of image */}
         <div className="hero-content-wrapper" style={{ position: "relative", zIndex: 10, width: "100%", display: "flex", flexDirection: "column", paddingTop: "110px" }}>
-<div className="hero-headline-wrapper" style={{
+        <div className="hero-headline-wrapper" style={{
           width: '100%',
           position: 'relative',
           zIndex: 10,
           paddingTop: '140px',
-          textAlign: 'center'
+          textAlign: 'center',
+          paddingLeft: '3%'
         }}>
           <span className="hero-headline-white" style={{
             color: '#FFFFFF',
@@ -252,7 +253,7 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
             textAlign: 'left',
             verticalAlign: 'baseline',
             position: 'relative',
-            top: '0.15em',
+            top: '5px',
             padding: 0,
             margin: 0
           }}>
