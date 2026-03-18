@@ -161,46 +161,6 @@ const MapCell = () => {
   );
 };
 
-const InstagramCell = () => {
-  const [hovered, setHovered] = useState(false);
-
-  return (
-    <a
-      href="https://instagram.com/blueprintproject"
-      target="_blank"
-      rel="noopener noreferrer"
-      className="bento-cell group"
-      style={{
-        background: "rgba(255,255,255,0.03)",
-        border: "0.5px solid rgba(255,255,255,0.1)",
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        justifyContent: "center",
-        textDecoration: "none",
-        cursor: "pointer",
-        transition: "border-color 0.3s, background 0.3s",
-      }}
-      onMouseEnter={e => { e.currentTarget.style.borderColor = "rgba(255,255,255,0.25)"; e.currentTarget.style.background = "rgba(255,255,255,0.06)"; setHovered(true); }}
-      onMouseLeave={e => { e.currentTarget.style.borderColor = "rgba(255,255,255,0.1)"; e.currentTarget.style.background = "rgba(255,255,255,0.03)"; setHovered(false); }}
-    >
-      <CornerBrackets color="rgba(255,255,255,0.15)" />
-      <img src={instagram3d} alt="Instagram" style={{ width: 48, height: 48, objectFit: "contain" }} />
-      <span
-        style={{
-          fontSize: 10,
-          letterSpacing: "0.1em",
-          color: "rgba(255,255,255,0.5)",
-          marginTop: 8,
-          opacity: hovered ? 1 : 0,
-          transition: "opacity 200ms ease",
-        }}
-      >
-        @BLUEPRINTPR
-      </span>
-    </a>
-  );
-};
 
 const BentoGrid = () => (
   <section className="relative z-10 pb-8 md:pb-12" style={{ background: "transparent", paddingTop: 0, marginTop: 0 }}>
