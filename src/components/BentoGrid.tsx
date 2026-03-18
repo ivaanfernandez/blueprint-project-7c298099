@@ -1,4 +1,5 @@
-import { useRef } from "react";
+import { useState } from "react";
+import { Clock, Phone } from "lucide-react";
 
 const FINGERPRINT_CARDS = [
   {
