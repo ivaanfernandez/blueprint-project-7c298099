@@ -12,6 +12,7 @@ import { ChevronDown } from 'lucide-react';
 import { InteractiveImageAccordion } from '@/components/ui/interactive-image-accordion';
 import PricingSection from '@/components/PricingSection';
 import BentoGrid from '@/components/BentoGrid';
+import Footer from '@/components/Footer';
 import slider1 from '@/assets/slider/slider-1.jpg';
 import slider2 from '@/assets/slider/slider-2.jpg';
 import slider3 from '@/assets/slider/slider-3.jpg';
@@ -349,6 +350,9 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
 
       {/* BENTO GRID */}
       <BentoGrid />
+
+      {/* FOOTER */}
+      <Footer />
 
       <style>{`
         @keyframes pulse-line {
