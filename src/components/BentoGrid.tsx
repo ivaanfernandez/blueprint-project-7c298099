@@ -212,6 +212,7 @@ const BentoGrid = () => (
         position: relative;
         overflow: hidden;
         transition: border-color 0.3s, background 0.3s;
+        min-height: 180px;
       }
       .bento-scan-line, .bento-scan-glow {
         animation: bentoScanMove 2.5s ease-in-out infinite;
