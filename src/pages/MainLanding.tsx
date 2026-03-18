@@ -223,25 +223,25 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
         <div className="hero-content-wrapper" style={{ position: "relative", zIndex: 10, width: "100%", display: "flex", flexDirection: "column", paddingTop: "110px" }}>
 <div className="hero-headline-wrapper" style={{
           display: 'flex',
-          flexDirection: 'row',
-          alignItems: 'center',
           justifyContent: 'flex-start',
+          alignItems: 'baseline',
           width: '100%',
           paddingLeft: '80px',
           paddingRight: '40px',
           boxSizing: 'border-box',
           position: 'relative',
           zIndex: 10,
-          paddingTop: '140px'
+          paddingTop: '140px',
+          flexWrap: 'wrap'
         }}>
           <span className="hero-headline-white" style={{
             color: '#FFFFFF',
             fontFamily: 'Bebas Neue, sans-serif',
             fontWeight: 400,
-            fontSize: 'clamp(56px, 7vw, 100px)',
+            fontSize: 'clamp(56px, 6vw, 88px)',
             whiteSpace: 'nowrap',
-            flexShrink: 0,
-            lineHeight: 1
+            lineHeight: 1,
+            display: 'inline'
           }}>
             <span className="hero-comma">THIS ISN'T A GYM,&nbsp;</span>
             <span className="hero-no-comma">THIS ISN'T A GYM&nbsp;</span>
@@ -250,10 +250,10 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
             color: '#1A6BFF',
             fontFamily: 'Bebas Neue, sans-serif',
             fontWeight: 400,
-            fontSize: 'clamp(56px, 7vw, 100px)',
-            whiteSpace: 'nowrap',
+            fontSize: 'clamp(56px, 6vw, 88px)',
             lineHeight: 1,
-            flexShrink: 0
+            display: 'inline-block',
+            minWidth: '10ch'
           }}>
             <WordRotate
               words={[
@@ -265,10 +265,10 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
               duration={2500}
               className=""
               framerProps={{
-                initial: { opacity: 0, y: -30 },
-                animate: { opacity: 1, y: 0 },
-                exit: { opacity: 0, y: 30 },
-                transition: { duration: 0.25, ease: "easeOut" }
+                initial: { opacity: 0 },
+                animate: { opacity: 1 },
+                exit: { opacity: 0 },
+                transition: { duration: 0.3, ease: "easeOut" }
               }}
             />
           </span>
