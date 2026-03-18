@@ -21,7 +21,7 @@ const ACCORDION_ITEMS: AccordionItem[] = [
   stripLabel: "ABOUT THE FOUNDER",
   title: "ABOUT THE FOUNDER",
   description:
-  "Christian 'Goldie' Latorre created Blueprint Project with one mission: build a system where training, nutrition, and recovery work as one. This isn't just a gym — it's his vision brought to life.",
+  "Christian 'Goldie' Latorre created Blueprint Project with one mission: build a system where training, nutrition, and recovery work as one. This isn't just a gym. It's his vision brought to life.",
   accentColor: "#1A6BFF",
   image: founderImage,
   objectPosition: "center 30%"
@@ -40,7 +40,7 @@ const ACCORDION_ITEMS: AccordionItem[] = [
   stripLabel: "SERVICES",
   title: "SERVICES",
   description:
-  "From personalized training programs to recovery protocols and nutrition guidance — every service at Blueprint is built to work together as a complete system.",
+  "From personalized training programs to recovery protocols and nutrition guidance. Every service at Blueprint is built to work together as a complete system.",
   accentColor: "#FF3B3B",
   image: servicesImage
 }];
