@@ -260,9 +260,9 @@ const PricingSection = () => {
       </div>
 
       {/* Cards */}
-      <div className="pricing-scroll-container flex gap-4 px-4 md:grid md:grid-cols-3 md:gap-6 max-w-5xl md:mx-auto">
+      <div className="pricing-scroll-container flex gap-4 px-4 md:grid md:grid-cols-3 md:gap-6 md:items-stretch max-w-5xl md:mx-auto">
         {PLANS.map((plan) => (
-          <div key={plan.name} className="pricing-card-wrapper flex-shrink-0 w-[85vw] md:w-auto md:flex-shrink-1">
+          <div key={plan.name} className="pricing-card-wrapper flex-shrink-0 w-[85vw] md:w-auto md:flex-shrink-1 flex">
             <PricingCard plan={plan} isYearly={isYearly} />
           </div>
         ))}
