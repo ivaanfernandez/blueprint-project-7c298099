@@ -1,24 +1,17 @@
 "use client";
 import { useEffect, useState } from "react";
-import { AnimatePresence, HTMLMotionProps, motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 
 interface WordRotateProps {
   words: string[];
   duration?: number;
-  framerProps?: HTMLMotionProps<"h1">;
   className?: string;
 }
 
 export function WordRotate({
   words,
   duration = 2500,
-  framerProps = {
-    initial: { opacity: 0, y: -50 },
-    animate: { opacity: 1, y: 0 },
-    exit: { opacity: 0, y: 50 },
-    transition: { duration: 0.25, ease: "easeOut" },
-  },
   className,
 }: WordRotateProps) {
   const [index, setIndex] = useState(0);
@@ -29,12 +22,19 @@ export function WordRotate({
     return () => clearInterval(interval);
   }, [words, duration]);
   return (
-    <div className={cn("overflow-hidden", className)}>
+    <span className={cn("", className)} style={{ position: "relative", display: "block", width: "100%", height: "1em" }}>
       <AnimatePresence mode="wait">
-        <motion.h1 key={words[index]} {...framerProps}>
+        <motion.span
+          key={words[index]}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.2, ease: "easeOut" }}
+          style={{ position: "absolute", left: 0, top: 0, whiteSpace: "nowrap" }}
+        >
           {words[index]}
-        </motion.h1>
+        </motion.span>
       </AnimatePresence>
-    </div>
+    </span>
   );
 }
