@@ -199,8 +199,6 @@ const SystemLogCell = () => {
   const lines = [
     "> All subsystems online.",
     "> Training protocols loaded.",
-    "> Nutrition engine calibrated.",
-    "> Recovery modules standing by.",
     "> Welcome to Blueprint Project.",
   ];
   return (
