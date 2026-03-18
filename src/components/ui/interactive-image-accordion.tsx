@@ -12,6 +12,7 @@ interface AccordionItem {
   description: string;
   accentColor: string;
   image: string;
+  objectPosition?: string;
 }
 
 const ACCORDION_ITEMS: AccordionItem[] = [
@@ -22,7 +23,8 @@ const ACCORDION_ITEMS: AccordionItem[] = [
   description:
   "Christian 'Goldie' Latorre created Blueprint Project with one mission: build a system where training, nutrition, and recovery work as one. This isn't just a gym — it's his vision brought to life.",
   accentColor: "#1A6BFF",
-  image: founderImage
+  image: founderImage,
+  objectPosition: "center 30%"
 },
 {
   label: "VISION",
@@ -128,18 +130,31 @@ const DesktopAccordion: React.FC = () => {
                 overflow: "hidden",
                 cursor: "pointer",
                 position: "relative",
-                transition: "all 700ms cubic-bezier(0.4, 0, 0.2, 1)",
-                background: !isActive ? "#111" : undefined,
-                backgroundImage: isActive ? `url(${item.image})` : undefined,
-                backgroundSize: "cover",
-                backgroundPosition: "center",
+                transition: "width 700ms cubic-bezier(0.4, 0, 0.2, 1), box-shadow 700ms cubic-bezier(0.4, 0, 0.2, 1)",
+                background: "#111",
                 boxShadow: isActive ? `0 0 30px ${item.accentColor}20` : "none",
                 borderLeft: !isActive ? `2px solid ${item.accentColor}4D` : "none",
                 flexShrink: 0
               }}>
               
-              {/* Active overlay gradient */}
-              {isActive &&
+              {/* Image element */}
+              <img
+                src={item.image}
+                alt={item.stripLabel}
+                style={{
+                  position: "absolute",
+                  inset: 0,
+                  width: "100%",
+                  height: "100%",
+                  objectFit: "cover",
+                  objectPosition: item.objectPosition || "center center",
+                  transition: "none",
+                  willChange: "transform",
+                  pointerEvents: "none",
+                }}
+              />
+
+              {/* Overlay gradient */}
               <div
                 style={{
                   position: "absolute",
@@ -147,8 +162,6 @@ const DesktopAccordion: React.FC = () => {
                   background: "linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.3) 60%, transparent 100%)",
                   zIndex: 1
                 }} />
-
-              }
 
               {/* Active label */}
               {isActive &&
