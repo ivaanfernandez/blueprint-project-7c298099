@@ -215,11 +215,30 @@ const PricingSection = () => {
       </div>
 
       {/* Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+      <div className="pricing-scroll-container flex gap-4 px-4 md:grid md:grid-cols-3 md:gap-6 max-w-5xl md:mx-auto">
         {PLANS.map((plan) => (
-          <PricingCard key={plan.name} plan={plan} isYearly={isYearly} />
+          <div key={plan.name} className="pricing-card-wrapper flex-shrink-0 w-[85vw] md:w-auto md:flex-shrink-1">
+            <PricingCard plan={plan} isYearly={isYearly} />
+          </div>
         ))}
       </div>
+
+      <style>{`
+        @media (max-width: 767px) {
+          .pricing-scroll-container {
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+          }
+          .pricing-scroll-container::-webkit-scrollbar {
+            display: none;
+          }
+          .pricing-card-wrapper {
+            scroll-snap-align: center;
+          }
+        }
+      `}</style>
     </section>
   );
 };
