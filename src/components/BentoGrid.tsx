@@ -39,7 +39,7 @@ const CornerBrackets = ({ color }: { color: string }) => (
 );
 
 const FingerprintScan = ({ color, delay }: { color: string; delay: string }) => (
-  <div style={{ position: "relative", width: 56, height: 64, margin: "0 auto 12px" }}>
+  <div style={{ position: "relative", width: 56, height: 64, marginBottom: 12 }}>
     <div style={{
       position: "absolute", top: "50%", left: "50%", transform: "translate(-50%,-50%)",
       width: 64, height: 64, borderRadius: "50%", border: `1px solid ${color}1a`,
