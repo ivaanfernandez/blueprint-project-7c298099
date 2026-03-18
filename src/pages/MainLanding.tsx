@@ -555,9 +555,10 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
             margin-bottom: 28px !important;
           }
           .hero-shiny-btn {
-            font-size: 16px !important;
-            padding: 1.25rem 3rem !important;
-            min-width: 320px !important;
+            font-size: 13px !important;
+            padding: 0.9rem 2.25rem !important;
+            min-width: unset !important;
+            max-width: 75% !important;
             letter-spacing: 0.15em !important;
           }
           .dock-container {
