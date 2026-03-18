@@ -359,6 +359,10 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
           0%, 100% { opacity: 1; }
           50% { opacity: 0.2; }
         }
+        @keyframes hero-bounce {
+          0%, 100% { transform: translateY(0); }
+          50% { transform: translateY(8px); }
+        }
         .hero-shiny-btn {
           white-space: nowrap !important;
           padding: 1.25rem 3rem !important;
@@ -407,7 +411,7 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
             justify-content: center !important;
             padding-left: 0 !important;
             padding-right: 0 !important;
-            text-align: left !important;
+            text-align: center !important;
             padding-top: 80px !important;
           }
           .hero-subtext-container {
@@ -418,14 +422,8 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
           }
           .hero-cta-button {
             margin-top: 64px !important;
-            margin-bottom: 100px !important;
+            margin-bottom: 40px !important;
           }
-        }
-        .hero-subtext-mobile {
-          display: none;
-        }
-        .hero-subtext-desktop {
-          display: inline;
         }
         @media (max-width: 767px) {
           .hero-bottom-fade {
@@ -444,7 +442,6 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
             padding-top: 80px !important;
           }
           .hero-headline-wrapper {
-            flex-wrap: wrap !important;
             text-align: center !important;
             justify-content: center !important;
             padding-left: 20px !important;
@@ -452,11 +449,11 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
             padding-top: 55px !important;
           }
           .hero-headline-white {
-            width: 100% !important;
-            font-size: clamp(56px, 14.5vw, 76px) !important;
+            font-size: clamp(40px, 11vw, 64px) !important;
           }
           .hero-headline-blue {
-            font-size: clamp(56px, 14.5vw, 76px) !important;
+            font-size: clamp(40px, 11vw, 64px) !important;
+            min-width: 8ch !important;
           }
           .hero-cta-button {
             margin-top: 48px !important;
@@ -484,19 +481,12 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
           .hero-no-comma {
             display: inline !important;
           }
-          /* Subtext container mobile */
           .hero-subtext-container {
             text-align: center !important;
             align-items: center !important;
             padding: 0 20px !important;
             width: 100% !important;
           }
-          /* Line 1 mobile: wrap into 2 lines */
-          .hero-subtext-line1 {
-            white-space: normal !important;
-            max-width: 320px !important;
-          }
-          /* Lines 2-5 mobile: larger font, keep nowrap, center */
           .hero-subtext-line {
             white-space: nowrap !important;
             font-size: clamp(10.5px, 3.2vw, 14px) !important;
@@ -504,17 +494,6 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
             display: flex !important;
             justify-content: center !important;
             width: 100% !important;
-          }
-          /* Show mobile text, hide desktop on mobile */
-          .hero-subtext-mobile {
-            display: inline !important;
-          }
-          .hero-subtext-desktop {
-            display: none !important;
-          }
-          /* Hide second phrase on mobile */
-          .hero-subtext-hide-mobile {
-            display: none !important;
           }
         }
       `}</style>
