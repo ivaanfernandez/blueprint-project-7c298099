@@ -393,6 +393,9 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
       {/* PRICING */}
       <PricingSection />
 
+      {/* BENTO GRID */}
+      <BentoGrid />
+
       {/* LOCATION */}
       <section style={{
         width: '100%',
