@@ -3,7 +3,6 @@ import { useState, useRef, useEffect } from "react";
 import founderImage from "@/assets/accordion/accordion-founder.jpg";
 import visionImage from "@/assets/accordion/accordion-vision.jpg";
 import servicesImage from "@/assets/accordion/accordion-services.jpg";
-import { BorderRotate } from "@/components/ui/animated-gradient-border";
 
 interface AccordionItem {
   label: string;
@@ -219,71 +218,107 @@ const DesktopAccordion: React.FC = () => {
 
 };
 
-const MOBILE_BORDER_COLORS = [
-  { primary: '#0a1628', secondary: '#1A6BFF', accent: '#5a9fff' },
-  { primary: '#0a2816', secondary: '#22C55E', accent: '#5aea8a' },
-  { primary: '#280a0a', secondary: '#FF3B3B', accent: '#ff7a7a' },
-];
+const TAB_LABELS = ["FOUNDER", "VISION", "SERVICES"];
+const ACCENT_RGB = ["26,107,255", "34,197,94", "255,59,59"];
 
-const MobileAccordion: React.FC = () =>
-<div className="flex md:hidden flex-col gap-4 px-6">
-    {ACCORDION_ITEMS.map((item, index) =>
-  <BorderRotate
-    key={item.label}
-    gradientColors={MOBILE_BORDER_COLORS[index]}
-    backgroundColor="#0a0a0a"
-    borderWidth={2}
-    borderRadius={16}
-    animationSpeed={4}
-  >
-    <div
-      style={{
-        width: "100%",
-        height: 192,
-        borderRadius: 14,
-        position: "relative",
-        overflow: "hidden",
-        backgroundImage: `url(${item.image})`,
-        backgroundSize: "cover",
-        backgroundPosition: "center"
-      }}>
-    
-        <div
-      style={{
-        position: "absolute",
-        inset: 0,
-        background: "linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.3) 60%, transparent 100%)",
-        zIndex: 1
-      }} />
-    
-        <div style={{ position: "relative", zIndex: 2, padding: 24, display: "flex", flexDirection: "column", justifyContent: "flex-end", height: "100%" }}>
-          <p
-        style={{
-          fontSize: 12,
-          letterSpacing: "0.2em",
-          color: item.accentColor,
-          fontFamily: "Space Grotesk, sans-serif",
-          textTransform: "uppercase",
-          marginBottom: 8
-        }}>
-        
-            {item.label}
-          </p>
-          <p
-        style={{
-          fontSize: 13,
-          color: "rgba(255,255,255,0.7)",
-          fontFamily: "Space Grotesk, sans-serif",
-          lineHeight: 1.6
-        }}>
-        
-            {item.description}
-          </p>
+const MobileAccordion: React.FC = () => {
+  const [active, setActive] = useState(0);
+  const [displayed, setDisplayed] = useState(0);
+  const [fading, setFading] = useState(false);
+  const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  useEffect(() => {
+    if (active === displayed) return;
+    setFading(true);
+    if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    timeoutRef.current = setTimeout(() => {
+      setDisplayed(active);
+      setFading(false);
+    }, 150);
+    return () => { if (timeoutRef.current) clearTimeout(timeoutRef.current); };
+  }, [active, displayed]);
+
+  const item = ACCORDION_ITEMS[displayed];
+
+  return (
+    <div className="flex md:hidden flex-col mx-4">
+      <div style={{ background: "#0a0a0a", borderRadius: 24, border: "0.5px solid rgba(255,255,255,0.1)", overflow: "hidden" }}>
+        {/* Tab bar */}
+        <div style={{ display: "flex", borderBottom: "1px solid rgba(255,255,255,0.1)" }}>
+          {ACCORDION_ITEMS.map((tabItem, i) => {
+            const isActive = i === active;
+            return (
+              <button
+                key={tabItem.label}
+                onClick={() => setActive(i)}
+                style={{
+                  flex: 1,
+                  padding: "14px 0",
+                  fontSize: 10,
+                  letterSpacing: "0.15em",
+                  fontWeight: 600,
+                  textTransform: "uppercase" as const,
+                  fontFamily: "Space Grotesk, sans-serif",
+                  color: tabItem.accentColor,
+                  opacity: isActive ? 1 : 0.45,
+                  background: isActive ? `rgba(${ACCENT_RGB[i]}, 0.08)` : "transparent",
+                  border: "none",
+                  borderBottom: isActive ? `2px solid ${tabItem.accentColor}` : "2px solid transparent",
+                  cursor: "pointer",
+                  transition: "opacity 200ms ease, background 200ms ease",
+                }}
+              >
+                {TAB_LABELS[i]}
+              </button>
+            );
+          })}
+        </div>
+
+        {/* Image area */}
+        <div style={{ position: "relative", width: "100%", height: 300, overflow: "hidden" }}>
+          <img
+            src={item.image}
+            alt={item.stripLabel}
+            style={{
+              position: "absolute", inset: 0, width: "100%", height: "100%",
+              objectFit: "cover", objectPosition: item.objectPosition || "center center",
+              opacity: fading ? 0 : 1, transition: "opacity 300ms ease",
+            }}
+          />
+          <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.3) 40%, transparent 100%)", zIndex: 1 }} />
+          <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, padding: "0 20px 20px", zIndex: 2, opacity: fading ? 0 : 1, transition: "opacity 300ms ease" }}>
+            <p style={{ fontSize: 10, letterSpacing: "0.15em", color: item.accentColor, fontFamily: "Space Grotesk, sans-serif", textTransform: "uppercase" as const, fontWeight: 600, marginBottom: 6 }}>
+              {item.label}
+            </p>
+            <h3 style={{ fontFamily: "Bebas Neue, sans-serif", fontSize: 24, color: "#fff", fontWeight: 700, lineHeight: 1.1, marginBottom: 8 }}>
+              {item.title}
+            </h3>
+            <p style={{ fontSize: 12, color: "rgba(255,255,255,0.55)", fontFamily: "Space Grotesk, sans-serif", lineHeight: 1.6 }}>
+              {item.description}
+            </p>
+          </div>
+        </div>
+
+        {/* Bottom indicator bar */}
+        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "12px 20px" }}>
+          <div style={{ display: "flex", gap: 8 }}>
+            {ACCORDION_ITEMS.map((dotItem, i) => (
+              <div key={i} style={{ width: 8, height: 8, borderRadius: "50%", backgroundColor: dotItem.accentColor, opacity: i === active ? 1 : 0.3, transition: "opacity 300ms ease" }} />
+            ))}
+          </div>
+          <span style={{ fontSize: 11, color: "rgba(255,255,255,0.35)", fontFamily: "Space Grotesk, sans-serif" }}>Swipe or tap tabs</span>
+        </div>
+
+        {/* Color accent bar */}
+        <div style={{ display: "flex", width: "100%", height: 3 }}>
+          <div style={{ flex: 1, backgroundColor: "#1A6BFF", opacity: active === 0 ? 1 : 0.3, transition: "opacity 300ms ease" }} />
+          <div style={{ flex: 1, backgroundColor: "#22C55E", opacity: active === 1 ? 1 : 0.3, transition: "opacity 300ms ease" }} />
+          <div style={{ flex: 1, backgroundColor: "#FF3B3B", opacity: active === 2 ? 1 : 0.3, transition: "opacity 300ms ease" }} />
         </div>
       </div>
-  </BorderRotate>
-  )}
-  </div>;
+    </div>
+  );
+};
 
 
 export const InteractiveImageAccordion: React.FC = () =>
