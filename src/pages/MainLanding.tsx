@@ -235,10 +235,11 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
             fontSize: 'clamp(56px, 6vw, 88px)',
             whiteSpace: 'nowrap',
             lineHeight: 1,
-            display: 'inline'
+            display: 'inline',
+            verticalAlign: 'baseline'
           }}>
             <span className="hero-comma">THIS ISN'T A GYM,&nbsp;</span>
-            <span className="hero-no-comma">THIS ISN'T A GYM&nbsp;</span>
+            <span className="hero-no-comma">THIS ISN'T A GYM</span>
           </span>
           <span className="hero-headline-blue" style={{
             color: '#1A6BFF',
