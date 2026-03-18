@@ -222,17 +222,11 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
         {/* Hero content - on top of image */}
         <div className="hero-content-wrapper" style={{ position: "relative", zIndex: 10, width: "100%", display: "flex", flexDirection: "column", paddingTop: "110px" }}>
 <div className="hero-headline-wrapper" style={{
-          display: 'flex',
-          justifyContent: 'flex-start',
-          alignItems: 'baseline',
           width: '100%',
-          paddingLeft: '80px',
-          paddingRight: '40px',
-          boxSizing: 'border-box',
           position: 'relative',
           zIndex: 10,
           paddingTop: '140px',
-          flexWrap: 'wrap'
+          textAlign: 'center'
         }}>
           <span className="hero-headline-white" style={{
             color: '#FFFFFF',
@@ -253,7 +247,9 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
             fontSize: 'clamp(56px, 6vw, 88px)',
             lineHeight: 1,
             display: 'inline-block',
-            minWidth: '10ch'
+            minWidth: '600px',
+            textAlign: 'left',
+            verticalAlign: 'baseline'
           }}>
             <WordRotate
               words={[
@@ -264,12 +260,6 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
               ]}
               duration={2500}
               className=""
-              framerProps={{
-                initial: { opacity: 0 },
-                animate: { opacity: 1 },
-                exit: { opacity: 0 },
-                transition: { duration: 0.3, ease: "easeOut" }
-              }}
             />
           </span>
         </div>
