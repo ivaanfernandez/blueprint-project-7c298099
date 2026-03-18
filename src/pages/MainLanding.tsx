@@ -486,12 +486,6 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
           .dock-fingerprint-wrapper {
             transform: scale(0.85) !important;
           }
-          .hero-comma {
-            display: none !important;
-          }
-          .hero-no-comma {
-            display: inline !important;
-          }
           /* Subtext container mobile */
           .hero-subtext-container {
             text-align: center !important;
