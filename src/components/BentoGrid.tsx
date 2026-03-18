@@ -178,16 +178,18 @@ const BentoGrid = () => (
       {FINGERPRINT_CARDS.map(card => <FingerprintCard key={card.tag} card={card} />)}
       <MapCell />
     </div>
-    <a
-      href="https://instagram.com/blueprintproject"
-      target="_blank"
-      rel="noopener noreferrer"
-      className="bento-ig-link"
-      style={{ display: "flex", alignItems: "center", gap: 10, marginTop: 24, cursor: "pointer", textDecoration: "none", justifyContent: "flex-start" }}
-    >
-      <Instagram size={24} style={{ color: "rgba(255,255,255,0.35)", transition: "color 0.3s" }} />
-      <span style={{ fontSize: 12, letterSpacing: "0.12em", color: "rgba(255,255,255,0.35)", fontWeight: 600, transition: "color 0.3s" }}>@BLUEPRINTPROJECT</span>
-    </a>
+    <div className="mx-4 md:mx-auto" style={{ maxWidth: 900 }}>
+      <a
+        href="https://instagram.com/blueprintproject"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="bento-ig-link"
+        style={{ display: "flex", alignItems: "center", gap: 10, marginTop: 24, cursor: "pointer", textDecoration: "none" }}
+      >
+        <Instagram size={24} style={{ color: "rgba(255,255,255,0.35)", transition: "color 0.3s" }} />
+        <span style={{ fontSize: 12, letterSpacing: "0.12em", color: "rgba(255,255,255,0.35)", fontWeight: 600, transition: "color 0.3s" }}>@BLUEPRINTPROJECT</span>
+      </a>
+    </div>
     <style>{`
       .bento-cell {
         border-radius: 12px;
