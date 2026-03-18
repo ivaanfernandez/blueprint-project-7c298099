@@ -197,7 +197,7 @@ const PricingCard = ({ plan, isYearly }: { plan: Plan; isYearly: boolean }) => {
         ))}
       </ul>
 
-      <button
+      <button style={{ marginTop: 'auto' }}
         className="w-full py-3 rounded-xl font-semibold text-sm transition-all duration-200 text-white"
         style={{ background: "transparent", border: "1px solid rgba(255,255,255,0.2)" }}
         onMouseEnter={(e) => { e.currentTarget.style.background = "rgba(255,255,255,0.05)"; }}
