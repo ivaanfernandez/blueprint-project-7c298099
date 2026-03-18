@@ -351,6 +351,9 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
       {/* BENTO GRID */}
       <BentoGrid />
 
+      {/* FOOTER */}
+      <Footer />
+
       <style>{`
         @keyframes pulse-line {
           0%, 100% { opacity: 1; }
