@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { Clock, Phone, Instagram } from "lucide-react";
+import { Clock, Phone } from "lucide-react";
+import instagram3d from "@/assets/instagram-3d.png";
 
 const FINGERPRINT_CARDS = [
   {
@@ -13,7 +14,6 @@ const FINGERPRINT_CARDS = [
     delay: "0s",
     tag: "BLUEPRINT PROJECT",
     title: "BLUEPRINT",
-    description: "",
   },
   {
     color: "#22C55E",
@@ -26,7 +26,6 @@ const FINGERPRINT_CARDS = [
     delay: "0.8s",
     tag: "HACK BAR",
     title: "HACK BAR",
-    description: "",
   },
   {
     color: "#FF3B3B",
@@ -39,7 +38,6 @@ const FINGERPRINT_CARDS = [
     delay: "1.6s",
     tag: "RESET",
     title: "RESET",
-    description: "",
   },
 ];
 
@@ -53,12 +51,12 @@ const CornerBrackets = ({ color }: { color: string }) => (
 );
 
 const FingerprintScan = ({ color, delay }: { color: string; delay: string }) => (
-  <div style={{ position: "relative", width: 80, height: 90, margin: "0 auto 16px" }}>
+  <div style={{ position: "relative", width: 56, height: 64, margin: "0 auto 12px" }}>
     <div style={{
       position: "absolute", top: "50%", left: "50%", transform: "translate(-50%,-50%)",
-      width: 88, height: 88, borderRadius: "50%", border: `1px solid ${color}1a`,
+      width: 64, height: 64, borderRadius: "50%", border: `1px solid ${color}1a`,
     }} />
-    <svg viewBox="0 0 56 56" width={56} height={56} fill="none" style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%,-50%)", opacity: 0.45 }}>
+    <svg viewBox="0 0 56 56" width={40} height={40} fill="none" style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%,-50%)", opacity: 0.45 }}>
       {[8, 12, 16, 20, 24].map((r, i) => (
         <ellipse key={i} cx="28" cy="30" rx={r * 0.7} ry={r} stroke={color} strokeWidth="1.2" />
       ))}
@@ -67,20 +65,20 @@ const FingerprintScan = ({ color, delay }: { color: string; delay: string }) => 
       ))}
     </svg>
     <div className="bento-scan-line" style={{ position: "absolute", left: "10%", right: "10%", height: 2, background: `linear-gradient(90deg, transparent, ${color}, transparent)`, animationDelay: delay }} />
-    <div className="bento-scan-glow" style={{ position: "absolute", left: "10%", right: "10%", height: 20, background: `linear-gradient(180deg, transparent, ${color}14, transparent)`, animationDelay: delay }} />
+    <div className="bento-scan-glow" style={{ position: "absolute", left: "10%", right: "10%", height: 16, background: `linear-gradient(180deg, transparent, ${color}14, transparent)`, animationDelay: delay }} />
   </div>
 );
 
 const FingerprintCard = ({ card }: { card: typeof FINGERPRINT_CARDS[0] }) => (
   <div
-    className="bento-cell group col-span-1 md:col-span-2"
+    className="bento-cell group col-span-2 md:col-span-1"
     style={{ background: card.bgColor, border: `0.5px solid ${card.borderColor}` }}
     onMouseEnter={e => { e.currentTarget.style.borderColor = card.hoverBorder; e.currentTarget.style.background = card.hoverBg; }}
     onMouseLeave={e => { e.currentTarget.style.borderColor = card.borderColor; e.currentTarget.style.background = card.bgColor; }}
   >
     <CornerBrackets color={card.bracketColor} />
     <FingerprintScan color={card.color} delay={card.delay} />
-    <p style={{ fontSize: 20, fontWeight: 700, color: card.color, textAlign: "center", fontFamily: "Bebas Neue, sans-serif", marginTop: 4 }}>{card.title}</p>
+    <p style={{ fontSize: 16, fontWeight: 700, color: card.color, textAlign: "center", fontFamily: "Bebas Neue, sans-serif", marginTop: 4 }}>{card.title}</p>
   </div>
 );
 
@@ -89,8 +87,8 @@ const MapCell = () => {
 
   return (
     <div
-      className="bento-cell group col-span-2 md:col-span-6"
-      style={{ background: "rgba(26,107,255,0.04)", border: "0.5px solid rgba(26,107,255,0.25)", padding: 0, minHeight: 140, position: "relative", cursor: "pointer" }}
+      className="bento-cell group col-span-2 md:col-span-2 md:aspect-square"
+      style={{ background: "rgba(26,107,255,0.04)", border: "0.5px solid rgba(26,107,255,0.25)", padding: 0, position: "relative", cursor: "pointer" }}
       onMouseEnter={e => { e.currentTarget.style.borderColor = "rgba(26,107,255,0.45)"; e.currentTarget.style.background = "rgba(26,107,255,0.07)"; setExpanded(true); }}
       onMouseLeave={e => { e.currentTarget.style.borderColor = "rgba(26,107,255,0.25)"; e.currentTarget.style.background = "rgba(26,107,255,0.04)"; setExpanded(false); }}
       onClick={() => setExpanded(prev => !prev)}
@@ -127,7 +125,6 @@ const MapCell = () => {
         <p style={{ fontSize: 14, fontWeight: 700, color: "#fff" }}>Santurce, PR</p>
         <p style={{ fontSize: 11, color: "rgba(255,255,255,0.35)" }}>1951 Calle Loíza</p>
       </div>
-      {/* Hover overlay */}
       <div
         style={{
           position: "absolute",
@@ -172,28 +169,58 @@ const MapCell = () => {
   );
 };
 
+const InstagramCell = () => {
+  const [hovered, setHovered] = useState(false);
+
+  return (
+    <a
+      href="https://instagram.com/blueprintproject"
+      target="_blank"
+      rel="noopener noreferrer"
+      className="bento-cell group col-span-2 md:col-span-1 h-24 md:h-auto"
+      style={{
+        background: "rgba(255,255,255,0.03)",
+        border: "0.5px solid rgba(255,255,255,0.1)",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+        textDecoration: "none",
+        cursor: "pointer",
+        transition: "border-color 0.3s, background 0.3s",
+      }}
+      onMouseEnter={e => { e.currentTarget.style.borderColor = "rgba(255,255,255,0.25)"; e.currentTarget.style.background = "rgba(255,255,255,0.06)"; setHovered(true); }}
+      onMouseLeave={e => { e.currentTarget.style.borderColor = "rgba(255,255,255,0.1)"; e.currentTarget.style.background = "rgba(255,255,255,0.03)"; setHovered(false); }}
+    >
+      <CornerBrackets color="rgba(255,255,255,0.15)" />
+      <img src={instagram3d} alt="Instagram" style={{ width: 48, height: 48, objectFit: "contain" }} />
+      <span
+        style={{
+          fontSize: 10,
+          letterSpacing: "0.1em",
+          color: "rgba(255,255,255,0.5)",
+          marginTop: 8,
+          opacity: hovered ? 1 : 0,
+          transition: "opacity 200ms ease",
+        }}
+      >
+        @BLUEPRINTPR
+      </span>
+    </a>
+  );
+};
+
 const BentoGrid = () => (
   <section className="relative z-10 pb-8 md:pb-12" style={{ background: "transparent", paddingTop: 0, marginTop: 0 }}>
     <div className="grid grid-cols-2 md:grid-cols-6 gap-2.5 md:gap-3 mx-4 md:mx-auto" style={{ maxWidth: 900 }}>
       {FINGERPRINT_CARDS.map(card => <FingerprintCard key={card.tag} card={card} />)}
       <MapCell />
-    </div>
-    <div className="mx-4 md:mx-auto" style={{ maxWidth: 900 }}>
-      <a
-        href="https://instagram.com/blueprintproject"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="bento-ig-link"
-        style={{ display: "flex", alignItems: "center", gap: 10, marginTop: 24, cursor: "pointer", textDecoration: "none" }}
-      >
-        <Instagram size={24} style={{ color: "rgba(255,255,255,0.35)", transition: "color 0.3s" }} />
-        <span style={{ fontSize: 12, letterSpacing: "0.12em", color: "rgba(255,255,255,0.35)", fontWeight: 600, transition: "color 0.3s" }}>@BLUEPRINTPROJECT</span>
-      </a>
+      <InstagramCell />
     </div>
     <style>{`
       .bento-cell {
         border-radius: 12px;
-        padding: 24px;
+        padding: 16px;
         position: relative;
         overflow: hidden;
         transition: border-color 0.3s, background 0.3s;
@@ -220,10 +247,6 @@ const BentoGrid = () => (
       @keyframes bentoLivePulse {
         0%, 100% { opacity: 1; }
         50% { opacity: 0.4; }
-      }
-      .bento-ig-link:hover svg,
-      .bento-ig-link:hover span {
-        color: rgba(255,255,255,0.6) !important;
       }
       .bento-maps-link:hover {
         text-decoration: underline;
