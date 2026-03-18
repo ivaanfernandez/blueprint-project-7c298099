@@ -1,5 +1,6 @@
 import * as React from "react";
 import { useState, useRef, useEffect } from "react";
+import { motion, useInView } from "framer-motion";
 import founderImage from "@/assets/accordion/accordion-founder.jpg";
 import visionImage from "@/assets/accordion/accordion-vision.jpg";
 import servicesImage from "@/assets/accordion/accordion-services.jpg";
@@ -226,6 +227,8 @@ const MobileAccordion: React.FC = () => {
   const [displayed, setDisplayed] = useState(0);
   const [fading, setFading] = useState(false);
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const isInView = useInView(containerRef, { once: true, margin: "-50px" });
 
   useEffect(() => {
     if (active === displayed) return;
@@ -241,7 +244,13 @@ const MobileAccordion: React.FC = () => {
   const item = ACCORDION_ITEMS[displayed];
 
   return (
-    <div className="flex md:hidden flex-col mx-4">
+    <motion.div
+      ref={containerRef}
+      className="flex md:hidden flex-col mx-4"
+      initial={{ opacity: 0, y: 30 }}
+      animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+      transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
+    >
       <div style={{ background: "#0a0a0a", borderRadius: 24, border: "0.5px solid rgba(255,255,255,0.1)", overflow: "hidden" }}>
         {/* Tab bar */}
         <div style={{ display: "flex", borderBottom: "1px solid rgba(255,255,255,0.1)" }}>
@@ -296,7 +305,7 @@ const MobileAccordion: React.FC = () => {
           </div>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 
