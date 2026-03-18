@@ -151,7 +151,7 @@ const PricingCard = ({ plan, isYearly }: { plan: Plan; isYearly: boolean }) => {
                 marginLeft: -8,
                 color: "rgba(255,255,255,0.4)",
               }}>
-              +12
+              +4
             </div>
           </div>
           <p className="text-[10px] text-center tracking-[0.1em] mb-4"
