@@ -4,18 +4,6 @@ import instagram3d from "@/assets/instagram-3d.png";
 
 const FINGERPRINT_CARDS = [
   {
-    color: "#1A6BFF",
-    borderColor: "rgba(26,107,255,0.25)",
-    bgColor: "rgba(26,107,255,0.04)",
-    hoverBorder: "rgba(26,107,255,0.45)",
-    hoverBg: "rgba(26,107,255,0.07)",
-    bracketColor: "rgba(26,107,255,0.5)",
-    bracketHover: "rgba(26,107,255,0.8)",
-    delay: "0s",
-    tag: "BLUEPRINT PROJECT",
-    title: "BLUEPRINT",
-  },
-  {
     color: "#22C55E",
     borderColor: "rgba(34,197,94,0.25)",
     bgColor: "rgba(34,197,94,0.04)",
@@ -71,7 +59,7 @@ const FingerprintScan = ({ color, delay }: { color: string; delay: string }) => 
 
 const FingerprintCard = ({ card }: { card: typeof FINGERPRINT_CARDS[0] }) => (
   <div
-    className="bento-cell group col-span-2 md:col-span-1"
+    className="bento-cell group col-span-2 md:col-span-2"
     style={{ background: card.bgColor, border: `0.5px solid ${card.borderColor}` }}
     onMouseEnter={e => { e.currentTarget.style.borderColor = card.hoverBorder; e.currentTarget.style.background = card.hoverBg; }}
     onMouseLeave={e => { e.currentTarget.style.borderColor = card.borderColor; e.currentTarget.style.background = card.bgColor; }}
@@ -215,6 +203,8 @@ const BentoGrid = () => (
     <div className="grid grid-cols-2 md:grid-cols-6 gap-2.5 md:gap-3 mx-4 md:mx-auto" style={{ maxWidth: 900 }}>
       {FINGERPRINT_CARDS.map(card => <FingerprintCard key={card.tag} card={card} />)}
       <MapCell />
+    </div>
+    <div className="mx-4 md:mx-auto mt-2.5 md:mt-3" style={{ maxWidth: 900 }}>
       <InstagramCell />
     </div>
     <style>{`
