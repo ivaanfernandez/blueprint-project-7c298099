@@ -8,6 +8,7 @@ import { ShinyButton } from '@/components/ui/shiny-button';
 import { LocationMap } from '@/components/ui/expand-map';
 import { FadeText } from '@/components/ui/fade-text';
 import { ImageAutoSlider } from '@/components/ui/image-auto-slider';
+import { ChevronDown } from 'lucide-react';
 import { InteractiveImageAccordion } from '@/components/ui/interactive-image-accordion';
 import PricingSection from '@/components/PricingSection';
 import BentoGrid from '@/components/BentoGrid';
