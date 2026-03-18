@@ -1,0 +1,213 @@
+import { useRef } from "react";
+
+const FINGERPRINT_CARDS = [
+  {
+    color: "#1A6BFF",
+    borderColor: "rgba(26,107,255,0.25)",
+    bgColor: "rgba(26,107,255,0.04)",
+    hoverBorder: "rgba(26,107,255,0.45)",
+    hoverBg: "rgba(26,107,255,0.07)",
+    bracketColor: "rgba(26,107,255,0.5)",
+    bracketHover: "rgba(26,107,255,0.8)",
+    delay: "0s",
+    tag: "BLUEPRINT PROJECT",
+    title: "Training",
+    description: "Personalized programs built on the Blueprint methodology.",
+  },
+  {
+    color: "#22C55E",
+    borderColor: "rgba(34,197,94,0.25)",
+    bgColor: "rgba(34,197,94,0.04)",
+    hoverBorder: "rgba(34,197,94,0.45)",
+    hoverBg: "rgba(34,197,94,0.07)",
+    bracketColor: "rgba(34,197,94,0.5)",
+    bracketHover: "rgba(34,197,94,0.8)",
+    delay: "0.8s",
+    tag: "HACK BAR",
+    title: "Nutrition",
+    description: "Performance-driven fuel to optimize your system.",
+  },
+  {
+    color: "#FF3B3B",
+    borderColor: "rgba(255,59,59,0.25)",
+    bgColor: "rgba(255,59,59,0.04)",
+    hoverBorder: "rgba(255,59,59,0.45)",
+    hoverBg: "rgba(255,59,59,0.07)",
+    bracketColor: "rgba(255,59,59,0.5)",
+    bracketHover: "rgba(255,59,59,0.8)",
+    delay: "1.6s",
+    tag: "RESET",
+    title: "Recovery",
+    description: "Full-spectrum protocols to restore and rebuild.",
+  },
+];
+
+const CornerBrackets = ({ color }: { color: string }) => (
+  <>
+    <div className="corner-bracket" style={{ position: "absolute", top: 6, left: 6, width: 14, height: 14, borderTop: `1.5px solid ${color}`, borderLeft: `1.5px solid ${color}` }} />
+    <div className="corner-bracket" style={{ position: "absolute", top: 6, right: 6, width: 14, height: 14, borderTop: `1.5px solid ${color}`, borderRight: `1.5px solid ${color}` }} />
+    <div className="corner-bracket" style={{ position: "absolute", bottom: 6, left: 6, width: 14, height: 14, borderBottom: `1.5px solid ${color}`, borderLeft: `1.5px solid ${color}` }} />
+    <div className="corner-bracket" style={{ position: "absolute", bottom: 6, right: 6, width: 14, height: 14, borderBottom: `1.5px solid ${color}`, borderRight: `1.5px solid ${color}` }} />
+  </>
+);
+
+const FingerprintScan = ({ color, delay }: { color: string; delay: string }) => (
+  <div style={{ position: "relative", width: 80, height: 90, margin: "0 auto 16px" }}>
+    <div style={{
+      position: "absolute", top: "50%", left: "50%", transform: "translate(-50%,-50%)",
+      width: 88, height: 88, borderRadius: "50%", border: `1px solid ${color}1a`,
+    }} />
+    <svg viewBox="0 0 56 56" width={56} height={56} fill="none" style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%,-50%)", opacity: 0.45 }}>
+      {[8, 12, 16, 20, 24].map((r, i) => (
+        <ellipse key={i} cx="28" cy="30" rx={r * 0.7} ry={r} stroke={color} strokeWidth="1.2" />
+      ))}
+      {[9, 14, 19].map((r, i) => (
+        <path key={`a-${i}`} d={`M ${28 - r * 0.6} ${22 - i * 2} Q 28 ${14 - i * 3} ${28 + r * 0.6} ${22 - i * 2}`} stroke={color} strokeWidth="1.2" fill="none" />
+      ))}
+    </svg>
+    <div className="bento-scan-line" style={{ position: "absolute", left: "10%", right: "10%", height: 2, background: `linear-gradient(90deg, transparent, ${color}, transparent)`, animationDelay: delay }} />
+    <div className="bento-scan-glow" style={{ position: "absolute", left: "10%", right: "10%", height: 20, background: `linear-gradient(180deg, transparent, ${color}14, transparent)`, animationDelay: delay }} />
+  </div>
+);
+
+const FingerprintCard = ({ card }: { card: typeof FINGERPRINT_CARDS[0] }) => (
+  <div
+    className="bento-cell group col-span-1 md:col-span-2"
+    style={{ background: card.bgColor, border: `0.5px solid ${card.borderColor}` }}
+    onMouseEnter={e => { e.currentTarget.style.borderColor = card.hoverBorder; e.currentTarget.style.background = card.hoverBg; }}
+    onMouseLeave={e => { e.currentTarget.style.borderColor = card.borderColor; e.currentTarget.style.background = card.bgColor; }}
+  >
+    <CornerBrackets color={card.bracketColor} />
+    <FingerprintScan color={card.color} delay={card.delay} />
+    <p style={{ fontSize: 10, letterSpacing: "0.2em", color: card.color, opacity: 0.6, textAlign: "center" }}>{card.tag}</p>
+    <p style={{ fontSize: 16, fontWeight: 700, color: "#e8e8e8", textAlign: "center", marginTop: 4 }}>{card.title}</p>
+    <p style={{ fontSize: 11, color: "rgba(255,255,255,0.4)", textAlign: "center", marginTop: 6, lineHeight: 1.5 }}>{card.description}</p>
+  </div>
+);
+
+const MapCell = () => (
+  <div
+    className="bento-cell group col-span-2 md:col-span-3 md:row-span-2"
+    style={{ background: "rgba(26,107,255,0.04)", border: "0.5px solid rgba(26,107,255,0.25)", padding: 0, minHeight: 240, position: "relative" }}
+    onMouseEnter={e => { e.currentTarget.style.borderColor = "rgba(26,107,255,0.45)"; e.currentTarget.style.background = "rgba(26,107,255,0.07)"; }}
+    onMouseLeave={e => { e.currentTarget.style.borderColor = "rgba(26,107,255,0.25)"; e.currentTarget.style.background = "rgba(26,107,255,0.04)"; }}
+  >
+    <CornerBrackets color="rgba(26,107,255,0.5)" />
+    {/* Grid overlay */}
+    {[20, 40, 60, 80].map(p => (
+      <div key={`h-${p}`} style={{ position: "absolute", top: `${p}%`, left: 0, right: 0, height: 1, background: "rgba(255,255,255,0.06)" }} />
+    ))}
+    {[20, 40, 60, 80].map(p => (
+      <div key={`v-${p}`} style={{ position: "absolute", left: `${p}%`, top: 0, bottom: 0, width: 1, background: "rgba(255,255,255,0.06)" }} />
+    ))}
+    {/* Buildings */}
+    {[
+      { w: 45, h: 35, t: "25%", l: "15%" }, { w: 55, h: 40, t: "55%", l: "70%" },
+      { w: 38, h: 50, t: "35%", l: "60%" }, { w: 60, h: 35, t: "65%", l: "20%" },
+      { w: 40, h: 45, t: "15%", l: "75%" }, { w: 50, h: 38, t: "50%", l: "35%" },
+      { w: 35, h: 55, t: "20%", l: "45%" },
+    ].map((b, i) => (
+      <div key={i} style={{ position: "absolute", top: b.t, left: b.l, width: b.w, height: b.h, borderRadius: 6, background: "rgba(255,255,255,0.04)", border: "0.5px solid rgba(255,255,255,0.06)" }} />
+    ))}
+    {/* Pin */}
+    <div style={{ position: "absolute", top: "45%", left: "50%", transform: "translate(-50%,-100%)" }}>
+      <svg width="20" height="28" viewBox="0 0 20 28" fill="none">
+        <path d="M10 0C4.5 0 0 4.5 0 10c0 7.5 10 18 10 18s10-10.5 10-18C20 4.5 15.5 0 10 0z" fill="#1A6BFF" />
+        <circle cx="10" cy="10" r="5" fill="#0a0a0a" />
+        <circle cx="10" cy="10" r="2.5" fill="#1A6BFF" />
+      </svg>
+    </div>
+    {/* Ping rings */}
+    <div className="bento-map-ping" style={{ position: "absolute", top: "45%", left: "50%", transform: "translate(-50%,-50%)", borderRadius: "50%", border: "1.5px solid rgba(26,107,255,0.5)" }} />
+    <div className="bento-map-ping" style={{ position: "absolute", top: "45%", left: "50%", transform: "translate(-50%,-50%)", borderRadius: "50%", border: "1.5px solid rgba(26,107,255,0.5)", animationDelay: "0.7s" }} />
+    {/* LIVE badge */}
+    <div style={{ position: "absolute", top: 12, right: 12, display: "flex", alignItems: "center", gap: 6, background: "rgba(0,0,0,0.6)", border: "0.5px solid rgba(255,255,255,0.1)", borderRadius: 20, padding: "4px 10px" }}>
+      <div className="bento-live-dot" style={{ width: 6, height: 6, borderRadius: "50%", background: "#22C55E" }} />
+      <span style={{ fontSize: 10, letterSpacing: "0.1em", color: "rgba(255,255,255,0.7)", fontFamily: "Space Grotesk, sans-serif" }}>LIVE</span>
+    </div>
+    {/* Location text */}
+    <div style={{ position: "absolute", bottom: 20, left: 20 }}>
+      <p style={{ fontSize: 16, fontWeight: 700, color: "#e8e8e8" }}>Santurce, PR</p>
+      <p style={{ fontSize: 11, color: "rgba(255,255,255,0.35)", fontFamily: "monospace", marginTop: 2 }}>18.4488° N, 66.0614° W</p>
+    </div>
+    {/* Accent bar */}
+    <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, height: 3, background: "linear-gradient(90deg, #1A6BFF, rgba(26,107,255,0.2))", borderRadius: "0 0 12px 12px" }} />
+  </div>
+);
+
+const SystemLogCell = () => {
+  const lines = [
+    "> All subsystems online.",
+    "> Training protocols loaded.",
+    "> Nutrition engine calibrated.",
+    "> Recovery modules standing by.",
+    "> Welcome to Blueprint Project.",
+  ];
+  return (
+    <div
+      className="bento-cell group col-span-2 md:col-span-3"
+      style={{ background: "rgba(26,107,255,0.04)", border: "0.5px solid rgba(26,107,255,0.25)" }}
+      onMouseEnter={e => { e.currentTarget.style.borderColor = "rgba(26,107,255,0.45)"; e.currentTarget.style.background = "rgba(26,107,255,0.07)"; }}
+      onMouseLeave={e => { e.currentTarget.style.borderColor = "rgba(26,107,255,0.25)"; e.currentTarget.style.background = "rgba(26,107,255,0.04)"; }}
+    >
+      <CornerBrackets color="rgba(26,107,255,0.5)" />
+      <p style={{ fontSize: 10, letterSpacing: "0.2em", color: "#1A6BFF", opacity: 0.6, marginBottom: 12 }}>SYSTEM LOG</p>
+      <div style={{ fontFamily: "monospace", fontSize: 12, lineHeight: 2 }}>
+        {lines.map((line, i) => (
+          <div key={i}>
+            <span style={{ color: "rgba(26,107,255,0.8)" }}>&gt;</span>
+            <span style={{ color: "rgba(26,107,255,0.55)" }}>{line.slice(1)}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
+
+const BentoGrid = () => (
+  <section className="relative z-10 py-16 md:py-24" style={{ background: "transparent" }}>
+    <div className="text-center mb-10">
+      <p style={{ fontSize: 11, letterSpacing: "0.2em", color: "rgba(26,107,255,0.5)", fontWeight: 600, fontFamily: "Space Grotesk, sans-serif", textTransform: "uppercase" }}>THE SYSTEM</p>
+      <h2 style={{ fontSize: 32, fontWeight: 700, color: "#e8e8e8", letterSpacing: "-0.02em", fontFamily: "Space Grotesk, sans-serif", marginTop: 8 }}>Blueprint Metrics</h2>
+    </div>
+    <div className="grid grid-cols-2 md:grid-cols-6 gap-2.5 md:gap-3 mx-4 md:mx-auto" style={{ maxWidth: 900 }}>
+      {FINGERPRINT_CARDS.map(card => <FingerprintCard key={card.tag} card={card} />)}
+      <MapCell />
+      <SystemLogCell />
+    </div>
+    <style>{`
+      .bento-cell {
+        border-radius: 12px;
+        padding: 24px;
+        position: relative;
+        overflow: hidden;
+        transition: border-color 0.3s, background 0.3s;
+      }
+      .bento-scan-line, .bento-scan-glow {
+        animation: bentoScanMove 2.5s ease-in-out infinite;
+      }
+      .bento-map-ping {
+        animation: bentoMapPing 2s ease-out infinite;
+      }
+      .bento-live-dot {
+        animation: bentoLivePulse 1.5s ease-in-out infinite;
+      }
+      @keyframes bentoScanMove {
+        0% { top: 10%; opacity: 0; }
+        10% { opacity: 1; }
+        90% { opacity: 1; }
+        100% { top: 88%; opacity: 0; }
+      }
+      @keyframes bentoMapPing {
+        0% { width: 10px; height: 10px; opacity: 1; }
+        100% { width: 60px; height: 60px; opacity: 0; }
+      }
+      @keyframes bentoLivePulse {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0.4; }
+      }
+    `}</style>
+  </section>
+);
+
+export default BentoGrid;
