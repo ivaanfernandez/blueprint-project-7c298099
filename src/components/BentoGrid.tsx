@@ -200,11 +200,9 @@ const InstagramCell = () => {
 
 const BentoGrid = () => (
   <section className="relative z-10 pb-8 md:pb-12" style={{ background: "transparent", paddingTop: 0, marginTop: 0 }}>
-    <div className="grid grid-cols-2 md:grid-cols-6 gap-2.5 md:gap-3 mx-4 md:mx-auto" style={{ maxWidth: 900 }}>
+    <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mx-4 md:mx-auto" style={{ maxWidth: 900 }}>
       {FINGERPRINT_CARDS.map(card => <FingerprintCard key={card.tag} card={card} />)}
       <MapCell />
-    </div>
-    <div className="mx-4 md:mx-auto mt-2.5 md:mt-3" style={{ maxWidth: 900 }}>
       <InstagramCell />
     </div>
     <style>{`
