@@ -1,4 +1,5 @@
-import { useRef } from "react";
+import { useState } from "react";
+import { Clock, Phone } from "lucide-react";
 
 const FINGERPRINT_CARDS = [
   {
@@ -83,62 +84,121 @@ const FingerprintCard = ({ card }: { card: typeof FINGERPRINT_CARDS[0] }) => (
   </div>
 );
 
-const MapCell = () => (
-  <div
-    className="bento-cell group col-span-2 md:col-span-3 md:row-span-2"
-    style={{ background: "rgba(26,107,255,0.04)", border: "0.5px solid rgba(26,107,255,0.25)", padding: 0, minHeight: 240, position: "relative" }}
-    onMouseEnter={e => { e.currentTarget.style.borderColor = "rgba(26,107,255,0.45)"; e.currentTarget.style.background = "rgba(26,107,255,0.07)"; }}
-    onMouseLeave={e => { e.currentTarget.style.borderColor = "rgba(26,107,255,0.25)"; e.currentTarget.style.background = "rgba(26,107,255,0.04)"; }}
-  >
-    <CornerBrackets color="rgba(26,107,255,0.5)" />
-    {/* Grid overlay */}
-    {[20, 40, 60, 80].map(p => (
-      <div key={`h-${p}`} style={{ position: "absolute", top: `${p}%`, left: 0, right: 0, height: 1, background: "rgba(255,255,255,0.06)" }} />
-    ))}
-    {[20, 40, 60, 80].map(p => (
-      <div key={`v-${p}`} style={{ position: "absolute", left: `${p}%`, top: 0, bottom: 0, width: 1, background: "rgba(255,255,255,0.06)" }} />
-    ))}
-    {/* Buildings */}
-    {[
-      { w: 45, h: 35, t: "25%", l: "15%" }, { w: 55, h: 40, t: "55%", l: "70%" },
-      { w: 38, h: 50, t: "35%", l: "60%" }, { w: 60, h: 35, t: "65%", l: "20%" },
-      { w: 40, h: 45, t: "15%", l: "75%" }, { w: 50, h: 38, t: "50%", l: "35%" },
-      { w: 35, h: 55, t: "20%", l: "45%" },
-    ].map((b, i) => (
-      <div key={i} style={{ position: "absolute", top: b.t, left: b.l, width: b.w, height: b.h, borderRadius: 6, background: "rgba(255,255,255,0.04)", border: "0.5px solid rgba(255,255,255,0.06)" }} />
-    ))}
-    {/* Pin */}
-    <div style={{ position: "absolute", top: "45%", left: "50%", transform: "translate(-50%,-100%)" }}>
-      <svg width="20" height="28" viewBox="0 0 20 28" fill="none">
-        <path d="M10 0C4.5 0 0 4.5 0 10c0 7.5 10 18 10 18s10-10.5 10-18C20 4.5 15.5 0 10 0z" fill="#1A6BFF" />
-        <circle cx="10" cy="10" r="5" fill="#0a0a0a" />
-        <circle cx="10" cy="10" r="2.5" fill="#1A6BFF" />
-      </svg>
+const MapCell = () => {
+  const [expanded, setExpanded] = useState(false);
+
+  return (
+    <div
+      className="bento-cell group col-span-2 md:col-span-3"
+      style={{ background: "rgba(26,107,255,0.04)", border: "0.5px solid rgba(26,107,255,0.25)", padding: 0, minHeight: 200, position: "relative", cursor: "pointer" }}
+      onMouseEnter={e => { e.currentTarget.style.borderColor = "rgba(26,107,255,0.45)"; e.currentTarget.style.background = "rgba(26,107,255,0.07)"; setExpanded(true); }}
+      onMouseLeave={e => { e.currentTarget.style.borderColor = "rgba(26,107,255,0.25)"; e.currentTarget.style.background = "rgba(26,107,255,0.04)"; setExpanded(false); }}
+      onClick={() => setExpanded(prev => !prev)}
+    >
+      <CornerBrackets color="rgba(26,107,255,0.5)" />
+      {/* Grid overlay */}
+      {[20, 40, 60, 80].map(p => (
+        <div key={`h-${p}`} style={{ position: "absolute", top: `${p}%`, left: 0, right: 0, height: 1, background: "rgba(255,255,255,0.06)" }} />
+      ))}
+      {[20, 40, 60, 80].map(p => (
+        <div key={`v-${p}`} style={{ position: "absolute", left: `${p}%`, top: 0, bottom: 0, width: 1, background: "rgba(255,255,255,0.06)" }} />
+      ))}
+      {/* Buildings */}
+      {[
+        { w: 45, h: 35, t: "25%", l: "15%" }, { w: 55, h: 40, t: "55%", l: "70%" },
+        { w: 38, h: 50, t: "35%", l: "60%" }, { w: 60, h: 35, t: "65%", l: "20%" },
+        { w: 40, h: 45, t: "15%", l: "75%" }, { w: 50, h: 38, t: "50%", l: "35%" },
+        { w: 35, h: 55, t: "20%", l: "45%" },
+      ].map((b, i) => (
+        <div key={i} style={{ position: "absolute", top: b.t, left: b.l, width: b.w, height: b.h, borderRadius: 6, background: "rgba(255,255,255,0.04)", border: "0.5px solid rgba(255,255,255,0.06)" }} />
+      ))}
+      {/* Pin */}
+      <div style={{ position: "absolute", top: "40%", left: "50%", transform: "translate(-50%,-100%)" }}>
+        <svg width="20" height="28" viewBox="0 0 20 28" fill="none">
+          <path d="M10 0C4.5 0 0 4.5 0 10c0 7.5 10 18 10 18s10-10.5 10-18C20 4.5 15.5 0 10 0z" fill="#1A6BFF" />
+          <circle cx="10" cy="10" r="5" fill="#0a0a0a" />
+          <circle cx="10" cy="10" r="2.5" fill="#1A6BFF" />
+        </svg>
+      </div>
+      {/* Ping rings */}
+      <div className="bento-map-ping" style={{ position: "absolute", top: "40%", left: "50%", transform: "translate(-50%,-50%)", borderRadius: "50%", border: "1.5px solid rgba(26,107,255,0.5)" }} />
+      <div className="bento-map-ping" style={{ position: "absolute", top: "40%", left: "50%", transform: "translate(-50%,-50%)", borderRadius: "50%", border: "1.5px solid rgba(26,107,255,0.5)", animationDelay: "0.7s" }} />
+      {/* LIVE badge */}
+      <div style={{ position: "absolute", top: 12, right: 12, display: "flex", alignItems: "center", gap: 6, background: "rgba(0,0,0,0.6)", border: "0.5px solid rgba(255,255,255,0.1)", borderRadius: 20, padding: "4px 10px" }}>
+        <div className="bento-live-dot" style={{ width: 6, height: 6, borderRadius: "50%", background: "#22C55E" }} />
+        <span style={{ fontSize: 10, letterSpacing: "0.1em", color: "rgba(255,255,255,0.7)", fontFamily: "Space Grotesk, sans-serif" }}>LIVE</span>
+      </div>
+      {/* Location name (always visible) */}
+      <div style={{ position: "absolute", bottom: 16, left: 16, zIndex: 1 }}>
+        <p style={{ fontSize: 14, fontWeight: 700, color: "#e8e8e8" }}>Santurce, PR</p>
+      </div>
+      {/* Expand panel */}
+      <div
+        style={{
+          position: "absolute",
+          bottom: 0,
+          left: 0,
+          right: 0,
+          height: "60%",
+          background: "rgba(0,0,0,0.7)",
+          backdropFilter: "blur(16px)",
+          WebkitBackdropFilter: "blur(16px)",
+          borderTop: "0.5px solid rgba(26,107,255,0.2)",
+          borderRadius: "0 0 12px 12px",
+          transform: expanded ? "translateY(0)" : "translateY(100%)",
+          transition: "transform 300ms ease",
+          padding: "16px",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          zIndex: 2,
+        }}
+      >
+        <p style={{ fontSize: 16, fontWeight: 700, color: "#fff", marginBottom: 4 }}>Blueprint Project</p>
+        <p style={{ fontSize: 12, color: "rgba(255,255,255,0.5)", marginBottom: 12 }}>1951 Calle Loíza, Santurce, PR 00911</p>
+        <div style={{ display: "flex", alignItems: "center", gap: 6, marginBottom: 4 }}>
+          <Clock size={14} color="#1A6BFF" />
+          <span style={{ fontSize: 12, color: "rgba(255,255,255,0.5)" }}>Mon–Fri: 5:00 AM – 10:00 PM</span>
+        </div>
+        <div style={{ display: "flex", alignItems: "center", gap: 6, marginBottom: 12 }}>
+          <Phone size={14} color="#1A6BFF" />
+          <span style={{ fontSize: 12, color: "rgba(255,255,255,0.5)" }}>(787) 000-0000</span>
+        </div>
+        <a
+          href="https://maps.google.com/?q=18.4488,-66.0614"
+          target="_blank"
+          rel="noopener noreferrer"
+          onClick={e => e.stopPropagation()}
+          style={{
+            display: "inline-block",
+            fontSize: 11,
+            letterSpacing: "0.1em",
+            textTransform: "uppercase",
+            fontWeight: 600,
+            border: "0.5px solid rgba(26,107,255,0.4)",
+            borderRadius: 8,
+            padding: "6px 12px",
+            color: "#1A6BFF",
+            textDecoration: "none",
+            transition: "background 0.2s",
+            width: "fit-content",
+          }}
+          onMouseEnter={e => (e.currentTarget.style.background = "rgba(26,107,255,0.1)")}
+          onMouseLeave={e => (e.currentTarget.style.background = "transparent")}
+        >
+          Open in Maps
+        </a>
+      </div>
+      {/* Accent bar */}
+      <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, height: 3, background: "linear-gradient(90deg, #1A6BFF, rgba(26,107,255,0.2))", borderRadius: "0 0 12px 12px" }} />
     </div>
-    {/* Ping rings */}
-    <div className="bento-map-ping" style={{ position: "absolute", top: "45%", left: "50%", transform: "translate(-50%,-50%)", borderRadius: "50%", border: "1.5px solid rgba(26,107,255,0.5)" }} />
-    <div className="bento-map-ping" style={{ position: "absolute", top: "45%", left: "50%", transform: "translate(-50%,-50%)", borderRadius: "50%", border: "1.5px solid rgba(26,107,255,0.5)", animationDelay: "0.7s" }} />
-    {/* LIVE badge */}
-    <div style={{ position: "absolute", top: 12, right: 12, display: "flex", alignItems: "center", gap: 6, background: "rgba(0,0,0,0.6)", border: "0.5px solid rgba(255,255,255,0.1)", borderRadius: 20, padding: "4px 10px" }}>
-      <div className="bento-live-dot" style={{ width: 6, height: 6, borderRadius: "50%", background: "#22C55E" }} />
-      <span style={{ fontSize: 10, letterSpacing: "0.1em", color: "rgba(255,255,255,0.7)", fontFamily: "Space Grotesk, sans-serif" }}>LIVE</span>
-    </div>
-    {/* Location text */}
-    <div style={{ position: "absolute", bottom: 20, left: 20 }}>
-      <p style={{ fontSize: 16, fontWeight: 700, color: "#e8e8e8" }}>Santurce, PR</p>
-      <p style={{ fontSize: 11, color: "rgba(255,255,255,0.35)", fontFamily: "monospace", marginTop: 2 }}>18.4488° N, 66.0614° W</p>
-    </div>
-    {/* Accent bar */}
-    <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, height: 3, background: "linear-gradient(90deg, #1A6BFF, rgba(26,107,255,0.2))", borderRadius: "0 0 12px 12px" }} />
-  </div>
-);
+  );
+};
 
 const SystemLogCell = () => {
   const lines = [
     "> All subsystems online.",
     "> Training protocols loaded.",
-    "> Nutrition engine calibrated.",
-    "> Recovery modules standing by.",
     "> Welcome to Blueprint Project.",
   ];
   return (
