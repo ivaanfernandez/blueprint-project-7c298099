@@ -11,8 +11,8 @@ const FINGERPRINT_CARDS = [
     bracketHover: "rgba(26,107,255,0.8)",
     delay: "0s",
     tag: "BLUEPRINT PROJECT",
-    title: "Training",
-    description: "Personalized programs built on the Blueprint methodology.",
+    title: "BLUEPRINT",
+    description: "",
   },
   {
     color: "#22C55E",
@@ -24,8 +24,8 @@ const FINGERPRINT_CARDS = [
     bracketHover: "rgba(34,197,94,0.8)",
     delay: "0.8s",
     tag: "HACK BAR",
-    title: "Nutrition",
-    description: "Performance-driven fuel to optimize your system.",
+    title: "HACK BAR",
+    description: "",
   },
   {
     color: "#FF3B3B",
@@ -37,8 +37,8 @@ const FINGERPRINT_CARDS = [
     bracketHover: "rgba(255,59,59,0.8)",
     delay: "1.6s",
     tag: "RESET",
-    title: "Recovery",
-    description: "Full-spectrum protocols to restore and rebuild.",
+    title: "RESET",
+    description: "",
   },
 ];
 
@@ -79,9 +79,7 @@ const FingerprintCard = ({ card }: { card: typeof FINGERPRINT_CARDS[0] }) => (
   >
     <CornerBrackets color={card.bracketColor} />
     <FingerprintScan color={card.color} delay={card.delay} />
-    <p style={{ fontSize: 10, letterSpacing: "0.2em", color: card.color, opacity: 0.6, textAlign: "center" }}>{card.tag}</p>
-    <p style={{ fontSize: 16, fontWeight: 700, color: "#e8e8e8", textAlign: "center", marginTop: 4 }}>{card.title}</p>
-    <p style={{ fontSize: 11, color: "rgba(255,255,255,0.4)", textAlign: "center", marginTop: 6, lineHeight: 1.5 }}>{card.description}</p>
+    <p style={{ fontSize: 20, fontWeight: 700, color: card.color, textAlign: "center", fontFamily: "Bebas Neue, sans-serif", marginTop: 4 }}>{card.title}</p>
   </div>
 );
 
@@ -165,7 +163,7 @@ const SystemLogCell = () => {
 };
 
 const BentoGrid = () => (
-  <section className="relative z-10 py-16 md:py-24" style={{ background: "transparent" }}>
+  <section className="relative z-10 py-8 md:py-12" style={{ background: "transparent" }}>
     <div className="text-center mb-10">
       <p style={{ fontSize: 11, letterSpacing: "0.2em", color: "rgba(26,107,255,0.5)", fontWeight: 600, fontFamily: "Space Grotesk, sans-serif", textTransform: "uppercase" }}>THE SYSTEM</p>
       <h2 style={{ fontSize: 32, fontWeight: 700, color: "#e8e8e8", letterSpacing: "-0.02em", fontFamily: "Space Grotesk, sans-serif", marginTop: 8 }}>Blueprint Metrics</h2>

@@ -184,21 +184,11 @@ const PricingSection = () => {
   const [isYearly, setIsYearly] = useState(false);
 
   return (
-    <section className="relative z-10 py-16 md:py-24 px-4">
-      <p className="text-center text-sm font-semibold tracking-[0.2em] mb-4"
-        style={{ color: "#1A6BFF", fontFamily: "Space Grotesk, sans-serif" }}>
-        MEMBRESÍAS
-      </p>
-
-      <h2 className="text-center text-5xl md:text-7xl mb-4"
-        style={{ fontFamily: "Bebas Neue, sans-serif", color: "rgba(255,255,255,0.3)", fontWeight: 400 }}>
-        PRICING
+    <section className="relative z-10 py-8 md:py-12 px-4">
+      <h2 className="text-center text-4xl md:text-5xl mb-10"
+        style={{ fontFamily: "Bebas Neue, sans-serif", color: "#fff", fontWeight: 400 }}>
+        YOUR SYSTEM STARTS HERE
       </h2>
-
-      <p className="text-center text-base mb-10"
-        style={{ color: "rgba(255,255,255,0.5)", fontFamily: "Space Grotesk, sans-serif" }}>
-        Choose your Blueprint
-      </p>
 
       {/* Toggle */}
       <div className="flex items-center justify-center gap-3 mb-10">
