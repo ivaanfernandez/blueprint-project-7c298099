@@ -295,23 +295,6 @@ const MobileAccordion: React.FC = () => {
             </p>
           </div>
         </div>
-
-        {/* Bottom indicator bar */}
-        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "12px 20px" }}>
-          <div style={{ display: "flex", gap: 8 }}>
-            {ACCORDION_ITEMS.map((dotItem, i) => (
-              <div key={i} style={{ width: 8, height: 8, borderRadius: "50%", backgroundColor: dotItem.accentColor, opacity: i === active ? 1 : 0.3, transition: "opacity 300ms ease" }} />
-            ))}
-          </div>
-          <span style={{ fontSize: 11, color: "rgba(255,255,255,0.35)", fontFamily: "Space Grotesk, sans-serif" }}>Swipe or tap tabs</span>
-        </div>
-
-        {/* Color accent bar */}
-        <div style={{ display: "flex", width: "100%", height: 3 }}>
-          <div style={{ flex: 1, backgroundColor: "#1A6BFF", opacity: active === 0 ? 1 : 0.3, transition: "opacity 300ms ease" }} />
-          <div style={{ flex: 1, backgroundColor: "#22C55E", opacity: active === 1 ? 1 : 0.3, transition: "opacity 300ms ease" }} />
-          <div style={{ flex: 1, backgroundColor: "#FF3B3B", opacity: active === 2 ? 1 : 0.3, transition: "opacity 300ms ease" }} />
-        </div>
       </div>
     </div>
   );
