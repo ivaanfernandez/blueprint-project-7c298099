@@ -13,13 +13,13 @@ const FingerprintSVG = ({ color, size = 40 }: { color: string; size?: number }) 
   </svg>
 );
 
-const CheckIcon = ({ color }: { color: string }) => (
+const CheckIcon = () => (
   <div style={{
     width: 20, height: 20, borderRadius: "50%",
-    background: `${color}15`, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0
+    background: "rgba(255,255,255,0.08)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0
   }}>
     <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-      <path d="M2.5 6L5 8.5L9.5 4" stroke={color} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M2.5 6L5 8.5L9.5 4" stroke="rgba(255,255,255,0.4)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
   </div>
 );
