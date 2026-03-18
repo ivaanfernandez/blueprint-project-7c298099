@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { Clock, Phone } from "lucide-react";
-import instagram3d from "@/assets/instagram-3d.png";
 
 const FINGERPRINT_CARDS = [
   {
