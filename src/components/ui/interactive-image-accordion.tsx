@@ -1,5 +1,6 @@
 import * as React from "react";
 import { useState, useRef, useEffect } from "react";
+import { motion, useInView } from "framer-motion";
 import founderImage from "@/assets/accordion/accordion-founder.jpg";
 import visionImage from "@/assets/accordion/accordion-vision.jpg";
 import servicesImage from "@/assets/accordion/accordion-services.jpg";
