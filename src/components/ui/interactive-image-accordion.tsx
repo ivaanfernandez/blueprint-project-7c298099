@@ -76,19 +76,6 @@ const DesktopAccordion: React.FC = () => {
             transition: "opacity 300ms ease, transform 300ms ease"
           }}>
           
-          <p
-            style={{
-              fontSize: 13,
-              letterSpacing: "0.2em",
-              color: item.accentColor,
-              fontFamily: "Space Grotesk, sans-serif",
-              textTransform: "uppercase",
-              fontWeight: 600,
-              marginBottom: 12
-            }}>
-            
-            {item.label}
-          </p>
           <h3
             style={{
               fontFamily: "Bebas Neue, sans-serif",
