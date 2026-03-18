@@ -143,7 +143,7 @@ const SystemLogCell = () => {
   return (
     <div
       className="bento-cell group col-span-2 md:col-span-3"
-      style={{ background: "rgba(26,107,255,0.04)", border: "0.5px solid rgba(26,107,255,0.25)" }}
+      style={{ background: "rgba(26,107,255,0.04)", border: "0.5px solid rgba(26,107,255,0.25)", minHeight: 140, display: "flex", flexDirection: "column", justifyContent: "center" }}
       onMouseEnter={e => { e.currentTarget.style.borderColor = "rgba(26,107,255,0.45)"; e.currentTarget.style.background = "rgba(26,107,255,0.07)"; }}
       onMouseLeave={e => { e.currentTarget.style.borderColor = "rgba(26,107,255,0.25)"; e.currentTarget.style.background = "rgba(26,107,255,0.04)"; }}
     >
