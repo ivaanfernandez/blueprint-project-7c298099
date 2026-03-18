@@ -3,7 +3,6 @@ import { useState, useRef, useEffect } from "react";
 import founderImage from "@/assets/accordion/accordion-founder.jpg";
 import visionImage from "@/assets/accordion/accordion-vision.jpg";
 import servicesImage from "@/assets/accordion/accordion-services.jpg";
-import { BorderRotate } from "@/components/ui/animated-gradient-border";
 
 interface AccordionItem {
   label: string;
