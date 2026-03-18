@@ -13,13 +13,13 @@ const FingerprintSVG = ({ color, size = 40 }: { color: string; size?: number }) 
   </svg>
 );
 
-const CheckIcon = ({ color }: { color: string }) => (
+const CheckIcon = () => (
   <div style={{
     width: 20, height: 20, borderRadius: "50%",
-    background: `${color}15`, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0
+    background: "rgba(255,255,255,0.08)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0
   }}>
     <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-      <path d="M2.5 6L5 8.5L9.5 4" stroke={color} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M2.5 6L5 8.5L9.5 4" stroke="rgba(255,255,255,0.4)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
   </div>
 );
@@ -95,28 +95,28 @@ const PricingCard = ({ plan, isYearly }: { plan: Plan; isYearly: boolean }) => {
         backdropFilter: "blur(20px)",
         WebkitBackdropFilter: "blur(20px)",
         border: plan.featured
-          ? "1px solid rgba(34,197,94,0.3)"
+          ? "1px solid rgba(255,255,255,0.2)"
           : "0.5px solid rgba(255,255,255,0.1)",
       }}
       onMouseEnter={(e) => {
-        e.currentTarget.style.borderColor = `${plan.color}66`;
-        e.currentTarget.style.boxShadow = `0 0 30px ${plan.color}15`;
+        e.currentTarget.style.borderColor = "rgba(255,255,255,0.25)";
       }}
       onMouseLeave={(e) => {
-        e.currentTarget.style.borderColor = plan.featured ? "rgba(34,197,94,0.3)" : "rgba(255,255,255,0.1)";
-        e.currentTarget.style.boxShadow = "none";
+        e.currentTarget.style.borderColor = plan.featured ? "rgba(255,255,255,0.2)" : "rgba(255,255,255,0.1)";
       }}
     >
       {plan.featured && (
         <span className="absolute top-4 right-4 text-[10px] rounded-full px-3 py-1"
-          style={{ background: "rgba(34,197,94,0.2)", color: "#22C55E" }}>
+          style={{ background: "rgba(255,255,255,0.1)", color: "#fff" }}>
           POPULAR
         </span>
       )}
 
-      <FingerprintSVG color={plan.color} size={40} />
+      <div className="flex justify-center mb-4">
+        <FingerprintSVG color={plan.color} size={64} />
+      </div>
 
-      <p className="mt-4 text-lg font-semibold tracking-wide" style={{ fontFamily: "Rajdhani, sans-serif", color: plan.color }}>
+      <p className="text-center text-lg font-semibold tracking-wide text-white" style={{ fontFamily: "Rajdhani, sans-serif" }}>
         {plan.name}
       </p>
 
@@ -146,33 +146,17 @@ const PricingCard = ({ plan, isYearly }: { plan: Plan; isYearly: boolean }) => {
       <ul className="flex flex-col gap-3 mb-8">
         {plan.features.map((f) => (
           <li key={f} className="flex items-center gap-3">
-            <CheckIcon color={plan.color} />
+            <CheckIcon />
             <span className="text-sm" style={{ color: "rgba(255,255,255,0.6)" }}>{f}</span>
           </li>
         ))}
       </ul>
 
       <button
-        className="w-full py-3 rounded-xl font-semibold text-sm transition-all duration-200"
-        style={
-          plan.ctaStyle === "filled"
-            ? { background: plan.color, color: "#000" }
-            : { background: "transparent", border: `1px solid ${plan.color}66`, color: plan.color }
-        }
-        onMouseEnter={(e) => {
-          if (plan.ctaStyle === "filled") {
-            e.currentTarget.style.opacity = "0.9";
-          } else {
-            e.currentTarget.style.background = `${plan.color}1A`;
-          }
-        }}
-        onMouseLeave={(e) => {
-          if (plan.ctaStyle === "filled") {
-            e.currentTarget.style.opacity = "1";
-          } else {
-            e.currentTarget.style.background = "transparent";
-          }
-        }}
+        className="w-full py-3 rounded-xl font-semibold text-sm transition-all duration-200 text-white"
+        style={{ background: "transparent", border: "1px solid rgba(255,255,255,0.2)" }}
+        onMouseEnter={(e) => { e.currentTarget.style.background = "rgba(255,255,255,0.05)"; }}
+        onMouseLeave={(e) => { e.currentTarget.style.background = "transparent"; }}
       >
         Choose Plan
       </button>
