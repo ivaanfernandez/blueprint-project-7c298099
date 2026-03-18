@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { motion } from "framer-motion";
 import { Clock, Phone } from "lucide-react";
 import instagram3d from "@/assets/instagram-3d.png";
 
@@ -58,16 +59,19 @@ const FingerprintScan = ({ color, delay }: { color: string; delay: string }) => 
 );
 
 const FingerprintCard = ({ card }: { card: typeof FINGERPRINT_CARDS[0] }) => (
-  <div
+  <motion.div
     className="bento-cell group"
     style={{ background: card.bgColor, border: `0.5px solid ${card.borderColor}` }}
     onMouseEnter={e => { e.currentTarget.style.borderColor = card.hoverBorder; e.currentTarget.style.background = card.hoverBg; }}
     onMouseLeave={e => { e.currentTarget.style.borderColor = card.borderColor; e.currentTarget.style.background = card.bgColor; }}
+    whileHover={{ scale: 1.04, y: -4 }}
+    whileTap={{ scale: 0.97 }}
+    transition={{ type: "spring", stiffness: 400, damping: 20 }}
   >
     <CornerBrackets color={card.bracketColor} />
     <FingerprintScan color={card.color} delay={card.delay} />
     <p style={{ fontSize: 16, fontWeight: 700, color: card.color, textAlign: "center", fontFamily: "Bebas Neue, sans-serif", marginTop: 4 }}>{card.title}</p>
-  </div>
+  </motion.div>
 );
 
 const MapCell = () => {
