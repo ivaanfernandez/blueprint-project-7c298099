@@ -15,7 +15,6 @@ import slider3 from '@/assets/slider/slider-3.jpg';
 import slider4 from '@/assets/slider/slider-4.jpg';
 import slider5 from '@/assets/slider/slider-5.jpg';
 import slider6 from '@/assets/slider/slider-6.jpg';
-import slider7 from '@/assets/slider/slider-7.jpg';
 
 const GYM_SLIDER_IMAGES = [
   { src: slider1, alt: "Blueprint Project — Instalaciones 1" },
@@ -24,7 +23,6 @@ const GYM_SLIDER_IMAGES = [
   { src: slider4, alt: "Blueprint Project — Instalaciones 4" },
   { src: slider5, alt: "Blueprint Project — Instalaciones 5" },
   { src: slider6, alt: "Blueprint Project — Instalaciones 6" },
-  { src: slider7, alt: "Blueprint Project — Instalaciones 7" },
 ];
 
 const FingerprintSVG = ({ color, size = 48 }: { color: string; size?: number }) => (
