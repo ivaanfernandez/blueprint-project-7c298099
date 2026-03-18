@@ -122,10 +122,10 @@ const PricingCard = ({ plan, isYearly }: { plan: Plan; isYearly: boolean }) => {
           <div style={{ zIndex: 3 }}>
             <FingerprintSVG color="#1A6BFF" size={44} />
           </div>
-          <div style={{ zIndex: 2, marginLeft: -14 }}>
+          <div style={{ zIndex: 2, marginLeft: -24 }}>
             <FingerprintSVG color="#22C55E" size={44} />
           </div>
-          <div style={{ zIndex: 1, marginLeft: -14 }}>
+          <div style={{ zIndex: 1, marginLeft: -24 }}>
             <FingerprintSVG color="#FF3B3B" size={44} />
           </div>
         </div>
@@ -134,7 +134,7 @@ const PricingCard = ({ plan, isYearly }: { plan: Plan; isYearly: boolean }) => {
       {plan.name === "BLUEPRINT ELITE" && (
         <>
           <div className="flex justify-center items-center mt-3 mb-2">
-            {[...Array(5)].map((_, i) => (
+            {[...Array(3)].map((_, i) => (
               <div key={i} className="w-8 h-8 rounded-full flex items-center justify-center"
                 style={{
                   background: "rgba(255,255,255,0.1)",
@@ -151,7 +151,7 @@ const PricingCard = ({ plan, isYearly }: { plan: Plan; isYearly: boolean }) => {
                 marginLeft: -8,
                 color: "rgba(255,255,255,0.4)",
               }}>
-              +12
+              +4
             </div>
           </div>
           <p className="text-[10px] text-center tracking-[0.1em] mb-4"
