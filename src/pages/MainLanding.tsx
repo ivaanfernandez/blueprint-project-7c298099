@@ -349,7 +349,7 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
 
         {/* CTA Button */}
         <div className="hero-cta-button" style={{ marginTop: "24px", display: "flex", justifyContent: "center", width: "100%" }}>
-          <ShinyButton fontSize="13px" className="hero-shiny-btn">HAVE YOUR BLUEPRINT</ShinyButton>
+          <ShinyButton fontSize="15px" className="hero-shiny-btn">HAVE YOUR BLUEPRINT</ShinyButton>
         </div>
 
         </div>
@@ -455,13 +455,17 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
         }
         .hero-shiny-btn {
           white-space: nowrap !important;
-          padding: 0.7rem 1.8rem !important;
-          font-size: 12px !important;
+          padding: 1.25rem 3rem !important;
+          font-size: 15px !important;
+          min-width: 280px !important;
+          letter-spacing: 0.15em !important;
         }
         @media (max-width: 767px) {
           .hero-shiny-btn {
-            font-size: 10px !important;
-            padding: 0.7rem 1.5rem !important;
+            font-size: 12px !important;
+            padding: 1.1rem 2.5rem !important;
+            min-width: 280px !important;
+            letter-spacing: 0.15em !important;
             width: auto !important;
             display: inline-block !important;
           }
@@ -553,8 +557,10 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
             margin-bottom: 28px !important;
           }
           .hero-shiny-btn {
-            font-size: 12px !important;
-            padding: 0.9rem 2.2rem !important;
+            font-size: 16px !important;
+            padding: 1.25rem 3rem !important;
+            min-width: 320px !important;
+            letter-spacing: 0.15em !important;
           }
           .dock-container {
             height: 52px !important;
