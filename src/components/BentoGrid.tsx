@@ -89,7 +89,7 @@ const MapCell = () => {
 
   return (
     <div
-      className="bento-cell group col-span-2 md:col-span-3"
+      className="bento-cell group col-span-2 md:col-span-6"
       style={{ background: "rgba(26,107,255,0.04)", border: "0.5px solid rgba(26,107,255,0.25)", padding: 0, minHeight: 140, position: "relative", cursor: "pointer" }}
       onMouseEnter={e => { e.currentTarget.style.borderColor = "rgba(26,107,255,0.45)"; e.currentTarget.style.background = "rgba(26,107,255,0.07)"; setExpanded(true); }}
       onMouseLeave={e => { e.currentTarget.style.borderColor = "rgba(26,107,255,0.25)"; e.currentTarget.style.background = "rgba(26,107,255,0.04)"; setExpanded(false); }}
@@ -172,26 +172,23 @@ const MapCell = () => {
   );
 };
 
-const InstagramCell = () => (
-  <div
-    className="bento-cell bento-ig-cell group col-span-2 md:col-span-3"
-    style={{ background: "rgba(26,107,255,0.04)", border: "0.5px solid rgba(26,107,255,0.25)", minHeight: 140, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", cursor: "pointer" }}
-    onMouseEnter={e => { e.currentTarget.style.borderColor = "rgba(26,107,255,0.45)"; e.currentTarget.style.background = "rgba(26,107,255,0.07)"; }}
-    onMouseLeave={e => { e.currentTarget.style.borderColor = "rgba(26,107,255,0.25)"; e.currentTarget.style.background = "rgba(26,107,255,0.04)"; }}
-    onClick={() => window.open("https://instagram.com/blueprintproject", "_blank")}
-  >
-    <CornerBrackets color="rgba(26,107,255,0.5)" />
-    <Instagram size={48} className="bento-ig-icon" style={{ color: "rgba(255,255,255,0.5)", transition: "color 0.3s" }} />
-    <p style={{ fontSize: 11, letterSpacing: "0.15em", color: "rgba(255,255,255,0.4)", fontWeight: 600, marginTop: 12 }}>@BLUEPRINTPROJECT</p>
-  </div>
-);
-
 const BentoGrid = () => (
   <section className="relative z-10 pb-8 md:pb-12" style={{ background: "transparent", paddingTop: 0, marginTop: 0 }}>
     <div className="grid grid-cols-2 md:grid-cols-6 gap-2.5 md:gap-3 mx-4 md:mx-auto" style={{ maxWidth: 900 }}>
       {FINGERPRINT_CARDS.map(card => <FingerprintCard key={card.tag} card={card} />)}
       <MapCell />
-      <InstagramCell />
+    </div>
+    <div className="mx-4 md:mx-auto" style={{ maxWidth: 900 }}>
+      <a
+        href="https://instagram.com/blueprintproject"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="bento-ig-link"
+        style={{ display: "flex", alignItems: "center", gap: 10, marginTop: 24, cursor: "pointer", textDecoration: "none" }}
+      >
+        <Instagram size={24} style={{ color: "rgba(255,255,255,0.35)", transition: "color 0.3s" }} />
+        <span style={{ fontSize: 12, letterSpacing: "0.12em", color: "rgba(255,255,255,0.35)", fontWeight: 600, transition: "color 0.3s" }}>@BLUEPRINTPROJECT</span>
+      </a>
     </div>
     <style>{`
       .bento-cell {
@@ -224,12 +221,12 @@ const BentoGrid = () => (
         0%, 100% { opacity: 1; }
         50% { opacity: 0.4; }
       }
-      .bento-ig-cell:hover .bento-ig-icon {
-        color: rgba(255,255,255,0.8) !important;
+      .bento-ig-link:hover svg,
+      .bento-ig-link:hover span {
+        color: rgba(255,255,255,0.6) !important;
       }
       .bento-maps-link:hover {
         text-decoration: underline;
-      }
       }
     `}</style>
   </section>
