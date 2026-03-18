@@ -163,11 +163,7 @@ const SystemLogCell = () => {
 };
 
 const BentoGrid = () => (
-  <section className="relative z-10 py-8 md:py-12" style={{ background: "transparent" }}>
-    <div className="text-center mb-10">
-      <p style={{ fontSize: 11, letterSpacing: "0.2em", color: "rgba(26,107,255,0.5)", fontWeight: 600, fontFamily: "Space Grotesk, sans-serif", textTransform: "uppercase" }}>THE SYSTEM</p>
-      <h2 style={{ fontSize: 32, fontWeight: 700, color: "#e8e8e8", letterSpacing: "-0.02em", fontFamily: "Space Grotesk, sans-serif", marginTop: 8 }}>Blueprint Metrics</h2>
-    </div>
+  <section className="relative z-10 pb-8 md:pb-12" style={{ background: "transparent", paddingTop: 0, marginTop: 0 }}>
     <div className="grid grid-cols-2 md:grid-cols-6 gap-2.5 md:gap-3 mx-4 md:mx-auto" style={{ maxWidth: 900 }}>
       {FINGERPRINT_CARDS.map(card => <FingerprintCard key={card.tag} card={card} />)}
       <MapCell />
