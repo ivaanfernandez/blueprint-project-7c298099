@@ -397,9 +397,6 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
             display: inline-block !important;
           }
         }
-        .hero-no-comma {
-          display: none;
-        }
         /* Desktop hero styles */
         @media (min-width: 768px) {
           .hero-section {
