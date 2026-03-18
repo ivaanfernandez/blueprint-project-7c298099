@@ -89,7 +89,7 @@ const MapCell = () => {
 
   return (
     <div
-      className="bento-cell group col-span-2 md:col-span-3"
+      className="bento-cell group col-span-2 md:col-span-6"
       style={{ background: "rgba(26,107,255,0.04)", border: "0.5px solid rgba(26,107,255,0.25)", padding: 0, minHeight: 140, position: "relative", cursor: "pointer" }}
       onMouseEnter={e => { e.currentTarget.style.borderColor = "rgba(26,107,255,0.45)"; e.currentTarget.style.background = "rgba(26,107,255,0.07)"; setExpanded(true); }}
       onMouseLeave={e => { e.currentTarget.style.borderColor = "rgba(26,107,255,0.25)"; e.currentTarget.style.background = "rgba(26,107,255,0.04)"; setExpanded(false); }}
