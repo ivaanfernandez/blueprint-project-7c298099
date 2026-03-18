@@ -11,8 +11,8 @@ const FINGERPRINT_CARDS = [
     bracketHover: "rgba(26,107,255,0.8)",
     delay: "0s",
     tag: "BLUEPRINT PROJECT",
-    title: "Training",
-    description: "Personalized programs built on the Blueprint methodology.",
+    title: "BLUEPRINT",
+    description: "",
   },
   {
     color: "#22C55E",
