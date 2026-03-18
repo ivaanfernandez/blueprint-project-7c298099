@@ -287,9 +287,6 @@ const MobileAccordion: React.FC = () => {
           />
           <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.3) 40%, transparent 100%)", zIndex: 1 }} />
           <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, padding: "0 20px 20px", zIndex: 2, opacity: fading ? 0 : 1, transition: "opacity 300ms ease" }}>
-            <p style={{ fontSize: 10, letterSpacing: "0.15em", color: item.accentColor, fontFamily: "Space Grotesk, sans-serif", textTransform: "uppercase" as const, fontWeight: 600, marginBottom: 6 }}>
-              {item.label}
-            </p>
             <h3 style={{ fontFamily: "Bebas Neue, sans-serif", fontSize: 24, color: "#fff", fontWeight: 700, lineHeight: 1.1, marginBottom: 8 }}>
               {item.title}
             </h3>
