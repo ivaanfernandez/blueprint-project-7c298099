@@ -361,7 +361,7 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
         <ImageAutoSlider images={GYM_SLIDER_IMAGES} />
       </div>
 
-      <div style={{ position: 'relative', zIndex: 10, background: '#000' }}>
+      <div style={{ position: 'relative', zIndex: 10 }}>
         <InteractiveImageAccordion />
       </div>
 
