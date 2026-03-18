@@ -24,8 +24,8 @@ const FINGERPRINT_CARDS = [
     bracketHover: "rgba(34,197,94,0.8)",
     delay: "0.8s",
     tag: "HACK BAR",
-    title: "Nutrition",
-    description: "Performance-driven fuel to optimize your system.",
+    title: "HACK BAR",
+    description: "",
   },
   {
     color: "#FF3B3B",
