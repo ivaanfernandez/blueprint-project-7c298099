@@ -224,6 +224,13 @@ const BentoGrid = () => (
         0%, 100% { opacity: 1; }
         50% { opacity: 0.4; }
       }
+      .bento-ig-cell:hover .bento-ig-icon {
+        color: rgba(255,255,255,0.8) !important;
+      }
+      .bento-maps-link:hover {
+        text-decoration: underline;
+      }
+      }
     `}</style>
   </section>
 );
