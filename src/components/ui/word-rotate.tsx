@@ -30,6 +30,7 @@ export function WordRotate({
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.2, ease: "easeOut" }}
+          className="word-rotate-inner"
           style={{ position: "absolute", left: 0, top: 0, whiteSpace: "nowrap", lineHeight: "inherit" }}
         >
           {words[index]}
