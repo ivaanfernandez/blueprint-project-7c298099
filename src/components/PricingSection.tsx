@@ -122,10 +122,10 @@ const PricingCard = ({ plan, isYearly }: { plan: Plan; isYearly: boolean }) => {
           <div style={{ zIndex: 3 }}>
             <FingerprintSVG color="#1A6BFF" size={44} />
           </div>
-          <div style={{ zIndex: 2, marginLeft: -14 }}>
+          <div style={{ zIndex: 2, marginLeft: -24 }}>
             <FingerprintSVG color="#22C55E" size={44} />
           </div>
-          <div style={{ zIndex: 1, marginLeft: -14 }}>
+          <div style={{ zIndex: 1, marginLeft: -24 }}>
             <FingerprintSVG color="#FF3B3B" size={44} />
           </div>
         </div>
