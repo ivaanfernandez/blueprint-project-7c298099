@@ -349,7 +349,7 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
 
         {/* CTA Button */}
         <div className="hero-cta-button" style={{ marginTop: "24px", display: "flex", justifyContent: "center", width: "100%" }}>
-          <ShinyButton fontSize="13px" className="hero-shiny-btn">HAVE YOUR BLUEPRINT</ShinyButton>
+          <ShinyButton fontSize="15px" className="hero-shiny-btn">HAVE YOUR BLUEPRINT</ShinyButton>
         </div>
 
         </div>
