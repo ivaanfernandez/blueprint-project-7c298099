@@ -8,6 +8,7 @@ import { ShinyButton } from '@/components/ui/shiny-button';
 import { LocationMap } from '@/components/ui/expand-map';
 import { FadeText } from '@/components/ui/fade-text';
 import { ImageAutoSlider } from '@/components/ui/image-auto-slider';
+import { ChevronDown } from 'lucide-react';
 import { InteractiveImageAccordion } from '@/components/ui/interactive-image-accordion';
 import PricingSection from '@/components/PricingSection';
 import BentoGrid from '@/components/BentoGrid';
@@ -222,25 +223,25 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
         <div className="hero-content-wrapper" style={{ position: "relative", zIndex: 10, width: "100%", display: "flex", flexDirection: "column", paddingTop: "110px" }}>
 <div className="hero-headline-wrapper" style={{
           display: 'flex',
-          flexDirection: 'row',
-          alignItems: 'center',
           justifyContent: 'flex-start',
+          alignItems: 'baseline',
           width: '100%',
           paddingLeft: '80px',
           paddingRight: '40px',
           boxSizing: 'border-box',
           position: 'relative',
           zIndex: 10,
-          paddingTop: '140px'
+          paddingTop: '140px',
+          flexWrap: 'wrap'
         }}>
           <span className="hero-headline-white" style={{
             color: '#FFFFFF',
             fontFamily: 'Bebas Neue, sans-serif',
             fontWeight: 400,
-            fontSize: 'clamp(56px, 7vw, 100px)',
+            fontSize: 'clamp(56px, 6vw, 88px)',
             whiteSpace: 'nowrap',
-            flexShrink: 0,
-            lineHeight: 1
+            lineHeight: 1,
+            display: 'inline'
           }}>
             <span className="hero-comma">THIS ISN'T A GYM,&nbsp;</span>
             <span className="hero-no-comma">THIS ISN'T A GYM&nbsp;</span>
@@ -249,10 +250,10 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
             color: '#1A6BFF',
             fontFamily: 'Bebas Neue, sans-serif',
             fontWeight: 400,
-            fontSize: 'clamp(56px, 7vw, 100px)',
-            whiteSpace: 'nowrap',
+            fontSize: 'clamp(56px, 6vw, 88px)',
             lineHeight: 1,
-            flexShrink: 0
+            display: 'inline-block',
+            minWidth: '10ch'
           }}>
             <WordRotate
               words={[
@@ -264,10 +265,10 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
               duration={2500}
               className=""
               framerProps={{
-                initial: { opacity: 0, y: -30 },
-                animate: { opacity: 1, y: 0 },
-                exit: { opacity: 0, y: 30 },
-                transition: { duration: 0.25, ease: "easeOut" }
+                initial: { opacity: 0 },
+                animate: { opacity: 1 },
+                exit: { opacity: 0 },
+                transition: { duration: 0.3, ease: "easeOut" }
               }}
             />
           </span>
@@ -283,37 +284,11 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
           zIndex: 10,
           textAlign: 'center'
         }}>
-          <div className="hero-subtext-line hero-subtext-line1" style={{
-            color: 'rgba(255,255,255,0.6)',
-            fontSize: 'clamp(10px, 1vw, 15px)',
-            fontFamily: 'Space Grotesk, sans-serif',
-            whiteSpace: 'nowrap',
-            letterSpacing: '0.04em',
-            lineHeight: '2'
-          }}>
-            <span className="hero-subtext-desktop">
-              <FadeText
-                direction="up"
-                text="Every detail, from the space to the mindset, is engineered for performance, recovery and mental clarity."
-                framerProps={{ show: { transition: { delay: 0.1, type: 'spring' } } }}
-                className=""
-              />
-            </span>
-            <span className="hero-subtext-mobile">
-              <FadeText
-                direction="up"
-                text="Mindset. Performance. Recovery"
-                framerProps={{ show: { transition: { delay: 0.1, type: 'spring' } } }}
-                className=""
-              />
-            </span>
-          </div>
           {[
-            { text: "We're here to reprogram you physically, mentally, and energetically.", delay: 0.25, mobileClass: "hero-subtext-hide-mobile" },
-            { text: "This is where discipline meets design.", delay: 0.4 },
-            { text: "Welcome to the future of self mastery.", delay: 0.55 },
+            { text: "This is where discipline meets design.", delay: 0.1 },
+            { text: "Welcome to the future of self mastery.", delay: 0.25 },
           ].map((item) => (
-            <div key={item.text} className={`hero-subtext-line ${item.mobileClass || ''}`} style={{
+            <div key={item.text} className="hero-subtext-line" style={{
               color: 'rgba(255,255,255,0.6)',
               fontSize: 'clamp(10px, 1vw, 15px)',
               fontFamily: 'Space Grotesk, sans-serif',
@@ -341,7 +316,7 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
             <FadeText
               direction="up"
               text="Follow the BLUEPRINT."
-              framerProps={{ show: { transition: { delay: 0.7, type: 'spring' } } }}
+              framerProps={{ show: { transition: { delay: 0.4, type: 'spring' } } }}
               className=""
             />
           </div>
@@ -350,6 +325,11 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
         {/* CTA Button */}
         <div className="hero-cta-button" style={{ marginTop: "24px", display: "flex", justifyContent: "center", width: "100%" }}>
           <ShinyButton fontSize="15px" className="hero-shiny-btn">HAVE YOUR BLUEPRINT</ShinyButton>
+        </div>
+
+        {/* Scroll indicator */}
+        <div style={{ marginTop: 24, display: 'flex', justifyContent: 'center', width: '100%', pointerEvents: 'none' }}>
+          <ChevronDown size={24} style={{ color: 'rgba(255,255,255,0.3)', animation: 'hero-bounce 2s ease-in-out infinite' }} />
         </div>
 
         </div>
@@ -378,6 +358,10 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
         @keyframes pulse-line {
           0%, 100% { opacity: 1; }
           50% { opacity: 0.2; }
+        }
+        @keyframes hero-bounce {
+          0%, 100% { transform: translateY(0); }
+          50% { transform: translateY(8px); }
         }
         .hero-shiny-btn {
           white-space: nowrap !important;
@@ -427,7 +411,7 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
             justify-content: center !important;
             padding-left: 0 !important;
             padding-right: 0 !important;
-            text-align: left !important;
+            text-align: center !important;
             padding-top: 80px !important;
           }
           .hero-subtext-container {
@@ -438,14 +422,8 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
           }
           .hero-cta-button {
             margin-top: 64px !important;
-            margin-bottom: 100px !important;
+            margin-bottom: 40px !important;
           }
-        }
-        .hero-subtext-mobile {
-          display: none;
-        }
-        .hero-subtext-desktop {
-          display: inline;
         }
         @media (max-width: 767px) {
           .hero-bottom-fade {
@@ -464,7 +442,6 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
             padding-top: 80px !important;
           }
           .hero-headline-wrapper {
-            flex-wrap: wrap !important;
             text-align: center !important;
             justify-content: center !important;
             padding-left: 20px !important;
@@ -472,11 +449,11 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
             padding-top: 55px !important;
           }
           .hero-headline-white {
-            width: 100% !important;
-            font-size: clamp(56px, 14.5vw, 76px) !important;
+            font-size: clamp(40px, 11vw, 64px) !important;
           }
           .hero-headline-blue {
-            font-size: clamp(56px, 14.5vw, 76px) !important;
+            font-size: clamp(40px, 11vw, 64px) !important;
+            min-width: 8ch !important;
           }
           .hero-cta-button {
             margin-top: 48px !important;
@@ -504,19 +481,12 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
           .hero-no-comma {
             display: inline !important;
           }
-          /* Subtext container mobile */
           .hero-subtext-container {
             text-align: center !important;
             align-items: center !important;
             padding: 0 20px !important;
             width: 100% !important;
           }
-          /* Line 1 mobile: wrap into 2 lines */
-          .hero-subtext-line1 {
-            white-space: normal !important;
-            max-width: 320px !important;
-          }
-          /* Lines 2-5 mobile: larger font, keep nowrap, center */
           .hero-subtext-line {
             white-space: nowrap !important;
             font-size: clamp(10.5px, 3.2vw, 14px) !important;
@@ -524,17 +494,6 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
             display: flex !important;
             justify-content: center !important;
             width: 100% !important;
-          }
-          /* Show mobile text, hide desktop on mobile */
-          .hero-subtext-mobile {
-            display: inline !important;
-          }
-          .hero-subtext-desktop {
-            display: none !important;
-          }
-          /* Hide second phrase on mobile */
-          .hero-subtext-hide-mobile {
-            display: none !important;
           }
         }
       `}</style>
