@@ -235,10 +235,11 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
             fontSize: 'clamp(56px, 6vw, 88px)',
             whiteSpace: 'nowrap',
             lineHeight: 1,
-            display: 'inline'
+            display: 'inline',
+            verticalAlign: 'baseline'
           }}>
             <span className="hero-comma">THIS ISN'T A GYM,&nbsp;</span>
-            <span className="hero-no-comma">THIS ISN'T A GYM&nbsp;</span>
+            <span className="hero-no-comma">THIS ISN'T A GYM</span>
           </span>
           <span className="hero-headline-blue" style={{
             color: '#1A6BFF',
@@ -433,17 +434,26 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
           }
           .hero-headline-wrapper {
             text-align: center !important;
-            justify-content: center !important;
-            padding-left: 20px !important;
-            padding-right: 20px !important;
+            padding-left: 16px !important;
+            padding-right: 16px !important;
             padding-top: 55px !important;
           }
           .hero-headline-white {
-            font-size: clamp(40px, 11vw, 64px) !important;
+            display: block !important;
+            font-size: clamp(36px, 10vw, 56px) !important;
+            white-space: nowrap !important;
+            text-align: center !important;
           }
           .hero-headline-blue {
-            font-size: clamp(40px, 11vw, 64px) !important;
-            min-width: 8ch !important;
+            display: block !important;
+            font-size: clamp(36px, 10vw, 56px) !important;
+            min-width: unset !important;
+            width: 100% !important;
+            text-align: center !important;
+          }
+          .hero-headline-blue .word-rotate-inner {
+            left: 50% !important;
+            transform: translateX(-50%) !important;
           }
           .hero-cta-button {
             margin-top: 48px !important;
@@ -469,7 +479,7 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
             display: none !important;
           }
           .hero-no-comma {
-            display: inline !important;
+            display: block !important;
           }
           .hero-subtext-container {
             text-align: center !important;
