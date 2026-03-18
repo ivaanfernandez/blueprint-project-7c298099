@@ -165,7 +165,7 @@ const InstagramCell = () => {
       href="https://instagram.com/blueprintproject"
       target="_blank"
       rel="noopener noreferrer"
-      className="bento-cell group col-span-2 md:col-span-1 h-24 md:h-auto"
+      className="bento-cell group"
       style={{
         background: "rgba(255,255,255,0.03)",
         border: "0.5px solid rgba(255,255,255,0.1)",
