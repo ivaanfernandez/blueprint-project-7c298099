@@ -161,8 +161,6 @@ const DesktopAccordion: React.FC = () => {
                   zIndex: 1
                 }} />
 
-              }
-
               {/* Active label */}
               {isActive &&
               <span
