@@ -90,7 +90,7 @@ const PricingCard = ({ plan, isYearly }: { plan: Plan; isYearly: boolean }) => {
 
   return (
     <div
-      className={`relative rounded-2xl p-8 transition-all duration-300 ${plan.featured ? "md:scale-105 md:py-10" : ""}`}
+      className="relative rounded-2xl p-8 transition-all duration-300 flex flex-col h-full"
       style={{
         background: "rgba(255,255,255,0.05)",
         backdropFilter: "blur(20px)",
@@ -198,7 +198,7 @@ const PricingCard = ({ plan, isYearly }: { plan: Plan; isYearly: boolean }) => {
       </ul>
 
       <button
-        className="w-full py-3 rounded-xl font-semibold text-sm transition-all duration-200 text-white"
+        className="w-full py-3 rounded-xl font-semibold text-sm transition-all duration-200 text-white mt-auto"
         style={{ background: "transparent", border: "1px solid rgba(255,255,255,0.2)" }}
         onMouseEnter={(e) => { e.currentTarget.style.background = "rgba(255,255,255,0.05)"; }}
         onMouseLeave={(e) => { e.currentTarget.style.background = "transparent"; }}
@@ -260,9 +260,9 @@ const PricingSection = () => {
       </div>
 
       {/* Cards */}
-      <div className="pricing-scroll-container flex gap-4 px-4 md:grid md:grid-cols-3 md:gap-6 max-w-5xl md:mx-auto">
+      <div className="pricing-scroll-container flex gap-4 px-4 md:grid md:grid-cols-3 md:gap-6 md:items-stretch max-w-5xl md:mx-auto">
         {PLANS.map((plan) => (
-          <div key={plan.name} className="pricing-card-wrapper flex-shrink-0 w-[85vw] md:w-auto md:flex-shrink-1">
+          <div key={plan.name} className="pricing-card-wrapper flex-shrink-0 w-[85vw] md:w-auto md:flex-shrink-1 flex">
             <PricingCard plan={plan} isYearly={isYearly} />
           </div>
         ))}
