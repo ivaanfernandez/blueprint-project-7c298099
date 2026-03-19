@@ -415,11 +415,17 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
             justify-content: flex-start !important;
           }
           .hero-headline-wrapper {
+            display: flex !important;
+            align-items: flex-end !important;
             justify-content: center !important;
+            gap: 24px !important;
             padding-left: 0 !important;
             padding-right: 0 !important;
             text-align: center !important;
             padding-top: 80px !important;
+          }
+          .hero-headline-blue {
+            transform: translateY(8px) !important;
           }
           .hero-subtext-container {
             margin-top: 16px !important;
