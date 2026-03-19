@@ -407,17 +407,14 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
             justify-content: flex-start !important;
           }
           .hero-headline-wrapper {
-            display: flex !important;
-            align-items: flex-end !important;
             justify-content: center !important;
-            gap: 24px !important;
             padding-left: 0 !important;
             padding-right: 0 !important;
             text-align: center !important;
             padding-top: 80px !important;
           }
           .hero-headline-blue {
-            transform: translateY(8px) !important;
+            top: 0.08em !important;
           }
           .hero-subtext-container {
             margin-top: 16px !important;
@@ -462,10 +459,9 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
           .hero-headline-blue {
             display: block !important;
             font-size: clamp(36px, 10vw, 56px) !important;
-            min-width: unset !important;
             width: 100% !important;
             text-align: center !important;
-            transform: none !important;
+            top: 0 !important;
           }
           .hero-headline-blue .word-rotate-inner {
             left: 0 !important;
