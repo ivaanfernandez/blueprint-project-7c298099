@@ -455,6 +455,7 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
             padding-top: 80px !important;
           }
           .hero-headline-wrapper {
+            display: block !important;
             text-align: center !important;
             padding-left: 0 !important;
             padding-right: 0 !important;
@@ -472,6 +473,7 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
             min-width: unset !important;
             width: 100% !important;
             text-align: center !important;
+            transform: none !important;
           }
           .hero-headline-blue .word-rotate-inner {
             left: 0 !important;
