@@ -7,12 +7,14 @@ interface WordRotateProps {
   words: string[];
   duration?: number;
   className?: string;
+  wrapperClassName?: string;
 }
 
 export function WordRotate({
   words,
   duration = 2500,
   className,
+  wrapperClassName,
 }: WordRotateProps) {
   const [index, setIndex] = useState(0);
   const measureRef = useRef<HTMLSpanElement>(null);
@@ -45,7 +47,7 @@ export function WordRotate({
         {longestWord}
       </span>
       <span
-        className={cn("", className)}
+        className={cn("word-rotate-wrapper", wrapperClassName, className)}
         style={{
           position: "relative",
           display: "inline-block",
