@@ -251,7 +251,7 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
             lineHeight: 1,
             display: 'inline-block',
             minWidth: '600px',
-            textAlign: 'left',
+            textAlign: 'center',
             verticalAlign: 'baseline',
             position: 'relative',
             top: 0,
@@ -443,8 +443,8 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
           }
           .hero-headline-wrapper {
             text-align: center !important;
-            padding-left: 16px !important;
-            padding-right: 16px !important;
+            padding-left: 0 !important;
+            padding-right: 0 !important;
             padding-top: 55px !important;
           }
           .hero-headline-white {
@@ -461,8 +461,10 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
             text-align: center !important;
           }
           .hero-headline-blue .word-rotate-inner {
-            left: 50% !important;
-            transform: translateX(-50%) !important;
+            left: 0 !important;
+            right: 0 !important;
+            transform: none !important;
+            justify-content: center !important;
           }
           .hero-cta-button {
             margin-top: 48px !important;
