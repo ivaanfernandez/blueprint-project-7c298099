@@ -324,7 +324,7 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
         </div>
 
         {/* Scroll indicator */}
-        <div style={{ marginTop: 24, display: 'flex', justifyContent: 'center', width: '100%', pointerEvents: 'none' }}>
+        <div className="hero-scroll-indicator" style={{ marginTop: 24, display: 'flex', justifyContent: 'center', width: '100%', pointerEvents: 'none' }}>
           <ChevronDown size={24} style={{ color: 'rgba(255,255,255,0.3)', animation: 'hero-bounce 2s ease-in-out infinite' }} />
         </div>
 
