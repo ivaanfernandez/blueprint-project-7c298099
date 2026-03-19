@@ -461,8 +461,10 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
             text-align: center !important;
           }
           .hero-headline-blue .word-rotate-inner {
-            left: 50% !important;
-            transform: translateX(-50%) !important;
+            left: 0 !important;
+            right: 0 !important;
+            transform: none !important;
+            justify-content: center !important;
           }
           .hero-cta-button {
             margin-top: 48px !important;
