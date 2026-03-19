@@ -486,7 +486,7 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
           }
           .hero-cta-button {
             margin-top: 28px !important;
-            margin-bottom: 0px !important;
+            margin-bottom: 40px !important;
           }
           .hero-scroll-indicator {
             margin-top: 12px !important;
