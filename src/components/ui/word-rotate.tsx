@@ -22,7 +22,7 @@ export function WordRotate({
     return () => clearInterval(interval);
   }, [words, duration]);
   return (
-    <span className={cn("", className)} style={{ position: "relative", display: "inline-block", width: "100%", height: "1em", verticalAlign: "baseline", lineHeight: "inherit", padding: 0, margin: 0 }}>
+    <span className={cn("", className)} style={{ position: "relative", display: "inline-block", width: "100%", height: "1em", verticalAlign: "baseline", lineHeight: "1", padding: 0, margin: 0 }}>
       <AnimatePresence mode="wait">
         <motion.span
           key={words[index]}
@@ -31,7 +31,7 @@ export function WordRotate({
           exit={{ opacity: 0 }}
           transition={{ duration: 0.2, ease: "easeOut" }}
           className="word-rotate-inner"
-          style={{ position: "absolute", left: 0, top: 0, whiteSpace: "nowrap", lineHeight: "inherit", transform: "none" }}
+          style={{ position: "absolute", left: 0, top: 0, bottom: 0, display: "flex", alignItems: "flex-end", whiteSpace: "nowrap", lineHeight: "1", transform: "none" }}
         >
           {words[index]}
         </motion.span>
