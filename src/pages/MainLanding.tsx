@@ -280,7 +280,132 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
           zIndex: 10,
           textAlign: 'center'
         }}>
-...
+          {[
+            { text: "This is where discipline meets design.", delay: 0.1 },
+            { text: "Welcome to the future of self mastery.", delay: 0.25 },
+          ].map((item) => (
+            <div key={item.text} className="hero-subtext-line" style={{
+              color: 'rgba(255,255,255,0.6)',
+              fontSize: 'clamp(10px, 1vw, 15px)',
+              fontFamily: 'Space Grotesk, sans-serif',
+              whiteSpace: 'nowrap',
+              letterSpacing: '0.04em',
+              lineHeight: '2'
+            }}>
+              <FadeText
+                direction="up"
+                text={item.text}
+                framerProps={{ show: { transition: { delay: item.delay, type: 'spring' } } }}
+                className=""
+              />
+            </div>
+          ))}
+          <div className="hero-subtext-line" style={{
+            color: '#1A6BFF',
+            fontSize: 'clamp(10px, 1vw, 15px)',
+            fontFamily: 'Space Grotesk, sans-serif',
+            fontWeight: '600',
+            whiteSpace: 'nowrap',
+            letterSpacing: '0.04em',
+            lineHeight: '2'
+          }}>
+            <FadeText
+              direction="up"
+              text="Follow the BLUEPRINT."
+              framerProps={{ show: { transition: { delay: 0.4, type: 'spring' } } }}
+              className=""
+            />
+          </div>
+        </div>
+
+        {/* CTA Button */}
+        <div className="hero-cta-button" style={{ marginTop: "24px", display: "flex", justifyContent: "center", width: "100%" }}>
+          <ShinyButton fontSize="15px" className="hero-shiny-btn">HAVE YOUR BLUEPRINT</ShinyButton>
+        </div>
+
+        {/* Scroll indicator */}
+        <div style={{ marginTop: 24, display: 'flex', justifyContent: 'center', width: '100%', pointerEvents: 'none' }}>
+          <ChevronDown size={24} style={{ color: 'rgba(255,255,255,0.3)', animation: 'hero-bounce 2s ease-in-out infinite' }} />
+        </div>
+
+        </div>
+
+      </section>
+
+      <ProceduralBackground />
+
+      {/* IMAGE AUTO-SLIDER */}
+      <div style={{ marginTop: '80px', position: 'relative', zIndex: 10, background: '#000', marginBottom: '48px', paddingBottom: 0 }}>
+        <ImageAutoSlider images={GYM_SLIDER_IMAGES} />
+      </div>
+
+      <div style={{ position: 'relative', zIndex: 10 }}>
+        <InteractiveImageAccordion />
+      </div>
+
+
+      {/* PRICING */}
+      <PricingSection />
+
+      {/* BENTO GRID */}
+      <BentoGrid />
+
+      {/* FOOTER */}
+      <Footer />
+
+      <style>{`
+        @keyframes pulse-line {
+          0%, 100% { opacity: 1; }
+          50% { opacity: 0.2; }
+        }
+        @keyframes hero-bounce {
+          0%, 100% { transform: translateY(0); }
+          50% { transform: translateY(8px); }
+        }
+        .hero-shiny-btn {
+          white-space: nowrap !important;
+          padding: 1.25rem 3rem !important;
+          font-size: 15px !important;
+          min-width: 280px !important;
+          letter-spacing: 0.15em !important;
+        }
+        @media (max-width: 767px) {
+          .hero-shiny-btn {
+            font-size: 12px !important;
+            padding: 1.1rem 2.5rem !important;
+            min-width: 280px !important;
+            letter-spacing: 0.15em !important;
+            width: auto !important;
+            display: inline-block !important;
+          }
+        }
+        .hero-no-comma {
+          display: none;
+        }
+        /* Desktop hero styles */
+        @media (min-width: 768px) {
+          .hero-section {
+            height: 100vh !important;
+            width: 100vw !important;
+            overflow: hidden !important;
+          }
+          .hero-bg-mobile {
+            display: none !important;
+          }
+          .hero-bg-desktop {
+            display: block !important;
+            width: 100% !important;
+            height: 100% !important;
+            object-fit: cover !important;
+            object-position: center 40% !important;
+          }
+          .hero-bg-image {
+            object-position: center 40% !important;
+          }
+          .hero-content-wrapper {
+            align-items: center !important;
+            justify-content: flex-start !important;
+          }
           .hero-headline-wrapper {
             justify-content: center !important;
             padding-left: 0 !important;
