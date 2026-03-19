@@ -228,7 +228,12 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
           zIndex: 10,
           paddingTop: '140px',
           textAlign: 'center',
-          paddingLeft: 0
+          paddingLeft: 0,
+          display: 'flex',
+          alignItems: 'flex-end',
+          justifyContent: 'center',
+          gap: '24px',
+          flexWrap: 'nowrap'
         }}>
           <span className="hero-headline-white" style={{
             color: '#FFFFFF',
@@ -249,7 +254,9 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
             fontWeight: 400,
             fontSize: 'clamp(56px, 6vw, 88px)',
             lineHeight: 1,
-            display: 'inline-block',
+            display: 'inline-flex',
+            alignItems: 'flex-end',
+            justifyContent: 'center',
             minWidth: '600px',
             textAlign: 'center',
             verticalAlign: 'baseline',
@@ -408,11 +415,17 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
             justify-content: flex-start !important;
           }
           .hero-headline-wrapper {
+            display: flex !important;
+            align-items: flex-end !important;
             justify-content: center !important;
+            gap: 24px !important;
             padding-left: 0 !important;
             padding-right: 0 !important;
             text-align: center !important;
             padding-top: 80px !important;
+          }
+          .hero-headline-blue {
+            transform: translateY(8px) !important;
           }
           .hero-subtext-container {
             margin-top: 16px !important;
@@ -442,6 +455,7 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
             padding-top: 80px !important;
           }
           .hero-headline-wrapper {
+            display: block !important;
             text-align: center !important;
             padding-left: 0 !important;
             padding-right: 0 !important;
@@ -459,6 +473,7 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
             min-width: unset !important;
             width: 100% !important;
             text-align: center !important;
+            transform: none !important;
           }
           .hero-headline-blue .word-rotate-inner {
             left: 0 !important;
