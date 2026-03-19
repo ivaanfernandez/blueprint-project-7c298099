@@ -433,6 +433,7 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
           }
           .hero-section {
             height: 95vh !important;
+            margin-bottom: 60px !important;
           }
           .hero-bg-desktop {
             display: none !important;
@@ -441,7 +442,7 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
             display: block !important;
           }
           .hero-content-wrapper {
-            padding-top: 50px !important;
+            padding-top: 90px !important;
             overflow: hidden !important;
           }
           .hero-headline-wrapper {
@@ -485,7 +486,7 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
           }
           .hero-cta-button {
             margin-top: 28px !important;
-            margin-bottom: 0px !important;
+            margin-bottom: 40px !important;
           }
           .hero-scroll-indicator {
             margin-top: 12px !important;
