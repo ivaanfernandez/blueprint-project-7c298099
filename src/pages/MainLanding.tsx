@@ -443,8 +443,8 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
           }
           .hero-headline-wrapper {
             text-align: center !important;
-            padding-left: 16px !important;
-            padding-right: 16px !important;
+            padding-left: 0 !important;
+            padding-right: 0 !important;
             padding-top: 55px !important;
           }
           .hero-headline-white {
