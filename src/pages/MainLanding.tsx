@@ -251,7 +251,7 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
             lineHeight: 1,
             display: 'inline-block',
             minWidth: '600px',
-            textAlign: 'left',
+            textAlign: 'center',
             verticalAlign: 'baseline',
             position: 'relative',
             top: 0,
