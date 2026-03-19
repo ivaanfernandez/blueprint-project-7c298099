@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { User } from "lucide-react";
+import { User, Check } from "lucide-react";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 const FingerprintSVG = ({ color, size = 40 }: { color: string; size?: number }) => (
   <svg viewBox="0 0 140 140" width={size} height={size} fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -22,6 +23,18 @@ const CheckIcon = () => (
     <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
       <path d="M2.5 6L5 8.5L9.5 4" stroke="rgba(255,255,255,0.4)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
+  </div>
+);
+
+const FingerprintDot = ({ color }: { color: string }) => (
+  <div style={{ width: 10, height: 10, borderRadius: "50%", background: color, flexShrink: 0 }} />
+);
+
+const TripleDots = () => (
+  <div className="flex items-center">
+    <FingerprintDot color="#1A6BFF" />
+    <div style={{ marginLeft: -4 }}><FingerprintDot color="#22C55E" /></div>
+    <div style={{ marginLeft: -4 }}><FingerprintDot color="#FF3B3B" /></div>
   </div>
 );
 
@@ -85,6 +98,117 @@ const PLANS: Plan[] = [
   },
 ];
 
+/* ─── Mobile compact card ─── */
+const MobileCard = ({ plan, isYearly, isExpanded, onToggle }: { plan: Plan; isYearly: boolean; isExpanded: boolean; onToggle: () => void }) => {
+  const price = isYearly ? plan.yearlyPrice : plan.monthlyPrice;
+
+  return (
+    <div
+      className="rounded-xl p-4"
+      style={{
+        background: "rgba(255,255,255,0.03)",
+        border: plan.featured
+          ? "0.5px solid rgba(255,255,255,0.18)"
+          : "0.5px solid rgba(255,255,255,0.1)",
+      }}
+    >
+      {/* Top row */}
+      <div className="flex justify-between items-start">
+        {/* Left: dots + name */}
+        <div>
+          <div className="flex items-center gap-2">
+            {plan.name === "BLUEPRINT" ? (
+              <FingerprintDot color="#1A6BFF" />
+            ) : (
+              <TripleDots />
+            )}
+          </div>
+          <div className="flex items-center gap-0 mt-1.5">
+            <p className="text-[13px] font-semibold tracking-wide text-white" style={{ fontFamily: "Rajdhani, sans-serif" }}>
+              {plan.name}
+            </p>
+            {plan.featured && (
+              <span className="text-[8px] rounded-full px-2 py-0.5 ml-2"
+                style={{ background: "rgba(255,255,255,0.08)", color: "#fff" }}>
+                POPULAR
+              </span>
+            )}
+          </div>
+        </div>
+
+        {/* Right: price */}
+        <div className="flex items-baseline gap-0.5">
+          <span className="text-[22px] font-bold text-white" style={{ fontFamily: "Space Grotesk, sans-serif" }}>
+            ${price}
+          </span>
+          <span className="text-[11px]" style={{ color: "rgba(255,255,255,0.35)" }}>/mo</span>
+        </div>
+      </div>
+
+      {/* Description */}
+      <p className="text-[11px] mt-1" style={{ color: "rgba(255,255,255,0.35)" }}>
+        {plan.description}
+      </p>
+
+      {/* CTA button */}
+      <button
+        onClick={onToggle}
+        className="w-full text-[11px] font-semibold tracking-[0.08em] text-center text-white rounded-lg py-2 mt-3 transition-all duration-200"
+        style={{ background: "transparent", border: "0.5px solid rgba(255,255,255,0.15)" }}
+      >
+        {isExpanded ? "Select Plan" : "Choose Plan"}
+      </button>
+
+      {/* Expandable features */}
+      <div
+        className="overflow-hidden transition-all duration-300 ease-in-out"
+        style={{ maxHeight: isExpanded ? 400 : 0 }}
+      >
+        <div style={{ borderTop: "0.5px solid rgba(255,255,255,0.08)", marginTop: 12, paddingTop: 12 }}>
+          <ul className="flex flex-col gap-2">
+            {plan.features.map((f) => (
+              <li key={f} className="flex items-center gap-2">
+                <Check size={12} style={{ color: "rgba(255,255,255,0.3)", flexShrink: 0 }} />
+                <span className="text-[11px]" style={{ color: "rgba(255,255,255,0.4)" }}>{f}</span>
+              </li>
+            ))}
+          </ul>
+
+          {plan.name === "BLUEPRINT ELITE" && (
+            <>
+              <div className="flex items-center mt-3">
+                {[...Array(3)].map((_, i) => (
+                  <div key={i} className="w-6 h-6 rounded-full flex items-center justify-center"
+                    style={{
+                      background: "rgba(255,255,255,0.1)",
+                      border: "2px solid rgba(0,0,0,0.8)",
+                      marginLeft: i > 0 ? -6 : 0,
+                    }}>
+                    <User size={10} style={{ color: "rgba(255,255,255,0.3)" }} />
+                  </div>
+                ))}
+                <div className="w-6 h-6 rounded-full flex items-center justify-center text-[8px] font-semibold"
+                  style={{
+                    background: "rgba(255,255,255,0.08)",
+                    border: "2px solid rgba(0,0,0,0.8)",
+                    marginLeft: -6,
+                    color: "rgba(255,255,255,0.4)",
+                  }}>
+                  +4
+                </div>
+              </div>
+              <p className="text-[9px] tracking-[0.1em] mt-1" style={{ color: "rgba(255,255,255,0.3)" }}>
+                Join the inner circle
+              </p>
+            </>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+/* ─── Desktop card (unchanged) ─── */
 const PricingCard = ({ plan, isYearly }: { plan: Plan; isYearly: boolean }) => {
   const price = isYearly ? plan.yearlyPrice : plan.monthlyPrice;
 
@@ -211,6 +335,8 @@ const PricingCard = ({ plan, isYearly }: { plan: Plan; isYearly: boolean }) => {
 
 const PricingSection = () => {
   const [isYearly, setIsYearly] = useState(false);
+  const [expandedCard, setExpandedCard] = useState<string | null>(null);
+  const isMobile = useIsMobile();
 
   return (
     <section className="relative z-10 py-8 md:py-12 px-4">
@@ -260,30 +386,27 @@ const PricingSection = () => {
       </div>
 
       {/* Cards */}
-      <div className="pricing-scroll-container flex gap-4 px-4 md:grid md:grid-cols-3 md:gap-6 md:items-stretch max-w-5xl md:mx-auto">
-        {PLANS.map((plan) => (
-          <div key={plan.name} className="pricing-card-wrapper flex-shrink-0 w-[85vw] md:w-auto md:flex-shrink-1 flex">
-            <PricingCard plan={plan} isYearly={isYearly} />
-          </div>
-        ))}
-      </div>
-
-      <style>{`
-        @media (max-width: 767px) {
-          .pricing-scroll-container {
-            overflow-x: auto;
-            scroll-snap-type: x mandatory;
-            -webkit-overflow-scrolling: touch;
-            scrollbar-width: none;
-          }
-          .pricing-scroll-container::-webkit-scrollbar {
-            display: none;
-          }
-          .pricing-card-wrapper {
-            scroll-snap-align: center;
-          }
-        }
-      `}</style>
+      {isMobile ? (
+        <div className="flex flex-col gap-3 mx-4">
+          {PLANS.map((plan) => (
+            <MobileCard
+              key={plan.name}
+              plan={plan}
+              isYearly={isYearly}
+              isExpanded={expandedCard === plan.name}
+              onToggle={() => setExpandedCard(expandedCard === plan.name ? null : plan.name)}
+            />
+          ))}
+        </div>
+      ) : (
+        <div className="grid grid-cols-3 gap-6 items-stretch max-w-5xl mx-auto">
+          {PLANS.map((plan) => (
+            <div key={plan.name} className="flex">
+              <PricingCard plan={plan} isYearly={isYearly} />
+            </div>
+          ))}
+        </div>
+      )}
     </section>
   );
 };
