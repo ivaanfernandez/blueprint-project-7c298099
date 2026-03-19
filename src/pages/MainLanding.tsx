@@ -253,7 +253,7 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
             textAlign: 'left',
             verticalAlign: 'baseline',
             position: 'relative',
-            top: '0.08em',
+            top: '0.14em',
             padding: 0,
             margin: 0
           }}>
@@ -414,7 +414,7 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
             padding-top: 80px !important;
           }
           .hero-headline-blue {
-            top: 0.08em !important;
+            top: 0.14em !important;
           }
           .hero-subtext-container {
             margin-top: 16px !important;
