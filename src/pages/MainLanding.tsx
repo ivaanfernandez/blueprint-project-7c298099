@@ -433,6 +433,7 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
           }
           .hero-section {
             height: 95vh !important;
+            margin-bottom: 60px !important;
           }
           .hero-bg-desktop {
             display: none !important;
