@@ -442,7 +442,7 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
             display: block !important;
           }
           .hero-content-wrapper {
-            padding-top: 50px !important;
+            padding-top: 90px !important;
             overflow: hidden !important;
           }
           .hero-headline-wrapper {
