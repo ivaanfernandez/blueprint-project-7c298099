@@ -7,6 +7,7 @@ interface WordRotateProps {
   words: string[];
   duration?: number;
   className?: string;
+  wrapperClassName?: string;
 }
 
 export function WordRotate({

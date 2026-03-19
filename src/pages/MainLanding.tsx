@@ -441,33 +441,47 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
             display: block !important;
           }
           .hero-content-wrapper {
-            padding-top: 40px !important;
+            padding-top: 50px !important;
+            overflow: hidden !important;
           }
           .hero-headline-wrapper {
             display: block !important;
             text-align: center !important;
-            padding-left: 0 !important;
-            padding-right: 0 !important;
-            padding-top: 30px !important;
+            padding: 0 16px !important;
+            padding-top: 40px !important;
           }
           .hero-headline-white {
             display: block !important;
-            font-size: clamp(36px, 10vw, 56px) !important;
-            white-space: nowrap !important;
+            font-size: clamp(32px, 9vw, 48px) !important;
+            white-space: normal !important;
             text-align: center !important;
+            width: 100% !important;
           }
           .hero-headline-blue {
             display: block !important;
-            font-size: clamp(36px, 10vw, 56px) !important;
+            font-size: clamp(32px, 9vw, 48px) !important;
             width: 100% !important;
             text-align: center !important;
             top: 0 !important;
+            white-space: normal !important;
+          }
+          .hero-headline-blue .word-rotate-wrapper {
+            width: 100% !important;
+            min-width: 0 !important;
+            max-width: 100% !important;
+            height: auto !important;
+            min-height: 1.2em !important;
           }
           .hero-headline-blue .word-rotate-inner {
-            left: 0 !important;
-            right: 0 !important;
+            position: relative !important;
+            left: auto !important;
+            right: auto !important;
             transform: none !important;
             justify-content: center !important;
+            white-space: normal !important;
+            width: 100% !important;
+            text-align: center !important;
+            display: flex !important;
           }
           .hero-cta-button {
             margin-top: 28px !important;
