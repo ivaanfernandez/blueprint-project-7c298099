@@ -228,12 +228,7 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
           zIndex: 10,
           paddingTop: '140px',
           textAlign: 'center',
-          paddingLeft: 0,
-          display: 'flex',
-          alignItems: 'flex-end',
-          justifyContent: 'center',
-          gap: '24px',
-          flexWrap: 'nowrap'
+          paddingLeft: 0
         }}>
           <span className="hero-headline-white" style={{
             color: '#FFFFFF',
@@ -254,14 +249,11 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
             fontWeight: 400,
             fontSize: 'clamp(56px, 6vw, 88px)',
             lineHeight: 1,
-            display: 'inline-flex',
-            alignItems: 'flex-end',
-            justifyContent: 'center',
-            minWidth: '600px',
-            textAlign: 'center',
+            display: 'inline-block',
+            textAlign: 'left',
             verticalAlign: 'baseline',
             position: 'relative',
-            top: 0,
+            top: '0.08em',
             padding: 0,
             margin: 0
           }}>
