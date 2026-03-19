@@ -324,7 +324,7 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
         </div>
 
         {/* Scroll indicator */}
-        <div style={{ marginTop: 24, display: 'flex', justifyContent: 'center', width: '100%', pointerEvents: 'none' }}>
+        <div className="hero-scroll-indicator" style={{ marginTop: 24, display: 'flex', justifyContent: 'center', width: '100%', pointerEvents: 'none' }}>
           <ChevronDown size={24} style={{ color: 'rgba(255,255,255,0.3)', animation: 'hero-bounce 2s ease-in-out infinite' }} />
         </div>
 
@@ -441,14 +441,14 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
             display: block !important;
           }
           .hero-content-wrapper {
-            padding-top: 80px !important;
+            padding-top: 40px !important;
           }
           .hero-headline-wrapper {
             display: block !important;
             text-align: center !important;
             padding-left: 0 !important;
             padding-right: 0 !important;
-            padding-top: 55px !important;
+            padding-top: 30px !important;
           }
           .hero-headline-white {
             display: block !important;
@@ -470,14 +470,17 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
             justify-content: center !important;
           }
           .hero-cta-button {
-            margin-top: 48px !important;
-            margin-bottom: 28px !important;
+            margin-top: 28px !important;
+            margin-bottom: 0px !important;
+          }
+          .hero-scroll-indicator {
+            margin-top: 12px !important;
           }
           .hero-shiny-btn {
-            font-size: 13px !important;
-            padding: 0.9rem 2.25rem !important;
+            font-size: 11px !important;
+            padding: 0.63rem 1.6rem !important;
             min-width: unset !important;
-            max-width: 75% !important;
+            max-width: 70% !important;
             letter-spacing: 0.15em !important;
           }
           .dock-container {
@@ -503,7 +506,7 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
           }
           .hero-subtext-line {
             white-space: nowrap !important;
-            font-size: clamp(10.5px, 3.2vw, 14px) !important;
+            font-size: clamp(12px, 3.5vw, 16px) !important;
             text-align: center !important;
             display: flex !important;
             justify-content: center !important;
