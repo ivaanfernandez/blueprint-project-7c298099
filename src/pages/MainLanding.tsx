@@ -223,6 +223,10 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
         {/* Hero content - on top of image */}
         <div className="hero-content-wrapper" style={{ position: "relative", zIndex: 10, width: "100%", display: "flex", flexDirection: "column", paddingTop: "110px" }}>
         <div className="hero-headline-wrapper" style={{
+          display: 'flex',
+          flexWrap: 'wrap',
+          alignItems: 'baseline',
+          justifyContent: 'center',
           width: '100%',
           position: 'relative',
           zIndex: 10,
