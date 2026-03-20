@@ -417,7 +417,7 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
             padding-top: 80px !important;
           }
           .hero-headline-blue {
-            top: 0.14em !important;
+            top: 0 !important;
           }
           .hero-subtext-container {
             margin-top: 16px !important;

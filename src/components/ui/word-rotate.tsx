@@ -71,10 +71,8 @@ export function WordRotate({
             style={{
               position: "absolute",
               left: 0,
-              top: 0,
               bottom: 0,
-              display: "flex",
-              alignItems: "flex-end",
+              display: "block",
               whiteSpace: "nowrap",
               lineHeight: "1",
               transform: "none",
