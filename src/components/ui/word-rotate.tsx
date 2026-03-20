@@ -53,7 +53,7 @@ export function WordRotate({
           display: "inline-block",
           width: measuredWidth ? `${measuredWidth}px` : "auto",
           minWidth: measuredWidth ? `${measuredWidth}px` : undefined,
-          height: "1em",
+          height: "1.1em",
           verticalAlign: "baseline",
           lineHeight: "1",
           padding: 0,
