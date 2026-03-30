@@ -154,6 +154,10 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
           <Dock>
             {HUELLAS.map((h) => (
               <DockIcon key={h.route} tooltip={h.tooltip} onClick={() => {
+                if (h.color === "#1A6BFF") {
+                  navigate("/");
+                  return;
+                }
                 const el = document.getElementById(h.sectionId);
                 if (el) {
                   el.scrollIntoView({ behavior: 'smooth', block: 'center' });

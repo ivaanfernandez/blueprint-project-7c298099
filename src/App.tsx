@@ -5,8 +5,8 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import BiometricScan from "./components/BiometricScan";
+import Home from "./pages/Home";
 import MainLanding from "./pages/MainLanding";
-import HuellaAzul from "./pages/HuellaAzul";
 import HuellaRoja from "./pages/HuellaRoja";
 import HuellaVerde from "./pages/HuellaVerde";
 import NotFound from "./pages/NotFound.tsx";
@@ -37,8 +37,8 @@ const App = () => {
         {phase === "landing" && (
           <BrowserRouter>
             <Routes>
-              <Route path="/" element={<MainLanding showDock={showDock} />} />
-              <Route path="/huella-azul" element={<HuellaAzul />} />
+              <Route path="/" element={<Home showDock={showDock} />} />
+              <Route path="/huella-azul" element={<MainLanding showDock={showDock} />} />
               <Route path="/huella-roja" element={<HuellaRoja />} />
               <Route path="/huella-verde" element={<HuellaVerde />} />
               <Route path="*" element={<NotFound />} />
