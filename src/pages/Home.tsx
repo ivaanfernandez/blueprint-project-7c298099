@@ -212,22 +212,6 @@ const Home = ({ showDock }: { showDock: boolean }) => {
               </button>
             </div>
 
-            {/* Stats */}
-            <div className="stats-row" style={{
-              display: "flex", gap: 32, marginTop: 40, paddingTop: 24,
-              borderTop: "1px solid rgba(255,255,255,0.06)",
-            }}>
-              {[
-                { value: "3", label: "Protocols" },
-                { value: "1", label: "System" },
-                { value: "∞", label: "Potential" },
-              ].map((s, i) => (
-                <div key={i}>
-                  <div style={{ fontFamily: "'Michroma', sans-serif", fontSize: 20, color: "#fff" }}>{s.value}</div>
-                  <div style={{ fontFamily: "'Inter', sans-serif", fontSize: 10, color: "rgba(255,255,255,0.3)", marginTop: 4 }}>{s.label}</div>
-                </div>
-              ))}
-            </div>
           </div>
 
           {/* Right */}
