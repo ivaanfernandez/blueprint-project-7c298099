@@ -190,7 +190,7 @@ const Home = ({ showDock }: { showDock: boolean }) => {
         {/* Left */}
         <div style={{ flex: 1, minWidth: 280 }}>
           <h1 style={{
-            fontFamily: "'Syne', sans-serif", fontWeight: 800,
+            fontFamily: "'Michroma', sans-serif",
             fontSize: "clamp(28px, 4vw, 56px)", color: "#000",
             lineHeight: 1.1, textTransform: "uppercase", marginBottom: 14, margin: 0,
           }}>
@@ -293,7 +293,7 @@ const Home = ({ showDock }: { showDock: boolean }) => {
             color: "#9CA3AF", letterSpacing: "0.3em", textTransform: "uppercase", marginBottom: 10,
           }}>ABOUT THE SYSTEM</p>
           <h2 style={{
-            fontFamily: "'Syne', sans-serif", fontWeight: 800,
+            fontFamily: "'Michroma', sans-serif",
             fontSize: "clamp(18px, 2.4vw, 30px)", color: "#000",
             lineHeight: 1.2, textTransform: "uppercase", margin: 0,
           }}>
@@ -368,7 +368,7 @@ const Home = ({ showDock }: { showDock: boolean }) => {
           color: "#9CA3AF", letterSpacing: "0.3em",
         }}>PROTOCOLS</p>
         <h2 style={{
-          fontFamily: "'Syne', sans-serif", fontWeight: 800,
+          fontFamily: "'Michroma', sans-serif",
           fontSize: "clamp(18px, 2.4vw, 30px)", color: "#000",
           textTransform: "uppercase", marginTop: 8, marginBottom: 32,
         }}>
