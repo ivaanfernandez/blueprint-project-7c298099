@@ -320,6 +320,7 @@ const Home = ({ showDock }: { showDock: boolean }) => {
           fontFamily: "'Michroma', sans-serif",
           fontSize: "clamp(18px, 2.5vw, 32px)", color: "#000",
           textTransform: "uppercase", marginBottom: 40,
+          textAlign: "center", width: "100%",
         }}>
           THE PROTOCOL
         </h2>
