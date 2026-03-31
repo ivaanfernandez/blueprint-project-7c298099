@@ -215,9 +215,9 @@ const Home = ({ showDock }: { showDock: boolean }) => {
           </div>
 
           {/* Right */}
-          <div className="hero-right" style={{ flex: 1, display: "flex", justifyContent: "center", minWidth: 260 }}>
+          <div className="hero-right" style={{ flex: 1, display: "flex", justifyContent: "flex-end", minWidth: 260 }}>
             <div style={{
-              maxWidth: 380, width: "100%", aspectRatio: "3/4", borderRadius: 20,
+              maxWidth: 480, width: "100%", aspectRatio: "3/4", borderRadius: "20px 0 0 20px",
               background: "linear-gradient(160deg, rgba(255,255,255,0.04), rgba(255,255,255,0.01))",
               border: "1px solid rgba(255,255,255,0.06)",
               display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 14,
