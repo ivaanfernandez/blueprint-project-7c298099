@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Dock, DockIcon } from "@/components/ui/dock";
@@ -8,6 +8,12 @@ import slider3 from "@/assets/slider/slider-3.jpg";
 import slider4 from "@/assets/slider/slider-4.jpg";
 import slider5 from "@/assets/slider/slider-5.jpg";
 import slider6 from "@/assets/slider/slider-6.jpg";
+
+declare global {
+  interface Window {
+    UnicornStudio: any;
+  }
+}
 
 /* ── Inline SVG ── */
 const FingerprintSVG = ({ color, size = 48 }: { color: string; size?: number }) => (
@@ -69,6 +75,29 @@ const Home = ({ showDock }: { showDock: boolean }) => {
     aboutRef.current?.scrollIntoView({ behavior: "smooth" });
   };
 
+  useEffect(() => {
+    const embedScript = document.createElement('script');
+    embedScript.type = 'text/javascript';
+    embedScript.textContent = `
+      !function(){
+        if(!window.UnicornStudio){
+          window.UnicornStudio={isInitialized:!1};
+          var i=document.createElement("script");
+          i.src="https://cdn.jsdelivr.net/gh/hiunicornstudio/unicornstudio.js@v1.4.33/dist/unicornStudio.umd.js";
+          i.onload=function(){
+            window.UnicornStudio.isInitialized||(UnicornStudio.init(),window.UnicornStudio.isInitialized=!0)
+          };
+          (document.head || document.body).appendChild(i)
+        }
+      }();
+    `;
+    document.head.appendChild(embedScript);
+
+    return () => {
+      document.head.removeChild(embedScript);
+    };
+  }, []);
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -105,6 +134,30 @@ const Home = ({ showDock }: { showDock: boolean }) => {
         @keyframes labDotPulse {
           0%, 100% { opacity: 0; transform: scale(0.5); }
           50% { opacity: 1; transform: scale(1); }
+        }
+        @keyframes pulse {
+          0%, 100% { opacity: 0.3; }
+          50% { opacity: 1; }
+        }
+        @media (min-width: 1024px) {
+          .vitruvian-canvas-desktop { display: block !important; }
+          .vitruvian-mobile-bg { display: none !important; }
+        }
+        @media (max-width: 1023px) {
+          .vitruvian-canvas-desktop { display: none !important; }
+          .vitruvian-mobile-bg { display: block !important; }
+          .vitruvian-dots-row { display: none !important; }
+        }
+        [data-us-project] { position: relative !important; overflow: hidden !important; }
+        [data-us-project] canvas { clip-path: inset(0 0 8% 0) !important; }
+        [data-us-project] * { pointer-events: none !important; }
+        [data-us-project] a[href*="unicorn"],
+        [data-us-project] button[title*="unicorn"],
+        [data-us-project] div[title*="Made with"],
+        [data-us-project] [class*="brand"],
+        [data-us-project] [class*="credit"],
+        [data-us-project] [class*="watermark"] {
+          display: none !important; visibility: hidden !important; opacity: 0 !important;
         }
         @media (max-width: 767px) {
           .hero-flex { flex-direction: column !important; text-align: center !important; }
@@ -447,8 +500,164 @@ const Home = ({ showDock }: { showDock: boolean }) => {
         </div>
       </div>
 
-      {/* ── Divider ── */}
+      </div>{/* END WHITE ZONE WRAPPER (before Vitruvian) */}
+
+      {/* ── Divider before Vitruvian ── */}
       <SectionDivider />
+
+      {/* ══════════════════════════════════════════════════════ */}
+      {/* ── VITRUVIAN MAN SECTION (DARK) ── */}
+      {/* ══════════════════════════════════════════════════════ */}
+      <div style={{
+        position: "relative", width: "100%", minHeight: "100vh",
+        background: "#0a0a0a", overflow: "hidden",
+        display: "flex", alignItems: "center",
+      }}>
+        {/* UnicornStudio animated Vitruvian Man - background layer, hidden on mobile */}
+        <div className="vitruvian-canvas-desktop" style={{
+          position: "absolute", inset: 0, zIndex: 0, pointerEvents: "none",
+        }}>
+          <div
+            data-us-project="VitruvianMan"
+            data-us-fileid="7WnWZWtJWYOsIxc9wY8G"
+            style={{ width: "100%", height: "100%", position: "absolute", inset: 0 }}
+          />
+        </div>
+
+        {/* Mobile fallback: subtle stars/dots background */}
+        <div className="vitruvian-mobile-bg" style={{
+          position: "absolute", inset: 0, zIndex: 0, pointerEvents: "none",
+          backgroundImage: "radial-gradient(rgba(255,255,255,0.05) 1px, transparent 1px)",
+          backgroundSize: "20px 20px",
+        }} />
+
+        {/* Corner frame accents */}
+        <div style={{ position: "absolute", inset: 0, zIndex: 1, pointerEvents: "none" }}>
+          <div style={{ position: "absolute", top: 24, left: 24, width: 40, height: 40, borderTop: "1px solid rgba(255,255,255,0.1)", borderLeft: "1px solid rgba(255,255,255,0.1)" }} />
+          <div style={{ position: "absolute", top: 24, right: 24, width: 40, height: 40, borderTop: "1px solid rgba(255,255,255,0.1)", borderRight: "1px solid rgba(255,255,255,0.1)" }} />
+          <div style={{ position: "absolute", bottom: 24, left: 24, width: 40, height: 40, borderBottom: "1px solid rgba(255,255,255,0.1)", borderLeft: "1px solid rgba(255,255,255,0.1)" }} />
+          <div style={{ position: "absolute", bottom: 24, right: 24, width: 40, height: 40, borderBottom: "1px solid rgba(255,255,255,0.1)", borderRight: "1px solid rgba(255,255,255,0.1)" }} />
+        </div>
+
+        {/* Content overlay - left side */}
+        <div style={{
+          position: "relative", zIndex: 2, padding: "80px 7%",
+          maxWidth: 520, display: "flex", flexDirection: "column", gap: 0,
+        }}>
+          {/* Top decorative line */}
+          <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 24 }}>
+            <div style={{ width: 40, height: 1, background: "rgba(255,255,255,0.15)" }} />
+            <span style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 7, color: "rgba(255,255,255,0.25)", letterSpacing: "0.2em" }}>001</span>
+            <div style={{ flex: 1, height: 1, background: "rgba(255,255,255,0.05)" }} />
+          </div>
+
+          {/* Title */}
+          <h2 style={{
+            fontFamily: "'Michroma', sans-serif",
+            fontSize: "clamp(28px, 4vw, 52px)", color: "#FFFFFF",
+            lineHeight: 1.08, textTransform: "uppercase", margin: "0 0 20px 0",
+          }}>
+            PERFECT<br />PROPORTIONS
+          </h2>
+
+          {/* Decorative dots row - desktop only */}
+          <div className="vitruvian-dots-row" style={{
+            display: "flex", gap: 4, marginBottom: 20, opacity: 0.3,
+          }}>
+            {Array.from({ length: 40 }).map((_, i) => (
+              <div key={i} style={{
+                width: 2, height: 2, borderRadius: "50%",
+                background: i % 5 === 0 ? "rgba(26,107,255,0.6)" : "rgba(255,255,255,0.3)",
+              }} />
+            ))}
+          </div>
+
+          {/* Description */}
+          <p style={{
+            fontFamily: "'Inter', sans-serif", fontWeight: 300,
+            fontSize: 13, color: "rgba(255,255,255,0.45)", lineHeight: 1.8,
+            maxWidth: 400, marginBottom: 28,
+          }}>
+            Where geometry meets humanity. The Blueprint system is built on the principle of ideal form — precision-engineered for the human machine.
+          </p>
+
+          {/* Buttons */}
+          <div style={{ display: "flex", gap: 12, marginBottom: 40 }}>
+            <button
+              onClick={() => navigate("/huella-azul")}
+              style={{
+                fontFamily: "'Orbitron', sans-serif", fontSize: 9, fontWeight: 500,
+                letterSpacing: "0.15em", color: "#fff", background: "transparent",
+                border: "1px solid rgba(255,255,255,0.2)", borderRadius: 6,
+                padding: "12px 24px", cursor: "pointer", transition: "all 0.3s ease",
+              }}
+              onMouseEnter={(e) => {
+                (e.target as HTMLElement).style.background = '#fff';
+                (e.target as HTMLElement).style.color = '#000';
+              }}
+              onMouseLeave={(e) => {
+                (e.target as HTMLElement).style.background = 'transparent';
+                (e.target as HTMLElement).style.color = '#fff';
+              }}
+            >
+              GET STARTED
+            </button>
+            <button
+              style={{
+                fontFamily: "'Orbitron', sans-serif", fontSize: 9, fontWeight: 500,
+                letterSpacing: "0.15em", color: "rgba(255,255,255,0.6)", background: "transparent",
+                border: "1px solid rgba(255,255,255,0.15)", borderRadius: 6,
+                padding: "12px 24px", cursor: "pointer", transition: "all 0.3s ease",
+              }}
+              onMouseEnter={(e) => {
+                (e.target as HTMLElement).style.borderColor = 'rgba(255,255,255,0.4)';
+                (e.target as HTMLElement).style.color = '#fff';
+              }}
+              onMouseLeave={(e) => {
+                (e.target as HTMLElement).style.borderColor = 'rgba(255,255,255,0.15)';
+                (e.target as HTMLElement).style.color = 'rgba(255,255,255,0.6)';
+              }}
+            >
+              LEARN MORE
+            </button>
+          </div>
+
+          {/* Bottom technical notation */}
+          <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+            <span style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 8, color: "rgba(255,255,255,0.15)" }}>∞</span>
+            <div style={{ width: 20, height: 1, background: "rgba(255,255,255,0.08)" }} />
+            <span style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 6, color: "rgba(255,255,255,0.12)", letterSpacing: "0.3em" }}>VITRUVIAN</span>
+          </div>
+        </div>
+
+        {/* Bottom status bar */}
+        <div style={{
+          position: "absolute", bottom: 0, left: 0, right: 0, zIndex: 2,
+          padding: "12px 7%", display: "flex", justifyContent: "space-between", alignItems: "center",
+          borderTop: "1px solid rgba(255,255,255,0.04)",
+        }}>
+          <div style={{ display: "flex", gap: 16, alignItems: "center" }}>
+            <span style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 7, color: "rgba(255,255,255,0.2)", letterSpacing: "0.15em" }}>SYSTEM.ACTIVE</span>
+            <span style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 7, color: "rgba(255,255,255,0.1)", letterSpacing: "0.1em" }}>V1.0.0</span>
+          </div>
+          <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
+            <span style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 7, color: "rgba(255,255,255,0.2)", letterSpacing: "0.1em" }}>◐ RENDERING</span>
+            <div style={{ display: "flex", gap: 3 }}>
+              <div style={{ width: 4, height: 4, borderRadius: "50%", background: "rgba(26,107,255,0.4)", animation: "pulse 2s ease-in-out infinite" }} />
+              <div style={{ width: 4, height: 4, borderRadius: "50%", background: "rgba(26,107,255,0.3)", animation: "pulse 2s ease-in-out 0.3s infinite" }} />
+              <div style={{ width: 4, height: 4, borderRadius: "50%", background: "rgba(26,107,255,0.2)", animation: "pulse 2s ease-in-out 0.6s infinite" }} />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* ── Divider after Vitruvian ── */}
+      <SectionDivider />
+
+      {/* ══════════════════════════════════════════════════════ */}
+      {/* ── WHITE ZONE WRAPPER (resumed) ── */}
+      {/* ══════════════════════════════════════════════════════ */}
+      <div style={{ position: "relative", background: "#FFFFFF" }}>
 
       {/* ── E: FEATURE (WHITE) ── */}
       <div className="feature-flex" style={{
@@ -528,7 +737,7 @@ const Home = ({ showDock }: { showDock: boolean }) => {
         </div>
       </div>
 
-      </div>{/* END WHITE ZONE WRAPPER */}
+      </div>{/* END WHITE ZONE WRAPPER (resumed) */}
 
       {/* ── G: CTA FINAL (DARK) ── */}
       {/* ══════════════════════════════════════════════════════ */}
