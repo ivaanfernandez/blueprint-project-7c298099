@@ -172,7 +172,7 @@ const Home = ({ showDock }: { showDock: boolean }) => {
               fontSize: "clamp(28px, 4.5vw, 58px)", color: "#FFFFFF",
               lineHeight: 1.08, textTransform: "uppercase", margin: "0 0 20px 0",
             }}>
-              THE FUTURE<br />OF HUMAN<br />PERFORMANCE
+              BLUEPRINT<br />PROJECT
             </h1>
             <p style={{
               fontFamily: "'Inter', sans-serif", fontWeight: 300,
