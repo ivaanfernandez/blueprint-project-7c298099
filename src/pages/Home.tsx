@@ -267,7 +267,7 @@ const Home = ({ showDock }: { showDock: boolean }) => {
                 HERO IMAGE
               </span>
             </div>
-          </div>
+           </motion.div>
         </div>
       </div>
 
