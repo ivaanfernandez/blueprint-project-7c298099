@@ -500,10 +500,8 @@ const Home = ({ showDock }: { showDock: boolean }) => {
       {/* ── Divider ── */}
       <SectionDivider />
 
-      {/* ══════════════════════════════════════════════════════ */}
       {/* ── F: BENTO GRID (WHITE) ── */}
-      {/* ══════════════════════════════════════════════════════ */}
-      <div style={{ padding: "40px 7%", background: "#FFFFFF" }}>
+      <div style={{ padding: "40px 7%", position: "relative", zIndex: 1 }}>
         <div style={{ position: "relative", padding: 14 }}>
           <CornerBrackets />
 
