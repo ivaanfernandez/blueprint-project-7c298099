@@ -305,34 +305,6 @@ const Home = ({ showDock }: { showDock: boolean }) => {
               Blueprint Project is a precision-engineered system built around three core protocols. Training, nutrition, and recovery — synchronized to unlock your full potential. This is not a gym. This is your operating system.
             </p>
 
-            {/* Action buttons */}
-            <div className="about-buttons" style={{ display: "flex", alignItems: "center", gap: 20 }}>
-              <button
-                onClick={() => navigate("/huella-azul")}
-                style={{
-                  fontFamily: "'Orbitron', sans-serif", fontSize: 9, fontWeight: 500,
-                  letterSpacing: "0.15em", color: "#fff", background: "#000",
-                  border: "none", borderRadius: 6, padding: "12px 24px", cursor: "pointer",
-                  transition: "all 0.3s ease",
-                }}
-                onMouseEnter={(e) => { e.currentTarget.style.background = "#1A6BFF"; }}
-                onMouseLeave={(e) => { e.currentTarget.style.background = "#000"; }}
-              >
-                LEARN MORE
-              </button>
-              <button
-                style={{
-                  fontFamily: "'Inter', sans-serif", fontSize: 12, color: "#6B7280",
-                  background: "transparent", border: "none", cursor: "pointer",
-                  display: "flex", alignItems: "center", gap: 6,
-                  transition: "color 0.3s ease",
-                }}
-                onMouseEnter={(e) => { e.currentTarget.style.color = "#000"; }}
-                onMouseLeave={(e) => { e.currentTarget.style.color = "#6B7280"; }}
-              >
-                ▶ Watch video
-              </button>
-            </div>
           </div>
         </div>
       </div>
