@@ -146,7 +146,7 @@ const Home = ({ showDock }: { showDock: boolean }) => {
       {/* ── B: HERO (DARK) ── */}
       {/* ══════════════════════════════════════════════════════ */}
       <div style={{
-        background: "#0a0a0a", minHeight: "90vh", position: "relative", overflow: "hidden",
+        background: "#0a0a0a", minHeight: "100vh", position: "relative", overflow: "hidden",
       }}>
         {/* Dot pattern */}
         <div style={{
@@ -156,7 +156,7 @@ const Home = ({ showDock }: { showDock: boolean }) => {
         }} />
 
         <div className="hero-flex" style={{
-          display: "flex", alignItems: "center", padding: "80px 7% 40px", gap: 40,
+          display: "flex", alignItems: "center", padding: "80px 0 40px 7%", gap: 40,
           position: "relative", zIndex: 2, flexWrap: "wrap",
         }}>
           {/* Left */}
@@ -172,7 +172,7 @@ const Home = ({ showDock }: { showDock: boolean }) => {
               fontSize: "clamp(28px, 4.5vw, 58px)", color: "#FFFFFF",
               lineHeight: 1.08, textTransform: "uppercase", margin: "0 0 20px 0",
             }}>
-              THE FUTURE<br />OF HUMAN<br />PERFORMANCE
+              BLUEPRINT<br />PROJECT
             </h1>
             <p style={{
               fontFamily: "'Inter', sans-serif", fontWeight: 300,
@@ -212,28 +212,12 @@ const Home = ({ showDock }: { showDock: boolean }) => {
               </button>
             </div>
 
-            {/* Stats */}
-            <div className="stats-row" style={{
-              display: "flex", gap: 32, marginTop: 40, paddingTop: 24,
-              borderTop: "1px solid rgba(255,255,255,0.06)",
-            }}>
-              {[
-                { value: "3", label: "Protocols" },
-                { value: "1", label: "System" },
-                { value: "∞", label: "Potential" },
-              ].map((s, i) => (
-                <div key={i}>
-                  <div style={{ fontFamily: "'Michroma', sans-serif", fontSize: 20, color: "#fff" }}>{s.value}</div>
-                  <div style={{ fontFamily: "'Inter', sans-serif", fontSize: 10, color: "rgba(255,255,255,0.3)", marginTop: 4 }}>{s.label}</div>
-                </div>
-              ))}
-            </div>
           </div>
 
           {/* Right */}
-          <div className="hero-right" style={{ flex: 1, display: "flex", justifyContent: "center", minWidth: 260 }}>
+          <div className="hero-right" style={{ flex: 1, display: "flex", justifyContent: "flex-end", minWidth: 260 }}>
             <div style={{
-              maxWidth: 380, width: "100%", aspectRatio: "3/4", borderRadius: 20,
+              maxWidth: 480, width: "100%", aspectRatio: "3/4", borderRadius: "20px 0 0 20px",
               background: "linear-gradient(160deg, rgba(255,255,255,0.04), rgba(255,255,255,0.01))",
               border: "1px solid rgba(255,255,255,0.06)",
               display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 14,
@@ -287,12 +271,6 @@ const Home = ({ showDock }: { showDock: boolean }) => {
 
           {/* Right — Text */}
           <div style={{ flex: 1, minWidth: 260 }}>
-            <p style={{
-              fontFamily: "'Orbitron', sans-serif", fontSize: 9, fontWeight: 500,
-              color: "#9CA3AF", letterSpacing: "0.35em", textTransform: "uppercase", marginBottom: 12,
-            }}>
-              A&nbsp;B&nbsp;O&nbsp;U&nbsp;T&nbsp; &nbsp;U&nbsp;S
-            </p>
             <h2 style={{
               fontFamily: "'Michroma', sans-serif",
               fontSize: "clamp(20px, 2.8vw, 34px)", color: "#000",
@@ -321,34 +299,6 @@ const Home = ({ showDock }: { showDock: boolean }) => {
               Blueprint Project is a precision-engineered system built around three core protocols. Training, nutrition, and recovery — synchronized to unlock your full potential. This is not a gym. This is your operating system.
             </p>
 
-            {/* Action buttons */}
-            <div className="about-buttons" style={{ display: "flex", alignItems: "center", gap: 20 }}>
-              <button
-                onClick={() => navigate("/huella-azul")}
-                style={{
-                  fontFamily: "'Orbitron', sans-serif", fontSize: 9, fontWeight: 500,
-                  letterSpacing: "0.15em", color: "#fff", background: "#000",
-                  border: "none", borderRadius: 6, padding: "12px 24px", cursor: "pointer",
-                  transition: "all 0.3s ease",
-                }}
-                onMouseEnter={(e) => { e.currentTarget.style.background = "#1A6BFF"; }}
-                onMouseLeave={(e) => { e.currentTarget.style.background = "#000"; }}
-              >
-                LEARN MORE
-              </button>
-              <button
-                style={{
-                  fontFamily: "'Inter', sans-serif", fontSize: 12, color: "#6B7280",
-                  background: "transparent", border: "none", cursor: "pointer",
-                  display: "flex", alignItems: "center", gap: 6,
-                  transition: "color 0.3s ease",
-                }}
-                onMouseEnter={(e) => { e.currentTarget.style.color = "#000"; }}
-                onMouseLeave={(e) => { e.currentTarget.style.color = "#6B7280"; }}
-              >
-                ▶ Watch video
-              </button>
-            </div>
           </div>
         </div>
       </div>
@@ -364,6 +314,7 @@ const Home = ({ showDock }: { showDock: boolean }) => {
           fontFamily: "'Michroma', sans-serif",
           fontSize: "clamp(18px, 2.5vw, 32px)", color: "#000",
           textTransform: "uppercase", marginBottom: 40,
+          textAlign: "center", width: "100%",
         }}>
           THE PROTOCOL
         </h2>
