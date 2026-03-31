@@ -9,11 +9,6 @@ import slider4 from "@/assets/slider/slider-4.jpg";
 import slider5 from "@/assets/slider/slider-5.jpg";
 import slider6 from "@/assets/slider/slider-6.jpg";
 
-declare global {
-  interface Window {
-    UnicornStudio: any;
-  }
-}
 
 /* ── Inline SVG ── */
 const FingerprintSVG = ({ color, size = 48 }: { color: string; size?: number }) => (
