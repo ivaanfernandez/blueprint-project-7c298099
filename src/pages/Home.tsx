@@ -237,7 +237,13 @@ const Home = ({ showDock }: { showDock: boolean }) => {
           </div>
 
           {/* Right */}
-          <div className="hero-right" style={{ flex: 1, display: "flex", justifyContent: "flex-end", minWidth: 260 }}>
+            <motion.div
+              className="hero-right"
+              style={{ flex: 1, display: "flex", justifyContent: "flex-end", minWidth: 260 }}
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 1, ease: [0.25, 0.1, 0.25, 1], delay: 0.5 }}
+            >
             <div style={{
               maxWidth: 480, width: "100%", aspectRatio: "3/4", borderRadius: "20px 0 0 20px",
               background: "linear-gradient(160deg, rgba(255,255,255,0.04), rgba(255,255,255,0.01))",
