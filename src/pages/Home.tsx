@@ -447,12 +447,10 @@ const Home = ({ showDock }: { showDock: boolean }) => {
       {/* ── Divider ── */}
       <SectionDivider />
 
-      {/* ══════════════════════════════════════════════════════ */}
       {/* ── E: FEATURE (WHITE) ── */}
-      {/* ══════════════════════════════════════════════════════ */}
       <div className="feature-flex" style={{
         padding: "56px 7%", display: "flex", alignItems: "center", gap: 48,
-        background: "#FFFFFF", flexWrap: "wrap",
+        position: "relative", zIndex: 1, flexWrap: "wrap",
       }}>
         {/* Left */}
         <div style={{ flex: 1, minWidth: 260 }}>
