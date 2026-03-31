@@ -271,12 +271,6 @@ const Home = ({ showDock }: { showDock: boolean }) => {
 
           {/* Right — Text */}
           <div style={{ flex: 1, minWidth: 260 }}>
-            <p style={{
-              fontFamily: "'Orbitron', sans-serif", fontSize: 9, fontWeight: 500,
-              color: "#9CA3AF", letterSpacing: "0.35em", textTransform: "uppercase", marginBottom: 12,
-            }}>
-              A&nbsp;B&nbsp;O&nbsp;U&nbsp;T&nbsp; &nbsp;U&nbsp;S
-            </p>
             <h2 style={{
               fontFamily: "'Michroma', sans-serif",
               fontSize: "clamp(20px, 2.8vw, 34px)", color: "#000",
