@@ -190,7 +190,7 @@ const Home = ({ showDock }: { showDock: boolean }) => {
         {/* Left */}
         <div style={{ flex: 1, minWidth: 280 }}>
           <h1 style={{
-            fontFamily: "'Syne', sans-serif", fontWeight: 800,
+            fontFamily: "'Michroma', sans-serif",
             fontSize: "clamp(28px, 4vw, 56px)", color: "#000",
             lineHeight: 1.1, textTransform: "uppercase", marginBottom: 14, margin: 0,
           }}>
