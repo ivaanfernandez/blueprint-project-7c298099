@@ -161,29 +161,51 @@ const Home = ({ showDock }: { showDock: boolean }) => {
         }}>
           {/* Left */}
           <div className="hero-left" style={{ flex: 1, minWidth: 280, display: "flex", flexDirection: "column" }}>
-            <p style={{
-              fontFamily: "'Orbitron', sans-serif", fontSize: 9, color: "rgba(255,255,255,0.35)",
-              letterSpacing: "0.35em", textTransform: "uppercase", marginBottom: 16,
-            }}>
+            <motion.p
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1], delay: 0.2 }}
+              style={{
+                fontFamily: "'Orbitron', sans-serif", fontSize: 9, color: "rgba(255,255,255,0.35)",
+                letterSpacing: "0.35em", textTransform: "uppercase", marginBottom: 16,
+              }}
+            >
               B&nbsp;L&nbsp;U&nbsp;E&nbsp;P&nbsp;R&nbsp;I&nbsp;N&nbsp;T&nbsp; &nbsp;S&nbsp;Y&nbsp;S&nbsp;T&nbsp;E&nbsp;M
-            </p>
-            <h1 className="hero-title" style={{
-              fontFamily: "'Michroma', sans-serif",
-              fontSize: "clamp(28px, 4.5vw, 58px)", color: "#FFFFFF",
-              lineHeight: 1.08, textTransform: "uppercase", margin: "0 0 20px 0",
-            }}>
+            </motion.p>
+            <motion.h1
+              className="hero-title"
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1], delay: 0.4 }}
+              style={{
+                fontFamily: "'Michroma', sans-serif",
+                fontSize: "clamp(28px, 4.5vw, 58px)", color: "#FFFFFF",
+                lineHeight: 1.08, textTransform: "uppercase", margin: "0 0 20px 0",
+              }}
+            >
               BLUEPRINT<br />PROJECT
-            </h1>
-            <p style={{
-              fontFamily: "'Inter', sans-serif", fontWeight: 300,
-              fontSize: 13, color: "rgba(255,255,255,0.45)", lineHeight: 1.7,
-              maxWidth: 400, marginBottom: 28,
-            }}>
+            </motion.h1>
+            <motion.p
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1], delay: 0.6 }}
+              style={{
+                fontFamily: "'Inter', sans-serif", fontWeight: 300,
+                fontSize: 13, color: "rgba(255,255,255,0.45)", lineHeight: 1.7,
+                maxWidth: 400, marginBottom: 28,
+              }}
+            >
               Where human performance connects his mind, body and soul. Three protocols. One integrated system.
-            </p>
+            </motion.p>
 
             {/* Buttons */}
-            <div className="hero-buttons" style={{ display: "flex", gap: 12, marginBottom: 0 }}>
+            <motion.div
+              className="hero-buttons"
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1], delay: 0.8 }}
+              style={{ display: "flex", gap: 12, marginBottom: 0 }}
+            >
               <button
                 onClick={() => navigate("/huella-azul")}
                 style={{
@@ -210,7 +232,7 @@ const Home = ({ showDock }: { showDock: boolean }) => {
               >
                 EXPLORE
               </button>
-            </div>
+            </motion.div>
 
           </div>
 
