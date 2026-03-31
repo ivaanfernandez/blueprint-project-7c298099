@@ -98,6 +98,14 @@ const Home = ({ showDock }: { showDock: boolean }) => {
         .feat-tab.active { color: #000 !important; font-weight: 500 !important; }
         .feat-tab.active::before { height: 20px; }
         .feat-tab:hover { color: #000 !important; }
+        @keyframes labScanLine {
+          0% { top: -50px; }
+          100% { top: 100%; }
+        }
+        @keyframes labDotPulse {
+          0%, 100% { opacity: 0; transform: scale(0.5); }
+          50% { opacity: 1; transform: scale(1); }
+        }
         @media (max-width: 767px) {
           .hero-flex { flex-direction: column !important; text-align: center !important; }
           .hero-left { align-items: center !important; }
@@ -278,9 +286,52 @@ const Home = ({ showDock }: { showDock: boolean }) => {
       }} />
 
       {/* ══════════════════════════════════════════════════════ */}
-      {/* ── C: ABOUT (WHITE) ── */}
+      {/* ── WHITE ZONE WRAPPER ── */}
       {/* ══════════════════════════════════════════════════════ */}
-      <div ref={aboutRef} style={{ background: "#FFFFFF" }}>
+      <div style={{ position: "relative", background: "#FFFFFF" }}>
+        {/* Lab Background */}
+        <div style={{
+          position: "absolute", inset: 0, pointerEvents: "none", overflow: "hidden", zIndex: 0,
+          backgroundImage: "linear-gradient(rgba(0,0,0,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(0,0,0,0.03) 1px, transparent 1px)",
+          backgroundSize: "50px 50px",
+        }}>
+          {/* Scan line */}
+          <div style={{
+            position: "absolute", left: 0, right: 0, height: 1, zIndex: 1,
+            background: "linear-gradient(90deg, transparent 0%, rgba(26,107,255,0.08) 20%, rgba(26,107,255,0.12) 50%, rgba(26,107,255,0.08) 80%, transparent 100%)",
+            animation: "labScanLine 10s linear infinite",
+          }}>
+            <div style={{
+              position: "absolute", left: 0, right: 0, top: -40, height: 40,
+              background: "linear-gradient(to top, rgba(26,107,255,0.03), transparent)",
+            }} />
+          </div>
+          {/* Pulsing dots */}
+          {[
+            { top: '8%', left: '12%', delay: '0s', duration: '4s' },
+            { top: '15%', left: '78%', delay: '1.2s', duration: '5s' },
+            { top: '25%', left: '35%', delay: '0.5s', duration: '3.5s' },
+            { top: '32%', left: '90%', delay: '2s', duration: '4.5s' },
+            { top: '40%', left: '5%', delay: '1.8s', duration: '3s' },
+            { top: '48%', left: '55%', delay: '0.3s', duration: '5.5s' },
+            { top: '55%', left: '22%', delay: '2.5s', duration: '4s' },
+            { top: '62%', left: '68%', delay: '1s', duration: '3.8s' },
+            { top: '70%', left: '42%', delay: '0.8s', duration: '4.2s' },
+            { top: '78%', left: '85%', delay: '1.5s', duration: '5s' },
+            { top: '85%', left: '15%', delay: '2.2s', duration: '3.5s' },
+            { top: '92%', left: '60%', delay: '0.7s', duration: '4.8s' },
+          ].map((dot, i) => (
+            <div key={i} style={{
+              position: "absolute", width: 3, height: 3, borderRadius: "50%",
+              background: "rgba(26,107,255,0.15)",
+              top: dot.top, left: dot.left,
+              animation: `labDotPulse ${dot.duration} ease-in-out ${dot.delay} infinite`,
+            }} />
+          ))}
+        </div>
+
+      {/* ── C: ABOUT (WHITE) ── */}
+      <div ref={aboutRef} style={{ position: "relative", zIndex: 1 }}>
         <div className="about-flex" style={{
           padding: "72px 7%", display: "flex", alignItems: "center", gap: 56, flexWrap: "wrap",
         }}>
@@ -334,10 +385,8 @@ const Home = ({ showDock }: { showDock: boolean }) => {
       {/* ── Divider ── */}
       <SectionDivider />
 
-      {/* ══════════════════════════════════════════════════════ */}
       {/* ── D: PROTOCOLS (WHITE) ── */}
-      {/* ══════════════════════════════════════════════════════ */}
-      <div style={{ padding: "56px 7%", background: "#FFFFFF" }}>
+      <div style={{ padding: "56px 7%", position: "relative", zIndex: 1 }}>
         <h2 style={{
           fontFamily: "'Michroma', sans-serif",
           fontSize: "clamp(18px, 2.5vw, 32px)", color: "#000",
@@ -398,12 +447,10 @@ const Home = ({ showDock }: { showDock: boolean }) => {
       {/* ── Divider ── */}
       <SectionDivider />
 
-      {/* ══════════════════════════════════════════════════════ */}
       {/* ── E: FEATURE (WHITE) ── */}
-      {/* ══════════════════════════════════════════════════════ */}
       <div className="feature-flex" style={{
         padding: "56px 7%", display: "flex", alignItems: "center", gap: 48,
-        background: "#FFFFFF", flexWrap: "wrap",
+        position: "relative", zIndex: 1, flexWrap: "wrap",
       }}>
         {/* Left */}
         <div style={{ flex: 1, minWidth: 260 }}>
@@ -453,10 +500,8 @@ const Home = ({ showDock }: { showDock: boolean }) => {
       {/* ── Divider ── */}
       <SectionDivider />
 
-      {/* ══════════════════════════════════════════════════════ */}
       {/* ── F: BENTO GRID (WHITE) ── */}
-      {/* ══════════════════════════════════════════════════════ */}
-      <div style={{ padding: "40px 7%", background: "#FFFFFF" }}>
+      <div style={{ padding: "40px 7%", position: "relative", zIndex: 1 }}>
         <div style={{ position: "relative", padding: 14 }}>
           <CornerBrackets />
 
@@ -480,7 +525,8 @@ const Home = ({ showDock }: { showDock: boolean }) => {
         </div>
       </div>
 
-      {/* ══════════════════════════════════════════════════════ */}
+      </div>{/* END WHITE ZONE WRAPPER */}
+
       {/* ── G: CTA FINAL (DARK) ── */}
       {/* ══════════════════════════════════════════════════════ */}
       <div style={{
