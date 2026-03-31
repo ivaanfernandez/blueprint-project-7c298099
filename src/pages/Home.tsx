@@ -385,10 +385,8 @@ const Home = ({ showDock }: { showDock: boolean }) => {
       {/* ── Divider ── */}
       <SectionDivider />
 
-      {/* ══════════════════════════════════════════════════════ */}
       {/* ── D: PROTOCOLS (WHITE) ── */}
-      {/* ══════════════════════════════════════════════════════ */}
-      <div style={{ padding: "56px 7%", background: "#FFFFFF" }}>
+      <div style={{ padding: "56px 7%", position: "relative", zIndex: 1 }}>
         <h2 style={{
           fontFamily: "'Michroma', sans-serif",
           fontSize: "clamp(18px, 2.5vw, 32px)", color: "#000",
