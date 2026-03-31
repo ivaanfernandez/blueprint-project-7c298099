@@ -98,6 +98,14 @@ const Home = ({ showDock }: { showDock: boolean }) => {
         .feat-tab.active { color: #000 !important; font-weight: 500 !important; }
         .feat-tab.active::before { height: 20px; }
         .feat-tab:hover { color: #000 !important; }
+        @keyframes labScanLine {
+          0% { top: -50px; }
+          100% { top: 100%; }
+        }
+        @keyframes labDotPulse {
+          0%, 100% { opacity: 0; transform: scale(0.5); }
+          50% { opacity: 1; transform: scale(1); }
+        }
         @media (max-width: 767px) {
           .hero-flex { flex-direction: column !important; text-align: center !important; }
           .hero-left { align-items: center !important; }
