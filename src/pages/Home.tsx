@@ -156,7 +156,7 @@ const Home = ({ showDock }: { showDock: boolean }) => {
         }} />
 
         <div className="hero-flex" style={{
-          display: "flex", alignItems: "center", padding: "80px 7% 40px", gap: 40,
+          display: "flex", alignItems: "center", padding: "80px 0 40px 7%", gap: 40,
           position: "relative", zIndex: 2, flexWrap: "wrap",
         }}>
           {/* Left */}
