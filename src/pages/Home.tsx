@@ -108,29 +108,11 @@ const Home = ({ showDock }: { showDock: boolean }) => {
           0%, 100% { opacity: 0; transform: scale(0.5); }
           50% { opacity: 1; transform: scale(1); }
         }
-        @keyframes pulse {
-          0%, 100% { opacity: 0.3; }
-          50% { opacity: 1; }
-        }
-        @media (min-width: 1024px) {
-          .vitruvian-canvas-desktop { display: block !important; }
-          .vitruvian-mobile-bg { display: none !important; }
-        }
-        @media (max-width: 1023px) {
-          .vitruvian-canvas-desktop { display: none !important; }
-          .vitruvian-mobile-bg { display: block !important; }
-          .vitruvian-dots-row { display: none !important; }
-        }
-        [data-us-project] { position: relative !important; overflow: hidden !important; }
-        [data-us-project] canvas { clip-path: inset(0 0 8% 0) !important; }
-        [data-us-project] * { pointer-events: none !important; }
-        [data-us-project] a[href*="unicorn"],
-        [data-us-project] button[title*="unicorn"],
-        [data-us-project] div[title*="Made with"],
-        [data-us-project] [class*="brand"],
-        [data-us-project] [class*="credit"],
-        [data-us-project] [class*="watermark"] {
-          display: none !important; visibility: hidden !important; opacity: 0 !important;
+        .program-card { transition: transform 0.4s ease, box-shadow 0.4s ease; }
+        .program-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,0.1); }
+        .program-card:hover .program-card-img { transform: scale(1.05); }
+        @media (max-width: 767px) {
+          .programs-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 10px !important; }
         }
         @media (max-width: 767px) {
           .hero-flex { flex-direction: column !important; text-align: center !important; }
