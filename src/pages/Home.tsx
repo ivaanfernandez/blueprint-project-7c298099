@@ -597,7 +597,7 @@ const Home = ({ showDock }: { showDock: boolean }) => {
         </div>
       </div>
 
-      
+      </div>{/* END WHITE ZONE WRAPPER */}
 
       {/* ── G: CTA FINAL (DARK) ── */}
       {/* ══════════════════════════════════════════════════════ */}
