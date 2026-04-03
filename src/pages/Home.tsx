@@ -270,7 +270,7 @@ const Home = ({ showDock }: { showDock: boolean }) => {
               {/* Radial glow */}
               <div style={{
                 position: "absolute", top: -40, right: -40, width: 200, height: 200,
-                background: "radial-gradient(circle, rgba(26,107,255,0.06) 0%, transparent 70%)",
+                background: "radial-gradient(circle, rgba(26,107,255,0.04) 0%, transparent 70%)",
                 pointerEvents: "none",
               }} />
               <div style={{ animation: "subtlePulse 3s ease-in-out infinite", position: "relative", zIndex: 1 }}>
