@@ -207,7 +207,7 @@ const Home = ({ showDock }: { showDock: boolean }) => {
               transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1], delay: 0.6 }}
               style={{
                 fontFamily: "'Inter', sans-serif", fontWeight: 300,
-                fontSize: 13, color: "rgba(255,255,255,0.45)", lineHeight: 1.7,
+                fontSize: 13, color: "#6B7280", lineHeight: 1.7,
                 maxWidth: 400, marginBottom: 28,
               }}
             >
