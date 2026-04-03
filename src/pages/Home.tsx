@@ -82,10 +82,10 @@ const Home = ({ showDock }: { showDock: boolean }) => {
       <style>{`
         @keyframes subtlePulse { 0%,100%{opacity:0.15} 50%{opacity:0.35} }
         .home-dock .dock-container {
-          background: rgba(255,255,255,0.08) !important;
-          border: 1px solid rgba(255,255,255,0.1) !important;
+          background: rgba(255,255,255,0.82) !important;
+          border: 1px solid rgba(0,0,0,0.08) !important;
           backdrop-filter: blur(16px) !important;
-          box-shadow: 0 4px 24px rgba(0,0,0,0.2) !important;
+          box-shadow: 0 4px 24px rgba(0,0,0,0.05) !important;
         }
         .protocol-card-neo { transition: all 0.4s ease; }
         .protocol-card-neo:hover { border-color: rgba(0,0,0,0.1) !important; box-shadow: 0 8px 32px rgba(0,0,0,0.05) !important; transform: translateY(-2px); }
