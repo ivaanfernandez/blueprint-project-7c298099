@@ -167,7 +167,7 @@ const Home = ({ showDock }: { showDock: boolean }) => {
         {/* Dot pattern */}
         <div style={{
           position: "absolute", inset: 0, pointerEvents: "none",
-          backgroundImage: "radial-gradient(rgba(255,255,255,0.03) 1px, transparent 1px)",
+          backgroundImage: "radial-gradient(rgba(0,0,0,0.03) 1px, transparent 1px)",
           backgroundSize: "24px 24px",
         }} />
 
