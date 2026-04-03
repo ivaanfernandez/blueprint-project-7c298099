@@ -162,7 +162,7 @@ const Home = ({ showDock }: { showDock: boolean }) => {
       {/* ── B: HERO (DARK) ── */}
       {/* ══════════════════════════════════════════════════════ */}
       <div style={{
-        background: "#0a0a0a", minHeight: "100vh", position: "relative", overflow: "hidden",
+        background: "#F5F5F5", minHeight: "100vh", position: "relative", overflow: "hidden",
       }}>
         {/* Dot pattern */}
         <div style={{
