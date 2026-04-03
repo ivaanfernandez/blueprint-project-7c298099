@@ -1,6 +1,7 @@
 import { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
+import CybercoreBackground from "@/components/CybercoreBackground";
 import { Dock, DockIcon } from "@/components/ui/dock";
 import slider1 from "@/assets/slider/slider-1.jpg";
 import slider2 from "@/assets/slider/slider-2.jpg";
@@ -115,12 +116,12 @@ const Home = ({ showDock }: { showDock: boolean }) => {
           .programs-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 10px !important; }
         }
         @media (max-width: 767px) {
-          .hero-flex { flex-direction: column !important; text-align: center !important; }
-          .hero-left { align-items: center !important; }
-          .hero-right { max-width: 280px !important; margin: 0 auto; }
-          .hero-title { font-size: clamp(24px, 7vw, 38px) !important; }
-          .hero-buttons { justify-content: center !important; }
-          .stats-row { justify-content: center !important; }
+          .hero-main-title {
+            font-size: clamp(36px, 12vw, 60px) !important;
+            white-space: normal !important;
+            padding: 0 24px !important;
+            line-height: 1.05 !important;
+          }
           .about-flex { flex-direction: column !important; text-align: center !important; }
           .about-img { max-width: 280px !important; margin: 0 auto !important; }
           .about-tags { justify-content: center !important; }
@@ -159,132 +160,144 @@ const Home = ({ showDock }: { showDock: boolean }) => {
       </div>
 
       {/* ══════════════════════════════════════════════════════ */}
-      {/* ── B: HERO (DARK) ── */}
+      {/* ── B: HERO (DEVIALET-INSPIRED) ── */}
       {/* ══════════════════════════════════════════════════════ */}
       <div style={{
         background: "#F5F5F5", minHeight: "100vh", position: "relative", overflow: "hidden",
+        display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center",
       }}>
-        {/* Dot pattern */}
-        <div style={{
-          position: "absolute", inset: 0, pointerEvents: "none",
-          backgroundImage: "radial-gradient(rgba(0,0,0,0.03) 1px, transparent 1px)",
-          backgroundSize: "24px 24px",
-        }} />
+        {/* Cybercore animated background */}
+        <CybercoreBackground beamCount={50} />
 
-        <div className="hero-flex" style={{
-          display: "flex", alignItems: "center", padding: "80px 0 40px 7%", gap: 40,
-          position: "relative", zIndex: 2, flexWrap: "wrap",
-        }}>
-          {/* Left */}
-          <div className="hero-left" style={{ flex: 1, minWidth: 280, display: "flex", flexDirection: "column" }}>
-            <motion.p
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1], delay: 0.2 }}
-              style={{
-                fontFamily: "'Orbitron', sans-serif", fontSize: 9, color: "rgba(0,0,0,0.35)",
-                letterSpacing: "0.35em", textTransform: "uppercase", marginBottom: 16,
-              }}
-            >
-              B&nbsp;L&nbsp;U&nbsp;E&nbsp;P&nbsp;R&nbsp;I&nbsp;N&nbsp;T&nbsp; &nbsp;S&nbsp;Y&nbsp;S&nbsp;T&nbsp;E&nbsp;M
-            </motion.p>
-            <motion.h1
-              className="hero-title"
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1], delay: 0.4 }}
-              style={{
-                fontFamily: "'Michroma', sans-serif",
-                fontSize: "clamp(28px, 4.5vw, 58px)", color: "#000000",
-                lineHeight: 1.08, textTransform: "uppercase", margin: "0 0 20px 0",
-              }}
-            >
-              BLUEPRINT<br />PROJECT
-            </motion.h1>
-            <motion.p
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1], delay: 0.6 }}
-              style={{
-                fontFamily: "'Inter', sans-serif", fontWeight: 300,
-                fontSize: 13, color: "#6B7280", lineHeight: 1.7,
-                maxWidth: 400, marginBottom: 28,
-              }}
-            >
-              Where human performance connects his mind, body and soul. Three protocols. One integrated system.
-            </motion.p>
+        {/* Centered massive title */}
+        <motion.h1
+          className="hero-main-title"
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1.2, ease: [0.25, 0.1, 0.25, 1], delay: 0.3 }}
+          style={{
+            fontFamily: "'Michroma', sans-serif",
+            fontSize: "clamp(48px, 10vw, 140px)",
+            color: "#000000",
+            textTransform: "uppercase",
+            letterSpacing: "0.05em",
+            lineHeight: 1.0,
+            textAlign: "center",
+            margin: 0,
+            position: "relative",
+            zIndex: 2,
+            whiteSpace: "nowrap",
+          }}
+        >
+          BLUEPRINT PROJECT
+        </motion.h1>
 
-            {/* Buttons */}
-            <motion.div
-              className="hero-buttons"
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1], delay: 0.8 }}
-              style={{ display: "flex", gap: 12, marginBottom: 0 }}
-            >
-              <button
-                onClick={() => navigate("/huella-azul")}
-                style={{
-                  fontFamily: "'Orbitron', sans-serif", fontSize: 9, fontWeight: 500,
-                  letterSpacing: "0.15em", color: "#fff", background: "#1A6BFF",
-                  border: "none", borderRadius: 6, padding: "12px 24px", cursor: "pointer",
-                  transition: "all 0.3s ease",
-                }}
-                onMouseEnter={(e) => { e.currentTarget.style.background = "#1558d4"; e.currentTarget.style.boxShadow = "0 0 20px rgba(26,107,255,0.3)"; }}
-                onMouseLeave={(e) => { e.currentTarget.style.background = "#1A6BFF"; e.currentTarget.style.boxShadow = "none"; }}
-              >
-                GET STARTED
-              </button>
-              <button
-                onClick={scrollToAbout}
-                style={{
-                  fontFamily: "'Orbitron', sans-serif", fontSize: 9, fontWeight: 500,
-                  letterSpacing: "0.15em", color: "rgba(0,0,0,0.6)", background: "transparent",
-                  border: "1px solid rgba(0,0,0,0.15)", borderRadius: 6, padding: "12px 24px", cursor: "pointer",
-                  transition: "all 0.3s ease",
-                }}
-                onMouseEnter={(e) => { e.currentTarget.style.borderColor = "rgba(0,0,0,0.4)"; e.currentTarget.style.color = "#000"; }}
-                onMouseLeave={(e) => { e.currentTarget.style.borderColor = "rgba(0,0,0,0.15)"; e.currentTarget.style.color = "rgba(0,0,0,0.6)"; }}
-              >
-                EXPLORE
-              </button>
-            </motion.div>
+        {/* Subtitle below title */}
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, ease: [0.25, 0.1, 0.25, 1], delay: 0.7 }}
+          style={{
+            fontFamily: "'Inter', sans-serif",
+            fontSize: 14,
+            fontWeight: 300,
+            color: "#6B7280",
+            textAlign: "center",
+            marginTop: 20,
+            position: "relative",
+            zIndex: 2,
+            letterSpacing: "0.02em",
+          }}
+        >
+          Where human performance connects his mind, body and soul.
+        </motion.p>
 
-          </div>
+        {/* Bottom-left: CTA text + button */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, ease: [0.25, 0.1, 0.25, 1], delay: 1.0 }}
+          style={{
+            position: "absolute",
+            bottom: 48,
+            left: 48,
+            zIndex: 3,
+          }}
+        >
+          <p style={{
+            fontFamily: "'Inter', sans-serif", fontSize: 12, fontWeight: 300,
+            color: "rgba(0,0,0,0.4)", maxWidth: 260, lineHeight: 1.6, marginBottom: 16,
+          }}>
+            Three protocols. One integrated system. Your evolution starts here.
+          </p>
 
-          {/* Right */}
-            <motion.div
-              className="hero-right"
-              style={{ flex: 1, display: "flex", justifyContent: "flex-end", minWidth: 260 }}
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 1, ease: [0.25, 0.1, 0.25, 1], delay: 0.5 }}
-            >
+          <div style={{ display: "flex", alignItems: "center", gap: 12, cursor: "pointer" }}
+            onClick={scrollToAbout}
+          >
             <div style={{
-              maxWidth: 480, width: "100%", aspectRatio: "3/4", borderRadius: "20px 0 0 20px",
-              background: "linear-gradient(160deg, rgba(0,0,0,0.03), rgba(0,0,0,0.01))",
-              border: "1px solid rgba(0,0,0,0.08)",
-              display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 14,
-              position: "relative", overflow: "hidden",
+              width: 32, height: 32, borderRadius: "50%", border: "1px solid rgba(0,0,0,0.15)",
+              display: "flex", alignItems: "center", justifyContent: "center",
+              transition: "all 0.3s ease",
             }}>
-              {/* Radial glow */}
-              <div style={{
-                position: "absolute", top: -40, right: -40, width: 200, height: 200,
-                background: "radial-gradient(circle, rgba(26,107,255,0.04) 0%, transparent 70%)",
-                pointerEvents: "none",
-              }} />
-              <div style={{ animation: "subtlePulse 3s ease-in-out infinite", position: "relative", zIndex: 1 }}>
-                <FingerprintSVG color="rgba(0,0,0,0.15)" size={80} />
-              </div>
-              <span style={{
-                fontFamily: "'Orbitron', sans-serif", fontSize: 7, color: "rgba(0,0,0,0.15)",
-                letterSpacing: "0.2em", textTransform: "uppercase", position: "relative", zIndex: 1,
-              }}>
-                HERO IMAGE
-              </span>
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                <path d="M6 2v8M6 10l3-3M6 10L3 7" stroke="rgba(0,0,0,0.4)" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
             </div>
-           </motion.div>
-        </div>
+
+            <span style={{
+              fontFamily: "'Orbitron', sans-serif", fontSize: 8, color: "rgba(0,0,0,0.35)",
+              letterSpacing: "0.2em", textTransform: "uppercase",
+            }}>
+              SCROLL TO EXPLORE
+            </span>
+          </div>
+        </motion.div>
+
+        {/* Bottom-right: Social icons */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, ease: [0.25, 0.1, 0.25, 1], delay: 1.2 }}
+          style={{
+            position: "absolute",
+            bottom: 48,
+            right: 48,
+            zIndex: 3,
+            display: "flex",
+            gap: 16,
+          }}
+        >
+          {/* Instagram */}
+          <a href="#" style={{ opacity: 0.4, transition: "opacity 0.3s ease" }}
+            onMouseEnter={(e) => (e.currentTarget.style.opacity = '0.8')}
+            onMouseLeave={(e) => (e.currentTarget.style.opacity = '0.4')}
+          >
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#000" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+              <rect x="2" y="2" width="20" height="20" rx="5" />
+              <circle cx="12" cy="12" r="5" />
+              <circle cx="17.5" cy="6.5" r="1.5" fill="#000" stroke="none" />
+            </svg>
+          </a>
+          {/* X / Twitter */}
+          <a href="#" style={{ opacity: 0.4, transition: "opacity 0.3s ease" }}
+            onMouseEnter={(e) => (e.currentTarget.style.opacity = '0.8')}
+            onMouseLeave={(e) => (e.currentTarget.style.opacity = '0.4')}
+          >
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#000" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M4 4l16 16M20 4L4 20" />
+            </svg>
+          </a>
+          {/* YouTube */}
+          <a href="#" style={{ opacity: 0.4, transition: "opacity 0.3s ease" }}
+            onMouseEnter={(e) => (e.currentTarget.style.opacity = '0.8')}
+            onMouseLeave={(e) => (e.currentTarget.style.opacity = '0.4')}
+          >
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#000" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+              <rect x="2" y="4" width="20" height="16" rx="4" />
+              <polygon points="10,8 16,12 10,16" fill="#000" stroke="none" />
+            </svg>
+          </a>
+        </motion.div>
       </div>
 
       {/* ── Transition Bar ── */}
