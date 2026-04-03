@@ -195,7 +195,7 @@ const Home = ({ showDock }: { showDock: boolean }) => {
               transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1], delay: 0.4 }}
               style={{
                 fontFamily: "'Michroma', sans-serif",
-                fontSize: "clamp(28px, 4.5vw, 58px)", color: "#FFFFFF",
+                fontSize: "clamp(28px, 4.5vw, 58px)", color: "#000000",
                 lineHeight: 1.08, textTransform: "uppercase", margin: "0 0 20px 0",
               }}
             >
