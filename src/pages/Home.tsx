@@ -290,7 +290,7 @@ const Home = ({ showDock }: { showDock: boolean }) => {
       {/* ── Transition Bar ── */}
       <div style={{
         height: 1,
-        background: "linear-gradient(90deg, transparent, rgba(26,107,255,0.15) 30%, rgba(26,107,255,0.2) 50%, rgba(26,107,255,0.15) 70%, transparent)",
+        background: "linear-gradient(90deg, transparent, rgba(0,0,0,0.04) 30%, rgba(0,0,0,0.06) 50%, rgba(0,0,0,0.04) 70%, transparent)",
       }} />
 
       {/* ══════════════════════════════════════════════════════ */}
