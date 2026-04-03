@@ -116,12 +116,12 @@ const Home = ({ showDock }: { showDock: boolean }) => {
           .programs-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 10px !important; }
         }
         @media (max-width: 767px) {
-          .hero-flex { flex-direction: column !important; text-align: center !important; }
-          .hero-left { align-items: center !important; }
-          .hero-right { max-width: 280px !important; margin: 0 auto; }
-          .hero-title { font-size: clamp(24px, 7vw, 38px) !important; }
-          .hero-buttons { justify-content: center !important; }
-          .stats-row { justify-content: center !important; }
+          .hero-main-title {
+            font-size: clamp(36px, 12vw, 60px) !important;
+            white-space: normal !important;
+            padding: 0 24px !important;
+            line-height: 1.05 !important;
+          }
           .about-flex { flex-direction: column !important; text-align: center !important; }
           .about-img { max-width: 280px !important; margin: 0 auto !important; }
           .about-tags { justify-content: center !important; }
