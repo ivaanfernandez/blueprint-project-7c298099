@@ -1,6 +1,7 @@
 import { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
+import CybercoreBackground from "@/components/CybercoreBackground";
 import { Dock, DockIcon } from "@/components/ui/dock";
 import slider1 from "@/assets/slider/slider-1.jpg";
 import slider2 from "@/assets/slider/slider-2.jpg";
