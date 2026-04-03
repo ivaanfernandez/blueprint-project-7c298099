@@ -277,7 +277,7 @@ const Home = ({ showDock }: { showDock: boolean }) => {
                 <FingerprintSVG color="rgba(0,0,0,0.15)" size={80} />
               </div>
               <span style={{
-                fontFamily: "'Orbitron', sans-serif", fontSize: 7, color: "rgba(255,255,255,0.2)",
+                fontFamily: "'Orbitron', sans-serif", fontSize: 7, color: "rgba(0,0,0,0.15)",
                 letterSpacing: "0.2em", textTransform: "uppercase", position: "relative", zIndex: 1,
               }}>
                 HERO IMAGE
