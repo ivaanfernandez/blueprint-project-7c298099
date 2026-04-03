@@ -117,10 +117,9 @@ const Home = ({ showDock }: { showDock: boolean }) => {
         }
         @media (max-width: 767px) {
           .hero-main-title {
-            font-size: clamp(36px, 12vw, 60px) !important;
+            font-size: clamp(28px, 8vw, 44px) !important;
             white-space: normal !important;
             padding: 0 24px !important;
-            line-height: 1.05 !important;
           }
           .about-flex { flex-direction: column !important; text-align: center !important; }
           .about-img { max-width: 280px !important; margin: 0 auto !important; }
