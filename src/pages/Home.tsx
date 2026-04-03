@@ -182,7 +182,7 @@ const Home = ({ showDock }: { showDock: boolean }) => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1], delay: 0.2 }}
               style={{
-                fontFamily: "'Orbitron', sans-serif", fontSize: 9, color: "rgba(255,255,255,0.35)",
+                fontFamily: "'Orbitron', sans-serif", fontSize: 9, color: "rgba(0,0,0,0.35)",
                 letterSpacing: "0.35em", textTransform: "uppercase", marginBottom: 16,
               }}
             >
