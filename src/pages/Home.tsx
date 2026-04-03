@@ -176,7 +176,7 @@ const Home = ({ showDock }: { showDock: boolean }) => {
           transition={{ duration: 1.2, ease: [0.25, 0.1, 0.25, 1], delay: 0.3 }}
           style={{
             fontFamily: "'Michroma', sans-serif",
-            fontSize: "clamp(48px, 10vw, 140px)",
+            fontSize: "clamp(32px, 5.5vw, 80px)",
             color: "#000000",
             textTransform: "uppercase",
             letterSpacing: "0.05em",
@@ -186,6 +186,8 @@ const Home = ({ showDock }: { showDock: boolean }) => {
             position: "relative",
             zIndex: 2,
             whiteSpace: "nowrap",
+            overflow: "hidden",
+            padding: "0 7%",
           }}
         >
           BLUEPRINT PROJECT
