@@ -117,10 +117,9 @@ const Home = ({ showDock }: { showDock: boolean }) => {
         }
         @media (max-width: 767px) {
           .hero-main-title {
-            font-size: clamp(36px, 12vw, 60px) !important;
+            font-size: clamp(28px, 8vw, 44px) !important;
             white-space: normal !important;
             padding: 0 24px !important;
-            line-height: 1.05 !important;
           }
           .about-flex { flex-direction: column !important; text-align: center !important; }
           .about-img { max-width: 280px !important; margin: 0 auto !important; }
@@ -177,7 +176,7 @@ const Home = ({ showDock }: { showDock: boolean }) => {
           transition={{ duration: 1.2, ease: [0.25, 0.1, 0.25, 1], delay: 0.3 }}
           style={{
             fontFamily: "'Michroma', sans-serif",
-            fontSize: "clamp(48px, 10vw, 140px)",
+            fontSize: "clamp(32px, 5.5vw, 80px)",
             color: "#000000",
             textTransform: "uppercase",
             letterSpacing: "0.05em",
@@ -187,6 +186,8 @@ const Home = ({ showDock }: { showDock: boolean }) => {
             position: "relative",
             zIndex: 2,
             whiteSpace: "nowrap",
+            overflow: "hidden",
+            padding: "0 7%",
           }}
         >
           BLUEPRINT PROJECT
@@ -267,34 +268,15 @@ const Home = ({ showDock }: { showDock: boolean }) => {
             gap: 16,
           }}
         >
-          {/* Instagram */}
-          <a href="#" style={{ opacity: 0.4, transition: "opacity 0.3s ease" }}
+          <a href="https://instagram.com/blueprintproject" target="_blank" rel="noopener noreferrer"
+            style={{ opacity: 0.35, transition: "opacity 0.3s ease", color: "#000" }}
             onMouseEnter={(e) => (e.currentTarget.style.opacity = '0.8')}
-            onMouseLeave={(e) => (e.currentTarget.style.opacity = '0.4')}
+            onMouseLeave={(e) => (e.currentTarget.style.opacity = '0.35')}
           >
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#000" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round">
               <rect x="2" y="2" width="20" height="20" rx="5" />
               <circle cx="12" cy="12" r="5" />
-              <circle cx="17.5" cy="6.5" r="1.5" fill="#000" stroke="none" />
-            </svg>
-          </a>
-          {/* X / Twitter */}
-          <a href="#" style={{ opacity: 0.4, transition: "opacity 0.3s ease" }}
-            onMouseEnter={(e) => (e.currentTarget.style.opacity = '0.8')}
-            onMouseLeave={(e) => (e.currentTarget.style.opacity = '0.4')}
-          >
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#000" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M4 4l16 16M20 4L4 20" />
-            </svg>
-          </a>
-          {/* YouTube */}
-          <a href="#" style={{ opacity: 0.4, transition: "opacity 0.3s ease" }}
-            onMouseEnter={(e) => (e.currentTarget.style.opacity = '0.8')}
-            onMouseLeave={(e) => (e.currentTarget.style.opacity = '0.4')}
-          >
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#000" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-              <rect x="2" y="4" width="20" height="16" rx="4" />
-              <polygon points="10,8 16,12 10,16" fill="#000" stroke="none" />
+              <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
             </svg>
           </a>
         </motion.div>
