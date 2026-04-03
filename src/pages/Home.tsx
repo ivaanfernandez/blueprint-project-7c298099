@@ -239,8 +239,8 @@ const Home = ({ showDock }: { showDock: boolean }) => {
                 onClick={scrollToAbout}
                 style={{
                   fontFamily: "'Orbitron', sans-serif", fontSize: 9, fontWeight: 500,
-                  letterSpacing: "0.15em", color: "rgba(255,255,255,0.7)", background: "transparent",
-                  border: "1px solid rgba(255,255,255,0.15)", borderRadius: 6, padding: "12px 24px", cursor: "pointer",
+                  letterSpacing: "0.15em", color: "rgba(0,0,0,0.6)", background: "transparent",
+                  border: "1px solid rgba(0,0,0,0.15)", borderRadius: 6, padding: "12px 24px", cursor: "pointer",
                   transition: "all 0.3s ease",
                 }}
                 onMouseEnter={(e) => { e.currentTarget.style.borderColor = "rgba(255,255,255,0.4)"; e.currentTarget.style.color = "#fff"; }}
