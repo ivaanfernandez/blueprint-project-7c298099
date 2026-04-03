@@ -82,10 +82,10 @@ const Home = ({ showDock }: { showDock: boolean }) => {
       <style>{`
         @keyframes subtlePulse { 0%,100%{opacity:0.15} 50%{opacity:0.35} }
         .home-dock .dock-container {
-          background: rgba(255,255,255,0.08) !important;
-          border: 1px solid rgba(255,255,255,0.1) !important;
+          background: rgba(255,255,255,0.82) !important;
+          border: 1px solid rgba(0,0,0,0.08) !important;
           backdrop-filter: blur(16px) !important;
-          box-shadow: 0 4px 24px rgba(0,0,0,0.2) !important;
+          box-shadow: 0 4px 24px rgba(0,0,0,0.05) !important;
         }
         .protocol-card-neo { transition: all 0.4s ease; }
         .protocol-card-neo:hover { border-color: rgba(0,0,0,0.1) !important; box-shadow: 0 8px 32px rgba(0,0,0,0.05) !important; transform: translateY(-2px); }
@@ -162,12 +162,12 @@ const Home = ({ showDock }: { showDock: boolean }) => {
       {/* ── B: HERO (DARK) ── */}
       {/* ══════════════════════════════════════════════════════ */}
       <div style={{
-        background: "#0a0a0a", minHeight: "100vh", position: "relative", overflow: "hidden",
+        background: "#F5F5F5", minHeight: "100vh", position: "relative", overflow: "hidden",
       }}>
         {/* Dot pattern */}
         <div style={{
           position: "absolute", inset: 0, pointerEvents: "none",
-          backgroundImage: "radial-gradient(rgba(255,255,255,0.03) 1px, transparent 1px)",
+          backgroundImage: "radial-gradient(rgba(0,0,0,0.03) 1px, transparent 1px)",
           backgroundSize: "24px 24px",
         }} />
 
@@ -182,7 +182,7 @@ const Home = ({ showDock }: { showDock: boolean }) => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1], delay: 0.2 }}
               style={{
-                fontFamily: "'Orbitron', sans-serif", fontSize: 9, color: "rgba(255,255,255,0.35)",
+                fontFamily: "'Orbitron', sans-serif", fontSize: 9, color: "rgba(0,0,0,0.35)",
                 letterSpacing: "0.35em", textTransform: "uppercase", marginBottom: 16,
               }}
             >
@@ -195,7 +195,7 @@ const Home = ({ showDock }: { showDock: boolean }) => {
               transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1], delay: 0.4 }}
               style={{
                 fontFamily: "'Michroma', sans-serif",
-                fontSize: "clamp(28px, 4.5vw, 58px)", color: "#FFFFFF",
+                fontSize: "clamp(28px, 4.5vw, 58px)", color: "#000000",
                 lineHeight: 1.08, textTransform: "uppercase", margin: "0 0 20px 0",
               }}
             >
@@ -207,7 +207,7 @@ const Home = ({ showDock }: { showDock: boolean }) => {
               transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1], delay: 0.6 }}
               style={{
                 fontFamily: "'Inter', sans-serif", fontWeight: 300,
-                fontSize: 13, color: "rgba(255,255,255,0.45)", lineHeight: 1.7,
+                fontSize: 13, color: "#6B7280", lineHeight: 1.7,
                 maxWidth: 400, marginBottom: 28,
               }}
             >
@@ -239,12 +239,12 @@ const Home = ({ showDock }: { showDock: boolean }) => {
                 onClick={scrollToAbout}
                 style={{
                   fontFamily: "'Orbitron', sans-serif", fontSize: 9, fontWeight: 500,
-                  letterSpacing: "0.15em", color: "rgba(255,255,255,0.7)", background: "transparent",
-                  border: "1px solid rgba(255,255,255,0.15)", borderRadius: 6, padding: "12px 24px", cursor: "pointer",
+                  letterSpacing: "0.15em", color: "rgba(0,0,0,0.6)", background: "transparent",
+                  border: "1px solid rgba(0,0,0,0.15)", borderRadius: 6, padding: "12px 24px", cursor: "pointer",
                   transition: "all 0.3s ease",
                 }}
-                onMouseEnter={(e) => { e.currentTarget.style.borderColor = "rgba(255,255,255,0.4)"; e.currentTarget.style.color = "#fff"; }}
-                onMouseLeave={(e) => { e.currentTarget.style.borderColor = "rgba(255,255,255,0.15)"; e.currentTarget.style.color = "rgba(255,255,255,0.7)"; }}
+                onMouseEnter={(e) => { e.currentTarget.style.borderColor = "rgba(0,0,0,0.4)"; e.currentTarget.style.color = "#000"; }}
+                onMouseLeave={(e) => { e.currentTarget.style.borderColor = "rgba(0,0,0,0.15)"; e.currentTarget.style.color = "rgba(0,0,0,0.6)"; }}
               >
                 EXPLORE
               </button>
@@ -262,22 +262,22 @@ const Home = ({ showDock }: { showDock: boolean }) => {
             >
             <div style={{
               maxWidth: 480, width: "100%", aspectRatio: "3/4", borderRadius: "20px 0 0 20px",
-              background: "linear-gradient(160deg, rgba(255,255,255,0.04), rgba(255,255,255,0.01))",
-              border: "1px solid rgba(255,255,255,0.06)",
+              background: "linear-gradient(160deg, rgba(0,0,0,0.03), rgba(0,0,0,0.01))",
+              border: "1px solid rgba(0,0,0,0.08)",
               display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 14,
               position: "relative", overflow: "hidden",
             }}>
               {/* Radial glow */}
               <div style={{
                 position: "absolute", top: -40, right: -40, width: 200, height: 200,
-                background: "radial-gradient(circle, rgba(26,107,255,0.06) 0%, transparent 70%)",
+                background: "radial-gradient(circle, rgba(26,107,255,0.04) 0%, transparent 70%)",
                 pointerEvents: "none",
               }} />
               <div style={{ animation: "subtlePulse 3s ease-in-out infinite", position: "relative", zIndex: 1 }}>
-                <FingerprintSVG color="rgba(255,255,255,0.25)" size={80} />
+                <FingerprintSVG color="rgba(0,0,0,0.15)" size={80} />
               </div>
               <span style={{
-                fontFamily: "'Orbitron', sans-serif", fontSize: 7, color: "rgba(255,255,255,0.2)",
+                fontFamily: "'Orbitron', sans-serif", fontSize: 7, color: "rgba(0,0,0,0.15)",
                 letterSpacing: "0.2em", textTransform: "uppercase", position: "relative", zIndex: 1,
               }}>
                 HERO IMAGE
@@ -290,7 +290,7 @@ const Home = ({ showDock }: { showDock: boolean }) => {
       {/* ── Transition Bar ── */}
       <div style={{
         height: 1,
-        background: "linear-gradient(90deg, transparent, rgba(26,107,255,0.15) 30%, rgba(26,107,255,0.2) 50%, rgba(26,107,255,0.15) 70%, transparent)",
+        background: "linear-gradient(90deg, transparent, rgba(0,0,0,0.04) 30%, rgba(0,0,0,0.06) 50%, rgba(0,0,0,0.04) 70%, transparent)",
       }} />
 
       {/* ══════════════════════════════════════════════════════ */}
