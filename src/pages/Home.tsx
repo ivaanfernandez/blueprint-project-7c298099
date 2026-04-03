@@ -243,8 +243,8 @@ const Home = ({ showDock }: { showDock: boolean }) => {
                   border: "1px solid rgba(0,0,0,0.15)", borderRadius: 6, padding: "12px 24px", cursor: "pointer",
                   transition: "all 0.3s ease",
                 }}
-                onMouseEnter={(e) => { e.currentTarget.style.borderColor = "rgba(255,255,255,0.4)"; e.currentTarget.style.color = "#fff"; }}
-                onMouseLeave={(e) => { e.currentTarget.style.borderColor = "rgba(255,255,255,0.15)"; e.currentTarget.style.color = "rgba(255,255,255,0.7)"; }}
+                onMouseEnter={(e) => { e.currentTarget.style.borderColor = "rgba(0,0,0,0.4)"; e.currentTarget.style.color = "#000"; }}
+                onMouseLeave={(e) => { e.currentTarget.style.borderColor = "rgba(0,0,0,0.15)"; e.currentTarget.style.color = "rgba(0,0,0,0.6)"; }}
               >
                 EXPLORE
               </button>
