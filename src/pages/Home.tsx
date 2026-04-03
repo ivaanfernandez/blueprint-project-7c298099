@@ -274,7 +274,7 @@ const Home = ({ showDock }: { showDock: boolean }) => {
                 pointerEvents: "none",
               }} />
               <div style={{ animation: "subtlePulse 3s ease-in-out infinite", position: "relative", zIndex: 1 }}>
-                <FingerprintSVG color="rgba(255,255,255,0.25)" size={80} />
+                <FingerprintSVG color="rgba(0,0,0,0.15)" size={80} />
               </div>
               <span style={{
                 fontFamily: "'Orbitron', sans-serif", fontSize: 7, color: "rgba(255,255,255,0.2)",
