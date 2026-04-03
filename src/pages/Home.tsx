@@ -262,8 +262,8 @@ const Home = ({ showDock }: { showDock: boolean }) => {
             >
             <div style={{
               maxWidth: 480, width: "100%", aspectRatio: "3/4", borderRadius: "20px 0 0 20px",
-              background: "linear-gradient(160deg, rgba(255,255,255,0.04), rgba(255,255,255,0.01))",
-              border: "1px solid rgba(255,255,255,0.06)",
+              background: "linear-gradient(160deg, rgba(0,0,0,0.03), rgba(0,0,0,0.01))",
+              border: "1px solid rgba(0,0,0,0.08)",
               display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 14,
               position: "relative", overflow: "hidden",
             }}>
