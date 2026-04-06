@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from "react";
+import { useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import VerticalBeams from "@/components/VerticalBeams";
@@ -40,41 +40,6 @@ const HUELLAS = [
 
 
 
-const ACCORDION_ITEMS = [
-  {
-    color: "#1A6BFF",
-    name: "Blueprint Lab",
-    desc: "Precision training methodology. Data-driven programming built to forge strength, endurance, and resilience.",
-    linkText: "LEARN MORE →",
-    route: "/huella-azul",
-    image: slider1,
-    badge: "BLUEPRINT LAB",
-    badgeBg: "rgba(26,107,255,0.12)",
-    badgeBorder: "rgba(26,107,255,0.15)",
-  },
-  {
-    color: "#22C55E",
-    name: "Hack Bar",
-    desc: "Nutrition engineered for performance. Every meal is a signal. Optimize input, transform output.",
-    linkText: "LEARN MORE →",
-    route: "/huella-verde",
-    image: slider2,
-    badge: "HACK BAR",
-    badgeBg: "rgba(34,197,94,0.12)",
-    badgeBorder: "rgba(34,197,94,0.15)",
-  },
-  {
-    color: "#FF3B3B",
-    name: "Reset",
-    desc: "Strategic recovery protocols. Optimized sleep, restoration, and rebuilding for continuous evolution.",
-    linkText: "LEARN MORE →",
-    route: "/huella-roja",
-    image: slider3,
-    badge: "RESET",
-    badgeBg: "rgba(255,59,59,0.12)",
-    badgeBorder: "rgba(255,59,59,0.15)",
-  },
-];
 
 /* ══════════════════════════════════════════════════════════ */
 /*  HOME PAGE                                                */
@@ -83,36 +48,11 @@ const ACCORDION_ITEMS = [
 const Home = ({ showDock }: { showDock: boolean }) => {
   const navigate = useNavigate();
   const aboutRef = useRef<HTMLDivElement>(null);
-  const [activeAccordion, setActiveAccordion] = useState(0);
-  const panelRefs = useRef<(HTMLDivElement | null)[]>([]);
 
   const scrollToAbout = () => {
     aboutRef.current?.scrollIntoView({ behavior: "smooth" });
   };
 
-  const scrollToPanel = (index: number) => {
-    panelRefs.current[index]?.scrollIntoView({ behavior: "smooth", block: "center" });
-  };
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            const index = panelRefs.current.indexOf(entry.target as HTMLDivElement);
-            if (index !== -1) setActiveAccordion(index);
-          }
-        });
-      },
-      { threshold: 0.5 }
-    );
-
-    panelRefs.current.forEach((ref) => {
-      if (ref) observer.observe(ref);
-    });
-
-    return () => observer.disconnect();
-  }, []);
 
 
   return (
@@ -164,31 +104,10 @@ const Home = ({ showDock }: { showDock: boolean }) => {
           .about-tags { justify-content: center !important; }
           .about-buttons { justify-content: center !important; }
           .bento-grid-neo { grid-template-columns: repeat(2, 1fr) !important; grid-template-rows: repeat(3, 180px) !important; }
-          .accordion-scroll-section {
+          .feature-row-mobile {
             flex-direction: column !important;
-            min-height: auto !important;
-            padding: 48px 6% !important;
-          }
-          .accordion-scroll-section .accordion-left {
-            position: relative !important;
-            top: auto !important;
-            height: auto !important;
-            flex: none !important;
-            width: 100% !important;
-            padding: 0 0 32px 0 !important;
-          }
-          .accordion-scroll-section .accordion-right {
-            flex: none !important;
-            width: 100% !important;
-          }
-          .accordion-scroll-section .accordion-right .accordion-panel {
-            min-height: auto !important;
-            padding: 16px 0 !important;
-          }
-          .accordion-scroll-section .accordion-right .accordion-panel .accordion-img-box {
-            width: 100% !important;
-            aspect-ratio: 16/10 !important;
-            border-radius: 12px !important;
+            gap: 16px !important;
+            text-align: center !important;
           }
           .footer-section {
             padding: 60px 6% 32px !important;
@@ -520,189 +439,127 @@ const Home = ({ showDock }: { showDock: boolean }) => {
       {/* ── Divider ── */}
       <SectionDivider />
 
-      {/* ── FEATURE ACCORDION SCROLL (NEW) ── */}
-      <div className="accordion-scroll-section" style={{
-        position: "relative",
-        paddingLeft: "7%",
-        paddingRight: 0,
-        display: "flex",
-        alignItems: "flex-start",
-        gap: 0,
-        background: "#FFFFFF",
-        zIndex: 1,
+      {/* ── E: FEATURE — HORIZONTAL ROWS (WHITE) ── */}
+      <div style={{
+        position: "relative", zIndex: 1, padding: "64px 7%", background: "#FFFFFF",
       }}>
-        {/* LEFT COLUMN (sticky) */}
-        <div className="accordion-left" style={{
-          flex: "0 0 42%",
-          position: "sticky",
-          top: 0,
-          height: "100vh",
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
-          padding: "40px 28px 40px 0",
-          alignSelf: "flex-start",
-          zIndex: 2,
+        <h2 style={{
+          fontFamily: "'Michroma', sans-serif",
+          fontSize: "clamp(28px, 3.5vw, 44px)",
+          color: "#000",
+          textTransform: "uppercase",
+          lineHeight: 1.1,
+          marginBottom: 48,
+          marginTop: 0,
+          maxWidth: 600,
         }}>
-          <h2 style={{
-            fontFamily: "'Michroma', sans-serif",
-            fontSize: "clamp(32px, 4vw, 52px)",
-            color: "#000",
-            textTransform: "uppercase",
-            lineHeight: 1.08,
-            marginBottom: 40,
-            marginTop: 0,
-            maxWidth: 500,
-          }}>
-            LIMITLESS POTENTIAL WITH BLUEPRINT
-          </h2>
+          LIMITLESS POTENTIAL WITH BLUEPRINT
+        </h2>
 
-          {/* Accordion items */}
-          <div>
-            {ACCORDION_ITEMS.map((item, i) => {
-              const isActive = activeAccordion === i;
-              const isLast = i === ACCORDION_ITEMS.length - 1;
-              return (
-                <div
-                  key={item.name}
-                  onClick={() => {
-                    setActiveAccordion(i);
-                    scrollToPanel(i);
-                  }}
-                  style={{
-                    borderBottom: isLast ? "none" : "1px solid rgba(0,0,0,0.06)",
-                    cursor: "pointer",
-                    overflow: "hidden",
-                    transition: "all 0.4s",
-                  }}
-                >
-                  {/* Title row */}
-                  <div style={{
-                    padding: "24px 0 24px 20px",
-                    display: "flex",
-                    alignItems: "center",
-                    gap: 10,
-                  }}>
-                    <div style={{
-                      width: 10, height: 10, borderRadius: "50%",
-                      background: item.color,
-                      opacity: isActive ? 1 : 0.25,
-                      boxShadow: isActive ? `0 0 8px ${item.color}` : "none",
-                      transition: "all 0.4s",
-                    }} />
-                    <span style={{
-                      fontFamily: "'Michroma', sans-serif",
-                      fontSize: 24,
-                      textTransform: "uppercase",
-                      letterSpacing: "0.02em",
-                      color: isActive ? "#000" : "#D1D5DB",
-                      transition: "color 0.4s",
-                    }}>
-                      {item.name}
-                    </span>
-                  </div>
-
-                  {/* Body (expandable) */}
-                  <div style={{
-                    overflow: "hidden",
-                    transition: "all 0.5s ease",
-                    paddingLeft: 20,
-                    maxHeight: isActive ? 200 : 0,
-                    opacity: isActive ? 1 : 0,
-                    paddingBottom: isActive ? 16 : 0,
-                  }}>
-                    <p style={{
-                      fontFamily: "'Inter', sans-serif",
-                      fontSize: 17,
-                      fontWeight: 300,
-                      color: "#6B7280",
-                      lineHeight: 1.75,
-                      maxWidth: 460,
-                      marginBottom: 14,
-                      marginTop: 0,
-                    }}>
-                      {item.desc}
-                    </p>
-                    <span
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        navigate(item.route);
-                      }}
-                      style={{
-                        fontFamily: "'Orbitron', sans-serif",
-                        fontSize: 12,
-                        letterSpacing: "0.1em",
-                        display: "inline-flex",
-                        alignItems: "center",
-                        gap: 4,
-                        color: item.color,
-                        cursor: "pointer",
-                      }}
-                    >
-                      {item.linkText}
-                    </span>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-
-        {/* RIGHT COLUMN (scrollable images) */}
-        <div className="accordion-right" style={{
-          flex: 1,
-          display: "flex",
-          flexDirection: "column",
-        }}>
-          {ACCORDION_ITEMS.map((item, i) => (
-            <div
-              key={item.name}
-              className="accordion-panel"
-              ref={(el) => { panelRefs.current[i] = el; }}
-              style={{
-                minHeight: "80vh",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "flex-end",
-                padding: "20px 0 20px 20px",
-              }}
-            >
-              <div className="accordion-img-box" style={{
-                width: "95%",
-                aspectRatio: "16/10",
-                borderRadius: "14px 0 0 14px",
-                overflow: "hidden",
-                position: "relative",
-                boxShadow: "0 8px 32px rgba(0,0,0,0.06)",
-                marginRight: 0,
-              }}>
-                <img src={item.image} alt={item.name} style={{
-                  width: "100%", height: "100%", objectFit: "cover",
-                }} />
-                {/* Badge */}
-                <div style={{
-                  position: "absolute",
-                  bottom: 10,
-                  left: 10,
-                  padding: "5px 12px",
-                  borderRadius: 6,
-                  backdropFilter: "blur(8px)",
-                  fontFamily: "'Orbitron', sans-serif",
-                  fontSize: 7,
-                  letterSpacing: "0.1em",
-                  background: item.badgeBg,
-                  color: item.color,
-                  border: `1px solid ${item.badgeBorder}`,
-                }}>
-                  {item.badge}
-                </div>
-              </div>
+        {[
+          {
+            color: "#1A6BFF",
+            name: "Blueprint Lab",
+            desc: "Precision training methodology. Data-driven programming built to forge strength, endurance, and resilience.",
+            linkColor: "#1A6BFF",
+            route: "/huella-azul",
+            img: slider1,
+          },
+          {
+            color: "#22C55E",
+            name: "Hack Bar",
+            desc: "Nutrition engineered for performance. Every meal is a signal. Optimize input, transform output.",
+            linkColor: "#22C55E",
+            route: "/huella-verde",
+            img: slider2,
+          },
+          {
+            color: "#FF3B3B",
+            name: "Reset",
+            desc: "Strategic recovery protocols. Optimized sleep, restoration, and rebuilding for continuous evolution.",
+            linkColor: "#FF3B3B",
+            route: "/huella-roja",
+            img: slider3,
+          },
+        ].map((item, i, arr) => (
+          <div
+            key={item.name}
+            className="feature-row-mobile"
+            onClick={() => navigate(item.route)}
+            style={{
+              display: "flex",
+              gap: 28,
+              alignItems: "center",
+              padding: "32px 0",
+              borderBottom: i < arr.length - 1 ? "1px solid rgba(0,0,0,0.06)" : "none",
+              cursor: "pointer",
+              transition: "background 0.3s ease",
+            }}
+            onMouseEnter={(e) => { e.currentTarget.style.background = "rgba(0,0,0,0.01)"; }}
+            onMouseLeave={(e) => { e.currentTarget.style.background = "transparent"; }}
+          >
+            {/* Thumbnail image */}
+            <div style={{
+              flex: "0 0 120px", height: 80, borderRadius: 10, overflow: "hidden",
+            }}>
+              <img src={item.img} alt={item.name} style={{
+                width: "100%", height: "100%", objectFit: "cover", display: "block",
+              }} />
             </div>
-          ))}
-        </div>
+
+            {/* Fingerprint icon */}
+            <div style={{ flex: "0 0 48px" }}>
+              <FingerprintSVG color={item.color} size={40} />
+            </div>
+
+            {/* Text content */}
+            <div style={{ flex: 1, minWidth: 0 }}>
+              <div style={{
+                fontFamily: "'Michroma', sans-serif",
+                fontSize: 18,
+                textTransform: "uppercase",
+                letterSpacing: "0.02em",
+                color: "#000",
+                marginBottom: 6,
+              }}>
+                {item.name}
+              </div>
+              <div style={{
+                fontFamily: "'Inter', sans-serif",
+                fontSize: 14,
+                fontWeight: 300,
+                color: "#6B7280",
+                lineHeight: 1.6,
+                marginBottom: 8,
+              }}>
+                {item.desc}
+              </div>
+              <span style={{
+                fontFamily: "'Orbitron', sans-serif",
+                fontSize: 11,
+                letterSpacing: "0.1em",
+                color: item.linkColor,
+              }}>
+                LEARN MORE →
+              </span>
+            </div>
+
+            {/* Arrow */}
+            <div style={{
+              flex: "0 0 32px",
+              fontFamily: "'Inter', sans-serif",
+              fontSize: 20,
+              color: "#D1D5DB",
+              textAlign: "center",
+            }}>
+              →
+            </div>
+          </div>
+        ))}
       </div>
 
-
+      {/* ── Divider ── */}
+      <SectionDivider />
 
 
       </div>{/* END WHITE ZONE WRAPPER */}
