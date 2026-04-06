@@ -140,3 +140,18 @@ All colors MUST be HSL.
   from { opacity: 0.3; filter: blur(30px); }
   to { opacity: 0.5; filter: blur(20px); }
 }
+
+@media (max-width: 767px) {
+  .about-section-new {
+    flex-direction: column !important;
+    padding: 48px 6% !important;
+  }
+  .about-photo-wrapper {
+    flex: none !important;
+    max-width: 100% !important;
+    width: 100% !important;
+  }
+  .about-stat-badge {
+    right: 16px !important;
+  }
+}

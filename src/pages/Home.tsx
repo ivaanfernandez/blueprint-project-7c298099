@@ -321,52 +321,78 @@ const Home = ({ showDock }: { showDock: boolean }) => {
 
       {/* ── C: ABOUT (WHITE) ── */}
       <div ref={aboutRef} style={{ position: "relative", zIndex: 1 }}>
-        <div className="about-flex" style={{
-          padding: "72px 7%", display: "flex", alignItems: "center", gap: 56, flexWrap: "wrap",
+        <div className="about-section-new" style={{
+          padding: "72px 7%", display: "flex", alignItems: "center", gap: 56,
+          position: "relative", zIndex: 1, background: "#FFFFFF",
         }}>
-          {/* Left — Image placeholder */}
-          <div className="about-img" style={{
-            maxWidth: 340, width: "100%", aspectRatio: "3/4", borderRadius: 20,
-            background: "linear-gradient(160deg, #e8e8e8, #d0d0d0)",
-            position: "relative", flex: "0 0 auto",
+          {/* Left — Photo with stat badge */}
+          <div className="about-photo-wrapper" style={{
+            flex: "0 0 42%", position: "relative", maxWidth: 460,
           }}>
-            <span style={{
-              position: "absolute", bottom: 12, left: 16,
-              fontFamily: "'Orbitron', sans-serif", fontSize: 6, color: "rgba(0,0,0,0.2)",
-              letterSpacing: "0.15em",
-            }}>VITRUVIAN SCAN</span>
+            <div style={{
+              width: "100%", aspectRatio: "3/4", borderRadius: 18, overflow: "hidden",
+            }}>
+              <img src={slider1} alt="Blueprint Project gym interior" style={{
+                width: "100%", height: "100%", objectFit: "cover", display: "block",
+              }} />
+            </div>
+            {/* Stat badge */}
+            <div className="about-stat-badge" style={{
+              position: "absolute", bottom: 20, right: -20,
+              background: "#FFFFFF", borderRadius: 12, padding: "14px 20px",
+              boxShadow: "0 8px 32px rgba(0,0,0,0.1)", zIndex: 2,
+              display: "flex", alignItems: "center", gap: 10,
+            }}>
+              <div>
+                <div style={{ fontFamily: "'Michroma', sans-serif", fontSize: 28, color: "#000", lineHeight: 1 }}>7+</div>
+                <div style={{ fontFamily: "'Inter', sans-serif", fontSize: 11, fontWeight: 500, color: "#6B7280", lineHeight: 1.3 }}>
+                  Years<br />Experience
+                </div>
+              </div>
+              <div style={{ width: 8, height: 8, borderRadius: "50%", background: "#1A6BFF" }} />
+            </div>
           </div>
 
-          {/* Right — Text */}
+          {/* Right — Text + features */}
           <div style={{ flex: 1, minWidth: 260 }}>
             <h2 style={{
               fontFamily: "'Michroma', sans-serif",
-              fontSize: "clamp(20px, 2.8vw, 34px)", color: "#000",
-              lineHeight: 1.15, textTransform: "uppercase", margin: 0,
+              fontSize: "clamp(24px, 3vw, 40px)", color: "#000",
+              textTransform: "uppercase", lineHeight: 1.15, marginBottom: 18, marginTop: 0,
             }}>
               DESIGNED FOR<br />THE HUMAN<br />MACHINE
             </h2>
 
-            {/* Tag pills */}
-            <div className="about-tags" style={{ display: "flex", gap: 8, margin: "20px 0 18px", flexWrap: "wrap" }}>
-              {["Training", "Nutrition", "Recovery"].map((tag) => (
-                <span key={tag} className="tag-pill" style={{
-                  fontFamily: "'Orbitron', sans-serif", fontSize: 8, letterSpacing: "0.1em",
-                  color: "#000", border: "1px solid rgba(0,0,0,0.15)", borderRadius: 20,
-                  padding: "6px 14px", cursor: "pointer",
-                }}>
-                  {tag}
-                </span>
-              ))}
-            </div>
-
             <p style={{
               fontFamily: "'Inter', sans-serif", fontWeight: 300, fontSize: 13,
-              color: "#6B7280", lineHeight: 1.8, maxWidth: 440, marginBottom: 24,
+              color: "#6B7280", lineHeight: 1.8, marginBottom: 28, maxWidth: 480,
             }}>
               Blueprint Project is a precision-engineered system built around three core protocols. Training, nutrition, and recovery — synchronized to unlock your full potential. This is not a gym. This is your operating system.
             </p>
 
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "20px 32px" }}>
+              {[
+                { title: "Precision Training", desc: "Data-driven methodology built to forge strength, endurance, and resilience." },
+                { title: "Nutrition Engineering", desc: "Every meal is a signal. Optimize input, transform output." },
+                { title: "Recovery Science", desc: "Strategic rest, optimized sleep, and complete restoration protocols." },
+                { title: "Mental Growth", desc: "Build focus, discipline, and unshakable mental clarity." },
+              ].map((feat) => (
+                <div key={feat.title} style={{ position: "relative", paddingLeft: 14 }}>
+                  <div style={{
+                    position: "absolute", left: 0, top: 4, width: 3, height: 14,
+                    background: "#1A6BFF", borderRadius: 2,
+                  }} />
+                  <div style={{
+                    fontFamily: "'Inter', sans-serif", fontSize: 13, fontWeight: 600,
+                    color: "#000", marginBottom: 4,
+                  }}>{feat.title}</div>
+                  <div style={{
+                    fontFamily: "'Inter', sans-serif", fontSize: 11, fontWeight: 300,
+                    color: "#9CA3AF", lineHeight: 1.5,
+                  }}>{feat.desc}</div>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </div>
