@@ -1,33 +1,38 @@
 
 
-## Plan: Redesign About Section
+## Plan: 3 Major Home Page Changes
 
-### What changes
-Replace the entire About section (lines 322-372 in `Home.tsx`) with a new two-column layout featuring a real photo with a floating stat badge on the left, and title + body text + 4-feature grid on the right.
+### Change 1: Delete Protocols Section
+Remove lines 401-464 (divider + protocols section + divider after it).
 
-### Implementation
+### Change 2: Replace Feature Section with Scroll-Linked Accordion
+Remove lines 524-575 (divider + feature section). Replace with a new section containing:
 
-**File: `src/pages/Home.tsx`**
+- **Left column (sticky)**: "LIMITLESS POTENTIAL WITH BLUEPRINT" title + 3-item accordion (Blueprint Lab / Hack Bar / Reset) with color-coded dots, expandable descriptions, and "LEARN MORE →" links routing to `/huella-azul`, `/huella-verde`, `/huella-roja`.
+- **Right column (scrollable)**: 3 full-viewport image panels using slider-1/2/3.jpg with color-coded badges.
+- **Scroll behavior**: `IntersectionObserver` (threshold 0.5) watches each image panel and updates `activeIndex` to control which accordion item is expanded. Clicking an accordion item scrolls to the corresponding panel.
+- **Mobile (<768px)**: No sticky, fully expanded, stacked vertically. Add media query to existing `<style>` block.
 
-1. **Replace lines 322-372** (the `aboutRef` div containing the old About section) with new JSX:
-   - Left side: `<img>` using `slider1` (already imported) in a 3/4 aspect-ratio container with `borderRadius: 18px`. Floating stat badge at bottom-right showing "7+ Years Experience" with blue dot.
-   - Right side: Title "DESIGNED FOR THE HUMAN MACHINE" in Michroma, body paragraph in Inter, and a 2×2 CSS grid of 4 feature items (Precision Training, Nutrition Engineering, Recovery Science, Mental Growth) each with a blue left accent bar.
+New state: `activeIndex` (replaces `activeTab`). New ref: `panelRefs`. Remove `FEATURE_TABS` constant and `activeTab` state.
 
-2. **Mobile responsive**: Add CSS class `about-section-new` and a media query in `src/index.css` for `<768px`:
-   - Stack vertically (flex-direction: column)
-   - Photo wrapper: full width, badge stays inside with `right: 16px`
-   - Section padding: `48px 6%`
+### Change 3: Replace CTA/Footer Section
+Remove lines 607-670 (entire CTA section). Replace with a centered dark footer containing:
 
-**File: `src/index.css`**
-- Add responsive media query for the new about layout.
+- Dot pattern background + animated SVG pulse beams converging to center
+- "ENTER THE BLUEPRINT" title (Michroma, clamp 24px-40px)
+- Subtitle + "JOIN NOW" pill button with 3 animated pulse rings and radial glow
+- Instagram icon link
+- Footer bar: brand name left, 3 links center, copyright right
+- New keyframes (`pulseRing`, `pulseGlow`) added to `<style>` block
+- Mobile: stacked footer bar, smaller title
 
-### What gets removed
-- Gray placeholder image with "VITRUVIAN SCAN" label
-- Training/Nutrition/Recovery tag pills
-- No "LEARN MORE" button or "Watch video" link exists currently, so nothing else to remove
+### Technical Details
 
-### What stays unchanged
-- `SectionDivider` components above and below
-- `aboutRef` ref attachment
-- All other sections, dock, routing
+**File modified**: `src/pages/Home.tsx` only
+
+**Removed**: `PROTOCOLS` constant, `FEATURE_TABS` constant, `activeTab` state, protocol card CSS classes, feature tab CSS classes, CTA CSS classes.
+
+**Added**: `useEffect` import, `activeIndex` state, `panelRefs` ref, `IntersectionObserver` in `useEffect`, `scrollToPanel` function, accordion section JSX, footer section JSX, new keyframes CSS, new mobile media query rules for accordion section and footer.
+
+**Final section order**: Hero → About → Divider → Programs → Divider → Accordion Scroll → Divider → Gallery → Footer (dark)
 
