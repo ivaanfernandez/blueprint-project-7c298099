@@ -357,20 +357,20 @@ const Home = ({ showDock }: { showDock: boolean }) => {
           <div style={{ flex: 1, minWidth: 260 }}>
             <h2 style={{
               fontFamily: "'Michroma', sans-serif",
-              fontSize: "clamp(24px, 3vw, 40px)", color: "#000",
-              textTransform: "uppercase", lineHeight: 1.15, marginBottom: 18, marginTop: 0,
+              fontSize: "clamp(28px, 3.5vw, 48px)", color: "#000",
+              textTransform: "uppercase", lineHeight: 1.15, marginBottom: 16, marginTop: 0,
             }}>
               DESIGNED FOR<br />THE HUMAN<br />MACHINE
             </h2>
 
             <p style={{
-              fontFamily: "'Inter', sans-serif", fontWeight: 300, fontSize: 13,
-              color: "#6B7280", lineHeight: 1.8, marginBottom: 28, maxWidth: 480,
+              fontFamily: "'Inter', sans-serif", fontWeight: 300, fontSize: 15,
+              color: "#6B7280", lineHeight: 1.8, marginBottom: 24, maxWidth: 480,
             }}>
               Blueprint Project is a precision-engineered system built around three core protocols. Training, nutrition, and recovery — synchronized to unlock your full potential. This is not a gym. This is your operating system.
             </p>
 
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "20px 32px" }}>
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "24px 40px", maxWidth: 500 }}>
               {[
                 { title: "Precision Training", desc: "Data-driven methodology built to forge strength, endurance, and resilience." },
                 { title: "Nutrition Engineering", desc: "Every meal is a signal. Optimize input, transform output." },
@@ -383,12 +383,12 @@ const Home = ({ showDock }: { showDock: boolean }) => {
                     background: "#1A6BFF", borderRadius: 2,
                   }} />
                   <div style={{
-                    fontFamily: "'Inter', sans-serif", fontSize: 13, fontWeight: 600,
+                    fontFamily: "'Inter', sans-serif", fontSize: 15, fontWeight: 600,
                     color: "#000", marginBottom: 4,
                   }}>{feat.title}</div>
                   <div style={{
-                    fontFamily: "'Inter', sans-serif", fontSize: 11, fontWeight: 300,
-                    color: "#9CA3AF", lineHeight: 1.5,
+                    fontFamily: "'Inter', sans-serif", fontSize: 13, fontWeight: 300,
+                    color: "#9CA3AF", lineHeight: 1.6,
                   }}>{feat.desc}</div>
                 </div>
               ))}
