@@ -99,13 +99,10 @@ const Home = ({ showDock }: { showDock: boolean }) => {
             white-space: normal !important;
             padding: 0 24px !important;
           }
-          .about-flex { flex-direction: column !important; text-align: center !important; }
-          .about-img { max-width: 280px !important; margin: 0 auto !important; }
-          .about-tags { justify-content: center !important; }
-          .about-buttons { justify-content: center !important; }
-          .about-section-new { padding: 48px 6% !important; }
-          .about-photo-wrapper { flex: none !important; width: 100% !important; max-width: 100% !important; }
-          .about-section-new h2 { white-space: normal !important; }
+          .about-section-new { padding: 48px 6% !important; flex-direction: column !important; gap: 32px !important; }
+          .about-center-photo { flex: none !important; width: 100% !important; max-width: 320px !important; margin: 0 auto !important; order: -1 !important; }
+          .about-left-text { text-align: center !important; }
+          .about-right-features { flex: none !important; width: 100% !important; }
           .bento-grid-neo { grid-template-columns: repeat(2, 1fr) !important; grid-template-rows: repeat(3, 180px) !important; }
           .feature-row-mobile {
             flex-direction: column !important;
@@ -304,12 +301,29 @@ const Home = ({ showDock }: { showDock: boolean }) => {
       {/* ── C: ABOUT (WHITE) ── */}
       <div ref={aboutRef} style={{ position: "relative", zIndex: 1 }}>
         <div className="about-section-new" style={{
-          padding: "72px 7%", display: "flex", alignItems: "flex-start", gap: 48,
+          padding: "64px 7%", display: "flex", alignItems: "flex-start", gap: 40,
           position: "relative", zIndex: 1, background: "#FFFFFF",
         }}>
-          {/* Left — Photo with stat badge */}
-          <div className="about-photo-wrapper" style={{
-            flex: "0 0 38%", position: "relative", maxWidth: 420,
+          {/* Left — Title + Body Text */}
+          <div className="about-left-text" style={{ flex: 1, paddingTop: 12 }}>
+            <h2 style={{
+              fontFamily: "'Michroma', sans-serif",
+              fontSize: "clamp(18px, 2.2vw, 30px)", color: "#000",
+              textTransform: "uppercase", lineHeight: 1.12, marginBottom: 16, marginTop: 0,
+            }}>
+              DESIGNED FOR THE HUMAN MACHINE
+            </h2>
+            <p style={{
+              fontFamily: "'Inter', sans-serif", fontWeight: 300, fontSize: 15,
+              color: "#6B7280", lineHeight: 1.8, margin: 0,
+            }}>
+              Blueprint Project is a precision-engineered system built around three core protocols. Training, nutrition, and recovery — synchronized to unlock your full potential. This is not a gym. This is your operating system.
+            </p>
+          </div>
+
+          {/* Center — Photo + Badge */}
+          <div className="about-center-photo" style={{
+            flex: "0 0 32%", maxWidth: 360, position: "relative",
           }}>
             <div style={{
               width: "100%", aspectRatio: "3/4", borderRadius: 18, overflow: "hidden",
@@ -318,64 +332,54 @@ const Home = ({ showDock }: { showDock: boolean }) => {
                 width: "100%", height: "100%", objectFit: "cover", display: "block",
               }} />
             </div>
-            {/* Stat badge */}
-            <div className="about-stat-badge" style={{
-              position: "absolute", bottom: 20, right: -20,
-              background: "#FFFFFF", borderRadius: 12, padding: "14px 20px",
-              boxShadow: "0 8px 32px rgba(0,0,0,0.1)", zIndex: 2,
-              display: "flex", alignItems: "center", gap: 10,
+            <div style={{
+              position: "absolute", bottom: 16, left: "50%", transform: "translateX(-50%)",
+              background: "#FFFFFF", borderRadius: 10, padding: "10px 16px",
+              boxShadow: "0 6px 24px rgba(0,0,0,0.1)", zIndex: 2,
+              display: "flex", alignItems: "center", gap: 8, whiteSpace: "nowrap",
             }}>
               <div>
-                <div style={{ fontFamily: "'Michroma', sans-serif", fontSize: 28, color: "#000", lineHeight: 1 }}>7+</div>
-                <div style={{ fontFamily: "'Inter', sans-serif", fontSize: 11, fontWeight: 500, color: "#6B7280", lineHeight: 1.3 }}>
+                <div style={{ fontFamily: "'Michroma', sans-serif", fontSize: 22, color: "#000", lineHeight: 1 }}>7+</div>
+                <div style={{ fontFamily: "'Inter', sans-serif", fontSize: 10, fontWeight: 500, color: "#6B7280", lineHeight: 1.3 }}>
                   Years<br />Experience
                 </div>
               </div>
-              <div style={{ width: 8, height: 8, borderRadius: "50%", background: "#1A6BFF" }} />
+              <div style={{ width: 7, height: 7, borderRadius: "50%", background: "#1A6BFF" }} />
             </div>
           </div>
 
-          {/* Right — Text + features */}
-          <div style={{ flex: 1, minWidth: 260, paddingTop: 8 }}>
-            <h2 style={{
-              fontFamily: "'Michroma', sans-serif",
-              fontSize: "clamp(22px, 2.8vw, 36px)", color: "#000",
-              textTransform: "uppercase", lineHeight: 1.15, marginBottom: 20, marginTop: 0,
-              whiteSpace: "nowrap",
-            }}>
-              DESIGNED FOR THE HUMAN MACHINE
-            </h2>
-
-            <p style={{
-              fontFamily: "'Inter', sans-serif", fontWeight: 300, fontSize: 17,
-              color: "#6B7280", lineHeight: 1.85, marginBottom: 32,
-            }}>
-              Blueprint Project is a precision-engineered system built around three core protocols. Training, nutrition, and recovery — synchronized to unlock your full potential. This is not a gym. This is your operating system.
-            </p>
-
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "32px 56px" }}>
-              {[
-                { title: "Precision Training", desc: "Data-driven methodology built to forge strength, endurance, and resilience." },
-                { title: "Nutrition Engineering", desc: "Every meal is a signal. Optimize input, transform output." },
-                { title: "Recovery Science", desc: "Strategic rest, optimized sleep, and complete restoration protocols." },
-                { title: "Mental Growth", desc: "Build focus, discipline, and unshakable mental clarity." },
-              ].map((feat) => (
-                <div key={feat.title} style={{ position: "relative", paddingLeft: 14 }}>
+          {/* Right — 4 Features Stacked */}
+          <div className="about-right-features" style={{
+            flex: 1, display: "flex", flexDirection: "column", gap: 0, paddingTop: 8,
+          }}>
+            {[
+              { num: "01", title: "Precision Training", desc: "Data-driven methodology built to forge strength, endurance, and resilience." },
+              { num: "02", title: "Nutrition Engineering", desc: "Every meal is a signal. Optimize input, transform output." },
+              { num: "03", title: "Recovery Science", desc: "Strategic rest, optimized sleep, and complete restoration protocols." },
+              { num: "04", title: "Mental Growth", desc: "Build focus, discipline, and unshakable mental clarity." },
+            ].map((feat, i, arr) => (
+              <div key={feat.num} style={{
+                display: "flex", alignItems: "flex-start", gap: 14, padding: "20px 0",
+                borderBottom: i < arr.length - 1 ? "1px solid rgba(0,0,0,0.05)" : "none",
+              }}>
+                <div style={{
+                  fontFamily: "'Orbitron', sans-serif", fontSize: 11, color: "#1A6BFF",
+                  minWidth: 28, height: 28, border: "1px solid rgba(26,107,255,0.15)",
+                  borderRadius: 8, display: "flex", alignItems: "center", justifyContent: "center",
+                  flexShrink: 0, letterSpacing: "0.05em",
+                }}>{feat.num}</div>
+                <div>
                   <div style={{
-                    position: "absolute", left: 0, top: 4, width: 3, height: 22,
-                    background: "#1A6BFF", borderRadius: 2,
-                  }} />
-                  <div style={{
-                    fontFamily: "'Inter', sans-serif", fontSize: 18, fontWeight: 600,
-                    color: "#000", marginBottom: 8,
+                    fontFamily: "'Inter', sans-serif", fontSize: 16, fontWeight: 600,
+                    color: "#000", marginBottom: 4,
                   }}>{feat.title}</div>
                   <div style={{
-                    fontFamily: "'Inter', sans-serif", fontSize: 15, fontWeight: 300,
-                    color: "#9CA3AF", lineHeight: 1.75,
+                    fontFamily: "'Inter', sans-serif", fontSize: 13, fontWeight: 300,
+                    color: "#9CA3AF", lineHeight: 1.6,
                   }}>{feat.desc}</div>
                 </div>
-              ))}
-            </div>
+              </div>
+            ))}
           </div>
         </div>
       </div>
