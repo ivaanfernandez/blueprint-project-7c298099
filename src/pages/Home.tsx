@@ -7,9 +7,6 @@ import { Dock, DockIcon } from "@/components/ui/dock";
 import slider1 from "@/assets/slider/slider-1.jpg";
 import slider2 from "@/assets/slider/slider-2.jpg";
 import slider3 from "@/assets/slider/slider-3.jpg";
-import slider4 from "@/assets/slider/slider-4.jpg";
-import slider5 from "@/assets/slider/slider-5.jpg";
-import slider6 from "@/assets/slider/slider-6.jpg";
 
 
 /* ── Inline SVG ── */
