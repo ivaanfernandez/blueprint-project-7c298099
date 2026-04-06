@@ -109,6 +109,8 @@ const Home = ({ showDock }: { showDock: boolean }) => {
             gap: 16px !important;
             text-align: center !important;
           }
+          .video-cinematic-section { height: 50vh !important; min-height: 280px !important; }
+          .video-section-fades { width: 40px !important; }
           .footer-section {
             padding: 60px 6% 32px !important;
           }
@@ -373,6 +375,51 @@ const Home = ({ showDock }: { showDock: boolean }) => {
             </div>
           </div>
         </div>
+      </div>
+
+      {/* ── Divider ── */}
+      <SectionDivider />
+
+      {/* ── VIDEO SECTION — CINEMATIC FULL-WIDTH ── */}
+      <div className="video-cinematic-section" style={{
+        position: "relative", width: "100%", height: "70vh", minHeight: 400,
+        overflow: "hidden", background: "#000",
+      }}>
+        {/* Video element */}
+        <video
+          autoPlay muted loop playsInline
+          style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
+        >
+          <source src="/videos/blueprint-gym.mp4" type="video/mp4" />
+        </video>
+
+        {/* Left fade */}
+        <div className="video-section-fades" style={{
+          position: "absolute", top: 0, left: 0, width: 80, height: "100%",
+          background: "linear-gradient(to right, rgba(0,0,0,0.6), transparent)",
+          pointerEvents: "none",
+        }} />
+
+        {/* Right fade */}
+        <div className="video-section-fades" style={{
+          position: "absolute", top: 0, right: 0, width: 80, height: "100%",
+          background: "linear-gradient(to left, rgba(0,0,0,0.6), transparent)",
+          pointerEvents: "none",
+        }} />
+
+        {/* Top fade — blends with white section above */}
+        <div style={{
+          position: "absolute", top: 0, left: 0, width: "100%", height: 100,
+          background: "linear-gradient(to bottom, #fff, transparent)",
+          pointerEvents: "none",
+        }} />
+
+        {/* Bottom fade — blends with white section below */}
+        <div style={{
+          position: "absolute", bottom: 0, left: 0, width: "100%", height: 100,
+          background: "linear-gradient(to top, #fff, transparent)",
+          pointerEvents: "none",
+        }} />
       </div>
 
       {/* ── Divider ── */}
