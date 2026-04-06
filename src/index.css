@@ -141,6 +141,11 @@ All colors MUST be HSL.
   to { opacity: 0.5; filter: blur(20px); }
 }
 
+@keyframes beamPulse {
+  0% { opacity: 0.3; transform: scaleY(0.95); }
+  100% { opacity: 1; transform: scaleY(1.05); }
+}
+
 @media (max-width: 767px) {
   .about-section-new {
     flex-direction: column !important;
