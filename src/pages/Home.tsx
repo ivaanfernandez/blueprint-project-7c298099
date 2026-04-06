@@ -1,7 +1,7 @@
 import { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
-import ShaderGrid from "@/components/ShaderGrid";
+import VerticalBeams from "@/components/VerticalBeams";
 import { TextScramble } from "@/components/ui/text-scramble";
 import { Dock, DockIcon } from "@/components/ui/dock";
 import slider1 from "@/assets/slider/slider-1.jpg";
