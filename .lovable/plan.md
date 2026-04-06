@@ -1,38 +1,30 @@
 
 
-## Plan: 3 Major Home Page Changes
+## Plan: Fix Feature Accordion Section + Hero Text
 
-### Change 1: Delete Protocols Section
-Remove lines 401-464 (divider + protocols section + divider after it).
+**File**: `src/pages/Home.tsx`
 
-### Change 2: Replace Feature Section with Scroll-Linked Accordion
-Remove lines 524-575 (divider + feature section). Replace with a new section containing:
+### FIX 1: Hero — Remove bottom-left paragraph
+Delete lines 307-312 (the `<p>` tag containing "Three protocols. One integrated system..."). Keep the `<div>` with scroll button starting at line 314.
 
-- **Left column (sticky)**: "LIMITLESS POTENTIAL WITH BLUEPRINT" title + 3-item accordion (Blueprint Lab / Hack Bar / Reset) with color-coded dots, expandable descriptions, and "LEARN MORE →" links routing to `/huella-azul`, `/huella-verde`, `/huella-roja`.
-- **Right column (scrollable)**: 3 full-viewport image panels using slider-1/2/3.jpg with color-coded badges.
-- **Scroll behavior**: `IntersectionObserver` (threshold 0.5) watches each image panel and updates `activeIndex` to control which accordion item is expanded. Clicking an accordion item scrolls to the corresponding panel.
-- **Mobile (<768px)**: No sticky, fully expanded, stacked vertically. Add media query to existing `<style>` block.
+### FIX 2: Feature Section Title — Bigger, 2 lines
+Lines 558-568: Change the accordion section title styles:
+- `fontSize`: `"clamp(28px, 3.5vw, 44px)"` (was `clamp(18px, 2.5vw, 28px)`)
+- `lineHeight`: `1.1` (was `1.12`)
+- Add `maxWidth: 500` to force "LIMITLESS POTENTIAL" / "WITH BLUEPRINT" as two lines
 
-New state: `activeIndex` (replaces `activeTab`). New ref: `panelRefs`. Remove `FEATURE_TABS` constant and `activeTab` state.
+### FIX 3: Accordion items — Bigger text
+Lines 590-653: Update accordion item styles:
+- Title row padding: `"20px 0 20px 16px"` (was `16px 0 16px 16px`)
+- Color dot: `width: 9, height: 9` (was 7)
+- Name font-size: `20` (was 14)
+- Description font-size: `15` (was 13), `lineHeight: 1.7` (was 1.65), `maxWidth: 400` (was 340)
+- Link font-size: `10` (was 8)
 
-### Change 3: Replace CTA/Footer Section
-Remove lines 607-670 (entire CTA section). Replace with a centered dark footer containing:
-
-- Dot pattern background + animated SVG pulse beams converging to center
-- "ENTER THE BLUEPRINT" title (Michroma, clamp 24px-40px)
-- Subtitle + "JOIN NOW" pill button with 3 animated pulse rings and radial glow
-- Instagram icon link
-- Footer bar: brand name left, 3 links center, copyright right
-- New keyframes (`pulseRing`, `pulseGlow`) added to `<style>` block
-- Mobile: stacked footer bar, smaller title
-
-### Technical Details
-
-**File modified**: `src/pages/Home.tsx` only
-
-**Removed**: `PROTOCOLS` constant, `FEATURE_TABS` constant, `activeTab` state, protocol card CSS classes, feature tab CSS classes, CTA CSS classes.
-
-**Added**: `useEffect` import, `activeIndex` state, `panelRefs` ref, `IntersectionObserver` in `useEffect`, `scrollToPanel` function, accordion section JSX, footer section JSX, new keyframes CSS, new mobile media query rules for accordion section and footer.
-
-**Final section order**: Hero → About → Divider → Programs → Divider → Accordion Scroll → Divider → Gallery → Footer (dark)
+### FIX 4: Images flush to right edge
+- Section container (line 538): Change `padding: "0 7%"` to `paddingLeft: "7%", paddingRight: 0`
+- Right column (line 662): Already `flex: 1`, no changes needed
+- Each image panel (line 672-678): Change to `minHeight: "80vh"`, `justifyContent: "flex-end"`, `padding: "20px 0 20px 20px"`
+- Each image box (line 680-687): Change `width: "95%"`, `borderRadius: "14px 0 0 14px"`, `marginRight: 0`
+- Mobile media query: Update `.accordion-panel .accordion-img-box` to keep `border-radius: 12px` on mobile
 
