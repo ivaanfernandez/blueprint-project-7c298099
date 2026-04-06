@@ -547,15 +547,16 @@ const Home = ({ showDock }: { showDock: boolean }) => {
           flexDirection: "column",
           justifyContent: "center",
           padding: "40px 28px 40px 0",
+          alignSelf: "flex-start",
           zIndex: 2,
         }}>
           <h2 style={{
             fontFamily: "'Michroma', sans-serif",
-            fontSize: "clamp(28px, 3.5vw, 44px)",
+            fontSize: "clamp(32px, 4vw, 52px)",
             color: "#000",
             textTransform: "uppercase",
-            lineHeight: 1.1,
-            marginBottom: 32,
+            lineHeight: 1.08,
+            marginBottom: 40,
             marginTop: 0,
             maxWidth: 500,
           }}>
@@ -583,13 +584,13 @@ const Home = ({ showDock }: { showDock: boolean }) => {
                 >
                   {/* Title row */}
                   <div style={{
-                    padding: "20px 0 20px 16px",
+                    padding: "24px 0 24px 20px",
                     display: "flex",
                     alignItems: "center",
                     gap: 10,
                   }}>
                     <div style={{
-                      width: 9, height: 9, borderRadius: "50%",
+                      width: 10, height: 10, borderRadius: "50%",
                       background: item.color,
                       opacity: isActive ? 1 : 0.25,
                       boxShadow: isActive ? `0 0 8px ${item.color}` : "none",
@@ -597,7 +598,7 @@ const Home = ({ showDock }: { showDock: boolean }) => {
                     }} />
                     <span style={{
                       fontFamily: "'Michroma', sans-serif",
-                      fontSize: 20,
+                      fontSize: 24,
                       textTransform: "uppercase",
                       letterSpacing: "0.02em",
                       color: isActive ? "#000" : "#D1D5DB",
@@ -611,19 +612,19 @@ const Home = ({ showDock }: { showDock: boolean }) => {
                   <div style={{
                     overflow: "hidden",
                     transition: "all 0.5s ease",
-                    paddingLeft: 17,
-                    maxHeight: isActive ? 160 : 0,
+                    paddingLeft: 20,
+                    maxHeight: isActive ? 200 : 0,
                     opacity: isActive ? 1 : 0,
                     paddingBottom: isActive ? 16 : 0,
                   }}>
                     <p style={{
                       fontFamily: "'Inter', sans-serif",
-                      fontSize: 15,
+                      fontSize: 17,
                       fontWeight: 300,
                       color: "#6B7280",
-                      lineHeight: 1.7,
-                      maxWidth: 400,
-                      marginBottom: 10,
+                      lineHeight: 1.75,
+                      maxWidth: 460,
+                      marginBottom: 14,
                       marginTop: 0,
                     }}>
                       {item.desc}
@@ -635,8 +636,8 @@ const Home = ({ showDock }: { showDock: boolean }) => {
                       }}
                       style={{
                         fontFamily: "'Orbitron', sans-serif",
-                        fontSize: 10,
-                        letterSpacing: "0.12em",
+                        fontSize: 12,
+                        letterSpacing: "0.1em",
                         display: "inline-flex",
                         alignItems: "center",
                         gap: 4,
