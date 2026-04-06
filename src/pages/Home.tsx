@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import VerticalBeams from "@/components/VerticalBeams";
@@ -49,15 +49,37 @@ const HUELLAS = [
   { color: "#22C55E", glow: "rgba(34,197,94,0.7)", route: "/huella-verde", tooltip: "RECUPERACIÓN" },
 ];
 
-const PROTOCOLS = [
-  { color: "#1A6BFF", name: "Entrenamiento", desc: "Precision training methodology designed to build strength, endurance, and resilience through data-driven programming.", route: "/huella-azul" },
-  { color: "#FF3B3B", name: "Nutrición", desc: "Fuel your system with precision nutrition protocols. Every meal is a signal — optimize input, transform output.", route: "/huella-roja" },
-  { color: "#22C55E", name: "Recuperación", desc: "Strategic rest, optimized sleep, and complete restoration. Without recovery there is no progress.", route: "/huella-verde" },
-];
-
 const GRID_IMAGES = [slider1, slider2, slider3, slider4, slider5, slider6];
 
-const FEATURE_TABS = ["Training Methodology", "Recovery Science", "Nutrition Engineering"];
+const ACCORDION_DATA = [
+  {
+    color: "#1A6BFF",
+    name: "Blueprint Lab",
+    desc: "Precision training methodology. Data-driven programming built to forge strength, endurance, and resilience.",
+    linkText: "LEARN MORE →",
+    route: "/huella-azul",
+    image: slider1,
+    badgeLabel: "BLUEPRINT LAB",
+  },
+  {
+    color: "#22C55E",
+    name: "Hack Bar",
+    desc: "Nutrition engineered for performance. Every meal is a signal. Optimize input, transform output.",
+    linkText: "LEARN MORE →",
+    route: "/huella-verde",
+    image: slider2,
+    badgeLabel: "HACK BAR",
+  },
+  {
+    color: "#FF3B3B",
+    name: "Reset",
+    desc: "Strategic recovery protocols. Optimized sleep, restoration, and rebuilding for continuous evolution.",
+    linkText: "LEARN MORE →",
+    route: "/huella-roja",
+    image: slider3,
+    badgeLabel: "RESET",
+  },
+];
 
 /* ══════════════════════════════════════════════════════════ */
 /*  HOME PAGE                                                */
@@ -66,11 +88,36 @@ const FEATURE_TABS = ["Training Methodology", "Recovery Science", "Nutrition Eng
 const Home = ({ showDock }: { showDock: boolean }) => {
   const navigate = useNavigate();
   const aboutRef = useRef<HTMLDivElement>(null);
-  const [activeTab, setActiveTab] = useState(0);
+  const [activeIndex, setActiveIndex] = useState(0);
+  const panelRefs = useRef<(HTMLDivElement | null)[]>([]);
 
   const scrollToAbout = () => {
     aboutRef.current?.scrollIntoView({ behavior: "smooth" });
   };
+
+  const scrollToPanel = (index: number) => {
+    panelRefs.current[index]?.scrollIntoView({ behavior: "smooth", block: "center" });
+  };
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const index = panelRefs.current.indexOf(entry.target as HTMLDivElement);
+            if (index !== -1) setActiveIndex(index);
+          }
+        });
+      },
+      { threshold: 0.5 }
+    );
+
+    panelRefs.current.forEach((ref) => {
+      if (ref) observer.observe(ref);
+    });
+
+    return () => observer.disconnect();
+  }, []);
 
 
   return (
@@ -89,19 +136,11 @@ const Home = ({ showDock }: { showDock: boolean }) => {
           backdrop-filter: blur(16px) !important;
           box-shadow: 0 4px 24px rgba(0,0,0,0.3) !important;
         }
-        .protocol-card-neo { transition: all 0.4s ease; }
-        .protocol-card-neo:hover { border-color: rgba(0,0,0,0.1) !important; box-shadow: 0 8px 32px rgba(0,0,0,0.05) !important; transform: translateY(-2px); }
-        .protocol-card-neo:hover .fp-icon-neo { transform: scale(1.1); }
-        .protocol-card-neo:hover .learn-link { color: inherit; }
         .bento-item-neo { transition: transform 0.4s ease; }
         .bento-item-neo:hover { transform: scale(1.01); }
-        .tag-pill { transition: all 0.3s ease; }
-        .tag-pill:hover { background: #000 !important; color: #fff !important; }
-        .feat-tab { transition: all 0.3s ease; position: relative; }
-        .feat-tab::before { content: ''; position: absolute; left: 0; top: 50%; transform: translateY(-50%); width: 3px; height: 0; background: #1A6BFF; border-radius: 2px; transition: height 0.3s ease; }
-        .feat-tab.active { color: #000 !important; font-weight: 500 !important; }
-        .feat-tab.active::before { height: 20px; }
-        .feat-tab:hover { color: #000 !important; }
+        .program-card { transition: all 0.4s ease; box-shadow: 0 0 20px rgba(0,0,0,0.04), 0 0 60px rgba(255,255,255,0.3); }
+        .program-card:hover { transform: translateY(-4px); box-shadow: 0 0 30px rgba(0,0,0,0.06), 0 0 80px rgba(255,255,255,0.5), 0 0 120px rgba(200,200,200,0.15); }
+        .program-card:hover .program-card-img { transform: scale(1.05); }
         @keyframes labScanLine {
           0% { top: -50px; }
           100% { top: 100%; }
@@ -110,13 +149,16 @@ const Home = ({ showDock }: { showDock: boolean }) => {
           0%, 100% { opacity: 0; transform: scale(0.5); }
           50% { opacity: 1; transform: scale(1); }
         }
-        .program-card { transition: all 0.4s ease; box-shadow: 0 0 20px rgba(0,0,0,0.04), 0 0 60px rgba(255,255,255,0.3); }
-        .program-card:hover { transform: translateY(-4px); box-shadow: 0 0 30px rgba(0,0,0,0.06), 0 0 80px rgba(255,255,255,0.5), 0 0 120px rgba(200,200,200,0.15); }
-        .program-card:hover .program-card-img { transform: scale(1.05); }
-        @media (max-width: 767px) {
-          .programs-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 10px !important; }
+        @keyframes pulseRing {
+          0%, 100% { opacity: 0.3; transform: scale(1); }
+          50% { opacity: 0.8; transform: scale(1.02); }
+        }
+        @keyframes pulseGlow {
+          0%, 100% { opacity: 0.3; }
+          50% { opacity: 0.7; }
         }
         @media (max-width: 767px) {
+          .programs-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 10px !important; }
           .hero-main-title {
             font-size: clamp(28px, 8vw, 44px) !important;
             white-space: normal !important;
@@ -126,12 +168,44 @@ const Home = ({ showDock }: { showDock: boolean }) => {
           .about-img { max-width: 280px !important; margin: 0 auto !important; }
           .about-tags { justify-content: center !important; }
           .about-buttons { justify-content: center !important; }
-          .protocols-grid-neo { grid-template-columns: 1fr !important; }
-          .feature-flex { flex-direction: column !important; }
           .bento-grid-neo { grid-template-columns: repeat(2, 1fr) !important; grid-template-rows: repeat(3, 180px) !important; }
-          .cta-flex { flex-direction: column !important; text-align: center !important; }
-          .cta-left { align-items: center !important; }
-          .cta-images { max-width: 300px !important; margin: 0 auto !important; }
+          .accordion-scroll-section {
+            flex-direction: column !important;
+            min-height: auto !important;
+            padding: 48px 6% !important;
+          }
+          .accordion-scroll-section .accordion-left {
+            position: relative !important;
+            top: auto !important;
+            height: auto !important;
+            flex: none !important;
+            width: 100% !important;
+            padding: 0 0 32px 0 !important;
+          }
+          .accordion-scroll-section .accordion-right {
+            flex: none !important;
+            width: 100% !important;
+          }
+          .accordion-scroll-section .accordion-right .accordion-panel {
+            min-height: auto !important;
+            padding: 16px 0 !important;
+          }
+          .accordion-scroll-section .accordion-right .accordion-panel .accordion-img-box {
+            width: 100% !important;
+            aspect-ratio: 16/10 !important;
+            border-radius: 12px !important;
+          }
+          .footer-section {
+            padding: 60px 6% 32px !important;
+          }
+          .footer-section .footer-title {
+            font-size: clamp(22px, 7vw, 32px) !important;
+          }
+          .footer-section .footer-bar {
+            flex-direction: column !important;
+            text-align: center !important;
+            gap: 12px !important;
+          }
         }
       `}</style>
 
@@ -166,10 +240,8 @@ const Home = ({ showDock }: { showDock: boolean }) => {
         background: "#070612", minHeight: "100vh", position: "relative", overflow: "hidden",
         display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center",
       }}>
-        {/* Animated vertical beams background */}
         <VerticalBeams beamCount={40} />
 
-        {/* Centered massive title */}
         <TextScramble
           as="h1"
           className="hero-main-title"
@@ -198,7 +270,6 @@ const Home = ({ showDock }: { showDock: boolean }) => {
           BLUEPRINT PROJECT
         </TextScramble>
 
-        {/* Subtitle below title */}
         <TextScramble
           as="p"
           duration={1.0}
@@ -222,7 +293,6 @@ const Home = ({ showDock }: { showDock: boolean }) => {
           Where human performance connects his mind, body and soul.
         </TextScramble>
 
-        {/* Bottom-left: CTA text + button */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -401,68 +471,6 @@ const Home = ({ showDock }: { showDock: boolean }) => {
       {/* ── Divider ── */}
       <SectionDivider />
 
-      {/* ── D: PROTOCOLS (WHITE) ── */}
-      <div style={{ padding: "56px 7%", position: "relative", zIndex: 1 }}>
-        <h2 style={{
-          fontFamily: "'Michroma', sans-serif",
-          fontSize: "clamp(18px, 2.5vw, 32px)", color: "#000",
-          textTransform: "uppercase", marginBottom: 40,
-          textAlign: "center", width: "100%",
-        }}>
-          THE PROTOCOL
-        </h2>
-
-        <div className="protocols-grid-neo" style={{
-          display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 16,
-        }}>
-          {PROTOCOLS.map((p) => (
-            <div
-              key={p.route}
-              className="protocol-card-neo"
-              onClick={() => navigate(p.route)}
-              style={{
-                background: "#FAFAFA", border: "1px solid rgba(0,0,0,0.05)",
-                borderRadius: 16, padding: "32px 24px", textAlign: "center",
-                cursor: "pointer", position: "relative", overflow: "hidden",
-              }}
-            >
-              {/* Top accent bar */}
-              <div style={{
-                position: "absolute", top: 0, left: "50%", transform: "translateX(-50%)",
-                width: 40, height: 2, borderRadius: "0 0 2px 2px", background: p.color,
-              }} />
-
-              {/* Icon */}
-              <div style={{
-                width: 40, height: 40, borderRadius: 10, margin: "0 auto 16px",
-                background: `${p.color}0F`,
-                display: "flex", alignItems: "center", justifyContent: "center",
-              }}>
-                <div className="fp-icon-neo" style={{ transition: "transform 0.3s ease" }}>
-                  <FingerprintSVG color={p.color} size={24} />
-                </div>
-              </div>
-
-              <p style={{
-                fontFamily: "'Michroma', sans-serif", fontSize: 11, color: "#000",
-                textTransform: "uppercase", letterSpacing: "0.05em", marginBottom: 10,
-              }}>{p.name}</p>
-              <p style={{
-                fontFamily: "'Inter', sans-serif", fontSize: 12, fontWeight: 300,
-                color: "#9CA3AF", lineHeight: 1.6, marginBottom: 16,
-              }}>{p.desc}</p>
-              <span className="learn-link" style={{
-                fontFamily: "'Orbitron', sans-serif", fontSize: 8, color: "#9CA3AF",
-                letterSpacing: "0.15em", transition: "color 0.3s ease",
-              }}>LEARN MORE →</span>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* ── Divider ── */}
-      <SectionDivider />
-
       {/* ── PROGRAMS SECTION (WHITE) ── */}
       <div style={{ padding: "56px 7%", position: "relative", zIndex: 1 }}>
         <h2 style={{
@@ -524,53 +532,182 @@ const Home = ({ showDock }: { showDock: boolean }) => {
       {/* ── Divider ── */}
       <SectionDivider />
 
-      {/* ── E: FEATURE (WHITE) ── */}
-      <div className="feature-flex" style={{
-        padding: "56px 7%", display: "flex", alignItems: "center", gap: 48,
-        position: "relative", zIndex: 1, flexWrap: "wrap",
+      {/* ── FEATURE ACCORDION SCROLL (NEW) ── */}
+      <div className="accordion-scroll-section" style={{
+        position: "relative",
+        padding: "0 7%",
+        minHeight: "100vh",
+        display: "flex",
+        alignItems: "flex-start",
+        gap: 0,
+        background: "#FFFFFF",
+        zIndex: 1,
       }}>
-        {/* Left */}
-        <div style={{ flex: 1, minWidth: 260 }}>
+        {/* LEFT COLUMN (sticky) */}
+        <div className="accordion-left" style={{
+          flex: "0 0 42%",
+          position: "sticky",
+          top: 0,
+          height: "100vh",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          padding: "40px 28px 40px 0",
+          zIndex: 2,
+        }}>
           <h2 style={{
             fontFamily: "'Michroma', sans-serif",
-            fontSize: "clamp(18px, 2.5vw, 32px)", color: "#000",
-            textTransform: "uppercase", lineHeight: 1.15, marginBottom: 28,
+            fontSize: "clamp(18px, 2.5vw, 28px)",
+            color: "#000",
+            textTransform: "uppercase",
+            lineHeight: 1.12,
+            marginBottom: 32,
+            marginTop: 0,
           }}>
-            LIMITLESS<br />POTENTIAL WITH<br />BLUEPRINT
+            LIMITLESS POTENTIAL WITH BLUEPRINT
           </h2>
 
-          <div style={{ borderTop: "1px solid rgba(0,0,0,0.06)" }}>
-            {FEATURE_TABS.map((tab, i) => (
-              <div
-                key={tab}
-                className={`feat-tab ${activeTab === i ? "active" : ""}`}
-                onClick={() => setActiveTab(i)}
-                style={{
-                  padding: "14px 0 14px 16px",
-                  borderBottom: "1px solid rgba(0,0,0,0.06)",
-                  fontFamily: "'Inter', sans-serif", fontSize: 13, color: "#9CA3AF",
-                  cursor: "pointer",
-                }}
-              >
-                {tab}
-              </div>
-            ))}
+          {/* Accordion items */}
+          <div>
+            {ACCORDION_DATA.map((item, i) => {
+              const isActive = activeIndex === i;
+              const isLast = i === ACCORDION_DATA.length - 1;
+              return (
+                <div
+                  key={item.name}
+                  onClick={() => {
+                    setActiveIndex(i);
+                    scrollToPanel(i);
+                  }}
+                  style={{
+                    borderBottom: isLast ? "none" : "1px solid rgba(0,0,0,0.06)",
+                    cursor: "pointer",
+                    overflow: "hidden",
+                    transition: "all 0.4s",
+                  }}
+                >
+                  {/* Title row */}
+                  <div style={{
+                    padding: "16px 0 16px 16px",
+                    display: "flex",
+                    alignItems: "center",
+                    gap: 10,
+                  }}>
+                    <div style={{
+                      width: 7, height: 7, borderRadius: "50%",
+                      background: item.color,
+                      opacity: isActive ? 1 : 0.25,
+                      boxShadow: isActive ? `0 0 8px ${item.color}` : "none",
+                      transition: "all 0.4s",
+                    }} />
+                    <span style={{
+                      fontFamily: "'Michroma', sans-serif",
+                      fontSize: 14,
+                      textTransform: "uppercase",
+                      letterSpacing: "0.02em",
+                      color: isActive ? "#000" : "#D1D5DB",
+                      transition: "color 0.4s",
+                    }}>
+                      {item.name}
+                    </span>
+                  </div>
+
+                  {/* Body (expandable) */}
+                  <div style={{
+                    overflow: "hidden",
+                    transition: "all 0.5s ease",
+                    paddingLeft: 17,
+                    maxHeight: isActive ? 120 : 0,
+                    opacity: isActive ? 1 : 0,
+                    paddingBottom: isActive ? 16 : 0,
+                  }}>
+                    <p style={{
+                      fontFamily: "'Inter', sans-serif",
+                      fontSize: 13,
+                      fontWeight: 300,
+                      color: "#6B7280",
+                      lineHeight: 1.65,
+                      maxWidth: 340,
+                      marginBottom: 10,
+                      marginTop: 0,
+                    }}>
+                      {item.desc}
+                    </p>
+                    <span
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        navigate(item.route);
+                      }}
+                      style={{
+                        fontFamily: "'Orbitron', sans-serif",
+                        fontSize: 8,
+                        letterSpacing: "0.12em",
+                        display: "inline-flex",
+                        alignItems: "center",
+                        gap: 4,
+                        color: item.color,
+                        cursor: "pointer",
+                      }}
+                    >
+                      {item.linkText}
+                    </span>
+                  </div>
+                </div>
+              );
+            })}
           </div>
         </div>
 
-        {/* Right */}
-        <div style={{ flex: 1, minWidth: 280 }}>
-          <div style={{
-            borderRadius: 16, aspectRatio: "4/3",
-            background: "linear-gradient(160deg, #e8e8e8, #d0d0d0)",
-            position: "relative",
-          }}>
-            <span style={{
-              position: "absolute", bottom: 10, right: 14,
-              fontFamily: "'Orbitron', sans-serif", fontSize: 6, color: "rgba(0,0,0,0.2)",
-              letterSpacing: "0.15em",
-            }}>FEATURE IMAGE</span>
-          </div>
+        {/* RIGHT COLUMN (scrollable images) */}
+        <div className="accordion-right" style={{
+          flex: 1,
+          display: "flex",
+          flexDirection: "column",
+        }}>
+          {ACCORDION_DATA.map((item, i) => (
+            <div
+              key={item.name}
+              className="accordion-panel"
+              ref={(el) => { panelRefs.current[i] = el; }}
+              style={{
+                minHeight: "100vh",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                padding: "40px 20px",
+              }}
+            >
+              <div className="accordion-img-box" style={{
+                width: "88%",
+                aspectRatio: "16/10",
+                borderRadius: 14,
+                overflow: "hidden",
+                position: "relative",
+                boxShadow: "0 8px 32px rgba(0,0,0,0.06)",
+              }}>
+                <img src={item.image} alt={item.name} style={{
+                  width: "100%", height: "100%", objectFit: "cover",
+                }} />
+                {/* Badge */}
+                <div style={{
+                  position: "absolute",
+                  bottom: 10,
+                  left: 10,
+                  padding: "5px 12px",
+                  borderRadius: 6,
+                  backdropFilter: "blur(8px)",
+                  fontFamily: "'Orbitron', sans-serif",
+                  fontSize: 7,
+                  letterSpacing: "0.1em",
+                  background: `${item.color}1F`,
+                  color: item.color,
+                  border: `1px solid ${item.color}26`,
+                }}>
+                  {item.badgeLabel}
+                </div>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
 
@@ -604,68 +741,230 @@ const Home = ({ showDock }: { showDock: boolean }) => {
 
       </div>{/* END WHITE ZONE WRAPPER */}
 
-      {/* ── G: CTA FINAL (DARK) ── */}
-      {/* ══════════════════════════════════════════════════════ */}
-      <div style={{
-        background: "#0a0a0a", padding: "72px 7%", marginTop: 40,
-        position: "relative", overflow: "hidden",
+      {/* ── FOOTER (NEW) ── */}
+      <div className="footer-section" style={{
+        background: "#0a0a0a",
+        padding: "80px 7% 40px",
+        textAlign: "center",
+        position: "relative",
+        overflow: "hidden",
       }}>
         {/* Dot pattern */}
         <div style={{
           position: "absolute", inset: 0, pointerEvents: "none",
-          backgroundImage: "radial-gradient(rgba(255,255,255,0.03) 1px, transparent 1px)",
+          backgroundImage: "radial-gradient(rgba(255,255,255,0.015) 1px, transparent 1px)",
           backgroundSize: "24px 24px",
         }} />
 
-        <div className="cta-flex" style={{
-          display: "flex", alignItems: "center", gap: 48,
-          position: "relative", zIndex: 2, flexWrap: "wrap",
+        {/* Pulse Beams SVG */}
+        <svg style={{ position: "absolute", inset: 0, zIndex: 1, pointerEvents: "none", overflow: "visible" }} viewBox="0 0 800 400" preserveAspectRatio="xMidYMid meet">
+          <path d="M400 200 L80 380" stroke="rgba(26,107,255,0.06)" strokeWidth="1" fill="none"/>
+          <path d="M400 200 L720 380" stroke="rgba(26,107,255,0.06)" strokeWidth="1" fill="none"/>
+          <path d="M400 200 L150 40" stroke="rgba(26,107,255,0.06)" strokeWidth="1" fill="none"/>
+          <path d="M400 200 L650 40" stroke="rgba(26,107,255,0.06)" strokeWidth="1" fill="none"/>
+          <path d="M400 200 L20 200" stroke="rgba(26,107,255,0.04)" strokeWidth="1" fill="none"/>
+          <path d="M400 200 L780 200" stroke="rgba(26,107,255,0.04)" strokeWidth="1" fill="none"/>
+
+          <circle cx="80" cy="380" r="3" fill="rgba(26,107,255,0.3)"/>
+          <circle cx="720" cy="380" r="3" fill="rgba(26,107,255,0.3)"/>
+          <circle cx="150" cy="40" r="3" fill="rgba(26,107,255,0.3)"/>
+          <circle cx="650" cy="40" r="3" fill="rgba(26,107,255,0.3)"/>
+          <circle cx="20" cy="200" r="3" fill="rgba(26,107,255,0.3)"/>
+          <circle cx="780" cy="200" r="3" fill="rgba(26,107,255,0.3)"/>
+          <circle cx="400" cy="200" r="4" fill="rgba(26,107,255,0.2)" stroke="rgba(26,107,255,0.3)" strokeWidth="1"/>
+
+          <line x1="80" y1="380" x2="400" y2="200" stroke="url(#beamGrad1)" strokeWidth="1.5" opacity="0">
+            <animate attributeName="opacity" values="0;0.6;0" dur="3s" repeatCount="indefinite"/>
+          </line>
+          <line x1="720" y1="380" x2="400" y2="200" stroke="url(#beamGrad2)" strokeWidth="1.5" opacity="0">
+            <animate attributeName="opacity" values="0;0.6;0" dur="3s" begin="0.8s" repeatCount="indefinite"/>
+          </line>
+          <line x1="150" y1="40" x2="400" y2="200" stroke="url(#beamGrad3)" strokeWidth="1.5" opacity="0">
+            <animate attributeName="opacity" values="0;0.6;0" dur="3s" begin="1.5s" repeatCount="indefinite"/>
+          </line>
+          <line x1="650" y1="40" x2="400" y2="200" stroke="url(#beamGrad4)" strokeWidth="1.5" opacity="0">
+            <animate attributeName="opacity" values="0;0.6;0" dur="3s" begin="0.4s" repeatCount="indefinite"/>
+          </line>
+
+          <defs>
+            <linearGradient id="beamGrad1" x1="0%" y1="100%" x2="100%" y2="0%"><stop offset="0%" stopColor="#1A6BFF" stopOpacity="0"/><stop offset="50%" stopColor="#1A6BFF" stopOpacity="0.4"/><stop offset="100%" stopColor="#1A6BFF" stopOpacity="0"/></linearGradient>
+            <linearGradient id="beamGrad2" x1="100%" y1="100%" x2="0%" y2="0%"><stop offset="0%" stopColor="#1A6BFF" stopOpacity="0"/><stop offset="50%" stopColor="#1A6BFF" stopOpacity="0.4"/><stop offset="100%" stopColor="#1A6BFF" stopOpacity="0"/></linearGradient>
+            <linearGradient id="beamGrad3" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stopColor="#1A6BFF" stopOpacity="0"/><stop offset="50%" stopColor="#1A6BFF" stopOpacity="0.4"/><stop offset="100%" stopColor="#1A6BFF" stopOpacity="0"/></linearGradient>
+            <linearGradient id="beamGrad4" x1="100%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stopColor="#1A6BFF" stopOpacity="0"/><stop offset="50%" stopColor="#1A6BFF" stopOpacity="0.4"/><stop offset="100%" stopColor="#1A6BFF" stopOpacity="0"/></linearGradient>
+          </defs>
+        </svg>
+
+        {/* Title */}
+        <h2 className="footer-title" style={{
+          fontFamily: "'Michroma', sans-serif",
+          fontSize: "clamp(24px, 4vw, 40px)",
+          color: "#FFFFFF",
+          textTransform: "uppercase",
+          lineHeight: 1.1,
+          marginBottom: 12,
+          marginTop: 0,
+          position: "relative",
+          zIndex: 2,
         }}>
-          {/* Left */}
-          <div className="cta-left" style={{ flex: 1, minWidth: 260, display: "flex", flexDirection: "column" }}>
-            <h2 style={{
-              fontFamily: "'Michroma', sans-serif",
-              fontSize: "clamp(20px, 3vw, 38px)", color: "#FFFFFF",
-              textTransform: "uppercase", lineHeight: 1.12, marginBottom: 16, marginTop: 0,
-            }}>
-              ENTER THE<br />BLUEPRINT
-            </h2>
-            <p style={{
-              fontFamily: "'Inter', sans-serif", fontWeight: 300,
-              fontSize: 13, color: "rgba(255,255,255,0.4)", lineHeight: 1.7,
-              maxWidth: 400, marginBottom: 24,
-            }}>
-              Your evolution begins with a single step. Three protocols, one system, infinite potential.
-            </p>
-            <button
-              onClick={() => navigate("/huella-azul")}
-              style={{
-                fontFamily: "'Orbitron', sans-serif", fontSize: 9, fontWeight: 500,
-                letterSpacing: "0.15em", color: "#fff", background: "#1A6BFF",
-                border: "none", borderRadius: 6, padding: "12px 24px", cursor: "pointer",
-                transition: "all 0.3s ease", alignSelf: "flex-start",
-              }}
-              onMouseEnter={(e) => { e.currentTarget.style.background = "#1558d4"; e.currentTarget.style.boxShadow = "0 0 20px rgba(26,107,255,0.3)"; }}
-              onMouseLeave={(e) => { e.currentTarget.style.background = "#1A6BFF"; e.currentTarget.style.boxShadow = "none"; }}
-            >
-              JOIN NOW
-            </button>
+          ENTER THE<br />BLUEPRINT
+        </h2>
+
+        {/* Subtitle */}
+        <p style={{
+          fontFamily: "'Inter', sans-serif",
+          fontSize: 13,
+          fontWeight: 300,
+          color: "rgba(255,255,255,0.4)",
+          marginBottom: 36,
+          marginTop: 0,
+          position: "relative",
+          zIndex: 2,
+        }}>
+          Your evolution begins with a single step.
+        </p>
+
+        {/* Pulse Button */}
+        <div style={{ position: "relative", display: "inline-block", zIndex: 2, marginBottom: 24 }}>
+          {/* Glow */}
+          <div style={{
+            position: "absolute",
+            top: "50%", left: "50%",
+            transform: "translate(-50%, -50%)",
+            width: "120%", height: "200%",
+            background: "radial-gradient(ellipse, rgba(26,107,255,0.08) 0%, transparent 70%)",
+            animation: "pulseGlow 3s ease-in-out infinite",
+            pointerEvents: "none",
+          }} />
+
+          {/* Rings */}
+          <div style={{
+            position: "absolute", inset: -4, borderRadius: 54,
+            border: "1px solid rgba(26,107,255,0.15)",
+            animation: "pulseRing 3s ease-in-out infinite",
+            pointerEvents: "none",
+          }} />
+          <div style={{
+            position: "absolute", inset: -12, borderRadius: 62,
+            border: "1px solid rgba(26,107,255,0.08)",
+            animation: "pulseRing 3s ease-in-out 0.5s infinite",
+            pointerEvents: "none",
+          }} />
+          <div style={{
+            position: "absolute", inset: -22, borderRadius: 72,
+            border: "1px solid rgba(26,107,255,0.04)",
+            animation: "pulseRing 3s ease-in-out 1s infinite",
+            pointerEvents: "none",
+          }} />
+
+          <button
+            onClick={() => navigate("/huella-azul")}
+            style={{
+              fontFamily: "'Orbitron', sans-serif",
+              fontSize: 10,
+              fontWeight: 500,
+              letterSpacing: "0.2em",
+              color: "#fff",
+              background: "rgba(255,255,255,0.03)",
+              border: "1px solid rgba(255,255,255,0.1)",
+              borderRadius: 50,
+              padding: "18px 48px",
+              cursor: "pointer",
+              position: "relative",
+              zIndex: 3,
+              transition: "all 0.3s ease",
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.borderColor = "rgba(26,107,255,0.5)";
+              e.currentTarget.style.background = "rgba(26,107,255,0.08)";
+              e.currentTarget.style.boxShadow = "0 0 40px rgba(26,107,255,0.15)";
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.borderColor = "rgba(255,255,255,0.1)";
+              e.currentTarget.style.background = "rgba(255,255,255,0.03)";
+              e.currentTarget.style.boxShadow = "none";
+            }}
+          >
+            JOIN NOW
+          </button>
+        </div>
+
+        {/* Instagram Icon */}
+        <div style={{ marginBottom: 48, position: "relative", zIndex: 2 }}>
+          <a
+            href="https://instagram.com/blueprintproject"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{ display: "inline-block", transition: "all 0.3s ease" }}
+            onMouseEnter={(e) => {
+              const svg = e.currentTarget.querySelector("svg");
+              if (svg) { svg.style.color = "#fff"; svg.style.filter = "drop-shadow(0 0 8px rgba(255,255,255,0.3))"; }
+            }}
+            onMouseLeave={(e) => {
+              const svg = e.currentTarget.querySelector("svg");
+              if (svg) { svg.style.color = "rgba(255,255,255,0.3)"; svg.style.filter = "none"; }
+            }}
+          >
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" style={{ color: "rgba(255,255,255,0.3)", transition: "all 0.3s ease" }}>
+              <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+              <circle cx="12" cy="12" r="5"/>
+              <circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/>
+            </svg>
+          </a>
+        </div>
+
+        {/* Footer Bar */}
+        <div className="footer-bar" style={{
+          paddingTop: 20,
+          borderTop: "1px solid rgba(255,255,255,0.06)",
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+          position: "relative",
+          zIndex: 2,
+        }}>
+          <span style={{
+            fontFamily: "'Michroma', sans-serif",
+            fontSize: 9,
+            color: "rgba(255,255,255,0.4)",
+            letterSpacing: "0.15em",
+          }}>
+            BLUEPRINT PROJECT
+          </span>
+
+          <div style={{ display: "flex", gap: 24 }}>
+            {[
+              { label: "INSTAGRAM", href: "https://instagram.com/blueprintproject" },
+              { label: "LOCATION", href: "#" },
+              { label: "CONTACT", href: "#" },
+            ].map((link) => (
+              <a
+                key={link.label}
+                href={link.href}
+                target={link.href.startsWith("http") ? "_blank" : undefined}
+                rel={link.href.startsWith("http") ? "noopener noreferrer" : undefined}
+                style={{
+                  fontFamily: "'Orbitron', sans-serif",
+                  fontSize: 7,
+                  color: "rgba(255,255,255,0.25)",
+                  letterSpacing: "0.12em",
+                  textDecoration: "none",
+                  transition: "color 0.3s ease",
+                }}
+                onMouseEnter={(e) => { e.currentTarget.style.color = "rgba(255,255,255,0.7)"; }}
+                onMouseLeave={(e) => { e.currentTarget.style.color = "rgba(255,255,255,0.25)"; }}
+              >
+                {link.label}
+              </a>
+            ))}
           </div>
 
-          {/* Right — Staggered images */}
-          <div className="cta-images" style={{ flex: 1, display: "flex", gap: 12, minWidth: 260 }}>
-            <div style={{
-              width: "48%", aspectRatio: "3/4", borderRadius: 14,
-              background: "linear-gradient(160deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02))",
-              border: "1px solid rgba(255,255,255,0.06)",
-            }} />
-            <div style={{
-              width: "48%", aspectRatio: "3/4", borderRadius: 14,
-              background: "linear-gradient(160deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02))",
-              border: "1px solid rgba(255,255,255,0.06)",
-              marginTop: 40,
-            }} />
-          </div>
+          <span style={{
+            fontFamily: "'Inter', sans-serif",
+            fontSize: 9,
+            color: "rgba(255,255,255,0.15)",
+          }}>
+            © 2025 Blueprint Project
+          </span>
         </div>
       </div>
     </motion.div>
