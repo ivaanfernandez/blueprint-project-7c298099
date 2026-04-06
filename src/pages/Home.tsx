@@ -1,7 +1,8 @@
 import { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
-import CybercoreBackground from "@/components/CybercoreBackground";
+import ShaderGrid from "@/components/ShaderGrid";
+import { TextScramble } from "@/components/ui/text-scramble";
 import { Dock, DockIcon } from "@/components/ui/dock";
 import slider1 from "@/assets/slider/slider-1.jpg";
 import slider2 from "@/assets/slider/slider-2.jpg";
@@ -109,8 +110,8 @@ const Home = ({ showDock }: { showDock: boolean }) => {
           0%, 100% { opacity: 0; transform: scale(0.5); }
           50% { opacity: 1; transform: scale(1); }
         }
-        .program-card { transition: transform 0.4s ease, box-shadow 0.4s ease; }
-        .program-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,0.1); }
+        .program-card { transition: all 0.4s ease; box-shadow: 0 0 20px rgba(0,0,0,0.04), 0 0 60px rgba(255,255,255,0.3); }
+        .program-card:hover { transform: translateY(-4px); box-shadow: 0 0 30px rgba(0,0,0,0.06), 0 0 80px rgba(255,255,255,0.5), 0 0 120px rgba(200,200,200,0.15); }
         .program-card:hover .program-card-img { transform: scale(1.05); }
         @media (max-width: 767px) {
           .programs-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 10px !important; }
@@ -165,53 +166,61 @@ const Home = ({ showDock }: { showDock: boolean }) => {
         background: "#F5F5F5", minHeight: "100vh", position: "relative", overflow: "hidden",
         display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center",
       }}>
-        {/* Cybercore animated background */}
-        <CybercoreBackground beamCount={50} />
+        {/* Shader grid animated background */}
+        <ShaderGrid />
 
         {/* Centered massive title */}
-        <motion.h1
+        <TextScramble
+          as="h1"
           className="hero-main-title"
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1.2, ease: [0.25, 0.1, 0.25, 1], delay: 0.3 }}
+          duration={1.2}
+          speed={0.03}
+          characterSet="ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.3, delay: 0.3 }}
           style={{
             fontFamily: "'Michroma', sans-serif",
             fontSize: "clamp(32px, 5.5vw, 80px)",
             color: "#000000",
-            textTransform: "uppercase",
+            textTransform: "uppercase" as const,
             letterSpacing: "0.05em",
             lineHeight: 1.0,
-            textAlign: "center",
+            textAlign: "center" as const,
             margin: 0,
-            position: "relative",
+            position: "relative" as const,
             zIndex: 2,
-            whiteSpace: "nowrap",
-            overflow: "hidden",
+            whiteSpace: "nowrap" as const,
+            overflow: "hidden" as const,
             padding: "0 7%",
           }}
         >
           BLUEPRINT PROJECT
-        </motion.h1>
+        </TextScramble>
 
         {/* Subtitle below title */}
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, ease: [0.25, 0.1, 0.25, 1], delay: 0.7 }}
+        <TextScramble
+          as="p"
+          duration={1.0}
+          speed={0.02}
+          characterSet="abcdefghijklmnopqrstuvwxyz., "
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.3, delay: 0.8 }}
           style={{
             fontFamily: "'Inter', sans-serif",
             fontSize: 14,
             fontWeight: 300,
             color: "#6B7280",
-            textAlign: "center",
+            textAlign: "center" as const,
             marginTop: 20,
-            position: "relative",
+            position: "relative" as const,
             zIndex: 2,
             letterSpacing: "0.02em",
           }}
         >
           Where human performance connects his mind, body and soul.
-        </motion.p>
+        </TextScramble>
 
         {/* Bottom-left: CTA text + button */}
         <motion.div
@@ -254,32 +263,6 @@ const Home = ({ showDock }: { showDock: boolean }) => {
           </div>
         </motion.div>
 
-        {/* Bottom-right: Social icons */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, ease: [0.25, 0.1, 0.25, 1], delay: 1.2 }}
-          style={{
-            position: "absolute",
-            bottom: 48,
-            right: 48,
-            zIndex: 3,
-            display: "flex",
-            gap: 16,
-          }}
-        >
-          <a href="https://instagram.com/blueprintproject" target="_blank" rel="noopener noreferrer"
-            style={{ opacity: 0.35, transition: "opacity 0.3s ease", color: "#000" }}
-            onMouseEnter={(e) => (e.currentTarget.style.opacity = '0.8')}
-            onMouseLeave={(e) => (e.currentTarget.style.opacity = '0.35')}
-          >
-            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round">
-              <rect x="2" y="2" width="20" height="20" rx="5" />
-              <circle cx="12" cy="12" r="5" />
-              <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
-            </svg>
-          </a>
-        </motion.div>
       </div>
 
       {/* ── Transition Bar ── */}
