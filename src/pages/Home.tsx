@@ -357,20 +357,21 @@ const Home = ({ showDock }: { showDock: boolean }) => {
           <div style={{ flex: 1, minWidth: 260 }}>
             <h2 style={{
               fontFamily: "'Michroma', sans-serif",
-              fontSize: "clamp(28px, 3.5vw, 48px)", color: "#000",
+              fontSize: "clamp(18px, 2vw, 24px)", color: "#000",
               textTransform: "uppercase", lineHeight: 1.15, marginBottom: 16, marginTop: 0,
+              whiteSpace: "nowrap",
             }}>
-              DESIGNED FOR<br />THE HUMAN<br />MACHINE
+              DESIGNED FOR THE HUMAN MACHINE
             </h2>
 
             <p style={{
-              fontFamily: "'Inter', sans-serif", fontWeight: 300, fontSize: 15,
-              color: "#6B7280", lineHeight: 1.8, marginBottom: 24, maxWidth: 480,
+              fontFamily: "'Inter', sans-serif", fontWeight: 300, fontSize: 16,
+              color: "#6B7280", lineHeight: 1.8, marginBottom: 28, maxWidth: 480,
             }}>
               Blueprint Project is a precision-engineered system built around three core protocols. Training, nutrition, and recovery — synchronized to unlock your full potential. This is not a gym. This is your operating system.
             </p>
 
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "24px 40px", maxWidth: 500 }}>
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "24px 40px", maxWidth: 520 }}>
               {[
                 { title: "Precision Training", desc: "Data-driven methodology built to forge strength, endurance, and resilience." },
                 { title: "Nutrition Engineering", desc: "Every meal is a signal. Optimize input, transform output." },
@@ -384,7 +385,7 @@ const Home = ({ showDock }: { showDock: boolean }) => {
                   }} />
                   <div style={{
                     fontFamily: "'Inter', sans-serif", fontSize: 15, fontWeight: 600,
-                    color: "#000", marginBottom: 4,
+                    color: "#000", marginBottom: 5,
                   }}>{feat.title}</div>
                   <div style={{
                     fontFamily: "'Inter', sans-serif", fontSize: 13, fontWeight: 300,
