@@ -612,7 +612,7 @@ const Home = ({ showDock }: { showDock: boolean }) => {
                     overflow: "hidden",
                     transition: "all 0.5s ease",
                     paddingLeft: 17,
-                    maxHeight: isActive ? 120 : 0,
+                    maxHeight: isActive ? 160 : 0,
                     opacity: isActive ? 1 : 0,
                     paddingBottom: isActive ? 16 : 0,
                   }}>
