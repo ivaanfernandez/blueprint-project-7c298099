@@ -142,8 +142,9 @@ All colors MUST be HSL.
 }
 
 @keyframes beamPulse {
-  0% { opacity: 0.3; transform: scaleY(0.95); }
-  100% { opacity: 1; transform: scaleY(1.05); }
+  0% { opacity: 0.2; transform: scaleY(0.92) translateX(-8px); }
+  50% { opacity: 1; transform: scaleY(1.05) translateX(4px); }
+  100% { opacity: 0.3; transform: scaleY(0.98) translateX(-4px); }
 }
 
 @media (max-width: 767px) {

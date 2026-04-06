@@ -14,11 +14,11 @@ const VerticalBeams: React.FC<VerticalBeamsProps> = ({ beamCount = 40 }) => {
 
   useEffect(() => {
     const generated = Array.from({ length: beamCount }).map((_, i) => {
-      const width = Math.random() * 30 + 8;
+      const width = Math.random() * 30 + 10;
       const left = Math.random() * 100;
-      const opacity = Math.random() * 0.07 + 0.02;
-      const duration = Math.random() * 4 + 6;
-      const delay = Math.random() * 8;
+      const opacity = Math.random() * 0.12 + 0.04;
+      const duration = Math.random() * 3 + 4;
+      const delay = Math.random() * 5;
 
       return {
         id: i,
@@ -28,9 +28,9 @@ const VerticalBeams: React.FC<VerticalBeamsProps> = ({ beamCount = 40 }) => {
           top: 0,
           width: `${width}px`,
           height: '100%',
-          background: `linear-gradient(180deg, transparent 0%, rgba(255,255,255,${opacity}) 30%, rgba(255,255,255,${opacity * 1.5}) 50%, rgba(255,255,255,${opacity}) 70%, transparent 100%)`,
-          filter: `blur(${Math.random() * 8 + 4}px)`,
-          animation: `beamPulse ${duration}s ease-in-out ${delay}s infinite alternate`,
+          background: `linear-gradient(180deg, transparent 0%, rgba(255,255,255,${opacity}) 30%, rgba(255,255,255,${opacity * 2}) 50%, rgba(255,255,255,${opacity}) 70%, transparent 100%)`,
+          filter: `blur(${Math.random() * 6 + 3}px)`,
+          animation: `beamPulse ${duration}s ease-in-out ${delay}s infinite`,
           pointerEvents: 'none' as const,
         },
       };
