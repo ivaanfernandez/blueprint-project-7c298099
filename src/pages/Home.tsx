@@ -84,10 +84,10 @@ const Home = ({ showDock }: { showDock: boolean }) => {
       <style>{`
         @keyframes subtlePulse { 0%,100%{opacity:0.15} 50%{opacity:0.35} }
         .home-dock .dock-container {
-          background: rgba(255,255,255,0.82) !important;
-          border: 1px solid rgba(0,0,0,0.08) !important;
+          background: rgba(255,255,255,0.06) !important;
+          border: 1px solid rgba(255,255,255,0.1) !important;
           backdrop-filter: blur(16px) !important;
-          box-shadow: 0 4px 24px rgba(0,0,0,0.05) !important;
+          box-shadow: 0 4px 24px rgba(0,0,0,0.3) !important;
         }
         .protocol-card-neo { transition: all 0.4s ease; }
         .protocol-card-neo:hover { border-color: rgba(0,0,0,0.1) !important; box-shadow: 0 8px 32px rgba(0,0,0,0.05) !important; transform: translateY(-2px); }
@@ -163,11 +163,11 @@ const Home = ({ showDock }: { showDock: boolean }) => {
       {/* ── B: HERO (DEVIALET-INSPIRED) ── */}
       {/* ══════════════════════════════════════════════════════ */}
       <div style={{
-        background: "#F5F5F5", minHeight: "100vh", position: "relative", overflow: "hidden",
+        background: "#070612", minHeight: "100vh", position: "relative", overflow: "hidden",
         display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center",
       }}>
-        {/* Shader grid animated background */}
-        <ShaderGrid />
+        {/* Animated vertical beams background */}
+        <VerticalBeams beamCount={40} />
 
         {/* Centered massive title */}
         <TextScramble
@@ -182,7 +182,7 @@ const Home = ({ showDock }: { showDock: boolean }) => {
           style={{
             fontFamily: "'Michroma', sans-serif",
             fontSize: "clamp(32px, 5.5vw, 80px)",
-            color: "#000000",
+            color: "#FFFFFF",
             textTransform: "uppercase" as const,
             letterSpacing: "0.05em",
             lineHeight: 1.0,
@@ -211,7 +211,7 @@ const Home = ({ showDock }: { showDock: boolean }) => {
             fontFamily: "'Inter', sans-serif",
             fontSize: 14,
             fontWeight: 300,
-            color: "#6B7280",
+            color: "rgba(255,255,255,0.7)",
             textAlign: "center" as const,
             marginTop: 20,
             position: "relative" as const,
@@ -236,7 +236,7 @@ const Home = ({ showDock }: { showDock: boolean }) => {
         >
           <p style={{
             fontFamily: "'Inter', sans-serif", fontSize: 12, fontWeight: 300,
-            color: "rgba(0,0,0,0.4)", maxWidth: 260, lineHeight: 1.6, marginBottom: 16,
+            color: "rgba(255,255,255,0.5)", maxWidth: 260, lineHeight: 1.6, marginBottom: 16,
           }}>
             Three protocols. One integrated system. Your evolution starts here.
           </p>
@@ -245,17 +245,17 @@ const Home = ({ showDock }: { showDock: boolean }) => {
             onClick={scrollToAbout}
           >
             <div style={{
-              width: 32, height: 32, borderRadius: "50%", border: "1px solid rgba(0,0,0,0.15)",
+              width: 32, height: 32, borderRadius: "50%", border: "1px solid rgba(255,255,255,0.2)",
               display: "flex", alignItems: "center", justifyContent: "center",
               transition: "all 0.3s ease",
             }}>
               <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-                <path d="M6 2v8M6 10l3-3M6 10L3 7" stroke="rgba(0,0,0,0.4)" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
+                <path d="M6 2v8M6 10l3-3M6 10L3 7" stroke="#fff" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
             </div>
 
             <span style={{
-              fontFamily: "'Orbitron', sans-serif", fontSize: 8, color: "rgba(0,0,0,0.35)",
+              fontFamily: "'Orbitron', sans-serif", fontSize: 8, color: "rgba(255,255,255,0.4)",
               letterSpacing: "0.2em", textTransform: "uppercase",
             }}>
               SCROLL TO EXPLORE
@@ -268,7 +268,7 @@ const Home = ({ showDock }: { showDock: boolean }) => {
       {/* ── Transition Bar ── */}
       <div style={{
         height: 1,
-        background: "linear-gradient(90deg, transparent, rgba(0,0,0,0.04) 30%, rgba(0,0,0,0.06) 50%, rgba(0,0,0,0.04) 70%, transparent)",
+        background: "rgba(255,255,255,0.06)",
       }} />
 
       {/* ══════════════════════════════════════════════════════ */}
