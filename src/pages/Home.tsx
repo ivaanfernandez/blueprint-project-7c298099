@@ -304,13 +304,6 @@ const Home = ({ showDock }: { showDock: boolean }) => {
             zIndex: 3,
           }}
         >
-          <p style={{
-            fontFamily: "'Inter', sans-serif", fontSize: 12, fontWeight: 300,
-            color: "rgba(255,255,255,0.5)", maxWidth: 260, lineHeight: 1.6, marginBottom: 16,
-          }}>
-            Three protocols. One integrated system. Your evolution starts here.
-          </p>
-
           <div style={{ display: "flex", alignItems: "center", gap: 12, cursor: "pointer" }}
             onClick={scrollToAbout}
           >
@@ -535,7 +528,8 @@ const Home = ({ showDock }: { showDock: boolean }) => {
       {/* ── FEATURE ACCORDION SCROLL (NEW) ── */}
       <div className="accordion-scroll-section" style={{
         position: "relative",
-        padding: "0 7%",
+        paddingLeft: "7%",
+        paddingRight: 0,
         minHeight: "100vh",
         display: "flex",
         alignItems: "flex-start",
@@ -557,12 +551,13 @@ const Home = ({ showDock }: { showDock: boolean }) => {
         }}>
           <h2 style={{
             fontFamily: "'Michroma', sans-serif",
-            fontSize: "clamp(18px, 2.5vw, 28px)",
+            fontSize: "clamp(28px, 3.5vw, 44px)",
             color: "#000",
             textTransform: "uppercase",
-            lineHeight: 1.12,
+            lineHeight: 1.1,
             marginBottom: 32,
             marginTop: 0,
+            maxWidth: 500,
           }}>
             LIMITLESS POTENTIAL WITH BLUEPRINT
           </h2>
@@ -588,13 +583,13 @@ const Home = ({ showDock }: { showDock: boolean }) => {
                 >
                   {/* Title row */}
                   <div style={{
-                    padding: "16px 0 16px 16px",
+                    padding: "20px 0 20px 16px",
                     display: "flex",
                     alignItems: "center",
                     gap: 10,
                   }}>
                     <div style={{
-                      width: 7, height: 7, borderRadius: "50%",
+                      width: 9, height: 9, borderRadius: "50%",
                       background: item.color,
                       opacity: isActive ? 1 : 0.25,
                       boxShadow: isActive ? `0 0 8px ${item.color}` : "none",
@@ -602,7 +597,7 @@ const Home = ({ showDock }: { showDock: boolean }) => {
                     }} />
                     <span style={{
                       fontFamily: "'Michroma', sans-serif",
-                      fontSize: 14,
+                      fontSize: 20,
                       textTransform: "uppercase",
                       letterSpacing: "0.02em",
                       color: isActive ? "#000" : "#D1D5DB",
@@ -617,17 +612,17 @@ const Home = ({ showDock }: { showDock: boolean }) => {
                     overflow: "hidden",
                     transition: "all 0.5s ease",
                     paddingLeft: 17,
-                    maxHeight: isActive ? 120 : 0,
+                    maxHeight: isActive ? 160 : 0,
                     opacity: isActive ? 1 : 0,
                     paddingBottom: isActive ? 16 : 0,
                   }}>
                     <p style={{
                       fontFamily: "'Inter', sans-serif",
-                      fontSize: 13,
+                      fontSize: 15,
                       fontWeight: 300,
                       color: "#6B7280",
-                      lineHeight: 1.65,
-                      maxWidth: 340,
+                      lineHeight: 1.7,
+                      maxWidth: 400,
                       marginBottom: 10,
                       marginTop: 0,
                     }}>
@@ -640,7 +635,7 @@ const Home = ({ showDock }: { showDock: boolean }) => {
                       }}
                       style={{
                         fontFamily: "'Orbitron', sans-serif",
-                        fontSize: 8,
+                        fontSize: 10,
                         letterSpacing: "0.12em",
                         display: "inline-flex",
                         alignItems: "center",
@@ -670,20 +665,21 @@ const Home = ({ showDock }: { showDock: boolean }) => {
               className="accordion-panel"
               ref={(el) => { panelRefs.current[i] = el; }}
               style={{
-                minHeight: "100vh",
+                minHeight: "80vh",
                 display: "flex",
                 alignItems: "center",
-                justifyContent: "center",
-                padding: "40px 20px",
+                justifyContent: "flex-end",
+                padding: "20px 0 20px 20px",
               }}
             >
               <div className="accordion-img-box" style={{
-                width: "88%",
+                width: "95%",
                 aspectRatio: "16/10",
-                borderRadius: 14,
+                borderRadius: "14px 0 0 14px",
                 overflow: "hidden",
                 position: "relative",
                 boxShadow: "0 8px 32px rgba(0,0,0,0.06)",
+                marginRight: 0,
               }}>
                 <img src={item.image} alt={item.name} style={{
                   width: "100%", height: "100%", objectFit: "cover",
