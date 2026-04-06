@@ -701,7 +701,7 @@ const Home = ({ showDock }: { showDock: boolean }) => {
                   fontFamily: "'Orbitron', sans-serif",
                   fontSize: 7,
                   letterSpacing: "0.1em",
-                  background: `${item.color}1F`,
+                  background: item.badgeBg,
                   color: item.color,
                   border: `1px solid ${item.badgeBorder}`,
                 }}>
