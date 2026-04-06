@@ -1,30 +1,38 @@
 
+Update only `src/pages/Home.tsx` to restore sticky behavior in the Feature Accordion section.
 
-## Plan: Fix Feature Accordion Section + Hero Text
+1. Remove the sticky blocker from ancestors
+- Change the top-level `motion.div` wrapper from `overflow: "hidden"` to `overflowX: "hidden"` so vertical sticky can work.
+- Audit the Feature Accordion section and its direct wrappers to ensure they do not set `overflow: hidden|auto|scroll`.
+- Leave image/card-level `overflow: hidden` intact where it is only used for clipping content inside individual boxes.
 
-**File**: `src/pages/Home.tsx`
+2. Tighten the Feature Accordion container structure
+- Keep the section as a flex row with `alignItems: "flex-start"`, `position: "relative"`, `paddingLeft: "7%"`, `paddingRight: 0`, `background: "#FFFFFF"`.
+- Remove `minHeight: "100vh"` from the accordion section so the three right-side panels define the section’s natural total height.
 
-### FIX 1: Hero — Remove bottom-left paragraph
-Delete lines 307-312 (the `<p>` tag containing "Three protocols. One integrated system..."). Keep the `<div>` with scroll button starting at line 314.
+3. Preserve the exact sticky left column requirements
+- Keep the left column with:
+  - `position: "sticky"`
+  - `top: 0`
+  - `height: "100vh"`
+  - `flex: "0 0 42%"`
+  - `display: "flex"`
+  - `flexDirection: "column"`
+  - `justifyContent: "center"`
+  - `padding: "40px 28px 40px 0"`
+  - `alignSelf: "flex-start"`
+  - `zIndex: 2`
 
-### FIX 2: Feature Section Title — Bigger, 2 lines
-Lines 558-568: Change the accordion section title styles:
-- `fontSize`: `"clamp(28px, 3.5vw, 44px)"` (was `clamp(18px, 2.5vw, 28px)`)
-- `lineHeight`: `1.1` (was `1.12`)
-- Add `maxWidth: 500` to force "LIMITLESS POTENTIAL" / "WITH BLUEPRINT" as two lines
+4. Preserve the right column height needed for sticky
+- Keep the right column non-sticky with `flex: 1`, `display: "flex"`, `flexDirection: "column"`.
+- Keep all three image panels at `minHeight: "80vh"` so the section remains tall enough for sticky scrolling to work.
 
-### FIX 3: Accordion items — Bigger text
-Lines 590-653: Update accordion item styles:
-- Title row padding: `"20px 0 20px 16px"` (was `16px 0 16px 16px`)
-- Color dot: `width: 9, height: 9` (was 7)
-- Name font-size: `20` (was 14)
-- Description font-size: `15` (was 13), `lineHeight: 1.7` (was 1.65), `maxWidth: 400` (was 340)
-- Link font-size: `10` (was 8)
+5. Do not change anything else
+- Do not alter the current accordion text sizes.
+- Do not change images, badges, IntersectionObserver logic, or any other section.
 
-### FIX 4: Images flush to right edge
-- Section container (line 538): Change `padding: "0 7%"` to `paddingLeft: "7%", paddingRight: 0`
-- Right column (line 662): Already `flex: 1`, no changes needed
-- Each image panel (line 672-678): Change to `minHeight: "80vh"`, `justifyContent: "flex-end"`, `padding: "20px 0 20px 20px"`
-- Each image box (line 680-687): Change `width: "95%"`, `borderRadius: "14px 0 0 14px"`, `marginRight: 0`
-- Mobile media query: Update `.accordion-panel .accordion-img-box` to keep `border-radius: 12px` on mobile
-
+Technical note
+- Confirmed root issue from current code: the page-level `motion.div` uses `overflow: "hidden"`, which can prevent `position: sticky` from working vertically.
+- The feature section layout is otherwise close to correct; the key implementation changes are:
+  - `motion.div`: `overflowX: "hidden"` instead of `overflow: "hidden"`
+  - Feature section: remove `minHeight: "100vh"`
