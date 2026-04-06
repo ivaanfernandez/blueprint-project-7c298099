@@ -410,19 +410,6 @@ const Home = ({ showDock }: { showDock: boolean }) => {
           pointerEvents: "none",
         }} />
 
-        {/* Top fade — blends with white section above */}
-        <div style={{
-          position: "absolute", top: 0, left: 0, width: "100%", height: 100,
-          background: "linear-gradient(to bottom, #fff, transparent)",
-          pointerEvents: "none",
-        }} />
-
-        {/* Bottom fade — blends with white section below */}
-        <div style={{
-          position: "absolute", bottom: 0, left: 0, width: "100%", height: 100,
-          background: "linear-gradient(to top, #fff, transparent)",
-          pointerEvents: "none",
-        }} />
       </div>
 
       {/* ── Divider ── */}
