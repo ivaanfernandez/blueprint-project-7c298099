@@ -51,7 +51,7 @@ const HUELLAS = [
 
 const GRID_IMAGES = [slider1, slider2, slider3, slider4, slider5, slider6];
 
-const ACCORDION_DATA = [
+const ACCORDION_ITEMS = [
   {
     color: "#1A6BFF",
     name: "Blueprint Lab",
@@ -59,7 +59,9 @@ const ACCORDION_DATA = [
     linkText: "LEARN MORE →",
     route: "/huella-azul",
     image: slider1,
-    badgeLabel: "BLUEPRINT LAB",
+    badge: "BLUEPRINT LAB",
+    badgeBg: "rgba(26,107,255,0.12)",
+    badgeBorder: "rgba(26,107,255,0.15)",
   },
   {
     color: "#22C55E",
@@ -68,7 +70,9 @@ const ACCORDION_DATA = [
     linkText: "LEARN MORE →",
     route: "/huella-verde",
     image: slider2,
-    badgeLabel: "HACK BAR",
+    badge: "HACK BAR",
+    badgeBg: "rgba(34,197,94,0.12)",
+    badgeBorder: "rgba(34,197,94,0.15)",
   },
   {
     color: "#FF3B3B",
@@ -77,7 +81,9 @@ const ACCORDION_DATA = [
     linkText: "LEARN MORE →",
     route: "/huella-roja",
     image: slider3,
-    badgeLabel: "RESET",
+    badge: "RESET",
+    badgeBg: "rgba(255,59,59,0.12)",
+    badgeBorder: "rgba(255,59,59,0.15)",
   },
 ];
 
@@ -88,7 +94,7 @@ const ACCORDION_DATA = [
 const Home = ({ showDock }: { showDock: boolean }) => {
   const navigate = useNavigate();
   const aboutRef = useRef<HTMLDivElement>(null);
-  const [activeIndex, setActiveIndex] = useState(0);
+  const [activeAccordion, setActiveAccordion] = useState(0);
   const panelRefs = useRef<(HTMLDivElement | null)[]>([]);
 
   const scrollToAbout = () => {
@@ -105,7 +111,7 @@ const Home = ({ showDock }: { showDock: boolean }) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             const index = panelRefs.current.indexOf(entry.target as HTMLDivElement);
-            if (index !== -1) setActiveIndex(index);
+            if (index !== -1) setActiveAccordion(index);
           }
         });
       },
@@ -564,14 +570,14 @@ const Home = ({ showDock }: { showDock: boolean }) => {
 
           {/* Accordion items */}
           <div>
-            {ACCORDION_DATA.map((item, i) => {
-              const isActive = activeIndex === i;
-              const isLast = i === ACCORDION_DATA.length - 1;
+            {ACCORDION_ITEMS.map((item, i) => {
+              const isActive = activeAccordion === i;
+              const isLast = i === ACCORDION_ITEMS.length - 1;
               return (
                 <div
                   key={item.name}
                   onClick={() => {
-                    setActiveIndex(i);
+                    setActiveAccordion(i);
                     scrollToPanel(i);
                   }}
                   style={{
@@ -659,7 +665,7 @@ const Home = ({ showDock }: { showDock: boolean }) => {
           display: "flex",
           flexDirection: "column",
         }}>
-          {ACCORDION_DATA.map((item, i) => (
+          {ACCORDION_ITEMS.map((item, i) => (
             <div
               key={item.name}
               className="accordion-panel"
@@ -695,11 +701,11 @@ const Home = ({ showDock }: { showDock: boolean }) => {
                   fontFamily: "'Orbitron', sans-serif",
                   fontSize: 7,
                   letterSpacing: "0.1em",
-                  background: `${item.color}1F`,
+                  background: item.badgeBg,
                   color: item.color,
-                  border: `1px solid ${item.color}26`,
+                  border: `1px solid ${item.badgeBorder}`,
                 }}>
-                  {item.badgeLabel}
+                  {item.badge}
                 </div>
               </div>
             </div>
