@@ -304,7 +304,7 @@ const Home = ({ showDock }: { showDock: boolean }) => {
       {/* ── C: ABOUT (WHITE) ── */}
       <div ref={aboutRef} style={{ position: "relative", zIndex: 1 }}>
         <div className="about-section-new" style={{
-          padding: "72px 7%", display: "flex", alignItems: "center", gap: 48,
+          padding: "72px 7%", display: "flex", alignItems: "flex-start", gap: 48,
           position: "relative", zIndex: 1, background: "#FFFFFF",
         }}>
           {/* Left — Photo with stat badge */}
@@ -336,7 +336,7 @@ const Home = ({ showDock }: { showDock: boolean }) => {
           </div>
 
           {/* Right — Text + features */}
-          <div style={{ flex: 1, minWidth: 260 }}>
+          <div style={{ flex: 1, minWidth: 260, paddingTop: 8 }}>
             <h2 style={{
               fontFamily: "'Michroma', sans-serif",
               fontSize: "clamp(22px, 2.8vw, 36px)", color: "#000",
@@ -348,12 +348,12 @@ const Home = ({ showDock }: { showDock: boolean }) => {
 
             <p style={{
               fontFamily: "'Inter', sans-serif", fontWeight: 300, fontSize: 17,
-              color: "#6B7280", lineHeight: 1.85, marginBottom: 32, maxWidth: 560,
+              color: "#6B7280", lineHeight: 1.85, marginBottom: 32,
             }}>
               Blueprint Project is a precision-engineered system built around three core protocols. Training, nutrition, and recovery — synchronized to unlock your full potential. This is not a gym. This is your operating system.
             </p>
 
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "28px 48px" }}>
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "32px 56px" }}>
               {[
                 { title: "Precision Training", desc: "Data-driven methodology built to forge strength, endurance, and resilience." },
                 { title: "Nutrition Engineering", desc: "Every meal is a signal. Optimize input, transform output." },
@@ -362,16 +362,16 @@ const Home = ({ showDock }: { showDock: boolean }) => {
               ].map((feat) => (
                 <div key={feat.title} style={{ position: "relative", paddingLeft: 14 }}>
                   <div style={{
-                    position: "absolute", left: 0, top: 3, width: 3, height: 18,
+                    position: "absolute", left: 0, top: 4, width: 3, height: 22,
                     background: "#1A6BFF", borderRadius: 2,
                   }} />
                   <div style={{
-                    fontFamily: "'Inter', sans-serif", fontSize: 16, fontWeight: 600,
-                    color: "#000", marginBottom: 6,
+                    fontFamily: "'Inter', sans-serif", fontSize: 18, fontWeight: 600,
+                    color: "#000", marginBottom: 8,
                   }}>{feat.title}</div>
                   <div style={{
-                    fontFamily: "'Inter', sans-serif", fontSize: 14, fontWeight: 300,
-                    color: "#9CA3AF", lineHeight: 1.7,
+                    fontFamily: "'Inter', sans-serif", fontSize: 15, fontWeight: 300,
+                    color: "#9CA3AF", lineHeight: 1.75,
                   }}>{feat.desc}</div>
                 </div>
               ))}
