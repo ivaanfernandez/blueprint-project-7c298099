@@ -7,9 +7,6 @@ import { Dock, DockIcon } from "@/components/ui/dock";
 import slider1 from "@/assets/slider/slider-1.jpg";
 import slider2 from "@/assets/slider/slider-2.jpg";
 import slider3 from "@/assets/slider/slider-3.jpg";
-import slider4 from "@/assets/slider/slider-4.jpg";
-import slider5 from "@/assets/slider/slider-5.jpg";
-import slider6 from "@/assets/slider/slider-6.jpg";
 
 
 /* ── Inline SVG ── */
@@ -32,15 +29,7 @@ const SectionDivider = () => (
   </div>
 );
 
-/* ── Corner Brackets ── */
-const CornerBrackets = ({ color = "rgba(26,107,255,0.3)", size = 18 }: { color?: string; size?: number }) => (
-  <>
-    <div style={{ position: "absolute", top: 0, left: 0, width: size, height: size, borderTop: `1.5px solid ${color}`, borderLeft: `1.5px solid ${color}` }} />
-    <div style={{ position: "absolute", top: 0, right: 0, width: size, height: size, borderTop: `1.5px solid ${color}`, borderRight: `1.5px solid ${color}` }} />
-    <div style={{ position: "absolute", bottom: 0, left: 0, width: size, height: size, borderBottom: `1.5px solid ${color}`, borderLeft: `1.5px solid ${color}` }} />
-    <div style={{ position: "absolute", bottom: 0, right: 0, width: size, height: size, borderBottom: `1.5px solid ${color}`, borderRight: `1.5px solid ${color}` }} />
-  </>
-);
+
 
 /* ── Constants ── */
 const HUELLAS = [
@@ -49,7 +38,7 @@ const HUELLAS = [
   { color: "#22C55E", glow: "rgba(34,197,94,0.7)", route: "/huella-verde", tooltip: "RECUPERACIÓN" },
 ];
 
-const GRID_IMAGES = [slider1, slider2, slider3, slider4, slider5, slider6];
+
 
 const ACCORDION_ITEMS = [
   {
@@ -713,33 +702,8 @@ const Home = ({ showDock }: { showDock: boolean }) => {
         </div>
       </div>
 
-      {/* ── Divider ── */}
-      <SectionDivider />
 
-      {/* ── F: BENTO GRID (WHITE) ── */}
-      <div style={{ padding: "40px 7%", position: "relative", zIndex: 1 }}>
-        <div style={{ position: "relative", padding: 14 }}>
-          <CornerBrackets />
 
-          <div className="bento-grid-neo" style={{
-            display: "grid", gridTemplateColumns: "repeat(3, 1fr)",
-            gridTemplateRows: "220px 220px", gap: 10,
-          }}>
-            {GRID_IMAGES.map((src, i) => (
-              <div
-                key={i}
-                className="bento-item-neo"
-                style={{
-                  borderRadius: 12, overflow: "hidden",
-                  background: "linear-gradient(135deg, #e8e8e8, #d0d0d0)",
-                }}
-              >
-                <img src={src} alt={`Blueprint ${i + 1}`} style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
 
       </div>{/* END WHITE ZONE WRAPPER */}
 
