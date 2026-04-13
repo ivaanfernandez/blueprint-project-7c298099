@@ -278,7 +278,7 @@ const Home = ({ showDock }: { showDock: boolean }) => {
           {/* Left — Title + Subtitle + Timeline */}
           <div style={{ flex: 1, display: "flex", flexDirection: "column" as const, ...(window.innerWidth >= 768 ? {} : { flexGrow: 0 }) }}>
             <h2 style={{
-              fontFamily: "'Exo 2', sans-serif", fontWeight: 700,
+              fontFamily: "'Michroma', sans-serif",
               fontSize: "clamp(18px, 2.2vw, 28px)", color: "#000",
               textTransform: "uppercase", lineHeight: 1.12, marginBottom: 10, marginTop: 0,
             }}>
@@ -288,7 +288,7 @@ const Home = ({ showDock }: { showDock: boolean }) => {
               fontFamily: "'Inter', sans-serif", fontSize: 15, fontWeight: 300,
               color: "#6B7280", lineHeight: 1.8, marginBottom: 28, maxWidth: 480,
             }}>
-              A precision-engineered system. Training, nutrition, and recovery<br />synchronized to unlock your full potential. This is not a gym. This is your operating system.
+              A precision-engineered system. Training, nutrition, and recovery — synchronized to unlock your full potential. This is not a gym. This is your operating system.
             </p>
 
             {/* Timeline */}
@@ -296,7 +296,7 @@ const Home = ({ showDock }: { showDock: boolean }) => {
               {/* Blue vertical line */}
               <div style={{
                 position: "absolute", left: 8, top: 10, bottom: 10,
-                width: 1.5, background: "linear-gradient(to bottom, #e0e0e0, #999999, #666666, #333333)",
+                width: 1.5, background: "linear-gradient(to bottom, #1A6BFF 0%, #FF3B3B 33%, #22C55E 66%, #F59E0B 100%)",
               }} />
 
               {[
@@ -320,15 +320,14 @@ const Home = ({ showDock }: { showDock: boolean }) => {
                     <path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/>
                   </svg>
                 )},
-              ].map((step, i, arr) => {
-                const dotColors = ["#e0e0e0", "#999999", "#666666", "#333333"];
-                return (
+              ].map((step, i, arr) => (
                 <div key={step.title} style={{ position: "relative", paddingBottom: i === arr.length - 1 ? 0 : 28 }}>
-                  {/* Dot */}
+                  {/* Colored dot */}
                   <div style={{
                     position: "absolute", left: -24, top: 7,
-                    width: 8, height: 8, borderRadius: "50%",
-                    background: dotColors[i],
+                    width: 11, height: 11, borderRadius: "50%",
+                    background: step.color, border: "2.5px solid #FFFFFF",
+                    boxShadow: `0 0 0 2.5px rgba(${step.rgba}, 0.2)`,
                   }} />
                   {/* Title row */}
                   <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 5 }}>
@@ -341,7 +340,7 @@ const Home = ({ showDock }: { showDock: boolean }) => {
                       {step.icon}
                     </div>
                     <div style={{
-                      fontFamily: "'Exo 2', sans-serif", fontSize: 18, fontWeight: 600, color: "#000", letterSpacing: "0.2px",
+                      fontFamily: "'Inter', sans-serif", fontSize: 18, fontWeight: 700, color: "#000",
                     }}>{step.title}</div>
                   </div>
                   {/* Description */}
@@ -350,7 +349,7 @@ const Home = ({ showDock }: { showDock: boolean }) => {
                     color: "#6B7280", lineHeight: 1.6, paddingLeft: 40,
                   }}>{step.desc}</div>
                 </div>
-              )})}
+              ))}
             </div>
           </div>
 
