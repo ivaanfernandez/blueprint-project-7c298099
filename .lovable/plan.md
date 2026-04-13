@@ -1,47 +1,23 @@
 
 
-## Plan: Replace Footer with Cinematic Scroll-Reveal Footer
+## Plan: Add Animated WebGL Background to Footer
 
-Three changes: install GSAP, create new component, update Home.tsx.
+Two changes: create a new component, update the footer in `src/pages/Home.tsx`.
 
-### Step 1: Install GSAP
+### Step 1: Create `src/components/FooterBackground.tsx`
 
-Run `npm install gsap`
+A WebGL canvas component that renders subtle white topographic lines on a near-black background (`#0a0a0a`). Uses the same noise/topo pattern as `ProceduralBackground.tsx` but with muted grayscale colors. Canvas auto-sizes to parent element. No dependencies needed.
 
-### Step 2: Create `src/components/CinematicFooter.tsx`
+### Step 2: Update footer in `src/pages/Home.tsx` (lines 635–770)
 
-The provided component code was truncated, so I will reconstruct the full component based on the partial code and intent:
+**2a.** Add import: `import FooterBackground from "@/components/FooterBackground";`
 
-- **GSAP + ScrollTrigger** for scroll-driven animations
-- **MagneticButton** — a button that subtly follows the cursor with elastic return (using GSAP)
-- **MarqueeItem** — infinite horizontal scrolling text band with pillar keywords ("Precision Training ✦ Nutrition Engineering ✦ Recovery Science ✦ Mental Growth ✦ Blueprint Lab ✦ Hack Bar ✦ Reset ✦")
-- **Main layout** (dark bg `#0a0a0a`):
-  - Giant "BLUEPRINT" text that parallax-scrolls in (y: 10vh → 0, scale 0.8 → 1, scrubbed)
-  - Breathing fingerprint glow behind the text (`footer-breathe` keyframe)
-  - Marquee band with `footer-scroll-marquee` animation
-  - Heading: "YOUR EVOLUTION STARTS HERE" fades in on scroll
-  - Two MagneticButtons: "JOIN NOW" (navigates `/huella-azul`) and "INSTAGRAM" (external link)
-  - Footer bar: "BLUEPRINT PROJECT" left, links center, "© 2025" right
-- All keyframes defined in the component's `STYLES` constant (pulseRing, pulseGlow, footer-breathe, footer-scroll-marquee)
-- `useNavigate` for internal routing
+**2b.** Inside the footer div (line 640, after the opening tag), add `<FooterBackground />` as the first child.
 
-### Step 3: Update `src/pages/Home.tsx`
+**2c.** Wrap all existing footer content (lines 641–770, from the blue accent line through the bottom bar) in a `<div style={{ position: "relative", zIndex: 1 }}>` so text sits above the canvas.
 
-**3a. Add import** at top:
-```tsx
-import CinematicFooter from "@/components/CinematicFooter";
-```
-
-**3b. Delete old footer** (lines 641–866) — the entire `<div className="footer-section">` block containing "ENTER THE BLUEPRINT", pulse beams SVG, JOIN NOW button, Instagram icon, and footer bar.
-
-**3c. Replace with:**
-```tsx
-<CinematicFooter />
-```
-Placed as last element before closing `</motion.div>`.
-
-**3d. Remove keyframes from `<style>` block** — delete `@keyframes pulseRing` (lines 83–86) and `@keyframes pulseGlow` (lines 87–90), since they now live inside the CinematicFooter component.
+The footer div already has `position: "relative"` — the canvas positions itself absolutely behind all content. The `background: "#0a0a0a"` stays as WebGL fallback.
 
 ### No other changes
-Hero, About, Video, Programs, Feature Rows, Dock all untouched. No routing changes.
+No new dependencies. No changes to layout, text, buttons, or any other section.
 
