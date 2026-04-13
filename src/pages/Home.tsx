@@ -2,6 +2,7 @@ import { useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import ProceduralBackgroundWhite from "@/components/ProceduralBackgroundWhite";
+import FooterBackground from "@/components/FooterBackground";
 
 
 import { TextScramble } from "@/components/ui/text-scramble";
@@ -638,6 +639,8 @@ const Home = ({ showDock }: { showDock: boolean }) => {
         textAlign: "center" as const,
         position: "relative" as const,
       }}>
+        <FooterBackground />
+        <div style={{ position: "relative", zIndex: 1 }}>
         {/* Blue accent line */}
         <div style={{
           width: 40,
@@ -773,6 +776,7 @@ const Home = ({ showDock }: { showDock: boolean }) => {
             © 2025 Blueprint Project
           </span>
         </div>
+        </div>{/* end z-index wrapper */}
       </div>
     </motion.div>
   );
