@@ -296,7 +296,7 @@ const Home = ({ showDock }: { showDock: boolean }) => {
               {/* Blue vertical line */}
               <div style={{
                 position: "absolute", left: 8, top: 10, bottom: 10,
-                width: 1.5, background: "linear-gradient(to bottom, #1A6BFF, rgba(26,107,255,0.1))",
+                width: 1.5, background: "linear-gradient(to bottom, #1A6BFF 0%, #FF3B3B 33%, #22C55E 66%, #F59E0B 100%)",
               }} />
 
               {[
