@@ -1,26 +1,51 @@
 
 
-## Plan: Fix About Title Overflow + Features Vertical Alignment
+## Plan: Replace Hero Background with Video + Dark Overlay
 
-Single file: `src/pages/Home.tsx`
+Single file: `src/pages/Home.tsx` + copy uploaded video
 
-### Fix 1: Title overflow (line 313)
+### Steps
 
-Remove `whiteSpace: "nowrap"` — at 936px viewport the title can't fit on one line. Let it wrap naturally. The `clamp(16px, 1.8vw, 24px)` sizing already keeps it on one line at larger viewports (~1100px+).
+1. **Copy uploaded video** to `public/videos/blueprint-hero.mp4`
 
-### Fix 2: Features grid stretching (line 325)
+2. **Remove VerticalBeams import** (line 4): Delete `import VerticalBeams from "@/components/VerticalBeams";`
 
-Add `gridTemplateRows: "1fr 1fr"` to force equal row distribution across the full grid height:
+3. **Replace `<VerticalBeams beamCount={40} />`** (line 161) with video element + dark overlay:
 
+```jsx
+<video
+  autoPlay
+  muted
+  loop
+  playsInline
+  style={{
+    position: "absolute",
+    top: 0,
+    left: 0,
+    width: "100%",
+    height: "100%",
+    objectFit: "cover",
+    zIndex: 0,
+  }}
+>
+  <source src="/videos/blueprint-hero.mp4" type="video/mp4" />
+</video>
+
+<div style={{
+  position: "absolute",
+  top: 0,
+  left: 0,
+  width: "100%",
+  height: "100%",
+  background: "rgba(0,0,0,0.65)",
+  zIndex: 1,
+}} />
 ```
-{ display: "grid", gridTemplateColumns: "1fr 1fr", gridTemplateRows: "1fr 1fr", gap: 20, marginBottom: 0, flexGrow: 1, alignContent: "stretch" }
-```
 
-### Fix 3: Feature cards fill their grid cells (line 348)
-
-Add `height: "100%"` to each feature card so they stretch to fill the 1fr rows, aligning the bottom row with the bottom of the photo.
+4. **Verify z-index on text elements** — already confirmed: title has `zIndex: 2`, subtitle has `zIndex: 2`, SCROLL TO EXPLORE has `zIndex: 3`. No changes needed.
 
 ### Technical notes
-- 3 inline style tweaks, lines 313, 325, 348
+- Hero container keeps `background: "#070612"` as video fallback
+- No new dependencies
 - No other sections or files affected
 
