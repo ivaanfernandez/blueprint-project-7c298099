@@ -288,7 +288,7 @@ const Home = ({ showDock }: { showDock: boolean }) => {
               fontFamily: "'Inter', sans-serif", fontSize: 15, fontWeight: 300,
               color: "#6B7280", lineHeight: 1.8, marginBottom: 28, maxWidth: 480,
             }}>
-              A precision-engineered system. Training, nutrition, and recovery — synchronized to unlock your full potential. This is not a gym. This is your operating system.
+              A precision-engineered system. Training, nutrition, and recovery synchronized to unlock your full potential.<br />This is not a gym. This is your operating system.
             </p>
 
             {/* Timeline */}
@@ -296,26 +296,26 @@ const Home = ({ showDock }: { showDock: boolean }) => {
               {/* Blue vertical line */}
               <div style={{
                 position: "absolute", left: 8, top: 10, bottom: 10,
-                width: 1.5, background: "linear-gradient(to bottom, #1A6BFF 0%, #FF3B3B 33%, #22C55E 66%, #F59E0B 100%)",
+                width: 1.5, background: "linear-gradient(to bottom, #ffffff, #999999, #333333)",
               }} />
 
               {[
-                { title: "Precision Training", desc: "Data-driven methodology built to forge strength, endurance, and resilience.", color: "#1A6BFF", rgba: "26,107,255", icon: (
+                { title: "Precision Training", desc: "Data-driven methodology built to forge strength, endurance, and resilience.", color: "#1A6BFF", rgba: "26,107,255", dotColor: "#ffffff", icon: (
                   <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#1A6BFF" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                     <path d="M6.5 6.5h-2a1 1 0 0 0-1 1v9a1 1 0 0 0 1 1h2"/><path d="M17.5 6.5h2a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1h-2"/><path d="M6.5 4v16"/><path d="M17.5 4v16"/><path d="M6.5 12h11"/>
                   </svg>
                 )},
-                { title: "Nutrition Engineering", desc: "Every meal is a signal. Optimize input, transform output.", color: "#FF3B3B", rgba: "255,59,59", icon: (
+                { title: "Nutrition Engineering", desc: "Every meal is a signal. Optimize input, transform output.", color: "#FF3B3B", rgba: "255,59,59", dotColor: "#aaaaaa", icon: (
                   <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#FF3B3B" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                     <path d="M11 20A7 7 0 0 1 9.8 6.9C15.5 4.9 17 3.5 19 2c1 2 2 4.5 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/>
                   </svg>
                 )},
-                { title: "Recovery Science", desc: "Strategic rest, optimized sleep, and complete restoration protocols.", color: "#22C55E", rgba: "34,197,94", icon: (
+                { title: "Recovery Science", desc: "Strategic rest, optimized sleep, and complete restoration protocols.", color: "#22C55E", rgba: "34,197,94", dotColor: "#666666", icon: (
                   <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#22C55E" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                     <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/>
                   </svg>
                 )},
-                { title: "Mental Growth", desc: "Build focus, discipline, and unshakable mental clarity.", color: "#F59E0B", rgba: "245,158,11", icon: (
+                { title: "Mental Growth", desc: "Build focus, discipline, and unshakable mental clarity.", color: "#F59E0B", rgba: "245,158,11", dotColor: "#333333", icon: (
                   <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                     <path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/>
                   </svg>
@@ -326,7 +326,7 @@ const Home = ({ showDock }: { showDock: boolean }) => {
                   <div style={{
                     position: "absolute", left: -24, top: 7,
                     width: 11, height: 11, borderRadius: "50%",
-                    background: step.color, border: "2.5px solid #FFFFFF",
+                    background: step.dotColor, border: "2.5px solid #FFFFFF",
                     boxShadow: `0 0 0 2.5px rgba(${step.rgba}, 0.2)`,
                   }} />
                   {/* Title row */}
