@@ -367,7 +367,6 @@ const Home = ({ showDock }: { showDock: boolean }) => {
           </div>
         </div>
       </div>
-      </div>
 
       {/* ── Divider ── */}
       <SectionDivider />
@@ -410,7 +409,7 @@ const Home = ({ showDock }: { showDock: boolean }) => {
           {[
             { name: "Blueprint Lab", color: "#1A6BFF", rgba: "26,107,255", img: slider1, route: "/huella-azul", desc: "Precision training methodology. Data-driven programming built to forge strength." },
             { name: "Hack Bar", color: "#22C55E", rgba: "34,197,94", img: slider2, route: "/huella-verde", desc: "Nutrition engineered for performance. Every meal is a signal to your body." },
-            { name: "Reset", color: "#FF3B3B", rgba: "255,59,59", img: slider3, route: "/huella-roja", desc: "Strategic recovery. Optimized sleep, restoration, and rebuilding protocols." },
+            { name: "Reset", color: "#FF3B3B", rgba: "255,59,59", img: slider3, video: "/videos/blueprint-reset.mp4", route: "/huella-roja", desc: "Strategic recovery. Optimized sleep, restoration, and rebuilding protocols." },
           ].map((item) => (
             <div
               key={item.name}
@@ -424,11 +423,20 @@ const Home = ({ showDock }: { showDock: boolean }) => {
               onMouseEnter={(e) => { e.currentTarget.style.boxShadow = `0 0 30px rgba(${item.rgba}, 0.12), 0 0 80px rgba(${item.rgba}, 0.06)`; }}
               onMouseLeave={(e) => { e.currentTarget.style.boxShadow = `0 0 20px rgba(${item.rgba}, 0.04), 0 0 60px rgba(${item.rgba}, 0.02)`; }}
             >
-              {/* Background image */}
-              <img className="pillar-card-img" src={item.img} alt={item.name} style={{
-                position: "absolute", inset: 0, width: "100%", height: "100%",
-                objectFit: "cover", transition: "transform 0.6s ease",
-              }} />
+              {/* Background image/video */}
+              {item.video ? (
+                <video className="pillar-card-img" autoPlay muted loop playsInline style={{
+                  position: "absolute", inset: 0, width: "100%", height: "100%",
+                  objectFit: "cover", transition: "transform 0.6s ease",
+                }}>
+                  <source src={item.video} type="video/mp4" />
+                </video>
+              ) : (
+                <img className="pillar-card-img" src={item.img} alt={item.name} style={{
+                  position: "absolute", inset: 0, width: "100%", height: "100%",
+                  objectFit: "cover", transition: "transform 0.6s ease",
+                }} />
+              )}
 
               {/* Dark overlay */}
               <div style={{
