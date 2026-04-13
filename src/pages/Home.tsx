@@ -340,7 +340,7 @@ const Home = ({ showDock }: { showDock: boolean }) => {
                       {step.icon}
                     </div>
                     <div style={{
-                      fontFamily: "'Inter', sans-serif", fontSize: 18, fontWeight: 700, color: "#000",
+                      fontFamily: "'Rajdhani', sans-serif", fontSize: 18, fontWeight: 600, color: "#000", letterSpacing: "1.5px", textTransform: "uppercase" as const,
                     }}>{step.title}</div>
                   </div>
                   {/* Description */}
