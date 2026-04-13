@@ -1,36 +1,20 @@
 
 
-## Plan: About Section Multi-Color Icons, Dots, Line + Image Fix
+## Plan: Fix Vertical Line/Dots Color + Subtext Line Break
 
-Single file edit: `src/pages/Home.tsx`, lines 296–361.
+Single file edit: `src/pages/Home.tsx`.
 
-### Change 1: Add color data to step array (lines 302-322)
-Add a `color` and `rgba` property to each step object, then use them for icon stroke, icon box background/border, and dot styling.
+### Fix 1: Vertical line + dots → solid black
 
-- Precision Training: `color: "#1A6BFF"`, `rgba: "26,107,255"`
-- Nutrition Engineering: `color: "#FF3B3B"`, `rgba: "255,59,59"`
-- Recovery Science: `color: "#22C55E"`, `rgba: "34,197,94"`
-- Mental Growth: `color: "#F59E0B"`, `rgba: "245,158,11"`
+**Line 299**: Change `background: "linear-gradient(to bottom, #ffffff, #999999, #333333)"` to `background: "#000000"`.
 
-Each SVG `stroke` changes from hardcoded `#1A6BFF` to `step.color`.
+**Lines 303, 308, 313, 318**: Change all `dotColor` values from `"#ffffff"`, `"#aaaaaa"`, `"#666666"`, `"#333333"` to `"#000000"`.
 
-### Change 2: Icon box uses step color (line 336)
-- `background` → `rgba(${step.rgba}, 0.06)`
-- Add `border: 1px solid rgba(${step.rgba}, 0.1)`
+**Line 330**: Remove the `boxShadow` with colored rgba, replace with no shadow or a neutral one: `boxShadow: "none"`.
 
-### Change 3: Timeline dots use step color (lines 327-331)
-- `background` → `step.color`
-- `boxShadow` → `0 0 0 2.5px rgba(${step.rgba}, 0.2)`
+### Fix 2: Subtext line break
 
-### Change 4: Timeline line gradient (line 299)
-Replace `linear-gradient(to bottom, #1A6BFF, rgba(26,107,255,0.1))` with:
-`linear-gradient(to bottom, #1A6BFF 0%, #FF3B3B 33%, #22C55E 66%, #F59E0B 100%)`
+**Lines 287-292**: The `<p>` already has a `<br />` between the two sentences. To force exactly 2 visual lines, reduce `maxWidth` from `480` to `420` so the first sentence wraps naturally before "potential.", and keep the `<br />` to separate the two sentences. The text and `<br />` placement stays the same.
 
-### Change 5: Image objectPosition (line 360)
-Add `objectPosition: "center center"` to the img style.
-
-### Change 6: Description fontSize (line 347)
-Change from `14` to `15`.
-
-No other sections touched. No new dependencies.
+No other changes.
 
