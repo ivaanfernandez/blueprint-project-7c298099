@@ -1,6 +1,7 @@
 import { useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
+import ProceduralBackgroundWhite from "@/components/ProceduralBackgroundWhite";
 
 import { TextScramble } from "@/components/ui/text-scramble";
 import { Dock, DockIcon } from "@/components/ui/dock";
@@ -92,14 +93,6 @@ const Home = ({ showDock }: { showDock: boolean }) => {
           transform: translateY(-2px) !important;
         }
         .glass-feat:hover .about-feat-glow { opacity: 1 !important; }
-        @keyframes labScanLine {
-          0% { top: -50px; }
-          100% { top: 100%; }
-        }
-        @keyframes labDotPulse {
-          0%, 100% { opacity: 0; transform: scale(0.5); }
-          50% { opacity: 1; transform: scale(1); }
-        }
         @keyframes pulseRing {
           0%, 100% { opacity: 0.3; transform: scale(1); }
           50% { opacity: 0.8; transform: scale(1.02); }
@@ -294,49 +287,7 @@ const Home = ({ showDock }: { showDock: boolean }) => {
       {/* ── WHITE ZONE WRAPPER ── */}
       {/* ══════════════════════════════════════════════════════ */}
       <div style={{ position: "relative", background: "#FFFFFF" }}>
-        {/* Lab Background */}
-        <div style={{
-          position: "absolute", inset: 0, pointerEvents: "none", overflow: "hidden", zIndex: 0,
-          backgroundImage: "linear-gradient(rgba(0,0,0,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(0,0,0,0.03) 1px, transparent 1px)",
-          backgroundSize: "50px 50px",
-        }}>
-          {/* Scan line */}
-          <div style={{
-            position: "absolute", left: 0, right: 0, height: 1, zIndex: 1,
-            background: "linear-gradient(90deg, transparent 0%, rgba(26,107,255,0.08) 20%, rgba(26,107,255,0.12) 50%, rgba(26,107,255,0.08) 80%, transparent 100%)",
-            animation: "labScanLine 10s linear infinite",
-          }}>
-            <div style={{
-              position: "absolute", left: 0, right: 0, top: -40, height: 40,
-              background: "linear-gradient(to top, rgba(26,107,255,0.03), transparent)",
-            }} />
-          </div>
-          {/* Pulsing dots */}
-          {[
-            { top: '5%', left: '10%', delay: '0s', duration: '4s', size: '3px', opacity: 0.15 },
-            { top: '8%', left: '85%', delay: '1.2s', duration: '5s', size: '2px', opacity: 0.12 },
-            { top: '14%', left: '45%', delay: '0.5s', duration: '3.5s', size: '3px', opacity: 0.1 },
-            { top: '22%', left: '72%', delay: '2s', duration: '4.5s', size: '2px', opacity: 0.15 },
-            { top: '28%', left: '4%', delay: '1.8s', duration: '3s', size: '3px', opacity: 0.12 },
-            { top: '35%', left: '58%', delay: '0.3s', duration: '5.5s', size: '2px', opacity: 0.1 },
-            { top: '42%', left: '25%', delay: '2.5s', duration: '4s', size: '3px', opacity: 0.15 },
-            { top: '48%', left: '92%', delay: '1s', duration: '3.8s', size: '2px', opacity: 0.12 },
-            { top: '55%', left: '38%', delay: '0.8s', duration: '4.2s', size: '3px', opacity: 0.1 },
-            { top: '63%', left: '78%', delay: '1.5s', duration: '5s', size: '2px', opacity: 0.15 },
-            { top: '70%', left: '15%', delay: '2.2s', duration: '3.5s', size: '3px', opacity: 0.12 },
-            { top: '76%', left: '62%', delay: '0.7s', duration: '4.8s', size: '2px', opacity: 0.1 },
-            { top: '83%', left: '8%', delay: '1.3s', duration: '4s', size: '3px', opacity: 0.15 },
-            { top: '88%', left: '50%', delay: '0.2s', duration: '5.2s', size: '2px', opacity: 0.12 },
-            { top: '94%', left: '88%', delay: '1.9s', duration: '3.5s', size: '3px', opacity: 0.1 },
-          ].map((dot, i) => (
-            <div key={i} style={{
-              position: "absolute", width: dot.size, height: dot.size, borderRadius: "50%",
-              background: `rgba(26,107,255,${dot.opacity})`,
-              top: dot.top, left: dot.left,
-              animation: `labDotPulse ${dot.duration} ease-in-out ${dot.delay} infinite`,
-            }} />
-          ))}
-        </div>
+        <ProceduralBackgroundWhite />
 
       {/* ── C: ABOUT (WHITE) ── */}
       <div ref={aboutRef} style={{ position: "relative", zIndex: 1 }}>
