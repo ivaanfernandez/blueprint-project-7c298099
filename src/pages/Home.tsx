@@ -284,12 +284,20 @@ const Home = ({ showDock }: { showDock: boolean }) => {
             }}>
               DESIGNED FOR THE HUMAN MACHINE
             </h2>
-            <p style={{
-              fontFamily: "'Inter', sans-serif", fontSize: 15, fontWeight: 300,
-              color: "#6B7280", lineHeight: 1.8, marginBottom: 28, maxWidth: 420,
-            }}>
-              A precision-engineered system. Training, nutrition, and recovery synchronized to unlock your full potential.<br />This is not a gym. This is your operating system.
-            </p>
+            <div style={{ maxWidth: 600, marginBottom: 28 }}>
+              <p style={{
+                fontFamily: "'Inter', sans-serif", fontSize: 15, fontWeight: 300,
+                color: "#6B7280", lineHeight: 1.8, margin: "0 0 4px 0",
+              }}>
+                A precision-engineered system. Training, nutrition, and recovery synchronized to unlock your full potential.
+              </p>
+              <p style={{
+                fontFamily: "'Inter', sans-serif", fontSize: 15, fontWeight: 300,
+                color: "#6B7280", lineHeight: 1.8, margin: 0,
+              }}>
+                This is not a gym. This is your operating system.
+              </p>
+            </div>
 
             {/* Timeline */}
             <div style={{ position: "relative", paddingLeft: 28, flexGrow: 1, display: "flex", flexDirection: "column" as const, justifyContent: window.innerWidth < 768 ? "flex-start" : "space-between" }}>
