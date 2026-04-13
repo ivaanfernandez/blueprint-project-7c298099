@@ -16,6 +16,14 @@ type TextScrambleProps = {
 
 const defaultChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
 
+const motionCache = new Map();
+function getMotionComponent(component: React.ElementType) {
+  if (!motionCache.has(component)) {
+    motionCache.set(component, motion.create(component as keyof JSX.IntrinsicElements));
+  }
+  return motionCache.get(component);
+}
+
 export function TextScramble({
   children,
   duration = 0.8,
@@ -27,7 +35,7 @@ export function TextScramble({
   onScrambleComplete,
   ...props
 }: TextScrambleProps) {
-  const MotionComponent = motion.create(Component as keyof JSX.IntrinsicElements);
+  const MotionComponent = getMotionComponent(Component);
   const [displayText, setDisplayText] = useState(children);
   const [isAnimating, setIsAnimating] = useState(false);
   const text = children;
