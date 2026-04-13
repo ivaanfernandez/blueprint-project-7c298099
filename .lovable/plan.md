@@ -1,16 +1,35 @@
 
 
-## Plan: Video Section Full-Screen Edge-to-Edge
+## Plan: About Features SVG Icons + Programs Title Change
 
-Single file change: `src/pages/Home.tsx`
+Single file: `src/pages/Home.tsx`
 
-### Changes
+### Change 1: Replace blue accent bars with SVG icon boxes (lines 322-348)
 
-1. **Container (line 386-389)**: Remove `minHeight: 400`, change `height: "70vh"` → `"100vh"`, change `background: "#000"` → `"#0a0a0a"`.
+Replace the features grid (lines 322-348) with an updated version:
+- Add SVG icon data to each feature object (dumbbell, leaf, moon, lightbulb paths as specified)
+- Replace the 3×28px blue bar div with a 44×44px icon box containing the SVG and a glow div (`className="about-feat-glow"`)
+- Increase feature card styles: gap 14→14, padding 10→14, borderRadius 10→12, gap between icon and text 10→14
+- Feature title fontSize 14→15, marginBottom 4→5
+- Grid gap 14→16
+- Add `className="about-feat"` to each feature div
 
-2. **Video element (line 393)**: Change `objectFit: "contain"` → `"cover"`.
+### Change 2: Rename programs title (line 407)
 
-3. **Delete fade divs (lines 398-410)**: Remove both the left fade and right fade gradient overlay divs entirely.
+Change `"OUR PROGRAMS"` → `"CHOOSE YOUR FINGERPRINT"`
 
-4. **Mobile CSS (line 112-113)**: Change `height: 50vh` → `60vh`, remove `min-height: 280px`, remove the `.video-section-fades` rule (no longer needed since fades are deleted).
+### Change 3: Add CSS hover rules (line ~79)
+
+Add to the `<style>` block:
+```css
+.about-feat { transition: all 0.3s ease; }
+.about-feat:hover { border-color: rgba(26,107,255,0.1) !important; background: rgba(26,107,255,0.02) !important; }
+.about-feat:hover .about-feat-glow { opacity: 1 !important; }
+```
+
+### Technical notes
+- No new imports or dependencies
+- SVGs are inline JSX with camelCase attributes (strokeWidth, strokeLinecap, strokeLinejoin)
+- Hover glow on icon uses CSS class targeting, no JS state needed
+- Feature card hover border/background also via CSS class
 
