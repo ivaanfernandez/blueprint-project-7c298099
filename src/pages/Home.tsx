@@ -427,45 +427,86 @@ const Home = ({ showDock }: { showDock: boolean }) => {
           fontFamily: "'Inter', sans-serif", fontSize: 13, fontWeight: 300,
           color: "#9CA3AF", textAlign: "center", marginBottom: 40,
         }}>
-          Discover the protocols designed to optimize every dimension of your performance.
+          Three pillars. One integrated system.
         </p>
 
         <div className="programs-grid" style={{
-          display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 14,
+          display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 16,
         }}>
           {[
-            { title: "Training", desc: "Precision methodology built to forge strength, endurance, and resilience.", img: "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=600&q=80" },
-            { title: "Nutrition", desc: "Fuel your system with precision. Every meal is a signal to your body.", img: "https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=600&q=80" },
-            { title: "Recovery", desc: "Strategic rest, optimized sleep, and complete restoration protocols.", img: "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=600&q=80" },
-            { title: "Mental Growth", desc: "Build focus, discipline, and unshakable mental clarity.", img: "https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=600&q=80" },
-          ].map((card) => (
-            <div key={card.title} className="program-card" style={{
-              position: "relative", borderRadius: 16, overflow: "hidden",
-              aspectRatio: "3/4", cursor: "pointer",
-            }}>
-              <img className="program-card-img" src={card.img} alt={card.title} style={{
+            { name: "Blueprint Lab", color: "#1A6BFF", rgba: "26,107,255", img: slider1, route: "/huella-azul", desc: "Precision training methodology. Data-driven programming built to forge strength." },
+            { name: "Hack Bar", color: "#22C55E", rgba: "34,197,94", img: slider2, route: "/huella-verde", desc: "Nutrition engineered for performance. Every meal is a signal to your body." },
+            { name: "Reset", color: "#FF3B3B", rgba: "255,59,59", img: slider3, route: "/huella-roja", desc: "Strategic recovery. Optimized sleep, restoration, and rebuilding protocols." },
+          ].map((item) => (
+            <div
+              key={item.name}
+              className="pillar-card"
+              onClick={() => navigate(item.route)}
+              style={{
+                position: "relative", borderRadius: 16, overflow: "hidden",
+                aspectRatio: "3/4", cursor: "pointer",
+                boxShadow: `0 0 20px rgba(${item.rgba}, 0.04), 0 0 60px rgba(${item.rgba}, 0.02)`,
+              }}
+              onMouseEnter={(e) => { e.currentTarget.style.boxShadow = `0 0 30px rgba(${item.rgba}, 0.12), 0 0 80px rgba(${item.rgba}, 0.06)`; }}
+              onMouseLeave={(e) => { e.currentTarget.style.boxShadow = `0 0 20px rgba(${item.rgba}, 0.04), 0 0 60px rgba(${item.rgba}, 0.02)`; }}
+            >
+              {/* Background image */}
+              <img className="pillar-card-img" src={item.img} alt={item.name} style={{
                 position: "absolute", inset: 0, width: "100%", height: "100%",
                 objectFit: "cover", transition: "transform 0.6s ease",
               }} />
+
+              {/* Dark overlay */}
               <div style={{
                 position: "absolute", inset: 0, zIndex: 1,
-                background: "linear-gradient(to top, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.2) 50%, rgba(0,0,0,0.05) 100%)",
+                background: `linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.3) 40%, rgba(${item.rgba}, 0.05) 100%)`,
               }} />
+
+              {/* Top accent line */}
               <div style={{
-                position: "absolute", bottom: 0, left: 0, right: 0, zIndex: 2,
+                position: "absolute", top: 0, left: "50%", transform: "translateX(-50%)",
+                width: 40, height: 2, borderRadius: "0 0 2px 2px", zIndex: 4,
+                background: item.color,
+              }} />
+
+              {/* Corner brackets */}
+              {[
+                { top: 8, left: 8, borderTop: `1.5px solid rgba(${item.rgba}, 0.25)`, borderLeft: `1.5px solid rgba(${item.rgba}, 0.25)` },
+                { top: 8, right: 8, borderTop: `1.5px solid rgba(${item.rgba}, 0.25)`, borderRight: `1.5px solid rgba(${item.rgba}, 0.25)` },
+                { bottom: 8, left: 8, borderBottom: `1.5px solid rgba(${item.rgba}, 0.25)`, borderLeft: `1.5px solid rgba(${item.rgba}, 0.25)` },
+                { bottom: 8, right: 8, borderBottom: `1.5px solid rgba(${item.rgba}, 0.25)`, borderRight: `1.5px solid rgba(${item.rgba}, 0.25)` },
+              ].map((corner, ci) => (
+                <div key={ci} style={{
+                  position: "absolute", width: 16, height: 16, zIndex: 4, pointerEvents: "none",
+                  ...corner,
+                }} />
+              ))}
+
+              {/* Fingerprint icon */}
+              <div className="pillar-card-fp" style={{
+                position: "absolute", top: 14, right: 14, zIndex: 4,
+                opacity: 0.5, transition: "opacity 0.4s ease",
+              }}>
+                <FingerprintSVG color={item.color} size={32} />
+              </div>
+
+              {/* Glassmorphism content panel */}
+              <div style={{
+                position: "absolute", bottom: 0, left: 0, right: 0, zIndex: 4,
                 padding: 18,
-                background: "rgba(255,255,255,0.08)",
-                backdropFilter: "blur(16px)", WebkitBackdropFilter: "blur(16px)",
-                borderTop: "1px solid rgba(255,255,255,0.12)",
+                background: "rgba(0,0,0,0.3)",
+                backdropFilter: "blur(12px)", WebkitBackdropFilter: "blur(12px)",
+                borderTop: "1px solid rgba(255,255,255,0.08)",
               }}>
                 <h3 style={{
-                  fontFamily: "'Michroma', sans-serif", fontSize: 11, color: "#FFFFFF",
-                  textTransform: "uppercase", letterSpacing: "0.05em", marginBottom: 6, marginTop: 0,
-                }}>{card.title}</h3>
+                  fontFamily: "'Michroma', sans-serif", fontSize: 12, color: "#FFFFFF",
+                  textTransform: "uppercase", letterSpacing: "0.05em", marginBottom: 5, marginTop: 0,
+                  textAlign: "left",
+                }}>{item.name}</h3>
                 <p style={{
-                  fontFamily: "'Inter', sans-serif", fontSize: 11, fontWeight: 300,
-                  color: "rgba(255,255,255,0.5)", lineHeight: 1.5, margin: 0,
-                }}>{card.desc}</p>
+                  fontFamily: "'Inter', sans-serif", fontSize: 10, fontWeight: 300,
+                  color: "rgba(255,255,255,0.5)", lineHeight: 1.5, textAlign: "left", margin: 0,
+                }}>{item.desc}</p>
               </div>
             </div>
           ))}
