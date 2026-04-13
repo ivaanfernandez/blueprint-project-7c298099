@@ -284,16 +284,16 @@ const Home = ({ showDock }: { showDock: boolean }) => {
             }}>
               DESIGNED FOR THE HUMAN MACHINE
             </h2>
-            <div style={{ maxWidth: 600, overflow: "hidden", marginBottom: 28 }}>
-              <p style={{
-                fontFamily: "'Inter', sans-serif", fontSize: 15, fontWeight: 300,
-                color: "#6B7280", lineHeight: 1.8, margin: "0 0 4px 0", whiteSpace: "nowrap",
+            <div className="about-subtext-container" style={{ display: "flex", flexDirection: "column", gap: 4, marginTop: 16, marginBottom: 32 }}>
+              <p className="about-subtext-line" style={{
+                whiteSpace: "nowrap", fontFamily: "'Inter', sans-serif", fontSize: 16, fontWeight: 400,
+                color: "#6B7280", lineHeight: 1.6, margin: 0,
               }}>
                 A precision-engineered system. Training, nutrition, and recovery synchronized to unlock your full potential.
               </p>
-              <p style={{
-                fontFamily: "'Inter', sans-serif", fontSize: 15, fontWeight: 300,
-                color: "#6B7280", lineHeight: 1.8, margin: 0, whiteSpace: "nowrap",
+              <p className="about-subtext-line" style={{
+                whiteSpace: "nowrap", fontFamily: "'Inter', sans-serif", fontSize: 16, fontWeight: 400,
+                color: "#6B7280", lineHeight: 1.6, margin: 0,
               }}>
                 This is not a gym. This is your operating system.
               </p>
