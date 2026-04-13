@@ -73,9 +73,10 @@ const Home = ({ showDock }: { showDock: boolean }) => {
         }
         .bento-item-neo { transition: transform 0.4s ease; }
         .bento-item-neo:hover { transform: scale(1.01); }
-        .program-card { transition: all 0.4s ease; box-shadow: 0 0 20px rgba(0,0,0,0.04), 0 0 60px rgba(255,255,255,0.3); }
-        .program-card:hover { transform: translateY(-4px); box-shadow: 0 0 30px rgba(0,0,0,0.06), 0 0 80px rgba(255,255,255,0.5), 0 0 120px rgba(200,200,200,0.15); }
-        .program-card:hover .program-card-img { transform: scale(1.05); }
+        .pillar-card { transition: all 0.4s ease; }
+        .pillar-card:hover { transform: translateY(-4px); }
+        .pillar-card:hover .pillar-card-img { transform: scale(1.05); }
+        .pillar-card:hover .pillar-card-fp { opacity: 1 !important; }
         @keyframes labScanLine {
           0% { top: -50px; }
           100% { top: 100%; }
@@ -93,16 +94,15 @@ const Home = ({ showDock }: { showDock: boolean }) => {
           50% { opacity: 0.7; }
         }
         @media (max-width: 767px) {
-          .programs-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 10px !important; }
+          .programs-grid { grid-template-columns: 1fr !important; max-width: 400px !important; margin: 0 auto !important; }
           .hero-main-title {
             font-size: clamp(28px, 8vw, 44px) !important;
             white-space: normal !important;
             padding: 0 24px !important;
           }
           .about-section-new { padding: 48px 6% !important; flex-direction: column !important; gap: 32px !important; }
-          .about-center-photo { flex: none !important; width: 100% !important; max-width: 320px !important; margin: 0 auto !important; order: -1 !important; }
-          .about-left-text { text-align: center !important; }
-          .about-right-features { flex: none !important; width: 100% !important; }
+          .about-photo-col { flex: none !important; width: 100% !important; max-width: 320px !important; margin: 0 auto !important; }
+          .about-stat-badge { right: 16px !important; }
           .bento-grid-neo { grid-template-columns: repeat(2, 1fr) !important; grid-template-rows: repeat(3, 180px) !important; }
           .feature-row-mobile {
             flex-direction: column !important;
@@ -304,26 +304,55 @@ const Home = ({ showDock }: { showDock: boolean }) => {
           padding: "64px 7%", display: "flex", alignItems: "flex-start", gap: 40,
           position: "relative", zIndex: 1, background: "#FFFFFF",
         }}>
-          {/* Left — Title + Body Text */}
-          <div className="about-left-text" style={{ flex: 1, paddingTop: 12 }}>
+          {/* Left — Title + Body + Features Grid */}
+          <div style={{ flex: 1, paddingTop: 12 }}>
             <h2 style={{
               fontFamily: "'Michroma', sans-serif",
               fontSize: "clamp(18px, 2.2vw, 30px)", color: "#000",
-              textTransform: "uppercase", lineHeight: 1.12, marginBottom: 16, marginTop: 0,
+              textTransform: "uppercase", lineHeight: 1.12, marginBottom: 12, marginTop: 0,
             }}>
               DESIGNED FOR THE HUMAN MACHINE
             </h2>
             <p style={{
               fontFamily: "'Inter', sans-serif", fontWeight: 300, fontSize: 15,
-              color: "#6B7280", lineHeight: 1.8, margin: 0,
+              color: "#6B7280", lineHeight: 1.8, marginBottom: 20,
             }}>
               Blueprint Project is a precision-engineered system built around three core protocols. Training, nutrition, and recovery — synchronized to unlock your full potential. This is not a gym. This is your operating system.
             </p>
+
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 14 }}>
+              {[
+                { title: "Precision Training", desc: "Data-driven methodology built to forge strength, endurance, and resilience." },
+                { title: "Nutrition Engineering", desc: "Every meal is a signal. Optimize input, transform output." },
+                { title: "Recovery Science", desc: "Strategic rest, optimized sleep, and complete restoration protocols." },
+                { title: "Mental Growth", desc: "Build focus, discipline, and unshakable mental clarity." },
+              ].map((feat) => (
+                <div key={feat.title} style={{
+                  display: "flex", alignItems: "flex-start", gap: 10, padding: 10,
+                  borderRadius: 10, border: "1px solid rgba(0,0,0,0.04)",
+                }}>
+                  <div style={{
+                    width: 3, height: 28, borderRadius: 2, background: "#1A6BFF",
+                    flexShrink: 0, marginTop: 2,
+                  }} />
+                  <div>
+                    <div style={{
+                      fontFamily: "'Inter', sans-serif", fontSize: 14, fontWeight: 600,
+                      color: "#000", marginBottom: 4,
+                    }}>{feat.title}</div>
+                    <div style={{
+                      fontFamily: "'Inter', sans-serif", fontSize: 12, fontWeight: 300,
+                      color: "#9CA3AF", lineHeight: 1.5,
+                    }}>{feat.desc}</div>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
 
-          {/* Center — Photo + Badge */}
-          <div className="about-center-photo" style={{
-            flex: "0 0 32%", maxWidth: 360, position: "relative",
+          {/* Right — Photo + Badge */}
+          <div className="about-photo-col" style={{
+            flex: "0 0 38%", maxWidth: 360, position: "relative",
           }}>
             <div style={{
               width: "100%", aspectRatio: "3/4", borderRadius: 18, overflow: "hidden",
@@ -332,11 +361,11 @@ const Home = ({ showDock }: { showDock: boolean }) => {
                 width: "100%", height: "100%", objectFit: "cover", display: "block",
               }} />
             </div>
-            <div style={{
-              position: "absolute", bottom: 16, left: "50%", transform: "translateX(-50%)",
+            <div className="about-stat-badge" style={{
+              position: "absolute", bottom: 16, right: -16,
               background: "#FFFFFF", borderRadius: 10, padding: "10px 16px",
               boxShadow: "0 6px 24px rgba(0,0,0,0.1)", zIndex: 2,
-              display: "flex", alignItems: "center", gap: 8, whiteSpace: "nowrap",
+              display: "flex", alignItems: "center", gap: 8,
             }}>
               <div>
                 <div style={{ fontFamily: "'Michroma', sans-serif", fontSize: 22, color: "#000", lineHeight: 1 }}>7+</div>
@@ -346,40 +375,6 @@ const Home = ({ showDock }: { showDock: boolean }) => {
               </div>
               <div style={{ width: 7, height: 7, borderRadius: "50%", background: "#1A6BFF" }} />
             </div>
-          </div>
-
-          {/* Right — 4 Features Stacked */}
-          <div className="about-right-features" style={{
-            flex: 1, display: "flex", flexDirection: "column", gap: 0, paddingTop: 8,
-          }}>
-            {[
-              { num: "01", title: "Precision Training", desc: "Data-driven methodology built to forge strength, endurance, and resilience." },
-              { num: "02", title: "Nutrition Engineering", desc: "Every meal is a signal. Optimize input, transform output." },
-              { num: "03", title: "Recovery Science", desc: "Strategic rest, optimized sleep, and complete restoration protocols." },
-              { num: "04", title: "Mental Growth", desc: "Build focus, discipline, and unshakable mental clarity." },
-            ].map((feat, i, arr) => (
-              <div key={feat.num} style={{
-                display: "flex", alignItems: "flex-start", gap: 14, padding: "20px 0",
-                borderBottom: i < arr.length - 1 ? "1px solid rgba(0,0,0,0.05)" : "none",
-              }}>
-                <div style={{
-                  fontFamily: "'Orbitron', sans-serif", fontSize: 11, color: "#1A6BFF",
-                  minWidth: 28, height: 28, border: "1px solid rgba(26,107,255,0.15)",
-                  borderRadius: 8, display: "flex", alignItems: "center", justifyContent: "center",
-                  flexShrink: 0, letterSpacing: "0.05em",
-                }}>{feat.num}</div>
-                <div>
-                  <div style={{
-                    fontFamily: "'Inter', sans-serif", fontSize: 16, fontWeight: 600,
-                    color: "#000", marginBottom: 4,
-                  }}>{feat.title}</div>
-                  <div style={{
-                    fontFamily: "'Inter', sans-serif", fontSize: 13, fontWeight: 300,
-                    color: "#9CA3AF", lineHeight: 1.6,
-                  }}>{feat.desc}</div>
-                </div>
-              </div>
-            ))}
           </div>
         </div>
       </div>
@@ -395,7 +390,7 @@ const Home = ({ showDock }: { showDock: boolean }) => {
         {/* Video element */}
         <video
           autoPlay muted loop playsInline
-          style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
+          style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", objectFit: "contain" }}
         >
           <source src="/videos/blueprint-gym.mp4" type="video/mp4" />
         </video>
@@ -432,45 +427,86 @@ const Home = ({ showDock }: { showDock: boolean }) => {
           fontFamily: "'Inter', sans-serif", fontSize: 13, fontWeight: 300,
           color: "#9CA3AF", textAlign: "center", marginBottom: 40,
         }}>
-          Discover the protocols designed to optimize every dimension of your performance.
+          Three pillars. One integrated system.
         </p>
 
         <div className="programs-grid" style={{
-          display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 14,
+          display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 16,
         }}>
           {[
-            { title: "Training", desc: "Precision methodology built to forge strength, endurance, and resilience.", img: "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=600&q=80" },
-            { title: "Nutrition", desc: "Fuel your system with precision. Every meal is a signal to your body.", img: "https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=600&q=80" },
-            { title: "Recovery", desc: "Strategic rest, optimized sleep, and complete restoration protocols.", img: "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=600&q=80" },
-            { title: "Mental Growth", desc: "Build focus, discipline, and unshakable mental clarity.", img: "https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=600&q=80" },
-          ].map((card) => (
-            <div key={card.title} className="program-card" style={{
-              position: "relative", borderRadius: 16, overflow: "hidden",
-              aspectRatio: "3/4", cursor: "pointer",
-            }}>
-              <img className="program-card-img" src={card.img} alt={card.title} style={{
+            { name: "Blueprint Lab", color: "#1A6BFF", rgba: "26,107,255", img: slider1, route: "/huella-azul", desc: "Precision training methodology. Data-driven programming built to forge strength." },
+            { name: "Hack Bar", color: "#22C55E", rgba: "34,197,94", img: slider2, route: "/huella-verde", desc: "Nutrition engineered for performance. Every meal is a signal to your body." },
+            { name: "Reset", color: "#FF3B3B", rgba: "255,59,59", img: slider3, route: "/huella-roja", desc: "Strategic recovery. Optimized sleep, restoration, and rebuilding protocols." },
+          ].map((item) => (
+            <div
+              key={item.name}
+              className="pillar-card"
+              onClick={() => navigate(item.route)}
+              style={{
+                position: "relative", borderRadius: 16, overflow: "hidden",
+                aspectRatio: "3/4", cursor: "pointer",
+                boxShadow: `0 0 20px rgba(${item.rgba}, 0.04), 0 0 60px rgba(${item.rgba}, 0.02)`,
+              }}
+              onMouseEnter={(e) => { e.currentTarget.style.boxShadow = `0 0 30px rgba(${item.rgba}, 0.12), 0 0 80px rgba(${item.rgba}, 0.06)`; }}
+              onMouseLeave={(e) => { e.currentTarget.style.boxShadow = `0 0 20px rgba(${item.rgba}, 0.04), 0 0 60px rgba(${item.rgba}, 0.02)`; }}
+            >
+              {/* Background image */}
+              <img className="pillar-card-img" src={item.img} alt={item.name} style={{
                 position: "absolute", inset: 0, width: "100%", height: "100%",
                 objectFit: "cover", transition: "transform 0.6s ease",
               }} />
+
+              {/* Dark overlay */}
               <div style={{
                 position: "absolute", inset: 0, zIndex: 1,
-                background: "linear-gradient(to top, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.2) 50%, rgba(0,0,0,0.05) 100%)",
+                background: `linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.3) 40%, rgba(${item.rgba}, 0.05) 100%)`,
               }} />
+
+              {/* Top accent line */}
               <div style={{
-                position: "absolute", bottom: 0, left: 0, right: 0, zIndex: 2,
+                position: "absolute", top: 0, left: "50%", transform: "translateX(-50%)",
+                width: 40, height: 2, borderRadius: "0 0 2px 2px", zIndex: 4,
+                background: item.color,
+              }} />
+
+              {/* Corner brackets */}
+              {[
+                { top: 8, left: 8, borderTop: `1.5px solid rgba(${item.rgba}, 0.25)`, borderLeft: `1.5px solid rgba(${item.rgba}, 0.25)` },
+                { top: 8, right: 8, borderTop: `1.5px solid rgba(${item.rgba}, 0.25)`, borderRight: `1.5px solid rgba(${item.rgba}, 0.25)` },
+                { bottom: 8, left: 8, borderBottom: `1.5px solid rgba(${item.rgba}, 0.25)`, borderLeft: `1.5px solid rgba(${item.rgba}, 0.25)` },
+                { bottom: 8, right: 8, borderBottom: `1.5px solid rgba(${item.rgba}, 0.25)`, borderRight: `1.5px solid rgba(${item.rgba}, 0.25)` },
+              ].map((corner, ci) => (
+                <div key={ci} style={{
+                  position: "absolute", width: 16, height: 16, zIndex: 4, pointerEvents: "none",
+                  ...corner,
+                }} />
+              ))}
+
+              {/* Fingerprint icon */}
+              <div className="pillar-card-fp" style={{
+                position: "absolute", top: 14, right: 14, zIndex: 4,
+                opacity: 0.5, transition: "opacity 0.4s ease",
+              }}>
+                <FingerprintSVG color={item.color} size={32} />
+              </div>
+
+              {/* Glassmorphism content panel */}
+              <div style={{
+                position: "absolute", bottom: 0, left: 0, right: 0, zIndex: 4,
                 padding: 18,
-                background: "rgba(255,255,255,0.08)",
-                backdropFilter: "blur(16px)", WebkitBackdropFilter: "blur(16px)",
-                borderTop: "1px solid rgba(255,255,255,0.12)",
+                background: "rgba(0,0,0,0.3)",
+                backdropFilter: "blur(12px)", WebkitBackdropFilter: "blur(12px)",
+                borderTop: "1px solid rgba(255,255,255,0.08)",
               }}>
                 <h3 style={{
-                  fontFamily: "'Michroma', sans-serif", fontSize: 11, color: "#FFFFFF",
-                  textTransform: "uppercase", letterSpacing: "0.05em", marginBottom: 6, marginTop: 0,
-                }}>{card.title}</h3>
+                  fontFamily: "'Michroma', sans-serif", fontSize: 12, color: "#FFFFFF",
+                  textTransform: "uppercase", letterSpacing: "0.05em", marginBottom: 5, marginTop: 0,
+                  textAlign: "left",
+                }}>{item.name}</h3>
                 <p style={{
-                  fontFamily: "'Inter', sans-serif", fontSize: 11, fontWeight: 300,
-                  color: "rgba(255,255,255,0.5)", lineHeight: 1.5, margin: 0,
-                }}>{card.desc}</p>
+                  fontFamily: "'Inter', sans-serif", fontSize: 10, fontWeight: 300,
+                  color: "rgba(255,255,255,0.5)", lineHeight: 1.5, textAlign: "left", margin: 0,
+                }}>{item.desc}</p>
               </div>
             </div>
           ))}
