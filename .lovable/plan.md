@@ -1,49 +1,20 @@
 
 
-## Plan: Swap Fingerprint Colors + Hover Large Fingerprint
+## Plan: Make Program Card Borders More Visible
 
 Single file: `src/pages/Home.tsx`
 
-### Change 1: Swap colors on Hack Bar and Reset (line 411-412)
+### Change: Update border and boxShadow values (lines 422-426)
 
-Swap the `color` and `rgba` values between Hack Bar and Reset:
+Since the cards already use `item.rgba` dynamically, just update the opacity/thickness values:
 
-- **Hack Bar**: `color: "#FF3B3B"`, `rgba: "255,59,59"` (was green)
-- **Reset**: `color: "#22C55E"`, `rgba: "34,197,94"` (was red)
+**Line 422** — default border: `1.5px solid ... 0.3` → `2px solid ... 0.5`
 
-All color references (corners, overlay, glow, accent line, fingerprint) already use `item.color` and `item.rgba` dynamically, so changing the data is sufficient.
+**Line 423** — default boxShadow: remove inset glow, update to `0 0 15px rgba(${item.rgba}, 0.1), 0 0 40px rgba(${item.rgba}, 0.05)`
 
-### Change 2: Add hover large fingerprint (after line 473, before glassmorphism panel)
+**Line 425** — hover border: `1.5px solid ... 0.6` → `2px solid ... 0.85`, hover boxShadow: `0 0 25px rgba(${item.rgba}, 0.2), 0 0 60px rgba(${item.rgba}, 0.1)`
 
-Insert a new div inside each card:
+**Line 426** — mouseLeave: reset to same default values as lines 422-423
 
-```tsx
-{/* Hover center fingerprint */}
-<div className="pillar-card-hover-fp" style={{
-  position: "absolute", top: "50%", left: "50%",
-  transform: "translate(-50%, -50%) scale(0.85)",
-  zIndex: 3, opacity: 0,
-  transition: "opacity 0.4s ease, transform 0.4s ease",
-  pointerEvents: "none",
-  filter: "drop-shadow(0 0 30px currentColor)",
-  color: item.color,
-}}>
-  <FingerprintSVG color={item.color} size={140} />
-</div>
-```
-
-### Change 3: Add hover CSS rule to `<style>` block
-
-Add to existing styles:
-
-```css
-.pillar-card:hover .pillar-card-hover-fp {
-  opacity: 0.15 !important;
-  transform: translate(-50%, -50%) scale(1) !important;
-}
-```
-
-### No other changes
-- Card layout, images, video, glassmorphism panels, section title all untouched
-- No new dependencies
+No other changes. Corner brackets, fingerprints, content all untouched.
 
