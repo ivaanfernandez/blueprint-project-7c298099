@@ -2,6 +2,7 @@ import { useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import ProceduralBackgroundWhite from "@/components/ProceduralBackgroundWhite";
+import FooterBackground from "@/components/FooterBackground";
 
 
 import { TextScramble } from "@/components/ui/text-scramble";
@@ -775,6 +776,7 @@ const Home = ({ showDock }: { showDock: boolean }) => {
             © 2025 Blueprint Project
           </span>
         </div>
+        </div>{/* end z-index wrapper */}
       </div>
     </motion.div>
   );
