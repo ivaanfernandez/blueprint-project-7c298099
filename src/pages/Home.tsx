@@ -86,9 +86,10 @@ const Home = ({ showDock }: { showDock: boolean }) => {
           transition: all 0.3s ease !important;
         }
         .glass-feat:hover {
-          background: rgba(255,255,255,0.55) !important;
-          border-color: rgba(255,255,255,0.8) !important;
-          box-shadow: 0 8px 32px rgba(0,0,0,0.06), inset 0 1px 0 rgba(255,255,255,0.9) !important;
+          background: rgba(26,107,255,0.04) !important;
+          border-color: rgba(26,107,255,0.18) !important;
+          box-shadow: 0 8px 32px rgba(26,107,255,0.08), 0 2px 8px rgba(0,0,0,0.04), inset 0 1px 0 rgba(255,255,255,0.9) !important;
+          transform: translateY(-2px) !important;
         }
         .glass-feat:hover .about-feat-glow { opacity: 1 !important; }
         @keyframes labScanLine {
