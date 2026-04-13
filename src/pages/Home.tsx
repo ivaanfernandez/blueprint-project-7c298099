@@ -77,6 +77,9 @@ const Home = ({ showDock }: { showDock: boolean }) => {
         .pillar-card:hover { transform: translateY(-4px); }
         .pillar-card:hover .pillar-card-img { transform: scale(1.05); }
         .pillar-card:hover .pillar-card-fp { opacity: 1 !important; }
+        .about-feat { transition: all 0.3s ease; }
+        .about-feat:hover { border-color: rgba(26,107,255,0.1) !important; background: rgba(26,107,255,0.02) !important; }
+        .about-feat:hover .about-feat-glow { opacity: 1 !important; }
         @keyframes labScanLine {
           0% { top: -50px; }
           100% { top: 100%; }
@@ -319,25 +322,49 @@ const Home = ({ showDock }: { showDock: boolean }) => {
               Blueprint Project is a precision-engineered system built around three core protocols. Training, nutrition, and recovery — synchronized to unlock your full potential. This is not a gym. This is your operating system.
             </p>
 
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 14 }}>
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }}>
               {[
-                { title: "Precision Training", desc: "Data-driven methodology built to forge strength, endurance, and resilience." },
-                { title: "Nutrition Engineering", desc: "Every meal is a signal. Optimize input, transform output." },
-                { title: "Recovery Science", desc: "Strategic rest, optimized sleep, and complete restoration protocols." },
-                { title: "Mental Growth", desc: "Build focus, discipline, and unshakable mental clarity." },
+                { title: "Precision Training", desc: "Data-driven methodology built to forge strength, endurance, and resilience.", icon: (
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1A6BFF" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M6.5 6.5h-2a1 1 0 0 0-1 1v9a1 1 0 0 0 1 1h2"/><path d="M17.5 6.5h2a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1h-2"/><path d="M6.5 4v16"/><path d="M17.5 4v16"/><path d="M6.5 12h11"/>
+                  </svg>
+                )},
+                { title: "Nutrition Engineering", desc: "Every meal is a signal. Optimize input, transform output.", icon: (
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1A6BFF" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M11 20A7 7 0 0 1 9.8 6.9C15.5 4.9 17 3.5 19 2c1 2 2 4.5 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/>
+                  </svg>
+                )},
+                { title: "Recovery Science", desc: "Strategic rest, optimized sleep, and complete restoration protocols.", icon: (
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1A6BFF" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/>
+                  </svg>
+                )},
+                { title: "Mental Growth", desc: "Build focus, discipline, and unshakable mental clarity.", icon: (
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1A6BFF" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/>
+                  </svg>
+                )},
               ].map((feat) => (
-                <div key={feat.title} style={{
-                  display: "flex", alignItems: "flex-start", gap: 10, padding: 10,
-                  borderRadius: 10, border: "1px solid rgba(0,0,0,0.04)",
+                <div key={feat.title} className="about-feat" style={{
+                  display: "flex", alignItems: "flex-start", gap: 14, padding: 14,
+                  borderRadius: 12, border: "1px solid rgba(0,0,0,0.04)",
                 }}>
                   <div style={{
-                    width: 3, height: 28, borderRadius: 2, background: "#1A6BFF",
-                    flexShrink: 0, marginTop: 2,
-                  }} />
+                    width: 44, height: 44, borderRadius: 12, background: "rgba(26,107,255,0.04)",
+                    display: "flex", alignItems: "center", justifyContent: "center",
+                    flexShrink: 0, position: "relative",
+                  }}>
+                    <div className="about-feat-glow" style={{
+                      position: "absolute", inset: -4, borderRadius: 16,
+                      background: "rgba(26,107,255,0.06)", filter: "blur(8px)",
+                      opacity: 0, transition: "opacity 0.3s ease", pointerEvents: "none",
+                    }} />
+                    {feat.icon}
+                  </div>
                   <div>
                     <div style={{
-                      fontFamily: "'Inter', sans-serif", fontSize: 14, fontWeight: 600,
-                      color: "#000", marginBottom: 4,
+                      fontFamily: "'Inter', sans-serif", fontSize: 15, fontWeight: 600,
+                      color: "#000", marginBottom: 5,
                     }}>{feat.title}</div>
                     <div style={{
                       fontFamily: "'Inter', sans-serif", fontSize: 12, fontWeight: 300,
@@ -404,7 +431,7 @@ const Home = ({ showDock }: { showDock: boolean }) => {
           fontSize: "clamp(20px, 2.5vw, 32px)", color: "#000",
           textTransform: "uppercase", textAlign: "center", marginBottom: 8,
         }}>
-          OUR PROGRAMS
+          CHOOSE YOUR FINGERPRINT
         </h2>
         <p style={{
           fontFamily: "'Inter', sans-serif", fontSize: 13, fontWeight: 300,
