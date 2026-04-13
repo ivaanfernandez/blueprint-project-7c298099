@@ -638,6 +638,8 @@ const Home = ({ showDock }: { showDock: boolean }) => {
         textAlign: "center" as const,
         position: "relative" as const,
       }}>
+        <FooterBackground />
+        <div style={{ position: "relative", zIndex: 1 }}>
         {/* Blue accent line */}
         <div style={{
           width: 40,
