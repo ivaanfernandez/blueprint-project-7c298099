@@ -77,9 +77,20 @@ const Home = ({ showDock }: { showDock: boolean }) => {
         .pillar-card:hover { transform: translateY(-4px); }
         .pillar-card:hover .pillar-card-img { transform: scale(1.05); }
         .pillar-card:hover .pillar-card-fp { opacity: 1 !important; }
-        .about-feat { transition: all 0.3s ease; }
-        .about-feat:hover { border-color: rgba(26,107,255,0.1) !important; background: rgba(26,107,255,0.02) !important; }
-        .about-feat:hover .about-feat-glow { opacity: 1 !important; }
+        .glass-feat {
+          background: rgba(255,255,255,0.4) !important;
+          backdrop-filter: blur(12px) !important;
+          -webkit-backdrop-filter: blur(12px) !important;
+          border: 1px solid rgba(255,255,255,0.6) !important;
+          box-shadow: 0 4px 24px rgba(0,0,0,0.04), inset 0 1px 0 rgba(255,255,255,0.8) !important;
+          transition: all 0.3s ease !important;
+        }
+        .glass-feat:hover {
+          background: rgba(255,255,255,0.55) !important;
+          border-color: rgba(255,255,255,0.8) !important;
+          box-shadow: 0 8px 32px rgba(0,0,0,0.06), inset 0 1px 0 rgba(255,255,255,0.9) !important;
+        }
+        .glass-feat:hover .about-feat-glow { opacity: 1 !important; }
         @keyframes labScanLine {
           0% { top: -50px; }
           100% { top: 100%; }
@@ -103,7 +114,7 @@ const Home = ({ showDock }: { showDock: boolean }) => {
             white-space: normal !important;
             padding: 0 24px !important;
           }
-          .about-section-new { padding: 48px 6% !important; flex-direction: column !important; gap: 32px !important; }
+          .about-section-new { padding: 48px 6% !important; flex-direction: column !important; gap: 32px !important; align-items: flex-start !important; }
           .about-photo-col { flex: none !important; width: 100% !important; max-width: 320px !important; margin: 0 auto !important; }
           .about-stat-badge { right: 16px !important; }
           .bento-grid-neo { grid-template-columns: repeat(2, 1fr) !important; grid-template-rows: repeat(3, 180px) !important; }
@@ -329,7 +340,7 @@ const Home = ({ showDock }: { showDock: boolean }) => {
       {/* ── C: ABOUT (WHITE) ── */}
       <div ref={aboutRef} style={{ position: "relative", zIndex: 1 }}>
         <div className="about-section-new" style={{
-          padding: "64px 7%", display: "flex", alignItems: "flex-start", gap: 32,
+          padding: "64px 7%", display: "flex", alignItems: "stretch", gap: 32,
           position: "relative", zIndex: 1, background: "#FFFFFF",
         }}>
           {/* Left — Title + Body + Features Grid */}
@@ -348,7 +359,7 @@ const Home = ({ showDock }: { showDock: boolean }) => {
               Blueprint Project is a precision-engineered system built around three core protocols. Training, nutrition, and recovery — synchronized to unlock your full potential. This is not a gym. This is your operating system.
             </p>
 
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gridTemplateRows: "1fr 1fr", gap: 20, marginBottom: 0, flexGrow: 1, alignContent: "stretch" }}>
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16, flexGrow: 1 }}>
               {[
                 { title: "Precision Training", desc: "Data-driven methodology built to forge strength, endurance, and resilience.", icon: (
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#1A6BFF" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
@@ -371,12 +382,20 @@ const Home = ({ showDock }: { showDock: boolean }) => {
                   </svg>
                 )},
               ].map((feat) => (
-                <div key={feat.title} className="about-feat" style={{ height: "100%",
-                  display: "flex", alignItems: "flex-start", gap: 14, padding: 18,
-                  borderRadius: 14, border: "1px solid rgba(0,0,0,0.04)",
+                <div key={feat.title} className="glass-feat" style={{
+                  display: "flex", alignItems: "flex-start", gap: 14, padding: 20,
+                  borderRadius: 16,
+                  background: "rgba(255,255,255,0.4)",
+                  backdropFilter: "blur(12px)",
+                  WebkitBackdropFilter: "blur(12px)",
+                  border: "1px solid rgba(255,255,255,0.6)",
+                  boxShadow: "0 4px 24px rgba(0,0,0,0.04), inset 0 1px 0 rgba(255,255,255,0.8)",
+                  transition: "all 0.3s ease",
+                  alignSelf: "stretch",
                 }}>
                   <div style={{
-                    width: 48, height: 48, borderRadius: 14, background: "rgba(26,107,255,0.04)",
+                    width: 48, height: 48, borderRadius: 14, background: "rgba(26,107,255,0.06)",
+                    border: "1px solid rgba(26,107,255,0.08)",
                     display: "flex", alignItems: "center", justifyContent: "center",
                     flexShrink: 0, position: "relative",
                   }}>
