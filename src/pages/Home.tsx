@@ -2,7 +2,7 @@ import { useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import ProceduralBackgroundWhite from "@/components/ProceduralBackgroundWhite";
-import CinematicFooter from "@/components/CinematicFooter";
+
 
 import { TextScramble } from "@/components/ui/text-scramble";
 import { Dock, DockIcon } from "@/components/ui/dock";
@@ -631,7 +631,149 @@ const Home = ({ showDock }: { showDock: boolean }) => {
 
       </div>{/* END WHITE ZONE WRAPPER */}
 
-      <CinematicFooter />
+      {/* ── FOOTER (DARK) ── */}
+      <div style={{
+        background: "#0a0a0a",
+        padding: "60px 7% 32px",
+        textAlign: "center" as const,
+        position: "relative" as const,
+      }}>
+        {/* Blue accent line */}
+        <div style={{
+          width: 40,
+          height: 1,
+          background: "#1A6BFF",
+          margin: "0 auto 32px",
+        }} />
+
+        {/* Title */}
+        <h2 style={{
+          fontFamily: "'Michroma', sans-serif",
+          fontSize: "clamp(24px, 4vw, 36px)",
+          color: "#FFFFFF",
+          textTransform: "uppercase" as const,
+          letterSpacing: "0.04em",
+          marginBottom: 10,
+          marginTop: 0,
+        }}>
+          Enter the Blueprint
+        </h2>
+
+        {/* Subtitle */}
+        <p style={{
+          fontFamily: "'Inter', sans-serif",
+          fontSize: 13,
+          fontWeight: 300,
+          color: "rgba(255,255,255,0.3)",
+          marginBottom: 32,
+        }}>
+          Your evolution begins with a single step.
+        </p>
+
+        {/* Buttons */}
+        <div style={{
+          display: "flex",
+          justifyContent: "center",
+          gap: 14,
+          marginBottom: 48,
+          ...(window.innerWidth < 768 ? { flexDirection: "column" as const, gap: 10, alignItems: "stretch" as const } : {}),
+        }}>
+          <button
+            onClick={() => navigate("/huella-azul")}
+            style={{
+              fontFamily: "'Orbitron', sans-serif",
+              fontSize: 10,
+              fontWeight: 500,
+              letterSpacing: "0.15em",
+              color: "#FFFFFF",
+              background: "transparent",
+              border: "1px solid rgba(255,255,255,0.12)",
+              borderRadius: 50,
+              padding: "14px 36px",
+              cursor: "pointer",
+              transition: "all 0.3s ease",
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.borderColor = "rgba(26,107,255,0.5)";
+              e.currentTarget.style.background = "rgba(26,107,255,0.05)";
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.borderColor = "rgba(255,255,255,0.12)";
+              e.currentTarget.style.background = "transparent";
+            }}
+          >
+            JOIN NOW
+          </button>
+
+          <button
+            onClick={() => window.open("https://instagram.com/blueprintproject", "_blank")}
+            style={{
+              fontFamily: "'Orbitron', sans-serif",
+              fontSize: 10,
+              fontWeight: 500,
+              letterSpacing: "0.15em",
+              color: "rgba(255,255,255,0.35)",
+              background: "transparent",
+              border: "1px solid rgba(255,255,255,0.06)",
+              borderRadius: 50,
+              padding: "14px 28px",
+              cursor: "pointer",
+              transition: "all 0.3s ease",
+              display: "flex",
+              alignItems: "center" as const,
+              justifyContent: "center" as const,
+              gap: 8,
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.color = "#FFFFFF";
+              e.currentTarget.style.borderColor = "rgba(255,255,255,0.2)";
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.color = "rgba(255,255,255,0.35)";
+              e.currentTarget.style.borderColor = "rgba(255,255,255,0.06)";
+            }}
+          >
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round">
+              <rect x="2" y="2" width="20" height="20" rx="5" />
+              <circle cx="12" cy="12" r="5" />
+              <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
+            </svg>
+            INSTAGRAM
+          </button>
+        </div>
+
+        {/* Divider */}
+        <div style={{
+          width: "100%",
+          height: 1,
+          background: "linear-gradient(90deg, transparent, rgba(255,255,255,0.06), transparent)",
+          marginBottom: 20,
+        }} />
+
+        {/* Bottom bar */}
+        <div style={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center" as const,
+          ...(window.innerWidth < 768 ? { flexDirection: "column" as const, gap: 8, textAlign: "center" as const } : {}),
+        }}>
+          <span style={{
+            fontFamily: "'Michroma', sans-serif",
+            fontSize: 8,
+            color: "rgba(255,255,255,0.25)",
+            letterSpacing: "0.2em",
+          }}>
+            BLUEPRINT PROJECT
+          </span>
+          <span style={{
+            fontFamily: "'Inter', sans-serif",
+            fontSize: 8,
+            color: "rgba(255,255,255,0.1)",
+          }}>
+            © 2025 Blueprint Project
+          </span>
+        </div>
+      </div>
     </motion.div>
   );
 };
