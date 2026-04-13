@@ -296,44 +296,45 @@ const Home = ({ showDock }: { showDock: boolean }) => {
               {/* Blue vertical line */}
               <div style={{
                 position: "absolute", left: 8, top: 10, bottom: 10,
-                width: 1.5, background: "linear-gradient(to bottom, #1A6BFF, rgba(26,107,255,0.1))",
+                width: 1.5, background: "linear-gradient(to bottom, #1A6BFF 0%, #FF3B3B 33%, #22C55E 66%, #F59E0B 100%)",
               }} />
 
               {[
-                { title: "Precision Training", desc: "Data-driven methodology built to forge strength, endurance, and resilience.", icon: (
+                { title: "Precision Training", desc: "Data-driven methodology built to forge strength, endurance, and resilience.", color: "#1A6BFF", rgba: "26,107,255", icon: (
                   <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#1A6BFF" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                     <path d="M6.5 6.5h-2a1 1 0 0 0-1 1v9a1 1 0 0 0 1 1h2"/><path d="M17.5 6.5h2a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1h-2"/><path d="M6.5 4v16"/><path d="M17.5 4v16"/><path d="M6.5 12h11"/>
                   </svg>
                 )},
-                { title: "Nutrition Engineering", desc: "Every meal is a signal. Optimize input, transform output.", icon: (
-                  <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#1A6BFF" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                { title: "Nutrition Engineering", desc: "Every meal is a signal. Optimize input, transform output.", color: "#FF3B3B", rgba: "255,59,59", icon: (
+                  <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#FF3B3B" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                     <path d="M11 20A7 7 0 0 1 9.8 6.9C15.5 4.9 17 3.5 19 2c1 2 2 4.5 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/>
                   </svg>
                 )},
-                { title: "Recovery Science", desc: "Strategic rest, optimized sleep, and complete restoration protocols.", icon: (
-                  <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#1A6BFF" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                { title: "Recovery Science", desc: "Strategic rest, optimized sleep, and complete restoration protocols.", color: "#22C55E", rgba: "34,197,94", icon: (
+                  <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#22C55E" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                     <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/>
                   </svg>
                 )},
-                { title: "Mental Growth", desc: "Build focus, discipline, and unshakable mental clarity.", icon: (
-                  <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#1A6BFF" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                { title: "Mental Growth", desc: "Build focus, discipline, and unshakable mental clarity.", color: "#F59E0B", rgba: "245,158,11", icon: (
+                  <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                     <path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/>
                   </svg>
                 )},
               ].map((step, i, arr) => (
                 <div key={step.title} style={{ position: "relative", paddingBottom: i === arr.length - 1 ? 0 : 28 }}>
-                  {/* Blue dot */}
+                  {/* Colored dot */}
                   <div style={{
                     position: "absolute", left: -24, top: 7,
                     width: 11, height: 11, borderRadius: "50%",
-                    background: "#1A6BFF", border: "2.5px solid #FFFFFF",
-                    boxShadow: "0 0 0 2.5px rgba(26,107,255,0.2)",
+                    background: step.color, border: "2.5px solid #FFFFFF",
+                    boxShadow: `0 0 0 2.5px rgba(${step.rgba}, 0.2)`,
                   }} />
                   {/* Title row */}
                   <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 5 }}>
                     <div style={{
                       width: 34, height: 34, borderRadius: 9,
-                      background: "rgba(26,107,255,0.05)",
+                      background: `rgba(${step.rgba}, 0.06)`,
+                      border: `1px solid rgba(${step.rgba}, 0.1)`,
                       display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0,
                     }}>
                       {step.icon}
@@ -344,7 +345,7 @@ const Home = ({ showDock }: { showDock: boolean }) => {
                   </div>
                   {/* Description */}
                   <div style={{
-                    fontFamily: "'Inter', sans-serif", fontSize: 14, fontWeight: 300,
+                    fontFamily: "'Inter', sans-serif", fontSize: 15, fontWeight: 300,
                     color: "#6B7280", lineHeight: 1.6, paddingLeft: 40,
                   }}>{step.desc}</div>
                 </div>
@@ -357,7 +358,7 @@ const Home = ({ showDock }: { showDock: boolean }) => {
             flex: "0 0 34%", maxWidth: 320, borderRadius: 16, overflow: "hidden", aspectRatio: "3/4",
           }}>
             <img src={slider1} alt="Blueprint Project" style={{
-              width: "100%", height: "100%", objectFit: "cover", display: "block",
+              width: "100%", height: "100%", objectFit: "cover", objectPosition: "center center", display: "block",
             }} />
           </div>
         </div>
