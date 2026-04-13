@@ -419,10 +419,11 @@ const Home = ({ showDock }: { showDock: boolean }) => {
               style={{
                 position: "relative", borderRadius: 16, overflow: "hidden",
                 aspectRatio: "3/4", cursor: "pointer",
-                boxShadow: `0 0 20px rgba(${item.rgba}, 0.04), 0 0 60px rgba(${item.rgba}, 0.02)`,
+                border: `1.5px solid rgba(${item.rgba}, 0.3)`,
+                boxShadow: `0 0 20px rgba(${item.rgba}, 0.04), 0 0 60px rgba(${item.rgba}, 0.02), inset 0 0 20px rgba(${item.rgba}, 0.03)`,
               }}
-              onMouseEnter={(e) => { e.currentTarget.style.boxShadow = `0 0 30px rgba(${item.rgba}, 0.12), 0 0 80px rgba(${item.rgba}, 0.06)`; }}
-              onMouseLeave={(e) => { e.currentTarget.style.boxShadow = `0 0 20px rgba(${item.rgba}, 0.04), 0 0 60px rgba(${item.rgba}, 0.02)`; }}
+              onMouseEnter={(e) => { e.currentTarget.style.border = `1.5px solid rgba(${item.rgba}, 0.6)`; e.currentTarget.style.boxShadow = `0 0 30px rgba(${item.rgba}, 0.12), 0 0 80px rgba(${item.rgba}, 0.06), inset 0 0 30px rgba(${item.rgba}, 0.05)`; }}
+              onMouseLeave={(e) => { e.currentTarget.style.border = `1.5px solid rgba(${item.rgba}, 0.3)`; e.currentTarget.style.boxShadow = `0 0 20px rgba(${item.rgba}, 0.04), 0 0 60px rgba(${item.rgba}, 0.02), inset 0 0 20px rgba(${item.rgba}, 0.03)`; }}
             >
               {/* Background image/video */}
               {item.video ? (
