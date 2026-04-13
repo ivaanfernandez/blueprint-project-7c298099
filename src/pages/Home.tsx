@@ -362,29 +362,29 @@ const Home = ({ showDock }: { showDock: boolean }) => {
 
             <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16, flexGrow: 1 }}>
               {[
-                { title: "Precision Training", desc: "Data-driven methodology built to forge strength, endurance, and resilience.", icon: (
+                { num: "01", title: "Precision Training", desc: "Data-driven methodology built to forge strength, endurance, and resilience.", icon: (
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#1A6BFF" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                     <path d="M6.5 6.5h-2a1 1 0 0 0-1 1v9a1 1 0 0 0 1 1h2"/><path d="M17.5 6.5h2a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1h-2"/><path d="M6.5 4v16"/><path d="M17.5 4v16"/><path d="M6.5 12h11"/>
                   </svg>
                 )},
-                { title: "Nutrition Engineering", desc: "Every meal is a signal. Optimize input, transform output.", icon: (
+                { num: "02", title: "Nutrition Engineering", desc: "Every meal is a signal. Optimize input, transform output.", icon: (
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#1A6BFF" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                     <path d="M11 20A7 7 0 0 1 9.8 6.9C15.5 4.9 17 3.5 19 2c1 2 2 4.5 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/>
                   </svg>
                 )},
-                { title: "Recovery Science", desc: "Strategic rest, optimized sleep, and complete restoration protocols.", icon: (
+                { num: "03", title: "Recovery Science", desc: "Strategic rest, optimized sleep, and complete restoration protocols.", icon: (
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#1A6BFF" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                     <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/>
                   </svg>
                 )},
-                { title: "Mental Growth", desc: "Build focus, discipline, and unshakable mental clarity.", icon: (
+                { num: "04", title: "Mental Growth", desc: "Build focus, discipline, and unshakable mental clarity.", icon: (
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#1A6BFF" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                     <path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/>
                   </svg>
                 )},
               ].map((feat) => (
                 <div key={feat.title} className="glass-feat" style={{
-                  display: "flex", alignItems: "flex-start", gap: 14, padding: 20,
+                  display: "flex", flexDirection: "column", padding: 20,
                   borderRadius: 16,
                   background: "rgba(255,255,255,0.4)",
                   backdropFilter: "blur(12px)",
@@ -394,29 +394,34 @@ const Home = ({ showDock }: { showDock: boolean }) => {
                   transition: "all 0.3s ease",
                   alignSelf: "stretch",
                 }}>
+                  <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 12 }}>
+                    <span style={{
+                      fontFamily: "'Michroma', sans-serif",
+                      fontSize: 36,
+                      color: "rgba(26,107,255,0.1)",
+                      lineHeight: 1,
+                    }}>{feat.num}</span>
+                    <div style={{
+                      width: 40, height: 40, borderRadius: 10, background: "rgba(26,107,255,0.06)",
+                      display: "flex", alignItems: "center", justifyContent: "center",
+                      flexShrink: 0, position: "relative",
+                    }}>
+                      <div className="about-feat-glow" style={{
+                        position: "absolute", inset: -4, borderRadius: 14,
+                        background: "rgba(26,107,255,0.06)", filter: "blur(8px)",
+                        opacity: 0, transition: "opacity 0.3s ease", pointerEvents: "none",
+                      }} />
+                      {feat.icon}
+                    </div>
+                  </div>
                   <div style={{
-                    width: 48, height: 48, borderRadius: 14, background: "rgba(26,107,255,0.06)",
-                    border: "1px solid rgba(26,107,255,0.08)",
-                    display: "flex", alignItems: "center", justifyContent: "center",
-                    flexShrink: 0, position: "relative",
-                  }}>
-                    <div className="about-feat-glow" style={{
-                      position: "absolute", inset: -4, borderRadius: 16,
-                      background: "rgba(26,107,255,0.06)", filter: "blur(8px)",
-                      opacity: 0, transition: "opacity 0.3s ease", pointerEvents: "none",
-                    }} />
-                    {feat.icon}
-                  </div>
-                  <div>
-                    <div style={{
-                      fontFamily: "'Inter', sans-serif", fontSize: 16, fontWeight: 600,
-                      color: "#000", marginBottom: 6,
-                    }}>{feat.title}</div>
-                    <div style={{
-                      fontFamily: "'Inter', sans-serif", fontSize: 13, fontWeight: 300,
-                      color: "#9CA3AF", lineHeight: 1.6,
-                    }}>{feat.desc}</div>
-                  </div>
+                    fontFamily: "'Inter', sans-serif", fontSize: 18, fontWeight: 700,
+                    color: "#000", marginBottom: 6,
+                  }}>{feat.title}</div>
+                  <div style={{
+                    fontFamily: "'Inter', sans-serif", fontSize: 13, fontWeight: 300,
+                    color: "#6B7280", lineHeight: 1.6,
+                  }}>{feat.desc}</div>
                 </div>
               ))}
             </div>
