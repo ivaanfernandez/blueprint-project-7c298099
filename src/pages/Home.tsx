@@ -94,16 +94,15 @@ const Home = ({ showDock }: { showDock: boolean }) => {
           50% { opacity: 0.7; }
         }
         @media (max-width: 767px) {
-          .programs-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 10px !important; }
+          .programs-grid { grid-template-columns: 1fr !important; max-width: 400px !important; margin: 0 auto !important; }
           .hero-main-title {
             font-size: clamp(28px, 8vw, 44px) !important;
             white-space: normal !important;
             padding: 0 24px !important;
           }
           .about-section-new { padding: 48px 6% !important; flex-direction: column !important; gap: 32px !important; }
-          .about-center-photo { flex: none !important; width: 100% !important; max-width: 320px !important; margin: 0 auto !important; order: -1 !important; }
-          .about-left-text { text-align: center !important; }
-          .about-right-features { flex: none !important; width: 100% !important; }
+          .about-photo-col { flex: none !important; width: 100% !important; max-width: 320px !important; margin: 0 auto !important; }
+          .about-stat-badge { right: 16px !important; }
           .bento-grid-neo { grid-template-columns: repeat(2, 1fr) !important; grid-template-rows: repeat(3, 180px) !important; }
           .feature-row-mobile {
             flex-direction: column !important;
