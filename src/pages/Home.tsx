@@ -73,9 +73,10 @@ const Home = ({ showDock }: { showDock: boolean }) => {
         }
         .bento-item-neo { transition: transform 0.4s ease; }
         .bento-item-neo:hover { transform: scale(1.01); }
-        .program-card { transition: all 0.4s ease; box-shadow: 0 0 20px rgba(0,0,0,0.04), 0 0 60px rgba(255,255,255,0.3); }
-        .program-card:hover { transform: translateY(-4px); box-shadow: 0 0 30px rgba(0,0,0,0.06), 0 0 80px rgba(255,255,255,0.5), 0 0 120px rgba(200,200,200,0.15); }
-        .program-card:hover .program-card-img { transform: scale(1.05); }
+        .pillar-card { transition: all 0.4s ease; }
+        .pillar-card:hover { transform: translateY(-4px); }
+        .pillar-card:hover .pillar-card-img { transform: scale(1.05); }
+        .pillar-card:hover .pillar-card-fp { opacity: 1 !important; }
         @keyframes labScanLine {
           0% { top: -50px; }
           100% { top: 100%; }
