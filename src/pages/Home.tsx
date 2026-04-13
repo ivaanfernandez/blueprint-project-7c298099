@@ -272,11 +272,11 @@ const Home = ({ showDock }: { showDock: boolean }) => {
       {/* ── C: ABOUT (WHITE) ── */}
       <div ref={aboutRef} style={{ position: "relative", zIndex: 1 }}>
         <div className="about-section-new" style={{
-          padding: "64px 7%", display: "flex", alignItems: "flex-start", gap: 36,
+          padding: "64px 7%", display: "flex", alignItems: window.innerWidth < 768 ? "flex-start" : "stretch", gap: 36,
           position: "relative", zIndex: 1, background: "#FFFFFF",
         }}>
           {/* Left — Title + Subtitle + Timeline */}
-          <div style={{ flex: 1 }}>
+          <div style={{ flex: 1, display: "flex", flexDirection: "column" as const, ...(window.innerWidth >= 768 ? {} : { flexGrow: 0 }) }}>
             <h2 style={{
               fontFamily: "'Michroma', sans-serif",
               fontSize: "clamp(18px, 2.2vw, 28px)", color: "#000",
@@ -285,14 +285,14 @@ const Home = ({ showDock }: { showDock: boolean }) => {
               DESIGNED FOR THE HUMAN MACHINE
             </h2>
             <p style={{
-              fontFamily: "'Inter', sans-serif", fontSize: 14, fontWeight: 300,
-              color: "#6B7280", lineHeight: 1.75, marginBottom: 24, maxWidth: 480,
+              fontFamily: "'Inter', sans-serif", fontSize: 15, fontWeight: 300,
+              color: "#6B7280", lineHeight: 1.8, marginBottom: 28, maxWidth: 480,
             }}>
               A precision-engineered system. Training, nutrition, and recovery — synchronized to unlock your full potential. This is not a gym. This is your operating system.
             </p>
 
             {/* Timeline */}
-            <div style={{ position: "relative", paddingLeft: 28 }}>
+            <div style={{ position: "relative", paddingLeft: 28, flexGrow: 1, display: "flex", flexDirection: "column" as const, justifyContent: window.innerWidth < 768 ? "flex-start" : "space-between" }}>
               {/* Blue vertical line */}
               <div style={{
                 position: "absolute", left: 8, top: 10, bottom: 10,
@@ -301,27 +301,27 @@ const Home = ({ showDock }: { showDock: boolean }) => {
 
               {[
                 { title: "Precision Training", desc: "Data-driven methodology built to forge strength, endurance, and resilience.", icon: (
-                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#1A6BFF" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                  <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#1A6BFF" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                     <path d="M6.5 6.5h-2a1 1 0 0 0-1 1v9a1 1 0 0 0 1 1h2"/><path d="M17.5 6.5h2a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1h-2"/><path d="M6.5 4v16"/><path d="M17.5 4v16"/><path d="M6.5 12h11"/>
                   </svg>
                 )},
                 { title: "Nutrition Engineering", desc: "Every meal is a signal. Optimize input, transform output.", icon: (
-                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#1A6BFF" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                  <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#1A6BFF" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                     <path d="M11 20A7 7 0 0 1 9.8 6.9C15.5 4.9 17 3.5 19 2c1 2 2 4.5 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/>
                   </svg>
                 )},
                 { title: "Recovery Science", desc: "Strategic rest, optimized sleep, and complete restoration protocols.", icon: (
-                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#1A6BFF" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                  <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#1A6BFF" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                     <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/>
                   </svg>
                 )},
                 { title: "Mental Growth", desc: "Build focus, discipline, and unshakable mental clarity.", icon: (
-                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#1A6BFF" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                  <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#1A6BFF" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                     <path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/>
                   </svg>
                 )},
               ].map((step, i, arr) => (
-                <div key={step.title} style={{ position: "relative", paddingBottom: i === arr.length - 1 ? 0 : 24 }}>
+                <div key={step.title} style={{ position: "relative", paddingBottom: i === arr.length - 1 ? 0 : 28 }}>
                   {/* Blue dot */}
                   <div style={{
                     position: "absolute", left: -24, top: 7,
@@ -330,22 +330,22 @@ const Home = ({ showDock }: { showDock: boolean }) => {
                     boxShadow: "0 0 0 2.5px rgba(26,107,255,0.2)",
                   }} />
                   {/* Title row */}
-                  <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 4 }}>
+                  <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 5 }}>
                     <div style={{
-                      width: 30, height: 30, borderRadius: 8,
+                      width: 34, height: 34, borderRadius: 9,
                       background: "rgba(26,107,255,0.05)",
                       display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0,
                     }}>
                       {step.icon}
                     </div>
                     <div style={{
-                      fontFamily: "'Inter', sans-serif", fontSize: 16, fontWeight: 700, color: "#000",
+                      fontFamily: "'Inter', sans-serif", fontSize: 18, fontWeight: 700, color: "#000",
                     }}>{step.title}</div>
                   </div>
                   {/* Description */}
                   <div style={{
-                    fontFamily: "'Inter', sans-serif", fontSize: 12, fontWeight: 300,
-                    color: "#9CA3AF", lineHeight: 1.55, paddingLeft: 40,
+                    fontFamily: "'Inter', sans-serif", fontSize: 14, fontWeight: 300,
+                    color: "#6B7280", lineHeight: 1.6, paddingLeft: 40,
                   }}>{step.desc}</div>
                 </div>
               ))}
