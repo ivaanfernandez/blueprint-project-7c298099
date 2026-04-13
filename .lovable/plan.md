@@ -1,33 +1,32 @@
 
 
-## Plan: Number Watermark + Bold Title in Feature Cards
+## Plan: Replace Lab Background with Animated WebGL Shader
 
-Single file: `src/pages/Home.tsx`
+Two files changed. No new dependencies.
 
-### What changes
+### File 1: Create `src/components/ProceduralBackground.tsx`
 
-Replace the inner content of each feature card (lines 364-421). The card container (`<div className="glass-feat" ...>`) stays identical. Only the children change.
+New WebGL component with a white-themed procedural shader (topographic lines on white). Uses `position: absolute` to fill its parent container, auto-sizes via `parentElement.clientWidth/Height`. The shader uses white base colors with subtle gray topographic lines subtracted from the surface.
 
-### Data array update (lines 364-384)
+### File 2: `src/pages/Home.tsx`
 
-Add a `num` field to each item: `"01"`, `"02"`, `"03"`, `"04"`. Keep existing `title`, `desc`, `icon` fields unchanged.
+**2a. Add import** (line 1 area):
+```tsx
+import ProceduralBackground from "@/components/ProceduralBackground";
+```
 
-### New card inner structure (lines 396-419)
+**2b. Delete lab background** (lines 297–339):
+Remove the entire `{/* Lab Background */}` div containing the grid pattern, scan line, and 15 pulsing dots.
 
-Replace the current horizontal icon+text layout with a vertical layout:
+**2c. Add replacement** in same position (first child of White Zone Wrapper):
+```tsx
+<ProceduralBackground />
+```
 
-1. **Top row** — flex row with number watermark + icon box:
-   - Large transparent number: Michroma font, 36px, `rgba(26,107,255,0.1)`
-   - Icon box: 40×40, borderRadius 10, same blue-tinted background. Keep glow effect div inside.
+**2d. Delete unused CSS keyframes** (lines 95–102):
+Remove `@keyframes labScanLine` and `@keyframes labDotPulse` from the `<style>` block.
 
-2. **Title** — Inter 18px, fontWeight 700, color `#000`, marginBottom 6
-
-3. **Description** — Inter 13px, fontWeight 300, color `#6B7280`, lineHeight 1.6
-
-### Card container — no changes
-
-The `glass-feat` div with glassmorphism styles, `alignSelf: "stretch"`, hover effects all remain exactly as-is. Only the `display: "flex", alignItems: "flex-start", gap: 14` on the container changes to `flexDirection: "column"` since the layout is now vertical (number+icon row, then title, then desc).
-
-### Files
-- `src/pages/Home.tsx` — lines ~364-421
+### No other changes
+- Hero, About content, Programs, Feature Rows, Footer all untouched
+- Mobile: no changes needed — canvas auto-sizes to parent
 
