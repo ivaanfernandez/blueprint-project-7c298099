@@ -78,21 +78,7 @@ const Home = ({ showDock }: { showDock: boolean }) => {
         .pillar-card:hover { transform: translateY(-4px); }
         .pillar-card:hover .pillar-card-img { transform: scale(1.05); }
         .pillar-card:hover .pillar-card-fp { opacity: 1 !important; }
-        .glass-feat {
-          background: rgba(255,255,255,0.4) !important;
-          backdrop-filter: blur(12px) !important;
-          -webkit-backdrop-filter: blur(12px) !important;
-          border: 1px solid rgba(255,255,255,0.6) !important;
-          box-shadow: 0 4px 24px rgba(0,0,0,0.04), inset 0 1px 0 rgba(255,255,255,0.8) !important;
-          transition: all 0.3s ease !important;
-        }
-        .glass-feat:hover {
-          background: rgba(26,107,255,0.04) !important;
-          border-color: rgba(26,107,255,0.18) !important;
-          box-shadow: 0 8px 32px rgba(26,107,255,0.08), 0 2px 8px rgba(0,0,0,0.04), inset 0 1px 0 rgba(255,255,255,0.9) !important;
-          transform: translateY(-2px) !important;
-        }
-        .glass-feat:hover .about-feat-glow { opacity: 1 !important; }
+        
         @keyframes pulseRing {
           0%, 100% { opacity: 0.3; transform: scale(1); }
           50% { opacity: 0.8; transform: scale(1.02); }
@@ -109,8 +95,7 @@ const Home = ({ showDock }: { showDock: boolean }) => {
             padding: 0 24px !important;
           }
           .about-section-new { padding: 48px 6% !important; flex-direction: column !important; gap: 32px !important; align-items: flex-start !important; }
-          .about-photo-col { flex: none !important; width: 100% !important; max-width: 320px !important; margin: 0 auto !important; }
-          .about-stat-badge { right: 16px !important; }
+          .about-photo-col { flex: none !important; width: 100% !important; max-width: 280px !important; margin: 0 auto !important; order: -1 !important; }
           .bento-grid-neo { grid-template-columns: repeat(2, 1fr) !important; grid-template-rows: repeat(3, 180px) !important; }
           .feature-row-mobile {
             flex-direction: column !important;
@@ -292,119 +277,96 @@ const Home = ({ showDock }: { showDock: boolean }) => {
       {/* ── C: ABOUT (WHITE) ── */}
       <div ref={aboutRef} style={{ position: "relative", zIndex: 1 }}>
         <div className="about-section-new" style={{
-          padding: "64px 7%", display: "flex", alignItems: "stretch", gap: 32,
+          padding: "64px 7%", display: "flex", alignItems: "flex-start", gap: 36,
           position: "relative", zIndex: 1, background: "#FFFFFF",
         }}>
-          {/* Left — Title + Body + Features Grid */}
-          <div style={{ flex: 1, paddingTop: 12, display: "flex", flexDirection: "column" as const }}>
+          {/* Left — Title + Subtitle + Timeline */}
+          <div style={{ flex: 1 }}>
             <h2 style={{
               fontFamily: "'Michroma', sans-serif",
-              fontSize: "clamp(16px, 1.8vw, 24px)", color: "#000",
-              textTransform: "uppercase", lineHeight: 1.12, marginBottom: 12, marginTop: 0,
+              fontSize: "clamp(18px, 2.2vw, 28px)", color: "#000",
+              textTransform: "uppercase", lineHeight: 1.12, marginBottom: 10, marginTop: 0,
             }}>
               DESIGNED FOR THE HUMAN MACHINE
             </h2>
             <p style={{
-              fontFamily: "'Inter', sans-serif", fontWeight: 300, fontSize: 15,
-              color: "#6B7280", lineHeight: 1.8, marginBottom: 20,
+              fontFamily: "'Inter', sans-serif", fontSize: 14, fontWeight: 300,
+              color: "#6B7280", lineHeight: 1.75, marginBottom: 24, maxWidth: 480,
             }}>
-              Blueprint Project is a precision-engineered system built around three core protocols. Training, nutrition, and recovery, synchronized to unlock your full potential. This is not a gym. This is your operating system.
+              A precision-engineered system. Training, nutrition, and recovery — synchronized to unlock your full potential. This is not a gym. This is your operating system.
             </p>
 
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16, flexGrow: 1 }}>
+            {/* Timeline */}
+            <div style={{ position: "relative", paddingLeft: 28 }}>
+              {/* Blue vertical line */}
+              <div style={{
+                position: "absolute", left: 8, top: 10, bottom: 10,
+                width: 1.5, background: "linear-gradient(to bottom, #1A6BFF, rgba(26,107,255,0.1))",
+              }} />
+
               {[
-                { num: "01", title: "Precision Training", desc: "Data-driven methodology built to forge strength, endurance, and resilience.", icon: (
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#1A6BFF" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                { title: "Precision Training", desc: "Data-driven methodology built to forge strength, endurance, and resilience.", icon: (
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#1A6BFF" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                     <path d="M6.5 6.5h-2a1 1 0 0 0-1 1v9a1 1 0 0 0 1 1h2"/><path d="M17.5 6.5h2a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1h-2"/><path d="M6.5 4v16"/><path d="M17.5 4v16"/><path d="M6.5 12h11"/>
                   </svg>
                 )},
-                { num: "02", title: "Nutrition Engineering", desc: "Every meal is a signal. Optimize input, transform output.", icon: (
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#1A6BFF" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                { title: "Nutrition Engineering", desc: "Every meal is a signal. Optimize input, transform output.", icon: (
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#1A6BFF" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                     <path d="M11 20A7 7 0 0 1 9.8 6.9C15.5 4.9 17 3.5 19 2c1 2 2 4.5 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/>
                   </svg>
                 )},
-                { num: "03", title: "Recovery Science", desc: "Strategic rest, optimized sleep, and complete restoration protocols.", icon: (
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#1A6BFF" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                { title: "Recovery Science", desc: "Strategic rest, optimized sleep, and complete restoration protocols.", icon: (
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#1A6BFF" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                     <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/>
                   </svg>
                 )},
-                { num: "04", title: "Mental Growth", desc: "Build focus, discipline, and unshakable mental clarity.", icon: (
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#1A6BFF" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                { title: "Mental Growth", desc: "Build focus, discipline, and unshakable mental clarity.", icon: (
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#1A6BFF" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                     <path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/>
                   </svg>
                 )},
-              ].map((feat) => (
-                <div key={feat.title} className="glass-feat" style={{
-                  display: "flex", flexDirection: "column", padding: 20,
-                  borderRadius: 16,
-                  background: "rgba(255,255,255,0.4)",
-                  backdropFilter: "blur(12px)",
-                  WebkitBackdropFilter: "blur(12px)",
-                  border: "1px solid rgba(255,255,255,0.6)",
-                  boxShadow: "0 4px 24px rgba(0,0,0,0.04), inset 0 1px 0 rgba(255,255,255,0.8)",
-                  transition: "all 0.3s ease",
-                  alignSelf: "stretch",
-                }}>
-                  <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 12 }}>
-                    <span style={{
-                      fontFamily: "'Michroma', sans-serif",
-                      fontSize: 36,
-                      color: "rgba(26,107,255,0.1)",
-                      lineHeight: 1,
-                    }}>{feat.num}</span>
+              ].map((step, i, arr) => (
+                <div key={step.title} style={{ position: "relative", paddingBottom: i === arr.length - 1 ? 0 : 24 }}>
+                  {/* Blue dot */}
+                  <div style={{
+                    position: "absolute", left: -24, top: 7,
+                    width: 11, height: 11, borderRadius: "50%",
+                    background: "#1A6BFF", border: "2.5px solid #FFFFFF",
+                    boxShadow: "0 0 0 2.5px rgba(26,107,255,0.2)",
+                  }} />
+                  {/* Title row */}
+                  <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 4 }}>
                     <div style={{
-                      width: 40, height: 40, borderRadius: 10, background: "rgba(26,107,255,0.06)",
-                      display: "flex", alignItems: "center", justifyContent: "center",
-                      flexShrink: 0, position: "relative",
+                      width: 30, height: 30, borderRadius: 8,
+                      background: "rgba(26,107,255,0.05)",
+                      display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0,
                     }}>
-                      <div className="about-feat-glow" style={{
-                        position: "absolute", inset: -4, borderRadius: 14,
-                        background: "rgba(26,107,255,0.06)", filter: "blur(8px)",
-                        opacity: 0, transition: "opacity 0.3s ease", pointerEvents: "none",
-                      }} />
-                      {feat.icon}
+                      {step.icon}
                     </div>
+                    <div style={{
+                      fontFamily: "'Inter', sans-serif", fontSize: 16, fontWeight: 700, color: "#000",
+                    }}>{step.title}</div>
                   </div>
+                  {/* Description */}
                   <div style={{
-                    fontFamily: "'Inter', sans-serif", fontSize: 18, fontWeight: 700,
-                    color: "#000", marginBottom: 6,
-                  }}>{feat.title}</div>
-                  <div style={{
-                    fontFamily: "'Inter', sans-serif", fontSize: 13, fontWeight: 300,
-                    color: "#6B7280", lineHeight: 1.6,
-                  }}>{feat.desc}</div>
+                    fontFamily: "'Inter', sans-serif", fontSize: 12, fontWeight: 300,
+                    color: "#9CA3AF", lineHeight: 1.55, paddingLeft: 40,
+                  }}>{step.desc}</div>
                 </div>
               ))}
             </div>
           </div>
 
-          {/* Right — Photo + Badge */}
+          {/* Right — Image */}
           <div className="about-photo-col" style={{
-            flex: "0 0 44%", maxWidth: 460, position: "relative",
+            flex: "0 0 34%", maxWidth: 320, borderRadius: 16, overflow: "hidden", aspectRatio: "3/4",
           }}>
-            <div style={{
-              width: "100%", aspectRatio: "3/4", borderRadius: 18, overflow: "hidden",
-            }}>
-              <img src={slider1} alt="Blueprint Project gym interior" style={{
-                width: "100%", height: "100%", objectFit: "cover", display: "block",
-              }} />
-            </div>
-            <div className="about-stat-badge" style={{
-              position: "absolute", bottom: 16, right: -16,
-              background: "#FFFFFF", borderRadius: 10, padding: "10px 16px",
-              boxShadow: "0 6px 24px rgba(0,0,0,0.1)", zIndex: 2,
-              display: "flex", alignItems: "center", gap: 8,
-            }}>
-              <div>
-                <div style={{ fontFamily: "'Michroma', sans-serif", fontSize: 22, color: "#000", lineHeight: 1 }}>7+</div>
-                <div style={{ fontFamily: "'Inter', sans-serif", fontSize: 10, fontWeight: 500, color: "#6B7280", lineHeight: 1.3 }}>
-                  Years<br />Experience
-                </div>
-              </div>
-              <div style={{ width: 7, height: 7, borderRadius: "50%", background: "#1A6BFF" }} />
-            </div>
+            <img src={slider1} alt="Blueprint Project" style={{
+              width: "100%", height: "100%", objectFit: "cover", display: "block",
+            }} />
           </div>
         </div>
+      </div>
       </div>
 
       {/* ── Divider ── */}
