@@ -1,51 +1,33 @@
 
 
-## Plan: Replace Hero Background with Video + Dark Overlay
+## Plan: Fix TextScramble Component + Hero Title
 
-Single file: `src/pages/Home.tsx` + copy uploaded video
+Two files: `src/components/ui/text-scramble.tsx` and `src/pages/Home.tsx`
 
-### Steps
+### Fix 1: TextScramble — move motion.create outside render (text-scramble.tsx)
 
-1. **Copy uploaded video** to `public/videos/blueprint-hero.mp4`
+The root cause: `motion.create()` is called inside the component body, creating a new MotionComponent on every render. During the scramble animation, `setDisplayText` triggers re-renders, each creating a new component type, causing React to unmount/remount the DOM element — producing visual distortion.
 
-2. **Remove VerticalBeams import** (line 4): Delete `import VerticalBeams from "@/components/VerticalBeams";`
+**Solution**: Use a cache (Map or module-level memoization) so `motion.create` is only called once per element type:
 
-3. **Replace `<VerticalBeams beamCount={40} />`** (line 161) with video element + dark overlay:
-
-```jsx
-<video
-  autoPlay
-  muted
-  loop
-  playsInline
-  style={{
-    position: "absolute",
-    top: 0,
-    left: 0,
-    width: "100%",
-    height: "100%",
-    objectFit: "cover",
-    zIndex: 0,
-  }}
->
-  <source src="/videos/blueprint-hero.mp4" type="video/mp4" />
-</video>
-
-<div style={{
-  position: "absolute",
-  top: 0,
-  left: 0,
-  width: "100%",
-  height: "100%",
-  background: "rgba(0,0,0,0.65)",
-  zIndex: 1,
-}} />
+```tsx
+const motionCache = new Map();
+function getMotionComponent(component: React.ElementType) {
+  if (!motionCache.has(component)) {
+    motionCache.set(component, motion.create(component as keyof JSX.IntrinsicElements));
+  }
+  return motionCache.get(component);
+}
 ```
 
-4. **Verify z-index on text elements** — already confirmed: title has `zIndex: 2`, subtitle has `zIndex: 2`, SCROLL TO EXPLORE has `zIndex: 3`. No changes needed.
+Then inside the component: `const MotionComponent = getMotionComponent(Component);`
+
+### Fix 2: Hero title — remove overflow hidden (Home.tsx, line 210)
+
+Remove `overflow: "hidden"` from the hero title style to prevent clipping during the scramble animation. The title text "BLUEPRINT PROJECT" is already correct on line 214 — no text change needed.
 
 ### Technical notes
-- Hero container keeps `background: "#070612"` as video fallback
 - No new dependencies
-- No other sections or files affected
+- No other sections affected
+- The scramble animation will now be smooth because React won't remount the element on each frame
 
