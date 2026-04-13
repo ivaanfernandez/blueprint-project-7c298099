@@ -304,26 +304,55 @@ const Home = ({ showDock }: { showDock: boolean }) => {
           padding: "64px 7%", display: "flex", alignItems: "flex-start", gap: 40,
           position: "relative", zIndex: 1, background: "#FFFFFF",
         }}>
-          {/* Left — Title + Body Text */}
-          <div className="about-left-text" style={{ flex: 1, paddingTop: 12 }}>
+          {/* Left — Title + Body + Features Grid */}
+          <div style={{ flex: 1, paddingTop: 12 }}>
             <h2 style={{
               fontFamily: "'Michroma', sans-serif",
               fontSize: "clamp(18px, 2.2vw, 30px)", color: "#000",
-              textTransform: "uppercase", lineHeight: 1.12, marginBottom: 16, marginTop: 0,
+              textTransform: "uppercase", lineHeight: 1.12, marginBottom: 12, marginTop: 0,
             }}>
               DESIGNED FOR THE HUMAN MACHINE
             </h2>
             <p style={{
               fontFamily: "'Inter', sans-serif", fontWeight: 300, fontSize: 15,
-              color: "#6B7280", lineHeight: 1.8, margin: 0,
+              color: "#6B7280", lineHeight: 1.8, marginBottom: 20,
             }}>
               Blueprint Project is a precision-engineered system built around three core protocols. Training, nutrition, and recovery — synchronized to unlock your full potential. This is not a gym. This is your operating system.
             </p>
+
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 14 }}>
+              {[
+                { title: "Precision Training", desc: "Data-driven methodology built to forge strength, endurance, and resilience." },
+                { title: "Nutrition Engineering", desc: "Every meal is a signal. Optimize input, transform output." },
+                { title: "Recovery Science", desc: "Strategic rest, optimized sleep, and complete restoration protocols." },
+                { title: "Mental Growth", desc: "Build focus, discipline, and unshakable mental clarity." },
+              ].map((feat) => (
+                <div key={feat.title} style={{
+                  display: "flex", alignItems: "flex-start", gap: 10, padding: 10,
+                  borderRadius: 10, border: "1px solid rgba(0,0,0,0.04)",
+                }}>
+                  <div style={{
+                    width: 3, height: 28, borderRadius: 2, background: "#1A6BFF",
+                    flexShrink: 0, marginTop: 2,
+                  }} />
+                  <div>
+                    <div style={{
+                      fontFamily: "'Inter', sans-serif", fontSize: 14, fontWeight: 600,
+                      color: "#000", marginBottom: 4,
+                    }}>{feat.title}</div>
+                    <div style={{
+                      fontFamily: "'Inter', sans-serif", fontSize: 12, fontWeight: 300,
+                      color: "#9CA3AF", lineHeight: 1.5,
+                    }}>{feat.desc}</div>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
 
-          {/* Center — Photo + Badge */}
-          <div className="about-center-photo" style={{
-            flex: "0 0 32%", maxWidth: 360, position: "relative",
+          {/* Right — Photo + Badge */}
+          <div className="about-photo-col" style={{
+            flex: "0 0 38%", maxWidth: 360, position: "relative",
           }}>
             <div style={{
               width: "100%", aspectRatio: "3/4", borderRadius: 18, overflow: "hidden",
@@ -332,11 +361,11 @@ const Home = ({ showDock }: { showDock: boolean }) => {
                 width: "100%", height: "100%", objectFit: "cover", display: "block",
               }} />
             </div>
-            <div style={{
-              position: "absolute", bottom: 16, left: "50%", transform: "translateX(-50%)",
+            <div className="about-stat-badge" style={{
+              position: "absolute", bottom: 16, right: -16,
               background: "#FFFFFF", borderRadius: 10, padding: "10px 16px",
               boxShadow: "0 6px 24px rgba(0,0,0,0.1)", zIndex: 2,
-              display: "flex", alignItems: "center", gap: 8, whiteSpace: "nowrap",
+              display: "flex", alignItems: "center", gap: 8,
             }}>
               <div>
                 <div style={{ fontFamily: "'Michroma', sans-serif", fontSize: 22, color: "#000", lineHeight: 1 }}>7+</div>
@@ -346,40 +375,6 @@ const Home = ({ showDock }: { showDock: boolean }) => {
               </div>
               <div style={{ width: 7, height: 7, borderRadius: "50%", background: "#1A6BFF" }} />
             </div>
-          </div>
-
-          {/* Right — 4 Features Stacked */}
-          <div className="about-right-features" style={{
-            flex: 1, display: "flex", flexDirection: "column", gap: 0, paddingTop: 8,
-          }}>
-            {[
-              { num: "01", title: "Precision Training", desc: "Data-driven methodology built to forge strength, endurance, and resilience." },
-              { num: "02", title: "Nutrition Engineering", desc: "Every meal is a signal. Optimize input, transform output." },
-              { num: "03", title: "Recovery Science", desc: "Strategic rest, optimized sleep, and complete restoration protocols." },
-              { num: "04", title: "Mental Growth", desc: "Build focus, discipline, and unshakable mental clarity." },
-            ].map((feat, i, arr) => (
-              <div key={feat.num} style={{
-                display: "flex", alignItems: "flex-start", gap: 14, padding: "20px 0",
-                borderBottom: i < arr.length - 1 ? "1px solid rgba(0,0,0,0.05)" : "none",
-              }}>
-                <div style={{
-                  fontFamily: "'Orbitron', sans-serif", fontSize: 11, color: "#1A6BFF",
-                  minWidth: 28, height: 28, border: "1px solid rgba(26,107,255,0.15)",
-                  borderRadius: 8, display: "flex", alignItems: "center", justifyContent: "center",
-                  flexShrink: 0, letterSpacing: "0.05em",
-                }}>{feat.num}</div>
-                <div>
-                  <div style={{
-                    fontFamily: "'Inter', sans-serif", fontSize: 16, fontWeight: 600,
-                    color: "#000", marginBottom: 4,
-                  }}>{feat.title}</div>
-                  <div style={{
-                    fontFamily: "'Inter', sans-serif", fontSize: 13, fontWeight: 300,
-                    color: "#9CA3AF", lineHeight: 1.6,
-                  }}>{feat.desc}</div>
-                </div>
-              </div>
-            ))}
           </div>
         </div>
       </div>
