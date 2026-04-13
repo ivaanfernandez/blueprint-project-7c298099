@@ -310,7 +310,7 @@ const Home = ({ showDock }: { showDock: boolean }) => {
           <div style={{ flex: 1, paddingTop: 12, display: "flex", flexDirection: "column" as const }}>
             <h2 style={{
               fontFamily: "'Michroma', sans-serif",
-              fontSize: "clamp(16px, 1.8vw, 24px)", color: "#000", whiteSpace: "nowrap" as const,
+              fontSize: "clamp(16px, 1.8vw, 24px)", color: "#000",
               textTransform: "uppercase", lineHeight: 1.12, marginBottom: 12, marginTop: 0,
             }}>
               DESIGNED FOR THE HUMAN MACHINE
@@ -322,7 +322,7 @@ const Home = ({ showDock }: { showDock: boolean }) => {
               Blueprint Project is a precision-engineered system built around three core protocols. Training, nutrition, and recovery — synchronized to unlock your full potential. This is not a gym. This is your operating system.
             </p>
 
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 20, marginBottom: 0, flexGrow: 1, alignContent: "stretch" }}>
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gridTemplateRows: "1fr 1fr", gap: 20, marginBottom: 0, flexGrow: 1, alignContent: "stretch" }}>
               {[
                 { title: "Precision Training", desc: "Data-driven methodology built to forge strength, endurance, and resilience.", icon: (
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#1A6BFF" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
@@ -345,7 +345,7 @@ const Home = ({ showDock }: { showDock: boolean }) => {
                   </svg>
                 )},
               ].map((feat) => (
-                <div key={feat.title} className="about-feat" style={{
+                <div key={feat.title} className="about-feat" style={{ height: "100%",
                   display: "flex", alignItems: "flex-start", gap: 14, padding: 18,
                   borderRadius: 14, border: "1px solid rgba(0,0,0,0.04)",
                 }}>
