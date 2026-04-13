@@ -390,7 +390,7 @@ const Home = ({ showDock }: { showDock: boolean }) => {
         {/* Video element */}
         <video
           autoPlay muted loop playsInline
-          style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
+          style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", objectFit: "contain" }}
         >
           <source src="/videos/blueprint-gym.mp4" type="video/mp4" />
         </video>
