@@ -78,6 +78,7 @@ const Home = ({ showDock }: { showDock: boolean }) => {
         .pillar-card:hover { transform: translateY(-4px); }
         .pillar-card:hover .pillar-card-img { transform: scale(1.05); }
         .pillar-card:hover .pillar-card-fp { opacity: 1 !important; }
+        .pillar-card:hover .pillar-card-hover-fp { opacity: 0.15 !important; transform: translate(-50%, -50%) scale(1) !important; }
         
         @keyframes pulseRing {
           0%, 100% { opacity: 0.3; transform: scale(1); }
@@ -408,8 +409,8 @@ const Home = ({ showDock }: { showDock: boolean }) => {
         }}>
           {[
             { name: "Blueprint Lab", color: "#1A6BFF", rgba: "26,107,255", img: slider1, route: "/huella-azul", desc: "Precision training methodology. Data-driven programming built to forge strength." },
-            { name: "Hack Bar", color: "#22C55E", rgba: "34,197,94", img: slider2, route: "/huella-verde", desc: "Nutrition engineered for performance. Every meal is a signal to your body." },
-            { name: "Reset", color: "#FF3B3B", rgba: "255,59,59", img: slider3, video: "/videos/blueprint-reset.mp4", route: "/huella-roja", desc: "Strategic recovery. Optimized sleep, restoration, and rebuilding protocols." },
+            { name: "Hack Bar", color: "#FF3B3B", rgba: "255,59,59", img: slider2, route: "/huella-roja", desc: "Nutrition engineered for performance. Every meal is a signal to your body." },
+            { name: "Reset", color: "#22C55E", rgba: "34,197,94", img: slider3, video: "/videos/blueprint-reset.mp4", route: "/huella-verde", desc: "Strategic recovery. Optimized sleep, restoration, and rebuilding protocols." },
           ].map((item) => (
             <div
               key={item.name}
@@ -470,6 +471,19 @@ const Home = ({ showDock }: { showDock: boolean }) => {
                 opacity: 0.5, transition: "opacity 0.4s ease",
               }}>
                 <FingerprintSVG color={item.color} size={32} />
+              </div>
+
+              {/* Hover center fingerprint */}
+              <div className="pillar-card-hover-fp" style={{
+                position: "absolute", top: "50%", left: "50%",
+                transform: "translate(-50%, -50%) scale(0.85)",
+                zIndex: 3, opacity: 0,
+                transition: "opacity 0.4s ease, transform 0.4s ease",
+                pointerEvents: "none",
+                filter: "drop-shadow(0 0 30px currentColor)",
+                color: item.color,
+              }}>
+                <FingerprintSVG color={item.color} size={140} />
               </div>
 
               {/* Glassmorphism content panel */}
