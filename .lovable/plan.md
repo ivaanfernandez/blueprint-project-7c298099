@@ -1,35 +1,29 @@
 
 
-## Plan: About Features SVG Icons + Programs Title Change
+## Plan: About Section — Bigger Image, Tighter Gap, Bigger Features
 
 Single file: `src/pages/Home.tsx`
 
-### Change 1: Replace blue accent bars with SVG icon boxes (lines 322-348)
+### Changes
 
-Replace the features grid (lines 322-348) with an updated version:
-- Add SVG icon data to each feature object (dumbbell, leaf, moon, lightbulb paths as specified)
-- Replace the 3×28px blue bar div with a 44×44px icon box containing the SVG and a glow div (`className="about-feat-glow"`)
-- Increase feature card styles: gap 14→14, padding 10→14, borderRadius 10→12, gap between icon and text 10→14
-- Feature title fontSize 14→15, marginBottom 4→5
-- Grid gap 14→16
-- Add `className="about-feat"` to each feature div
+1. **Section container gap** (line 306): `gap: 40` → `gap: 32`
 
-### Change 2: Rename programs title (line 407)
+2. **Photo column** (line 381): `flex: "0 0 38%", maxWidth: 360` → `flex: "0 0 44%", maxWidth: 460`
 
-Change `"OUR PROGRAMS"` → `"CHOOSE YOUR FINGERPRINT"`
+3. **Features grid** (line 325): `gap: 16` → `gap: 20`, add `marginBottom: 0`
 
-### Change 3: Add CSS hover rules (line ~79)
+4. **Feature cards** (lines 349-350): `padding: 14, borderRadius: 12` → `padding: 18, borderRadius: 14`
 
-Add to the `<style>` block:
-```css
-.about-feat { transition: all 0.3s ease; }
-.about-feat:hover { border-color: rgba(26,107,255,0.1) !important; background: rgba(26,107,255,0.02) !important; }
-.about-feat:hover .about-feat-glow { opacity: 1 !important; }
-```
+5. **Icon boxes** (line 353): `width: 44, height: 44, borderRadius: 12` → `width: 48, height: 48, borderRadius: 14`
+
+6. **SVG icons** (lines 328-329, 333-334, 338-339, 343-344): `width="22" height="22"` → `width="24" height="24"` (4 occurrences)
+
+7. **Feature titles** (line 366): `fontSize: 15, marginBottom: 5` → `fontSize: 16, marginBottom: 6`
+
+8. **Feature descriptions** (line 370): `fontSize: 12, lineHeight: 1.5` → `fontSize: 13, lineHeight: 1.6`
 
 ### Technical notes
-- No new imports or dependencies
-- SVGs are inline JSX with camelCase attributes (strokeWidth, strokeLinecap, strokeLinejoin)
-- Hover glow on icon uses CSS class targeting, no JS state needed
-- Feature card hover border/background also via CSS class
+- No mobile CSS changes needed
+- No other sections affected
+- 8 small inline style tweaks, all within lines 305-376
 
