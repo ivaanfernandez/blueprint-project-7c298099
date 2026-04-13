@@ -1,38 +1,33 @@
 
 
-## Plan: Glassmorphism Features + Eliminate White Space
+## Plan: Number Watermark + Bold Title in Feature Cards
 
 Single file: `src/pages/Home.tsx`
 
-### Change 1: Section container — alignItems stretch (line 332)
-Replace `alignItems: "flex-start"` with `alignItems: "stretch"` to force both columns to the same height as the photo.
+### What changes
 
-### Change 2: Features grid styles (line 351)
-Replace current grid styles with:
-```
-display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16, flexGrow: 1
-```
-Remove `gridTemplateRows`, `marginBottom`, `alignContent` — let `flexGrow: 1` + stretch handle it.
+Replace the inner content of each feature card (lines 364-421). The card container (`<div className="glass-feat" ...>`) stays identical. Only the children change.
 
-### Change 3: Feature cards — glassmorphism + hover state (lines 373-400)
-Add `useState` for hovered card tracking. Replace each feature card with:
-- `className="glass-feat"`
-- Glassmorphism styles: `background: "rgba(255,255,255,0.4)"`, `backdropFilter: "blur(12px)"`, `border: "1px solid rgba(255,255,255,0.6)"`, `boxShadow` with inset highlight, `borderRadius: 16`, `padding: 20`, `alignSelf: "stretch"`
-- `onMouseEnter`/`onMouseLeave` to swap to hover styles (increased opacity/shadow)
+### Data array update (lines 364-384)
 
-### Change 4: Icon box background update (line 379)
-Change to `background: "rgba(26,107,255,0.06)"`, `border: "1px solid rgba(26,107,255,0.08)"`
+Add a `num` field to each item: `"01"`, `"02"`, `"03"`, `"04"`. Keep existing `title`, `desc`, `icon` fields unchanged.
 
-### Change 5: Add CSS fallback class (in `<style>` block)
-Add `.glass-feat` and `.glass-feat:hover` CSS rules with `!important` as fallback for the glassmorphism effect.
+### New card inner structure (lines 396-419)
 
-### Change 6: Mobile override
-In the existing `@media (max-width: 767px)` block, add:
-- `.about-section-new { align-items: flex-start !important; }`
-- `.glass-feat` grid: `flex-grow: 0`
+Replace the current horizontal icon+text layout with a vertical layout:
 
-### Technical notes
-- Add `useState<string|null>` for hover tracking
-- No new dependencies
-- No other sections affected
+1. **Top row** — flex row with number watermark + icon box:
+   - Large transparent number: Michroma font, 36px, `rgba(26,107,255,0.1)`
+   - Icon box: 40×40, borderRadius 10, same blue-tinted background. Keep glow effect div inside.
+
+2. **Title** — Inter 18px, fontWeight 700, color `#000`, marginBottom 6
+
+3. **Description** — Inter 13px, fontWeight 300, color `#6B7280`, lineHeight 1.6
+
+### Card container — no changes
+
+The `glass-feat` div with glassmorphism styles, `alignSelf: "stretch"`, hover effects all remain exactly as-is. Only the `display: "flex", alignItems: "flex-start", gap: 14` on the container changes to `flexDirection: "column"` since the layout is now vertical (number+icon row, then title, then desc).
+
+### Files
+- `src/pages/Home.tsx` — lines ~364-421
 
