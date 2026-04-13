@@ -1,21 +1,26 @@
 
 
-## Plan: Fix About Title + Features Alignment
+## Plan: Fix About Title Overflow + Features Vertical Alignment
 
 Single file: `src/pages/Home.tsx`
 
-### Change 1: Title fontSize (line 313)
-`fontSize: "clamp(18px, 2.2vw, 30px)"` → `fontSize: "clamp(16px, 1.8vw, 24px)"`
-Add `whiteSpace: "nowrap"` to the same style object.
+### Fix 1: Title overflow (line 313)
 
-### Change 2: Left column flex layout (line 310)
-`{ flex: 1, paddingTop: 12 }` → `{ flex: 1, paddingTop: 12, display: "flex", flexDirection: "column" as const }`
+Remove `whiteSpace: "nowrap"` — at 936px viewport the title can't fit on one line. Let it wrap naturally. The `clamp(16px, 1.8vw, 24px)` sizing already keeps it on one line at larger viewports (~1100px+).
 
-### Change 3: Features grid flex-grow (line 325)
-Add `flexGrow: 1, alignContent: "stretch"` to the grid style:
-`{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 20, marginBottom: 0, flexGrow: 1, alignContent: "stretch" }`
+### Fix 2: Features grid stretching (line 325)
+
+Add `gridTemplateRows: "1fr 1fr"` to force equal row distribution across the full grid height:
+
+```
+{ display: "grid", gridTemplateColumns: "1fr 1fr", gridTemplateRows: "1fr 1fr", gap: 20, marginBottom: 0, flexGrow: 1, alignContent: "stretch" }
+```
+
+### Fix 3: Feature cards fill their grid cells (line 348)
+
+Add `height: "100%"` to each feature card so they stretch to fill the 1fr rows, aligning the bottom row with the bottom of the photo.
 
 ### Technical notes
-- 3 inline style tweaks, lines 310-325
-- No mobile or CSS block changes needed
+- 3 inline style tweaks, lines 313, 325, 348
+- No other sections or files affected
 
