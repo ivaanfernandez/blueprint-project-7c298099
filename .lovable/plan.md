@@ -1,32 +1,48 @@
 
 
-## Plan: Replace About Section with Timeline Layout
+## Plan: Fix Build Error + Add Video to Reset Card
 
-Single file changed: `src/pages/Home.tsx`
+Two changes to `src/pages/Home.tsx`, plus copying the uploaded video file.
 
-### Change 1: Replace About section content (lines 292–408)
+### Fix 1: Remove extra closing `</div>` (line 370)
 
-Delete the entire About section (the `<div ref={aboutRef}>` wrapper and its contents — title, subtitle, 2×2 glassmorphism grid, photo with badge). Replace with:
+Line 370 has a stray `</div>` that prematurely closes the White Zone Wrapper. This causes the actual `</div>` at line 616 to try closing `<motion.div>`, triggering the build error.
 
-- **Section container**: `padding: "64px 7%"`, `display: "flex"`, `alignItems: "flex-start"`, `gap: 36`, `className="about-section-new"`
-- **Left column** (`flex: 1`): Title (Michroma, clamp 18–28px), subtitle (Inter 14px/300), then a timeline container with:
-  - Blue vertical gradient line (absolute, left 8, width 1.5px)
-  - 4 steps, each with: blue dot (11px, white border, blue shadow), icon box (30×30) + title row, description (paddingLeft: 40)
-- **Right column** (`flex: "0 0 34%"`, maxWidth 320): Image only (slider1), no badge, borderRadius 16, aspect-ratio 3/4
+**Action**: Delete line 370 entirely. The correct nesting is:
+- Line 278: `<div ref={aboutRef}>` → closes at line 369
+- Line 279: `<div className="about-section-new">` → closes at line 368
+- Line 274: White Zone Wrapper → closes at line 616
 
-### Change 2: Clean up CSS (lines 81–95)
+### Fix 2: Copy uploaded video to `public/videos/blueprint-reset.mp4`
 
-Remove `.glass-feat`, `.glass-feat:hover`, and `.glass-feat:hover .about-feat-glow` CSS rules — no longer used.
+Copy the user's uploaded MP4 to `public/videos/blueprint-reset.mp4`.
 
-### Change 3: Update mobile CSS (line 111–113)
+### Fix 3: Replace Reset card image with video
 
-Replace the existing `.about-section-new` / `.about-photo-col` / `.about-stat-badge` mobile rules with:
-- `.about-section-new { flex-direction: column; gap: 32px; padding: 48px 6%; }`
-- `.about-photo-col { flex: none; width: 100%; max-width: 280px; margin: 0 auto; order: -1; }` (image above text on mobile)
+In the Programs section (line 410-413), the three cards are rendered from an array. The Reset card (3rd item) currently uses `img: slider3`. 
 
-Remove `.about-stat-badge` mobile rule (badge no longer exists).
+**Approach**: Instead of modifying the shared `.map()` render logic, add a `video` field to only the Reset item (`video: "/videos/blueprint-reset.mp4"`). Then in the card render (line 428), conditionally render a `<video>` instead of `<img>` when `item.video` exists:
+
+```tsx
+{item.video ? (
+  <video className="pillar-card-img" autoPlay muted loop playsInline style={{
+    position: "absolute", inset: 0, width: "100%", height: "100%",
+    objectFit: "cover", transition: "transform 0.6s ease",
+  }}>
+    <source src={item.video} type="video/mp4" />
+  </video>
+) : (
+  <img className="pillar-card-img" src={item.img} alt={item.name} style={{
+    position: "absolute", inset: 0, width: "100%", height: "100%",
+    objectFit: "cover", transition: "transform 0.6s ease",
+  }} />
+)}
+```
+
+### Files
+- `src/pages/Home.tsx` — remove extra `</div>` at line 370 + add video conditional in programs cards
+- `public/videos/blueprint-reset.mp4` — copy uploaded file
 
 ### No other changes
-- Hero, Video, Programs, Feature Rows, Footer, Dock all untouched
-- No new imports or dependencies
+Hero, Video section, Feature Rows, Footer, Dock all untouched. No new dependencies.
 
