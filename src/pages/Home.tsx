@@ -356,7 +356,7 @@ const Home = ({ showDock }: { showDock: boolean }) => {
               fontFamily: "'Inter', sans-serif", fontWeight: 300, fontSize: 15,
               color: "#6B7280", lineHeight: 1.8, marginBottom: 20,
             }}>
-              Blueprint Project is a precision-engineered system built around three core protocols. Training, nutrition, and recovery — synchronized to unlock your full potential. This is not a gym. This is your operating system.
+              Blueprint Project is a precision-engineered system built around three core protocols. Training, nutrition, and recovery, synchronized to unlock your full potential. This is not a gym. This is your operating system.
             </p>
 
             <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16, flexGrow: 1 }}>
