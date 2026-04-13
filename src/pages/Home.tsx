@@ -207,7 +207,7 @@ const Home = ({ showDock }: { showDock: boolean }) => {
             position: "relative" as const,
             zIndex: 2,
             whiteSpace: "nowrap" as const,
-            overflow: "hidden" as const,
+            
             padding: "0 7%",
           }}
         >
