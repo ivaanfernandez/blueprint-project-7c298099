@@ -232,7 +232,9 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
           zIndex: 10,
           paddingTop: '140px',
           textAlign: 'center',
-          paddingLeft: 0
+          paddingLeft: '7%',
+          paddingRight: '7%',
+          overflow: 'hidden'
         }}>
           <span className="hero-headline-white" style={{
             color: '#FFFFFF',
