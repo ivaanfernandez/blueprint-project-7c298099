@@ -232,13 +232,15 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
           zIndex: 10,
           paddingTop: '140px',
           textAlign: 'center',
-          paddingLeft: 0
+          paddingLeft: '7%',
+          paddingRight: '7%',
+          overflow: 'hidden'
         }}>
           <span className="hero-headline-white" style={{
             color: '#FFFFFF',
             fontFamily: "'Michroma', sans-serif",
             fontWeight: 400,
-            fontSize: 'clamp(28px, 4.5vw, 58px)',
+            fontSize: 'clamp(24px, 4vw, 52px)',
             whiteSpace: 'nowrap',
             lineHeight: 1.08,
             letterSpacing: '0.02em',
@@ -252,7 +254,7 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
             color: '#1A6BFF',
             fontFamily: "'Michroma', sans-serif",
             fontWeight: 400,
-            fontSize: 'clamp(28px, 4.5vw, 58px)',
+            fontSize: 'clamp(24px, 4vw, 52px)',
             lineHeight: 1.08,
             letterSpacing: '0.02em',
             display: 'inline-block',
@@ -454,19 +456,19 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
           .hero-headline-wrapper {
             display: block !important;
             text-align: center !important;
-            padding: 0 16px !important;
+            padding: 0 6% !important;
             padding-top: 40px !important;
           }
           .hero-headline-white {
             display: block !important;
-            font-size: clamp(22px, 6vw, 40px) !important;
+            font-size: clamp(20px, 6vw, 36px) !important;
             white-space: normal !important;
             text-align: center !important;
             width: 100% !important;
           }
           .hero-headline-blue {
             display: block !important;
-            font-size: clamp(22px, 6vw, 40px) !important;
+            font-size: clamp(20px, 6vw, 36px) !important;
             width: 100% !important;
             text-align: center !important;
             top: 0 !important;
