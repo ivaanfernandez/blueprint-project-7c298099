@@ -232,15 +232,15 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
           zIndex: 10,
           paddingTop: '140px',
           textAlign: 'center',
-          paddingLeft: '7%',
-          paddingRight: '7%',
+          paddingLeft: '5%',
+          paddingRight: '5%',
           overflow: 'hidden'
         }}>
           <span className="hero-headline-white" style={{
             color: '#FFFFFF',
             fontFamily: "'Michroma', sans-serif",
             fontWeight: 400,
-            fontSize: 'clamp(24px, 4vw, 52px)',
+            fontSize: 'clamp(20px, 3.2vw, 42px)',
             whiteSpace: 'nowrap',
             lineHeight: 1.08,
             letterSpacing: '0.02em',
@@ -254,7 +254,7 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
             color: '#1A6BFF',
             fontFamily: "'Michroma', sans-serif",
             fontWeight: 400,
-            fontSize: 'clamp(24px, 4vw, 52px)',
+            fontSize: 'clamp(20px, 3.2vw, 42px)',
             lineHeight: 1.08,
             letterSpacing: '0.02em',
             display: 'inline-block',
@@ -456,19 +456,21 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
           .hero-headline-wrapper {
             display: block !important;
             text-align: center !important;
-            padding: 0 6% !important;
+            padding: 0 4% !important;
+            padding-left: 4% !important;
+            padding-right: 4% !important;
             padding-top: 40px !important;
           }
           .hero-headline-white {
             display: block !important;
-            font-size: clamp(20px, 6vw, 36px) !important;
+            font-size: clamp(18px, 5.5vw, 32px) !important;
             white-space: normal !important;
             text-align: center !important;
             width: 100% !important;
           }
           .hero-headline-blue {
             display: block !important;
-            font-size: clamp(20px, 6vw, 36px) !important;
+            font-size: clamp(18px, 5.5vw, 32px) !important;
             width: 100% !important;
             text-align: center !important;
             top: 0 !important;
