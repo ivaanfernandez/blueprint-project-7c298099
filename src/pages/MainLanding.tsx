@@ -456,19 +456,19 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
           .hero-headline-wrapper {
             display: block !important;
             text-align: center !important;
-            padding: 0 16px !important;
+            padding: 0 6% !important;
             padding-top: 40px !important;
           }
           .hero-headline-white {
             display: block !important;
-            font-size: clamp(22px, 6vw, 40px) !important;
+            font-size: clamp(20px, 6vw, 36px) !important;
             white-space: normal !important;
             text-align: center !important;
             width: 100% !important;
           }
           .hero-headline-blue {
             display: block !important;
-            font-size: clamp(22px, 6vw, 40px) !important;
+            font-size: clamp(20px, 6vw, 36px) !important;
             width: 100% !important;
             text-align: center !important;
             top: 0 !important;
