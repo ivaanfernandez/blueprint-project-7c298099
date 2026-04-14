@@ -4,18 +4,6 @@ import { Clock, Phone } from "lucide-react";
 
 const FINGERPRINT_CARDS = [
   {
-    color: "#22C55E",
-    borderColor: "rgba(34,197,94,0.25)",
-    bgColor: "rgba(34,197,94,0.04)",
-    hoverBorder: "rgba(34,197,94,0.45)",
-    hoverBg: "rgba(34,197,94,0.07)",
-    bracketColor: "rgba(34,197,94,0.5)",
-    bracketHover: "rgba(34,197,94,0.8)",
-    delay: "0.8s",
-    tag: "HACK BAR",
-    title: "HACK BAR",
-  },
-  {
     color: "#FF3B3B",
     borderColor: "rgba(255,59,59,0.25)",
     bgColor: "rgba(255,59,59,0.04)",
@@ -23,6 +11,18 @@ const FINGERPRINT_CARDS = [
     hoverBg: "rgba(255,59,59,0.07)",
     bracketColor: "rgba(255,59,59,0.5)",
     bracketHover: "rgba(255,59,59,0.8)",
+    delay: "0.8s",
+    tag: "HACK BAR",
+    title: "HACK BAR",
+  },
+  {
+    color: "#22C55E",
+    borderColor: "rgba(34,197,94,0.25)",
+    bgColor: "rgba(34,197,94,0.04)",
+    hoverBorder: "rgba(34,197,94,0.45)",
+    hoverBg: "rgba(34,197,94,0.07)",
+    bracketColor: "rgba(34,197,94,0.5)",
+    bracketHover: "rgba(34,197,94,0.8)",
     delay: "1.6s",
     tag: "RESET",
     title: "RESET",

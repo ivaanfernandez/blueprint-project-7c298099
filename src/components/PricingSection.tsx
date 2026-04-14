@@ -66,7 +66,7 @@ const PLANS: Plan[] = [
   },
   {
     name: "BLUEPRINT+",
-    color: "#22C55E",
+    color: "#FF3B3B",
     monthlyPrice: 150,
     yearlyPrice: 128,
     description: "For those who want the full system — training, nutrition, and recovery.",
@@ -82,7 +82,7 @@ const PLANS: Plan[] = [
   },
   {
     name: "BLUEPRINT ELITE",
-    color: "#FF3B3B",
+    color: "#22C55E",
     monthlyPrice: 250,
     yearlyPrice: 213,
     description: "The ultimate Blueprint experience — fully personalized, fully integrated.",

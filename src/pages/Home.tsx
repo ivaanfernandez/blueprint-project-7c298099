@@ -622,14 +622,14 @@ const Home = ({ showDock }: { showDock: boolean }) => {
             <div style={{
               position: "absolute", bottom: 100, left: 100,
               width: 1, height: 100,
-              background: "linear-gradient(180deg, rgba(0,0,0,0.04), rgba(34,197,94,0.15))",
+              background: "linear-gradient(180deg, rgba(0,0,0,0.04), rgba(255,59,59,0.15))",
               transform: "rotate(-30deg)",
             }} />
             {/* Bottom-right connector */}
             <div style={{
               position: "absolute", bottom: 100, right: 100,
               width: 1, height: 100,
-              background: "linear-gradient(180deg, rgba(0,0,0,0.04), rgba(255,59,59,0.15))",
+              background: "linear-gradient(180deg, rgba(0,0,0,0.04), rgba(34,197,94,0.15))",
               transform: "rotate(30deg)",
             }} />
 
@@ -693,20 +693,20 @@ const Home = ({ showDock }: { showDock: boolean }) => {
                 animationDelay: "0.4s",
                 zIndex: 6,
               }}
-              onClick={() => navigate("/huella-verde")}
+              onClick={() => navigate("/huella-roja")}
             >
               <div style={{
                 width: 52, height: 52,
                 borderRadius: 14,
-                background: "rgba(34,197,94,0.08)",
-                border: "1px solid rgba(34,197,94,0.2)",
+                background: "rgba(255,59,59,0.08)",
+                border: "1px solid rgba(255,59,59,0.2)",
                 display: "flex", alignItems: "center", justifyContent: "center",
                 marginBottom: 8,
                 transition: "all 0.3s ease",
               }}>
                 <svg viewBox="0 0 140 140" width={26} height={26} fill="none" xmlns="http://www.w3.org/2000/svg">
                   {[18, 26, 34, 42].map((ry, i) => (
-                    <ellipse key={i} cx="70" cy="75" rx={ry * 0.7} ry={ry} stroke="#22C55E" strokeWidth="2.5" />
+                    <ellipse key={i} cx="70" cy="75" rx={ry * 0.7} ry={ry} stroke="#FF3B3B" strokeWidth="2.5" />
                   ))}
                 </svg>
               </div>
@@ -725,20 +725,20 @@ const Home = ({ showDock }: { showDock: boolean }) => {
                 animationDelay: "0.6s",
                 zIndex: 6,
               }}
-              onClick={() => navigate("/huella-roja")}
+              onClick={() => navigate("/huella-verde")}
             >
               <div style={{
                 width: 52, height: 52,
                 borderRadius: 14,
-                background: "rgba(255,59,59,0.08)",
-                border: "1px solid rgba(255,59,59,0.2)",
+                background: "rgba(34,197,94,0.08)",
+                border: "1px solid rgba(34,197,94,0.2)",
                 display: "flex", alignItems: "center", justifyContent: "center",
                 marginBottom: 8,
                 transition: "all 0.3s ease",
               }}>
                 <svg viewBox="0 0 140 140" width={26} height={26} fill="none" xmlns="http://www.w3.org/2000/svg">
                   {[18, 26, 34, 42].map((ry, i) => (
-                    <ellipse key={i} cx="70" cy="75" rx={ry * 0.7} ry={ry} stroke="#FF3B3B" strokeWidth="2.5" />
+                    <ellipse key={i} cx="70" cy="75" rx={ry * 0.7} ry={ry} stroke="#22C55E" strokeWidth="2.5" />
                   ))}
                 </svg>
               </div>
