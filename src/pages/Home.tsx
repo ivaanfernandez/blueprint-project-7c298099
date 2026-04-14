@@ -199,28 +199,6 @@ const Home = ({ showDock }: { showDock: boolean }) => {
           BLUEPRINT PROJECT
         </TextScramble>
 
-        <TextScramble
-          as="p"
-          duration={1.0}
-          speed={0.02}
-          characterSet="abcdefghijklmnopqrstuvwxyz., "
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.3, delay: 0.8 }}
-          style={{
-            fontFamily: "'Inter', sans-serif",
-            fontSize: 14,
-            fontWeight: 300,
-            color: "rgba(255,255,255,0.7)",
-            textAlign: "center" as const,
-            marginTop: 20,
-            position: "relative" as const,
-            zIndex: 2,
-            letterSpacing: "0.02em",
-          }}
-        >
-          Where human performance connects his mind, body and soul.
-        </TextScramble>
 
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -284,20 +262,13 @@ const Home = ({ showDock }: { showDock: boolean }) => {
             }}>
               DESIGNED FOR THE HUMAN MACHINE
             </h2>
-            <div className="about-subtext-container" style={{ display: "flex", flexDirection: "column", gap: 4, marginTop: 16, marginBottom: 32 }}>
-              <p className="about-subtext-line" style={{
-                whiteSpace: "nowrap", fontFamily: "'Inter', sans-serif", fontSize: 16, fontWeight: 400,
-                color: "#6B7280", lineHeight: 1.6, margin: 0,
-              }}>
-                A precision-engineered system. Training, nutrition, and recovery synchronized to unlock your full potential.
-              </p>
-              <p className="about-subtext-line" style={{
-                whiteSpace: "nowrap", fontFamily: "'Inter', sans-serif", fontSize: 16, fontWeight: 400,
-                color: "#6B7280", lineHeight: 1.6, margin: 0,
-              }}>
-                This is not a gym. This is your operating system.
-              </p>
-            </div>
+            <p className="about-subtext-line" style={{
+              fontFamily: "'Inter', sans-serif", fontSize: 16, fontWeight: 400,
+              color: "#6B7280", lineHeight: 1.6, marginTop: 16, marginBottom: 32,
+              whiteSpace: "nowrap",
+            }}>
+              Where human performance connects his mind, body and soul.
+            </p>
 
             {/* Timeline */}
             <div style={{ position: "relative", paddingLeft: 28, flexGrow: 1, display: "flex", flexDirection: "column" as const, justifyContent: window.innerWidth < 768 ? "flex-start" : "space-between" }}>
@@ -704,14 +675,17 @@ const Home = ({ showDock }: { showDock: boolean }) => {
               padding: "14px 36px",
               cursor: "pointer",
               transition: "all 0.3s ease",
+              boxShadow: "0 0 15px rgba(26,107,255,0.5), 0 0 30px rgba(26,107,255,0.3), 0 0 60px rgba(26,107,255,0.15)",
             }}
             onMouseEnter={(e) => {
               e.currentTarget.style.borderColor = "rgba(26,107,255,0.5)";
               e.currentTarget.style.background = "rgba(26,107,255,0.05)";
+              e.currentTarget.style.boxShadow = "0 0 20px rgba(26,107,255,0.7), 0 0 40px rgba(26,107,255,0.4), 0 0 80px rgba(26,107,255,0.2)";
             }}
             onMouseLeave={(e) => {
               e.currentTarget.style.borderColor = "rgba(255,255,255,0.12)";
               e.currentTarget.style.background = "transparent";
+              e.currentTarget.style.boxShadow = "0 0 15px rgba(26,107,255,0.5), 0 0 30px rgba(26,107,255,0.3), 0 0 60px rgba(26,107,255,0.15)";
             }}
           >
             JOIN NOW
@@ -731,6 +705,7 @@ const Home = ({ showDock }: { showDock: boolean }) => {
               padding: "14px 28px",
               cursor: "pointer",
               transition: "all 0.3s ease",
+              boxShadow: "0 0 15px rgba(255,59,59,0.5), 0 0 30px rgba(255,59,59,0.3), 0 0 60px rgba(255,59,59,0.15)",
               display: "flex",
               alignItems: "center" as const,
               justifyContent: "center" as const,
@@ -739,10 +714,12 @@ const Home = ({ showDock }: { showDock: boolean }) => {
             onMouseEnter={(e) => {
               e.currentTarget.style.color = "#FFFFFF";
               e.currentTarget.style.borderColor = "rgba(255,255,255,0.2)";
+              e.currentTarget.style.boxShadow = "0 0 20px rgba(255,59,59,0.7), 0 0 40px rgba(255,59,59,0.4), 0 0 80px rgba(255,59,59,0.2)";
             }}
             onMouseLeave={(e) => {
               e.currentTarget.style.color = "rgba(255,255,255,0.35)";
               e.currentTarget.style.borderColor = "rgba(255,255,255,0.06)";
+              e.currentTarget.style.boxShadow = "0 0 15px rgba(255,59,59,0.5), 0 0 30px rgba(255,59,59,0.3), 0 0 60px rgba(255,59,59,0.15)";
             }}
           >
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round">
