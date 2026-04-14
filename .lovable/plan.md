@@ -1,48 +1,71 @@
 
 
-## Plan: Hero Text Removal + About Subtext Replace + Footer Button Glows
+## Plan: Home Title + Features Layout + Huella Azul Hero Font
 
-Three independent edits in `src/pages/Home.tsx`, plus one CSS addition in `src/index.css`.
+Four changes across `src/pages/Home.tsx` and `src/pages/MainLanding.tsx`.
 
 ---
 
-### Change 1: Remove Hero Subtitle
+### Change 1: Center "LIMITLESS POTENTIAL WITH BLUEPRINT" title (Home.tsx, lines 494-505)
 
-Delete the `TextScramble` element at lines 202-223 that renders "Where human performance connects his mind, body and soul." Remove the entire block including the blank line after it.
+Replace the `<h2>` styles:
+- `fontSize: "clamp(14px, 1.6vw, 20px)"`
+- `textAlign: "center"`
+- `letterSpacing: "0.04em"`
+- `whiteSpace: "nowrap"`
+- `lineHeight: 1`
+- Remove `maxWidth: 600`
 
-### Change 2: Replace About Subtext
-
-Replace lines 287-300 (the `div.about-subtext-container` with two `<p>` tags) with a single `<p>`:
-
-```tsx
-<p className="about-subtext-line" style={{
-  fontFamily: "'Inter', sans-serif", fontSize: 16, fontWeight: 400,
-  color: "#6B7280", lineHeight: 1.6, marginTop: 16, marginBottom: 32,
-  whiteSpace: "nowrap",
-}}>
-  Where human performance connects his mind, body and soul.
-</p>
+Add mobile override in the `<style>` block (~line 85):
+```css
+.feature-title-centered {
+  white-space: normal !important;
+  font-size: clamp(12px, 4vw, 16px) !important;
+  text-align: center !important;
+  margin-bottom: 32px !important;
+}
 ```
 
-The existing mobile CSS override in `index.css` for `.about-subtext-line` already sets `white-space: normal`, `font-size: 14px`, and `line-height: 1.5` at `max-width: 767px` — no CSS changes needed.
+### Change 2: Update feature rows to match spec (Home.tsx, lines 507-606)
 
-### Change 3: Add Glow to Footer Buttons
+The horizontal row layout already exists. Update to match spec:
+- **Thumbnail**: Change `flex: "0 0 120px"` → `flex: "0 0 200px"`, `height: 80` → `height: 140`, `borderRadius: 10` → `14`
+- **Fingerprint**: `flex: "0 0 48px"` → `flex: "0 0 56px"`, size `40` → `56`
+- **Name**: `fontSize: 18` → `clamp(18px, 2vw, 28px)`, add `marginBottom: 8`
+- **Description**: `fontSize: 14` → `clamp(14px, 1.2vw, 17px)`, `lineHeight: 1.6` → `1.7`, add `maxWidth: 500`
+- **Link**: add `marginTop: 12`, `display: "inline-block"`, `transition: "color 0.3s ease"`
+- **Arrow**: `fontSize: 20` → `28`, add `transition: "all 0.3s ease"`, add hover handlers for `translateX(4px)` and `color: #000`
+- **Row padding**: already `32px 0` — correct
 
-**JOIN NOW button (lines 693-718):** Add blue glow `boxShadow` to default style, and update hover/leave handlers to toggle enhanced glow:
-- Default: `boxShadow: "0 0 15px rgba(26,107,255,0.5), 0 0 30px rgba(26,107,255,0.3), 0 0 60px rgba(26,107,255,0.15)"`
-- Hover: `boxShadow: "0 0 20px rgba(26,107,255,0.7), 0 0 40px rgba(26,107,255,0.4), 0 0 80px rgba(26,107,255,0.2)"`
-- Leave: restore default shadow
+Update mobile CSS for `.feature-row-mobile`:
+```css
+.feature-row-mobile {
+  flex-direction: column !important;
+  gap: 16px !important;
+  text-align: center !important;
+  align-items: center !important;
+  padding: 24px 16px !important;
+}
+```
+Add classes for mobile photo override (100% width, 180px height, 12px radius) and hide arrow on mobile.
 
-**Instagram button (lines 720-754):** Add red glow `boxShadow` to default style, and update hover/leave handlers:
-- Default: `boxShadow: "0 0 15px rgba(255,59,59,0.5), 0 0 30px rgba(255,59,59,0.3), 0 0 60px rgba(255,59,59,0.15)"`
-- Hover: `boxShadow: "0 0 20px rgba(255,59,59,0.7), 0 0 40px rgba(255,59,59,0.4), 0 0 80px rgba(255,59,59,0.2)"`
-- Leave: restore default shadow
+### Change 3: Huella Azul hero font → Michroma (MainLanding.tsx, lines 237-274)
 
-Both buttons already have `borderRadius: 50` which produces pill/circular shapes — the glow will follow naturally.
+Change both `hero-headline-white` and `hero-headline-blue` spans:
+- `fontFamily: 'Bebas Neue, sans-serif'` → `fontFamily: "'Michroma', sans-serif"`
+- `fontSize: 'clamp(56px, 6vw, 88px)'` → `fontSize: "clamp(28px, 4.5vw, 58px)"`
+- `fontWeight: 400`
+- `letterSpacing: "0.02em"`
+- `lineHeight: 1.08`
+
+Update mobile overrides for `.hero-headline-white` and `.hero-headline-blue`:
+- `font-size: clamp(22px, 6vw, 40px) !important`
+
+Michroma is already imported globally (used in Home.tsx) — no new font import needed.
 
 ---
 
 ### Files Modified
-- `src/pages/Home.tsx` — all three changes
-- No other files touched
+- `src/pages/Home.tsx` — Changes 1 and 2
+- `src/pages/MainLanding.tsx` — Change 3
 
