@@ -98,21 +98,10 @@ const Home = ({ showDock }: { showDock: boolean }) => {
             text-align: center !important;
             margin-bottom: 32px !important;
           }
-          .feature-row-mobile {
-            flex-direction: column !important;
-            gap: 16px !important;
-            text-align: center !important;
-            align-items: center !important;
-            padding: 24px 16px !important;
-          }
-          .feature-row-photo {
-            flex: none !important;
-            width: 100% !important;
-            height: 180px !important;
-            border-radius: 12px !important;
-          }
-          .feature-row-arrow {
-            display: none !important;
+          .radar-scale-wrapper {
+            transform: scale(0.62);
+            transform-origin: top center;
+            margin-bottom: -120px;
           }
           .video-cinematic-section { height: 60vh !important; }
           .footer-section {
@@ -504,10 +493,12 @@ const Home = ({ showDock }: { showDock: boolean }) => {
       {/* ── Divider ── */}
       <SectionDivider />
 
-      {/* ── E: FEATURE — HORIZONTAL ROWS (WHITE) ── */}
+      {/* ── E: LIMITLESS POTENTIAL — RADAR ORBITAL (WHITE) ── */}
       <div style={{
-        position: "relative", zIndex: 1, padding: "64px 7%", background: "#FFFFFF",
+        position: "relative", zIndex: 1, padding: "80px 7%", background: "#FFFFFF",
+        display: "flex", flexDirection: "column", alignItems: "center",
       }}>
+        {/* Section Title */}
         <h2 className="feature-title-centered" style={{
           fontFamily: "'Michroma', sans-serif",
           fontSize: "clamp(14px, 1.6vw, 20px)",
@@ -517,124 +508,246 @@ const Home = ({ showDock }: { showDock: boolean }) => {
           letterSpacing: "0.04em",
           whiteSpace: "nowrap",
           lineHeight: 1,
-          marginBottom: 48,
+          marginBottom: 12,
           marginTop: 0,
         }}>
           LIMITLESS POTENTIAL WITH BLUEPRINT
         </h2>
+        <p style={{
+          fontFamily: "'Inter', sans-serif",
+          fontSize: "clamp(13px, 1.2vw, 16px)",
+          fontWeight: 300,
+          color: "#9CA3AF",
+          textAlign: "center",
+          marginBottom: 48,
+          marginTop: 0,
+        }}>
+          Three pillars. One integrated system.
+        </p>
 
-        {[
-          {
-            color: "#1A6BFF",
-            name: "Blueprint Lab",
-            desc: "Precision training methodology. Data-driven programming built to forge strength, endurance, and resilience.",
-            linkColor: "#1A6BFF",
-            route: "/huella-azul",
-            img: slider1,
-          },
-          {
-            color: "#22C55E",
-            name: "Hack Bar",
-            desc: "Nutrition engineered for performance. Every meal is a signal. Optimize input, transform output.",
-            linkColor: "#22C55E",
-            route: "/huella-verde",
-            img: slider2,
-          },
-          {
-            color: "#FF3B3B",
-            name: "Reset",
-            desc: "Strategic recovery protocols. Optimized sleep, restoration, and rebuilding for continuous evolution.",
-            linkColor: "#FF3B3B",
-            route: "/huella-roja",
-            img: slider3,
-          },
-        ].map((item, i, arr) => (
-          <div
-            key={item.name}
-            className="feature-row-mobile"
-            onClick={() => navigate(item.route)}
-            style={{
-              display: "flex",
-              gap: 28,
-              alignItems: "center",
-              padding: "32px 0",
-              borderBottom: i < arr.length - 1 ? "1px solid rgba(0,0,0,0.06)" : "none",
-              cursor: "pointer",
-              transition: "background 0.3s ease",
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.background = "rgba(0,0,0,0.01)";
-              const arrow = e.currentTarget.querySelector('.feature-row-arrow') as HTMLElement;
-              if (arrow) { arrow.style.color = "#000"; arrow.style.transform = "translateX(4px)"; }
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.background = "transparent";
-              const arrow = e.currentTarget.querySelector('.feature-row-arrow') as HTMLElement;
-              if (arrow) { arrow.style.color = "#D1D5DB"; arrow.style.transform = "translateX(0)"; }
-            }}
-          >
-            {/* Thumbnail image */}
-            <div className="feature-row-photo" style={{
-              flex: "0 0 200px", height: 140, borderRadius: 14, overflow: "hidden",
+        {/* Radar Container */}
+        <div className="radar-scale-wrapper">
+          <div style={{
+            position: "relative",
+            width: 520,
+            height: 520,
+            margin: "0 auto",
+          }}>
+            {/* CSS Keyframes */}
+            <style>{`
+              @keyframes radarSweep {
+                from { transform: rotate(0deg); }
+                to { transform: rotate(360deg); }
+              }
+              @keyframes pulseRing {
+                0%, 100% { opacity: 1; }
+                50% { opacity: 0.4; }
+              }
+              @keyframes fadeUp {
+                from { opacity: 0; transform: translateY(8px); }
+                to { opacity: 1; transform: translateY(0); }
+              }
+            `}</style>
+
+            {/* Concentric Rings */}
+            {[120, 200, 290, 370, 440, 510].map((size, i) => (
+              <div key={`ring-${i}`} style={{
+                position: "absolute",
+                top: "50%", left: "50%",
+                width: size, height: size,
+                borderRadius: "50%",
+                border: "1px solid rgba(0,0,0,0.06)",
+                transform: "translate(-50%, -50%)",
+                animation: `pulseRing ${3 + i * 0.5}s ease-in-out infinite`,
+              }} />
+            ))}
+
+            {/* Crosshair Center */}
+            <div style={{
+              position: "absolute", top: "50%", left: "50%",
+              width: 1, height: 510,
+              background: "rgba(0,0,0,0.04)",
+              transform: "translate(-50%, -50%)",
+            }} />
+            <div style={{
+              position: "absolute", top: "50%", left: "50%",
+              width: 510, height: 1,
+              background: "rgba(0,0,0,0.04)",
+              transform: "translate(-50%, -50%)",
+            }} />
+
+            {/* Degree Ticks */}
+            {[
+              { label: "000°", style: { top: "50%", left: "50%", transform: "translate(-50%, -265px)" } as React.CSSProperties },
+              { label: "090°", style: { top: "50%", left: "50%", transform: "translate(245px, -50%)" } as React.CSSProperties },
+              { label: "180°", style: { top: "50%", left: "50%", transform: "translate(-50%, 255px)" } as React.CSSProperties },
+              { label: "270°", style: { top: "50%", left: "50%", transform: "translate(-265px, -50%)" } as React.CSSProperties },
+            ].map((tick) => (
+              <div key={tick.label} style={{
+                position: "absolute",
+                fontFamily: "'Orbitron', sans-serif",
+                fontSize: 9,
+                color: "rgba(0,0,0,0.2)",
+                letterSpacing: "0.1em",
+                ...tick.style,
+              }}>
+                {tick.label}
+              </div>
+            ))}
+
+            {/* Rotating Sweep Line */}
+            <div style={{
+              position: "absolute",
+              top: "50%", left: "50%",
+              width: 255, height: 2,
+              transformOrigin: "0 50%",
+              animation: "radarSweep 5s linear infinite",
             }}>
-              <img src={item.img} alt={item.name} style={{
-                width: "100%", height: "100%", objectFit: "cover", display: "block",
+              <div style={{
+                width: "100%", height: "100%",
+                background: "linear-gradient(90deg, rgba(0,0,0,0.12), transparent)",
+                borderRadius: 1,
               }} />
             </div>
 
-            {/* Fingerprint icon */}
-            <div style={{ flex: "0 0 56px" }}>
-              <FingerprintSVG color={item.color} size={56} />
-            </div>
+            {/* Connectors from center to nodes */}
+            {/* Top center connector */}
+            <div style={{
+              position: "absolute", top: 60, left: "50%",
+              width: 1, height: 140,
+              background: "linear-gradient(180deg, rgba(26,107,255,0.15), rgba(0,0,0,0.04))",
+              transform: "translateX(-50%)",
+            }} />
+            {/* Bottom-left connector */}
+            <div style={{
+              position: "absolute", bottom: 100, left: 100,
+              width: 1, height: 100,
+              background: "linear-gradient(180deg, rgba(0,0,0,0.04), rgba(34,197,94,0.15))",
+              transform: "rotate(-30deg)",
+            }} />
+            {/* Bottom-right connector */}
+            <div style={{
+              position: "absolute", bottom: 100, right: 100,
+              width: 1, height: 100,
+              background: "linear-gradient(180deg, rgba(0,0,0,0.04), rgba(255,59,59,0.15))",
+              transform: "rotate(30deg)",
+            }} />
 
-            {/* Text content */}
-            <div style={{ flex: 1, minWidth: 0 }}>
-              <div style={{
-                fontFamily: "'Michroma', sans-serif",
-                fontSize: "clamp(18px, 2vw, 28px)",
-                textTransform: "uppercase",
-                letterSpacing: "0.02em",
-                color: "#000",
-                marginBottom: 8,
-              }}>
-                {item.name}
-              </div>
-              <div style={{
-                fontFamily: "'Inter', sans-serif",
-                fontSize: "clamp(14px, 1.2vw, 17px)",
-                fontWeight: 300,
-                color: "#6B7280",
-                lineHeight: 1.7,
-                maxWidth: 500,
-              }}>
-                {item.desc}
-              </div>
-              <span style={{
-                fontFamily: "'Orbitron', sans-serif",
-                fontSize: 11,
-                letterSpacing: "0.1em",
-                color: item.linkColor,
-                marginTop: 12,
-                display: "inline-block",
-                transition: "color 0.3s ease",
-              }}>
-                LEARN MORE →
-              </span>
-            </div>
-
-            {/* Arrow */}
-            <div className="feature-row-arrow" style={{
-              flex: "0 0 32px",
-              fontFamily: "'Inter', sans-serif",
-              fontSize: 28,
-              color: "#D1D5DB",
-              textAlign: "center",
-              transition: "all 0.3s ease",
+            {/* Center Hub */}
+            <div style={{
+              position: "absolute",
+              top: "50%", left: "50%",
+              width: 80, height: 80,
+              borderRadius: "50%",
+              background: "#FFFFFF",
+              border: "2px solid rgba(0,0,0,0.08)",
+              transform: "translate(-50%, -50%)",
+              display: "flex", alignItems: "center", justifyContent: "center",
+              zIndex: 5,
+              boxShadow: "0 4px 20px rgba(0,0,0,0.06)",
             }}>
-              →
+              <FingerprintSVG color="#000000" size={40} />
             </div>
+
+            {/* Node: Blueprint Lab (top center) */}
+            <div
+              style={{
+                position: "absolute",
+                top: 20, left: "50%",
+                transform: "translateX(-50%)",
+                display: "flex", flexDirection: "column", alignItems: "center",
+                cursor: "pointer",
+                animation: "fadeUp 0.6s ease both",
+                animationDelay: "0.2s",
+                zIndex: 6,
+              }}
+              onClick={() => navigate("/huella-azul")}
+            >
+              <div style={{
+                width: 52, height: 52,
+                borderRadius: 14,
+                background: "rgba(26,107,255,0.08)",
+                border: "1px solid rgba(26,107,255,0.2)",
+                display: "flex", alignItems: "center", justifyContent: "center",
+                marginBottom: 8,
+                transition: "all 0.3s ease",
+              }}>
+                <svg viewBox="0 0 140 140" width={26} height={26} fill="none" xmlns="http://www.w3.org/2000/svg">
+                  {[18, 26, 34, 42].map((ry, i) => (
+                    <ellipse key={i} cx="70" cy="75" rx={ry * 0.7} ry={ry} stroke="#1A6BFF" strokeWidth="2.5" />
+                  ))}
+                </svg>
+              </div>
+              <span style={{ fontFamily: "'Michroma', sans-serif", fontSize: 11, color: "#000", letterSpacing: "0.04em", textTransform: "uppercase" as const }}>Blueprint Lab</span>
+              <span style={{ fontFamily: "'Inter', sans-serif", fontSize: 9, color: "#9CA3AF", marginTop: 2 }}>Precision training</span>
+            </div>
+
+            {/* Node: Hack Bar (bottom left) */}
+            <div
+              style={{
+                position: "absolute",
+                bottom: 36, left: 40,
+                display: "flex", flexDirection: "column", alignItems: "center",
+                cursor: "pointer",
+                animation: "fadeUp 0.6s ease both",
+                animationDelay: "0.4s",
+                zIndex: 6,
+              }}
+              onClick={() => navigate("/huella-verde")}
+            >
+              <div style={{
+                width: 52, height: 52,
+                borderRadius: 14,
+                background: "rgba(34,197,94,0.08)",
+                border: "1px solid rgba(34,197,94,0.2)",
+                display: "flex", alignItems: "center", justifyContent: "center",
+                marginBottom: 8,
+                transition: "all 0.3s ease",
+              }}>
+                <svg viewBox="0 0 140 140" width={26} height={26} fill="none" xmlns="http://www.w3.org/2000/svg">
+                  {[18, 26, 34, 42].map((ry, i) => (
+                    <ellipse key={i} cx="70" cy="75" rx={ry * 0.7} ry={ry} stroke="#22C55E" strokeWidth="2.5" />
+                  ))}
+                </svg>
+              </div>
+              <span style={{ fontFamily: "'Michroma', sans-serif", fontSize: 11, color: "#000", letterSpacing: "0.04em", textTransform: "uppercase" as const }}>Hack Bar</span>
+              <span style={{ fontFamily: "'Inter', sans-serif", fontSize: 9, color: "#9CA3AF", marginTop: 2 }}>Nutrition engineering</span>
+            </div>
+
+            {/* Node: Reset (bottom right) */}
+            <div
+              style={{
+                position: "absolute",
+                bottom: 36, right: 40,
+                display: "flex", flexDirection: "column", alignItems: "center",
+                cursor: "pointer",
+                animation: "fadeUp 0.6s ease both",
+                animationDelay: "0.6s",
+                zIndex: 6,
+              }}
+              onClick={() => navigate("/huella-roja")}
+            >
+              <div style={{
+                width: 52, height: 52,
+                borderRadius: 14,
+                background: "rgba(255,59,59,0.08)",
+                border: "1px solid rgba(255,59,59,0.2)",
+                display: "flex", alignItems: "center", justifyContent: "center",
+                marginBottom: 8,
+                transition: "all 0.3s ease",
+              }}>
+                <svg viewBox="0 0 140 140" width={26} height={26} fill="none" xmlns="http://www.w3.org/2000/svg">
+                  {[18, 26, 34, 42].map((ry, i) => (
+                    <ellipse key={i} cx="70" cy="75" rx={ry * 0.7} ry={ry} stroke="#FF3B3B" strokeWidth="2.5" />
+                  ))}
+                </svg>
+              </div>
+              <span style={{ fontFamily: "'Michroma', sans-serif", fontSize: 11, color: "#000", letterSpacing: "0.04em", textTransform: "uppercase" as const }}>Reset</span>
+              <span style={{ fontFamily: "'Inter', sans-serif", fontSize: 9, color: "#9CA3AF", marginTop: 2 }}>Recovery science</span>
+            </div>
+
           </div>
-        ))}
+        </div>
       </div>
 
       {/* ── Divider ── */}
