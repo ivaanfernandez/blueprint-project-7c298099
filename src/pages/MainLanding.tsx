@@ -236,11 +236,12 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
         }}>
           <span className="hero-headline-white" style={{
             color: '#FFFFFF',
-            fontFamily: 'Bebas Neue, sans-serif',
+            fontFamily: "'Michroma', sans-serif",
             fontWeight: 400,
-            fontSize: 'clamp(56px, 6vw, 88px)',
+            fontSize: 'clamp(28px, 4.5vw, 58px)',
             whiteSpace: 'nowrap',
-            lineHeight: 1,
+            lineHeight: 1.08,
+            letterSpacing: '0.02em',
             display: 'inline',
             verticalAlign: 'baseline'
           }}>
@@ -249,10 +250,11 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
           </span>
           <span className="hero-headline-blue" style={{
             color: '#1A6BFF',
-            fontFamily: 'Bebas Neue, sans-serif',
+            fontFamily: "'Michroma', sans-serif",
             fontWeight: 400,
-            fontSize: 'clamp(56px, 6vw, 88px)',
-            lineHeight: 1,
+            fontSize: 'clamp(28px, 4.5vw, 58px)',
+            lineHeight: 1.08,
+            letterSpacing: '0.02em',
             display: 'inline-block',
             textAlign: 'left',
             verticalAlign: 'baseline',
@@ -457,14 +459,14 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
           }
           .hero-headline-white {
             display: block !important;
-            font-size: clamp(32px, 9vw, 48px) !important;
+            font-size: clamp(22px, 6vw, 40px) !important;
             white-space: normal !important;
             text-align: center !important;
             width: 100% !important;
           }
           .hero-headline-blue {
             display: block !important;
-            font-size: clamp(32px, 9vw, 48px) !important;
+            font-size: clamp(22px, 6vw, 40px) !important;
             width: 100% !important;
             text-align: center !important;
             top: 0 !important;

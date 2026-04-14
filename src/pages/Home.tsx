@@ -92,10 +92,27 @@ const Home = ({ showDock }: { showDock: boolean }) => {
           .about-section-new { padding: 48px 6% !important; flex-direction: column !important; gap: 32px !important; align-items: flex-start !important; }
           .about-photo-col { flex: none !important; width: 100% !important; max-width: 280px !important; margin: 0 auto !important; order: -1 !important; }
           .bento-grid-neo { grid-template-columns: repeat(2, 1fr) !important; grid-template-rows: repeat(3, 180px) !important; }
+          .feature-title-centered {
+            white-space: normal !important;
+            font-size: clamp(12px, 4vw, 16px) !important;
+            text-align: center !important;
+            margin-bottom: 32px !important;
+          }
           .feature-row-mobile {
             flex-direction: column !important;
             gap: 16px !important;
             text-align: center !important;
+            align-items: center !important;
+            padding: 24px 16px !important;
+          }
+          .feature-row-photo {
+            flex: none !important;
+            width: 100% !important;
+            height: 180px !important;
+            border-radius: 12px !important;
+          }
+          .feature-row-arrow {
+            display: none !important;
           }
           .video-cinematic-section { height: 60vh !important; }
           .footer-section {
@@ -491,15 +508,17 @@ const Home = ({ showDock }: { showDock: boolean }) => {
       <div style={{
         position: "relative", zIndex: 1, padding: "64px 7%", background: "#FFFFFF",
       }}>
-        <h2 style={{
+        <h2 className="feature-title-centered" style={{
           fontFamily: "'Michroma', sans-serif",
-          fontSize: "clamp(28px, 3.5vw, 44px)",
+          fontSize: "clamp(14px, 1.6vw, 20px)",
           color: "#000",
           textTransform: "uppercase",
-          lineHeight: 1.1,
+          textAlign: "center",
+          letterSpacing: "0.04em",
+          whiteSpace: "nowrap",
+          lineHeight: 1,
           marginBottom: 48,
           marginTop: 0,
-          maxWidth: 600,
         }}>
           LIMITLESS POTENTIAL WITH BLUEPRINT
         </h2>
@@ -543,12 +562,20 @@ const Home = ({ showDock }: { showDock: boolean }) => {
               cursor: "pointer",
               transition: "background 0.3s ease",
             }}
-            onMouseEnter={(e) => { e.currentTarget.style.background = "rgba(0,0,0,0.01)"; }}
-            onMouseLeave={(e) => { e.currentTarget.style.background = "transparent"; }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.background = "rgba(0,0,0,0.01)";
+              const arrow = e.currentTarget.querySelector('.feature-row-arrow') as HTMLElement;
+              if (arrow) { arrow.style.color = "#000"; arrow.style.transform = "translateX(4px)"; }
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.background = "transparent";
+              const arrow = e.currentTarget.querySelector('.feature-row-arrow') as HTMLElement;
+              if (arrow) { arrow.style.color = "#D1D5DB"; arrow.style.transform = "translateX(0)"; }
+            }}
           >
             {/* Thumbnail image */}
-            <div style={{
-              flex: "0 0 120px", height: 80, borderRadius: 10, overflow: "hidden",
+            <div className="feature-row-photo" style={{
+              flex: "0 0 200px", height: 140, borderRadius: 14, overflow: "hidden",
             }}>
               <img src={item.img} alt={item.name} style={{
                 width: "100%", height: "100%", objectFit: "cover", display: "block",
@@ -556,29 +583,29 @@ const Home = ({ showDock }: { showDock: boolean }) => {
             </div>
 
             {/* Fingerprint icon */}
-            <div style={{ flex: "0 0 48px" }}>
-              <FingerprintSVG color={item.color} size={40} />
+            <div style={{ flex: "0 0 56px" }}>
+              <FingerprintSVG color={item.color} size={56} />
             </div>
 
             {/* Text content */}
             <div style={{ flex: 1, minWidth: 0 }}>
               <div style={{
                 fontFamily: "'Michroma', sans-serif",
-                fontSize: 18,
+                fontSize: "clamp(18px, 2vw, 28px)",
                 textTransform: "uppercase",
                 letterSpacing: "0.02em",
                 color: "#000",
-                marginBottom: 6,
+                marginBottom: 8,
               }}>
                 {item.name}
               </div>
               <div style={{
                 fontFamily: "'Inter', sans-serif",
-                fontSize: 14,
+                fontSize: "clamp(14px, 1.2vw, 17px)",
                 fontWeight: 300,
                 color: "#6B7280",
-                lineHeight: 1.6,
-                marginBottom: 8,
+                lineHeight: 1.7,
+                maxWidth: 500,
               }}>
                 {item.desc}
               </div>
@@ -587,18 +614,22 @@ const Home = ({ showDock }: { showDock: boolean }) => {
                 fontSize: 11,
                 letterSpacing: "0.1em",
                 color: item.linkColor,
+                marginTop: 12,
+                display: "inline-block",
+                transition: "color 0.3s ease",
               }}>
                 LEARN MORE →
               </span>
             </div>
 
             {/* Arrow */}
-            <div style={{
+            <div className="feature-row-arrow" style={{
               flex: "0 0 32px",
               fontFamily: "'Inter', sans-serif",
-              fontSize: 20,
+              fontSize: 28,
               color: "#D1D5DB",
               textAlign: "center",
+              transition: "all 0.3s ease",
             }}>
               →
             </div>
