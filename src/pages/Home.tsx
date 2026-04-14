@@ -562,8 +562,16 @@ const Home = ({ showDock }: { showDock: boolean }) => {
               cursor: "pointer",
               transition: "background 0.3s ease",
             }}
-            onMouseEnter={(e) => { e.currentTarget.style.background = "rgba(0,0,0,0.01)"; }}
-            onMouseLeave={(e) => { e.currentTarget.style.background = "transparent"; }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.background = "rgba(0,0,0,0.01)";
+              const arrow = e.currentTarget.querySelector('.feature-row-arrow') as HTMLElement;
+              if (arrow) { arrow.style.color = "#000"; arrow.style.transform = "translateX(4px)"; }
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.background = "transparent";
+              const arrow = e.currentTarget.querySelector('.feature-row-arrow') as HTMLElement;
+              if (arrow) { arrow.style.color = "#D1D5DB"; arrow.style.transform = "translateX(0)"; }
+            }}
           >
             {/* Thumbnail image */}
             <div className="feature-row-photo" style={{
