@@ -39,7 +39,7 @@ const App = () => {
             <Routes>
               <Route path="/" element={<Home showDock={showDock} />} />
               <Route path="/huella-azul" element={<MainLanding showDock={showDock} />} />
-              <Route path="/huella-roja" element={<HuellaRoja />} />
+              <Route path="/huella-roja" element={<HuellaRoja showDock={showDock} />} />
               <Route path="/huella-verde" element={<HuellaVerde />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
