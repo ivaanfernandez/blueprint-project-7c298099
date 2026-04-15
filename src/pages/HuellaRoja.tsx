@@ -155,10 +155,11 @@ const HuellaRoja = ({ showDock }: { showDock: boolean }) => {
         @media (max-width: 767px) {
           .hr-hero { flex-direction: column !important; }
           .hr-hero-left { flex: none !important; width: 100% !important; padding: 100px 6% 40px !important; text-align: center !important; align-items: center !important; }
-          .hr-hero-right { flex: none !important; width: 100% !important; height: 300px !important; }
+          .hr-hero-right { flex: none !important; width: 100% !important; height: 250px !important; }
           .hr-hero-fade { width: 100% !important; height: 60px !important; background: linear-gradient(to bottom, #0a0a0a, transparent) !important; top: 0 !important; left: 0 !important; }
           .hr-hero-title { font-size: clamp(28px, 8vw, 42px) !important; }
           .hr-hero-subtitle { text-align: center !important; max-width: 100% !important; }
+          .hr-hero-placeholder { width: 90% !important; height: 80% !important; }
           .hr-fuel-grid { flex-direction: column !important; gap: 16px !important; }
           .hr-fuel-card { min-height: 320px !important; }
           .hr-station-grid { grid-template-columns: 1fr !important; gap: 16px !important; }
@@ -169,7 +170,7 @@ const HuellaRoja = ({ showDock }: { showDock: boolean }) => {
 
       {/* ── DOCK ── */}
       {showDock && (
-        <div style={{ position: "fixed", bottom: 24, left: "50%", transform: "translateX(-50%)", zIndex: 50 }}>
+        <div style={{ position: "fixed", top: 14, left: "50%", transform: "translateX(-50%)", zIndex: 50 }}>
           <Dock magnification={64} distance={100}>
             {HUELLAS.map((h) => (
               <DockIcon key={h.route} tooltip={h.tooltip} onClick={() => navigate(h.route)}>
@@ -187,7 +188,8 @@ const HuellaRoja = ({ showDock }: { showDock: boolean }) => {
         {/* Left column */}
         <div className="hr-hero-left" style={{ flex: "0 0 55%", padding: "80px 0 80px 7%", display: "flex", flexDirection: "column", justifyContent: "center", gap: 16, position: "relative", zIndex: 2 }}>
           {/* Ambient glow */}
-          <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse at 0% 80%, rgba(255,59,59,0.06) 0%, transparent 60%)", pointerEvents: "none" }} />
+          <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse at 10% 70%, rgba(255,59,59,0.12) 0%, transparent 55%)", pointerEvents: "none" }} />
+          <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse at 90% 40%, rgba(255,59,59,0.06) 0%, transparent 50%)", pointerEvents: "none" }} />
 
           <p style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 10, letterSpacing: "0.25em", textTransform: "uppercase", color: "rgba(255,59,59,0.5)", animation: "hrFadeUp 0.8s ease 0.3s both" }}>
             BLUEPRINT SYSTEM
@@ -209,10 +211,24 @@ const HuellaRoja = ({ showDock }: { showDock: boolean }) => {
         </div>
 
         {/* Right column */}
-        <div className="hr-hero-right" style={{ flex: "0 0 45%", position: "relative", height: "100vh", overflow: "hidden" }}>
-          <div style={{ width: "100%", height: "100%", backgroundColor: "#1a1a1a" }} />
+        <div className="hr-hero-right" style={{ flex: "0 0 45%", position: "relative", height: "100vh", overflow: "hidden", display: "flex", alignItems: "center", justifyContent: "center" }}>
+          <div style={{ position: "absolute", inset: 0, backgroundColor: "#1a1a1a" }} />
           {/* Left fade */}
-          <div className="hr-hero-fade" style={{ position: "absolute", top: 0, left: 0, width: 80, height: "100%", background: "linear-gradient(to right, #0a0a0a, transparent)", zIndex: 1, pointerEvents: "none" }} />
+          <div className="hr-hero-fade" style={{ position: "absolute", top: 0, left: 0, width: 80, height: "100%", background: "linear-gradient(to right, #0a0a0a, transparent)", zIndex: 3, pointerEvents: "none" }} />
+          {/* Placeholder box */}
+          <div className="hr-hero-placeholder" style={{ position: "relative", zIndex: 2, width: "80%", height: "60%", border: "1px solid rgba(255,59,59,0.15)", borderRadius: 12, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 12, background: "rgba(255,59,59,0.02)" }}>
+            {/* Corner brackets */}
+            <div style={{ position: "absolute", top: 8, left: 8, width: 16, height: 16, borderTop: "2px solid rgba(255,59,59,0.3)", borderLeft: "2px solid rgba(255,59,59,0.3)" }} />
+            <div style={{ position: "absolute", top: 8, right: 8, width: 16, height: 16, borderTop: "2px solid rgba(255,59,59,0.3)", borderRight: "2px solid rgba(255,59,59,0.3)" }} />
+            <div style={{ position: "absolute", bottom: 8, left: 8, width: 16, height: 16, borderBottom: "2px solid rgba(255,59,59,0.3)", borderLeft: "2px solid rgba(255,59,59,0.3)" }} />
+            <div style={{ position: "absolute", bottom: 8, right: 8, width: 16, height: 16, borderBottom: "2px solid rgba(255,59,59,0.3)", borderRight: "2px solid rgba(255,59,59,0.3)" }} />
+            {/* Camera icon */}
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="rgba(255,59,59,0.3)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z" />
+              <circle cx="12" cy="13" r="4" />
+            </svg>
+            <span style={{ fontFamily: "'Inter', sans-serif", fontSize: 11, color: "rgba(255,59,59,0.25)", letterSpacing: "0.1em", textTransform: "uppercase" }}>Image placeholder</span>
+          </div>
         </div>
       </section>
 
