@@ -1,55 +1,80 @@
 
 
-## Plan: Global Color Swap — Hack Bar → Red, Reset → Green
+## Plan: Create Full Hack Bar Page (HuellaRoja)
 
 ### Summary
-Swap colors so Hack Bar uses Red (#FF3B3B) and Reset uses Green (#22C55E) everywhere they're currently reversed. Several places already have the correct mapping; only the mismatched ones need changes.
+Replace the HuellaRoja placeholder with a complete page featuring a red BiometricScan, Dock navigation, hero section, two content sections, and a footer. Also update App.tsx to pass `showDock` and handle the red scan independently.
 
-### File 1: `src/pages/Home.tsx`
+### File 1: `src/components/BiometricScanRed.tsx` (NEW)
 
-**Radar Orbital Section (lines 685-747):**
-- **Hack Bar node** (bottom-left, line 696): change `navigate("/huella-verde")` → `navigate("/huella-roja")`; swap all green colors to red (`#22C55E` → `#FF3B3B`, `rgba(34,197,94,...)` → `rgba(255,59,59,...)`)
-- **Reset node** (bottom-right, line 728): change `navigate("/huella-roja")` → `navigate("/huella-verde")`; swap all red colors to green (`#FF3B3B` → `#22C55E`, `rgba(255,59,59,...)` → `rgba(34,197,94,...)`)
-- **Connector lines** (lines 622-633): swap bottom-left connector from green gradient to red; swap bottom-right from red to green
+Clone `BiometricScan.tsx` with all `#1A6BFF` replaced by `#FF3B3B`, all `#0A3D8F` → `#5C1111`, all `#4A7FBF` → `#BF4A4A`, and the wordmark text changed to "ACCESSING HACK BAR". Same phase timing (5 seconds total). This avoids modifying the shared BiometricScan component.
 
-No other changes in Home.tsx — the Dock (HUELLAS array), Programs section, About timeline, and Footer button glows are already correct.
+### File 2: `src/pages/HuellaRoja.tsx` (REWRITE)
 
-### File 2: `src/components/BentoGrid.tsx`
+Complete page with these sections, all using `#FF3B3B` as accent color and `#0a0a0a` background:
 
-**FINGERPRINT_CARDS array (lines 5-29):**
-- First card (Hack Bar): swap `#22C55E` → `#FF3B3B` and all `rgba(34,197,94,...)` → `rgba(255,59,59,...)`
-- Second card (Reset): swap `#FF3B3B` → `#22C55E` and all `rgba(255,59,59,...)` → `rgba(34,197,94,...)`
-- The "LIVE" dot (line 113) uses `#22C55E` but it's a generic live indicator, not pillar-specific — leave unchanged.
+**State management:**
+- `useState` for scan phase (`"scan" | "ready"`)
+- `useState` for showDock (delayed after scan)
+- `useNavigate` from react-router-dom
 
-### File 3: `src/components/PricingSection.tsx`
+**BiometricScanRed:** Shown during scan phase, triggers transition to ready.
 
-**PLANS array (lines 67-98):**
-- BLUEPRINT+ (line 69): swap `color: "#22C55E"` → `"#FF3B3B"` (associated with Hack Bar nutrition)
-- BLUEPRINT ELITE (line 85): swap `color: "#FF3B3B"` → `"#22C55E"` (associated with Reset recovery)
+**Dock:** Same HUELLAS array pattern as Home/MainLanding (3 fingerprints: blue→`/`, red→current page scroll, green→`/huella-verde`). Inline, same glassmorphism styling.
 
-**Decorative fingerprint dots (lines 36-37, 250-253):** These are just decorative trio dots (blue/green/red). Leave unchanged — they're not pillar-specific.
+**Section A — Hero (split layout):**
+- Flex row: left 55% (text), right 45% (placeholder image div)
+- Left: Orbitron eyebrow "BLUEPRINT SYSTEM", Michroma title "HACK BAR" with TextScramble, Inter subtitle (Spanish text), red ambient glow
+- Right: dark gray placeholder div with left-fade gradient overlay
+- Mobile: stacks vertically, centered text
 
-**"Save 15%" badge (line 381):** Uses green — this is a generic UI indicator, not pillar-specific. Leave unchanged.
+**Section B — "FUEL YOUR SYSTEM" (2 cards):**
+- Michroma section title, Inter subtitle
+- 2 flex cards with dark placeholder backgrounds, gradient overlays, corner brackets in red, scan line animation
+- Card 1: "SUPLEMENTOS" with 3 bullet items
+- Card 2: "MEAL PREP" with 3 bullet items
+- Hover: translateY(-4px) + red box-shadow
 
-### File 4: `src/pages/HuellaRoja.tsx`
-- Change display text from `"HUELLA ROJA"` → `"HACK BAR"`
+**Section C — "HACKBAR STATION" (3-column grid):**
+- 3 cards with dark placeholders, gradient overlays, red accent line at bottom
+- Cards: "BATIDOS PERSONALIZADOS", "CAFÉ FUNCIONAL", "SNACKS BLUEPRINT"
+- Hover: translateY(-4px)
 
-### File 5: `src/pages/HuellaVerde.tsx`
-- Change display text from `"HUELLA VERDE"` → `"RESET"`
+**Section D — Footer:**
+- Red fingerprint SVG (32px), "Hack Bar — Blueprint Project", copyright
+- Border-top with red tint
 
-### File 6: `src/components/Footer.tsx`
-- Decorative dots (blue/green/red) — leave unchanged, not pillar-specific.
+**Animations:**
+- CSS keyframes: `scanLine`, `fadeUp` (inline `<style>` tag)
+- Framer Motion `motion.div` with `whileInView` for fade-up on sections
+- Card stagger via animation-delay
 
-### Files NOT changed
-- `src/App.tsx` — routes already correct (/huella-roja → HuellaRoja, /huella-verde → HuellaVerde)
-- `src/pages/MainLanding.tsx` — HUELLAS array already has correct mapping (Red=Hack Bar, Green=Reset)
-- `src/components/Footer.tsx` — decorative only
-- No routing paths change
+**Mobile (<768px):**
+- Hero: column layout, centered text, image section 300px height
+- Fuel cards: column layout
+- HackBar Station: single column grid
+- All via inline `<style>` media queries
 
-### Total: 5 files modified
-- `src/pages/Home.tsx` — Radar nodes + connectors
-- `src/components/BentoGrid.tsx` — FINGERPRINT_CARDS colors
-- `src/components/PricingSection.tsx` — PLANS colors
-- `src/pages/HuellaRoja.tsx` — display text
-- `src/pages/HuellaVerde.tsx` — display text
+### File 3: `src/App.tsx` (MINOR UPDATE)
+
+Update the HuellaRoja route to pass `showDock`:
+```tsx
+<Route path="/huella-roja" element={<HuellaRoja showDock={showDock} />} />
+```
+
+No other changes needed — the red scan is self-contained within HuellaRoja (it manages its own scan state independently of the global blue scan).
+
+**Wait — actually**, looking at App.tsx, the global BiometricScan already runs on app load. HuellaRoja should have its own red scan that runs when navigating to `/huella-roja`. So HuellaRoja will manage its own internal scan state, and simply accept `showDock` for the Dock visibility (which is already true by the time users navigate there).
+
+### Files Modified
+- `src/components/BiometricScanRed.tsx` — NEW (red variant of BiometricScan)
+- `src/pages/HuellaRoja.tsx` — REWRITE (full page)
+- `src/App.tsx` — pass `showDock` to HuellaRoja route
+
+### Technical Notes
+- No new npm dependencies
+- TextScramble component already exists at `@/components/ui/text-scramble`
+- FingerprintSVG defined inline (same pattern as Home/MainLanding)
+- Placeholder images use dark `#1a1a1a` background divs (no actual image files needed)
+- All colors are RED (`#FF3B3B`) — no blue or green accents
 
