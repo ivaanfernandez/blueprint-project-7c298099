@@ -165,4 +165,16 @@ All colors MUST be HSL.
     font-size: 14px !important;
     line-height: 1.5 !important;
   }
+  .about-features-desktop {
+    display: none !important;
+  }
+  .about-features-mobile {
+    display: flex !important;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 8px;
+  }
+  .about-photo-col {
+    display: none !important;
+  }
 }

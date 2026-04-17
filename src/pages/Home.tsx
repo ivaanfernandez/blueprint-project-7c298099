@@ -276,8 +276,8 @@ const Home = ({ showDock }: { showDock: boolean }) => {
               Where human performance connects his mind, body and soul.
             </p>
 
-            {/* Timeline */}
-            <div style={{ position: "relative", paddingLeft: 28, flexGrow: 1, display: "flex", flexDirection: "column" as const, justifyContent: window.innerWidth < 768 ? "flex-start" : "space-between" }}>
+            {/* Timeline (DESKTOP) */}
+            <div className="about-features-desktop" style={{ position: "relative", paddingLeft: 28, flexGrow: 1, display: "flex", flexDirection: "column" as const, justifyContent: window.innerWidth < 768 ? "flex-start" : "space-between" }}>
               {/* Blue vertical line */}
               <div style={{
                 position: "absolute", left: 8, top: 10, bottom: 10,
@@ -333,6 +333,30 @@ const Home = ({ showDock }: { showDock: boolean }) => {
                     fontFamily: "'Inter', sans-serif", fontSize: 15, fontWeight: 300,
                     color: "#6B7280", lineHeight: 1.6, paddingLeft: 40,
                   }}>{step.desc}</div>
+                </div>
+              ))}
+            </div>
+
+            {/* Mobile stacked cards */}
+            <div className="about-features-mobile" style={{ display: "none" }}>
+              {[
+                { title: "PRECISION TRAINING", desc: "Data-driven methodology built to forge strength, endurance, and resilience.", grad: "linear-gradient(135deg, rgba(26,107,255,0.15), rgba(26,107,255,0.03))", accent: "linear-gradient(to right, transparent, #1A6BFF, transparent)" },
+                { title: "NUTRITION ENGINEERING", desc: "Every meal is a signal. Optimize input, transform output.", grad: "linear-gradient(135deg, rgba(255,59,59,0.15), rgba(255,59,59,0.03))", accent: "linear-gradient(to right, transparent, #FF3B3B, transparent)" },
+                { title: "RECOVERY SCIENCE", desc: "Strategic rest, optimized sleep, and complete restoration protocols.", grad: "linear-gradient(135deg, rgba(34,197,94,0.15), rgba(34,197,94,0.03))", accent: "linear-gradient(to right, transparent, #22C55E, transparent)" },
+                { title: "MENTAL GROWTH", desc: "Build focus, discipline, and unshakable mental clarity.", grad: "linear-gradient(135deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02))", accent: "linear-gradient(to right, transparent, rgba(255,255,255,0.3), transparent)" },
+              ].map((c) => (
+                <div key={c.title} style={{
+                  width: "100%", minHeight: 140, borderRadius: 16, position: "relative",
+                  overflow: "hidden", display: "flex", alignItems: "flex-end", padding: 20,
+                  background: "#0a0a0a",
+                }}>
+                  <div style={{ position: "absolute", inset: 0, background: c.grad, zIndex: 0 }} />
+                  <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.1) 100%)", zIndex: 1 }} />
+                  <div style={{ position: "relative", zIndex: 2 }}>
+                    <div style={{ fontFamily: "'Michroma', sans-serif", fontSize: 16, color: "#FFFFFF", textTransform: "uppercase", letterSpacing: "0.03em", lineHeight: 1.2 }}>{c.title}</div>
+                    <div style={{ fontFamily: "'Inter', sans-serif", fontSize: 12, color: "rgba(255,255,255,0.5)", lineHeight: 1.5, marginTop: 6 }}>{c.desc}</div>
+                  </div>
+                  <div style={{ position: "absolute", bottom: 0, left: "15%", right: "15%", height: 2, background: c.accent, zIndex: 2 }} />
                 </div>
               ))}
             </div>
