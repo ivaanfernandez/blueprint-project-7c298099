@@ -80,7 +80,8 @@ const Home = ({ showDock }: { showDock: boolean }) => {
         .pillar-card:hover .pillar-card-hover-fp { opacity: 0.15 !important; transform: translate(-50%, -50%) scale(1) !important; }
         
         @media (max-width: 767px) {
-          .programs-grid { grid-template-columns: 1fr !important; max-width: 400px !important; margin: 0 auto !important; }
+          .programs-grid-desktop { display: none !important; }
+          .programs-grid-mobile { display: flex !important; }
           .hero-main-title {
             font-size: clamp(28px, 8vw, 44px) !important;
             white-space: normal !important;
