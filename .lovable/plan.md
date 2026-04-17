@@ -1,23 +1,25 @@
 
+## Plan: Remove "Limitless Potential" Radar Section from Home
 
-## Plan: Fix Hack Bar Hero — Dock + Image Placeholder + Glow
+### File: `src/pages/Home.tsx`
 
-### File: `src/pages/HuellaRoja.tsx`
+**What to delete:**
+- The entire `<section>` (or wrapping element) marked `{/* ── E: LIMITLESS POTENTIAL — RADAR ORBITAL (WHITE) ── */}` containing:
+  - Heading "LIMITLESS POTENTIAL WITH BLUEPRINT"
+  - Subtitle "Three pillars. One integrated system."
+  - Radar visualization (concentric rings, degree ticks 000°/090°/180°/270°, sweep line, center hub fingerprint, 3 pillar nodes)
+  - Associated `<style>` tag with `radarSweep`, `pulseRing`, `fadeUp` keyframes
+  - Any state/refs/variables used only by this section
 
-**Fix 1 — Move Dock to fixed top position (line 172):**
-Change `bottom: 24` to `top: 14` in the Dock wrapper div style.
+**Verification before delete:**
+1. Read `src/pages/Home.tsx` to locate exact line range of the section.
+2. Search the file for `radarSweep`, `pulseRing`, `fadeUp` references — keep keyframes only if reused elsewhere on the page; otherwise remove.
+3. Check imports at the top — remove any that become unused after deletion.
 
-**Fix 2 — Add visible image placeholder in right column (lines 212-216):**
-Replace the plain `#1a1a1a` div with a styled placeholder box containing corner brackets, a camera icon (SVG), and "Image placeholder" label text. The placeholder box uses `border: 1px solid rgba(255,59,59,0.15)`, centered inside the right column with 80% width/60% height.
+**What stays untouched:**
+- Hero, About ("DESIGNED FOR THE HUMAN MACHINE"), Programs, "CHOOSE YOUR FINGERPRINT", Gallery, Footer, Dock
+- Routing, other pages, mobile-specific styling for unrelated sections
+- Section ordering — neighboring sections close the gap naturally without extra spacers
 
-**Fix 3 — Intensify red ambient glow (line 190):**
-- Change existing glow from `rgba(255,59,59,0.06)` to `rgba(255,59,59,0.12)` and reposition to `10% 70%`
-- Add a second glow div on the right side: `radial-gradient(ellipse at 90% 40%, rgba(255,59,59,0.06) 0%, transparent 50%)`
-
-**Mobile CSS updates (lines 155-167):**
-- Add `.hr-hero-right` mobile rule for placeholder height: `height: 250px !important`
-- Add `.hr-hero-placeholder` mobile rule: `width: 90% !important; height: 80% !important;`
-- Existing `.hr-hero-fade` mobile rule already handles top fade
-
-### Only file modified: `src/pages/HuellaRoja.tsx`
-
+### Files Modified
+- `src/pages/Home.tsx` only
