@@ -276,8 +276,8 @@ const Home = ({ showDock }: { showDock: boolean }) => {
               Where human performance connects his mind, body and soul.
             </p>
 
-            {/* Timeline */}
-            <div style={{ position: "relative", paddingLeft: 28, flexGrow: 1, display: "flex", flexDirection: "column" as const, justifyContent: window.innerWidth < 768 ? "flex-start" : "space-between" }}>
+            {/* Timeline (DESKTOP) */}
+            <div className="about-features-desktop" style={{ position: "relative", paddingLeft: 28, flexGrow: 1, display: "flex", flexDirection: "column" as const, justifyContent: window.innerWidth < 768 ? "flex-start" : "space-between" }}>
               {/* Blue vertical line */}
               <div style={{
                 position: "absolute", left: 8, top: 10, bottom: 10,
