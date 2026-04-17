@@ -1,14 +1,28 @@
 
-The hero-to-about fade was already implemented in the previous turn. The reported "build error" is a Cloudflare R2 upload timeout from Lovable's deploy infrastructure — not a code/build failure. There is nothing in the codebase to fix.
+## Plan: Replace mobile flowchart with glassmorphism cards
 
-## Plan: No code changes needed
+### File: `src/pages/Home.tsx`
 
-The fade transition is already in place in `src/pages/Home.tsx`:
-- `.hero-fade-bottom` overlay (140px desktop / 100px mobile) fading from transparent dark to `#FFFFFF`
-- Old 1px transition bar removed
-- Mobile height override added
+Replace the mobile-only `about-features-mobile` block (currently a flowchart with connectors/arrows from the previous iteration) with 4 stacked glassmorphism cards.
 
-The error message is an infra-level timeout (`context deadline exceeded` while requesting temporary R2 credentials from Cloudflare). It's transient and unrelated to the source code.
+### Changes
 
-### Action
-Retry the publish/build. If it keeps failing across multiple retries over several minutes, it's a Lovable platform incident — contact support rather than editing files.
+**1. Replace the contents of `<div className="about-features-mobile">`** with:
+- Container: flex column, `gap: 12px`, `padding: 0 16px`
+- 4 cards (Precision Training, Nutrition Engineering, Recovery Science, Mental Growth) — each:
+  - `padding: 16px 18px`, `borderRadius: 16px`, flex row with `gap: 14px`, `alignItems: center`
+  - Glass surface: `rgba(255,255,255,0.45)` bg, `1px solid rgba(255,255,255,0.6)` border, `backdropFilter: blur(12px)` (+ `WebkitBackdropFilter`), soft outer + inset highlight box-shadow
+  - Icon tile: 40×40, `borderRadius: 12px`, nested glass surface, holds a 18×18 stroke SVG
+  - SVG stroke colors: Blue `#1A6BFF`, Red `#FF3B3B`, Green `#22C55E`, Gray `#9CA3AF`
+  - Label: Michroma 11px, uppercase, `letterSpacing: 0.02em`, color `#000`
+- No connectors, no arrows, no descriptions
+
+**2. Keep the wrapper class `about-features-mobile`** so the existing media query in `src/index.css` continues to handle mobile-only visibility (no need to switch to `flex md:hidden`).
+
+### What stays untouched
+- Desktop timeline `about-features-desktop` (lines 243–302)
+- Section title `DESIGNED FOR THE HUMAN MACHINE` and subtitle (already centered on mobile via existing `.about-title-line` / `.about-subtext-line` rules in `src/index.css`)
+- Gym photo, hero, all other sections, all other pages
+
+### Files Modified
+- `src/pages/Home.tsx` — swap mobile flowchart markup for 4 glassmorphism cards
