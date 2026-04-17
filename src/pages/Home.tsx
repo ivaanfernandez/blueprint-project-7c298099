@@ -204,13 +204,17 @@ const Home = ({ showDock }: { showDock: boolean }) => {
         </TextScramble>
 
 
+        <div className="hero-fade-bottom" style={{
+          position: "absolute",
+          left: 0,
+          right: 0,
+          bottom: 0,
+          height: 140,
+          background: "linear-gradient(to bottom, rgba(7,6,18,0) 0%, rgba(7,6,18,0.4) 40%, #FFFFFF 100%)",
+          zIndex: 2,
+          pointerEvents: "none",
+        }} />
       </div>
-
-      {/* ── Transition Bar ── */}
-      <div style={{
-        height: 1,
-        background: "rgba(255,255,255,0.06)",
-      }} />
 
       {/* ══════════════════════════════════════════════════════ */}
       {/* ── WHITE ZONE WRAPPER ── */}
