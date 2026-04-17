@@ -301,26 +301,92 @@ const Home = ({ showDock }: { showDock: boolean }) => {
               ))}
             </div>
 
-            {/* Mobile stacked cards */}
-            <div className="about-features-mobile" style={{ display: "none" }}>
+            {/* Mobile flowchart */}
+            <div className="about-features-mobile" style={{ display: "none", flexDirection: "column", alignItems: "center", padding: "0 16px", gap: 0 }}>
               {[
-                { title: "PRECISION TRAINING", desc: "Data-driven methodology built to forge strength, endurance, and resilience.", grad: "linear-gradient(135deg, rgba(26,107,255,0.15), rgba(26,107,255,0.03))", accent: "linear-gradient(to right, transparent, #1A6BFF, transparent)" },
-                { title: "NUTRITION ENGINEERING", desc: "Every meal is a signal. Optimize input, transform output.", grad: "linear-gradient(135deg, rgba(255,59,59,0.15), rgba(255,59,59,0.03))", accent: "linear-gradient(to right, transparent, #FF3B3B, transparent)" },
-                { title: "RECOVERY SCIENCE", desc: "Strategic rest, optimized sleep, and complete restoration protocols.", grad: "linear-gradient(135deg, rgba(34,197,94,0.15), rgba(34,197,94,0.03))", accent: "linear-gradient(to right, transparent, #22C55E, transparent)" },
-                { title: "MENTAL GROWTH", desc: "Build focus, discipline, and unshakable mental clarity.", grad: "linear-gradient(135deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02))", accent: "linear-gradient(to right, transparent, rgba(255,255,255,0.3), transparent)" },
-              ].map((c) => (
-                <div key={c.title} style={{
-                  width: "100%", minHeight: 140, borderRadius: 16, position: "relative",
-                  overflow: "hidden", display: "flex", alignItems: "flex-end", padding: 20,
-                  background: "#0a0a0a",
-                }}>
-                  <div style={{ position: "absolute", inset: 0, background: c.grad, zIndex: 0 }} />
-                  <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.1) 100%)", zIndex: 1 }} />
-                  <div style={{ position: "relative", zIndex: 2 }}>
-                    <div style={{ fontFamily: "'Michroma', sans-serif", fontSize: 16, color: "#FFFFFF", textTransform: "uppercase", letterSpacing: "0.03em", lineHeight: 1.2 }}>{c.title}</div>
-                    <div style={{ fontFamily: "'Inter', sans-serif", fontSize: 12, color: "rgba(255,255,255,0.5)", lineHeight: 1.5, marginTop: 6 }}>{c.desc}</div>
+                {
+                  title: "PRECISION TRAINING",
+                  stroke: "#1A6BFF",
+                  iconBg: "rgba(26,107,255,0.06)",
+                  ring: "rgba(26,107,255,0.2)",
+                  inset: "inset 0 0 0 1px rgba(26,107,255,0.15)",
+                  icon: <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />,
+                  nextColor: "#FF3B3B",
+                  gradient: "linear-gradient(to bottom, #1A6BFF, #FF3B3B)",
+                },
+                {
+                  title: "NUTRITION ENGINEERING",
+                  stroke: "#FF3B3B",
+                  iconBg: "rgba(255,59,59,0.06)",
+                  ring: "rgba(255,59,59,0.2)",
+                  inset: "inset 0 0 0 1px rgba(255,59,59,0.15)",
+                  icon: (
+                    <>
+                      <path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9" />
+                      <path d="M13.73 21a2 2 0 01-3.46 0" />
+                    </>
+                  ),
+                  nextColor: "#22C55E",
+                  gradient: "linear-gradient(to bottom, #FF3B3B, #22C55E)",
+                },
+                {
+                  title: "RECOVERY SCIENCE",
+                  stroke: "#22C55E",
+                  iconBg: "rgba(34,197,94,0.06)",
+                  ring: "rgba(34,197,94,0.2)",
+                  inset: "inset 0 0 0 1px rgba(34,197,94,0.15)",
+                  icon: <path d="M22 12h-4l-3 9L9 3l-3 9H2" />,
+                  nextColor: "#9CA3AF",
+                  gradient: "linear-gradient(to bottom, #22C55E, #9CA3AF)",
+                },
+                {
+                  title: "MENTAL GROWTH",
+                  stroke: "#9CA3AF",
+                  iconBg: "rgba(0,0,0,0.03)",
+                  ring: "rgba(0,0,0,0.1)",
+                  inset: "inset 0 0 0 1px rgba(0,0,0,0.06)",
+                  icon: (
+                    <>
+                      <circle cx="12" cy="12" r="10" />
+                      <path d="M12 16v-4M12 8h.01" />
+                    </>
+                  ),
+                  nextColor: null as string | null,
+                  gradient: null as string | null,
+                },
+              ].map((c, i, arr) => (
+                <div key={c.title} style={{ width: "100%", display: "flex", flexDirection: "column", alignItems: "center" }}>
+                  <div style={{
+                    width: "100%", padding: "14px 16px", borderRadius: 14,
+                    display: "flex", alignItems: "center", gap: 14, position: "relative",
+                    border: "0.5px solid rgba(0,0,0,0.06)", boxShadow: c.inset, background: "#ffffff",
+                  }}>
+                    <div style={{
+                      width: 36, height: 36, borderRadius: "50%",
+                      display: "flex", alignItems: "center", justifyContent: "center",
+                      flexShrink: 0, position: "relative", background: c.iconBg,
+                    }}>
+                      <div style={{ position: "absolute", inset: -3, borderRadius: "50%", border: `1px dashed ${c.ring}`, pointerEvents: "none" }} />
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke={c.stroke} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                        {c.icon}
+                      </svg>
+                    </div>
+                    <div style={{
+                      fontFamily: "'Michroma', sans-serif", fontSize: 11,
+                      textTransform: "uppercase", letterSpacing: "0.02em", color: "#000000",
+                    }}>{c.title}</div>
                   </div>
-                  <div style={{ position: "absolute", bottom: 0, left: "15%", right: "15%", height: 2, background: c.accent, zIndex: 2 }} />
+                  {i < arr.length - 1 && (
+                    <div style={{ display: "flex", flexDirection: "column", alignItems: "center", height: 20 }}>
+                      <div style={{ width: 1, flex: 1, background: c.gradient ?? undefined }} />
+                      <div style={{
+                        width: 0, height: 0,
+                        borderLeft: "4px solid transparent",
+                        borderRight: "4px solid transparent",
+                        borderTop: `4px solid ${c.nextColor ?? "transparent"}`,
+                      }} />
+                    </div>
+                  )}
                 </div>
               ))}
             </div>
