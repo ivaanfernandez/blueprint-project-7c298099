@@ -1,25 +1,27 @@
 
-## Plan: Center About title/subtitle on mobile + Remove "SCROLL TO EXPLORE"
+
+## Plan: Replace mobile feature cards with flowchart layout
 
 ### File: `src/pages/Home.tsx`
 
-**Change 1 — Add class to the h2 title (line 264):**
-Add `className="about-title-line"` to the `<h2>` so it can be targeted by mobile CSS. Inline styles stay unchanged.
+Replace the content of the mobile `<div className="about-features-mobile">` block (lines 305–326) with a flowchart:
 
-**Change 2 — Delete the "SCROLL TO EXPLORE" element (lines 209-240):**
-Remove the entire `<motion.div>` block (the bottom-left scroll indicator: arrow circle + "SCROLL TO EXPLORE" label). Removed for both desktop and mobile, as the user prompt says "remove the entire element (arrow + text)".
+- **Container**: flex column, centered, `padding: 0 16px`, gap 0.
+- **4 Cards** (name only, no description):
+  - Full width, `padding: 14px 16px`, `border-radius: 14px`, white background (inherit page bg), `border: 0.5px solid rgba(0,0,0,0.06)`, plus per-card inset colored box-shadow (blue / red / green / gray).
+  - Flex row, `gap: 14px`, items centered.
+  - **Icon circle** (36×36, 50% radius) with tinted background and absolutely-positioned dashed ring (`inset: -3px`). Icons: SVG 16×16 with stroke colors `#1A6BFF`, `#FF3B3B`, `#22C55E`, `#9CA3AF` (paths from prompt).
+  - **Name**: Michroma 11px, uppercase, letter-spacing 0.02em, color `#000`. Titles: "PRECISION TRAINING", "NUTRITION ENGINEERING", "RECOVERY SCIENCE", "MENTAL GROWTH". No description.
+- **3 Connectors** between cards: flex column centered, height 20px.
+  - 1px vertical gradient line (blue→red, red→green, green→gray).
+  - Arrow tip at bottom using CSS triangle (`border-top` in the next card's color).
 
-Note: `scrollToAbout` may become unused after removal — I'll check and remove it only if no other references exist.
-
-### File: `src/index.css`
-
-Inside the existing `@media (max-width: 767px)` block, add:
-```css
-.about-title-line { text-align: center !important; }
-.about-subtext-line { text-align: center !important; }
-```
-(The `.about-section-new` already switches to `flex-direction: column` on mobile, so centering text-align is sufficient.)
+### What stays the same
+- `about-features-mobile` container keeps `className` so the existing `@media (max-width: 767px)` rule in `src/index.css` continues to toggle visibility (desktop hidden / mobile shown).
+- Section title `DESIGNED FOR THE HUMAN MACHINE` and subtitle already centered on mobile via existing CSS — untouched.
+- Desktop timeline (`about-features-desktop`, lines 243–302) untouched.
+- `about-photo-col` untouched (already hidden on mobile).
 
 ### Files Modified
-- `src/pages/Home.tsx` — add class to h2, delete scroll-to-explore motion.div
-- `src/index.css` — add mobile text-align rules
+- `src/pages/Home.tsx` — replace lines 305–326 with flowchart markup.
+
