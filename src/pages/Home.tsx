@@ -372,7 +372,8 @@ const Home = ({ showDock }: { showDock: boolean }) => {
           Three pillars. One integrated system.
         </p>
 
-        <div className="programs-grid" style={{
+        {/* Desktop fingerprint cards — hidden on mobile */}
+        <div className="programs-grid programs-grid-desktop" style={{
           display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 16,
         }}>
           {[
@@ -473,6 +474,67 @@ const Home = ({ showDock }: { showDock: boolean }) => {
                   color: "rgba(255,255,255,0.5)", lineHeight: 1.5, textAlign: "left", margin: 0,
                 }}>{item.desc}</p>
               </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Mobile fingerprint cards — hidden on desktop */}
+        <div className="programs-grid-mobile" style={{
+          display: "none",
+          flexDirection: "column",
+          gap: 10,
+          padding: "0 16px",
+        }}>
+          {[
+            { name: "BLUEPRINT LAB", desc: "Precision training methodology", color: "#1A6BFF", route: "/huella-azul",
+              bg: "linear-gradient(135deg, #1a2a4a, #0a0f1a)",
+              overlay: "linear-gradient(to top, rgba(0,0,0,0.6), rgba(26,107,255,0.1))" },
+            { name: "HACK BAR", desc: "Nutrition engineered for performance", color: "#FF3B3B", route: "/huella-roja",
+              bg: "linear-gradient(135deg, #2a1515, #1a0a0a)",
+              overlay: "linear-gradient(to top, rgba(0,0,0,0.6), rgba(255,59,59,0.1))" },
+            { name: "RESET", desc: "Strategic recovery protocols", color: "#22C55E", route: "/huella-verde",
+              bg: "linear-gradient(135deg, #0a2a1a, #0a1a0f)",
+              overlay: "linear-gradient(to top, rgba(0,0,0,0.6), rgba(34,197,94,0.1))" },
+          ].map((c) => (
+            <div
+              key={c.name}
+              onClick={() => navigate(c.route)}
+              style={{
+                width: "100%", height: 120, borderRadius: 14,
+                position: "relative", overflow: "hidden",
+                display: "flex", alignItems: "flex-end", padding: 16,
+                cursor: "pointer", background: c.bg,
+              }}
+            >
+              {/* Dark overlay */}
+              <div style={{ position: "absolute", inset: 0, zIndex: 1, background: c.overlay }} />
+
+              {/* Fingerprint icon top-right */}
+              <div style={{
+                position: "absolute", top: 10, right: 10, width: 24, height: 24,
+                zIndex: 2, opacity: 0.4,
+              }}>
+                <FingerprintSVG color={c.color} size={24} />
+              </div>
+
+              {/* Content */}
+              <div style={{ position: "relative", zIndex: 2 }}>
+                <div style={{
+                  fontFamily: "'Michroma', sans-serif", fontSize: 13, color: "#FFFFFF",
+                  textTransform: "uppercase", letterSpacing: "0.02em", marginBottom: 3,
+                }}>{c.name}</div>
+                <div style={{
+                  fontFamily: "'Inter', sans-serif", fontSize: 10,
+                  color: "rgba(255,255,255,0.55)", lineHeight: 1.4,
+                }}>{c.desc}</div>
+              </div>
+
+              {/* Accent line at bottom */}
+              <div style={{
+                position: "absolute", bottom: 0, left: "15%", right: "15%",
+                height: 2, zIndex: 2,
+                background: `linear-gradient(to right, transparent, ${c.color}, transparent)`,
+              }} />
             </div>
           ))}
         </div>
