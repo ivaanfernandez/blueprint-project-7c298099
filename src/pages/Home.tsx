@@ -306,8 +306,14 @@ const Home = ({ showDock }: { showDock: boolean }) => {
               ))}
             </div>
 
-            {/* Mobile features — glassmorphism cards */}
-            <div className="about-features-mobile" style={{ display: "none", flexDirection: "column", padding: "0 16px", gap: 12 }}>
+            {/* Mobile features — glassmorphism with animated glow border */}
+            <div className="about-features-mobile" style={{ display: "none", flexDirection: "column", padding: "0 16px", gap: 14 }}>
+              <style>{`
+                @keyframes glowSpin {
+                  0% { transform: rotate(0deg); }
+                  100% { transform: rotate(360deg); }
+                }
+              `}</style>
               {[
                 {
                   title: "PRECISION TRAINING",
@@ -341,41 +347,67 @@ const Home = ({ showDock }: { showDock: boolean }) => {
                 },
               ].map((c) => (
                 <div key={c.title} style={{
-                  padding: "16px 18px",
-                  borderRadius: 16,
-                  display: "flex",
-                  alignItems: "center",
-                  gap: 14,
-                  background: "rgba(255, 255, 255, 0.45)",
-                  border: "1px solid rgba(255, 255, 255, 0.6)",
-                  boxShadow: "0 2px 16px rgba(0,0,0,0.04), inset 0 1px 0 rgba(255,255,255,0.8)",
-                  backdropFilter: "blur(12px)",
-                  WebkitBackdropFilter: "blur(12px)",
                   position: "relative",
+                  padding: 1,
+                  borderRadius: 17,
+                  overflow: "hidden",
+                  isolation: "isolate",
                 }}>
+                  {/* Sharp rotating glow */}
                   <div style={{
-                    width: 40,
-                    height: 40,
-                    borderRadius: 12,
+                    position: "absolute",
+                    inset: -20,
+                    background: "conic-gradient(from 0deg, transparent 0deg, rgba(255,255,255,0.95) 60deg, rgba(125,211,252,0.9) 90deg, transparent 150deg, transparent 210deg, rgba(255,255,255,0.95) 270deg, rgba(125,211,252,0.9) 300deg, transparent 360deg)",
+                    animation: "glowSpin 6s linear infinite",
+                    zIndex: 0,
+                  }} />
+                  {/* Soft blurred glow (counter-rotating) */}
+                  <div style={{
+                    position: "absolute",
+                    inset: -20,
+                    background: "conic-gradient(from 180deg, transparent 0deg, rgba(186,230,253,0.7) 80deg, transparent 160deg, transparent 240deg, rgba(186,230,253,0.7) 320deg, transparent 360deg)",
+                    animation: "glowSpin 9s linear infinite reverse",
+                    filter: "blur(10px)",
+                    zIndex: 0,
+                  }} />
+                  {/* Card inner */}
+                  <div style={{
+                    position: "relative",
+                    zIndex: 1,
+                    padding: "16px 18px",
+                    borderRadius: 16,
                     display: "flex",
                     alignItems: "center",
-                    justifyContent: "center",
-                    flexShrink: 0,
-                    background: "rgba(255, 255, 255, 0.5)",
-                    border: "1px solid rgba(255, 255, 255, 0.7)",
-                    boxShadow: "0 1px 8px rgba(0,0,0,0.03), inset 0 1px 0 rgba(255,255,255,0.9)",
+                    gap: 14,
+                    background: "rgba(255, 255, 255, 0.82)",
+                    boxShadow: "0 2px 16px rgba(0,0,0,0.04), inset 0 1px 0 rgba(255,255,255,0.9)",
+                    backdropFilter: "blur(12px)",
+                    WebkitBackdropFilter: "blur(12px)",
                   }}>
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke={c.stroke} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                      {c.icon}
-                    </svg>
+                    <div style={{
+                      width: 40,
+                      height: 40,
+                      borderRadius: 12,
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      flexShrink: 0,
+                      background: "rgba(255, 255, 255, 0.6)",
+                      border: "1px solid rgba(255, 255, 255, 0.8)",
+                      boxShadow: "0 1px 8px rgba(0,0,0,0.03), inset 0 1px 0 rgba(255,255,255,0.9)",
+                    }}>
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke={c.stroke} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                        {c.icon}
+                      </svg>
+                    </div>
+                    <span style={{
+                      fontFamily: "'Michroma', sans-serif",
+                      fontSize: 11,
+                      textTransform: "uppercase",
+                      letterSpacing: "0.02em",
+                      color: "#000",
+                    }}>{c.title}</span>
                   </div>
-                  <span style={{
-                    fontFamily: "'Michroma', sans-serif",
-                    fontSize: 11,
-                    textTransform: "uppercase",
-                    letterSpacing: "0.02em",
-                    color: "#000",
-                  }}>{c.title}</span>
                 </div>
               ))}
             </div>
