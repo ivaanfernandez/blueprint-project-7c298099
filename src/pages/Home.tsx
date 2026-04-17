@@ -52,9 +52,6 @@ const Home = ({ showDock }: { showDock: boolean }) => {
   const navigate = useNavigate();
   const aboutRef = useRef<HTMLDivElement>(null);
 
-  const scrollToAbout = () => {
-    aboutRef.current?.scrollIntoView({ behavior: "smooth" });
-  };
 
 
 

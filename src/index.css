@@ -164,6 +164,10 @@ All colors MUST be HSL.
     white-space: normal !important;
     font-size: 14px !important;
     line-height: 1.5 !important;
+    text-align: center !important;
+  }
+  .about-title-line {
+    text-align: center !important;
   }
   .about-features-desktop {
     display: none !important;
