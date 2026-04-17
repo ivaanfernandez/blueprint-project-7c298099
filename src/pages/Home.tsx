@@ -112,6 +112,7 @@ const Home = ({ showDock }: { showDock: boolean }) => {
             text-align: center !important;
             gap: 12px !important;
           }
+          .hero-fade-bottom { height: 100px !important; }
         }
       `}</style>
 
