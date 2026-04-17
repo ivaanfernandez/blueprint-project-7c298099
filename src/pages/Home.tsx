@@ -52,9 +52,6 @@ const Home = ({ showDock }: { showDock: boolean }) => {
   const navigate = useNavigate();
   const aboutRef = useRef<HTMLDivElement>(null);
 
-  const scrollToAbout = () => {
-    aboutRef.current?.scrollIntoView({ behavior: "smooth" });
-  };
 
 
 
@@ -206,39 +203,6 @@ const Home = ({ showDock }: { showDock: boolean }) => {
         </TextScramble>
 
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, ease: [0.25, 0.1, 0.25, 1], delay: 1.0 }}
-          style={{
-            position: "absolute",
-            bottom: 48,
-            left: 48,
-            zIndex: 3,
-          }}
-        >
-          <div style={{ display: "flex", alignItems: "center", gap: 12, cursor: "pointer" }}
-            onClick={scrollToAbout}
-          >
-            <div style={{
-              width: 32, height: 32, borderRadius: "50%", border: "1px solid rgba(255,255,255,0.2)",
-              display: "flex", alignItems: "center", justifyContent: "center",
-              transition: "all 0.3s ease",
-            }}>
-              <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-                <path d="M6 2v8M6 10l3-3M6 10L3 7" stroke="#fff" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
-            </div>
-
-            <span style={{
-              fontFamily: "'Orbitron', sans-serif", fontSize: 8, color: "rgba(255,255,255,0.4)",
-              letterSpacing: "0.2em", textTransform: "uppercase",
-            }}>
-              SCROLL TO EXPLORE
-            </span>
-          </div>
-        </motion.div>
-
       </div>
 
       {/* ── Transition Bar ── */}
@@ -261,7 +225,7 @@ const Home = ({ showDock }: { showDock: boolean }) => {
         }}>
           {/* Left — Title + Subtitle + Timeline */}
           <div style={{ flex: 1, display: "flex", flexDirection: "column" as const, ...(window.innerWidth >= 768 ? {} : { flexGrow: 0 }) }}>
-            <h2 style={{
+            <h2 className="about-title-line" style={{
               fontFamily: "'Michroma', sans-serif",
               fontSize: "clamp(18px, 2.2vw, 28px)", color: "#000",
               textTransform: "uppercase", lineHeight: 1.12, marginBottom: 10, marginTop: 0,
