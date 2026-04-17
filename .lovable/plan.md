@@ -1,7 +1,25 @@
 
-Both requested changes were already implemented in the previous turn:
+## Plan: Center About title/subtitle on mobile + Remove "SCROLL TO EXPLORE"
 
-1. **Centering on mobile** — `.about-title-line` and `.about-subtext-line` already have `text-align: center !important` inside the `@media (max-width: 767px)` block in `src/index.css`, and the `<h2>` already carries the `about-title-line` class.
-2. **"SCROLL TO EXPLORE" removed** — the `<motion.div>` containing the arrow + label was deleted from `src/pages/Home.tsx`, and the unused `scrollToAbout` helper was cleaned up.
+### File: `src/pages/Home.tsx`
 
-No further changes are needed. Please verify in the mobile preview (<768px) that the title and subtitle are centered and the scroll indicator no longer appears. If anything still looks off, share a screenshot and I'll dig in.
+**Change 1 — Add class to the h2 title (line 264):**
+Add `className="about-title-line"` to the `<h2>` so it can be targeted by mobile CSS. Inline styles stay unchanged.
+
+**Change 2 — Delete the "SCROLL TO EXPLORE" element (lines 209-240):**
+Remove the entire `<motion.div>` block (the bottom-left scroll indicator: arrow circle + "SCROLL TO EXPLORE" label). Removed for both desktop and mobile, as the user prompt says "remove the entire element (arrow + text)".
+
+Note: `scrollToAbout` may become unused after removal — I'll check and remove it only if no other references exist.
+
+### File: `src/index.css`
+
+Inside the existing `@media (max-width: 767px)` block, add:
+```css
+.about-title-line { text-align: center !important; }
+.about-subtext-line { text-align: center !important; }
+```
+(The `.about-section-new` already switches to `flex-direction: column` on mobile, so centering text-align is sufficient.)
+
+### Files Modified
+- `src/pages/Home.tsx` — add class to h2, delete scroll-to-explore motion.div
+- `src/index.css` — add mobile text-align rules
