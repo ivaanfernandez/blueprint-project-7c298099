@@ -306,92 +306,76 @@ const Home = ({ showDock }: { showDock: boolean }) => {
               ))}
             </div>
 
-            {/* Mobile flowchart */}
-            <div className="about-features-mobile" style={{ display: "none", flexDirection: "column", alignItems: "center", padding: "0 16px", gap: 0 }}>
+            {/* Mobile features — glassmorphism cards */}
+            <div className="about-features-mobile" style={{ display: "none", flexDirection: "column", padding: "0 16px", gap: 12 }}>
               {[
                 {
                   title: "PRECISION TRAINING",
                   stroke: "#1A6BFF",
-                  iconBg: "rgba(26,107,255,0.06)",
-                  ring: "rgba(26,107,255,0.2)",
-                  inset: "inset 0 0 0 1px rgba(26,107,255,0.15)",
                   icon: <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />,
-                  nextColor: "#FF3B3B",
-                  gradient: "linear-gradient(to bottom, #1A6BFF, #FF3B3B)",
                 },
                 {
                   title: "NUTRITION ENGINEERING",
                   stroke: "#FF3B3B",
-                  iconBg: "rgba(255,59,59,0.06)",
-                  ring: "rgba(255,59,59,0.2)",
-                  inset: "inset 0 0 0 1px rgba(255,59,59,0.15)",
                   icon: (
                     <>
                       <path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9" />
                       <path d="M13.73 21a2 2 0 01-3.46 0" />
                     </>
                   ),
-                  nextColor: "#22C55E",
-                  gradient: "linear-gradient(to bottom, #FF3B3B, #22C55E)",
                 },
                 {
                   title: "RECOVERY SCIENCE",
                   stroke: "#22C55E",
-                  iconBg: "rgba(34,197,94,0.06)",
-                  ring: "rgba(34,197,94,0.2)",
-                  inset: "inset 0 0 0 1px rgba(34,197,94,0.15)",
                   icon: <path d="M22 12h-4l-3 9L9 3l-3 9H2" />,
-                  nextColor: "#9CA3AF",
-                  gradient: "linear-gradient(to bottom, #22C55E, #9CA3AF)",
                 },
                 {
                   title: "MENTAL GROWTH",
                   stroke: "#9CA3AF",
-                  iconBg: "rgba(0,0,0,0.03)",
-                  ring: "rgba(0,0,0,0.1)",
-                  inset: "inset 0 0 0 1px rgba(0,0,0,0.06)",
                   icon: (
                     <>
                       <circle cx="12" cy="12" r="10" />
                       <path d="M12 16v-4M12 8h.01" />
                     </>
                   ),
-                  nextColor: null as string | null,
-                  gradient: null as string | null,
                 },
-              ].map((c, i, arr) => (
-                <div key={c.title} style={{ width: "100%", display: "flex", flexDirection: "column", alignItems: "center" }}>
+              ].map((c) => (
+                <div key={c.title} style={{
+                  padding: "16px 18px",
+                  borderRadius: 16,
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 14,
+                  background: "rgba(255, 255, 255, 0.45)",
+                  border: "1px solid rgba(255, 255, 255, 0.6)",
+                  boxShadow: "0 2px 16px rgba(0,0,0,0.04), inset 0 1px 0 rgba(255,255,255,0.8)",
+                  backdropFilter: "blur(12px)",
+                  WebkitBackdropFilter: "blur(12px)",
+                  position: "relative",
+                }}>
                   <div style={{
-                    width: "100%", padding: "14px 16px", borderRadius: 14,
-                    display: "flex", alignItems: "center", gap: 14, position: "relative",
-                    border: "0.5px solid rgba(0,0,0,0.06)", boxShadow: c.inset, background: "#ffffff",
+                    width: 40,
+                    height: 40,
+                    borderRadius: 12,
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    flexShrink: 0,
+                    background: "rgba(255, 255, 255, 0.5)",
+                    border: "1px solid rgba(255, 255, 255, 0.7)",
+                    boxShadow: "0 1px 8px rgba(0,0,0,0.03), inset 0 1px 0 rgba(255,255,255,0.9)",
                   }}>
-                    <div style={{
-                      width: 36, height: 36, borderRadius: "50%",
-                      display: "flex", alignItems: "center", justifyContent: "center",
-                      flexShrink: 0, position: "relative", background: c.iconBg,
-                    }}>
-                      <div style={{ position: "absolute", inset: -3, borderRadius: "50%", border: `1px dashed ${c.ring}`, pointerEvents: "none" }} />
-                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke={c.stroke} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                        {c.icon}
-                      </svg>
-                    </div>
-                    <div style={{
-                      fontFamily: "'Michroma', sans-serif", fontSize: 11,
-                      textTransform: "uppercase", letterSpacing: "0.02em", color: "#000000",
-                    }}>{c.title}</div>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke={c.stroke} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                      {c.icon}
+                    </svg>
                   </div>
-                  {i < arr.length - 1 && (
-                    <div style={{ display: "flex", flexDirection: "column", alignItems: "center", height: 20 }}>
-                      <div style={{ width: 1, flex: 1, background: c.gradient ?? undefined }} />
-                      <div style={{
-                        width: 0, height: 0,
-                        borderLeft: "4px solid transparent",
-                        borderRight: "4px solid transparent",
-                        borderTop: `4px solid ${c.nextColor ?? "transparent"}`,
-                      }} />
-                    </div>
-                  )}
+                  <span style={{
+                    fontFamily: "'Michroma', sans-serif",
+                    fontSize: 11,
+                    textTransform: "uppercase",
+                    letterSpacing: "0.02em",
+                    color: "#000",
+                  }}>{c.title}</span>
                 </div>
               ))}
             </div>
