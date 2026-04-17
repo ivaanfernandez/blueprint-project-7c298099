@@ -228,7 +228,7 @@ const Home = ({ showDock }: { showDock: boolean }) => {
         }}>
           {/* Left — Title + Subtitle + Timeline */}
           <div style={{ flex: 1, display: "flex", flexDirection: "column" as const, ...(window.innerWidth >= 768 ? {} : { flexGrow: 0 }) }}>
-            <h2 style={{
+            <h2 className="about-title-line" style={{
               fontFamily: "'Michroma', sans-serif",
               fontSize: "clamp(18px, 2.2vw, 28px)", color: "#000",
               textTransform: "uppercase", lineHeight: 1.12, marginBottom: 10, marginTop: 0,
