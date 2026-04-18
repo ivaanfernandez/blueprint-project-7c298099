@@ -575,16 +575,8 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
           .hero-bg-mobile {
             display: block !important;
           }
-          .hero-content-wrapper {
-            display: flex !important;
-            flex-direction: column !important;
-            align-items: center !important;
-            justify-content: center !important;
-            text-align: center !important;
-            min-height: 100vh !important;
-            padding: 80px 6% 40px !important;
-            padding-top: 80px !important;
-            overflow: hidden !important;
+          .hero-content-wrapper.hidden {
+            display: none !important;
           }
           .hero-headline-wrapper {
             display: flex !important;
