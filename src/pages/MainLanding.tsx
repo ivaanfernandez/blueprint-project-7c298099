@@ -339,28 +339,27 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
 
         </div>
 
-        {/* MOBILE content — restructured into two groups */}
+        {/* MOBILE content — text centered absolutely, button pinned to bottom */}
         <div className="flex md:hidden" style={{
           position: "relative",
           zIndex: 10,
           flexDirection: "column",
           alignItems: "center",
           justifyContent: "center",
-          textAlign: "center",
           width: "100%",
+          height: "100vh",
           minHeight: "100vh",
-          padding: "80px 6% 24px",
+          padding: "80px 6% 100px",
+          boxSizing: "border-box",
         }}>
-          {/* GROUP 1: Text — grows to fill, centers content vertically */}
+          {/* Centered text block */}
           <div style={{
-            flex: 1,
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            justifyContent: "center",
-            textAlign: "center",
-            width: "100%",
-            minHeight: 0,
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            gap: '20px',
+            width: '100%',
+            textAlign: 'center',
           }}>
             <div style={{ width: '100%', textAlign: 'center', overflow: 'hidden' }}>
               <span style={{
@@ -404,7 +403,6 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
               flexDirection: 'column',
               alignItems: 'center',
               gap: '2px',
-              marginTop: '20px',
               textAlign: 'center',
               width: '100%',
             }}>
@@ -449,14 +447,16 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
             </div>
           </div>
 
-          {/* GROUP 2: Button + chevron — pinned to bottom */}
+          {/* Button + Chevron pinned to bottom via absolute positioning */}
           <div style={{
+            position: "absolute",
+            bottom: "20px",
+            left: 0,
+            right: 0,
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
-            gap: "16px",
-            paddingBottom: "16px",
-            flexShrink: 0,
+            gap: "12px",
           }}>
             <ShinyButton fontSize="15px" className="hero-shiny-btn">HAVE YOUR BLUEPRINT</ShinyButton>
             <ChevronDown size={24} style={{ color: 'rgba(255,255,255,0.3)', animation: 'hero-bounce 2s ease-in-out infinite' }} />
@@ -575,16 +575,8 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
           .hero-bg-mobile {
             display: block !important;
           }
-          .hero-content-wrapper {
-            display: flex !important;
-            flex-direction: column !important;
-            align-items: center !important;
-            justify-content: center !important;
-            text-align: center !important;
-            min-height: 100vh !important;
-            padding: 80px 6% 40px !important;
-            padding-top: 80px !important;
-            overflow: hidden !important;
+          .hero-content-wrapper.hidden {
+            display: none !important;
           }
           .hero-headline-wrapper {
             display: flex !important;
