@@ -210,11 +210,22 @@ const Home = ({ showDock }: { showDock: boolean }) => {
           right: 0,
           bottom: 0,
           height: 140,
-          background: "linear-gradient(to bottom, rgba(7,6,18,0) 0%, rgba(7,6,18,0.4) 40%, #FFFFFF 100%)",
+          background: "linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0.5) 40%, #000000 100%)",
           zIndex: 2,
           pointerEvents: "none",
         }} />
       </div>
+
+      {/* ── Dark to white transition strip ── */}
+      <div
+        style={{
+          width: "100%",
+          height: window.innerWidth < 768 ? 80 : 120,
+          background: "linear-gradient(to bottom, #000000, #FFFFFF)",
+          position: "relative",
+          zIndex: 1,
+        }}
+      />
 
       {/* ══════════════════════════════════════════════════════ */}
       {/* ── WHITE ZONE WRAPPER ── */}
