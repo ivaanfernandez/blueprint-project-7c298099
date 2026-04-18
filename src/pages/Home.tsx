@@ -86,7 +86,8 @@ const Home = ({ showDock }: { showDock: boolean }) => {
             white-space: normal !important;
             padding: 0 24px !important;
           }
-          .about-section-new { padding: 48px 6% !important; flex-direction: column !important; gap: 32px !important; align-items: flex-start !important; }
+          .about-section-new { padding: 48px 6% 24px !important; flex-direction: column !important; gap: 32px !important; align-items: flex-start !important; }
+          .programs-section { padding: 24px 7% 56px !important; }
           .about-photo-col { flex: none !important; width: 100% !important; max-width: 280px !important; margin: 0 auto !important; order: -1 !important; }
           .bento-grid-neo { grid-template-columns: repeat(2, 1fr) !important; grid-template-rows: repeat(3, 180px) !important; }
           .feature-title-centered {
@@ -478,7 +479,7 @@ const Home = ({ showDock }: { showDock: boolean }) => {
       <SectionDivider />
 
       {/* ── PROGRAMS SECTION (WHITE) ── */}
-      <div style={{ padding: "56px 7%", position: "relative", zIndex: 1 }}>
+      <div className="programs-section" style={{ padding: "56px 7%", position: "relative", zIndex: 1 }}>
         <h2 style={{
           fontFamily: "'Michroma', sans-serif",
           fontSize: "clamp(20px, 2.5vw, 32px)", color: "#000",
