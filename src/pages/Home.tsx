@@ -162,7 +162,7 @@ const Home = ({ showDock }: { showDock: boolean }) => {
             zIndex: 0,
           }}
         >
-          <source src="/videos/blueprint-hero.mp4" type="video/mp4" />
+          <source src="/hero-bg.mp4" type="video/mp4" />
         </video>
 
         <div style={{
