@@ -440,7 +440,8 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
             display: block !important;
           }
           .hero-section {
-            height: 95vh !important;
+            height: 100vh !important;
+            min-height: 100vh !important;
             margin-bottom: 60px !important;
           }
           .hero-bg-desktop {
@@ -450,16 +451,23 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
             display: block !important;
           }
           .hero-content-wrapper {
-            padding-top: 90px !important;
+            display: flex !important;
+            flex-direction: column !important;
+            align-items: center !important;
+            justify-content: center !important;
+            text-align: center !important;
+            min-height: 100vh !important;
+            padding: 80px 6% 40px !important;
+            padding-top: 80px !important;
             overflow: hidden !important;
           }
           .hero-headline-wrapper {
-            display: block !important;
+            display: flex !important;
+            flex-direction: column !important;
+            align-items: center !important;
             text-align: center !important;
             padding: 0 4% !important;
-            padding-left: 4% !important;
-            padding-right: 4% !important;
-            padding-top: 40px !important;
+            padding-top: 0 !important;
           }
           .hero-headline-white {
             display: block !important;
@@ -495,11 +503,13 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
             display: flex !important;
           }
           .hero-cta-button {
-            margin-top: 28px !important;
-            margin-bottom: 40px !important;
+            margin-top: auto !important;
+            margin-bottom: 20px !important;
+            align-self: center !important;
           }
           .hero-scroll-indicator {
-            margin-top: 12px !important;
+            margin-top: 0 !important;
+            margin-bottom: 16px !important;
           }
           .hero-shiny-btn {
             font-size: 11px !important;
