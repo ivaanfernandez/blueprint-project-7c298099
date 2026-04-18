@@ -1,28 +1,26 @@
 
-## Plan: Replace mobile flowchart with glassmorphism cards
 
-### File: `src/pages/Home.tsx`
+## Plan: Force vertical centering on mobile hero (MainLanding)
 
-Replace the mobile-only `about-features-mobile` block (currently a flowchart with connectors/arrows from the previous iteration) with 4 stacked glassmorphism cards.
+The mobile wrapper at lines 343–461 already has the two-group structure but text still appears stuck near the top on the 390px viewport. Root cause: the inner Group 1 div is missing `min-height: 0`, which (in a flex column parent) prevents proper shrinking/centering when the children's natural height plus Group 2 exceeds available space. Apply the user's exact fix.
 
-### Changes
+### File: `src/pages/MainLanding.tsx`
 
-**1. Replace the contents of `<div className="about-features-mobile">`** with:
-- Container: flex column, `gap: 12px`, `padding: 0 16px`
-- 4 cards (Precision Training, Nutrition Engineering, Recovery Science, Mental Growth) — each:
-  - `padding: 16px 18px`, `borderRadius: 16px`, flex row with `gap: 14px`, `alignItems: center`
-  - Glass surface: `rgba(255,255,255,0.45)` bg, `1px solid rgba(255,255,255,0.6)` border, `backdropFilter: blur(12px)` (+ `WebkitBackdropFilter`), soft outer + inset highlight box-shadow
-  - Icon tile: 40×40, `borderRadius: 12px`, nested glass surface, holds a 18×18 stroke SVG
-  - SVG stroke colors: Blue `#1A6BFF`, Red `#FF3B3B`, Green `#22C55E`, Gray `#9CA3AF`
-  - Label: Michroma 11px, uppercase, `letterSpacing: 0.02em`, color `#000`
-- No connectors, no arrows, no descriptions
+**Edit 1 — Outer mobile wrapper (lines 343–351)**
+Add explicit centering properties to the `flex md:hidden` div. Add `justifyContent: "center"`, `textAlign: "center"`. Keep existing `minHeight: 100vh`, `flexDirection: column`, `alignItems: center`, `padding: "80px 6% 24px"`.
 
-**2. Keep the wrapper class `about-features-mobile`** so the existing media query in `src/index.css` continues to handle mobile-only visibility (no need to switch to `flex md:hidden`).
+**Edit 2 — Inner Group 1 wrapper (lines 353–361)**
+Add `minHeight: 0` to the text group so it can shrink/grow correctly inside the flex column parent. Keep all other props (`flex: 1`, `display: flex`, `flexDirection: column`, `alignItems: center`, `justifyContent: center`, `textAlign: center`, `width: 100%`).
 
-### What stays untouched
-- Desktop timeline `about-features-desktop` (lines 243–302)
-- Section title `DESIGNED FOR THE HUMAN MACHINE` and subtitle (already centered on mobile via existing `.about-title-line` / `.about-subtext-line` rules in `src/index.css`)
-- Gym photo, hero, all other sections, all other pages
+**Edit 3 — No changes to Group 2** (button + chevron) — already pinned correctly with `flexShrink: 0`.
+
+### Untouched
+- Desktop wrapper (`hidden md:flex`, lines before 342)
+- All text content, WordRotate, FadeText, ShinyButton, ChevronDown
+- Section background, gradients, video, dock
+- `.hero-section` CSS rules (height: 100vh on mobile is needed so the wrapper's `100vh` matches the section)
+- All other pages and sections
 
 ### Files Modified
-- `src/pages/Home.tsx` — swap mobile flowchart markup for 4 glassmorphism cards
+- `src/pages/MainLanding.tsx` — two small style-object additions
+
