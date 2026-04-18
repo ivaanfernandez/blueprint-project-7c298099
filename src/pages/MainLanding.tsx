@@ -345,6 +345,8 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
           zIndex: 10,
           flexDirection: "column",
           alignItems: "center",
+          justifyContent: "center",
+          textAlign: "center",
           width: "100%",
           minHeight: "100vh",
           padding: "80px 6% 24px",
@@ -358,6 +360,7 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
             justifyContent: "center",
             textAlign: "center",
             width: "100%",
+            minHeight: 0,
           }}>
             <div style={{ width: '100%', textAlign: 'center', overflow: 'hidden' }}>
               <span style={{
