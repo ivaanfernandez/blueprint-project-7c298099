@@ -374,7 +374,7 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
               }}>
                 THIS ISN'T A GYM
               </span>
-              <span style={{
+              <span className="mobile-wordrotate" style={{
                 display: 'block',
                 color: '#1A6BFF',
                 fontFamily: "'Michroma', sans-serif",
@@ -663,6 +663,31 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
             display: flex !important;
             justify-content: center !important;
             width: 100% !important;
+          }
+          .mobile-wordrotate {
+            display: block !important;
+            width: 100% !important;
+            text-align: center !important;
+          }
+          .mobile-wordrotate .word-rotate-wrapper {
+            width: 100% !important;
+            min-width: 0 !important;
+            max-width: 100% !important;
+            height: auto !important;
+            min-height: 1.2em !important;
+            display: block !important;
+            text-align: center !important;
+          }
+          .mobile-wordrotate .word-rotate-inner {
+            position: relative !important;
+            left: auto !important;
+            right: auto !important;
+            transform: none !important;
+            display: flex !important;
+            justify-content: center !important;
+            width: 100% !important;
+            text-align: center !important;
+            white-space: normal !important;
           }
         }
       `}</style>
