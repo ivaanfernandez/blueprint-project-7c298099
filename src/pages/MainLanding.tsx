@@ -346,9 +346,11 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
           flexDirection: "column",
           alignItems: "center",
           width: "100%",
+          height: "100vh",
           minHeight: "100vh",
           padding: "80px 6% 24px",
           gap: "20px",
+          boxSizing: "border-box",
         }}>
           {/* Spacer top */}
           <div style={{ flex: 1, minHeight: "20px" }} />
