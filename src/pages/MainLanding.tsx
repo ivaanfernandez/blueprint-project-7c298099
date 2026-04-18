@@ -374,7 +374,7 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
               }}>
                 THIS ISN'T A GYM
               </span>
-              <span style={{
+              <span className="mobile-wordrotate" style={{
                 display: 'block',
                 color: '#1A6BFF',
                 fontFamily: "'Michroma', sans-serif",
