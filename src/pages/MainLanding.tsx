@@ -503,11 +503,13 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
             display: flex !important;
           }
           .hero-cta-button {
-            margin-top: 28px !important;
-            margin-bottom: 40px !important;
+            margin-top: auto !important;
+            margin-bottom: 20px !important;
+            align-self: center !important;
           }
           .hero-scroll-indicator {
-            margin-top: 12px !important;
+            margin-top: 0 !important;
+            margin-bottom: 16px !important;
           }
           .hero-shiny-btn {
             font-size: 11px !important;
