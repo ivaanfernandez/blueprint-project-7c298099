@@ -225,7 +225,8 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
           }}
         />
         {/* Hero content - on top of image */}
-        <div className="hero-content-wrapper" style={{ position: "relative", zIndex: 10, width: "100%", display: "flex", flexDirection: "column", paddingTop: "110px" }}>
+        {/* DESKTOP content — unchanged */}
+        <div className="hero-content-wrapper hidden md:flex" style={{ position: "relative", zIndex: 10, width: "100%", flexDirection: "column", paddingTop: "110px" }}>
         <div className="hero-headline-wrapper" style={{
           width: '100%',
           position: 'relative',
@@ -336,6 +337,127 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
           <ChevronDown size={24} style={{ color: 'rgba(255,255,255,0.3)', animation: 'hero-bounce 2s ease-in-out infinite' }} />
         </div>
 
+        </div>
+
+        {/* MOBILE content — restructured into two groups */}
+        <div className="flex md:hidden" style={{
+          position: "relative",
+          zIndex: 10,
+          flexDirection: "column",
+          alignItems: "center",
+          width: "100%",
+          minHeight: "100vh",
+          padding: "80px 6% 24px",
+        }}>
+          {/* GROUP 1: Text — grows to fill, centers content vertically */}
+          <div style={{
+            flex: 1,
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+            textAlign: "center",
+            width: "100%",
+          }}>
+            <div style={{ width: '100%', textAlign: 'center', overflow: 'hidden' }}>
+              <span style={{
+                display: 'block',
+                color: '#FFFFFF',
+                fontFamily: "'Michroma', sans-serif",
+                fontWeight: 400,
+                fontSize: 'clamp(18px, 5.5vw, 32px)',
+                lineHeight: 1.15,
+                letterSpacing: '0.02em',
+                textAlign: 'center',
+              }}>
+                THIS ISN'T A GYM
+              </span>
+              <span style={{
+                display: 'block',
+                color: '#1A6BFF',
+                fontFamily: "'Michroma', sans-serif",
+                fontWeight: 400,
+                fontSize: 'clamp(18px, 5.5vw, 32px)',
+                lineHeight: 1.15,
+                letterSpacing: '0.02em',
+                textAlign: 'center',
+                marginTop: '4px',
+              }}>
+                <WordRotate
+                  words={[
+                    "IT'S A SYSTEM",
+                    "IT'S A COMMUNITY",
+                    "IT'S A MINDSET",
+                    "THIS IS BLUEPRINT"
+                  ]}
+                  duration={2500}
+                  className=""
+                />
+              </span>
+            </div>
+
+            <div style={{
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              gap: '2px',
+              marginTop: '20px',
+              textAlign: 'center',
+              width: '100%',
+            }}>
+              {[
+                { text: "This is where discipline meets design.", delay: 0.1 },
+                { text: "Welcome to the future of self mastery.", delay: 0.25 },
+              ].map((item) => (
+                <div key={item.text} style={{
+                  color: 'rgba(255,255,255,0.6)',
+                  fontSize: 'clamp(12px, 3.5vw, 16px)',
+                  fontFamily: 'Space Grotesk, sans-serif',
+                  whiteSpace: 'nowrap',
+                  letterSpacing: '0.04em',
+                  lineHeight: 2,
+                  textAlign: 'center',
+                }}>
+                  <FadeText
+                    direction="up"
+                    text={item.text}
+                    framerProps={{ show: { transition: { delay: item.delay, type: 'spring' } } }}
+                    className=""
+                  />
+                </div>
+              ))}
+              <div style={{
+                color: '#1A6BFF',
+                fontSize: 'clamp(12px, 3.5vw, 16px)',
+                fontFamily: 'Space Grotesk, sans-serif',
+                fontWeight: 600,
+                whiteSpace: 'nowrap',
+                letterSpacing: '0.04em',
+                lineHeight: 2,
+                textAlign: 'center',
+              }}>
+                <FadeText
+                  direction="up"
+                  text="Follow the BLUEPRINT."
+                  framerProps={{ show: { transition: { delay: 0.4, type: 'spring' } } }}
+                  className=""
+                />
+              </div>
+            </div>
+          </div>
+
+          {/* GROUP 2: Button + chevron — pinned to bottom */}
+          <div style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            gap: "16px",
+            paddingBottom: "16px",
+            flexShrink: 0,
+          }}>
+            <ShinyButton fontSize="15px" className="hero-shiny-btn">HAVE YOUR BLUEPRINT</ShinyButton>
+            <ChevronDown size={24} style={{ color: 'rgba(255,255,255,0.3)', animation: 'hero-bounce 2s ease-in-out infinite' }} />
+          </div>
         </div>
 
       </section>
