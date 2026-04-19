@@ -1,33 +1,5 @@
 import { useState } from "react";
-import { motion } from "framer-motion";
 import { Clock, Phone } from "lucide-react";
-
-const FINGERPRINT_CARDS = [
-  {
-    color: "#FF3B3B",
-    borderColor: "rgba(255,59,59,0.25)",
-    bgColor: "rgba(255,59,59,0.04)",
-    hoverBorder: "rgba(255,59,59,0.45)",
-    hoverBg: "rgba(255,59,59,0.07)",
-    bracketColor: "rgba(255,59,59,0.5)",
-    bracketHover: "rgba(255,59,59,0.8)",
-    delay: "0.8s",
-    tag: "HACK BAR",
-    title: "HACK BAR",
-  },
-  {
-    color: "#22C55E",
-    borderColor: "rgba(34,197,94,0.25)",
-    bgColor: "rgba(34,197,94,0.04)",
-    hoverBorder: "rgba(34,197,94,0.45)",
-    hoverBg: "rgba(34,197,94,0.07)",
-    bracketColor: "rgba(34,197,94,0.5)",
-    bracketHover: "rgba(34,197,94,0.8)",
-    delay: "1.6s",
-    tag: "RESET",
-    title: "RESET",
-  },
-];
 
 const CornerBrackets = ({ color }: { color: string }) => (
   <>
@@ -38,41 +10,85 @@ const CornerBrackets = ({ color }: { color: string }) => (
   </>
 );
 
-const FingerprintScan = ({ color, delay }: { color: string; delay: string }) => (
-  <div style={{ position: "relative", width: 56, height: 64, marginBottom: 12 }}>
-    <div style={{
-      position: "absolute", top: "50%", left: "50%", transform: "translate(-50%,-50%)",
-      width: 64, height: 64, borderRadius: "50%", border: `1px solid ${color}1a`,
-    }} />
-    <svg viewBox="0 0 56 56" width={40} height={40} fill="none" style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%,-50%)", opacity: 0.45 }}>
-      {[8, 12, 16, 20, 24].map((r, i) => (
-        <ellipse key={i} cx="28" cy="30" rx={r * 0.7} ry={r} stroke={color} strokeWidth="1.2" />
-      ))}
-      {[9, 14, 19].map((r, i) => (
-        <path key={`a-${i}`} d={`M ${28 - r * 0.6} ${22 - i * 2} Q 28 ${14 - i * 3} ${28 + r * 0.6} ${22 - i * 2}`} stroke={color} strokeWidth="1.2" fill="none" />
-      ))}
-    </svg>
-    <div className="bento-scan-line" style={{ position: "absolute", left: "10%", right: "10%", height: 2, background: `linear-gradient(90deg, transparent, ${color}, transparent)`, animationDelay: delay }} />
-    <div className="bento-scan-glow" style={{ position: "absolute", left: "10%", right: "10%", height: 16, background: `linear-gradient(180deg, transparent, ${color}14, transparent)`, animationDelay: delay }} />
+const FingerprintBigSVG = ({ color, size = 160 }: { color: string; size?: number }) => (
+  <svg viewBox="0 0 140 140" width={size} height={size} fill="none" xmlns="http://www.w3.org/2000/svg" style={{ display: "block" }}>
+    {[18, 26, 34, 42, 50].map((ry, i) => (
+      <ellipse key={i} cx="70" cy="75" rx={ry * 0.7} ry={ry} stroke={color} strokeWidth="1.8" />
+    ))}
+    {[20, 30, 40].map((r, i) => (
+      <path key={`a-${i}`} d={`M ${70 - r * 0.6} ${55 - i * 4} Q 70 ${20 - i * 6} ${70 + r * 0.6} ${55 - i * 4}`} stroke={color} strokeWidth="1.8" fill="none" />
+    ))}
+    <path d="M 62 70 Q 65 60 70 58 Q 75 60 78 70 Q 75 80 70 82 Q 65 80 62 70Z" stroke={color} strokeWidth="1.4" fill="none" />
+  </svg>
+);
+
+const BiometricScanCard = () => (
+  <div
+    className="bento-cell"
+    style={{
+      background: "rgba(0,0,0,0.6)",
+      border: "1px solid rgba(26,107,255,0.15)",
+      borderRadius: 16,
+      padding: "32px 24px",
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "center",
+      gap: 24,
+      backdropFilter: "blur(12px)",
+      WebkitBackdropFilter: "blur(12px)",
+      minHeight: "100%",
+      position: "relative",
+      overflow: "hidden",
+    }}
+  >
+    {/* Header */}
+    <div style={{ width: "100%", display: "flex", alignItems: "center", justifyContent: "space-between", gap: 12 }}>
+      <p style={{ fontSize: 9, letterSpacing: "0.25em", color: "rgba(255,255,255,0.35)", textTransform: "uppercase", fontFamily: "'Inter', sans-serif", margin: 0 }}>
+        Security Level
+      </p>
+      <p style={{ fontSize: 10, letterSpacing: "0.3em", color: "#1A6BFF", textTransform: "uppercase", fontFamily: "'Orbitron', sans-serif", fontWeight: 500, margin: 0 }}>
+        Blueprint
+      </p>
+      <div style={{ display: "flex", gap: 4 }}>
+        <span className="bento-fp-blink" style={{ width: 6, height: 6, borderRadius: "50%", background: "#1A6BFF", boxShadow: "0 0 6px #1A6BFF" }} />
+        <span style={{ width: 6, height: 6, borderRadius: "50%", background: "rgba(26,107,255,0.3)" }} />
+      </div>
+    </div>
+
+    {/* Fingerprint */}
+    <div style={{ position: "relative", width: 160, height: 160, display: "flex", alignItems: "center", justifyContent: "center" }}>
+      <div aria-hidden style={{ position: "absolute", inset: 0, background: "radial-gradient(circle, rgba(26,107,255,0.25) 0%, transparent 70%)", filter: "blur(20px)", pointerEvents: "none" }} />
+      <FingerprintBigSVG color="#1A6BFF" size={160} />
+      <div
+        aria-hidden
+        className="bento-fp-scan"
+        style={{
+          position: "absolute",
+          left: "8%",
+          width: "84%",
+          height: 2,
+          background: "linear-gradient(90deg, transparent, #1A6BFF, transparent)",
+          boxShadow: "0 0 12px #1A6BFF",
+          pointerEvents: "none",
+        }}
+      />
+    </div>
+
+    {/* Divider */}
+    <div style={{ width: "100%", height: 1, background: "linear-gradient(90deg, transparent, rgba(26,107,255,0.3), transparent)" }} />
+
+    {/* Footer */}
+    <div style={{ width: "100%", display: "flex", alignItems: "center", justifyContent: "space-between", gap: 12 }}>
+      <p style={{ fontSize: 9, letterSpacing: "0.25em", color: "rgba(255,255,255,0.35)", textTransform: "uppercase", fontFamily: "'Inter', sans-serif", margin: 0 }}>
+        Biometric Scan
+      </p>
+      <p style={{ fontSize: 10, letterSpacing: "0.3em", color: "#1A6BFF", textTransform: "uppercase", fontFamily: "'Orbitron', sans-serif", fontWeight: 500, margin: 0 }}>
+        System Active
+      </p>
+      <span className="bento-fp-blink" style={{ width: 6, height: 6, borderRadius: "50%", background: "#1A6BFF", boxShadow: "0 0 6px #1A6BFF" }} />
+    </div>
   </div>
 );
-
-const FingerprintCard = ({ card }: { card: typeof FINGERPRINT_CARDS[0] }) => (
-  <motion.div
-    className="bento-cell group"
-    style={{ background: card.bgColor, border: `0.5px solid ${card.borderColor}`, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", height: "100%" }}
-    onMouseEnter={e => { e.currentTarget.style.borderColor = card.hoverBorder; e.currentTarget.style.background = card.hoverBg; }}
-    onMouseLeave={e => { e.currentTarget.style.borderColor = card.borderColor; e.currentTarget.style.background = card.bgColor; }}
-    whileHover={{ scale: 1.04, y: -4 }}
-    whileTap={{ scale: 0.97 }}
-    transition={{ type: "spring", stiffness: 400, damping: 20 }}
-  >
-    <CornerBrackets color={card.bracketColor} />
-    <FingerprintScan color={card.color} delay={card.delay} />
-    <p style={{ fontSize: 16, fontWeight: 700, color: card.color, textAlign: "center", fontFamily: "Bebas Neue, sans-serif", marginTop: 4 }}>{card.title}</p>
-  </motion.div>
-);
-
 
 const MapCell = () => {
   const [expanded, setExpanded] = useState(false);
@@ -80,7 +96,7 @@ const MapCell = () => {
   return (
     <div
       className="bento-cell group"
-      style={{ background: "rgba(26,107,255,0.04)", border: "0.5px solid rgba(26,107,255,0.25)", padding: 0, position: "relative", cursor: "pointer" }}
+      style={{ background: "rgba(26,107,255,0.04)", border: "0.5px solid rgba(26,107,255,0.25)", padding: 0, position: "relative", cursor: "pointer", minHeight: "100%" }}
       onMouseEnter={e => { e.currentTarget.style.borderColor = "rgba(26,107,255,0.45)"; e.currentTarget.style.background = "rgba(26,107,255,0.07)"; setExpanded(true); }}
       onMouseLeave={e => { e.currentTarget.style.borderColor = "rgba(26,107,255,0.25)"; e.currentTarget.style.background = "rgba(26,107,255,0.04)"; setExpanded(false); }}
       onClick={() => setExpanded(prev => !prev)}
@@ -164,11 +180,18 @@ const MapCell = () => {
 
 const BentoGrid = () => (
   <section className="relative z-10 pb-8 md:pb-12" style={{ background: "transparent", paddingTop: 0, marginTop: 0 }}>
-    <div className="grid grid-cols-2 md:grid-cols-3 gap-3 mx-4 md:mx-auto" style={{ maxWidth: 900 }}>
-      {FINGERPRINT_CARDS.map(card => <FingerprintCard key={card.tag} card={card} />)}
-      <div className="col-span-2 md:col-span-1">
-        <MapCell />
-      </div>
+    <div
+      className="bento-grid-2col mx-4 md:mx-auto"
+      style={{
+        display: "grid",
+        gridTemplateColumns: "repeat(2, 1fr)",
+        gap: 20,
+        alignItems: "stretch",
+        maxWidth: 900,
+      }}
+    >
+      <BiometricScanCard />
+      <MapCell />
     </div>
     <style>{`
       .bento-cell {
@@ -177,10 +200,7 @@ const BentoGrid = () => (
         position: relative;
         overflow: hidden;
         transition: border-color 0.3s, background 0.3s;
-        min-height: 180px;
-      }
-      .bento-scan-line, .bento-scan-glow {
-        animation: bentoScanMove 2.5s ease-in-out infinite;
+        min-height: 320px;
       }
       .bento-map-ping {
         animation: bentoMapPing 2s ease-out infinite;
@@ -188,11 +208,22 @@ const BentoGrid = () => (
       .bento-live-dot {
         animation: bentoLivePulse 1.5s ease-in-out infinite;
       }
-      @keyframes bentoScanMove {
-        0% { top: 10%; opacity: 0; }
+      .bento-fp-scan {
+        animation: bentoFpScan 3s ease-in-out infinite;
+      }
+      .bento-fp-blink {
+        animation: bentoFpBlink 1.4s ease-in-out infinite;
+      }
+      @keyframes bentoFpScan {
+        0%, 100% { top: 10%; opacity: 0; }
         10% { opacity: 1; }
+        50% { top: 85%; opacity: 1; }
         90% { opacity: 1; }
-        100% { top: 88%; opacity: 0; }
+        95% { opacity: 0; }
+      }
+      @keyframes bentoFpBlink {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0.3; }
       }
       @keyframes bentoMapPing {
         0% { width: 10px; height: 10px; opacity: 1; }
@@ -204,6 +235,12 @@ const BentoGrid = () => (
       }
       .bento-maps-link:hover {
         text-decoration: underline;
+      }
+      @media (max-width: 767px) {
+        .bento-grid-2col {
+          grid-template-columns: 1fr !important;
+          gap: 16px !important;
+        }
       }
     `}</style>
   </section>
