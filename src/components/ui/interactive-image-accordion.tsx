@@ -18,8 +18,8 @@ interface AccordionItem {
 const ACCORDION_ITEMS: AccordionItem[] = [
 {
   label: "CHRISTIAN 'GOLDIE' LATORRE",
-  stripLabel: "ABOUT THE FOUNDER",
-  title: "ABOUT THE FOUNDER",
+  stripLabel: "ABOUT BLUEPRINT",
+  title: "ABOUT BLUEPRINT",
   description:
   "Christian 'Goldie' Latorre created Blueprint Project with one mission: build a system where training, nutrition, and recovery work as one. This isn't just a gym. It's his vision brought to life.",
   accentColor: "#1A6BFF",
@@ -32,7 +32,7 @@ const ACCORDION_ITEMS: AccordionItem[] = [
   title: "VISION",
   description:
   "Blueprint Project exists to redefine what a fitness space can be. Where science meets discipline, and every detail is designed to unlock your potential.",
-  accentColor: "#22C55E",
+  accentColor: "#1A6BFF",
   image: visionImage
 },
 {
@@ -41,7 +41,7 @@ const ACCORDION_ITEMS: AccordionItem[] = [
   title: "SERVICES",
   description:
   "From personalized training programs to recovery protocols and nutrition guidance. Every service at Blueprint is built to work together as a complete system.",
-  accentColor: "#FF3B3B",
+  accentColor: "#1A6BFF",
   image: servicesImage
 }];
 
@@ -207,7 +207,7 @@ const DesktopAccordion: React.FC = () => {
 };
 
 const TAB_LABELS = ["FOUNDER", "VISION", "SERVICES"];
-const ACCENT_RGB = ["26,107,255", "34,197,94", "255,59,59"];
+const ACCENT_RGB = ["26,107,255", "26,107,255", "26,107,255"];
 
 const MobileAccordion: React.FC = () => {
   const [active, setActive] = useState(0);
