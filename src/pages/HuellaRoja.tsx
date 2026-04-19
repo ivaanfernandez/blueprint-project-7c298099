@@ -119,6 +119,41 @@ const StationCard = ({ name, desc, index }: { name: string; desc: string; index:
   </div>
 );
 
+/* ── Chef Card ── */
+const ChefCard = ({ name, desc, index }: { name: string; desc: string; index: number }) => {
+  const bgGradients = [
+    "linear-gradient(135deg, rgba(255,59,59,0.1), rgba(255,59,59,0.03))",
+    "linear-gradient(135deg, rgba(255,59,59,0.08), rgba(255,59,59,0.02))",
+    "linear-gradient(135deg, rgba(255,59,59,0.06), rgba(255,59,59,0.01))",
+  ];
+  return (
+    <div
+      className="hr-chef-card"
+      style={{
+        borderRadius: 14,
+        minHeight: 220,
+        position: "relative",
+        overflow: "hidden",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "flex-end",
+        padding: "20px 16px",
+        cursor: "pointer",
+        transition: "transform 0.3s ease",
+        animation: `hrFadeUp 0.5s ease ${index * 0.15}s both`,
+      }}
+    >
+      <div style={{ position: "absolute", inset: 0, borderRadius: 14, background: bgGradients[index] ?? bgGradients[0], border: "1px solid rgba(255,59,59,0.1)" }} />
+      <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(0,0,0,0.8) 10%, rgba(0,0,0,0.2) 60%, transparent)", zIndex: 1 }} />
+      <div style={{ position: "absolute", bottom: 0, left: "20%", right: "20%", height: 2, background: "linear-gradient(to right, transparent, #FF3B3B, transparent)", zIndex: 2 }} />
+      <div style={{ position: "relative", zIndex: 2 }}>
+        <p style={{ fontFamily: "'Michroma', sans-serif", fontSize: 14, color: "#FFFFFF", textTransform: "uppercase", letterSpacing: "0.02em", marginBottom: 6 }}>{name}</p>
+        <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 12, color: "rgba(255,255,255,0.5)", lineHeight: 1.6 }}>{desc}</p>
+      </div>
+    </div>
+  );
+};
+
 /* ══════════════════════════════════════════════════════════ */
 /*  HUELLA ROJA — HACK BAR PAGE                              */
 /* ══════════════════════════════════════════════════════════ */
