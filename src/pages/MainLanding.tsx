@@ -491,7 +491,6 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
           0%, 100% { opacity: 1; }
           50% { opacity: 0.2; }
         }
-        }
         @keyframes hero-bounce {
           0%, 100% { transform: translateY(0); }
           50% { transform: translateY(8px); }
