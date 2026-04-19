@@ -64,11 +64,19 @@ const labImages = [
   "/blueprint-lab/lab-4.jpg",
 ];
 
+const hackbarImages = [
+  "/hackbar-card/hackbar-1.jpg",
+  "/hackbar-card/hackbar-2.jpg",
+  "/hackbar-card/hackbar-3.jpg",
+  "/hackbar-card/hackbar-4.jpg",
+];
+
 const Home = ({ showDock }: { showDock: boolean }) => {
   const navigate = useNavigate();
   const aboutRef = useRef<HTMLDivElement>(null);
   const [currentAboutImage, setCurrentAboutImage] = useState(0);
   const [currentLabImage, setCurrentLabImage] = useState(0);
+  const [currentHackbarImage, setCurrentHackbarImage] = useState(0);
   useEffect(() => {
     const id = setInterval(
       () => setCurrentAboutImage((p) => (p + 1) % aboutImages.length),
@@ -79,6 +87,13 @@ const Home = ({ showDock }: { showDock: boolean }) => {
   useEffect(() => {
     const id = setInterval(
       () => setCurrentLabImage((p) => (p + 1) % labImages.length),
+      4000
+    );
+    return () => clearInterval(id);
+  }, []);
+  useEffect(() => {
+    const id = setInterval(
+      () => setCurrentHackbarImage((p) => (p + 1) % hackbarImages.length),
       4000
     );
     return () => clearInterval(id);
@@ -580,6 +595,22 @@ const Home = ({ showDock }: { showDock: boolean }) => {
                       objectFit: "cover", objectPosition: "center",
                       transition: "opacity 1s ease-in-out",
                       opacity: index === currentLabImage ? 1 : 0,
+                    }}
+                  />
+                ))
+              ) : item.name === "Hack Bar" ? (
+                hackbarImages.map((src, index) => (
+                  <img
+                    key={src}
+                    className="pillar-card-img"
+                    src={src}
+                    alt={`Hack Bar ${index + 1}`}
+                    style={{
+                      position: "absolute", top: 0, left: 0,
+                      width: "100%", height: "100%",
+                      objectFit: "cover", objectPosition: "center",
+                      transition: "opacity 1s ease-in-out",
+                      opacity: index === currentHackbarImage ? 1 : 0,
                     }}
                   />
                 ))
