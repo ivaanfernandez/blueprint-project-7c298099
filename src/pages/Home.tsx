@@ -60,6 +60,7 @@ const labImages = [
   "/blueprint-lab/lab-1.jpg",
   "/blueprint-lab/lab-2.jpg",
   "/blueprint-lab/lab-3.jpg",
+  "/blueprint-lab/lab-4.jpg",
 ];
 
 const Home = ({ showDock }: { showDock: boolean }) => {
