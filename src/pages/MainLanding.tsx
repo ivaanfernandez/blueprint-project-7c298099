@@ -491,32 +491,6 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
           0%, 100% { opacity: 1; }
           50% { opacity: 0.2; }
         }
-        @keyframes fingerprintScan {
-          0%, 100% { top: 10%; opacity: 0; }
-          10% { opacity: 1; }
-          50% { top: 85%; opacity: 1; }
-          90% { opacity: 1; }
-          95% { opacity: 0; }
-        }
-        @keyframes fp-blink {
-          0%, 100% { opacity: 1; }
-          50% { opacity: 0.3; }
-        }
-        @media (max-width: 767px) {
-          .fp-lab-section {
-            padding: 60px 6% !important;
-            min-height: 400px !important;
-          }
-          .fp-lab-card {
-            max-width: 100% !important;
-            padding: 32px 24px !important;
-          }
-          .fp-lab-stats {
-            gap: 24px !important;
-          }
-          .fp-lab-stat-value {
-            font-size: 16px !important;
-          }
         }
         @keyframes hero-bounce {
           0%, 100% { transform: translateY(0); }
