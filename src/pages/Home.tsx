@@ -56,13 +56,27 @@ const aboutImages = [
   "/about/about-5.jpg",
 ];
 
+const labImages = [
+  "/blueprint-lab/lab-1.jpg",
+  "/blueprint-lab/lab-2.jpg",
+  "/blueprint-lab/lab-3.jpg",
+];
+
 const Home = ({ showDock }: { showDock: boolean }) => {
   const navigate = useNavigate();
   const aboutRef = useRef<HTMLDivElement>(null);
   const [currentAboutImage, setCurrentAboutImage] = useState(0);
+  const [currentLabImage, setCurrentLabImage] = useState(0);
   useEffect(() => {
     const id = setInterval(
       () => setCurrentAboutImage((p) => (p + 1) % aboutImages.length),
+      4000
+    );
+    return () => clearInterval(id);
+  }, []);
+  useEffect(() => {
+    const id = setInterval(
+      () => setCurrentLabImage((p) => (p + 1) % labImages.length),
       4000
     );
     return () => clearInterval(id);
@@ -551,6 +565,22 @@ const Home = ({ showDock }: { showDock: boolean }) => {
                 }}>
                   <source src={item.video} type="video/mp4" />
                 </video>
+              ) : item.name === "Blueprint Lab" ? (
+                labImages.map((src, index) => (
+                  <img
+                    key={src}
+                    className="pillar-card-img"
+                    src={src}
+                    alt={`Blueprint Lab ${index + 1}`}
+                    style={{
+                      position: "absolute", top: 0, left: 0,
+                      width: "100%", height: "100%",
+                      objectFit: "cover", objectPosition: "center",
+                      transition: "opacity 1s ease-in-out",
+                      opacity: index === currentLabImage ? 1 : 0,
+                    }}
+                  />
+                ))
               ) : (
                 <img className="pillar-card-img" src={item.img} alt={item.name} style={{
                   position: "absolute", inset: 0, width: "100%", height: "100%",
