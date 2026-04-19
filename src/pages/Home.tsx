@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import ProceduralBackgroundWhite from "@/components/ProceduralBackgroundWhite";
@@ -48,9 +48,25 @@ const HUELLAS = [
 /*  HOME PAGE                                                */
 /* ══════════════════════════════════════════════════════════ */
 
+const aboutImages = [
+  "/about/about-1.jpg",
+  "/about/about-2.jpg",
+  "/about/about-3.jpg",
+  "/about/about-4.jpg",
+  "/about/about-5.jpg",
+];
+
 const Home = ({ showDock }: { showDock: boolean }) => {
   const navigate = useNavigate();
   const aboutRef = useRef<HTMLDivElement>(null);
+  const [currentAboutImage, setCurrentAboutImage] = useState(0);
+  useEffect(() => {
+    const id = setInterval(
+      () => setCurrentAboutImage((p) => (p + 1) % aboutImages.length),
+      4000
+    );
+    return () => clearInterval(id);
+  }, []);
 
 
 
@@ -448,13 +464,25 @@ const Home = ({ showDock }: { showDock: boolean }) => {
             </div>
           </div>
 
-          {/* Right — Image */}
+          {/* Right — Rotating Image Slideshow */}
           <div className="about-photo-col" style={{
             flex: "0 0 34%", maxWidth: 320, borderRadius: 16, overflow: "hidden", aspectRatio: "3/4",
+            position: "relative",
           }}>
-            <img src={slider1} alt="Blueprint Project" style={{
-              width: "100%", height: "100%", objectFit: "cover", objectPosition: "center center", display: "block",
-            }} />
+            {aboutImages.map((src, index) => (
+              <img
+                key={src}
+                src={src}
+                alt={`Blueprint gym ${index + 1}`}
+                style={{
+                  position: "absolute", top: 0, left: 0,
+                  width: "100%", height: "100%",
+                  objectFit: "cover", objectPosition: "center",
+                  transition: "opacity 1s ease-in-out",
+                  opacity: index === currentAboutImage ? 1 : 0,
+                }}
+              />
+            ))}
           </div>
         </div>
       </div>
