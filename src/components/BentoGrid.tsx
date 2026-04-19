@@ -144,22 +144,23 @@ const MapCell = () => {
           borderRadius: 12,
           transform: expanded ? "translateY(0)" : "translateY(100%)",
           transition: "transform 300ms ease",
-          padding: 20,
+          padding: "40px 32px",
           display: "flex",
           flexDirection: "column",
           justifyContent: "center",
+          alignItems: "flex-start",
           zIndex: 2,
         }}
       >
-        <p style={{ fontSize: 15, fontWeight: 700, color: "#fff", marginBottom: 4 }}>Blueprint Project</p>
-        <p style={{ fontSize: 11, color: "rgba(255,255,255,0.4)", marginBottom: 16 }}>1951 Calle Loíza, Santurce, PR 00911</p>
-        <div style={{ display: "flex", alignItems: "center", gap: 6, marginBottom: 8 }}>
-          <Clock size={13} color="#1A6BFF" />
-          <span style={{ fontSize: 11, color: "rgba(255,255,255,0.5)" }}>Mon–Fri: 5:00 AM – 10:00 PM</span>
+        <p style={{ fontSize: 28, fontWeight: 700, color: "#fff", marginBottom: 8 }}>Blueprint Project</p>
+        <p style={{ fontSize: 16, color: "rgba(255,255,255,0.5)", marginBottom: 24 }}>1951 Calle Loíza, Santurce, PR 00911</p>
+        <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 8 }}>
+          <Clock size={20} color="#1A6BFF" />
+          <span style={{ fontSize: 16, color: "rgba(255,255,255,0.6)" }}>Mon–Fri: 5:00 AM – 10:00 PM</span>
         </div>
-        <div style={{ display: "flex", alignItems: "center", gap: 6, marginBottom: 12 }}>
-          <Phone size={13} color="#1A6BFF" />
-          <span style={{ fontSize: 11, color: "rgba(255,255,255,0.5)" }}>(787) 000-0000</span>
+        <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 24 }}>
+          <Phone size={20} color="#1A6BFF" />
+          <span style={{ fontSize: 16, color: "rgba(255,255,255,0.6)" }}>(787) 000-0000</span>
         </div>
         <a
           href="https://maps.google.com/?q=18.4488,-66.0614"
@@ -167,7 +168,7 @@ const MapCell = () => {
           rel="noopener noreferrer"
           onClick={e => e.stopPropagation()}
           className="bento-maps-link"
-          style={{ fontSize: 10, letterSpacing: "0.1em", textTransform: "uppercase", color: "#1A6BFF", textDecoration: "none", width: "fit-content" }}
+          style={{ fontSize: 14, letterSpacing: "0.1em", textTransform: "uppercase", color: "#1A6BFF", textDecoration: "none", width: "fit-content" }}
         >
           Open in Maps →
         </a>
