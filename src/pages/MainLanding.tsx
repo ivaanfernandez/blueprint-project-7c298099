@@ -483,6 +483,176 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
       {/* BENTO GRID */}
       <BentoGrid />
 
+      {/* FINGERPRINT LAB SCAN */}
+      <section
+        className="fp-lab-section"
+        style={{
+          background: '#0a0a0a',
+          padding: '80px 7%',
+          position: 'relative',
+          overflow: 'hidden',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          minHeight: '500px',
+          flexDirection: 'column',
+        }}
+      >
+        {/* Dot grid */}
+        <div
+          aria-hidden
+          style={{
+            position: 'absolute',
+            inset: 0,
+            backgroundImage: 'radial-gradient(rgba(26,107,255,0.07) 1px, transparent 1px)',
+            backgroundSize: '20px 20px',
+            pointerEvents: 'none',
+            zIndex: 0,
+          }}
+        />
+        {/* Top ambient glow */}
+        <div
+          aria-hidden
+          style={{
+            position: 'absolute',
+            top: '-100px',
+            left: '50%',
+            transform: 'translateX(-50%)',
+            width: '500px',
+            height: '250px',
+            background: 'rgba(26,107,255,0.08)',
+            filter: 'blur(100px)',
+            borderRadius: '50%',
+            pointerEvents: 'none',
+            zIndex: 0,
+          }}
+        />
+
+        {/* Card */}
+        <div
+          className="fp-lab-card"
+          style={{
+            position: 'relative',
+            zIndex: 1,
+            width: '100%',
+            maxWidth: '400px',
+            background: 'rgba(0,0,0,0.6)',
+            border: '1px solid rgba(26,107,255,0.15)',
+            borderRadius: '24px',
+            padding: '40px 32px',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            gap: '32px',
+            backdropFilter: 'blur(12px)',
+            WebkitBackdropFilter: 'blur(12px)',
+            boxShadow: '0 0 60px rgba(26,107,255,0.05)',
+          }}
+        >
+          {/* Card glow */}
+          <div
+            aria-hidden
+            style={{
+              position: 'absolute',
+              inset: '-1px',
+              borderRadius: '25px',
+              background: 'linear-gradient(135deg, rgba(26,107,255,0.2), transparent 50%, rgba(26,107,255,0.1))',
+              zIndex: -1,
+              pointerEvents: 'none',
+              filter: 'blur(1px)',
+            }}
+          />
+
+          {/* HEADER */}
+          <div style={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '16px' }}>
+            <p style={{ fontSize: '9px', letterSpacing: '0.25em', color: 'rgba(255,255,255,0.35)', textTransform: 'uppercase', fontFamily: "'Inter', sans-serif" }}>
+              Security Level
+            </p>
+            <p style={{ fontSize: '10px', letterSpacing: '0.3em', color: '#1A6BFF', textTransform: 'uppercase', fontFamily: "'Orbitron', sans-serif", fontWeight: 500 }}>
+              Blueprint
+            </p>
+            <div style={{ display: 'flex', gap: '4px' }}>
+              <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#1A6BFF', boxShadow: '0 0 6px #1A6BFF', animation: 'fp-blink 1.4s ease-in-out infinite' }} />
+              <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: 'rgba(26,107,255,0.3)' }} />
+            </div>
+          </div>
+
+          {/* FINGERPRINT */}
+          <div style={{ position: 'relative', width: '180px', height: '180px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            {/* Glow */}
+            <div
+              aria-hidden
+              style={{
+                position: 'absolute',
+                inset: 0,
+                background: 'radial-gradient(circle, rgba(26,107,255,0.25) 0%, transparent 70%)',
+                filter: 'blur(20px)',
+                pointerEvents: 'none',
+              }}
+            />
+            <FingerprintSVG color="#1A6BFF" size={180} />
+            {/* Scan line */}
+            <div
+              aria-hidden
+              style={{
+                position: 'absolute',
+                left: '8%',
+                width: '84%',
+                height: '2px',
+                background: 'linear-gradient(90deg, transparent, #1A6BFF, transparent)',
+                boxShadow: '0 0 12px #1A6BFF',
+                animation: 'fingerprintScan 3s ease-in-out infinite',
+                pointerEvents: 'none',
+              }}
+            />
+          </div>
+
+          {/* DIVIDER */}
+          <div style={{ width: '100%', height: '1px', background: 'linear-gradient(90deg, transparent, rgba(26,107,255,0.3), transparent)' }} />
+
+          {/* FOOTER DATA */}
+          <div style={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '16px' }}>
+            <p style={{ fontSize: '9px', letterSpacing: '0.25em', color: 'rgba(255,255,255,0.35)', textTransform: 'uppercase', fontFamily: "'Inter', sans-serif" }}>
+              Biometric Scan
+            </p>
+            <p style={{ fontSize: '10px', letterSpacing: '0.3em', color: '#1A6BFF', textTransform: 'uppercase', fontFamily: "'Orbitron', sans-serif", fontWeight: 500 }}>
+              System Active
+            </p>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+              <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#1A6BFF', boxShadow: '0 0 6px #1A6BFF', animation: 'fp-blink 1.4s ease-in-out infinite' }} />
+            </div>
+          </div>
+        </div>
+
+        {/* STATS */}
+        <div
+          className="fp-lab-stats"
+          style={{
+            position: 'relative',
+            zIndex: 1,
+            display: 'flex',
+            gap: '40px',
+            marginTop: '32px',
+            justifyContent: 'center',
+          }}
+        >
+          {[
+            { value: '7+', label: 'Years' },
+            { value: '3', label: 'Pillars' },
+            { value: '100%', label: 'Data-Driven' },
+          ].map((s) => (
+            <div key={s.label} style={{ textAlign: 'center' }}>
+              <div className="fp-lab-stat-value" style={{ fontFamily: "'Orbitron', sans-serif", fontSize: '20px', fontWeight: 500, color: '#1A6BFF', marginBottom: '4px' }}>
+                {s.value}
+              </div>
+              <div style={{ fontFamily: "'Inter', sans-serif", fontSize: '9px', color: 'rgba(255,255,255,0.25)', textTransform: 'uppercase', letterSpacing: '0.1em' }}>
+                {s.label}
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
       {/* FOOTER */}
       <Footer />
 
@@ -490,6 +660,33 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
         @keyframes pulse-line {
           0%, 100% { opacity: 1; }
           50% { opacity: 0.2; }
+        }
+        @keyframes fingerprintScan {
+          0%, 100% { top: 10%; opacity: 0; }
+          10% { opacity: 1; }
+          50% { top: 85%; opacity: 1; }
+          90% { opacity: 1; }
+          95% { opacity: 0; }
+        }
+        @keyframes fp-blink {
+          0%, 100% { opacity: 1; }
+          50% { opacity: 0.3; }
+        }
+        @media (max-width: 767px) {
+          .fp-lab-section {
+            padding: 60px 6% !important;
+            min-height: 400px !important;
+          }
+          .fp-lab-card {
+            max-width: 100% !important;
+            padding: 32px 24px !important;
+          }
+          .fp-lab-stats {
+            gap: 24px !important;
+          }
+          .fp-lab-stat-value {
+            font-size: 16px !important;
+          }
         }
         @keyframes hero-bounce {
           0%, 100% { transform: translateY(0); }
