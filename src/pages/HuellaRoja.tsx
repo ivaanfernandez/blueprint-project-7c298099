@@ -119,6 +119,41 @@ const StationCard = ({ name, desc, index }: { name: string; desc: string; index:
   </div>
 );
 
+/* ── Chef Card ── */
+const ChefCard = ({ name, desc, index }: { name: string; desc: string; index: number }) => {
+  const bgGradients = [
+    "linear-gradient(135deg, rgba(255,59,59,0.1), rgba(255,59,59,0.03))",
+    "linear-gradient(135deg, rgba(255,59,59,0.08), rgba(255,59,59,0.02))",
+    "linear-gradient(135deg, rgba(255,59,59,0.06), rgba(255,59,59,0.01))",
+  ];
+  return (
+    <div
+      className="hr-chef-card"
+      style={{
+        borderRadius: 14,
+        minHeight: 220,
+        position: "relative",
+        overflow: "hidden",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "flex-end",
+        padding: "20px 16px",
+        cursor: "pointer",
+        transition: "transform 0.3s ease",
+        animation: `hrFadeUp 0.5s ease ${index * 0.15}s both`,
+      }}
+    >
+      <div style={{ position: "absolute", inset: 0, borderRadius: 14, background: bgGradients[index] ?? bgGradients[0], border: "1px solid rgba(255,59,59,0.1)" }} />
+      <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(0,0,0,0.8) 10%, rgba(0,0,0,0.2) 60%, transparent)", zIndex: 1 }} />
+      <div style={{ position: "absolute", bottom: 0, left: "20%", right: "20%", height: 2, background: "linear-gradient(to right, transparent, #FF3B3B, transparent)", zIndex: 2 }} />
+      <div style={{ position: "relative", zIndex: 2 }}>
+        <p style={{ fontFamily: "'Michroma', sans-serif", fontSize: 14, color: "#FFFFFF", textTransform: "uppercase", letterSpacing: "0.02em", marginBottom: 6 }}>{name}</p>
+        <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 12, color: "rgba(255,255,255,0.5)", lineHeight: 1.6 }}>{desc}</p>
+      </div>
+    </div>
+  );
+};
+
 /* ══════════════════════════════════════════════════════════ */
 /*  HUELLA ROJA — HACK BAR PAGE                              */
 /* ══════════════════════════════════════════════════════════ */
@@ -164,6 +199,11 @@ const HuellaRoja = ({ showDock }: { showDock: boolean }) => {
           .hr-fuel-card { min-height: 320px !important; }
           .hr-station-grid { grid-template-columns: 1fr !important; gap: 16px !important; }
           .hr-station-card { min-height: 260px !important; }
+          .hr-chef-row { flex-direction: column !important; gap: 24px !important; }
+          .hr-chef-left { flex: none !important; width: 100% !important; text-align: center !important; align-items: center !important; }
+          .hr-chef-right { flex: none !important; width: 100% !important; min-height: 250px !important; }
+          .hr-chef-grid { grid-template-columns: 1fr !important; gap: 16px !important; }
+          .hr-chef-card { min-height: 180px !important; }
           .hr-footer { padding: 32px 6% !important; }
         }
       `}</style>
@@ -283,7 +323,55 @@ const HuellaRoja = ({ showDock }: { showDock: boolean }) => {
         </div>
       </motion.section>
 
-      {/* ═══ SECTION D: FOOTER ═══ */}
+      {/* ═══ SECTION D: MEET THE CHEF ═══ */}
+      <motion.section
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6 }}
+        style={{ backgroundColor: "#0a0a0a", padding: "0 7% 72px", position: "relative", zIndex: 1 }}
+      >
+        <div className="hr-chef-row" style={{ display: "flex", alignItems: "flex-start", gap: 40, marginBottom: 40 }}>
+          {/* Left: title + subtitle */}
+          <div className="hr-chef-left" style={{ flex: "0 0 55%", display: "flex", flexDirection: "column", justifyContent: "center", paddingTop: 20 }}>
+            <TextScramble
+              as="p"
+              style={{ fontFamily: "'Michroma', sans-serif", fontSize: "clamp(20px, 3vw, 36px)", color: "#FFFFFF", textTransform: "uppercase", letterSpacing: "0.04em", lineHeight: 1.1, marginBottom: 16 }}
+              duration={1.2}
+              speed={0.04}
+            >
+              MEET THE CHEF
+            </TextScramble>
+            <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 14, fontWeight: 300, color: "rgba(255,255,255,0.4)", lineHeight: 1.7, maxWidth: 480 }}>
+              The mind behind every recipe. Precision nutrition crafted with science and passion.
+            </p>
+            <div style={{ width: 60, height: 2, background: "#FF3B3B", marginTop: 20, borderRadius: 1 }} />
+          </div>
+          {/* Right: photo placeholder */}
+          <div className="hr-chef-right" style={{ flex: "0 0 45%", minHeight: 350, borderRadius: 16, overflow: "hidden", position: "relative" }}>
+            <div style={{ width: "100%", height: "100%", minHeight: 350, borderRadius: 16, border: "1px solid rgba(255,59,59,0.15)", background: "linear-gradient(135deg, rgba(255,59,59,0.06), rgba(255,59,59,0.02))", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 12, position: "relative" }}>
+              {/* Corner brackets */}
+              <div style={{ position: "absolute", top: 12, left: 12, width: 20, height: 20, borderTop: "2px solid rgba(255,59,59,0.3)", borderLeft: "2px solid rgba(255,59,59,0.3)" }} />
+              <div style={{ position: "absolute", top: 12, right: 12, width: 20, height: 20, borderTop: "2px solid rgba(255,59,59,0.3)", borderRight: "2px solid rgba(255,59,59,0.3)" }} />
+              <div style={{ position: "absolute", bottom: 12, left: 12, width: 20, height: 20, borderBottom: "2px solid rgba(255,59,59,0.3)", borderLeft: "2px solid rgba(255,59,59,0.3)" }} />
+              <div style={{ position: "absolute", bottom: 12, right: 12, width: 20, height: 20, borderBottom: "2px solid rgba(255,59,59,0.3)", borderRight: "2px solid rgba(255,59,59,0.3)" }} />
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="rgba(255,59,59,0.25)" strokeWidth="1.5">
+                <rect x="3" y="3" width="18" height="18" rx="2" />
+                <circle cx="8.5" cy="8.5" r="1.5" />
+                <path d="M21 15l-5-5L5 21" />
+              </svg>
+              <span style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 8, letterSpacing: "0.15em", color: "rgba(255,59,59,0.2)", textTransform: "uppercase" }}>Chef photo</span>
+            </div>
+          </div>
+        </div>
+        <div className="hr-chef-grid" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 20 }}>
+          <ChefCard index={0} name="MEAL PREPS" desc="High-performance meals with perfect macro balance." />
+          <ChefCard index={1} name="DETOX JUICE" desc="Cold-pressed functional blends for cleansing and energy." />
+          <ChefCard index={2} name="SUPPLEMENTS" desc="Blueprint Approved stack for recovery and focus." />
+        </div>
+      </motion.section>
+
+      {/* ═══ SECTION E: FOOTER ═══ */}
       <footer className="hr-footer" style={{ padding: "40px 7%", borderTop: "1px solid rgba(255,59,59,0.08)", display: "flex", flexDirection: "column", alignItems: "center", gap: 16, backgroundColor: "#0a0a0a" }}>
         <FingerprintSVG color="#FF3B3B" size={32} />
         <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 12, color: "rgba(255,255,255,0.25)" }}>Hack Bar — Blueprint Project</p>
