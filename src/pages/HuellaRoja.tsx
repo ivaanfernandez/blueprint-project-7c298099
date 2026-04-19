@@ -199,6 +199,11 @@ const HuellaRoja = ({ showDock }: { showDock: boolean }) => {
           .hr-fuel-card { min-height: 320px !important; }
           .hr-station-grid { grid-template-columns: 1fr !important; gap: 16px !important; }
           .hr-station-card { min-height: 260px !important; }
+          .hr-chef-row { flex-direction: column !important; gap: 24px !important; }
+          .hr-chef-left { flex: none !important; width: 100% !important; text-align: center !important; align-items: center !important; }
+          .hr-chef-right { flex: none !important; width: 100% !important; min-height: 250px !important; }
+          .hr-chef-grid { grid-template-columns: 1fr !important; gap: 16px !important; }
+          .hr-chef-card { min-height: 180px !important; }
           .hr-footer { padding: 32px 6% !important; }
         }
       `}</style>
