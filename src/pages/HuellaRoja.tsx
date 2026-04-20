@@ -301,16 +301,13 @@ const HuellaRoja = ({ showDock }: { showDock: boolean }) => {
         transition={{ duration: 0.6 }}
         style={{ backgroundColor: "#0a0a0a", padding: "0 7% 72px", position: "relative", zIndex: 1 }}
       >
-        <p style={{ fontFamily: "'Michroma', sans-serif", fontSize: "clamp(16px, 2vw, 24px)", color: "#FFFFFF", textTransform: "uppercase", letterSpacing: "0.04em", marginBottom: 8 }}>
+        <p style={{ fontFamily: "'Michroma', sans-serif", fontSize: "clamp(16px, 2vw, 24px)", color: "#FFFFFF", textTransform: "uppercase", letterSpacing: "0.04em", marginBottom: 32, textAlign: "center", width: "100%" }}>
           HACKBAR STATION
         </p>
-        <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 14, color: "rgba(255,255,255,0.35)", marginBottom: 32 }}>
-          Tu laboratorio nutricional dentro de BlueprintLab.
-        </p>
         <div className="hr-station-grid" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 20 }}>
-          <StationCard index={0} name="BATIDOS PERSONALIZADOS" desc="Según tu tipo de entrenamiento o meta: energía, recuperación, masa magra o detox." />
-          <StationCard index={1} name="CAFÉ FUNCIONAL" desc="Infusionado con adaptógenos y nootrópicos para claridad mental sostenida sin el crash." />
-          <StationCard index={2} name="SNACKS BLUEPRINT" desc="Sin conservantes ni azúcar refinada. Solo ingredientes funcionales que alimentan tu sistema." />
+          <StationCard index={0} name="CUSTOM SHAKES" desc="Tailored to your training type or goal: energy, recovery, lean mass, or detox." />
+          <StationCard index={1} name="FUNCTIONAL COFFEE" desc="Infused with adaptogens and nootropics for sustained mental clarity without the crash." />
+          <StationCard index={2} name="BLUEPRINT SNACKS" desc="No preservatives or refined sugar. Only functional ingredients that fuel your system." />
         </div>
       </motion.section>
 
