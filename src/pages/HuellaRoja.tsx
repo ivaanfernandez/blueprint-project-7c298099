@@ -193,6 +193,7 @@ const Carousel3D = () => {
       <div
         onTouchStart={handleTouchStart}
         onTouchEnd={handleTouchEnd}
+        className="carousel-3d-container"
         style={{ display: "flex", alignItems: "center", justifyContent: "center", padding: "60px 7%", perspective: "1000px", position: "relative", minHeight: 400, touchAction: "pan-y" }}
       >
         {CAROUSEL_CARDS.map((card, index) => {
@@ -201,6 +202,7 @@ const Carousel3D = () => {
           return (
             <div
               key={card.title}
+              className={`carousel-3d-card${isActive ? " is-active" : ""}${isLeft ? " is-left" : index > activeCard ? " is-right" : ""}`}
               onClick={() => setActiveCard(index)}
               style={{
                 width: isActive ? 320 : 260,
@@ -257,7 +259,7 @@ const Carousel3D = () => {
                 </svg>
               </div>
               <h3 className="carousel-3d-title" style={{ fontFamily: "'Michroma', sans-serif", fontSize: isActive ? 18 : 14, color: "#FFFFFF", textTransform: "uppercase", letterSpacing: "0.03em", transition: "font-size 0.5s ease", margin: 0 }}>{card.title}</h3>
-              <p style={{
+              <p className="carousel-3d-desc" style={{
                 fontFamily: "'Inter', sans-serif",
                 fontSize: 13,
                 color: "rgba(255,255,255,0.45)",
@@ -355,23 +357,32 @@ const HuellaRoja = ({ showDock }: { showDock: boolean }) => {
         }
         .hr-fuel-card:hover { transform: translateY(-4px); box-shadow: 0 8px 32px rgba(255,59,59,0.15); }
         .hr-station-card:hover { transform: translateY(-4px); }
+        .hackbar-scroll { scrollbar-width: none; -ms-overflow-style: none; }
+        .hackbar-scroll::-webkit-scrollbar { display: none; }
         @media (max-width: 767px) {
-          .hr-hero { flex-direction: column !important; }
-          .hr-hero-left { flex: none !important; width: 100% !important; padding: 100px 6% 40px !important; text-align: center !important; align-items: center !important; }
-          .hr-hero-right { flex: none !important; width: 100% !important; height: 250px !important; }
-          .hr-hero-fade { width: 100% !important; height: 60px !important; background: linear-gradient(to bottom, #0a0a0a, transparent) !important; top: 0 !important; left: 0 !important; }
+          .hr-hero { flex-direction: column !important; min-height: 60vh !important; }
+          .hr-hero-left { flex: none !important; width: 100% !important; min-height: 60vh !important; padding: 0 6% !important; text-align: center !important; align-items: center !important; justify-content: center !important; }
+          .hr-hero-right { display: none !important; }
           .hr-hero-title { font-size: clamp(28px, 8vw, 42px) !important; }
-          .hr-hero-placeholder { width: 90% !important; height: 80% !important; }
           .hr-fuel-grid { flex-direction: column !important; gap: 16px !important; }
           .hr-fuel-card { min-height: 320px !important; }
           .hr-station-grid { grid-template-columns: 1fr !important; gap: 16px !important; }
           .hr-station-card { min-height: 260px !important; }
           .hr-chef-row { flex-direction: column !important; gap: 24px !important; }
           .hr-chef-left { flex: none !important; width: 100% !important; text-align: center !important; align-items: center !important; }
-          .hr-chef-right { flex: none !important; width: 100% !important; min-height: 250px !important; }
+          .hr-chef-right { flex: none !important; width: 100% !important; min-height: 150px !important; height: 150px !important; }
+          .hr-chef-right > div { min-height: 150px !important; }
           .hr-chef-grid { grid-template-columns: 1fr !important; gap: 16px !important; }
           .hr-chef-card { min-height: 180px !important; }
           .hr-footer { padding: 32px 6% !important; }
+          .carousel-3d-container { min-height: 320px !important; padding: 32px 4% !important; }
+          .carousel-3d-card { width: 170px !important; min-height: 240px !important; padding: 20px 16px !important; }
+          .carousel-3d-card.is-active { width: 220px !important; min-height: 280px !important; padding: 20px 16px !important; }
+          .carousel-3d-card.is-left { transform: translateX(-15px) rotateY(10deg) scale(0.8) !important; }
+          .carousel-3d-card.is-right { transform: translateX(15px) rotateY(-10deg) scale(0.8) !important; }
+          .carousel-3d-card .carousel-3d-title { font-size: 11px !important; }
+          .carousel-3d-card.is-active .carousel-3d-title { font-size: 14px !important; }
+          .carousel-3d-card .carousel-3d-desc { font-size: 11px !important; }
           .lab-footer { height: auto !important; min-height: 500px !important; padding: 32px 24px !important; }
           .lab-footer-row { flex-direction: column !important; gap: 40px !important; padding: 32px 24px !important; height: auto !important; }
           .lab-col-left, .lab-col-center, .lab-col-right { flex: none !important; width: 100% !important; align-items: center !important; text-align: center !important; }
@@ -452,7 +463,7 @@ const HuellaRoja = ({ showDock }: { showDock: boolean }) => {
         <p style={{ fontFamily: "'Michroma', sans-serif", fontSize: "clamp(16px, 2vw, 24px)", color: "#FFFFFF", textTransform: "uppercase", letterSpacing: "0.04em", marginBottom: 32, textAlign: "center", width: "100%" }}>
           FUEL YOUR SYSTEM
         </p>
-        <div className="hr-fuel-grid" style={{ display: "flex", gap: 20 }}>
+        <div className="hr-fuel-grid hidden md:flex" style={{ display: "flex", gap: 20 }}>
           <FuelCard
             index={0}
             name="SUPPLEMENTS"
@@ -468,6 +479,25 @@ const HuellaRoja = ({ showDock }: { showDock: boolean }) => {
             image="/hackbar/mealprep.jpg"
           />
         </div>
+
+        {/* Mobile compact fuel cards */}
+        <div className="flex md:hidden flex-col gap-3">
+          {[
+            { name: "SUPPLEMENTS", items: ["Hydration Boost", "Focus Stack", "Recovery Mix"], image: "/hackbar/supplements.jpg" },
+            { name: "MEAL PREPS", items: ["Weekly Plans", "Performance / Shred / Gain", "QR Traceability"], image: "/hackbar/mealprep.jpg" },
+          ].map((c) => (
+            <div key={c.name} style={{ position: "relative", minHeight: 120, borderRadius: 12, overflow: "hidden", padding: "16px 18px", display: "flex", flexDirection: "column", justifyContent: "center" }}>
+              <div style={{ position: "absolute", inset: 0, backgroundColor: "#1a1a1a", zIndex: 0 }} />
+              <img src={c.image} alt={c.name} style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", zIndex: 0 }} />
+              <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(0,0,0,0.92) 10%, rgba(0,0,0,0.55) 60%, rgba(0,0,0,0.3) 100%)", zIndex: 1 }} />
+              <div style={{ position: "absolute", bottom: 0, left: "20%", right: "20%", height: 2, background: "linear-gradient(to right, transparent, #FF3B3B, transparent)", zIndex: 2 }} />
+              <div style={{ position: "relative", zIndex: 2 }}>
+                <p style={{ fontFamily: "'Michroma', sans-serif", fontSize: 14, color: "#fff", textTransform: "uppercase", margin: 0, marginBottom: 6 }}>{c.name}</p>
+                <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 11, color: "rgba(255,255,255,0.55)", margin: 0, lineHeight: 1.5 }}>{c.items.join(" · ")}</p>
+              </div>
+            </div>
+          ))}
+        </div>
       </motion.section>
 
       {/* ═══ SECTION C: HACKBAR STATION ═══ */}
@@ -481,10 +511,28 @@ const HuellaRoja = ({ showDock }: { showDock: boolean }) => {
         <p style={{ fontFamily: "'Michroma', sans-serif", fontSize: "clamp(16px, 2vw, 24px)", color: "#FFFFFF", textTransform: "uppercase", letterSpacing: "0.04em", marginBottom: 32, textAlign: "center", width: "100%" }}>
           HACKBAR STATION
         </p>
-        <div className="hr-station-grid" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 20 }}>
+        <div className="hr-station-grid hidden md:grid" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 20 }}>
           <StationCard index={0} name="CUSTOM SHAKES" desc="Tailored to your training type or goal: energy, recovery, lean mass, or detox." />
           <StationCard index={1} name="FUNCTIONAL COFFEE" desc="Infused with adaptogens and nootropics for sustained mental clarity without the crash." />
           <StationCard index={2} name="BLUEPRINT SNACKS" desc="No preservatives or refined sugar. Only functional ingredients that fuel your system." />
+        </div>
+
+        {/* Mobile horizontal scroll */}
+        <div className="hackbar-scroll flex md:hidden" style={{ overflowX: "auto", scrollSnapType: "x mandatory", gap: 14, paddingLeft: "4%", paddingRight: "4%", marginLeft: "-7%", marginRight: "-7%" }}>
+          {[
+            { title: "CUSTOM SHAKES", desc: "Tailored to your training type or goal: energy, recovery, lean mass, or detox." },
+            { title: "FUNCTIONAL COFFEE", desc: "Infused with adaptogens and nootropics for sustained mental clarity without the crash." },
+            { title: "BLUEPRINT SNACKS", desc: "No preservatives or refined sugar. Only functional ingredients that fuel your system." },
+          ].map((item) => (
+            <div key={item.title} style={{ flex: "0 0 260px", minHeight: 220, scrollSnapAlign: "start", borderRadius: 14, position: "relative", overflow: "hidden", padding: "20px 18px", display: "flex", flexDirection: "column", justifyContent: "flex-end", backgroundColor: "#1a1a1a" }}>
+              <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(0,0,0,0.85) 10%, rgba(0,0,0,0.3) 60%, transparent)", zIndex: 1 }} />
+              <div style={{ position: "absolute", bottom: 0, left: "20%", right: "20%", height: 2, background: "linear-gradient(to right, transparent, #FF3B3B, transparent)", zIndex: 2 }} />
+              <div style={{ position: "relative", zIndex: 2 }}>
+                <p style={{ fontFamily: "'Michroma', sans-serif", fontSize: 13, color: "#fff", textTransform: "uppercase", margin: 0, marginBottom: 8 }}>{item.title}</p>
+                <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 11, color: "rgba(255,255,255,0.5)", lineHeight: 1.6, margin: 0 }}>{item.desc}</p>
+              </div>
+            </div>
+          ))}
         </div>
       </motion.section>
 
