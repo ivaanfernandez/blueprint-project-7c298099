@@ -77,7 +77,7 @@ const FuelCard = ({ name, desc, items, index }: { name: string; desc: string; it
     {/* Content */}
     <div style={{ position: "relative", zIndex: 2 }}>
       <p style={{ fontFamily: "'Michroma', sans-serif", fontSize: 18, color: "#fff", textTransform: "uppercase", marginBottom: 8 }}>{name}</p>
-      <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 13, color: "rgba(255,255,255,0.6)", lineHeight: 1.6, marginBottom: 12 }}>{desc}</p>
+      {desc && <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 13, color: "rgba(255,255,255,0.6)", lineHeight: 1.6, marginBottom: 12 }}>{desc}</p>}
       <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
         {items.map((item, i) => (
           <div key={i} style={{ display: "flex", alignItems: "center", gap: 8 }}>
