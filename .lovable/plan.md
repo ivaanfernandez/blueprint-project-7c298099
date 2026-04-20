@@ -1,41 +1,46 @@
 
-## Plan: Desktop Hero Centering + Button Enlargement
 
-### Overview
-Center the hero content vertically on desktop and enlarge the "HAVE YOUR BLUEPRINT" button with appropriate spacing adjustments. Mobile remains unchanged.
+## Plan: Hack Bar Page — Cleanup + English Translation
 
-### Changes
+All edits in `src/pages/HuellaRoja.tsx`.
 
-**1. Center Hero Content Vertically (Desktop)**
-- Update `.hero-content-wrapper` CSS (line ~538-541):
-  - Change `justify-content: flex-start` → `justify-content: center`
-  - Add `min-height: 100vh` to ensure vertical centering
-- Remove excessive top padding from `hero-headline-wrapper` inline style (line ~234): Change `paddingTop: '140px'` → `paddingTop: '40px'` or remove entirely
-- Remove `paddingTop: "110px"` from hero-content-wrapper inline style (line ~229)
+### 1. Hero — remove eyebrow + subtitle, fix "glitch"
+- Delete the `BLUEPRINT SYSTEM` eyebrow `<p>` (lines 234–236).
+- Delete the subtitle `<p className="hr-hero-subtitle">…</p>` (lines 248–250).
+- The "glitch" behind the title is caused by TWO stacked red `radial-gradient` overlays positioned on the left column (lines 231–232) — they create a hard-edged red blob that looks static. Replace them with a single, softer, animated ambient glow (slow opacity pulse via a new `@keyframes hrAmbient` so it visibly breathes instead of looking broken). Keep the section background `#0a0a0a`.
+- Also update the related mobile CSS (`.hr-hero-subtitle` rule at line 196) — harmless to keep, but no longer needed; leave or remove. Will remove for cleanliness.
 
-**2. Increase Gap Between Subtitle and Button**
-- Change hero-cta-button `marginTop` inline style (line ~331): `"24px"` → `"48px"`
-- Update CSS `.hero-cta-button` (line ~558-561): `margin-top: 64px` → `margin-top: 80px`
+### 2. "FUEL YOUR SYSTEM" — center title, remove subtitle, remove card descriptions
+- Add `textAlign: "center", width: "100%"` to the title `<p>` (line 283).
+- Delete the subtitle `<p>` (lines 286–288).
+- In `<FuelCard>` component (line 80): conditionally render the `desc` line only when `desc` is non-empty (so we can pass `desc=""` for both cards without removing the prop signature). Cleaner: keep the prop, render `{desc && <p>…</p>}`.
+- Pass empty `desc=""` to both FuelCard instances (lines 290–301). Translate names/items as below.
 
-**3. Enlarge the "HAVE YOUR BLUEPRINT" Button**
-- Update `.hero-shiny-btn` CSS (line ~498-504):
-  - `padding: 1.25rem 3rem` → `padding: 18px 48px`
-  - `font-size: 15px` → `font-size: 14px`
-  - `min-width: 280px` (keep)
-  - `letter-spacing: 0.15em` (keep)
-  - Add explicit `height: auto` to support larger padding
+### 3. "HACKBAR STATION" — center title, remove subtitle
+- Add `textAlign: "center", width: "100%"` to title (line 313).
+- Delete the subtitle `<p>` (lines 316–318).
 
-**4. Push Chevron Down**
-- Change hero-scroll-indicator `marginTop` inline style (line ~336): `24` → `40`
-- Update CSS `.hero-scroll-indicator` desktop rule to have `margin-top: 40px`
+### 4. Translate all Spanish → English
+- `SUPLEMENTOS` → `SUPPLEMENTS`
+- Items: `Planes semanales` → `Weekly Plans`; `Trazabilidad QR` → `QR Traceability`
+- Station card 1: `BATIDOS PERSONALIZADOS` → `CUSTOM SHAKES`; desc → `Tailored to your training type or goal: energy, recovery, lean mass, or detox.`
+- Station card 2: `CAFÉ FUNCIONAL` → `FUNCTIONAL COFFEE`; desc → `Infused with adaptogens and nootropics for sustained mental clarity without the crash.`
+- Station card 3: `SNACKS BLUEPRINT` → `BLUEPRINT SNACKS`; desc → `No preservatives or refined sugar. Only functional ingredients that fuel your system.`
+- HUELLAS dock tooltips (lines 22–24): `ENTRENAMIENTO` → `TRAINING`, `NUTRICIÓN` → `NUTRITION`, `RECUPERACIÓN` → `RECOVERY`.
+- Hero placeholder label "Image placeholder" — already English, leave.
+- Meet the Chef section + ChefCards + footer — already English, leave.
+
+### Mobile
+- Centered titles use `textAlign: center` which applies to both viewports. No extra mobile rules needed.
 
 ### Untouched
-- All mobile styles (`@media (max-width: 767px)` rules remain unchanged)
-- Button text, border, glow, and hover effects
-- Hero background, overlay, or any imagery
-- Title text, WordRotate, or subtitle text
-- Dock component or any other section
-- Any other pages
+- "HACK BAR" title text/font/size, TextScramble animation
+- Hero placeholder box (image area), corner brackets
+- Card layouts, scan line animations, grid structures
+- Meet the Chef section, footer layout
+- BiometricScanRed intro
+- Any other page
 
 ### Files Modified
-- `src/pages/MainLanding.tsx` (CSS in `<style>` block and inline styles on hero content wrapper, headline wrapper, CTA button, and scroll indicator)
+- `src/pages/HuellaRoja.tsx`
+
