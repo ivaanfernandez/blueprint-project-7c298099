@@ -397,11 +397,8 @@ const HuellaRoja = ({ showDock }: { showDock: boolean }) => {
             </div>
           </div>
         </div>
-        <div className="hr-chef-grid" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 20 }}>
-          <ChefCard index={0} name="MEAL PREPS" desc="High-performance meals with perfect macro balance." />
-          <ChefCard index={1} name="DETOX JUICE" desc="Cold-pressed functional blends for cleansing and energy." />
-          <ChefCard index={2} name="SUPPLEMENTS" desc="Blueprint Approved stack for recovery and focus." />
-        </div>
+        {/* 3D Carousel */}
+        <Carousel3D />
       </motion.section>
 
       {/* ═══ SECTION E: LAB MONITOR FOOTER ═══ */}
