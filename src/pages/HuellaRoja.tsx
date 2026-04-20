@@ -65,6 +65,8 @@ const FuelCard = ({ name, desc, items, index, image }: { name: string; desc: str
       cursor: "pointer",
       transition: "transform 0.3s ease, box-shadow 0.3s ease",
       animation: `hrFadeUp 0.5s ease ${index * 0.15}s both`,
+      border: "1px solid rgba(255,59,59,0.15)",
+      boxShadow: "0 0 20px rgba(255,59,59,0.12), 0 0 40px rgba(255,59,59,0.06)",
     }}
   >
     {/* Placeholder bg */}
@@ -426,7 +428,7 @@ const HuellaRoja = ({ showDock }: { showDock: boolean }) => {
           0%, 100% { opacity: 0.4; transform: scaleY(1); }
           50% { opacity: 0.9; transform: scaleY(1.15); }
         }
-        .hr-fuel-card:hover { transform: translateY(-4px); box-shadow: 0 8px 32px rgba(255,59,59,0.15); }
+        .hr-fuel-card:hover { transform: translateY(-4px); box-shadow: 0 0 25px rgba(255,59,59,0.2), 0 0 50px rgba(255,59,59,0.1); }
         .hr-station-row:hover { background: rgba(255,59,59,0.03) !important; }
         @media (max-width: 767px) {
           .hr-hero { flex-direction: column !important; min-height: 60vh !important; }
@@ -745,7 +747,7 @@ const HuellaRoja = ({ showDock }: { showDock: boolean }) => {
       </motion.section>
 
       {/* ═══ SECTION E: LAB MONITOR FOOTER ═══ */}
-      <footer className="lab-footer" style={{ background: "#050505", padding: 0, position: "relative", overflow: "hidden", height: 500, borderTop: "1px solid rgba(255,59,59,0.1)" }}>
+      <footer className="lab-footer hidden md:block" style={{ background: "#050505", padding: 0, position: "relative", overflow: "hidden", height: 500, borderTop: "1px solid rgba(255,59,59,0.1)" }}>
         {/* LAYER 1 — Grid */}
         <div style={{ position: "absolute", inset: 0, backgroundImage: "linear-gradient(rgba(255,59,59,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,59,59,0.03) 1px, transparent 1px)", backgroundSize: "40px 40px", pointerEvents: "none", zIndex: 0 }} />
 
@@ -836,6 +838,100 @@ const HuellaRoja = ({ showDock }: { showDock: boolean }) => {
           </div>
         </div>
       </footer>
+
+      {/* Mobile Lab Footer */}
+      <div className="flex md:hidden" style={{
+        background: "#050505",
+        borderTop: "1px solid rgba(255,59,59,0.1)",
+        padding: "32px 20px",
+        flexDirection: "column",
+        alignItems: "center",
+        gap: "24px",
+        position: "relative",
+        overflow: "hidden",
+      }}>
+        {/* Grid background */}
+        <div style={{
+          position: "absolute",
+          inset: 0,
+          backgroundImage: "linear-gradient(rgba(255,59,59,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,59,59,0.03) 1px, transparent 1px)",
+          backgroundSize: "30px 30px",
+          pointerEvents: "none",
+        }} />
+
+        {/* Corner brackets */}
+        <div style={{ position: "absolute", top: "12px", left: "12px", width: "24px", height: "24px", borderTop: "1.5px solid rgba(255,59,59,0.25)", borderLeft: "1.5px solid rgba(255,59,59,0.25)" }} />
+        <div style={{ position: "absolute", top: "12px", right: "12px", width: "24px", height: "24px", borderTop: "1.5px solid rgba(255,59,59,0.25)", borderRight: "1.5px solid rgba(255,59,59,0.25)" }} />
+        <div style={{ position: "absolute", bottom: "12px", left: "12px", width: "24px", height: "24px", borderBottom: "1.5px solid rgba(255,59,59,0.25)", borderLeft: "1.5px solid rgba(255,59,59,0.25)" }} />
+        <div style={{ position: "absolute", bottom: "12px", right: "12px", width: "24px", height: "24px", borderBottom: "1.5px solid rgba(255,59,59,0.25)", borderRight: "1.5px solid rgba(255,59,59,0.25)" }} />
+
+        {/* Fingerprint + title */}
+        <div style={{ position: "relative", zIndex: 1, display: "flex", flexDirection: "column", alignItems: "center", gap: "12px" }}>
+          <svg width="60" height="60" viewBox="0 0 140 140" fill="none">
+            <ellipse cx="70" cy="75" rx="12" ry="18" stroke="#FF3B3B" strokeWidth="1.5" opacity="0.9"/>
+            <ellipse cx="70" cy="75" rx="20" ry="30" stroke="#FF3B3B" strokeWidth="1.5" opacity="0.6"/>
+            <ellipse cx="70" cy="75" rx="28" ry="42" stroke="#FF3B3B" strokeWidth="1.5" opacity="0.35"/>
+          </svg>
+          <span style={{ fontFamily: "'Michroma', sans-serif", fontSize: "14px", color: "#fff", textTransform: "uppercase", letterSpacing: "0.06em" }}>Hack Bar</span>
+        </div>
+
+        {/* Data grid 2x2 */}
+        <div style={{
+          position: "relative",
+          zIndex: 1,
+          display: "grid",
+          gridTemplateColumns: "1fr 1fr",
+          gap: "12px",
+          width: "100%",
+        }}>
+          {[
+            { label: "METABOLIC RATE", value: "1,847 kcal", active: false },
+            { label: "PROTEIN INTAKE", value: "142g", active: false },
+            { label: "HYDRATION LVL", value: "94.2%", active: false },
+            { label: "SYSTEM STATUS", value: "ACTIVE", active: true },
+          ].map((item) => (
+            <div key={item.label} style={{
+              padding: "12px",
+              borderRadius: "10px",
+              background: "rgba(255,59,59,0.03)",
+              border: "1px solid rgba(255,59,59,0.08)",
+              textAlign: "center",
+            }}>
+              <div style={{ fontFamily: "'Orbitron', sans-serif", fontSize: "7px", letterSpacing: "0.12em", color: "rgba(255,255,255,0.25)", marginBottom: "6px" }}>
+                {item.label}
+              </div>
+              <div style={{
+                fontFamily: "'Orbitron', sans-serif",
+                fontSize: "16px",
+                fontWeight: 500,
+                color: "#FF3B3B",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                gap: "6px",
+              }}>
+                {item.active && (
+                  <div style={{ width: "6px", height: "6px", borderRadius: "50%", background: "#FF3B3B", animation: "labPulse 2s infinite" }} />
+                )}
+                {item.value}
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Bottom bar */}
+        <div style={{
+          position: "relative",
+          zIndex: 1,
+          display: "flex",
+          justifyContent: "space-between",
+          width: "100%",
+          alignItems: "center",
+        }}>
+          <span style={{ fontFamily: "'Inter', sans-serif", fontSize: "8px", color: "rgba(255,255,255,0.3)" }}>© 2025 Blueprint Project</span>
+          <span style={{ fontFamily: "'Inter', sans-serif", fontSize: "8px", color: "rgba(255,255,255,0.3)" }}>Hack Bar — Blueprint Project</span>
+        </div>
+      </div>
 
       {/* Bottom spacer for dock */}
       <div style={{ height: 120 }} />
