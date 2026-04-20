@@ -518,29 +518,113 @@ const HuellaRoja = ({ showDock }: { showDock: boolean }) => {
         <p style={{ fontFamily: "'Michroma', sans-serif", fontSize: "clamp(16px, 2vw, 24px)", color: "#FFFFFF", textTransform: "uppercase", letterSpacing: "0.04em", marginBottom: 32, textAlign: "center", width: "100%" }}>
           HACKBAR STATION
         </p>
-        <div className="hr-station-grid hidden md:grid" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 20 }}>
-          <StationCard index={0} name="CUSTOM SHAKES" desc="Tailored to your training type or goal: energy, recovery, lean mass, or detox." />
-          <StationCard index={1} name="FUNCTIONAL COFFEE" desc="Infused with adaptogens and nootropics for sustained mental clarity without the crash." />
-          <StationCard index={2} name="BLUEPRINT SNACKS" desc="No preservatives or refined sugar. Only functional ingredients that fuel your system." />
-        </div>
-
-        {/* Mobile horizontal scroll */}
-        <div className="hackbar-scroll flex md:hidden" style={{ overflowX: "auto", scrollSnapType: "x mandatory", gap: 14, paddingLeft: "4%", paddingRight: "4%", marginLeft: "-7%", marginRight: "-7%" }}>
-          {[
-            { title: "CUSTOM SHAKES", desc: "Tailored to your training type or goal: energy, recovery, lean mass, or detox." },
-            { title: "FUNCTIONAL COFFEE", desc: "Infused with adaptogens and nootropics for sustained mental clarity without the crash." },
-            { title: "BLUEPRINT SNACKS", desc: "No preservatives or refined sugar. Only functional ingredients that fuel your system." },
-          ].map((item) => (
-            <div key={item.title} style={{ flex: "0 0 260px", minHeight: 220, scrollSnapAlign: "start", borderRadius: 14, position: "relative", overflow: "hidden", padding: "20px 18px", display: "flex", flexDirection: "column", justifyContent: "flex-end", backgroundColor: "#1a1a1a" }}>
-              <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(0,0,0,0.85) 10%, rgba(0,0,0,0.3) 60%, transparent)", zIndex: 1 }} />
-              <div style={{ position: "absolute", bottom: 0, left: "20%", right: "20%", height: 2, background: "linear-gradient(to right, transparent, #FF3B3B, transparent)", zIndex: 2 }} />
-              <div style={{ position: "relative", zIndex: 2 }}>
-                <p style={{ fontFamily: "'Michroma', sans-serif", fontSize: 13, color: "#fff", textTransform: "uppercase", margin: 0, marginBottom: 8 }}>{item.title}</p>
-                <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 11, color: "rgba(255,255,255,0.5)", lineHeight: 1.6, margin: 0 }}>{item.desc}</p>
-              </div>
+        {(() => {
+          const stationItems = [
+            {
+              title: "CUSTOM SHAKES",
+              desc: "Tailored to your training type or goal: energy, recovery, lean mass, or detox.",
+              icon: (
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M7 3h10l-1 4H8L7 3z" />
+                  <path d="M8 7l-1 13a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2l-1-13" />
+                  <path d="M9 12h6" />
+                </svg>
+              ),
+            },
+            {
+              title: "FUNCTIONAL COFFEE",
+              desc: "Infused with adaptogens and nootropics for sustained mental clarity without the crash.",
+              icon: (
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M4 10h13v7a4 4 0 0 1-4 4H8a4 4 0 0 1-4-4v-7z" />
+                  <path d="M17 12h2a3 3 0 0 1 0 6h-2" />
+                  <path d="M8 3c0 1.5-1 2-1 3.5S8 8 8 9.5" />
+                  <path d="M12 3c0 1.5-1 2-1 3.5S12 8 12 9.5" />
+                </svg>
+              ),
+            },
+            {
+              title: "BLUEPRINT SNACKS",
+              desc: "No preservatives or refined sugar. Only functional ingredients that fuel your system.",
+              icon: (
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
+                  <rect x="3" y="8" width="18" height="10" rx="2" />
+                  <path d="M3 12h18" />
+                  <path d="M8 8V6M16 8V6" />
+                </svg>
+              ),
+            },
+          ];
+          return (
+            <div style={{ maxWidth: 760, margin: "0 auto", border: "1px solid rgba(255,255,255,0.06)", borderRadius: 14, overflow: "hidden", backgroundColor: "rgba(255,255,255,0.015)" }}>
+              {stationItems.map((item, index) => {
+                const isActive = activeStation === index;
+                return (
+                  <div
+                    key={item.title}
+                    onMouseEnter={() => setActiveStation(index)}
+                    onMouseLeave={() => setActiveStation(null)}
+                    onClick={() => setActiveStation(isActive ? null : index)}
+                    className="hr-station-row"
+                    style={{
+                      position: "relative",
+                      overflow: "hidden",
+                      borderBottom: index < stationItems.length - 1 ? "1px solid rgba(255,255,255,0.06)" : "none",
+                      padding: isActive ? "28px 24px" : "20px 24px",
+                      cursor: "pointer",
+                      transition: "all 0.3s ease",
+                      background: isActive ? "rgba(255,59,59,0.03)" : "transparent",
+                    }}
+                  >
+                    {isActive && (
+                      <>
+                        <div style={{ position: "absolute", top: 8, left: 8, width: 12, height: 12, borderTop: "1px solid #FF3B3B", borderLeft: "1px solid #FF3B3B" }} />
+                        <div style={{ position: "absolute", top: 8, right: 8, width: 12, height: 12, borderTop: "1px solid #FF3B3B", borderRight: "1px solid #FF3B3B" }} />
+                        <div style={{ position: "absolute", bottom: 8, left: 8, width: 12, height: 12, borderBottom: "1px solid #FF3B3B", borderLeft: "1px solid #FF3B3B" }} />
+                        <div style={{ position: "absolute", bottom: 8, right: 8, width: 12, height: 12, borderBottom: "1px solid #FF3B3B", borderRight: "1px solid #FF3B3B" }} />
+                      </>
+                    )}
+                    <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 16, position: "relative", zIndex: 1 }}>
+                      <div style={{ flex: 1 }}>
+                        <p
+                          className={`hr-station-title${isActive ? " is-active" : ""}`}
+                          style={{
+                            fontFamily: "'Michroma', sans-serif",
+                            fontSize: isActive ? 16 : 14,
+                            color: "#fff",
+                            textTransform: "uppercase",
+                            letterSpacing: "0.04em",
+                            margin: 0,
+                            transition: "font-size 0.3s ease",
+                          }}
+                        >
+                          {item.title}
+                        </p>
+                        {isActive && (
+                          <p
+                            className="hr-station-desc"
+                            style={{
+                              fontFamily: "'Inter', sans-serif",
+                              fontSize: 13,
+                              color: "rgba(255,255,255,0.6)",
+                              lineHeight: 1.6,
+                              margin: "10px 0 0",
+                            }}
+                          >
+                            {item.desc}
+                          </p>
+                        )}
+                      </div>
+                      {isActive && (
+                        <div style={{ flex: "0 0 auto", color: "rgba(255,255,255,0.7)" }}>{item.icon}</div>
+                      )}
+                    </div>
+                  </div>
+                );
+              })}
             </div>
-          ))}
-        </div>
+          );
+        })()}
       </motion.section>
 
       {/* ═══ SECTION D: MEET THE CHEF ═══ */}
