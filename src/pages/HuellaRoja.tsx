@@ -234,6 +234,17 @@ const Carousel3D = () => {
               {isActive && (
                 <div style={{ position: "absolute", inset: -1, borderRadius: 21, background: "linear-gradient(135deg, rgba(255,59,59,0.25), transparent 50%, rgba(255,59,59,0.15))", zIndex: -1, pointerEvents: "none" }} />
               )}
+              {card.image && (
+                <>
+                  <img
+                    src={card.image}
+                    alt={card.title}
+                    style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", borderRadius: 20, opacity: isActive ? 0.55 : 0.35, transition: "opacity 0.5s ease", zIndex: 0, pointerEvents: "none" }}
+                  />
+                  <div style={{ position: "absolute", inset: 0, borderRadius: 20, background: "linear-gradient(to top, rgba(0,0,0,0.85) 10%, rgba(0,0,0,0.45) 60%, rgba(0,0,0,0.25) 100%)", zIndex: 1, pointerEvents: "none" }} />
+                </>
+              )}
+              <div style={{ position: "relative", zIndex: 2, display: "flex", flexDirection: "column", alignItems: "center", gap: 20 }}>
               <div style={{
                 fontFamily: "'Orbitron', sans-serif",
                 fontSize: 8,
