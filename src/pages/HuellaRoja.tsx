@@ -489,7 +489,7 @@ const HuellaRoja = ({ showDock }: { showDock: boolean }) => {
         <p style={{ fontFamily: "'Michroma', sans-serif", fontSize: "clamp(16px, 2vw, 24px)", color: "#FFFFFF", textTransform: "uppercase", letterSpacing: "0.04em", marginBottom: 32, textAlign: "center", width: "100%" }}>
           FUEL YOUR SYSTEM
         </p>
-        <div className="hr-fuel-grid hidden md:flex" style={{ display: "flex", gap: 20 }}>
+        <div className="hr-fuel-grid" style={{ display: "flex", gap: 20 }}>
           <FuelCard
             index={0}
             name="SUPPLEMENTS"
@@ -504,25 +504,6 @@ const HuellaRoja = ({ showDock }: { showDock: boolean }) => {
             items={["Weekly Plans", "Performance / Shred / Gain", "QR Traceability"]}
             image="/hackbar/mealprep.jpg"
           />
-        </div>
-
-        {/* Mobile compact fuel cards */}
-        <div className="flex md:hidden flex-col gap-3">
-          {[
-            { name: "SUPPLEMENTS", items: ["Hydration Boost", "Focus Stack", "Recovery Mix"], image: "/hackbar/supplements.jpg" },
-            { name: "MEAL PREPS", items: ["Weekly Plans", "Performance / Shred / Gain", "QR Traceability"], image: "/hackbar/mealprep.jpg" },
-          ].map((c) => (
-            <div key={c.name} style={{ position: "relative", minHeight: 120, borderRadius: 12, overflow: "hidden", padding: "16px 18px", display: "flex", flexDirection: "column", justifyContent: "center" }}>
-              <div style={{ position: "absolute", inset: 0, backgroundColor: "#1a1a1a", zIndex: 0 }} />
-              <img src={c.image} alt={c.name} style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", zIndex: 0 }} />
-              <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(0,0,0,0.92) 10%, rgba(0,0,0,0.55) 60%, rgba(0,0,0,0.3) 100%)", zIndex: 1 }} />
-              <div style={{ position: "absolute", bottom: 0, left: "20%", right: "20%", height: 2, background: "linear-gradient(to right, transparent, #FF3B3B, transparent)", zIndex: 2 }} />
-              <div style={{ position: "relative", zIndex: 2 }}>
-                <p style={{ fontFamily: "'Michroma', sans-serif", fontSize: 14, color: "#fff", textTransform: "uppercase", margin: 0, marginBottom: 6 }}>{c.name}</p>
-                <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 11, color: "rgba(255,255,255,0.55)", margin: 0, lineHeight: 1.5 }}>{c.items.join(" · ")}</p>
-              </div>
-            </div>
-          ))}
         </div>
       </motion.section>
 
