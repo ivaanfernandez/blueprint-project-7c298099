@@ -412,8 +412,33 @@ const HuellaRoja = ({ showDock }: { showDock: boolean }) => {
         </div>
       )}
 
-      {/* ═══ SECTION A: HERO ═══ */}
-      <section className="hr-hero" style={{ minHeight: "100vh", display: "flex", alignItems: "center", position: "relative", overflow: "hidden", backgroundColor: "#0a0a0a" }}>
+      {/* ═══ SECTION A: HERO (MOBILE) ═══ */}
+      <section className="flex md:hidden" style={{
+        position: "relative", minHeight: "100vh", width: "100%",
+        overflow: "hidden", alignItems: "center", justifyContent: "center",
+        backgroundColor: "#0a0a0a",
+      }}>
+        <img src="/hackbar/hero-mobile.jpg" alt="Hack Bar" style={{
+          position: "absolute", inset: 0, width: "100%", height: "100%",
+          objectFit: "cover", objectPosition: "center", zIndex: 0,
+        }} />
+        <div style={{ position: "absolute", inset: 0, background: "rgba(0,0,0,0.45)", zIndex: 1 }} />
+        <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse at 50% 50%, rgba(255,59,59,0.10) 0%, transparent 60%)", zIndex: 1, pointerEvents: "none" }} />
+        <div style={{ position: "relative", zIndex: 2, textAlign: "center" }}>
+          <h1 style={{
+            fontFamily: "'Michroma', sans-serif",
+            fontSize: "clamp(60px, 18vw, 100px)",
+            color: "#FFFFFF", textTransform: "uppercase",
+            letterSpacing: "0.06em", lineHeight: 1.05,
+            textShadow: "0 0 40px rgba(255,59,59,0.2)",
+            margin: 0,
+          }}>HACK<br />BAR</h1>
+        </div>
+        <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, height: 100, background: "linear-gradient(to bottom, transparent, #0a0a0a)", zIndex: 2, pointerEvents: "none" }} />
+      </section>
+
+      {/* ═══ SECTION A: HERO (DESKTOP) ═══ */}
+      <section className="hr-hero hidden md:flex" style={{ minHeight: "100vh", alignItems: "center", position: "relative", overflow: "hidden", backgroundColor: "#0a0a0a" }}>
         {/* Left column */}
         <div className="hr-hero-left" style={{ flex: "0 0 55%", padding: "80px 0 80px 7%", display: "flex", flexDirection: "column", justifyContent: "center", gap: 16, position: "relative", zIndex: 2 }}>
           {/* Ambient glow — single soft pulsing layer */}
