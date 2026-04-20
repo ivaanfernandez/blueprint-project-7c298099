@@ -647,11 +647,11 @@ const HuellaRoja = ({ showDock }: { showDock: boolean }) => {
               MEET THE CHEF
             </TextScramble>
             <p className="hr-chef-subtitle" style={{ fontFamily: "'Inter', sans-serif", fontSize: 14, fontWeight: 300, color: "rgba(255,255,255,0.4)", lineHeight: 1.7, maxWidth: 480 }}>
-              <span className="hidden md:inline">The mind behind every recipe. Precision nutrition crafted with science and passion.</span>
-              <span className="md:hidden">
+              <span className="hidden md:inline">The mind behind every recipe. Personalized nutrition crafted with science and passion.</span>
+              <span className="md:hidden text-xs font-mono">
                 The mind behind every recipe.
                 <br />
-                Precision nutrition crafted with science and passion.
+                Personalized nutrition crafted with science and passion.
               </span>
             </p>
             <div style={{ width: 60, height: 2, background: "#FF3B3B", marginTop: 20, borderRadius: 1 }} />
