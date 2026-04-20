@@ -363,9 +363,11 @@ const HuellaRoja = ({ showDock }: { showDock: boolean }) => {
           .hr-hero-right { display: none !important; }
           .hr-hero-title { font-size: clamp(28px, 8vw, 42px) !important; }
           .hr-fuel-grid { flex-direction: column !important; gap: 16px !important; }
-          .hr-fuel-card { min-height: 320px !important; }
-          .hr-station-grid { grid-template-columns: 1fr !important; gap: 16px !important; }
-          .hr-station-card { min-height: 260px !important; }
+          .hr-fuel-card { min-height: 280px !important; }
+          .hr-station-row { padding: 18px 16px !important; }
+          .hr-station-row .hr-station-title { font-size: 13px !important; }
+          .hr-station-row .hr-station-title.is-active { font-size: 15px !important; }
+          .hr-station-row .hr-station-desc { font-size: 12px !important; }
           .hr-chef-row { flex-direction: column !important; gap: 24px !important; }
           .hr-chef-left { flex: none !important; width: 100% !important; text-align: center !important; align-items: center !important; }
           .hr-chef-right { flex: none !important; width: 100% !important; min-height: 150px !important; height: 150px !important; }
