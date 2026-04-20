@@ -647,19 +647,19 @@ const HuellaRoja = ({ showDock }: { showDock: boolean }) => {
         }} />
 
         {/* Corner brackets */}
-        <div style={{ position: "absolute", top: "12px", left: "12px", width: "24px", height: "24px", borderTop: "1.5px solid rgba(255,59,59,0.25)", borderLeft: "1.5px solid rgba(255,59,59,0.25)" }} />
-        <div style={{ position: "absolute", top: "12px", right: "12px", width: "24px", height: "24px", borderTop: "1.5px solid rgba(255,59,59,0.25)", borderRight: "1.5px solid rgba(255,59,59,0.25)" }} />
-        <div style={{ position: "absolute", bottom: "12px", left: "12px", width: "24px", height: "24px", borderBottom: "1.5px solid rgba(255,59,59,0.25)", borderLeft: "1.5px solid rgba(255,59,59,0.25)" }} />
-        <div style={{ position: "absolute", bottom: "12px", right: "12px", width: "24px", height: "24px", borderBottom: "1.5px solid rgba(255,59,59,0.25)", borderRight: "1.5px solid rgba(255,59,59,0.25)" }} />
+        <div style={{ position: "absolute", top: "12px", left: "12px", width: "28px", height: "28px", borderTop: "2px solid rgba(255,59,59,0.25)", borderLeft: "2px solid rgba(255,59,59,0.25)" }} />
+        <div style={{ position: "absolute", top: "12px", right: "12px", width: "28px", height: "28px", borderTop: "2px solid rgba(255,59,59,0.25)", borderRight: "2px solid rgba(255,59,59,0.25)" }} />
+        <div style={{ position: "absolute", bottom: "12px", left: "12px", width: "28px", height: "28px", borderBottom: "2px solid rgba(255,59,59,0.25)", borderLeft: "2px solid rgba(255,59,59,0.25)" }} />
+        <div style={{ position: "absolute", bottom: "12px", right: "12px", width: "28px", height: "28px", borderBottom: "2px solid rgba(255,59,59,0.25)", borderRight: "2px solid rgba(255,59,59,0.25)" }} />
 
         {/* Fingerprint + title */}
         <div style={{ position: "relative", zIndex: 1, display: "flex", flexDirection: "column", alignItems: "center", gap: "12px" }}>
-          <svg width="60" height="60" viewBox="0 0 140 140" fill="none">
+          <svg width="80" height="80" viewBox="0 0 140 140" fill="none">
             <ellipse cx="70" cy="75" rx="12" ry="18" stroke="#FF3B3B" strokeWidth="1.5" opacity="0.9"/>
             <ellipse cx="70" cy="75" rx="20" ry="30" stroke="#FF3B3B" strokeWidth="1.5" opacity="0.6"/>
             <ellipse cx="70" cy="75" rx="28" ry="42" stroke="#FF3B3B" strokeWidth="1.5" opacity="0.35"/>
           </svg>
-          <span style={{ fontFamily: "'Michroma', sans-serif", fontSize: "14px", color: "#fff", textTransform: "uppercase", letterSpacing: "0.06em" }}>Hack Bar</span>
+          <span style={{ fontFamily: "'Michroma', sans-serif", fontSize: "20px", color: "#fff", textTransform: "uppercase", letterSpacing: "0.08em" }}>Hack Bar</span>
         </div>
 
         {/* Data grid 2x2 */}
@@ -668,7 +668,7 @@ const HuellaRoja = ({ showDock }: { showDock: boolean }) => {
           zIndex: 1,
           display: "grid",
           gridTemplateColumns: "1fr 1fr",
-          gap: "12px",
+          gap: "14px",
           width: "100%",
         }}>
           {[
@@ -678,18 +678,18 @@ const HuellaRoja = ({ showDock }: { showDock: boolean }) => {
             { label: "SYSTEM STATUS", value: "ACTIVE", active: true },
           ].map((item) => (
             <div key={item.label} style={{
-              padding: "12px",
-              borderRadius: "10px",
+              padding: "16px",
+              borderRadius: "12px",
               background: "rgba(255,59,59,0.03)",
               border: "1px solid rgba(255,59,59,0.08)",
               textAlign: "center",
             }}>
-              <div style={{ fontFamily: "'Orbitron', sans-serif", fontSize: "7px", letterSpacing: "0.12em", color: "rgba(255,255,255,0.25)", marginBottom: "6px" }}>
+              <div style={{ fontFamily: "'Orbitron', sans-serif", fontSize: "9px", letterSpacing: "0.1em", color: "rgba(255,255,255,0.25)", marginBottom: "6px" }}>
                 {item.label}
               </div>
               <div style={{
                 fontFamily: "'Orbitron', sans-serif",
-                fontSize: "16px",
+                fontSize: "22px",
                 fontWeight: 500,
                 color: "#FF3B3B",
                 display: "flex",
@@ -698,7 +698,7 @@ const HuellaRoja = ({ showDock }: { showDock: boolean }) => {
                 gap: "6px",
               }}>
                 {item.active && (
-                  <div style={{ width: "6px", height: "6px", borderRadius: "50%", background: "#FF3B3B", animation: "labPulse 2s infinite" }} />
+                  <div style={{ width: "8px", height: "8px", borderRadius: "50%", background: "#FF3B3B", animation: "labPulse 2s infinite" }} />
                 )}
                 {item.value}
               </div>
@@ -715,13 +715,13 @@ const HuellaRoja = ({ showDock }: { showDock: boolean }) => {
           width: "100%",
           alignItems: "center",
         }}>
-          <span style={{ fontFamily: "'Inter', sans-serif", fontSize: "8px", color: "rgba(255,255,255,0.3)" }}>© 2025 Blueprint Project</span>
-          <span style={{ fontFamily: "'Inter', sans-serif", fontSize: "8px", color: "rgba(255,255,255,0.3)" }}>Hack Bar — Blueprint Project</span>
+          <span style={{ fontFamily: "'Inter', sans-serif", fontSize: "10px", color: "rgba(255,255,255,0.3)" }}>© 2025 Blueprint Project</span>
+          <span style={{ fontFamily: "'Inter', sans-serif", fontSize: "10px", color: "rgba(255,255,255,0.3)" }}>Hack Bar — Blueprint Project</span>
         </div>
       </div>
 
-      {/* Bottom spacer for dock */}
-      <div style={{ height: 120 }} />
+      {/* Bottom spacer for dock (desktop only) */}
+      <div className="hidden md:block" style={{ height: 120 }} />
     </motion.div>
   );
 };
