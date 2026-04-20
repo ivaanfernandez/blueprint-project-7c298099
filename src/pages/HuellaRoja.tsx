@@ -162,6 +162,117 @@ const ChefCard = ({ name, desc, index }: { name: string; desc: string; index: nu
   );
 };
 
+/* ── 3D Perspective Carousel ── */
+const CAROUSEL_CARDS = [
+  { title: "MEAL PREPS", desc: "High-performance meals with perfect macro balance.", icon: "M3 3h18v18H3zM3 9h18M9 3v18" },
+  { title: "DETOX JUICE", desc: "Cold-pressed functional blends for cleansing and energy.", icon: "M12 2a10 10 0 100 20 10 10 0 000-20zM12 6v6l4 2" },
+  { title: "SUPPLEMENTS", desc: "Blueprint Approved stack for recovery and focus.", icon: "M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" },
+];
+
+const Carousel3D = () => {
+  const [activeCard, setActiveCard] = useState(1);
+  return (
+    <>
+      <div style={{ display: "flex", alignItems: "center", justifyContent: "center", padding: "60px 7%", perspective: "1000px", position: "relative", minHeight: 400 }}>
+        {CAROUSEL_CARDS.map((card, index) => {
+          const isActive = index === activeCard;
+          const isLeft = index < activeCard;
+          return (
+            <div
+              key={card.title}
+              onClick={() => setActiveCard(index)}
+              style={{
+                width: isActive ? 320 : 260,
+                minHeight: isActive ? 380 : 340,
+                borderRadius: 20,
+                background: "rgba(255,255,255,0.03)",
+                border: `1px solid rgba(255,59,59,${isActive ? 0.3 : 0.1})`,
+                backdropFilter: "blur(12px)",
+                WebkitBackdropFilter: "blur(12px)",
+                padding: "32px 24px",
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                justifyContent: "center",
+                gap: 20,
+                textAlign: "center",
+                cursor: isActive ? "default" : "pointer",
+                transition: "all 0.5s cubic-bezier(0.4,0,0.2,1)",
+                transform: isActive
+                  ? "translateX(0) rotateY(0deg) scale(1)"
+                  : isLeft
+                  ? "translateX(-40px) rotateY(15deg) scale(0.85)"
+                  : "translateX(40px) rotateY(-15deg) scale(0.85)",
+                opacity: isActive ? 1 : 0.4,
+                zIndex: isActive ? 10 : 5,
+                position: "relative",
+                boxShadow: isActive ? "0 0 40px rgba(255,59,59,0.1), inset 0 1px 0 rgba(255,255,255,0.05)" : "none",
+                flexShrink: 0,
+              }}
+            >
+              {isActive && (
+                <div style={{ position: "absolute", inset: -1, borderRadius: 21, background: "linear-gradient(135deg, rgba(255,59,59,0.25), transparent 50%, rgba(255,59,59,0.15))", zIndex: -1, pointerEvents: "none" }} />
+              )}
+              <div style={{
+                fontFamily: "'Orbitron', sans-serif",
+                fontSize: 8,
+                letterSpacing: "0.15em",
+                color: isActive ? "#FF3B3B" : "rgba(255,255,255,0.3)",
+                textTransform: "uppercase",
+                padding: "4px 12px",
+                borderRadius: 6,
+                background: isActive ? "rgba(255,59,59,0.1)" : "rgba(255,255,255,0.03)",
+                border: `1px solid ${isActive ? "rgba(255,59,59,0.2)" : "rgba(255,255,255,0.05)"}`,
+                transition: "all 0.5s ease",
+              }}>{`Feature ${index + 1}`}</div>
+              <div style={{
+                width: 60, height: 60, borderRadius: 16,
+                background: isActive ? "rgba(255,59,59,0.08)" : "rgba(255,255,255,0.03)",
+                border: `1px solid ${isActive ? "rgba(255,59,59,0.2)" : "rgba(255,255,255,0.05)"}`,
+                display: "flex", alignItems: "center", justifyContent: "center",
+                transition: "all 0.5s ease",
+              }}>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke={isActive ? "#FF3B3B" : "rgba(255,255,255,0.2)"} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" style={{ transition: "stroke 0.5s ease" }}>
+                  {card.icon.split(/(?=M)/).map((d, i) => (<path key={i} d={d} />))}
+                </svg>
+              </div>
+              <h3 style={{ fontFamily: "'Michroma', sans-serif", fontSize: isActive ? 18 : 14, color: "#FFFFFF", textTransform: "uppercase", letterSpacing: "0.03em", transition: "font-size 0.5s ease", margin: 0 }}>{card.title}</h3>
+              <p style={{
+                fontFamily: "'Inter', sans-serif",
+                fontSize: 13,
+                color: "rgba(255,255,255,0.45)",
+                lineHeight: 1.6,
+                maxWidth: 260,
+                opacity: isActive ? 1 : 0,
+                maxHeight: isActive ? 80 : 0,
+                overflow: "hidden",
+                transition: "opacity 0.5s ease, max-height 0.5s ease",
+                margin: 0,
+              }}>{card.desc}</p>
+            </div>
+          );
+        })}
+      </div>
+      <div style={{ display: "flex", justifyContent: "center", gap: 8, paddingBottom: 40 }}>
+        {CAROUSEL_CARDS.map((_, index) => (
+          <div
+            key={index}
+            onClick={() => setActiveCard(index)}
+            style={{
+              width: index === activeCard ? 24 : 8,
+              height: 8,
+              borderRadius: 4,
+              background: index === activeCard ? "#FF3B3B" : "rgba(255,255,255,0.15)",
+              cursor: "pointer",
+              transition: "all 0.3s ease",
+            }}
+          />
+        ))}
+      </div>
+    </>
+  );
+};
+
 /* ══════════════════════════════════════════════════════════ */
 /*  HUELLA ROJA — HACK BAR PAGE                              */
 /* ══════════════════════════════════════════════════════════ */
