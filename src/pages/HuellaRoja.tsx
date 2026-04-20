@@ -1,4 +1,4 @@
-import { useState, useCallback, useRef } from "react";
+import { useState, useCallback, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import BiometricScanRed from "@/components/BiometricScanRed";
@@ -171,7 +171,15 @@ const CAROUSEL_CARDS = [
 
 const Carousel3D = () => {
   const [activeCard, setActiveCard] = useState(1);
+  const [autoRotateCard, setAutoRotateCard] = useState(0);
   const touchStartX = useRef<number | null>(null);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setAutoRotateCard((prev) => (prev + 1) % CAROUSEL_CARDS.length);
+    }, 3500);
+    return () => clearInterval(interval);
+  }, []);
 
   const handleTouchStart = (e: React.TouchEvent) => {
     touchStartX.current = e.touches[0].clientX;
@@ -190,10 +198,11 @@ const Carousel3D = () => {
 
   return (
     <>
+      {/* Desktop 3D carousel */}
       <div
         onTouchStart={handleTouchStart}
         onTouchEnd={handleTouchEnd}
-        className="carousel-3d-container"
+        className="carousel-3d-container hidden md:flex"
         style={{ display: "flex", alignItems: "center", justifyContent: "center", padding: "60px 7%", perspective: "1000px", position: "relative", minHeight: 400, touchAction: "pan-y" }}
       >
         {CAROUSEL_CARDS.map((card, index) => {
@@ -276,7 +285,7 @@ const Carousel3D = () => {
           );
         })}
       </div>
-      <div style={{ display: "flex", justifyContent: "center", gap: 8, paddingBottom: 40 }}>
+      <div className="hidden md:flex" style={{ justifyContent: "center", gap: 8, paddingBottom: 40 }}>
         {CAROUSEL_CARDS.map((_, index) => (
           <div
             key={index}
@@ -291,6 +300,67 @@ const Carousel3D = () => {
             }}
           />
         ))}
+      </div>
+
+      {/* Mobile auto-rotating single card */}
+      <div className="md:hidden" style={{ padding: "32px 24px 16px", display: "flex", flexDirection: "column", alignItems: "center", gap: 20 }}>
+        <div style={{ position: "relative", width: "100%", maxWidth: 340, minHeight: 360, borderRadius: 20, overflow: "hidden", border: "1px solid rgba(255,59,59,0.25)", background: "rgba(255,255,255,0.03)", backdropFilter: "blur(12px)", WebkitBackdropFilter: "blur(12px)", boxShadow: "0 0 40px rgba(255,59,59,0.1), inset 0 1px 0 rgba(255,255,255,0.05)" }}>
+          {/* Glow border */}
+          <div style={{ position: "absolute", inset: -1, borderRadius: 21, background: "linear-gradient(135deg, rgba(255,59,59,0.25), transparent 50%, rgba(255,59,59,0.15))", zIndex: 0, pointerEvents: "none" }} />
+
+          {CAROUSEL_CARDS.map((card, index) => {
+            const isVisible = index === autoRotateCard;
+            return (
+              <div
+                key={card.title}
+                style={{
+                  position: "absolute",
+                  inset: 0,
+                  opacity: isVisible ? 1 : 0,
+                  transition: "opacity 0.8s ease",
+                  pointerEvents: isVisible ? "auto" : "none",
+                  zIndex: 1,
+                }}
+              >
+                {card.image && (
+                  <>
+                    <img
+                      src={card.image}
+                      alt={card.title}
+                      style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", borderRadius: 20, opacity: 0.55, zIndex: 0, pointerEvents: "none" }}
+                    />
+                    <div style={{ position: "absolute", inset: 0, borderRadius: 20, background: "linear-gradient(to top, rgba(0,0,0,0.85) 10%, rgba(0,0,0,0.45) 60%, rgba(0,0,0,0.25) 100%)", zIndex: 1, pointerEvents: "none" }} />
+                  </>
+                )}
+                <div style={{ position: "relative", zIndex: 2, height: "100%", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 16, padding: "32px 24px", textAlign: "center" }}>
+                  <div style={{ width: 60, height: 60, borderRadius: 16, background: "rgba(255,59,59,0.08)", border: "1px solid rgba(255,59,59,0.2)", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#FF3B3B" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                      {card.icon.split(/(?=M)/).map((d, i) => (<path key={i} d={d} />))}
+                    </svg>
+                  </div>
+                  <h3 style={{ fontFamily: "'Michroma', sans-serif", fontSize: 16, color: "#FFFFFF", textTransform: "uppercase", letterSpacing: "0.03em", margin: 0 }}>{card.title}</h3>
+                  <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 13, color: "rgba(255,255,255,0.6)", lineHeight: 1.6, maxWidth: 260, margin: 0 }}>{card.desc}</p>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+
+        {/* Dots indicator */}
+        <div style={{ display: "flex", justifyContent: "center", gap: 8 }}>
+          {CAROUSEL_CARDS.map((_, i) => (
+            <div
+              key={i}
+              style={{
+                width: i === autoRotateCard ? 24 : 8,
+                height: 8,
+                borderRadius: 4,
+                background: i === autoRotateCard ? "#FF3B3B" : "rgba(255,255,255,0.15)",
+                transition: "all 0.4s ease",
+              }}
+            />
+          ))}
+        </div>
       </div>
     </>
   );
