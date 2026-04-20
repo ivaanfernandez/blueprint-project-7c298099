@@ -49,7 +49,7 @@ const CornerBrackets = () => (
 );
 
 /* ── Fuel Card ── */
-const FuelCard = ({ name, desc, items, index }: { name: string; desc: string; items: string[]; index: number }) => (
+const FuelCard = ({ name, desc, items, index, image }: { name: string; desc: string; items: string[]; index: number; image?: string }) => (
   <div
     className="hr-fuel-card"
     style={{
@@ -68,7 +68,15 @@ const FuelCard = ({ name, desc, items, index }: { name: string; desc: string; it
     }}
   >
     {/* Placeholder bg */}
-    <div style={{ position: "absolute", inset: 0, backgroundColor: "#1a1a1a" }} />
+    <div style={{ position: "absolute", inset: 0, backgroundColor: "#1a1a1a", zIndex: 0 }} />
+    {/* Image bg */}
+    {image && (
+      <img
+        src={image}
+        alt={name}
+        style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", objectFit: "cover", objectPosition: "center", zIndex: 0 }}
+      />
+    )}
     {/* Gradient overlay */}
     <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(0,0,0,0.9) 15%, rgba(0,0,0,0.4) 50%, rgba(0,0,0,0.1) 100%)", zIndex: 1 }} />
     <CornerBrackets />
