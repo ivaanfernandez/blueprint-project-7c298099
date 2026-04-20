@@ -729,9 +729,9 @@ const HuellaRoja = ({ showDock }: { showDock: boolean }) => {
             <div style={{ width: 60, height: 2, background: "#FF3B3B", marginTop: 20, borderRadius: 1 }} />
           </div>
           {/* Right: chef photo */}
-          <div className="hr-chef-right" style={{ flex: "0 0 45%", minHeight: 350, borderRadius: 16, overflow: "hidden", position: "relative" }}>
-            <div style={{ width: "100%", height: "100%", minHeight: 350, borderRadius: 16, border: "1px solid rgba(255,59,59,0.15)", overflow: "hidden", position: "relative" }}>
-              <img src="/hackbar/chef.jpg" alt="Chef" style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", objectPosition: "center" }} />
+          <div className="hr-chef-right" style={{ flex: "0 0 45%", minHeight: 450, height: "auto", aspectRatio: "16 / 10", borderRadius: 16, overflow: "hidden", position: "relative" }}>
+            <div style={{ width: "100%", height: "100%", borderRadius: 16, border: "1px solid rgba(255,59,59,0.15)", overflow: "hidden", position: "relative" }}>
+              <img src="/hackbar/chef.jpg" alt="Chef" style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", objectPosition: "center top" }} />
               {/* Subtle gradient for legibility / cohesion */}
               <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.1) 50%, rgba(0,0,0,0.25) 100%)", zIndex: 1, pointerEvents: "none" }} />
               {/* Corner brackets */}
