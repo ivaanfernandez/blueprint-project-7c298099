@@ -65,6 +65,8 @@ const FuelCard = ({ name, desc, items, index, image }: { name: string; desc: str
       cursor: "pointer",
       transition: "transform 0.3s ease, box-shadow 0.3s ease",
       animation: `hrFadeUp 0.5s ease ${index * 0.15}s both`,
+      border: "1px solid rgba(255,59,59,0.15)",
+      boxShadow: "0 0 20px rgba(255,59,59,0.12), 0 0 40px rgba(255,59,59,0.06)",
     }}
   >
     {/* Placeholder bg */}
@@ -426,7 +428,7 @@ const HuellaRoja = ({ showDock }: { showDock: boolean }) => {
           0%, 100% { opacity: 0.4; transform: scaleY(1); }
           50% { opacity: 0.9; transform: scaleY(1.15); }
         }
-        .hr-fuel-card:hover { transform: translateY(-4px); box-shadow: 0 8px 32px rgba(255,59,59,0.15); }
+        .hr-fuel-card:hover { transform: translateY(-4px); box-shadow: 0 0 25px rgba(255,59,59,0.2), 0 0 50px rgba(255,59,59,0.1); }
         .hr-station-row:hover { background: rgba(255,59,59,0.03) !important; }
         @media (max-width: 767px) {
           .hr-hero { flex-direction: column !important; min-height: 60vh !important; }
@@ -745,7 +747,7 @@ const HuellaRoja = ({ showDock }: { showDock: boolean }) => {
       </motion.section>
 
       {/* ═══ SECTION E: LAB MONITOR FOOTER ═══ */}
-      <footer className="lab-footer" style={{ background: "#050505", padding: 0, position: "relative", overflow: "hidden", height: 500, borderTop: "1px solid rgba(255,59,59,0.1)" }}>
+      <footer className="lab-footer hidden md:block" style={{ background: "#050505", padding: 0, position: "relative", overflow: "hidden", height: 500, borderTop: "1px solid rgba(255,59,59,0.1)" }}>
         {/* LAYER 1 — Grid */}
         <div style={{ position: "absolute", inset: 0, backgroundImage: "linear-gradient(rgba(255,59,59,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,59,59,0.03) 1px, transparent 1px)", backgroundSize: "40px 40px", pointerEvents: "none", zIndex: 0 }} />
 
