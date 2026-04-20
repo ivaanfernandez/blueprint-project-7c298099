@@ -1,4 +1,4 @@
-import { useState, useCallback, useRef } from "react";
+import { useState, useCallback, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import BiometricScanRed from "@/components/BiometricScanRed";
@@ -171,7 +171,15 @@ const CAROUSEL_CARDS = [
 
 const Carousel3D = () => {
   const [activeCard, setActiveCard] = useState(1);
+  const [autoRotateCard, setAutoRotateCard] = useState(0);
   const touchStartX = useRef<number | null>(null);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setAutoRotateCard((prev) => (prev + 1) % CAROUSEL_CARDS.length);
+    }, 3500);
+    return () => clearInterval(interval);
+  }, []);
 
   const handleTouchStart = (e: React.TouchEvent) => {
     touchStartX.current = e.touches[0].clientX;
@@ -190,10 +198,11 @@ const Carousel3D = () => {
 
   return (
     <>
+      {/* Desktop 3D carousel */}
       <div
         onTouchStart={handleTouchStart}
         onTouchEnd={handleTouchEnd}
-        className="carousel-3d-container"
+        className="carousel-3d-container hidden md:flex"
         style={{ display: "flex", alignItems: "center", justifyContent: "center", padding: "60px 7%", perspective: "1000px", position: "relative", minHeight: 400, touchAction: "pan-y" }}
       >
         {CAROUSEL_CARDS.map((card, index) => {
