@@ -164,8 +164,8 @@ const ChefCard = ({ name, desc, index }: { name: string; desc: string; index: nu
 
 /* ── 3D Perspective Carousel ── */
 const CAROUSEL_CARDS = [
-  { title: "MEAL PREPS", desc: "High-performance meals with perfect macro balance.", icon: "M3 3h18v18H3zM3 9h18M9 3v18", image: "" },
-  { title: "DETOX JUICE", desc: "Cold-pressed functional blends for cleansing and energy.", icon: "M12 2a10 10 0 100 20 10 10 0 000-20zM12 6v6l4 2", image: "" },
+  { title: "MEAL PREPS", desc: "High-performance meals with perfect macro balance.", icon: "M3 3h18v18H3zM3 9h18M9 3v18", image: "/hackbar/meal-preps.png" },
+  { title: "DETOX JUICE", desc: "Cold-pressed functional blends for cleansing and energy.", icon: "M12 2a10 10 0 100 20 10 10 0 000-20zM12 6v6l4 2", image: "/hackbar/detox-juice.jpg" },
   { title: "SUPPLEMENTS", desc: "Blueprint Approved stack for recovery and focus.", icon: "M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5", image: "/hackbar/supplements-stack.jpg" },
 ];
 
@@ -245,18 +245,6 @@ const Carousel3D = () => {
                 </>
               )}
               <div style={{ position: "relative", zIndex: 2, display: "flex", flexDirection: "column", alignItems: "center", gap: 20 }}>
-              <div style={{
-                fontFamily: "'Orbitron', sans-serif",
-                fontSize: 8,
-                letterSpacing: "0.15em",
-                color: isActive ? "#FF3B3B" : "rgba(255,255,255,0.3)",
-                textTransform: "uppercase",
-                padding: "4px 12px",
-                borderRadius: 6,
-                background: isActive ? "rgba(255,59,59,0.1)" : "rgba(255,255,255,0.03)",
-                border: `1px solid ${isActive ? "rgba(255,59,59,0.2)" : "rgba(255,255,255,0.05)"}`,
-                transition: "all 0.5s ease",
-              }}>{`Feature ${index + 1}`}</div>
               <div style={{
                 width: 60, height: 60, borderRadius: 16,
                 background: isActive ? "rgba(255,59,59,0.08)" : "rgba(255,255,255,0.03)",
