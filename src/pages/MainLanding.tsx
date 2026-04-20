@@ -226,12 +226,12 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
         />
         {/* Hero content - on top of image */}
         {/* DESKTOP content — unchanged */}
-        <div className="hero-content-wrapper hidden md:flex" style={{ position: "relative", zIndex: 10, width: "100%", flexDirection: "column", paddingTop: "110px" }}>
+        <div className="hero-content-wrapper hidden md:flex" style={{ position: "relative", zIndex: 10, width: "100%", flexDirection: "column" }}>
         <div className="hero-headline-wrapper" style={{
           width: '100%',
           position: 'relative',
           zIndex: 10,
-          paddingTop: '140px',
+          paddingTop: '40px',
           textAlign: 'center',
           paddingLeft: '5%',
           paddingRight: '5%',
@@ -328,12 +328,12 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
         </div>
 
         {/* CTA Button */}
-        <div className="hero-cta-button" style={{ marginTop: "24px", display: "flex", justifyContent: "center", width: "100%" }}>
-          <ShinyButton fontSize="15px" className="hero-shiny-btn">HAVE YOUR BLUEPRINT</ShinyButton>
+        <div className="hero-cta-button" style={{ marginTop: "48px", display: "flex", justifyContent: "center", width: "100%" }}>
+          <ShinyButton fontSize="14px" className="hero-shiny-btn">HAVE YOUR BLUEPRINT</ShinyButton>
         </div>
 
         {/* Scroll indicator */}
-        <div className="hero-scroll-indicator" style={{ marginTop: 24, display: 'flex', justifyContent: 'center', width: '100%', pointerEvents: 'none' }}>
+        <div className="hero-scroll-indicator" style={{ marginTop: 40, display: 'flex', justifyContent: 'center', width: '100%', pointerEvents: 'none' }}>
           <ChevronDown size={24} style={{ color: 'rgba(255,255,255,0.3)', animation: 'hero-bounce 2s ease-in-out infinite' }} />
         </div>
 
@@ -497,10 +497,11 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
         }
         .hero-shiny-btn {
           white-space: nowrap !important;
-          padding: 1.25rem 3rem !important;
-          font-size: 15px !important;
+          padding: 18px 48px !important;
+          font-size: 14px !important;
           min-width: 280px !important;
           letter-spacing: 0.15em !important;
+          height: auto !important;
         }
         @media (max-width: 767px) {
           .hero-shiny-btn {
@@ -537,7 +538,8 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
           }
           .hero-content-wrapper {
             align-items: center !important;
-            justify-content: flex-start !important;
+            justify-content: center !important;
+            min-height: 100vh !important;
           }
           .hero-headline-wrapper {
             justify-content: center !important;
@@ -556,8 +558,11 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
             font-size: clamp(14px, 1.5vw, 20px) !important;
           }
           .hero-cta-button {
-            margin-top: 64px !important;
+            margin-top: 80px !important;
             margin-bottom: 40px !important;
+          }
+          .hero-scroll-indicator {
+            margin-top: 40px !important;
           }
         }
         @media (max-width: 767px) {
