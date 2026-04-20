@@ -281,6 +281,7 @@ const Carousel3D = () => {
                 transition: "opacity 0.5s ease, max-height 0.5s ease",
                 margin: 0,
               }}>{card.desc}</p>
+              </div>
             </div>
           );
         })}
