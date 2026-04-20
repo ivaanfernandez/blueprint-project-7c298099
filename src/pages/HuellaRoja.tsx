@@ -356,9 +356,7 @@ const HuellaRoja = ({ showDock }: { showDock: boolean }) => {
           50% { opacity: 0.9; transform: scaleY(1.15); }
         }
         .hr-fuel-card:hover { transform: translateY(-4px); box-shadow: 0 8px 32px rgba(255,59,59,0.15); }
-        .hr-station-card:hover { transform: translateY(-4px); }
-        .hackbar-scroll { scrollbar-width: none; -ms-overflow-style: none; }
-        .hackbar-scroll::-webkit-scrollbar { display: none; }
+        .hr-station-row:hover { background: rgba(255,59,59,0.03) !important; }
         @media (max-width: 767px) {
           .hr-hero { flex-direction: column !important; min-height: 60vh !important; }
           .hr-hero-left { flex: none !important; width: 100% !important; min-height: 60vh !important; padding: 0 6% !important; text-align: center !important; align-items: center !important; justify-content: center !important; }
