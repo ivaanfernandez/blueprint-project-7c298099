@@ -1,43 +1,41 @@
 
+## Plan: Desktop Hero Centering + Button Enlargement
 
-## Plan: Rename "ABOUT THE FOUNDER" → "ABOUT BLUEPRINT" + recolor Vision/Services to blue
+### Overview
+Center the hero content vertically on desktop and enlarge the "HAVE YOUR BLUEPRINT" button with appropriate spacing adjustments. Mobile remains unchanged.
 
-All edits live in `src/components/ui/interactive-image-accordion.tsx` (the data drives both desktop and mobile). `MainLanding.tsx` only imports the component — no changes needed there.
+### Changes
 
-### Edits
+**1. Center Hero Content Vertically (Desktop)**
+- Update `.hero-content-wrapper` CSS (line ~538-541):
+  - Change `justify-content: flex-start` → `justify-content: center`
+  - Add `min-height: 100vh` to ensure vertical centering
+- Remove excessive top padding from `hero-headline-wrapper` inline style (line ~234): Change `paddingTop: '140px'` → `paddingTop: '40px'` or remove entirely
+- Remove `paddingTop: "110px"` from hero-content-wrapper inline style (line ~229)
 
-**1. ACCORDION_ITEMS array (lines ~19–40)** — rename + recolor in one place:
+**2. Increase Gap Between Subtitle and Button**
+- Change hero-cta-button `marginTop` inline style (line ~331): `"24px"` → `"48px"`
+- Update CSS `.hero-cta-button` (line ~558-561): `margin-top: 64px` → `margin-top: 80px`
 
-- Item 0 (Founder):
-  - `stripLabel: "ABOUT THE FOUNDER"` → `"ABOUT BLUEPRINT"`
-  - `title: "ABOUT THE FOUNDER"` → `"ABOUT BLUEPRINT"`
-  - `accentColor: "#1A6BFF"` (already blue — unchanged)
-- Item 1 (Vision):
-  - `accentColor: "#22C55E"` → `"#1A6BFF"`
-- Item 2 (Services):
-  - `accentColor: "#FF3B3B"` → `"#1A6BFF"`
+**3. Enlarge the "HAVE YOUR BLUEPRINT" Button**
+- Update `.hero-shiny-btn` CSS (line ~498-504):
+  - `padding: 1.25rem 3rem` → `padding: 18px 48px`
+  - `font-size: 15px` → `font-size: 14px`
+  - `min-width: 280px` (keep)
+  - `letter-spacing: 0.15em` (keep)
+  - Add explicit `height: auto` to support larger padding
 
-This single change automatically updates:
-- Left-panel title (desktop)
-- Rotated strip label and active strip label (desktop)
-- Active glow shadow (`boxShadow: 0 0 30px ${accentColor}20`)
-- Inactive left border (`borderLeft: 2px solid ${accentColor}4D`)
-- Mobile tab text color, active tab border, and tab background (uses `accentColor` directly)
-
-**2. ACCENT_RGB constant (line ~219)** — mobile tab uses precomputed RGB strings for the translucent active background:
-
-- `["26,107,255", "34,197,94", "255,59,59"]` → `["26,107,255", "26,107,255", "26,107,255"]`
-
-This makes the mobile active-tab background tint blue for Vision and Services to match the new accent.
-
-**3. Image alt text** — `image: founderImage`'s `alt` is bound to `item.stripLabel`, which becomes "ABOUT BLUEPRINT" automatically. No separate alt edit required.
+**4. Push Chevron Down**
+- Change hero-scroll-indicator `marginTop` inline style (line ~336): `24` → `40`
+- Update CSS `.hero-scroll-indicator` desktop rule to have `margin-top: 40px`
 
 ### Untouched
-- Images (founder/vision/services jpgs)
-- Descriptions, layout, animation timing, fade logic
-- TAB_LABELS ("FOUNDER" / "VISION" / "SERVICES") — these are the short tab captions, distinct from the renamed title; spec only renames "ABOUT THE FOUNDER". I will leave TAB_LABELS as-is.
-- `MainLanding.tsx` and every other section/page
+- All mobile styles (`@media (max-width: 767px)` rules remain unchanged)
+- Button text, border, glow, and hover effects
+- Hero background, overlay, or any imagery
+- Title text, WordRotate, or subtitle text
+- Dock component or any other section
+- Any other pages
 
 ### Files Modified
-- `src/components/ui/interactive-image-accordion.tsx` (4 string changes in `ACCORDION_ITEMS` + 2 string changes in `ACCENT_RGB`)
-
+- `src/pages/MainLanding.tsx` (CSS in `<style>` block and inline styles on hero content wrapper, headline wrapper, CTA button, and scroll indicator)
