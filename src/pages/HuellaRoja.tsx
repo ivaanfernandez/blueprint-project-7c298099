@@ -303,6 +303,7 @@ const Carousel3D = () => {
 const HuellaRoja = ({ showDock }: { showDock: boolean }) => {
   const navigate = useNavigate();
   const [scanDone, setScanDone] = useState(false);
+  const [activeStation, setActiveStation] = useState<number | null>(null);
   const handleScanComplete = useCallback(() => setScanDone(true), []);
 
   if (!scanDone) {
