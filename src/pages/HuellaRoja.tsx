@@ -19,9 +19,9 @@ const FingerprintSVG = ({ color, size = 48 }: { color: string; size?: number }) 
 );
 
 const HUELLAS = [
-  { color: "#1A6BFF", glow: "rgba(26,107,255,0.7)", route: "/huella-azul", tooltip: "ENTRENAMIENTO" },
-  { color: "#FF3B3B", glow: "rgba(255,59,59,0.7)", route: "/huella-roja", tooltip: "NUTRICIÓN" },
-  { color: "#22C55E", glow: "rgba(34,197,94,0.7)", route: "/huella-verde", tooltip: "RECUPERACIÓN" },
+  { color: "#1A6BFF", glow: "rgba(26,107,255,0.7)", route: "/huella-azul", tooltip: "TRAINING" },
+  { color: "#FF3B3B", glow: "rgba(255,59,59,0.7)", route: "/huella-roja", tooltip: "NUTRITION" },
+  { color: "#22C55E", glow: "rgba(34,197,94,0.7)", route: "/huella-verde", tooltip: "RECOVERY" },
 ];
 
 /* ── Corner Brackets ── */
@@ -77,7 +77,7 @@ const FuelCard = ({ name, desc, items, index }: { name: string; desc: string; it
     {/* Content */}
     <div style={{ position: "relative", zIndex: 2 }}>
       <p style={{ fontFamily: "'Michroma', sans-serif", fontSize: 18, color: "#fff", textTransform: "uppercase", marginBottom: 8 }}>{name}</p>
-      <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 13, color: "rgba(255,255,255,0.6)", lineHeight: 1.6, marginBottom: 12 }}>{desc}</p>
+      {desc && <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 13, color: "rgba(255,255,255,0.6)", lineHeight: 1.6, marginBottom: 12 }}>{desc}</p>}
       <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
         {items.map((item, i) => (
           <div key={i} style={{ display: "flex", alignItems: "center", gap: 8 }}>
@@ -185,6 +185,10 @@ const HuellaRoja = ({ showDock }: { showDock: boolean }) => {
           from { opacity: 0; transform: translateY(20px); }
           to { opacity: 1; transform: translateY(0); }
         }
+        @keyframes hrAmbient {
+          0%, 100% { opacity: 0.55; transform: scale(1); }
+          50% { opacity: 1; transform: scale(1.06); }
+        }
         .hr-fuel-card:hover { transform: translateY(-4px); box-shadow: 0 8px 32px rgba(255,59,59,0.15); }
         .hr-station-card:hover { transform: translateY(-4px); }
         @media (max-width: 767px) {
@@ -193,7 +197,6 @@ const HuellaRoja = ({ showDock }: { showDock: boolean }) => {
           .hr-hero-right { flex: none !important; width: 100% !important; height: 250px !important; }
           .hr-hero-fade { width: 100% !important; height: 60px !important; background: linear-gradient(to bottom, #0a0a0a, transparent) !important; top: 0 !important; left: 0 !important; }
           .hr-hero-title { font-size: clamp(28px, 8vw, 42px) !important; }
-          .hr-hero-subtitle { text-align: center !important; max-width: 100% !important; }
           .hr-hero-placeholder { width: 90% !important; height: 80% !important; }
           .hr-fuel-grid { flex-direction: column !important; gap: 16px !important; }
           .hr-fuel-card { min-height: 320px !important; }
@@ -227,13 +230,8 @@ const HuellaRoja = ({ showDock }: { showDock: boolean }) => {
       <section className="hr-hero" style={{ minHeight: "100vh", display: "flex", alignItems: "center", position: "relative", overflow: "hidden", backgroundColor: "#0a0a0a" }}>
         {/* Left column */}
         <div className="hr-hero-left" style={{ flex: "0 0 55%", padding: "80px 0 80px 7%", display: "flex", flexDirection: "column", justifyContent: "center", gap: 16, position: "relative", zIndex: 2 }}>
-          {/* Ambient glow */}
-          <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse at 10% 70%, rgba(255,59,59,0.12) 0%, transparent 55%)", pointerEvents: "none" }} />
-          <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse at 90% 40%, rgba(255,59,59,0.06) 0%, transparent 50%)", pointerEvents: "none" }} />
-
-          <p style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 10, letterSpacing: "0.25em", textTransform: "uppercase", color: "rgba(255,59,59,0.5)", animation: "hrFadeUp 0.8s ease 0.3s both" }}>
-            BLUEPRINT SYSTEM
-          </p>
+          {/* Ambient glow — single soft pulsing layer */}
+          <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse at 20% 60%, rgba(255,59,59,0.10) 0%, transparent 60%)", pointerEvents: "none", animation: "hrAmbient 6s ease-in-out infinite" }} />
 
           <TextScramble
             className="hr-hero-title"
@@ -244,10 +242,6 @@ const HuellaRoja = ({ showDock }: { showDock: boolean }) => {
           >
             HACK BAR
           </TextScramble>
-
-          <p className="hr-hero-subtitle" style={{ fontFamily: "'Inter', sans-serif", fontSize: 14, fontWeight: 300, color: "rgba(255,255,255,0.4)", lineHeight: 1.7, maxWidth: 480, animation: "hrFadeUp 0.8s ease 0.5s both" }}>
-            La rama roja de Blueprint Lab. Energía funcional, nutrición inteligente y optimización metabólica al servicio de tu rendimiento diario.
-          </p>
         </div>
 
         {/* Right column */}
@@ -280,24 +274,21 @@ const HuellaRoja = ({ showDock }: { showDock: boolean }) => {
         transition={{ duration: 0.6 }}
         style={{ backgroundColor: "#0a0a0a", padding: "72px 7%", position: "relative", zIndex: 1 }}
       >
-        <p style={{ fontFamily: "'Michroma', sans-serif", fontSize: "clamp(16px, 2vw, 24px)", color: "#FFFFFF", textTransform: "uppercase", letterSpacing: "0.04em", marginBottom: 8 }}>
+        <p style={{ fontFamily: "'Michroma', sans-serif", fontSize: "clamp(16px, 2vw, 24px)", color: "#FFFFFF", textTransform: "uppercase", letterSpacing: "0.04em", marginBottom: 32, textAlign: "center", width: "100%" }}>
           FUEL YOUR SYSTEM
-        </p>
-        <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 14, color: "rgba(255,255,255,0.35)", marginBottom: 32 }}>
-          Tu cuerpo merece combustible de calidad. Elige tu protocolo nutricional.
         </p>
         <div className="hr-fuel-grid" style={{ display: "flex", gap: 20 }}>
           <FuelCard
             index={0}
-            name="SUPLEMENTOS"
-            desc="Línea Blueprint x AFTER. Ciencia deportiva + nutrición funcional avanzada."
+            name="SUPPLEMENTS"
+            desc=""
             items={["Hydration Boost", "Focus Stack", "Recovery Mix"]}
           />
           <FuelCard
             index={1}
             name="MEAL PREP"
-            desc="Comidas con balance perfecto de macros, sabor limpio y alimentos funcionales."
-            items={["Planes semanales", "Performance / Shred / Gain", "Trazabilidad QR"]}
+            desc=""
+            items={["Weekly Plans", "Performance / Shred / Gain", "QR Traceability"]}
           />
         </div>
       </motion.section>
@@ -310,16 +301,13 @@ const HuellaRoja = ({ showDock }: { showDock: boolean }) => {
         transition={{ duration: 0.6 }}
         style={{ backgroundColor: "#0a0a0a", padding: "0 7% 72px", position: "relative", zIndex: 1 }}
       >
-        <p style={{ fontFamily: "'Michroma', sans-serif", fontSize: "clamp(16px, 2vw, 24px)", color: "#FFFFFF", textTransform: "uppercase", letterSpacing: "0.04em", marginBottom: 8 }}>
+        <p style={{ fontFamily: "'Michroma', sans-serif", fontSize: "clamp(16px, 2vw, 24px)", color: "#FFFFFF", textTransform: "uppercase", letterSpacing: "0.04em", marginBottom: 32, textAlign: "center", width: "100%" }}>
           HACKBAR STATION
         </p>
-        <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 14, color: "rgba(255,255,255,0.35)", marginBottom: 32 }}>
-          Tu laboratorio nutricional dentro de BlueprintLab.
-        </p>
         <div className="hr-station-grid" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 20 }}>
-          <StationCard index={0} name="BATIDOS PERSONALIZADOS" desc="Según tu tipo de entrenamiento o meta: energía, recuperación, masa magra o detox." />
-          <StationCard index={1} name="CAFÉ FUNCIONAL" desc="Infusionado con adaptógenos y nootrópicos para claridad mental sostenida sin el crash." />
-          <StationCard index={2} name="SNACKS BLUEPRINT" desc="Sin conservantes ni azúcar refinada. Solo ingredientes funcionales que alimentan tu sistema." />
+          <StationCard index={0} name="CUSTOM SHAKES" desc="Tailored to your training type or goal: energy, recovery, lean mass, or detox." />
+          <StationCard index={1} name="FUNCTIONAL COFFEE" desc="Infused with adaptogens and nootropics for sustained mental clarity without the crash." />
+          <StationCard index={2} name="BLUEPRINT SNACKS" desc="No preservatives or refined sugar. Only functional ingredients that fuel your system." />
         </div>
       </motion.section>
 
