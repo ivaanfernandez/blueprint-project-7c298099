@@ -291,12 +291,14 @@ const HuellaRoja = ({ showDock }: { showDock: boolean }) => {
             name="SUPPLEMENTS"
             desc=""
             items={["Hydration Boost", "Focus Stack", "Recovery Mix"]}
+            image="/hackbar/supplements.jpg"
           />
           <FuelCard
             index={1}
             name="MEAL PREP"
             desc=""
             items={["Weekly Plans", "Performance / Shred / Gain", "QR Traceability"]}
+            image="/hackbar/mealprep.jpg"
           />
         </div>
       </motion.section>
