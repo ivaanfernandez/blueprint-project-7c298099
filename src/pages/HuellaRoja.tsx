@@ -256,7 +256,7 @@ const Carousel3D = () => {
                   {card.icon.split(/(?=M)/).map((d, i) => (<path key={i} d={d} />))}
                 </svg>
               </div>
-              <h3 style={{ fontFamily: "'Michroma', sans-serif", fontSize: isActive ? 18 : 14, color: "#FFFFFF", textTransform: "uppercase", letterSpacing: "0.03em", transition: "font-size 0.5s ease", margin: 0 }}>{card.title}</h3>
+              <h3 className="carousel-3d-title" style={{ fontFamily: "'Michroma', sans-serif", fontSize: isActive ? 18 : 14, color: "#FFFFFF", textTransform: "uppercase", letterSpacing: "0.03em", transition: "font-size 0.5s ease", margin: 0 }}>{card.title}</h3>
               <p style={{
                 fontFamily: "'Inter', sans-serif",
                 fontSize: 13,
