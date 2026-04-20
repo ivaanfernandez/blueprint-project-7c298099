@@ -274,24 +274,21 @@ const HuellaRoja = ({ showDock }: { showDock: boolean }) => {
         transition={{ duration: 0.6 }}
         style={{ backgroundColor: "#0a0a0a", padding: "72px 7%", position: "relative", zIndex: 1 }}
       >
-        <p style={{ fontFamily: "'Michroma', sans-serif", fontSize: "clamp(16px, 2vw, 24px)", color: "#FFFFFF", textTransform: "uppercase", letterSpacing: "0.04em", marginBottom: 8 }}>
+        <p style={{ fontFamily: "'Michroma', sans-serif", fontSize: "clamp(16px, 2vw, 24px)", color: "#FFFFFF", textTransform: "uppercase", letterSpacing: "0.04em", marginBottom: 32, textAlign: "center", width: "100%" }}>
           FUEL YOUR SYSTEM
-        </p>
-        <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 14, color: "rgba(255,255,255,0.35)", marginBottom: 32 }}>
-          Tu cuerpo merece combustible de calidad. Elige tu protocolo nutricional.
         </p>
         <div className="hr-fuel-grid" style={{ display: "flex", gap: 20 }}>
           <FuelCard
             index={0}
-            name="SUPLEMENTOS"
-            desc="Línea Blueprint x AFTER. Ciencia deportiva + nutrición funcional avanzada."
+            name="SUPPLEMENTS"
+            desc=""
             items={["Hydration Boost", "Focus Stack", "Recovery Mix"]}
           />
           <FuelCard
             index={1}
             name="MEAL PREP"
-            desc="Comidas con balance perfecto de macros, sabor limpio y alimentos funcionales."
-            items={["Planes semanales", "Performance / Shred / Gain", "Trazabilidad QR"]}
+            desc=""
+            items={["Weekly Plans", "Performance / Shred / Gain", "QR Traceability"]}
           />
         </div>
       </motion.section>
