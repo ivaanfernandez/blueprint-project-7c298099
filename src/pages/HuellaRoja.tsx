@@ -1,4 +1,4 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import BiometricScanRed from "@/components/BiometricScanRed";
@@ -164,16 +164,37 @@ const ChefCard = ({ name, desc, index }: { name: string; desc: string; index: nu
 
 /* ── 3D Perspective Carousel ── */
 const CAROUSEL_CARDS = [
-  { title: "MEAL PREPS", desc: "High-performance meals with perfect macro balance.", icon: "M3 3h18v18H3zM3 9h18M9 3v18" },
-  { title: "DETOX JUICE", desc: "Cold-pressed functional blends for cleansing and energy.", icon: "M12 2a10 10 0 100 20 10 10 0 000-20zM12 6v6l4 2" },
-  { title: "SUPPLEMENTS", desc: "Blueprint Approved stack for recovery and focus.", icon: "M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" },
+  { title: "MEAL PREPS", desc: "High-performance meals with perfect macro balance.", icon: "M3 3h18v18H3zM3 9h18M9 3v18", image: "" },
+  { title: "DETOX JUICE", desc: "Cold-pressed functional blends for cleansing and energy.", icon: "M12 2a10 10 0 100 20 10 10 0 000-20zM12 6v6l4 2", image: "" },
+  { title: "SUPPLEMENTS", desc: "Blueprint Approved stack for recovery and focus.", icon: "M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5", image: "/hackbar/supplements-stack.jpg" },
 ];
 
 const Carousel3D = () => {
   const [activeCard, setActiveCard] = useState(1);
+  const touchStartX = useRef<number | null>(null);
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX;
+  };
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    if (touchStartX.current === null) return;
+    const dx = e.changedTouches[0].clientX - touchStartX.current;
+    const threshold = 40;
+    if (dx <= -threshold && activeCard < CAROUSEL_CARDS.length - 1) {
+      setActiveCard(activeCard + 1);
+    } else if (dx >= threshold && activeCard > 0) {
+      setActiveCard(activeCard - 1);
+    }
+    touchStartX.current = null;
+  };
+
   return (
     <>
-      <div style={{ display: "flex", alignItems: "center", justifyContent: "center", padding: "60px 7%", perspective: "1000px", position: "relative", minHeight: 400 }}>
+      <div
+        onTouchStart={handleTouchStart}
+        onTouchEnd={handleTouchEnd}
+        style={{ display: "flex", alignItems: "center", justifyContent: "center", padding: "60px 7%", perspective: "1000px", position: "relative", minHeight: 400, touchAction: "pan-y" }}
+      >
         {CAROUSEL_CARDS.map((card, index) => {
           const isActive = index === activeCard;
           const isLeft = index < activeCard;
@@ -213,6 +234,17 @@ const Carousel3D = () => {
               {isActive && (
                 <div style={{ position: "absolute", inset: -1, borderRadius: 21, background: "linear-gradient(135deg, rgba(255,59,59,0.25), transparent 50%, rgba(255,59,59,0.15))", zIndex: -1, pointerEvents: "none" }} />
               )}
+              {card.image && (
+                <>
+                  <img
+                    src={card.image}
+                    alt={card.title}
+                    style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", borderRadius: 20, opacity: isActive ? 0.55 : 0.35, transition: "opacity 0.5s ease", zIndex: 0, pointerEvents: "none" }}
+                  />
+                  <div style={{ position: "absolute", inset: 0, borderRadius: 20, background: "linear-gradient(to top, rgba(0,0,0,0.85) 10%, rgba(0,0,0,0.45) 60%, rgba(0,0,0,0.25) 100%)", zIndex: 1, pointerEvents: "none" }} />
+                </>
+              )}
+              <div style={{ position: "relative", zIndex: 2, display: "flex", flexDirection: "column", alignItems: "center", gap: 20 }}>
               <div style={{
                 fontFamily: "'Orbitron', sans-serif",
                 fontSize: 8,
@@ -249,6 +281,7 @@ const Carousel3D = () => {
                 transition: "opacity 0.5s ease, max-height 0.5s ease",
                 margin: 0,
               }}>{card.desc}</p>
+              </div>
             </div>
           );
         })}
