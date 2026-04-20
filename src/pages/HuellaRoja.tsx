@@ -230,13 +230,8 @@ const HuellaRoja = ({ showDock }: { showDock: boolean }) => {
       <section className="hr-hero" style={{ minHeight: "100vh", display: "flex", alignItems: "center", position: "relative", overflow: "hidden", backgroundColor: "#0a0a0a" }}>
         {/* Left column */}
         <div className="hr-hero-left" style={{ flex: "0 0 55%", padding: "80px 0 80px 7%", display: "flex", flexDirection: "column", justifyContent: "center", gap: 16, position: "relative", zIndex: 2 }}>
-          {/* Ambient glow */}
-          <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse at 10% 70%, rgba(255,59,59,0.12) 0%, transparent 55%)", pointerEvents: "none" }} />
-          <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse at 90% 40%, rgba(255,59,59,0.06) 0%, transparent 50%)", pointerEvents: "none" }} />
-
-          <p style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 10, letterSpacing: "0.25em", textTransform: "uppercase", color: "rgba(255,59,59,0.5)", animation: "hrFadeUp 0.8s ease 0.3s both" }}>
-            BLUEPRINT SYSTEM
-          </p>
+          {/* Ambient glow — single soft pulsing layer */}
+          <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse at 20% 60%, rgba(255,59,59,0.10) 0%, transparent 60%)", pointerEvents: "none", animation: "hrAmbient 6s ease-in-out infinite" }} />
 
           <TextScramble
             className="hr-hero-title"
@@ -247,10 +242,6 @@ const HuellaRoja = ({ showDock }: { showDock: boolean }) => {
           >
             HACK BAR
           </TextScramble>
-
-          <p className="hr-hero-subtitle" style={{ fontFamily: "'Inter', sans-serif", fontSize: 14, fontWeight: 300, color: "rgba(255,255,255,0.4)", lineHeight: 1.7, maxWidth: 480, animation: "hrFadeUp 0.8s ease 0.5s both" }}>
-            La rama roja de Blueprint Lab. Energía funcional, nutrición inteligente y optimización metabólica al servicio de tu rendimiento diario.
-          </p>
         </div>
 
         {/* Right column */}
