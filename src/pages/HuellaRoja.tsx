@@ -171,9 +171,30 @@ const CAROUSEL_CARDS = [
 
 const Carousel3D = () => {
   const [activeCard, setActiveCard] = useState(1);
+  const touchStartX = useRef<number | null>(null);
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX;
+  };
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    if (touchStartX.current === null) return;
+    const dx = e.changedTouches[0].clientX - touchStartX.current;
+    const threshold = 40;
+    if (dx <= -threshold && activeCard < CAROUSEL_CARDS.length - 1) {
+      setActiveCard(activeCard + 1);
+    } else if (dx >= threshold && activeCard > 0) {
+      setActiveCard(activeCard - 1);
+    }
+    touchStartX.current = null;
+  };
+
   return (
     <>
-      <div style={{ display: "flex", alignItems: "center", justifyContent: "center", padding: "60px 7%", perspective: "1000px", position: "relative", minHeight: 400 }}>
+      <div
+        onTouchStart={handleTouchStart}
+        onTouchEnd={handleTouchEnd}
+        style={{ display: "flex", alignItems: "center", justifyContent: "center", padding: "60px 7%", perspective: "1000px", position: "relative", minHeight: 400, touchAction: "pan-y" }}
+      >
         {CAROUSEL_CARDS.map((card, index) => {
           const isActive = index === activeCard;
           const isLeft = index < activeCard;
