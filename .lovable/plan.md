@@ -1,46 +1,65 @@
 
 
-## Plan: Hack Bar Page — Cleanup + English Translation
+## Plan: Hack Bar Mobile Optimization (5 changes, mobile only)
 
-All edits in `src/pages/HuellaRoja.tsx`.
+All edits in `src/pages/HuellaRoja.tsx`. Desktop layout untouched — every change is gated behind `@media (max-width: 767px)` or `hidden md:*` classes.
 
-### 1. Hero — remove eyebrow + subtitle, fix "glitch"
-- Delete the `BLUEPRINT SYSTEM` eyebrow `<p>` (lines 234–236).
-- Delete the subtitle `<p className="hr-hero-subtitle">…</p>` (lines 248–250).
-- The "glitch" behind the title is caused by TWO stacked red `radial-gradient` overlays positioned on the left column (lines 231–232) — they create a hard-edged red blob that looks static. Replace them with a single, softer, animated ambient glow (slow opacity pulse via a new `@keyframes hrAmbient` so it visibly breathes instead of looking broken). Keep the section background `#0a0a0a`.
-- Also update the related mobile CSS (`.hr-hero-subtitle` rule at line 196) — harmless to keep, but no longer needed; leave or remove. Will remove for cleanliness.
+### 1. HERO — Hide image placeholder, center title (mobile only)
 
-### 2. "FUEL YOUR SYSTEM" — center title, remove subtitle, remove card descriptions
-- Add `textAlign: "center", width: "100%"` to the title `<p>` (line 283).
-- Delete the subtitle `<p>` (lines 286–288).
-- In `<FuelCard>` component (line 80): conditionally render the `desc` line only when `desc` is non-empty (so we can pass `desc=""` for both cards without removing the prop signature). Cleaner: keep the prop, render `{desc && <p>…</p>}`.
-- Pass empty `desc=""` to both FuelCard instances (lines 290–301). Translate names/items as below.
+In the existing `@media (max-width: 767px)` block, update `.hr-hero-right` to `display: none !important;` and `.hr-hero-left` to `min-height: 60vh; padding: 0 6%; justify-content: center;`. Also reduce hero `.hr-hero` to `min-height: 60vh` on mobile.
 
-### 3. "HACKBAR STATION" — center title, remove subtitle
-- Add `textAlign: "center", width: "100%"` to title (line 313).
-- Delete the subtitle `<p>` (lines 316–318).
+Result on mobile: dark background + ambient red glow + centered "HACK BAR" title only.
 
-### 4. Translate all Spanish → English
-- `SUPLEMENTOS` → `SUPPLEMENTS`
-- Items: `Planes semanales` → `Weekly Plans`; `Trazabilidad QR` → `QR Traceability`
-- Station card 1: `BATIDOS PERSONALIZADOS` → `CUSTOM SHAKES`; desc → `Tailored to your training type or goal: energy, recovery, lean mass, or detox.`
-- Station card 2: `CAFÉ FUNCIONAL` → `FUNCTIONAL COFFEE`; desc → `Infused with adaptogens and nootropics for sustained mental clarity without the crash.`
-- Station card 3: `SNACKS BLUEPRINT` → `BLUEPRINT SNACKS`; desc → `No preservatives or refined sugar. Only functional ingredients that fuel your system.`
-- HUELLAS dock tooltips (lines 22–24): `ENTRENAMIENTO` → `TRAINING`, `NUTRICIÓN` → `NUTRITION`, `RECUPERACIÓN` → `RECOVERY`.
-- Hero placeholder label "Image placeholder" — already English, leave.
-- Meet the Chef section + ChefCards + footer — already English, leave.
+### 2. FUEL YOUR SYSTEM — Compact 120px cards (mobile only)
 
-### Mobile
-- Centered titles use `textAlign: center` which applies to both viewports. No extra mobile rules needed.
+- Add `className="hr-fuel-grid hidden md:flex"` to the existing desktop `<FuelCard>` grid (line 455) so it's hidden on mobile.
+- Add a new mobile-only block right after it: `<div className="flex md:hidden flex-col gap-3">` containing two compact cards (120px height each):
+  - SUPPLEMENTS — bg image `/hackbar/supplements.jpg`, dark overlay, title + items joined by ` · ` on one line, red accent line bottom
+  - MEAL PREPS — bg image `/hackbar/mealprep.jpg`, same structure
 
-### Untouched
-- "HACK BAR" title text/font/size, TextScramble animation
-- Hero placeholder box (image area), corner brackets
-- Card layouts, scan line animations, grid structures
-- Meet the Chef section, footer layout
-- BiometricScanRed intro
-- Any other page
+Each compact card: `min-height: 120px`, padding `16px 18px`, `border-radius: 12px`, image absolute bg with `objectFit: cover`, gradient overlay, content z-index 2.
+
+### 3. HACKBAR STATION — Horizontal swipe carousel (mobile only)
+
+- Add `hidden md:grid` to the existing `.hr-station-grid` (line 484) so the desktop 3-col grid hides on mobile.
+- Add a new mobile-only block: `<div className="hackbar-scroll flex md:hidden">` with `overflow-x: auto`, `scroll-snap-type: x mandatory`, `gap: 14px`, horizontal padding for edge insets.
+- Render 3 mini cards (Custom Shakes / Functional Coffee / Blueprint Snacks) at fixed width `260px`, `scroll-snap-align: start`, dark bg + red accent line + title + desc.
+- Inject `.hackbar-scroll::-webkit-scrollbar { display: none; }` and `scrollbar-width: none` into the `<style>` block.
+
+### 4. MEET THE CHEF — Reduce placeholder to 150px (mobile only)
+
+In the existing media query update `.hr-chef-right` from `min-height: 250px` → `min-height: 150px !important; height: 150px;`. Inner placeholder `min-height` also reduced. `.hr-chef-left` already centered — keep as is.
+
+### 5. 3D CAROUSEL — Reduce card sizes (mobile only)
+
+Add CSS classes `carousel-3d-container`, `carousel-3d-card` to the existing `Carousel3D` elements (lines 196 and 202) so we can size them via media query without disturbing inline styles on desktop. In the mobile media query:
+
+```css
+.carousel-3d-container { min-height: 320px !important; padding: 32px 4% !important; }
+.carousel-3d-card { width: 170px !important; min-height: 240px !important; padding: 20px 16px !important; }
+.carousel-3d-card.is-active { width: 220px !important; min-height: 280px !important; }
+.carousel-3d-card h3 { font-size: 11px !important; }
+.carousel-3d-card.is-active h3 { font-size: 14px !important; }
+.carousel-3d-card p { font-size: 11px !important; }
+```
+
+The inline `transform` (translateX/rotateY/scale) stays on desktop values — acceptable because the perspective container scales the look naturally. Optionally tighten translate/rotate via `transform: translateX(±15px) rotateY(±10deg) scale(0.8) !important;` on `.carousel-3d-card:not(.is-active).is-left` / `.is-right`.
+
+### Technical Notes
+
+- All changes additive: existing desktop inline styles & media queries remain intact.
+- Mobile breakpoint `<768px` aligns with Tailwind `md:` (768px+).
+- New CSS injected inside the existing `<style>{`…`}</style>` block (line 317).
+- No new imports, no new dependencies.
+- Image paths (`/hackbar/supplements.jpg`, `/hackbar/mealprep.jpg`) already exist.
 
 ### Files Modified
-- `src/pages/HuellaRoja.tsx`
+- `src/pages/HuellaRoja.tsx` (single file)
+
+### Untouched
+- All desktop layouts (≥768px)
+- Lab monitor footer
+- All other pages
+- All section text/content (only layout changes on mobile)
+- Biometric intro, dock, animations
 
