@@ -164,9 +164,9 @@ const ChefCard = ({ name, desc, index }: { name: string; desc: string; index: nu
 
 /* ── 3D Perspective Carousel ── */
 const CAROUSEL_CARDS = [
-  { title: "MEAL PREPS", desc: "High-performance meals with perfect macro balance.", icon: "M3 3h18v18H3zM3 9h18M9 3v18" },
-  { title: "DETOX JUICE", desc: "Cold-pressed functional blends for cleansing and energy.", icon: "M12 2a10 10 0 100 20 10 10 0 000-20zM12 6v6l4 2" },
-  { title: "SUPPLEMENTS", desc: "Blueprint Approved stack for recovery and focus.", icon: "M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" },
+  { title: "MEAL PREPS", desc: "High-performance meals with perfect macro balance.", icon: "M3 3h18v18H3zM3 9h18M9 3v18", image: "" },
+  { title: "DETOX JUICE", desc: "Cold-pressed functional blends for cleansing and energy.", icon: "M12 2a10 10 0 100 20 10 10 0 000-20zM12 6v6l4 2", image: "" },
+  { title: "SUPPLEMENTS", desc: "Blueprint Approved stack for recovery and focus.", icon: "M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5", image: "/hackbar/supplements-stack.jpg" },
 ];
 
 const Carousel3D = () => {
