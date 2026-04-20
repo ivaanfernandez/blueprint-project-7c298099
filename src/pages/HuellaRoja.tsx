@@ -185,6 +185,10 @@ const HuellaRoja = ({ showDock }: { showDock: boolean }) => {
           from { opacity: 0; transform: translateY(20px); }
           to { opacity: 1; transform: translateY(0); }
         }
+        @keyframes hrAmbient {
+          0%, 100% { opacity: 0.55; transform: scale(1); }
+          50% { opacity: 1; transform: scale(1.06); }
+        }
         .hr-fuel-card:hover { transform: translateY(-4px); box-shadow: 0 8px 32px rgba(255,59,59,0.15); }
         .hr-station-card:hover { transform: translateY(-4px); }
         @media (max-width: 767px) {
@@ -193,7 +197,6 @@ const HuellaRoja = ({ showDock }: { showDock: boolean }) => {
           .hr-hero-right { flex: none !important; width: 100% !important; height: 250px !important; }
           .hr-hero-fade { width: 100% !important; height: 60px !important; background: linear-gradient(to bottom, #0a0a0a, transparent) !important; top: 0 !important; left: 0 !important; }
           .hr-hero-title { font-size: clamp(28px, 8vw, 42px) !important; }
-          .hr-hero-subtitle { text-align: center !important; max-width: 100% !important; }
           .hr-hero-placeholder { width: 90% !important; height: 80% !important; }
           .hr-fuel-grid { flex-direction: column !important; gap: 16px !important; }
           .hr-fuel-card { min-height: 320px !important; }
