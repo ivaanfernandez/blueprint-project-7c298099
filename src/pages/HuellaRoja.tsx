@@ -330,7 +330,7 @@ const HuellaRoja = ({ showDock }: { showDock: boolean }) => {
           />
           <FuelCard
             index={1}
-            name="MEAL PREP"
+            name="MEAL PREPS"
             desc=""
             items={["Weekly Plans", "Performance / Shred / Gain", "QR Traceability"]}
             image="/hackbar/mealprep.jpg"
