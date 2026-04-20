@@ -646,25 +646,27 @@ const HuellaRoja = ({ showDock }: { showDock: boolean }) => {
             >
               MEET THE CHEF
             </TextScramble>
-            <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 14, fontWeight: 300, color: "rgba(255,255,255,0.4)", lineHeight: 1.7, maxWidth: 480 }}>
-              The mind behind every recipe. Precision nutrition crafted with science and passion.
+            <p className="hr-chef-subtitle" style={{ fontFamily: "'Inter', sans-serif", fontSize: 14, fontWeight: 300, color: "rgba(255,255,255,0.4)", lineHeight: 1.7, maxWidth: 480 }}>
+              <span className="hidden md:inline">The mind behind every recipe. Precision nutrition crafted with science and passion.</span>
+              <span className="md:hidden">
+                The mind behind every recipe.
+                <br />
+                Precision nutrition crafted with science and passion.
+              </span>
             </p>
             <div style={{ width: 60, height: 2, background: "#FF3B3B", marginTop: 20, borderRadius: 1 }} />
           </div>
-          {/* Right: photo placeholder */}
+          {/* Right: chef photo */}
           <div className="hr-chef-right" style={{ flex: "0 0 45%", minHeight: 350, borderRadius: 16, overflow: "hidden", position: "relative" }}>
-            <div style={{ width: "100%", height: "100%", minHeight: 350, borderRadius: 16, border: "1px solid rgba(255,59,59,0.15)", background: "linear-gradient(135deg, rgba(255,59,59,0.06), rgba(255,59,59,0.02))", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 12, position: "relative" }}>
+            <div style={{ width: "100%", height: "100%", minHeight: 350, borderRadius: 16, border: "1px solid rgba(255,59,59,0.15)", overflow: "hidden", position: "relative" }}>
+              <img src="/hackbar/chef.jpg" alt="Chef" style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", objectPosition: "center" }} />
+              {/* Subtle gradient for legibility / cohesion */}
+              <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.1) 50%, rgba(0,0,0,0.25) 100%)", zIndex: 1, pointerEvents: "none" }} />
               {/* Corner brackets */}
-              <div style={{ position: "absolute", top: 12, left: 12, width: 20, height: 20, borderTop: "2px solid rgba(255,59,59,0.3)", borderLeft: "2px solid rgba(255,59,59,0.3)" }} />
-              <div style={{ position: "absolute", top: 12, right: 12, width: 20, height: 20, borderTop: "2px solid rgba(255,59,59,0.3)", borderRight: "2px solid rgba(255,59,59,0.3)" }} />
-              <div style={{ position: "absolute", bottom: 12, left: 12, width: 20, height: 20, borderBottom: "2px solid rgba(255,59,59,0.3)", borderLeft: "2px solid rgba(255,59,59,0.3)" }} />
-              <div style={{ position: "absolute", bottom: 12, right: 12, width: 20, height: 20, borderBottom: "2px solid rgba(255,59,59,0.3)", borderRight: "2px solid rgba(255,59,59,0.3)" }} />
-              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="rgba(255,59,59,0.25)" strokeWidth="1.5">
-                <rect x="3" y="3" width="18" height="18" rx="2" />
-                <circle cx="8.5" cy="8.5" r="1.5" />
-                <path d="M21 15l-5-5L5 21" />
-              </svg>
-              <span style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 8, letterSpacing: "0.15em", color: "rgba(255,59,59,0.2)", textTransform: "uppercase" }}>Chef photo</span>
+              <div style={{ position: "absolute", top: 12, left: 12, width: 20, height: 20, borderTop: "2px solid rgba(255,59,59,0.4)", borderLeft: "2px solid rgba(255,59,59,0.4)", zIndex: 2 }} />
+              <div style={{ position: "absolute", top: 12, right: 12, width: 20, height: 20, borderTop: "2px solid rgba(255,59,59,0.4)", borderRight: "2px solid rgba(255,59,59,0.4)", zIndex: 2 }} />
+              <div style={{ position: "absolute", bottom: 12, left: 12, width: 20, height: 20, borderBottom: "2px solid rgba(255,59,59,0.4)", borderLeft: "2px solid rgba(255,59,59,0.4)", zIndex: 2 }} />
+              <div style={{ position: "absolute", bottom: 12, right: 12, width: 20, height: 20, borderBottom: "2px solid rgba(255,59,59,0.4)", borderRight: "2px solid rgba(255,59,59,0.4)", zIndex: 2 }} />
             </div>
           </div>
         </div>
