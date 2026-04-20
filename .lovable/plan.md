@@ -1,100 +1,35 @@
 
 
-## Plan: Remove Duplicate Fuel Cards + Replace HackBar Station with Expandable List
+## Plan: Enlarge Chef Image + Remove 3D Carousel Section
 
 Single-file edit in `src/pages/HuellaRoja.tsx`.
 
-### Change 1 — Fuel Your System: drop the compact mobile duplicates
+### Change 1 — Enlarge chef image so the full image is visible
 
-- Delete the entire mobile-only block (lines 508-525): `<div className="flex md:hidden flex-col gap-3"> … </div>`.
-- Remove `hidden md:flex` from line 491 so the desktop `<FuelCard>` grid renders on every viewport.
-- The existing media query at line 367-368 already handles mobile stacking:
-  ```css
-  .hr-fuel-grid { flex-direction: column !important; gap: 16px !important; }
-  .hr-fuel-card { min-height: 320px !important; }
-  ```
-  Adjust `min-height` from 320 → 280 to match spec.
+Update the chef image container (lines 732-733):
 
-### Change 2 — HackBar Station: expandable list (desktop + mobile)
+- Outer wrapper: change `flex: "0 0 45%"` block → use `minHeight: 450`, add `aspectRatio: "16 / 10"`, `height: "auto"`.
+- Inner wrapper: drop fixed `minHeight: 350`, let it fill 100%.
+- `<img>` (line 734): change `objectPosition: "center"` → `"center top"` so the head/face stays anchored.
 
-Delete both the desktop grid (lines 539-543) and the mobile horizontal scroll (lines 545-561). Replace with a single expandable list driven by an `activeStation` state.
-
-**State** (added to `HuellaRoja` component near the top with the other hooks):
-```tsx
-const [activeStation, setActiveStation] = useState<number | null>(null);
-```
-
-**Data array** (`stationItems`) with title, desc, and a white-stroke SVG icon (rgba(255,255,255,0.7)) for each:
-- CUSTOM SHAKES — shaker / cup outline icon
-- FUNCTIONAL COFFEE — coffee cup with steam icon
-- BLUEPRINT SNACKS — bar / package icon
-
-**JSX** (replaces lines 539-561):
-```tsx
-<div style={{ maxWidth: 760, margin: "0 auto", border: "1px solid rgba(255,255,255,0.06)", borderRadius: 14, overflow: "hidden", backgroundColor: "rgba(255,255,255,0.015)" }}>
-  {stationItems.map((item, index) => {
-    const isActive = activeStation === index;
-    return (
-      <div
-        key={item.title}
-        onMouseEnter={() => setActiveStation(index)}
-        onMouseLeave={() => setActiveStation(null)}
-        onClick={() => setActiveStation(isActive ? null : index)}
-        className="hr-station-row"
-        style={{
-          position: "relative",
-          overflow: "hidden",
-          borderBottom: index < stationItems.length - 1 ? "1px solid rgba(255,255,255,0.06)" : "none",
-          padding: isActive ? "28px 24px" : "20px 24px",
-          cursor: "pointer",
-          transition: "all 0.3s ease",
-          background: isActive ? "rgba(255,59,59,0.03)" : "transparent",
-        }}
-      >
-        {isActive && (
-          <>
-            {/* 4 corner brackets in #FF3B3B, 12×12, 1px stroke, absolute at each corner */}
-          </>
-        )}
-        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 16, position: "relative", zIndex: 1 }}>
-          <div style={{ flex: 1 }}>
-            <p className="hr-station-title" style={{ fontFamily: "'Michroma', sans-serif", fontSize: isActive ? 16 : 14, color: "#fff", textTransform: "uppercase", letterSpacing: "0.04em", margin: 0, transition: "font-size 0.3s ease" }}>
-              {item.title}
-            </p>
-            {isActive && (
-              <p className="hr-station-desc" style={{ fontFamily: "'Inter', sans-serif", fontSize: 13, color: "rgba(255,255,255,0.6)", lineHeight: 1.6, marginTop: 10, margin: "10px 0 0" }}>
-                {item.desc}
-              </p>
-            )}
-          </div>
-          {isActive && (
-            <div style={{ flex: "0 0 auto", color: "rgba(255,255,255,0.7)" }}>{item.icon}</div>
-          )}
-        </div>
-      </div>
-    );
-  })}
-</div>
-```
-
-**Mobile CSS** (added inside the existing `@media (max-width: 767px)` block; remove now-unused `.hr-station-grid` / `.hr-station-card` / `.hackbar-scroll` rules):
+Mobile override in the existing `@media (max-width: 767px)` block (lines 446-447):
 ```css
-.hr-station-row { padding: 18px 16px !important; }
-.hr-station-row .hr-station-title { font-size: 13px !important; }
-.hr-station-row .hr-station-title.is-active { font-size: 15px !important; }
-.hr-station-row .hr-station-desc { font-size: 12px !important; }
+.hr-chef-right { flex: none !important; width: 100% !important; min-height: 300px !important; height: auto !important; aspect-ratio: 4 / 3 !important; }
+.hr-chef-right > div { min-height: 300px !important; }
 ```
-(Apply `is-active` className conditionally on the title element.)
 
-**Behavior**: Desktop uses hover; mobile uses tap. `onClick` toggles the same state, so both interactions naturally work — hover sets active, click toggles. Tapping another row sets it active (mouseleave doesn't fire on touch, so tap-to-toggle handles collapse).
+### Change 2 — Delete the 3 cards section (3D carousel + mobile auto-rotate)
 
-### Cleanup
-- The unused `StationCard` component definition (around line 100-110) can stay (harmless) or be removed — leaving it untouched to minimize diff risk.
-- Drop now-orphan CSS rules: `.hr-station-card:hover`, `.hackbar-scroll`, `.hackbar-scroll::-webkit-scrollbar`, `.hr-station-grid` / `.hr-station-card` mobile overrides.
+- Remove `<Carousel3D />` invocation at line 746 and the `{/* 3D Carousel */}` comment at 745.
+- Delete the entire `Carousel3D` component definition (lines 174 → its closing brace, ~line 367) along with the `CAROUSEL_CARDS` constant (lines 168-172).
+- Delete now-orphan CSS rules in the mobile media query: `.carousel-3d-container`, `.carousel-3d-card`, `.carousel-3d-card.is-active`, `.carousel-3d-card.is-left`, `.carousel-3d-card.is-right`, `.carousel-3d-card .carousel-3d-title`, `.carousel-3d-card.is-active .carousel-3d-title`, `.carousel-3d-card .carousel-3d-desc` (lines 451-458).
+- The `useEffect`, `useRef`, `activeCard`, and `autoRotateCard` state live entirely inside `Carousel3D`, so removing the component cleans them up automatically. No usages elsewhere.
+
+### Untouched
+- "MEET THE CHEF" title, subtitle, accent line, corner brackets on the chef image
+- Hero, Fuel Your System, HackBar Station, Lab Footer (desktop + mobile)
+- Dock and all other pages
 
 ### Files Modified
 - `src/pages/HuellaRoja.tsx`
-
-### Untouched
-- Hero (mobile + desktop), Meet the Chef, 3D Carousel, Lab footer, Dock, all other pages.
 
