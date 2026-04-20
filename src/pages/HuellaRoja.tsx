@@ -244,6 +244,14 @@ const HuellaRoja = ({ showDock }: { showDock: boolean }) => {
           .hr-chef-right > div { min-height: 300px !important; }
           .hr-chef-grid { grid-template-columns: 1fr !important; gap: 16px !important; }
           .hr-chef-card { min-height: 180px !important; }
+          .carousel-3d-container { min-height: 320px !important; padding: 32px 4% !important; }
+          .carousel-3d-card { width: 170px !important; min-height: 240px !important; padding: 20px 16px !important; }
+          .carousel-3d-card.is-active { width: 220px !important; min-height: 280px !important; padding: 20px 16px !important; }
+          .carousel-3d-card.is-left { transform: translateX(-15px) rotateY(10deg) scale(0.8) !important; }
+          .carousel-3d-card.is-right { transform: translateX(15px) rotateY(-10deg) scale(0.8) !important; }
+          .carousel-3d-card .carousel-3d-title { font-size: 11px !important; }
+          .carousel-3d-card.is-active .carousel-3d-title { font-size: 14px !important; }
+          .carousel-3d-card .carousel-3d-desc { font-size: 11px !important; }
           .hr-footer { padding: 32px 6% !important; }
           .lab-footer { height: auto !important; min-height: 500px !important; padding: 32px 24px !important; }
           .lab-footer-row { flex-direction: column !important; gap: 40px !important; padding: 32px 24px !important; height: auto !important; }
@@ -531,6 +539,8 @@ const HuellaRoja = ({ showDock }: { showDock: boolean }) => {
             </div>
           </div>
         </div>
+        {/* 3D Carousel */}
+        <Carousel3D />
       </motion.section>
 
       {/* ═══ SECTION E: LAB MONITOR FOOTER ═══ */}
