@@ -10,7 +10,7 @@ import AnimatedRoutes from "@/components/AnimatedRoutes";
 
 const queryClient = new QueryClient();
 
-type Phase = "scan" | "transition" | "landing";
+type Phase = "scan" | "landing";
 
 // ── TEST-MODE BYPASS DETECTION (opt-in, runs once at module load).
 //    Real users never set these flags, so production behavior is unchanged.
@@ -54,32 +54,11 @@ if (typeof document !== "undefined" && detectNoMotion()) {
 const App = () => {
   const [phase, setPhase] = useState<Phase>(BYPASS ? "landing" : "scan");
   const [showDock, setShowDock] = useState(BYPASS);
-  const [overlayVisible, setOverlayVisible] = useState(false);
 
-  // Phase 5: scan completes → mount landing behind a full black overlay,
-  // then fade the overlay out to reveal the landing content.
-  const handleScanComplete = useCallback(() => {
-    setOverlayVisible(true);
-    setPhase("transition");
-  }, []);
+  const handleScanComplete = useCallback(() => setPhase("landing"), []);
 
   useEffect(() => {
-    if (phase !== "transition") return;
-    // Mount landing on next frame, then fade overlay out shortly after.
-    const mountTimer = setTimeout(() => setPhase("landing"), 50);
-    const fadeTimer = setTimeout(() => setOverlayVisible(false), 150);
-    const cleanupTimer = setTimeout(() => {
-      // Overlay fade-out duration matches the CSS transition (800ms).
-    }, 1000);
-    return () => {
-      clearTimeout(mountTimer);
-      clearTimeout(fadeTimer);
-      clearTimeout(cleanupTimer);
-    };
-  }, [phase]);
-
-  useEffect(() => {
-    if ((phase === "landing" || phase === "transition") && !showDock) {
+    if (phase === "landing" && !showDock) {
       const timer = setTimeout(() => setShowDock(true), 100);
       return () => clearTimeout(timer);
     }
@@ -93,7 +72,6 @@ const App = () => {
     const force = () => {
       setPhase("landing");
       setShowDock(true);
-      setOverlayVisible(false);
     };
     (window as unknown as { __BP_FORCE_COMPLETE__?: () => void }).__BP_FORCE_COMPLETE__ = force;
     window.addEventListener("bp:force-complete-intro", force);
@@ -108,27 +86,12 @@ const App = () => {
         <Toaster />
         <Sonner />
         {phase === "scan" && <BiometricScan onComplete={handleScanComplete} />}
-        {(phase === "landing" || phase === "transition") && (
+        {phase === "landing" && (
           <BrowserRouter>
             <ScrollToTop />
             <AnimatedRoutes showDock={showDock} />
           </BrowserRouter>
         )}
-        {/* Phase 5: full-screen black overlay covering the handoff between
-            the biometric scan and the landing content. Fades out smoothly
-            once the landing is mounted, revealing the page underneath. */}
-        <div
-          aria-hidden="true"
-          style={{
-            position: "fixed",
-            inset: 0,
-            zIndex: 100,
-            backgroundColor: "#000000",
-            opacity: overlayVisible ? 1 : 0,
-            pointerEvents: overlayVisible ? "auto" : "none",
-            transition: "opacity 0.8s ease-in-out",
-          }}
-        />
       </TooltipProvider>
     </QueryClientProvider>
   );
