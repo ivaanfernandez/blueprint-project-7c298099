@@ -255,7 +255,7 @@ const Home = ({ showDock }: { showDock: boolean }) => {
           )}
         </div>
 
-        {/* Mobile: poster image only (no video) */}
+        {/* Mobile: poster image + lightweight video crossfade */}
         <div className="block md:hidden" style={{ position: "absolute", inset: 0, zIndex: 0 }}>
           <img
             src="/poster_image.jpg"
@@ -269,6 +269,29 @@ const Home = ({ showDock }: { showDock: boolean }) => {
               objectFit: "cover",
               objectPosition: "center center",
               zIndex: 1,
+            }}
+          />
+          <video
+            src="/hero-bg-mobile.mp4"
+            poster="/poster_image.jpg"
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="auto"
+            onLoadedData={(e) => {
+              (e.currentTarget as HTMLVideoElement).style.opacity = "1";
+            }}
+            style={{
+              position: "absolute",
+              inset: 0,
+              width: "100%",
+              height: "100%",
+              objectFit: "cover",
+              objectPosition: "center center",
+              opacity: 0,
+              transition: "opacity 0.8s ease-in-out",
+              zIndex: 2,
             }}
           />
         </div>
