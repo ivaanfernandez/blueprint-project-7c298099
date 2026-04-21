@@ -791,7 +791,8 @@ const Home = ({ showDock }: { showDock: boolean }) => {
           marginBottom: 48,
           ...(window.innerWidth < 768 ? { flexDirection: "column" as const, gap: 10, alignItems: "stretch" as const } : {}),
         }}>
-          <button
+          <motion.button
+            variants={blurRevealItem}
             onClick={() => navigate("/huella-azul")}
             style={{
               fontFamily: "'Orbitron', sans-serif",
@@ -819,9 +820,10 @@ const Home = ({ showDock }: { showDock: boolean }) => {
             }}
           >
             JOIN NOW
-          </button>
+          </motion.button>
 
-          <button
+          <motion.button
+            variants={blurRevealItem}
             onClick={() => window.open("https://instagram.com/blueprintproject", "_blank")}
             style={{
               fontFamily: "'Orbitron', sans-serif",
@@ -858,8 +860,8 @@ const Home = ({ showDock }: { showDock: boolean }) => {
               <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
             </svg>
             INSTAGRAM
-          </button>
-        </div>
+          </motion.button>
+        </motion.div>
 
         {/* Divider */}
         <div style={{
