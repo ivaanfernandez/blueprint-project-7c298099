@@ -268,6 +268,7 @@ const Home = ({ showDock }: { showDock: boolean }) => {
         .pillar-card:hover .pillar-card-hover-fp { opacity: 0.15 !important; transform: translate(-50%, -50%) scale(1) !important; }
 
         .scan-video-wrapper { padding: 72px 7%; }
+        .scan-rotativo-wrapper { padding: 72px 7%; }
 
         @media (max-width: 767px) {
           .programs-grid { grid-template-columns: 1fr !important; max-width: 400px !important; margin: 0 auto !important; }
@@ -292,6 +293,7 @@ const Home = ({ showDock }: { showDock: boolean }) => {
             margin-bottom: -120px;
           }
           .scan-video-wrapper { padding: 48px 6% !important; }
+          .scan-rotativo-wrapper { padding: 48px 6% !important; }
           .footer-section {
             padding: 60px 6% 32px !important;
           }
