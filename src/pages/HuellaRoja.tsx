@@ -1,7 +1,7 @@
 import { useState, useCallback, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
-import { scrollReveal } from "@/lib/scrollAnimations";
+import { scrollReveal, scrollRevealNoShift } from "@/lib/scrollAnimations";
 import BiometricScanRed from "@/components/BiometricScanRed";
 import { TextScramble } from "@/components/ui/text-scramble";
 import { Dock, DockIcon } from "@/components/ui/dock";
@@ -508,10 +508,7 @@ const HuellaRoja = ({ showDock }: { showDock: boolean }) => {
 
       {/* ═══ SECTION B: FUEL YOUR SYSTEM ═══ */}
       <motion.section
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.6 }}
+        {...scrollReveal}
         style={{ backgroundColor: "#0a0a0a", padding: "72px 7%", position: "relative", zIndex: 1 }}
       >
         <p style={{ fontFamily: "'Michroma', sans-serif", fontSize: "clamp(16px, 2vw, 24px)", color: "#FFFFFF", textTransform: "uppercase", letterSpacing: "0.04em", marginBottom: 32, textAlign: "center", width: "100%" }}>
@@ -537,10 +534,7 @@ const HuellaRoja = ({ showDock }: { showDock: boolean }) => {
 
       {/* ═══ SECTION C: HACKBAR STATION ═══ */}
       <motion.section
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.6 }}
+        {...scrollReveal}
         style={{ backgroundColor: "#0a0a0a", padding: "0 7% 72px", position: "relative", zIndex: 1 }}
       >
         <p style={{ fontFamily: "'Michroma', sans-serif", fontSize: "clamp(16px, 2vw, 24px)", color: "#FFFFFF", textTransform: "uppercase", letterSpacing: "0.04em", marginBottom: 32, textAlign: "center", width: "100%" }}>
@@ -662,10 +656,7 @@ const HuellaRoja = ({ showDock }: { showDock: boolean }) => {
 
       {/* ═══ SECTION D: MEET THE CHEF ═══ */}
       <motion.section
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.6 }}
+        {...scrollReveal}
         style={{ backgroundColor: "#0a0a0a", padding: "0 7% 72px", position: "relative", zIndex: 1 }}
       >
         <div className="hr-chef-row" style={{ display: "flex", alignItems: "flex-start", gap: 40, marginBottom: 40 }}>
@@ -708,7 +699,7 @@ const HuellaRoja = ({ showDock }: { showDock: boolean }) => {
       </motion.section>
 
       {/* ═══ SECTION E: LAB MONITOR FOOTER (DESKTOP) ═══ */}
-      <motion.div {...scrollReveal} className="hidden md:block" style={{ background: "#050505", padding: "60px 5% 80px", borderTop: "1px solid rgba(255,59,59,0.1)", position: "relative" }}>
+      <motion.div {...scrollRevealNoShift} className="hidden md:block" style={{ background: "#050505", padding: "60px 5% 80px", borderTop: "1px solid rgba(255,59,59,0.1)", position: "relative" }}>
         <ElectricBorder color="#FF3B3B" speed={0.2} chaos={0.3} borderRadius={16} style={{ width: "100%" }}>
           <footer className="lab-footer" style={{ background: "#050505", padding: 0, position: "relative", height: 500, borderRadius: 16, overflow: "hidden" }}>
             {/* LAYER 1 — Grid */}
@@ -803,7 +794,7 @@ const HuellaRoja = ({ showDock }: { showDock: boolean }) => {
       </motion.div>
 
       {/* Mobile Lab Footer */}
-      <motion.div {...scrollReveal} className="block md:hidden" style={{
+      <motion.div {...scrollRevealNoShift} className="block md:hidden" style={{
         background: "#050505",
         borderTop: "1px solid rgba(255,59,59,0.1)",
         padding: "48px 6% 64px",

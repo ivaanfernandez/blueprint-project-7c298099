@@ -1,6 +1,7 @@
 import { useState, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
+import { scrollReveal, scrollStagger, blurRevealItem } from "@/lib/scrollAnimations";
 import BiometricScanGreen from "@/components/BiometricScanGreen";
 import { TextScramble } from "@/components/ui/text-scramble";
 import BackToHomeButton from "@/components/BackToHomeButton";
@@ -180,23 +181,20 @@ const HuellaVerde = ({ showDock = true }: HuellaVerdeProps) => {
 
         {/* ── RECOVERY ROOM ── */}
         <motion.section
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
+          {...scrollReveal}
           style={{ background: "#0a0a0a", padding: "72px 7%", position: "relative", zIndex: 1 }}
         >
-          <h2 style={{ fontFamily: "'Michroma', sans-serif", fontSize: "clamp(16px, 2vw, 24px)", color: "#FFFFFF", textTransform: "uppercase", letterSpacing: "0.04em", marginBottom: 8 }}>
+          <motion.h2 {...scrollReveal} style={{ fontFamily: "'Michroma', sans-serif", fontSize: "clamp(16px, 2vw, 24px)", color: "#FFFFFF", textTransform: "uppercase", letterSpacing: "0.04em", marginBottom: 8 }}>
             RECOVERY ROOM
-          </h2>
-          <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 14, color: "rgba(255,255,255,0.35)", marginBottom: 32 }}>
+          </motion.h2>
+          <motion.p {...scrollReveal} style={{ fontFamily: "'Inter', sans-serif", fontSize: 14, color: "rgba(255,255,255,0.35)", marginBottom: 32 }}>
             Tu zona de Reset. Disponible exclusivamente para miembros de BlueprintLab.
-          </p>
+          </motion.p>
 
           {/* Top 3 */}
-          <div className="hv-grid-top" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 20, marginBottom: 20 }}>
+          <motion.div {...scrollStagger} className="hv-grid-top" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 20, marginBottom: 20 }}>
             {RECOVERY_TOP.map((card, i) => (
-              <div key={card.name} className="hv-card" style={{ borderRadius: 14, minHeight: 320, position: "relative", overflow: "hidden", display: "flex", flexDirection: "column", justifyContent: "flex-end", padding: "24px 20px", cursor: "pointer", animation: `hvFadeUp 0.5s ease ${i * 0.15}s both` }}>
+              <motion.div variants={blurRevealItem} key={card.name} className="hv-card" style={{ borderRadius: 14, minHeight: 320, position: "relative", overflow: "hidden", display: "flex", flexDirection: "column", justifyContent: "flex-end", padding: "24px 20px", cursor: "pointer" }}>
                 <div style={{ position: "absolute", inset: 0, backgroundColor: "#1a1a1a" }} />
                 <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(0,0,0,0.85) 10%, rgba(0,0,0,0.3) 55%, rgba(0,0,0,0.05) 100%)", zIndex: 1 }} />
                 {/* Scan line */}
@@ -208,14 +206,14 @@ const HuellaVerde = ({ showDock = true }: HuellaVerdeProps) => {
                   <h3 style={{ fontFamily: "'Michroma', sans-serif", fontSize: 14, color: "#fff", textTransform: "uppercase", letterSpacing: "0.02em", marginBottom: 6 }}>{card.name}</h3>
                   <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 12, color: "rgba(255,255,255,0.55)", lineHeight: 1.6 }}>{card.desc}</p>
                 </div>
-              </div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
 
           {/* Bottom 2 */}
-          <div className="hv-grid-bot" style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: 20 }}>
+          <motion.div {...scrollStagger} className="hv-grid-bot" style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: 20 }}>
             {RECOVERY_BOT.map((card, i) => (
-              <div key={card.name} className="hv-card" style={{ borderRadius: 14, minHeight: 220, position: "relative", overflow: "hidden", display: "flex", flexDirection: "column", justifyContent: "flex-end", padding: "24px 20px", cursor: "pointer", animation: `hvFadeUp 0.5s ease ${(i + 3) * 0.15}s both` }}>
+              <motion.div variants={blurRevealItem} key={card.name} className="hv-card" style={{ borderRadius: 14, minHeight: 220, position: "relative", overflow: "hidden", display: "flex", flexDirection: "column", justifyContent: "flex-end", padding: "24px 20px", cursor: "pointer" }}>
                 <div style={{ position: "absolute", inset: 0, backgroundColor: "#1a1a1a" }} />
                 <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(0,0,0,0.85) 10%, rgba(0,0,0,0.3) 55%, rgba(0,0,0,0.05) 100%)", zIndex: 1 }} />
                 <div style={{ position: "absolute", left: 0, right: 0, height: 1, background: "linear-gradient(to right, transparent, rgba(34,197,94,0.25), transparent)", animation: `hvScanLine 5s ease-in-out ${scanDelays[i + 3]}s infinite`, zIndex: 2, pointerEvents: "none" }} />
@@ -224,52 +222,48 @@ const HuellaVerde = ({ showDock = true }: HuellaVerdeProps) => {
                   <h3 style={{ fontFamily: "'Michroma', sans-serif", fontSize: 14, color: "#fff", textTransform: "uppercase", letterSpacing: "0.02em", marginBottom: 6 }}>{card.name}</h3>
                   <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 12, color: "rgba(255,255,255,0.55)", lineHeight: 1.6 }}>{card.desc}</p>
                 </div>
-              </div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </motion.section>
 
         {/* ── SERVICIOS PREMIUM ── */}
         <motion.section
+          {...scrollReveal}
           className="hv-servicios"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
           style={{ background: "#0a0a0a", padding: "0 7% 72px", position: "relative", zIndex: 1 }}
         >
-          <h2 style={{ fontFamily: "'Michroma', sans-serif", fontSize: "clamp(16px, 2vw, 24px)", color: "#FFFFFF", textTransform: "uppercase", letterSpacing: "0.04em", marginBottom: 8 }}>
+          <motion.h2 {...scrollReveal} style={{ fontFamily: "'Michroma', sans-serif", fontSize: "clamp(16px, 2vw, 24px)", color: "#FFFFFF", textTransform: "uppercase", letterSpacing: "0.04em", marginBottom: 8 }}>
             SERVICIOS PREMIUM
-          </h2>
-          <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 14, color: "rgba(255,255,255,0.35)", marginBottom: 32 }}>
+          </motion.h2>
+          <motion.p {...scrollReveal} style={{ fontFamily: "'Inter', sans-serif", fontSize: 14, color: "rgba(255,255,255,0.35)", marginBottom: 32 }}>
             Protocolos avanzados para miembros comprometidos con su evolución.
-          </p>
+          </motion.p>
 
-          {SERVICIOS.map((s, i) => (
-            <motion.div
-              key={s.num}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: i * 0.1 }}
-              style={{ display: "flex", alignItems: "flex-start", gap: 20, padding: "24px 0", borderBottom: i < SERVICIOS.length - 1 ? "1px solid rgba(255,255,255,0.06)" : "none" }}
-            >
-              <span style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 14, fontWeight: 500, color: "#22C55E", flexShrink: 0, width: 32 }}>{s.num}</span>
-              <div>
-                <div className="hv-servicio-line" style={{ height: 1, background: "linear-gradient(to right, #22C55E, transparent)", width: 200, marginBottom: 8 }} />
-                <h3 style={{ fontFamily: "'Michroma', sans-serif", fontSize: 14, color: "#FFFFFF", textTransform: "uppercase", letterSpacing: "0.02em", marginBottom: 8 }}>{s.name}</h3>
-                <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 13, color: "rgba(255,255,255,0.35)", lineHeight: 1.6, maxWidth: 600 }}>{s.desc}</p>
-              </div>
-            </motion.div>
-          ))}
+          <motion.div {...scrollStagger}>
+            {SERVICIOS.map((s, i) => (
+              <motion.div
+                variants={blurRevealItem}
+                key={s.num}
+                style={{ display: "flex", alignItems: "flex-start", gap: 20, padding: "24px 0", borderBottom: i < SERVICIOS.length - 1 ? "1px solid rgba(255,255,255,0.06)" : "none" }}
+              >
+                <span style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 14, fontWeight: 500, color: "#22C55E", flexShrink: 0, width: 32 }}>{s.num}</span>
+                <div>
+                  <div className="hv-servicio-line" style={{ height: 1, background: "linear-gradient(to right, #22C55E, transparent)", width: 200, marginBottom: 8 }} />
+                  <h3 style={{ fontFamily: "'Michroma', sans-serif", fontSize: 14, color: "#FFFFFF", textTransform: "uppercase", letterSpacing: "0.02em", marginBottom: 8 }}>{s.name}</h3>
+                  <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 13, color: "rgba(255,255,255,0.35)", lineHeight: 1.6, maxWidth: 600 }}>{s.desc}</p>
+                </div>
+              </motion.div>
+            ))}
+          </motion.div>
         </motion.section>
 
         {/* ── FOOTER ── */}
-        <footer className="hv-footer" style={{ padding: "40px 7%", borderTop: "1px solid rgba(34,197,94,0.08)", display: "flex", flexDirection: "column", alignItems: "center", gap: 16, background: "#0a0a0a" }}>
+        <motion.footer {...scrollReveal} className="hv-footer" style={{ padding: "40px 7%", borderTop: "1px solid rgba(34,197,94,0.08)", display: "flex", flexDirection: "column", alignItems: "center", gap: 16, background: "#0a0a0a" }}>
           <FingerprintSVG color="#22C55E" size={32} />
           <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 12, color: "rgba(255,255,255,0.25)" }}>Reset — Blueprint Project</p>
           <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 10, color: "rgba(255,255,255,0.15)" }}>© 2025 Blueprint Project</p>
-        </footer>
+        </motion.footer>
         <BackToHomeButton />
       </motion.div>
     </>

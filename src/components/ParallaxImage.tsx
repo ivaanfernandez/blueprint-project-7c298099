@@ -10,6 +10,14 @@ interface ParallaxImageProps {
   rounded?: number; // border-radius in px
 }
 
+// SSR-safe reduced-motion check, read at module load.
+const prefersReducedMotion = (): boolean => {
+  if (typeof window === "undefined" || !window.matchMedia) return false;
+  return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+};
+
+const REDUCE = prefersReducedMotion();
+
 const ParallaxImage = ({
   src,
   alt = "",
@@ -31,6 +39,32 @@ const ParallaxImage = ({
     [0, 1],
     [-intensity / 2, intensity / 2]
   );
+
+  // Reduced-motion: render a plain static <img>, no parallax, no scale.
+  if (REDUCE) {
+    return (
+      <div
+        className={className}
+        style={{
+          position: "relative",
+          overflow: "hidden",
+          borderRadius: rounded,
+          ...style,
+        }}
+      >
+        <img
+          src={src}
+          alt={alt}
+          style={{
+            width: "100%",
+            height: "100%",
+            objectFit: "cover",
+            display: "block",
+          }}
+        />
+      </div>
+    );
+  }
 
   return (
     <div
