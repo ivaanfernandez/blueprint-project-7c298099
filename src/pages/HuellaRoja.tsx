@@ -886,7 +886,7 @@ const HuellaRoja = ({ showDock }: { showDock: boolean }) => {
       </motion.div>
 
       {/* Bottom spacer for dock (desktop only) */}
-      <div className="hidden md:block" style={{ height: 120 }} />
+      <div className="hidden md:block back-to-home-wrapper" style={{ height: 16 }} />
       <BackToHomeButton />
     </motion.div>
   );
