@@ -264,21 +264,17 @@ const Home = ({ showDock }: { showDock: boolean }) => {
         }} />
       </div>
 
-      {/* ── Dark to white transition strip ── */}
-      <div
-        style={{
-          width: "100%",
-          height: window.innerWidth < 768 ? 80 : 120,
-          background: "linear-gradient(to bottom, #000000, #FFFFFF)",
-          position: "relative",
-          zIndex: 1,
-        }}
-      />
-
       {/* ══════════════════════════════════════════════════════ */}
-      {/* ── WHITE ZONE WRAPPER ── */}
+      {/* ── WHITE ZONE WRAPPER (card emergence over hero black) ── */}
       {/* ══════════════════════════════════════════════════════ */}
-      <div style={{ position: "relative", background: "#FFFFFF" }}>
+      <div style={{
+        position: "relative",
+        background: "#FFFFFF",
+        borderTopLeftRadius: window.innerWidth < 768 ? 24 : 32,
+        borderTopRightRadius: window.innerWidth < 768 ? 24 : 32,
+        marginTop: window.innerWidth < 768 ? -24 : -32,
+        zIndex: 2,
+      }}>
         <ProceduralBackgroundWhite />
 
       {/* ── C: ABOUT (WHITE) ── */}
