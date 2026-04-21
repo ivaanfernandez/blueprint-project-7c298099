@@ -169,7 +169,7 @@ const HuellaVerde = ({ showDock = true }: HuellaVerdeProps) => {
           {...scrollReveal}
           style={{ background: "rgba(0,0,0,0.4)", padding: "72px 7%", position: "relative", zIndex: 1 }}
         >
-          <motion.h2 {...scrollReveal} style={{ fontFamily: "'Michroma', sans-serif", fontSize: "clamp(16px, 2vw, 24px)", color: "#FFFFFF", textTransform: "uppercase", letterSpacing: "0.04em", marginBottom: 32, textAlign: "center" }}>
+          <motion.h2 {...scrollReveal} style={{ fontFamily: "'Michroma', sans-serif", fontSize: "clamp(28px, 5vw, 42px)", fontWeight: 400, color: "#FFFFFF", textTransform: "uppercase", letterSpacing: "0.05em", margin: "0 0 48px 0", textAlign: "center" }}>
             RECOVERY ROOM
           </motion.h2>
 
