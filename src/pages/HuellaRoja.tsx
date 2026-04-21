@@ -730,8 +730,8 @@ const HuellaRoja = ({ showDock }: { showDock: boolean }) => {
                       </div>
                     ))}
                     <div className="lab-data-item" style={{ padding: "12px 0", borderBottom: "1px solid rgba(255,59,59,0.06)" }}>
-                      <p className="lab-data-label" style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 7, letterSpacing: "0.15em", color: "rgba(255,255,255,0.2)", margin: 0, textTransform: "uppercase" }}>SYSTEM STATUS</p>
-                      <p className="lab-data-value" style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 16, color: "#FF3B3B", margin: "4px 0 0", display: "flex", alignItems: "center", gap: 8 }}>
+                      <p className="lab-data-label hackbar-scan-label" style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 7, letterSpacing: "0.15em", color: "rgba(255,255,255,0.2)", margin: 0, textTransform: "uppercase" }}>SYSTEM STATUS</p>
+                      <p className="lab-data-value hackbar-scan-value" style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 16, color: "#FF3B3B", margin: "4px 0 0", display: "flex", alignItems: "center", gap: 8 }}>
                         <span style={{ width: 6, height: 6, borderRadius: "50%", background: "#FF3B3B", animation: "labPulse 2s infinite", display: "inline-block" }} />
                         ACTIVE
                       </p>
