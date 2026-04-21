@@ -375,12 +375,12 @@ const Home = ({ showDock }: { showDock: boolean }) => {
                       color: "#6B7280", lineHeight: 1.6, paddingLeft: 44,
                     }}>{step.desc}</div>
                   </div>
-                </div>
+                </motion.div>
               ))}
-            </div>
+            </motion.div>
 
             {/* Mobile features — glassmorphism with animated glow border */}
-            <div className="about-features-mobile" style={{ display: "none", flexDirection: "column", padding: "0 16px", gap: 14 }}>
+            <motion.div {...scrollStagger} className="about-features-mobile" style={{ display: "none", flexDirection: "column", padding: "0 16px", gap: 14 }}>
               <style>{`
                 @keyframes glowSpin {
                   0% { transform: rotate(0deg); }
@@ -419,7 +419,7 @@ const Home = ({ showDock }: { showDock: boolean }) => {
                   ),
                 },
               ].map((c) => (
-                <div key={c.title} style={{
+                <motion.div variants={blurRevealItem} key={c.title} style={{
                   position: "relative",
                   padding: 1,
                   borderRadius: 17,
