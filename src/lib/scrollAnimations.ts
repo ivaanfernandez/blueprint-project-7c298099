@@ -2,8 +2,13 @@ import type { Variants } from "framer-motion";
 
 // ── REDUCED-MOTION DETECTION (SSR-safe, read at module load).
 //    Users who toggle the OS preference need a refresh.
+//    Also honors the test-only `data-no-motion` attribute on <html>, set by
+//    App.tsx when ?nomotion=1 / localStorage.bp_no_motion is present.
 const prefersReducedMotion = (): boolean => {
   if (typeof window === "undefined" || !window.matchMedia) return false;
+  if (typeof document !== "undefined" && document.documentElement?.dataset?.noMotion === "true") {
+    return true;
+  }
   return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 };
 

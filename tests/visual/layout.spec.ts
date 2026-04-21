@@ -1,13 +1,17 @@
 import { test, expect } from "../../playwright-fixture";
+import { prepPage } from "./helpers";
+import { thresholdFor } from "./thresholds";
 
 /**
  * Visual regression suite — catches aspect-ratio, spacing, and border-radius
  * issues across mobile (390px) and desktop (1280px) viewports.
  *
- * Snapshots are stored under tests/visual/__snapshots__/. To update after an
- * intentional change: run with `--update-snapshots`.
+ * Snapshots live under tests/visual/__snapshots__/. Update intentional changes
+ * with `--update-snapshots`.
  *
- * Animations are disabled per-screenshot to keep snapshots deterministic.
+ * Determinism comes from `prepPage` (helpers.ts), which bypasses the biometric
+ * intro via the in-app E2E switch and injects an animation-killing style tag.
+ * Per-route diff tolerances are centralized in thresholds.ts.
  */
 
 const ROUTES = [
@@ -22,55 +26,19 @@ const VIEWPORTS = [
   { name: "desktop-1280", width: 1280, height: 800 },
 ];
 
-// Bypass biometric intro screens that gate the pillar pages.
-async function skipBiometricIntro(page: import("@playwright/test").Page) {
-  // The intro components call onComplete after ~5s. Wait it out OR fast-forward.
-  // Easiest: just wait for the intro to finish naturally on first navigation.
-  await page.waitForTimeout(5500);
-}
-
 for (const viewport of VIEWPORTS) {
   test.describe(`Visual @ ${viewport.name}`, () => {
     test.use({ viewport: { width: viewport.width, height: viewport.height } });
 
     for (const route of ROUTES) {
       test(`${route.name} — full page`, async ({ page }) => {
-        await page.goto(route.path);
+        await prepPage(page, route.path);
 
-        // Pillar pages have a 5s biometric intro screen.
-        if (route.path !== "/" && route.path !== "/blueprint-lab") {
-          await skipBiometricIntro(page);
-        }
-
-        // Wait for fonts + lazy assets.
-        await page.waitForLoadState("networkidle").catch(() => {});
-        await page.evaluate(() => document.fonts?.ready);
-
-        // Disable all CSS animations/transitions for stable snapshots.
-        await page.addStyleTag({
-          content: `
-            *, *::before, *::after {
-              animation-duration: 0s !important;
-              animation-delay: 0s !important;
-              transition-duration: 0s !important;
-              transition-delay: 0s !important;
-            }
-          `,
-        });
-
-        // Force any scroll-triggered Framer Motion reveals to settle by
-        // scrolling once to the bottom and back to the top.
-        await page.evaluate(async () => {
-          window.scrollTo(0, document.body.scrollHeight);
-          await new Promise((r) => setTimeout(r, 300));
-          window.scrollTo(0, 0);
-          await new Promise((r) => setTimeout(r, 300));
-        });
-
+        const t = thresholdFor(route.name, viewport.name);
         await expect(page).toHaveScreenshot(`${route.name}-${viewport.name}.png`, {
           fullPage: true,
-          // Allow 1% pixel diff to absorb font hinting / canvas noise.
-          maxDiffPixelRatio: 0.01,
+          maxDiffPixelRatio: t.maxDiffPixelRatio,
+          threshold: t.threshold,
           animations: "disabled",
         });
       });
@@ -82,23 +50,98 @@ test.describe("Visual @ critical regions (mobile 390)", () => {
   test.use({ viewport: { width: 390, height: 844 } });
 
   test("home — about edge-to-edge image (16:9, rounded, spacing)", async ({ page }) => {
-    await page.goto("/");
-    await page.waitForLoadState("networkidle").catch(() => {});
+    await prepPage(page, "/");
 
-    // Scroll to the About mobile image. It sits in the .about-section-new
-    // flex column, after the 4 feature cards.
     const target = page.locator('img[alt="Designed for the human machine"]').first();
     await target.scrollIntoViewIfNeeded();
-    await page.waitForTimeout(400);
+    await page.waitForTimeout(200);
 
-    await page.addStyleTag({
-      content: `*, *::before, *::after { animation-duration: 0s !important; transition-duration: 0s !important; }`,
-    });
-
-    // Snapshot the wrapper (includes border-radius + margins above/below).
-    const wrapper = target.locator("xpath=ancestor::div[contains(@class,'block') and contains(@class,'md:hidden')][1]");
+    const wrapper = target.locator(
+      "xpath=ancestor::div[contains(@class,'block') and contains(@class,'md:hidden')][1]"
+    );
+    const t = thresholdFor("home", "mobile-390");
     await expect(wrapper).toHaveScreenshot("home-about-edge-image-mobile.png", {
-      maxDiffPixelRatio: 0.01,
+      maxDiffPixelRatio: t.maxDiffPixelRatio,
+      threshold: t.threshold,
+      animations: "disabled",
+    });
+  });
+});
+
+/**
+ * Targeted Huella Verde mobile snapshots — focused on layout invariants:
+ * card border-radius, grid gap, min-height, and section padding. These
+ * scoped snapshots catch regressions full-page diffs would smear over.
+ */
+test.describe("Visual @ Huella Verde regions (mobile 390)", () => {
+  test.use({ viewport: { width: 390, height: 844 } });
+
+  test("hv-grid-top — 3-card recovery grid (rounded 14, gap 20, min-h 320)", async ({ page }) => {
+    await prepPage(page, "/huella-verde");
+
+    const grid = page.locator(".hv-grid-top").first();
+    await grid.scrollIntoViewIfNeeded();
+    await page.waitForTimeout(200);
+
+    // Layout invariant assertions.
+    const gap = await grid.evaluate((el) => getComputedStyle(el).gap);
+    expect(gap.startsWith("20px")).toBe(true);
+
+    const firstCard = grid.locator(".hv-card").first();
+    const radius = await firstCard.evaluate((el) => getComputedStyle(el).borderRadius);
+    expect(radius).toBe("14px");
+    const minH = await firstCard.evaluate((el) => parseFloat(getComputedStyle(el).minHeight));
+    expect(minH).toBeGreaterThanOrEqual(240); // mobile override clamps to 240+
+
+    const t = thresholdFor("huella-verde", "mobile-390");
+    await expect(grid).toHaveScreenshot("hv-grid-top-mobile-390.png", {
+      maxDiffPixelRatio: t.maxDiffPixelRatio,
+      threshold: t.threshold,
+      animations: "disabled",
+    });
+  });
+
+  test("hv-grid-bot — 2-card recovery grid (rounded 14, gap 20)", async ({ page }) => {
+    await prepPage(page, "/huella-verde");
+
+    const grid = page.locator(".hv-grid-bot").first();
+    await grid.scrollIntoViewIfNeeded();
+    await page.waitForTimeout(200);
+
+    const gap = await grid.evaluate((el) => getComputedStyle(el).gap);
+    expect(gap.startsWith("20px")).toBe(true);
+
+    const firstCard = grid.locator(".hv-card").first();
+    const radius = await firstCard.evaluate((el) => getComputedStyle(el).borderRadius);
+    expect(radius).toBe("14px");
+
+    const t = thresholdFor("huella-verde", "mobile-390");
+    await expect(grid).toHaveScreenshot("hv-grid-bot-mobile-390.png", {
+      maxDiffPixelRatio: t.maxDiffPixelRatio,
+      threshold: t.threshold,
+      animations: "disabled",
+    });
+  });
+
+  test("fingerprint-card — Blueprint Lab mobile bento", async ({ page }) => {
+    await prepPage(page, "/blueprint-lab");
+
+    // The fingerprint scan card lives inside the mobile-only bento column.
+    const card = page
+      .locator('[class*="bento-cell"], .bento-cell')
+      .filter({ has: page.locator("text=/Security Level|Blueprint/i") })
+      .first();
+
+    // Fallback: target the BiometricScanCard root if the bento-cell class shifts.
+    const target = (await card.count()) > 0 ? card : page.locator(".biometric-scan-card").first();
+
+    await target.scrollIntoViewIfNeeded();
+    await page.waitForTimeout(200);
+
+    const t = thresholdFor("main-landing", "mobile-390");
+    await expect(target).toHaveScreenshot("fingerprint-card-mobile-390.png", {
+      maxDiffPixelRatio: t.maxDiffPixelRatio,
+      threshold: t.threshold,
       animations: "disabled",
     });
   });
