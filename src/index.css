@@ -232,8 +232,37 @@ All colors MUST be HSL.
     gap: 12px;
     margin-top: 8px;
   }
-  .about-photo-col {
-    display: none !important;
+  /* Mobile: rotativo visible as 1:1 square below features */
+  .about-photo-col.rotativo-container {
+    display: block !important;
+    flex: none !important;
+    width: 100% !important;
+    max-width: 540px !important;
+    margin: 32px auto 0 !important;
+    order: 0 !important;
+    aspect-ratio: 1 / 1 !important;
+    position: relative;
+  }
+  .about-photo-col.rotativo-container > * {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+/* ── TABLET 768-1023px: rotativo as 1:1 square below features ── */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .about-photo-col.rotativo-container {
+    display: block !important;
+    width: 100% !important;
+    max-width: 540px !important;
+    margin: 32px auto 0 !important;
+    aspect-ratio: 1 / 1 !important;
+    height: auto !important;
+    position: relative;
+  }
+  .about-photo-col.rotativo-container > * {
+    width: 100%;
+    height: 100%;
   }
 }
 
