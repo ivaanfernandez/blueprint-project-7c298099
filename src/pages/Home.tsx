@@ -172,6 +172,10 @@ const Home = ({ showDock }: { showDock: boolean }) => {
             gap: 12px !important;
           }
           .hero-fade-bottom { height: 100px !important; }
+          /* About feature cards container mobile */
+          .about-features-mobile {
+            display: flex !important;
+          }
         }
       `}</style>
 
