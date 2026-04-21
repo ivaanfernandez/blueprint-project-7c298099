@@ -6,6 +6,7 @@ import ProceduralBackgroundWhite from "@/components/ProceduralBackgroundWhite";
 import FooterBackground from "@/components/FooterBackground";
 import HomeLoader from "@/components/HomeLoader";
 import FeatureCard from "@/components/FeatureCard";
+import Silk from "@/components/Silk";
 
 
 import { TextScramble } from "@/components/ui/text-scramble";
@@ -126,6 +127,19 @@ const Home = ({ showDock }: { showDock: boolean }) => {
 
   return (
     <>
+      {/* Silk background global fijo — detrás de todo el Home */}
+      <div
+        aria-hidden="true"
+        style={{
+          position: "fixed",
+          inset: 0,
+          zIndex: -1,
+          pointerEvents: "none",
+        }}
+      >
+        <Silk speed={5} scale={1} color="#4A4A52" noiseIntensity={1.5} rotation={0} />
+      </div>
+
       {showLoader && <HomeLoader onComplete={handleLoaderComplete} />}
     <motion.div
       initial={{ opacity: 0 }}

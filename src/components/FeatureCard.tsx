@@ -123,14 +123,15 @@ const FeatureCard = memo(function FeatureCard({
   const containerStyle = useMemo<CSSProperties>(() => {
     const shared: CSSProperties = {
       position: "relative",
-      background: "rgba(255, 255, 255, 0.65)",
-      backdropFilter: "blur(20px) saturate(180%)",
-      WebkitBackdropFilter: "blur(20px) saturate(180%)",
-      border: `1px solid ${isInView ? "rgba(0, 0, 0, 0.1)" : "rgba(0, 0, 0, 0.06)"}`,
+      background: isInView ? "rgba(255, 255, 255, 0.5)" : "rgba(255, 255, 255, 0.35)",
+      backdropFilter: "blur(24px) saturate(200%)",
+      WebkitBackdropFilter: "blur(24px) saturate(200%)",
+      border: `1px solid ${isInView ? "rgba(255, 255, 255, 0.6)" : "rgba(255, 255, 255, 0.4)"}`,
       borderRadius: 16,
       boxShadow: isInView ? ACTIVE_SHADOW : BASE_SHADOW,
       transform: isInView ? "translateY(-2px)" : "translateY(0)",
-      transition: "box-shadow 0.4s ease, transform 0.4s ease, border-color 0.4s ease",
+      transition:
+        "box-shadow 0.4s ease, transform 0.4s ease, border-color 0.4s ease, background 0.4s ease",
       cursor: "default",
     };
     return variant === "desktop"
