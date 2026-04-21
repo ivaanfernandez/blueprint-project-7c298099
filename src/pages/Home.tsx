@@ -243,7 +243,7 @@ const Home = ({ showDock }: { showDock: boolean }) => {
             textAlign: "center" as const,
             margin: 0,
             position: "relative" as const,
-            zIndex: 2,
+            zIndex: 4,
             whiteSpace: "nowrap" as const,
             
             padding: "0 7%",
@@ -260,7 +260,7 @@ const Home = ({ showDock }: { showDock: boolean }) => {
           bottom: 0,
           height: 140,
           background: "linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0.5) 40%, #000000 100%)",
-          zIndex: 2,
+          zIndex: 3,
           pointerEvents: "none",
         }} />
       </div>
