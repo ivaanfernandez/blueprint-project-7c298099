@@ -6,6 +6,7 @@ import BiometricScanGreen from "@/components/BiometricScanGreen";
 import { TextScramble } from "@/components/ui/text-scramble";
 import BackToHomeButton from "@/components/BackToHomeButton";
 import ProceduralGroundBackground from "@/components/ProceduralGroundBackground";
+import resetHeroBg from "@/assets/reset-hero-bg.jpg";
 
 interface HuellaVerdeProps {
   showDock?: boolean;
@@ -142,8 +143,17 @@ const HuellaVerde = ({ showDock = true }: HuellaVerdeProps) => {
 
         {/* ── HERO ── */}
         <section style={{ minHeight: "100vh", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", position: "relative", overflow: "hidden", background: "transparent" }}>
+          {/* Background image */}
+          <img
+            src={resetHeroBg}
+            alt=""
+            aria-hidden="true"
+            style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", objectPosition: "center", opacity: 0.85, zIndex: 0, pointerEvents: "none" }}
+          />
+          {/* Black radial fade overlay for title legibility */}
+          <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse at center, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.45) 40%, rgba(0,0,0,0.15) 80%, transparent 100%)", zIndex: 1, pointerEvents: "none" }} />
           {/* Ambient glow */}
-          <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse at 50% 30%, rgba(34,197,94,0.06) 0%, transparent 60%)", pointerEvents: "none" }} />
+          <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse at 50% 30%, rgba(34,197,94,0.06) 0%, transparent 60%)", pointerEvents: "none", zIndex: 1 }} />
 
           {/* Title */}
           <div className="hv-hero-text" style={{ textAlign: "center", display: "flex", flexDirection: "column", alignItems: "center", gap: 16, padding: "80px 7%", zIndex: 2 }}>
