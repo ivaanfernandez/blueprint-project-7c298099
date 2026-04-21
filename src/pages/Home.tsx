@@ -597,17 +597,58 @@ const Home = ({ showDock }: { showDock: boolean }) => {
       {/* ── Divider ── */}
       <SectionDivider />
 
-      {/* ── VIDEO SECTION — CINEMATIC FULL-WIDTH ── */}
-      <div className="video-cinematic-section" style={{
-        position: "relative", width: "100%", height: "100vh",
-        overflow: "hidden", background: "#0a0a0a",
-      }}>
-        <video
-          autoPlay muted loop playsInline
-          style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", objectFit: "cover" }}
-        >
-          <source src="/videos/blueprint-gym.mp4" type="video/mp4" />
-        </video>
+      {/* ── DECORATIVE SCAN VIDEO ── */}
+      <div className="scan-video-wrapper" style={{ padding: "48px 6%", position: "relative", zIndex: 1 }}>
+        <div style={{
+          position: "relative",
+          width: "100%",
+          aspectRatio: "4 / 3",
+          overflow: "hidden",
+          borderRadius: 16,
+          border: "1px solid rgba(125, 249, 255, 0.2)",
+          background: "#0a0a0a",
+        }}>
+          {/* Video base */}
+          <video
+            autoPlay
+            muted
+            loop
+            playsInline
+            style={{
+              position: "absolute",
+              inset: 0,
+              width: "100%",
+              height: "100%",
+              objectFit: "cover",
+              display: "block",
+            }}
+          >
+            <source src="/videos/blueprint-gym.mp4" type="video/mp4" />
+          </video>
+
+          {/* Vertical scan line */}
+          <div
+            aria-hidden
+            style={{
+              position: "absolute",
+              left: 0,
+              top: 0,
+              width: "100%",
+              height: 2,
+              background: "linear-gradient(90deg, transparent, rgba(125,249,255,0.9), transparent)",
+              boxShadow: "0 0 12px rgba(125,249,255,0.7)",
+              animation: "scan-vertical 4s linear infinite",
+              pointerEvents: "none",
+              zIndex: 2,
+            }}
+          />
+
+          {/* Corner brackets */}
+          <div aria-hidden style={{ position: "absolute", top: 12, left: 12, width: 24, height: 24, borderTop: "2px solid rgba(125,249,255,0.85)", borderLeft: "2px solid rgba(125,249,255,0.85)", pointerEvents: "none", zIndex: 2 }} />
+          <div aria-hidden style={{ position: "absolute", top: 12, right: 12, width: 24, height: 24, borderTop: "2px solid rgba(125,249,255,0.85)", borderRight: "2px solid rgba(125,249,255,0.85)", pointerEvents: "none", zIndex: 2 }} />
+          <div aria-hidden style={{ position: "absolute", bottom: 12, left: 12, width: 24, height: 24, borderBottom: "2px solid rgba(125,249,255,0.85)", borderLeft: "2px solid rgba(125,249,255,0.85)", pointerEvents: "none", zIndex: 2 }} />
+          <div aria-hidden style={{ position: "absolute", bottom: 12, right: 12, width: 24, height: 24, borderBottom: "2px solid rgba(125,249,255,0.85)", borderRight: "2px solid rgba(125,249,255,0.85)", pointerEvents: "none", zIndex: 2 }} />
+        </div>
       </div>
 
       {/* ── Divider ── */}
