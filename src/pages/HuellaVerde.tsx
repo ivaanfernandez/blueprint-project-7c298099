@@ -150,24 +150,14 @@ const HuellaVerde = ({ showDock = true }: HuellaVerdeProps) => {
           {/* Ambient glow */}
           <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse at 50% 30%, rgba(34,197,94,0.06) 0%, transparent 60%)", pointerEvents: "none" }} />
 
-          {/* Text */}
-          <div className="hv-hero-text" style={{ textAlign: "center", display: "flex", flexDirection: "column", alignItems: "center", gap: 16, padding: "80px 7% 32px", zIndex: 2 }}>
+          {/* Title */}
+          <div className="hv-hero-text" style={{ textAlign: "center", display: "flex", flexDirection: "column", alignItems: "center", gap: 16, padding: "80px 7%", zIndex: 2 }}>
             <TextScramble
               className="hv-hero-title"
-              style={{ fontFamily: "'Michroma', sans-serif", fontSize: "clamp(40px, 6vw, 72px)", color: "#FFFFFF", textTransform: "uppercase", letterSpacing: "0.04em", lineHeight: 1.08 }}
+              style={{ fontFamily: "'Michroma', sans-serif", fontSize: "clamp(56px, 12vw, 120px)", color: "#FFFFFF", textTransform: "uppercase", letterSpacing: "0.02em", lineHeight: 1.08, textShadow: "0 0 40px rgba(34,197,94,0.3)" }}
             >
               RESET
             </TextScramble>
-          </div>
-
-          {/* Photo strip */}
-          <div className="hv-photo-strip" style={{ width: "100%", height: "35vh", minHeight: 250, maxHeight: 400, position: "relative", overflow: "hidden", marginTop: 20 }}>
-            <div style={{ width: "100%", height: "100%", backgroundColor: "rgba(26,26,26,0.5)" }} />
-            {/* Fades */}
-            <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 80, background: "linear-gradient(to bottom, rgba(10,10,10,0.6), transparent)", zIndex: 1 }} />
-            <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, height: 60, background: "linear-gradient(to bottom, transparent, rgba(10,10,10,0.6))", zIndex: 1 }} />
-            <div style={{ position: "absolute", top: 0, left: 0, width: 60, height: "100%", background: "linear-gradient(to right, rgba(10,10,10,0.6), transparent)", zIndex: 1 }} />
-            <div style={{ position: "absolute", top: 0, right: 0, width: 60, height: "100%", background: "linear-gradient(to left, rgba(10,10,10,0.6), transparent)", zIndex: 1 }} />
           </div>
 
           {/* Green accent line */}
