@@ -167,7 +167,7 @@ const HuellaVerde = ({ showDock = true }: HuellaVerdeProps) => {
         {/* ── RECOVERY ROOM ── */}
         <motion.section
           {...scrollReveal}
-          style={{ background: "rgba(0,0,0,0.4)", padding: "72px 7%", position: "relative", zIndex: 1 }}
+          style={{ background: "transparent", padding: "72px 7%", position: "relative", zIndex: 1 }}
         >
           <motion.h2 {...scrollReveal} style={{ fontFamily: "'Michroma', sans-serif", fontSize: "clamp(28px, 5vw, 42px)", fontWeight: 400, color: "#FFFFFF", textTransform: "uppercase", letterSpacing: "0.05em", margin: "0 0 48px 0", textAlign: "center" }}>
             RECOVERY ROOM
@@ -228,7 +228,7 @@ const HuellaVerde = ({ showDock = true }: HuellaVerdeProps) => {
         <motion.section
           {...scrollReveal}
           className="hv-servicios"
-          style={{ background: "rgba(0,0,0,0.4)", padding: "0 7% 72px", position: "relative", zIndex: 1 }}
+          style={{ background: "transparent", padding: "0 7% 72px", position: "relative", zIndex: 1 }}
         >
           <motion.h2 {...scrollReveal} style={{ fontFamily: "'Michroma', sans-serif", fontSize: "clamp(16px, 2vw, 24px)", color: "#FFFFFF", textTransform: "uppercase", letterSpacing: "0.04em", marginBottom: 8 }}>
             PREMIUM SERVICES
@@ -256,7 +256,7 @@ const HuellaVerde = ({ showDock = true }: HuellaVerdeProps) => {
         </motion.section>
 
         {/* ── FOOTER ── */}
-        <motion.footer {...scrollReveal} className="hv-footer" style={{ padding: "40px 7%", borderTop: "1px solid rgba(34,197,94,0.08)", display: "flex", flexDirection: "column", alignItems: "center", gap: 16, background: "rgba(0,0,0,0.4)" }}>
+        <motion.footer {...scrollReveal} className="hv-footer" style={{ padding: "40px 7%", borderTop: "1px solid rgba(34,197,94,0.08)", display: "flex", flexDirection: "column", alignItems: "center", gap: 16, background: "transparent" }}>
           <FingerprintSVG color="#22C55E" size={32} />
           <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 12, color: "rgba(255,255,255,0.25)" }}>Reset — Blueprint Project</p>
           <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 10, color: "rgba(255,255,255,0.15)" }}>© 2025 Blueprint Project</p>
