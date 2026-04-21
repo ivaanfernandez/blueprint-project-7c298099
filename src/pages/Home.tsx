@@ -483,6 +483,40 @@ const Home = ({ showDock }: { showDock: boolean }) => {
                 </div>
               ))}
             </div>
+
+            {/* ── ABOUT MOBILE EDGE-TO-EDGE IMAGE ── */}
+            <div
+              className="block md:hidden"
+              style={{
+                width: "100vw",
+                marginLeft: "calc(-50vw + 50%)",
+                marginTop: 48,
+                marginBottom: 16,
+              }}
+            >
+              <div
+                style={{
+                  width: "100%",
+                  aspectRatio: "4 / 5",
+                  overflow: "hidden",
+                  borderTopLeftRadius: 16,
+                  borderTopRightRadius: 16,
+                  borderBottomLeftRadius: 16,
+                  borderBottomRightRadius: 16,
+                }}
+              >
+                <img
+                  src={aboutImages[0]}
+                  alt="Designed for the human machine"
+                  style={{
+                    width: "100%",
+                    height: "100%",
+                    objectFit: "cover",
+                    display: "block",
+                  }}
+                />
+              </div>
+            </div>
           </div>
 
           {/* Right — Rotating Image Slideshow */}
