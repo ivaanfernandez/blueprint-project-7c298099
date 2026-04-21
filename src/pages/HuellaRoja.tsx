@@ -800,7 +800,7 @@ const HuellaRoja = ({ showDock }: { showDock: boolean }) => {
         padding: "48px 6% 64px",
         position: "relative",
       }}>
-        <ElectricBorder color="#FF3B3B" speed={0.2} chaos={0.3} borderRadius={16} style={{ width: "100%" }}>
+<ElectricBorder color="#FF3B3B" speed={0.5} chaos={0.12} thickness={1} borderRadius={16} style={{ width: "100%" }}>
           <div style={{
             background: "#050505",
             padding: "32px 20px",
