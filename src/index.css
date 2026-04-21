@@ -393,3 +393,33 @@ html[data-no-motion="true"] *::after {
     gap: 20px !important;
   }
 }
+
+/* ── HUELLA ROJA · HACKBAR STATION (desktop only) ── */
+@media (min-width: 1024px) {
+  .hr-station-shell {
+    width: 80% !important;
+    max-width: 1000px !important;
+  }
+  .hr-station-shell .hr-station-row {
+    padding: 28px 40px !important;
+  }
+  .hr-station-shell .hr-station-row > div {
+    justify-content: center !important;
+    text-align: center;
+  }
+  .hr-station-shell .hr-station-row > div > div {
+    flex: 0 1 auto !important;
+    text-align: center;
+  }
+  .hr-station-shell .hr-station-title {
+    font-size: 28px !important;
+    letter-spacing: 0.08em !important;
+    text-align: center;
+  }
+  .hr-station-shell .hr-station-title.is-active {
+    font-size: 30px !important;
+  }
+  .hr-station-shell .hr-station-desc {
+    text-align: center;
+  }
+}
