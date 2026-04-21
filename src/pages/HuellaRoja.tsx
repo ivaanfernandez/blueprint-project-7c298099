@@ -700,7 +700,7 @@ const HuellaRoja = ({ showDock }: { showDock: boolean }) => {
       </motion.section>
 
       {/* ═══ SECTION E: LAB MONITOR FOOTER (DESKTOP) ═══ */}
-      <motion.div {...scrollRevealNoShift} className="hidden md:block" style={{ background: "#050505", padding: "60px 5% 80px", borderTop: "1px solid rgba(255,59,59,0.1)", position: "relative" }}>
+      <motion.div {...scrollRevealNoShift} className="hackbar-scan-wrapper hidden md:block" style={{ background: "#050505", padding: "60px 5% 80px", borderTop: "1px solid rgba(255,59,59,0.1)", position: "relative" }}
 <ElectricBorder color="#FF3B3B" speed={0.5} chaos={0.12} thickness={1} borderRadius={16} style={{ width: "100%" }}>
           <footer className="lab-footer" style={{ background: "#050505", padding: 0, position: "relative", height: 500, borderRadius: 16, overflow: "hidden" }}>
             {/* LAYER 1 — Grid */}
