@@ -532,16 +532,10 @@ const Home = ({ showDock }: { showDock: boolean }) => {
         <h2 style={{
           fontFamily: "'Michroma', sans-serif",
           fontSize: "clamp(20px, 2.5vw, 32px)", color: "#000",
-          textTransform: "uppercase", textAlign: "center", marginBottom: 8,
+          textTransform: "uppercase", textAlign: "center", marginBottom: 40,
         }}>
           CHOOSE YOUR FINGERPRINT
         </h2>
-        <p style={{
-          fontFamily: "'Inter', sans-serif", fontSize: 13, fontWeight: 300,
-          color: "#9CA3AF", textAlign: "center", marginBottom: 40,
-        }}>
-          Three pillars. One integrated system.
-        </p>
 
         <div className="programs-grid" style={{
           display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 16,
