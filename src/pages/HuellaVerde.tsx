@@ -125,9 +125,7 @@ const HuellaVerde = ({ showDock = true }: HuellaVerdeProps) => {
         @media (max-width: 767px) {
           .hv-hero-text { padding: 60px 6% 20px !important; }
           .hv-hero-title { font-size: clamp(32px, 10vw, 48px) !important; }
-          .hv-photo-strip { height: 200px !important; min-height: 180px !important; }
-          .hv-grid-top, .hv-grid-bot { grid-template-columns: 1fr !important; }
-          .hv-grid-top .hv-card, .hv-grid-bot .hv-card { min-height: 240px !important; }
+          .recovery-grid { gap: 12px !important; }
           .hv-servicios { padding: 0 6% 48px !important; }
           .hv-servicio-line { width: 100% !important; }
           .hv-footer { padding: 32px 6% !important; }
