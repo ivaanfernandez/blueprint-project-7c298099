@@ -6,6 +6,7 @@ import BiometricScanGreen from "@/components/BiometricScanGreen";
 import { TextScramble } from "@/components/ui/text-scramble";
 import BackToHomeButton from "@/components/BackToHomeButton";
 import ProceduralGroundBackground from "@/components/ProceduralGroundBackground";
+import resetHeroBg from "@/assets/reset-hero-bg.jpg";
 
 interface HuellaVerdeProps {
   showDock?: boolean;
