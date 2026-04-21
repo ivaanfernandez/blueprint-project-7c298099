@@ -773,7 +773,7 @@ const HuellaRoja = ({ showDock }: { showDock: boolean }) => {
               {/* RIGHT COLUMN — Nutrition lab */}
               <div className="lab-col-right" style={{ flex: "0 0 30%", display: "flex", flexDirection: "column", justifyContent: "space-between", alignItems: "flex-end", textAlign: "right" }}>
                 <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-end", width: "100%" }}>
-                  <p style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 8, letterSpacing: "0.2em", color: "rgba(255,59,59,0.4)", textTransform: "uppercase", margin: 0 }}>NUTRITION LAB</p>
+                  <p className="hackbar-scan-label" style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 8, letterSpacing: "0.2em", color: "rgba(255,59,59,0.4)", textTransform: "uppercase", margin: 0 }}>NUTRITION LAB</p>
                   <div style={{ width: 60, height: 60, border: "1px solid rgba(255,59,59,0.15)", borderTop: "1px solid rgba(255,59,59,0.5)", borderRadius: "50%", animation: "labRotate 8s linear infinite", margin: "16px 0" }} />
                   <div style={{ width: "100%" }}>
                     {[
