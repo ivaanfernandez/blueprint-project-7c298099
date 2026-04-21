@@ -173,8 +173,6 @@ const Home = ({ showDock }: { showDock: boolean }) => {
             transform-origin: top center;
             margin-bottom: -120px;
           }
-.scan-video-wrapper { padding: 48px 6% !important; }
-          .scan-rotativo-wrapper { padding: 32px 6% 48px !important; }
           .footer-section {
             padding: 60px 6% 32px !important;
           }
