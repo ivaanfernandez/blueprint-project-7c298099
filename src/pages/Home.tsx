@@ -492,19 +492,16 @@ const Home = ({ showDock }: { showDock: boolean }) => {
               style={{
                 width: "100vw",
                 marginLeft: "calc(-50vw + 50%)",
-                marginTop: 48,
-                marginBottom: 16,
+                marginTop: 56,
+                marginBottom: 24,
               }}
             >
               <div
                 style={{
                   width: "100%",
-                  aspectRatio: "4 / 5",
+                  aspectRatio: "16 / 9",
                   overflow: "hidden",
-                  borderTopLeftRadius: 16,
-                  borderTopRightRadius: 16,
-                  borderBottomLeftRadius: 16,
-                  borderBottomRightRadius: 16,
+                  borderRadius: 16,
                 }}
               >
                 <img
@@ -514,6 +511,7 @@ const Home = ({ showDock }: { showDock: boolean }) => {
                     width: "100%",
                     height: "100%",
                     objectFit: "cover",
+                    objectPosition: "center center",
                     display: "block",
                   }}
                 />
