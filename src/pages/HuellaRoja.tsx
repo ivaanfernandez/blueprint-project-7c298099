@@ -373,6 +373,10 @@ const HuellaRoja = ({ showDock }: { showDock: boolean }) => {
           0% { transform: rotate(0deg); }
           100% { transform: rotate(360deg); }
         }
+        @keyframes stationBorderSpin {
+          from { transform: rotate(0deg); }
+          to { transform: rotate(360deg); }
+        }
         @keyframes labHeartPulse {
           0%, 100% { opacity: 0.4; transform: scaleY(1); }
           50% { opacity: 0.9; transform: scaleY(1.15); }
