@@ -84,14 +84,11 @@ const Dock = ({ show }: { show: boolean }) => {
 };
 
 /* ── Data (English) ── */
-const RECOVERY_TOP = [
-  { name: "INFRARED SAUNA", desc: "Deep toxin elimination, restorative sleep enhancement and natural collagen stimulation.", img: "/reset/infrared-sauna.jpg" },
-  { name: "ICE BATH THERAPY", desc: "Nervous system control, inflammation reduction and mental clarity optimization.", img: "/reset/ice-bath.jpg" },
-  { name: "COMPRESSION THERAPY", desc: "Advanced lymphatic drainage, improved circulation and accelerated recovery.", img: "/reset/compression.jpg" },
-];
-const RECOVERY_BOT = [
-  { name: "MOBILITY & BREATHING", desc: "Conscious breathing and functional mobility to restore range of motion.", img: "/reset/mobility.jpg" },
-  { name: "MASSAGES & BODYWORK", desc: "Sports, deep relaxation or deep-tissue massage tailored to your needs.", img: "/reset/massages.jpg" },
+const RECOVERY_CARDS = [
+  { name: "INFRARED SAUNA", img: "https://images.unsplash.com/photo-1635321593200-e88cbd876f56?w=800&auto=format&fit=crop" },
+  { name: "ICE BATH THERAPY", img: "https://images.unsplash.com/photo-1682687220795-796d3f6f7000?w=800&auto=format&fit=crop" },
+  { name: "MOBILITY & BREATHING", img: "https://images.unsplash.com/photo-1545205597-3d9d02c29597?w=800&auto=format&fit=crop" },
+  { name: "MASSAGES & BODYWORK", img: "https://images.unsplash.com/photo-1600334129128-685c5582fd35?w=800&auto=format&fit=crop" },
 ];
 const SERVICIOS = [
   { num: "01", name: "PERSONALIZED RECOVERY PROTOCOLS", desc: "Designed by our expert team based on your goals: athletic performance, cellular longevity, deep relaxation or superior mental focus." },
