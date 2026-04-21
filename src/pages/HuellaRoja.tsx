@@ -717,7 +717,7 @@ const HuellaRoja = ({ showDock }: { showDock: boolean }) => {
               {/* LEFT COLUMN — System monitor */}
               <div className="lab-col-left" style={{ flex: "0 0 30%", display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
                 <div>
-                  <p style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 8, letterSpacing: "0.2em", color: "rgba(255,59,59,0.4)", textTransform: "uppercase", margin: 0 }}>SYSTEM MONITOR</p>
+                  <p className="hackbar-scan-label" style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 8, letterSpacing: "0.2em", color: "rgba(255,59,59,0.4)", textTransform: "uppercase", margin: 0 }}>SYSTEM MONITOR</p>
                   <div style={{ marginTop: 16, display: "flex", flexDirection: "column" }}>
                     {[
                       { label: "METABOLIC RATE", value: "1,847 kcal", flicker: true },
