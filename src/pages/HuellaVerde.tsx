@@ -166,55 +166,39 @@ const HuellaVerde = ({ showDock = true }: HuellaVerdeProps) => {
           {...scrollReveal}
           style={{ background: "transparent", padding: "72px 7%", position: "relative", zIndex: 1 }}
         >
-          <motion.h2 {...scrollReveal} style={{ fontFamily: "'Michroma', sans-serif", fontSize: "clamp(28px, 5vw, 42px)", fontWeight: 400, color: "#FFFFFF", textTransform: "uppercase", letterSpacing: "0.05em", margin: "0 0 48px 0", textAlign: "center" }}>
+          <motion.h2 {...scrollReveal} style={{ fontFamily: "'Michroma', sans-serif", fontSize: "clamp(28px, 5vw, 42px)", fontWeight: 400, color: "#FFFFFF", textTransform: "uppercase", letterSpacing: "0.05em", margin: "0 0 12px 0", textAlign: "center" }}>
             RECOVERY ROOM
           </motion.h2>
+          <motion.p {...scrollReveal} style={{ fontFamily: "'Inter', sans-serif", fontSize: 14, color: "rgba(255,255,255,0.45)", textAlign: "center", margin: "0 auto 40px", maxWidth: 600 }}>
+            Your Reset zone. Available exclusively for Blueprint Lab members.
+          </motion.p>
 
-          {/* Top 3 */}
-          <motion.div {...scrollStagger} className="hv-grid-top" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 20, marginBottom: 20 }}>
-            {RECOVERY_TOP.map((card, i) => (
-              <motion.div variants={blurRevealItem} key={card.name} className="hv-card" style={{ borderRadius: 14, minHeight: 320, position: "relative", overflow: "hidden", display: "flex", flexDirection: "column", justifyContent: "flex-end", padding: "24px 20px", cursor: "pointer", background: "rgba(0,0,0,0.7)", backdropFilter: "blur(8px)", WebkitBackdropFilter: "blur(8px)" }}>
-                {/* Image placeholder (real img with onError fallback to gradient) */}
-                <div aria-hidden style={{ position: "absolute", inset: 0, background: "linear-gradient(135deg, rgba(34,197,94,0.15) 0%, rgba(0,0,0,0.8) 100%)", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                  <img
-                    src={card.img}
-                    alt={card.name}
-                    style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
-                    onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = "none"; }}
-                  />
-                </div>
-                <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(0,0,0,0.85) 10%, rgba(0,0,0,0.3) 55%, rgba(0,0,0,0.05) 100%)", zIndex: 1 }} />
+          {/* Grid 2x2 */}
+          <motion.div {...scrollStagger} className="recovery-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16, maxWidth: 1100, margin: "0 auto" }}>
+            {RECOVERY_CARDS.map((card, i) => (
+              <motion.div
+                variants={blurRevealItem}
+                key={card.name}
+                className="recovery-card"
+                style={{ position: "relative", aspectRatio: "1 / 1", borderRadius: 16, overflow: "hidden", cursor: "pointer", transition: "transform 0.4s ease, box-shadow 0.4s ease" }}
+              >
+                <img
+                  src={card.img}
+                  alt={card.name}
+                  loading="lazy"
+                  style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", transition: "transform 0.6s ease" }}
+                />
+                {/* Gradient overlay: transparent top → dark bottom */}
+                <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0.2) 50%, rgba(0,0,0,0.85) 100%)", zIndex: 1 }} />
+                {/* Green accent glow bottom-left */}
+                <div style={{ position: "absolute", bottom: -40, left: -40, width: 160, height: 160, background: "radial-gradient(circle, rgba(34,197,94,0.25) 0%, transparent 70%)", zIndex: 1, pointerEvents: "none" }} />
                 {/* Scan line */}
-                <div style={{ position: "absolute", left: 0, right: 0, height: 1, background: "linear-gradient(to right, transparent, rgba(34,197,94,0.25), transparent)", animation: `hvScanLine 5s ease-in-out ${scanDelays[i]}s infinite`, zIndex: 2, pointerEvents: "none" }} />
-                {/* Accent line */}
-                <div style={{ position: "absolute", bottom: 0, left: "20%", right: "20%", height: 2, background: "linear-gradient(to right, transparent, #22C55E, transparent)", zIndex: 2 }} />
-                {/* Content */}
-                <div style={{ position: "relative", zIndex: 2 }}>
-                  <h3 style={{ fontFamily: "'Michroma', sans-serif", fontSize: 14, color: "#fff", textTransform: "uppercase", letterSpacing: "0.02em", marginBottom: 6 }}>{card.name}</h3>
-                  <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 12, color: "rgba(255,255,255,0.55)", lineHeight: 1.6 }}>{card.desc}</p>
-                </div>
-              </motion.div>
-            ))}
-          </motion.div>
-
-          {/* Bottom 2 */}
-          <motion.div {...scrollStagger} className="hv-grid-bot" style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: 20 }}>
-            {RECOVERY_BOT.map((card, i) => (
-              <motion.div variants={blurRevealItem} key={card.name} className="hv-card" style={{ borderRadius: 14, minHeight: 220, position: "relative", overflow: "hidden", display: "flex", flexDirection: "column", justifyContent: "flex-end", padding: "24px 20px", cursor: "pointer", background: "rgba(0,0,0,0.7)", backdropFilter: "blur(8px)", WebkitBackdropFilter: "blur(8px)" }}>
-                <div aria-hidden style={{ position: "absolute", inset: 0, background: "linear-gradient(135deg, rgba(34,197,94,0.15) 0%, rgba(0,0,0,0.8) 100%)", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                  <img
-                    src={card.img}
-                    alt={card.name}
-                    style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
-                    onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = "none"; }}
-                  />
-                </div>
-                <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(0,0,0,0.85) 10%, rgba(0,0,0,0.3) 55%, rgba(0,0,0,0.05) 100%)", zIndex: 1 }} />
-                <div style={{ position: "absolute", left: 0, right: 0, height: 1, background: "linear-gradient(to right, transparent, rgba(34,197,94,0.25), transparent)", animation: `hvScanLine 5s ease-in-out ${scanDelays[i + 3]}s infinite`, zIndex: 2, pointerEvents: "none" }} />
-                <div style={{ position: "absolute", bottom: 0, left: "20%", right: "20%", height: 2, background: "linear-gradient(to right, transparent, #22C55E, transparent)", zIndex: 2 }} />
-                <div style={{ position: "relative", zIndex: 2 }}>
-                  <h3 style={{ fontFamily: "'Michroma', sans-serif", fontSize: 14, color: "#fff", textTransform: "uppercase", letterSpacing: "0.02em", marginBottom: 6 }}>{card.name}</h3>
-                  <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 12, color: "rgba(255,255,255,0.55)", lineHeight: 1.6 }}>{card.desc}</p>
+                <div style={{ position: "absolute", left: 0, right: 0, height: 1, background: "linear-gradient(to right, transparent, rgba(34,197,94,0.4), transparent)", animation: `hvScanLine 5s ease-in-out ${scanDelays[i]}s infinite`, zIndex: 2, pointerEvents: "none" }} />
+                {/* Title */}
+                <div style={{ position: "absolute", left: 0, right: 0, bottom: 0, padding: "20px 18px", zIndex: 2 }}>
+                  <h3 style={{ fontFamily: "'Michroma', sans-serif", fontSize: "clamp(13px, 2.2vw, 18px)", color: "#fff", textTransform: "uppercase", letterSpacing: "0.04em", lineHeight: 1.2, margin: 0, textShadow: "0 2px 12px rgba(0,0,0,0.8)" }}>
+                    {card.name}
+                  </h3>
                 </div>
               </motion.div>
             ))}
