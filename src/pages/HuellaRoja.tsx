@@ -5,6 +5,7 @@ import BiometricScanRed from "@/components/BiometricScanRed";
 import { TextScramble } from "@/components/ui/text-scramble";
 import { Dock, DockIcon } from "@/components/ui/dock";
 import ElectricBorder from "@/components/ElectricBorder";
+import BackToHomeButton from "@/components/BackToHomeButton";
 
 /* ── Inline SVG ── */
 const FingerprintSVG = ({ color, size = 48 }: { color: string; size?: number }) => (
@@ -893,6 +894,7 @@ const HuellaRoja = ({ showDock }: { showDock: boolean }) => {
 
       {/* Bottom spacer for dock (desktop only) */}
       <div className="hidden md:block" style={{ height: 120 }} />
+      <BackToHomeButton />
     </motion.div>
   );
 };

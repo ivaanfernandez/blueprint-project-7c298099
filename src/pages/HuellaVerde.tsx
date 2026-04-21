@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import BiometricScanGreen from "@/components/BiometricScanGreen";
 import { TextScramble } from "@/components/ui/text-scramble";
+import BackToHomeButton from "@/components/BackToHomeButton";
 
 interface HuellaVerdeProps {
   showDock?: boolean;
@@ -269,6 +270,7 @@ const HuellaVerde = ({ showDock = true }: HuellaVerdeProps) => {
           <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 12, color: "rgba(255,255,255,0.25)" }}>Reset — Blueprint Project</p>
           <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 10, color: "rgba(255,255,255,0.15)" }}>© 2025 Blueprint Project</p>
         </footer>
+        <BackToHomeButton />
       </motion.div>
     </>
   );
