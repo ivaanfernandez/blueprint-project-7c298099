@@ -716,15 +716,36 @@ const Home = ({ showDock }: { showDock: boolean }) => {
 
       </div>{/* END WHITE ZONE WRAPPER */}
 
-      {/* ── FOOTER (DARK) ── */}
-      <div style={{
-        background: "#0a0a0a",
-        padding: "60px 7% 32px",
-        textAlign: "center" as const,
+      {/* ── FOOTER (DARK with hands background) ── */}
+      <div className="footer-bg-wrapper" style={{
         position: "relative" as const,
+        backgroundImage: "url('/footer-bg.jpeg')",
+        backgroundSize: "cover",
+        backgroundPosition: "center center",
+        backgroundRepeat: "no-repeat",
+        overflow: "hidden",
+        minHeight: 560,
+        padding: "96px 7% 48px",
+        display: "flex",
+        flexDirection: "column" as const,
+        justifyContent: "center" as const,
+        alignItems: "center" as const,
+        textAlign: "center" as const,
       }}>
-        <FooterBackground />
-        <div style={{ position: "relative", zIndex: 1 }}>
+        <style>{`
+          @media (max-width: 767px) {
+            .footer-bg-wrapper { min-height: 480px !important; padding: 72px 6% 32px !important; }
+            .footer-bg-overlay { background: rgba(0, 0, 0, 0.65) !important; }
+          }
+        `}</style>
+        <div className="footer-bg-overlay" style={{
+          position: "absolute" as const,
+          inset: 0,
+          background: "rgba(0, 0, 0, 0.55)",
+          pointerEvents: "none" as const,
+          zIndex: 1,
+        }} />
+        <div style={{ position: "relative", zIndex: 2, width: "100%", display: "flex", flexDirection: "column" as const, alignItems: "center" as const, gap: 0 }}>
         {/* Blue accent line */}
         <div style={{
           width: 40,
