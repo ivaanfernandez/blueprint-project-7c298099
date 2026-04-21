@@ -758,7 +758,7 @@ const HuellaRoja = ({ showDock }: { showDock: boolean }) => {
                   </svg>
                   <div style={{ position: "absolute", left: "50%", transform: "translateX(-50%)", width: 160, height: 2, background: "linear-gradient(to right, transparent, #FF3B3B, transparent)", boxShadow: "0 0 15px rgba(255,59,59,0.5)", animation: "labScanLine 3s ease-in-out infinite", zIndex: 3 }} />
                 </div>
-                <p style={{ fontFamily: "'Michroma', sans-serif", fontSize: 20, color: "#FFFFFF", textTransform: "uppercase", letterSpacing: "0.06em", marginTop: 24, marginBottom: 0 }}>HACK BAR</p>
+                <p className="hackbar-scan-title" style={{ fontFamily: "'Michroma', sans-serif", fontSize: 20, color: "#FFFFFF", textTransform: "uppercase", letterSpacing: "0.06em", marginTop: 24, marginBottom: 0 }}>HACK BAR</p>
                 <svg width="200" height="50" viewBox="0 0 100 50" style={{ marginTop: 16, overflow: "visible", animation: "labHeartPulse 1.5s ease-in-out infinite", transformOrigin: "center" }}>
                   <path
                     d="M0 25 L15 25 L20 10 L25 40 L30 20 L35 30 L40 25 L55 25 L60 25 L65 15 L70 35 L75 22 L80 28 L85 25 L100 25"
