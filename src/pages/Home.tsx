@@ -4,7 +4,6 @@ import { motion } from "framer-motion";
 import { scrollReveal, scrollStagger, blurRevealItem } from "@/lib/scrollAnimations";
 import ProceduralBackgroundWhite from "@/components/ProceduralBackgroundWhite";
 import FooterBackground from "@/components/FooterBackground";
-import HomeLoader from "@/components/HomeLoader";
 import FeatureCard from "@/components/FeatureCard";
 
 
