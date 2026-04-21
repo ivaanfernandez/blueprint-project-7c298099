@@ -196,23 +196,64 @@ const Home = ({ showDock }: { showDock: boolean }) => {
         background: "#070612", minHeight: "100vh", position: "relative", overflow: "hidden",
         display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center",
       }}>
-        <video
-          autoPlay
-          muted
-          loop
-          playsInline
-          style={{
-            position: "absolute",
-            top: 0,
-            left: 0,
-            width: "100%",
-            height: "100%",
-            objectFit: "cover",
-            zIndex: 0,
-          }}
-        >
-          <source src="/hero-bg.mp4" type="video/mp4" />
-        </video>
+        {/* Desktop: poster image + video crossfade */}
+        <div className="hidden md:block" style={{ position: "absolute", inset: 0, zIndex: 0 }}>
+          <img
+            src="/poster_image.jpg"
+            alt=""
+            aria-hidden="true"
+            style={{
+              position: "absolute",
+              inset: 0,
+              width: "100%",
+              height: "100%",
+              objectFit: "cover",
+              objectPosition: "center center",
+              zIndex: 1,
+            }}
+          />
+          <video
+            src="/hero-bg.mp4"
+            poster="/poster_image.jpg"
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="auto"
+            onLoadedData={(e) => {
+              (e.currentTarget as HTMLVideoElement).style.opacity = "1";
+            }}
+            style={{
+              position: "absolute",
+              inset: 0,
+              width: "100%",
+              height: "100%",
+              objectFit: "cover",
+              objectPosition: "center center",
+              opacity: 0,
+              transition: "opacity 0.8s ease-in-out",
+              zIndex: 2,
+            }}
+          />
+        </div>
+
+        {/* Mobile: poster image only (no video) */}
+        <div className="block md:hidden" style={{ position: "absolute", inset: 0, zIndex: 0 }}>
+          <img
+            src="/poster_image.jpg"
+            alt=""
+            aria-hidden="true"
+            style={{
+              position: "absolute",
+              inset: 0,
+              width: "100%",
+              height: "100%",
+              objectFit: "cover",
+              objectPosition: "center center",
+              zIndex: 1,
+            }}
+          />
+        </div>
 
         <div style={{
           position: "absolute",
@@ -221,7 +262,7 @@ const Home = ({ showDock }: { showDock: boolean }) => {
           width: "100%",
           height: "100%",
           background: "rgba(0,0,0,0.65)",
-          zIndex: 1,
+          zIndex: 3,
         }} />
 
         <TextScramble
@@ -243,7 +284,7 @@ const Home = ({ showDock }: { showDock: boolean }) => {
             textAlign: "center" as const,
             margin: 0,
             position: "relative" as const,
-            zIndex: 2,
+            zIndex: 4,
             whiteSpace: "nowrap" as const,
             
             padding: "0 7%",
@@ -260,7 +301,7 @@ const Home = ({ showDock }: { showDock: boolean }) => {
           bottom: 0,
           height: 140,
           background: "linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0.5) 40%, #000000 100%)",
-          zIndex: 2,
+          zIndex: 3,
           pointerEvents: "none",
         }} />
       </div>
