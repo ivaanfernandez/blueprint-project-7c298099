@@ -58,39 +58,40 @@ const getGymStatus = () => {
   return { isOpen: false, label: "CLOSED", nextChange: "Opens tomorrow 5:00 AM" };
 };
 
-// Gimmick: número plausible de miembros entrenando según hora del día
-const getMembersTraining = () => {
+// Generar número de cupos/slots disponibles (gimmick de conversión)
+const getSlotsOpen = () => {
   const prTime = getPRTime();
   const hour = prTime.getHours();
 
-  let baseMin = 5;
-  let baseMax = 12;
+  // En horas pico hay MENOS slots (mayor urgencia). En horas bajas hay MÁS.
+  let baseMin = 8;
+  let baseMax = 18;
 
-  if (hour >= 6 && hour < 9) { baseMin = 18; baseMax = 32; }
-  else if (hour >= 9 && hour < 12) { baseMin = 10; baseMax = 20; }
-  else if (hour >= 12 && hour < 16) { baseMin = 8; baseMax = 15; }
-  else if (hour >= 16 && hour < 20) { baseMin = 20; baseMax = 34; }
-  else if (hour >= 20 && hour < 22) { baseMin = 10; baseMax = 18; }
+  if (hour >= 6 && hour < 9) { baseMin = 2; baseMax = 6; }
+  else if (hour >= 9 && hour < 12) { baseMin = 5; baseMax = 12; }
+  else if (hour >= 12 && hour < 16) { baseMin = 8; baseMax = 16; }
+  else if (hour >= 16 && hour < 20) { baseMin = 2; baseMax = 5; }
+  else if (hour >= 20 && hour < 22) { baseMin = 6; baseMax = 12; }
 
   return Math.floor(Math.random() * (baseMax - baseMin + 1)) + baseMin;
 };
 
 const LocationCardInteractive = () => {
   const [gymStatus, setGymStatus] = useState(getGymStatus());
-  const [membersTraining, setMembersTraining] = useState(getMembersTraining());
+  const [slotsOpen, setSlotsOpen] = useState(getSlotsOpen());
 
   useEffect(() => {
     const statusInterval = setInterval(() => {
       setGymStatus(getGymStatus());
     }, 60000);
 
-    const membersInterval = setInterval(() => {
-      setMembersTraining(getMembersTraining());
+    const slotsInterval = setInterval(() => {
+      setSlotsOpen(getSlotsOpen());
     }, 30000);
 
     return () => {
       clearInterval(statusInterval);
-      clearInterval(membersInterval);
+      clearInterval(slotsInterval);
     };
   }, []);
 
@@ -256,17 +257,16 @@ const LocationCardInteractive = () => {
           {gymStatus.nextChange}
         </div>
 
-        {/* Members training now */}
+        {/* Slots open now (gimmick de urgencia / conversión) */}
         <div style={{ display: "flex", alignItems: "center", gap: 10, fontFamily: "'Inter', sans-serif", fontSize: 14, color: "rgba(255, 255, 255, 0.85)" }}>
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1A6BFF" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
-            <circle cx="9" cy="7" r="4" />
-            <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
-            <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+            <path d="M9 11H5a2 2 0 0 0-2 2v7a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7a2 2 0 0 0-2-2h-4" />
+            <polyline points="9 6 12 3 15 6" />
+            <line x1="12" y1="3" x2="12" y2="15" />
           </svg>
           <span>
-            <span style={{ color: "#1A6BFF", fontWeight: 600 }}>{membersTraining}</span>{" "}
-            members training now
+            <span style={{ color: "#1A6BFF", fontWeight: 600 }}>{slotsOpen}</span>{" "}
+            slots open
           </span>
         </div>
 
