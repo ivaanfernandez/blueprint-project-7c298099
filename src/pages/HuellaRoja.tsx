@@ -725,8 +725,8 @@ const HuellaRoja = ({ showDock }: { showDock: boolean }) => {
                       { label: "HYDRATION LVL", value: "94.2%" },
                     ].map((item) => (
                       <div key={item.label} className="lab-data-item" style={{ padding: "12px 0", borderBottom: "1px solid rgba(255,59,59,0.06)" }}>
-                        <p className="lab-data-label" style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 7, letterSpacing: "0.15em", color: "rgba(255,255,255,0.2)", margin: 0, textTransform: "uppercase" }}>{item.label}</p>
-                        <p className="lab-data-value" style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 16, color: "#FF3B3B", margin: "4px 0 0", animation: item.flicker ? "labDataFlicker 3s infinite" : undefined }}>{item.value}</p>
+                        <p className="lab-data-label hackbar-scan-label" style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 7, letterSpacing: "0.15em", color: "rgba(255,255,255,0.2)", margin: 0, textTransform: "uppercase" }}>{item.label}</p>
+                        <p className="lab-data-value hackbar-scan-value" style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 16, color: "#FF3B3B", margin: "4px 0 0", animation: item.flicker ? "labDataFlicker 3s infinite" : undefined }}>{item.value}</p>
                       </div>
                     ))}
                     <div className="lab-data-item" style={{ padding: "12px 0", borderBottom: "1px solid rgba(255,59,59,0.06)" }}>
