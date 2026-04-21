@@ -1,4 +1,6 @@
+import { useState, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
+import BiometricScan from "@/components/BiometricScan";
 import { motion } from "framer-motion";
 import { scrollReveal, scrollRevealNoShift } from "@/lib/scrollAnimations";
 import ProceduralBackground from "@/components/ProceduralBackground";
@@ -126,6 +128,12 @@ const HuellaCard = ({ h }: { h: typeof HUELLAS[0] }) => (
 
 const MainLanding = ({ showDock }: { showDock: boolean }) => {
   const navigate = useNavigate();
+  const [scanDone, setScanDone] = useState(false);
+  const handleScanComplete = useCallback(() => setScanDone(true), []);
+
+  if (!scanDone) {
+    return <BiometricScan onComplete={handleScanComplete} />;
+  }
 
   return (
     <motion.div

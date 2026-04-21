@@ -1,16 +1,13 @@
-import { useState, useCallback, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter } from "react-router-dom";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import BiometricScan from "./components/BiometricScan";
 import ScrollToTop from "@/components/ScrollToTop";
 import AnimatedRoutes from "@/components/AnimatedRoutes";
 
 const queryClient = new QueryClient();
-
-type Phase = "scan" | "landing";
 
 // ── TEST-MODE BYPASS DETECTION (opt-in, runs once at module load).
 //    Real users never set these flags, so production behavior is unchanged.
@@ -52,31 +49,27 @@ if (typeof document !== "undefined" && detectNoMotion()) {
 }
 
 const App = () => {
-  const [phase, setPhase] = useState<Phase>(BYPASS ? "landing" : "scan");
+  // Dock is shown immediately if bypass is on; otherwise after a tick post-mount.
   const [showDock, setShowDock] = useState(BYPASS);
 
-  const handleScanComplete = useCallback(() => setPhase("landing"), []);
-
   useEffect(() => {
-    if (phase === "landing" && !showDock) {
-      const timer = setTimeout(() => setShowDock(true), 100);
-      return () => clearTimeout(timer);
-    }
-  }, [phase, showDock]);
+    if (showDock) return;
+    const timer = setTimeout(() => setShowDock(true), 100);
+    return () => clearTimeout(timer);
+  }, [showDock]);
 
   // ── E2E ESCAPE HATCH: Playwright can dispatch `bp:force-complete-intro`
-  //    or call window.__BP_FORCE_COMPLETE__() to skip the biometric scan
-  //    instantly without depending on its 5-second timer.
+  //    or call window.__BP_FORCE_COMPLETE__() to skip per-page biometric
+  //    scans (handled inside the relevant page components themselves).
   useEffect(() => {
     if (typeof window === "undefined") return;
-    const force = () => {
-      setPhase("landing");
-      setShowDock(true);
-    };
-    (window as unknown as { __BP_FORCE_COMPLETE__?: () => void }).__BP_FORCE_COMPLETE__ = force;
-    window.addEventListener("bp:force-complete-intro", force);
+    
+    const handler = () => setShowDock(true);
+    (window as unknown as { __BP_FORCE_COMPLETE__?: () => void }).__BP_FORCE_COMPLETE__ = handler;
+    window.addEventListener("bp:force-complete-intro", handler);
+    
     return () => {
-      window.removeEventListener("bp:force-complete-intro", force);
+      window.removeEventListener("bp:force-complete-intro", handler);
     };
   }, []);
 
@@ -85,13 +78,10 @@ const App = () => {
       <TooltipProvider>
         <Toaster />
         <Sonner />
-        {phase === "scan" && <BiometricScan onComplete={handleScanComplete} />}
-        {phase === "landing" && (
-          <BrowserRouter>
-            <ScrollToTop />
-            <AnimatedRoutes showDock={showDock} />
-          </BrowserRouter>
-        )}
+        <BrowserRouter>
+          <ScrollToTop />
+          <AnimatedRoutes showDock={showDock} />
+        </BrowserRouter>
       </TooltipProvider>
     </QueryClientProvider>
   );
