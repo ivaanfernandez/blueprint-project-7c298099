@@ -257,3 +257,39 @@ html[data-no-motion="true"] *::after {
   transition: none !important;
   scroll-behavior: auto !important;
 }
+
+/* ── Location Card Interactive: Pin + ondas + status dot ── */
+@keyframes pulse-pin {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.15);
+    opacity: 0.85;
+  }
+}
+
+@keyframes wave-expand {
+  0% {
+    width: 20px;
+    height: 20px;
+    opacity: 0.9;
+  }
+  100% {
+    width: 80px;
+    height: 80px;
+    opacity: 0;
+  }
+}
+
+@keyframes pulse-dot {
+  0%, 100% {
+    opacity: 1;
+    box-shadow: 0 0 8px rgba(34, 197, 94, 0.8);
+  }
+  50% {
+    opacity: 0.6;
+    box-shadow: 0 0 12px rgba(34, 197, 94, 1);
+  }
+}
