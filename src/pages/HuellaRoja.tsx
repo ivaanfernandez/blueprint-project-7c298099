@@ -487,23 +487,15 @@ const HuellaRoja = ({ showDock }: { showDock: boolean }) => {
         </div>
 
         {/* Right column */}
-        <div className="hr-hero-right" style={{ flex: "0 0 45%", position: "relative", height: "100vh", overflow: "hidden", display: "flex", alignItems: "center", justifyContent: "center" }}>
-          <div style={{ position: "absolute", inset: 0, backgroundColor: "#1a1a1a" }} />
+        <div className="hr-hero-right" style={{ flex: "0 0 45%", position: "relative", height: "100vh", overflow: "hidden", display: "flex", alignItems: "center", justifyContent: "center", padding: "40px 7% 40px 0" }}>
           {/* Left fade */}
           <div className="hr-hero-fade" style={{ position: "absolute", top: 0, left: 0, width: 80, height: "100%", background: "linear-gradient(to right, #0a0a0a, transparent)", zIndex: 3, pointerEvents: "none" }} />
-          {/* Placeholder box */}
-          <div className="hr-hero-placeholder" style={{ position: "relative", zIndex: 2, width: "80%", height: "60%", border: "1px solid rgba(255,59,59,0.15)", borderRadius: 12, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 12, background: "rgba(255,59,59,0.02)" }}>
-            {/* Corner brackets */}
-            <div style={{ position: "absolute", top: 8, left: 8, width: 16, height: 16, borderTop: "2px solid rgba(255,59,59,0.3)", borderLeft: "2px solid rgba(255,59,59,0.3)" }} />
-            <div style={{ position: "absolute", top: 8, right: 8, width: 16, height: 16, borderTop: "2px solid rgba(255,59,59,0.3)", borderRight: "2px solid rgba(255,59,59,0.3)" }} />
-            <div style={{ position: "absolute", bottom: 8, left: 8, width: 16, height: 16, borderBottom: "2px solid rgba(255,59,59,0.3)", borderLeft: "2px solid rgba(255,59,59,0.3)" }} />
-            <div style={{ position: "absolute", bottom: 8, right: 8, width: 16, height: 16, borderBottom: "2px solid rgba(255,59,59,0.3)", borderRight: "2px solid rgba(255,59,59,0.3)" }} />
-            {/* Camera icon */}
-            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="rgba(255,59,59,0.3)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z" />
-              <circle cx="12" cy="13" r="4" />
-            </svg>
-            <span style={{ fontFamily: "'Inter', sans-serif", fontSize: 11, color: "rgba(255,59,59,0.25)", letterSpacing: "0.1em", textTransform: "uppercase" }}>Image placeholder</span>
+          <div style={{ position: "relative", zIndex: 2, width: "100%", height: "100%", overflow: "hidden", borderRadius: 12 }}>
+            <img
+              src={heroHackbarDesktop}
+              alt="Hack Bar meal prep"
+              style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
+            />
           </div>
         </div>
       </section>
