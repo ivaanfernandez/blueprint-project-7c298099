@@ -241,7 +241,7 @@ const LocationCardInteractive = () => {
       {/* Info block */}
       <div style={{ padding: "24px", display: "flex", flexDirection: "column", gap: 16 }}>
         <h3 style={{ fontFamily: "'Michroma', sans-serif", fontSize: 22, fontWeight: 500, color: "#FFFFFF", margin: 0, lineHeight: 1.2 }}>
-          Blueprint Project
+          Blueprint Lab
         </h3>
 
         <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 14, fontWeight: 400, color: "rgba(255, 255, 255, 0.75)", margin: 0, lineHeight: 1.5 }}>
