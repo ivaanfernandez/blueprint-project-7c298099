@@ -390,12 +390,16 @@ const Home = ({ showDock }: { showDock: boolean }) => {
               {[
                 {
                   title: "PROFESSIONAL TRAINING",
+                  desc: "Data-driven methodology built to forge strength, endurance, and resilience.",
                   stroke: "#1A6BFF",
+                  spin: "4s",
                   icon: <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />,
                 },
                 {
                   title: "NUTRITION ENGINEERING",
+                  desc: "Every meal is a signal. Optimize input, transform output.",
                   stroke: "#FF3B3B",
+                  spin: "5s",
                   icon: (
                     <>
                       <path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9" />
@@ -405,12 +409,16 @@ const Home = ({ showDock }: { showDock: boolean }) => {
                 },
                 {
                   title: "RECOVERY SCIENCE",
+                  desc: "Strategic rest, optimized sleep, and complete restoration protocols.",
                   stroke: "#22C55E",
+                  spin: "4.5s",
                   icon: <path d="M22 12h-4l-3 9L9 3l-3 9H2" />,
                 },
                 {
                   title: "MENTAL GROWTH",
+                  desc: "Build focus, discipline, and unshakable mental clarity.",
                   stroke: "#9CA3AF",
+                  spin: "5.5s",
                   icon: (
                     <>
                       <circle cx="12" cy="12" r="10" />
@@ -425,22 +433,16 @@ const Home = ({ showDock }: { showDock: boolean }) => {
                   borderRadius: 17,
                   overflow: "hidden",
                   isolation: "isolate",
+                  border: "1px solid rgba(125,249,255,0.35)",
+                  boxShadow: "0 0 0 1px rgba(125,249,255,0.15), 0 0 20px rgba(125,249,255,0.25), 0 0 40px rgba(125,249,255,0.15), inset 0 0 20px rgba(125,249,255,0.05)",
                 }}>
-                  {/* Sharp rotating glow */}
+                  {/* Rotating cyan/white conic ring */}
                   <div style={{
                     position: "absolute",
-                    inset: -20,
-                    background: "conic-gradient(from 0deg, transparent 0deg, rgba(255,255,255,0.95) 60deg, rgba(125,211,252,0.9) 90deg, transparent 150deg, transparent 210deg, rgba(255,255,255,0.95) 270deg, rgba(125,211,252,0.9) 300deg, transparent 360deg)",
-                    animation: "glowSpin 6s linear infinite",
-                    zIndex: 0,
-                  }} />
-                  {/* Soft blurred glow (counter-rotating) */}
-                  <div style={{
-                    position: "absolute",
-                    inset: -20,
-                    background: "conic-gradient(from 180deg, transparent 0deg, rgba(186,230,253,0.7) 80deg, transparent 160deg, transparent 240deg, rgba(186,230,253,0.7) 320deg, transparent 360deg)",
-                    animation: "glowSpin 9s linear infinite reverse",
-                    filter: "blur(10px)",
+                    inset: -2,
+                    background: "conic-gradient(from 0deg, transparent 0%, rgba(125,249,255,0.8) 25%, rgba(255,255,255,1) 50%, rgba(125,249,255,0.8) 75%, transparent 100%)",
+                    borderRadius: 18,
+                    animation: `glowSpin ${c.spin} linear infinite`,
                     zIndex: 0,
                   }} />
                   {/* Card inner */}
@@ -450,12 +452,10 @@ const Home = ({ showDock }: { showDock: boolean }) => {
                     padding: "16px 18px",
                     borderRadius: 16,
                     display: "flex",
-                    alignItems: "center",
+                    alignItems: "flex-start",
                     gap: 14,
-                    background: "rgba(255, 255, 255, 0.82)",
+                    background: "#FFFFFF",
                     boxShadow: "0 2px 16px rgba(0,0,0,0.04), inset 0 1px 0 rgba(255,255,255,0.9)",
-                    backdropFilter: "blur(12px)",
-                    WebkitBackdropFilter: "blur(12px)",
                   }}>
                     <div style={{
                       width: 40,
@@ -473,13 +473,24 @@ const Home = ({ showDock }: { showDock: boolean }) => {
                         {c.icon}
                       </svg>
                     </div>
-                    <span style={{
-                      fontFamily: "'Michroma', sans-serif",
-                      fontSize: 11,
-                      textTransform: "uppercase",
-                      letterSpacing: "0.02em",
-                      color: "#000",
-                    }}>{c.title}</span>
+                    <div style={{ display: "flex", flexDirection: "column", gap: 4, minWidth: 0, flex: 1 }}>
+                      <span style={{
+                        fontFamily: "'Michroma', sans-serif",
+                        fontSize: 11,
+                        textTransform: "uppercase",
+                        letterSpacing: "0.02em",
+                        color: "#000",
+                        lineHeight: 1.3,
+                      }}>{c.title}</span>
+                      <p style={{
+                        fontFamily: "'Inter', sans-serif",
+                        fontSize: 13,
+                        fontWeight: 400,
+                        lineHeight: 1.5,
+                        color: "rgba(0,0,0,0.6)",
+                        margin: "4px 0 0 0",
+                      }}>{c.desc}</p>
+                    </div>
                   </div>
                 </motion.div>
               ))}
