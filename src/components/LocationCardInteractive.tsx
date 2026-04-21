@@ -78,20 +78,20 @@ const getSlotsOpen = () => {
 
 const LocationCardInteractive = () => {
   const [gymStatus, setGymStatus] = useState(getGymStatus());
-  const [membersTraining, setMembersTraining] = useState(getMembersTraining());
+  const [slotsOpen, setSlotsOpen] = useState(getSlotsOpen());
 
   useEffect(() => {
     const statusInterval = setInterval(() => {
       setGymStatus(getGymStatus());
     }, 60000);
 
-    const membersInterval = setInterval(() => {
-      setMembersTraining(getMembersTraining());
+    const slotsInterval = setInterval(() => {
+      setSlotsOpen(getSlotsOpen());
     }, 30000);
 
     return () => {
       clearInterval(statusInterval);
-      clearInterval(membersInterval);
+      clearInterval(slotsInterval);
     };
   }, []);
 
