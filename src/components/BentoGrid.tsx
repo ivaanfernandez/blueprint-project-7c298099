@@ -1,15 +1,5 @@
 import LocationCardInteractive from "./LocationCardInteractive";
 
-
-const CornerBrackets = ({ color }: { color: string }) => (
-  <>
-    <div className="corner-bracket" style={{ position: "absolute", top: 6, left: 6, width: 14, height: 14, borderTop: `1.5px solid ${color}`, borderLeft: `1.5px solid ${color}` }} />
-    <div className="corner-bracket" style={{ position: "absolute", top: 6, right: 6, width: 14, height: 14, borderTop: `1.5px solid ${color}`, borderRight: `1.5px solid ${color}` }} />
-    <div className="corner-bracket" style={{ position: "absolute", bottom: 6, left: 6, width: 14, height: 14, borderBottom: `1.5px solid ${color}`, borderLeft: `1.5px solid ${color}` }} />
-    <div className="corner-bracket" style={{ position: "absolute", bottom: 6, right: 6, width: 14, height: 14, borderBottom: `1.5px solid ${color}`, borderRight: `1.5px solid ${color}` }} />
-  </>
-);
-
 const FingerprintBigSVG = ({ color, size = 160 }: { color: string; size?: number }) => (
   <svg viewBox="0 0 140 140" width={size} height={size} fill="none" xmlns="http://www.w3.org/2000/svg" style={{ display: "block" }}>
     {[18, 26, 34, 42, 50].map((ry, i) => (
@@ -90,190 +80,9 @@ const BiometricScanCard = () => (
   </div>
 );
 
-const MapCell = () => {
-  const [expanded, setExpanded] = useState(false);
-
-  return (
-    <div
-      className="bento-cell group"
-      style={{ background: "rgba(26,107,255,0.04)", border: "0.5px solid rgba(26,107,255,0.25)", padding: 0, position: "relative", cursor: "pointer", minHeight: "100%" }}
-      onMouseEnter={e => { e.currentTarget.style.borderColor = "rgba(26,107,255,0.45)"; e.currentTarget.style.background = "rgba(26,107,255,0.07)"; setExpanded(true); }}
-      onMouseLeave={e => { e.currentTarget.style.borderColor = "rgba(26,107,255,0.25)"; e.currentTarget.style.background = "rgba(26,107,255,0.04)"; setExpanded(false); }}
-      onClick={() => setExpanded(prev => !prev)}
-    >
-      <CornerBrackets color="rgba(26,107,255,0.5)" />
-      {[20, 40, 60, 80].map(p => (
-        <div key={`h-${p}`} style={{ position: "absolute", top: `${p}%`, left: 0, right: 0, height: 1, background: "rgba(255,255,255,0.06)" }} />
-      ))}
-      {[20, 40, 60, 80].map(p => (
-        <div key={`v-${p}`} style={{ position: "absolute", left: `${p}%`, top: 0, bottom: 0, width: 1, background: "rgba(255,255,255,0.06)" }} />
-      ))}
-      {[
-        { w: 45, h: 35, t: "25%", l: "15%" }, { w: 55, h: 40, t: "55%", l: "70%" },
-        { w: 38, h: 50, t: "35%", l: "60%" }, { w: 60, h: 35, t: "65%", l: "20%" },
-        { w: 40, h: 45, t: "15%", l: "75%" }, { w: 50, h: 38, t: "50%", l: "35%" },
-        { w: 35, h: 55, t: "20%", l: "45%" },
-      ].map((b, i) => (
-        <div key={i} style={{ position: "absolute", top: b.t, left: b.l, width: b.w, height: b.h, borderRadius: 6, background: "rgba(255,255,255,0.04)", border: "0.5px solid rgba(255,255,255,0.06)" }} />
-      ))}
-      <div style={{ position: "absolute", top: "40%", left: "50%", transform: "translate(-50%,-100%)" }}>
-        <svg width="20" height="28" viewBox="0 0 20 28" fill="none">
-          <path d="M10 0C4.5 0 0 4.5 0 10c0 7.5 10 18 10 18s10-10.5 10-18C20 4.5 15.5 0 10 0z" fill="#1A6BFF" />
-          <circle cx="10" cy="10" r="5" fill="#0a0a0a" />
-          <circle cx="10" cy="10" r="2.5" fill="#1A6BFF" />
-        </svg>
-      </div>
-      <div className="bento-map-ping" style={{ position: "absolute", top: "40%", left: "50%", transform: "translate(-50%,-50%)", borderRadius: "50%", border: "1.5px solid rgba(26,107,255,0.5)" }} />
-      <div className="bento-map-ping" style={{ position: "absolute", top: "40%", left: "50%", transform: "translate(-50%,-50%)", borderRadius: "50%", border: "1.5px solid rgba(26,107,255,0.5)", animationDelay: "0.7s" }} />
-      <div style={{ position: "absolute", top: 12, right: 12, display: "flex", alignItems: "center", gap: 6, background: "rgba(0,0,0,0.6)", border: "0.5px solid rgba(255,255,255,0.1)", borderRadius: 20, padding: "4px 10px" }}>
-        <div className="bento-live-dot" style={{ width: 6, height: 6, borderRadius: "50%", background: "#22C55E" }} />
-        <span style={{ fontSize: 10, letterSpacing: "0.1em", color: "rgba(255,255,255,0.7)", fontFamily: "Space Grotesk, sans-serif" }}>LIVE</span>
-      </div>
-      <div style={{ position: "absolute", bottom: 16, left: 16, zIndex: 1 }}>
-        <p style={{ fontSize: 14, fontWeight: 700, color: "#fff" }}>Santurce, PR</p>
-        <p style={{ fontSize: 11, color: "rgba(255,255,255,0.35)" }}>1951 Calle Loíza</p>
-      </div>
-      <div
-        style={{
-          position: "absolute",
-          inset: 0,
-          background: "rgba(0,0,0,0.85)",
-          backdropFilter: "blur(8px)",
-          WebkitBackdropFilter: "blur(8px)",
-          borderTop: "0.5px solid rgba(26,107,255,0.2)",
-          borderRadius: 12,
-          transform: expanded ? "translateY(0)" : "translateY(100%)",
-          transition: "transform 300ms ease",
-          padding: "40px 32px",
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
-          alignItems: "flex-start",
-          zIndex: 2,
-        }}
-      >
-        <p style={{ fontSize: 28, fontWeight: 700, color: "#fff", marginBottom: 8 }}>Blueprint Project</p>
-        <p style={{ fontSize: 16, color: "rgba(255,255,255,0.5)", marginBottom: 24 }}>1951 Calle Loíza, Santurce, PR 00911</p>
-        <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 8 }}>
-          <Clock size={20} color="#1A6BFF" />
-          <span style={{ fontSize: 16, color: "rgba(255,255,255,0.6)" }}>Mon–Fri: 5:00 AM – 10:00 PM</span>
-        </div>
-        <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 24 }}>
-          <Phone size={20} color="#1A6BFF" />
-          <span style={{ fontSize: 16, color: "rgba(255,255,255,0.6)" }}>(787) 000-0000</span>
-        </div>
-        <a
-          href="https://maps.google.com/?q=18.4488,-66.0614"
-          target="_blank"
-          rel="noopener noreferrer"
-          onClick={e => e.stopPropagation()}
-          className="bento-maps-link"
-          style={{ fontSize: 14, letterSpacing: "0.1em", textTransform: "uppercase", color: "#1A6BFF", textDecoration: "none", width: "fit-content" }}
-        >
-          Open in Maps →
-        </a>
-      </div>
-      <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, height: 3, background: "linear-gradient(90deg, #1A6BFF, rgba(26,107,255,0.2))", borderRadius: "0 0 12px 12px" }} />
-    </div>
-  );
-};
-
-
-const BlueprintLocationCardMobile = () => (
-  <div
-    style={{
-      position: "relative",
-      width: "100%",
-      background: "#000000",
-      border: "1px solid rgba(26, 107, 255, 0.25)",
-      borderRadius: 16,
-      padding: "28px 24px",
-      overflow: "hidden",
-      display: "flex",
-      flexDirection: "column",
-      gap: 20,
-    }}
-  >
-    {/* Corner brackets */}
-    <div style={{ position: "absolute", top: 10, left: 10, width: 16, height: 16, borderTop: "2px solid rgba(26, 107, 255, 0.6)", borderLeft: "2px solid rgba(26, 107, 255, 0.6)", pointerEvents: "none" }} />
-    <div style={{ position: "absolute", top: 10, right: 10, width: 16, height: 16, borderTop: "2px solid rgba(26, 107, 255, 0.6)", borderRight: "2px solid rgba(26, 107, 255, 0.6)", pointerEvents: "none" }} />
-    <div style={{ position: "absolute", bottom: 10, left: 10, width: 16, height: 16, borderBottom: "2px solid rgba(26, 107, 255, 0.6)", borderLeft: "2px solid rgba(26, 107, 255, 0.6)", pointerEvents: "none" }} />
-    <div style={{ position: "absolute", bottom: 10, right: 10, width: 16, height: 16, borderBottom: "2px solid rgba(26, 107, 255, 0.6)", borderRight: "2px solid rgba(26, 107, 255, 0.6)", pointerEvents: "none" }} />
-
-    {/* LIVE badge */}
-    <div
-      style={{
-        position: "absolute",
-        top: 16,
-        right: 16,
-        display: "flex",
-        alignItems: "center",
-        gap: 6,
-        padding: "4px 10px",
-        background: "rgba(0, 0, 0, 0.6)",
-        border: "1px solid rgba(255, 255, 255, 0.15)",
-        borderRadius: 999,
-        fontFamily: "'Orbitron', sans-serif",
-        fontSize: 10,
-        letterSpacing: "0.15em",
-        color: "rgba(255, 255, 255, 0.85)",
-        textTransform: "uppercase",
-      }}
-    >
-      <span style={{ width: 6, height: 6, borderRadius: "50%", background: "#22C55E", boxShadow: "0 0 8px rgba(34, 197, 94, 0.8)" }} />
-      LIVE
-    </div>
-
-    <h3 style={{ fontFamily: "'Michroma', sans-serif", fontSize: 22, fontWeight: 500, color: "#FFFFFF", margin: 0, marginTop: 8, lineHeight: 1.2 }}>
-      Blueprint Project
-    </h3>
-
-    <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 14, fontWeight: 400, color: "rgba(255, 255, 255, 0.75)", margin: 0, lineHeight: 1.5 }}>
-      1951 Calle Loíza, Santurce, PR 00911
-    </p>
-
-    <div style={{ display: "flex", alignItems: "center", gap: 10, fontFamily: "'Inter', sans-serif", fontSize: 14, color: "rgba(255, 255, 255, 0.85)" }}>
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1A6BFF" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-        <circle cx="12" cy="12" r="10" />
-        <polyline points="12 6 12 12 16 14" />
-      </svg>
-      Mon–Fri: 5:00 AM – 10:00 PM
-    </div>
-
-    <div style={{ display: "flex", alignItems: "center", gap: 10, fontFamily: "'Inter', sans-serif", fontSize: 14, color: "rgba(255, 255, 255, 0.85)" }}>
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1A6BFF" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
-      </svg>
-      (787) 000-0000
-    </div>
-
-    <a
-      href="https://www.google.com/maps/search/?api=1&query=1951+Calle+Loíza,+Santurce,+PR+00911"
-      target="_blank"
-      rel="noopener noreferrer"
-      style={{
-        fontFamily: "'Orbitron', sans-serif",
-        fontSize: 13,
-        fontWeight: 600,
-        letterSpacing: "0.15em",
-        color: "#1A6BFF",
-        textTransform: "uppercase",
-        textDecoration: "none",
-        marginTop: 4,
-        display: "inline-flex",
-        alignItems: "center",
-        gap: 8,
-        cursor: "pointer",
-      }}
-    >
-      OPEN IN MAPS →
-    </a>
-  </div>
-);
-
 const BentoGrid = () => (
   <section className="relative z-10 pb-8 md:pb-12" style={{ background: "transparent", paddingTop: 0, marginTop: 0 }}>
-    {/* DESKTOP: original 2-col bento */}
+    {/* DESKTOP: 2-col bento */}
     <div
       className="bento-grid-2col mx-4 md:mx-auto hidden md:grid"
       style={{
@@ -284,7 +93,7 @@ const BentoGrid = () => (
       }}
     >
       <BiometricScanCard />
-      <MapCell />
+      <LocationCardInteractive />
     </div>
 
     {/* MOBILE: Location card on top, Fingerprint scan below */}
@@ -297,7 +106,7 @@ const BentoGrid = () => (
         margin: "0 16px",
       }}
     >
-      <BlueprintLocationCardMobile />
+      <LocationCardInteractive />
       <BiometricScanCard />
     </div>
     <style>{`
@@ -308,12 +117,6 @@ const BentoGrid = () => (
         overflow: hidden;
         transition: border-color 0.3s, background 0.3s;
         min-height: 320px;
-      }
-      .bento-map-ping {
-        animation: bentoMapPing 2s ease-out infinite;
-      }
-      .bento-live-dot {
-        animation: bentoLivePulse 1.5s ease-in-out infinite;
       }
       .bento-fp-scan {
         animation: bentoFpScan 3s ease-in-out infinite;
@@ -331,17 +134,6 @@ const BentoGrid = () => (
       @keyframes bentoFpBlink {
         0%, 100% { opacity: 1; }
         50% { opacity: 0.3; }
-      }
-      @keyframes bentoMapPing {
-        0% { width: 10px; height: 10px; opacity: 1; }
-        100% { width: 60px; height: 60px; opacity: 0; }
-      }
-      @keyframes bentoLivePulse {
-        0%, 100% { opacity: 1; }
-        50% { opacity: 0.4; }
-      }
-      .bento-maps-link:hover {
-        text-decoration: underline;
       }
       @media (max-width: 767px) {
         .bento-grid-2col {
