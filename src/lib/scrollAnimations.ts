@@ -60,6 +60,20 @@ export const blurRevealNoShift: Variants = REDUCE ? STATIC_VARIANT : {
   },
 };
 
+// ── SMALL-SCREEN DETECTION (read at module load).
+//    On ≤480px screens (390px iPhone target), sections sit closer together so
+//    we tighten the cascade and trigger reveals earlier.
+const isSmallScreen = (): boolean => {
+  if (typeof window === "undefined" || !window.matchMedia) return false;
+  return window.matchMedia("(max-width: 480px)").matches;
+};
+
+const SMALL = isSmallScreen();
+
+// Stagger timings — tighter on mobile so the cascade reads as one motion.
+const STAGGER_CHILDREN = SMALL ? 0.06 : 0.08;
+const DELAY_CHILDREN = SMALL ? 0.03 : 0.05;
+
 // ── STAGGER CONTAINER: applies progressive delay to direct children.
 //    Use as a wrapper for lists/grids. Children should use `blurRevealItem`.
 export const staggerContainer: Variants = REDUCE ? STATIC_CONTAINER : {
@@ -67,8 +81,8 @@ export const staggerContainer: Variants = REDUCE ? STATIC_CONTAINER : {
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.08,
-      delayChildren: 0.05,
+      staggerChildren: STAGGER_CHILDREN,
+      delayChildren: DELAY_CHILDREN,
     },
   },
 };
@@ -91,9 +105,12 @@ export const blurRevealItem: Variants = REDUCE ? STATIC_VARIANT : {
   },
 };
 
-// ── Shared viewport config — fires when 15% of element is visible, with a
-//    10% bottom margin. Scales naturally from 390px mobile to desktop.
-const VIEWPORT_CONFIG = { once: true, amount: 0.15, margin: "0px 0px -10% 0px" } as const;
+// ── Shared viewport config — fires when 15% (desktop) or 10% (≤480px mobile)
+//    of the element is visible. Mobile uses a deeper bottom margin to fire
+//    earlier, since each section nearly fills the viewport on a 390px screen.
+const VIEWPORT_CONFIG = SMALL
+  ? { once: true, amount: 0.1, margin: "0px 0px -15% 0px" }
+  : { once: true, amount: 0.15, margin: "0px 0px -10% 0px" };
 
 // ── DEFAULT PROPS for scroll-triggered reveal motion elements.
 //    Usage: <motion.div {...scrollReveal} />
