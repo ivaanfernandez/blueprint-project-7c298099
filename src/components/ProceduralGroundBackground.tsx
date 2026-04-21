@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
 
 const ProceduralGroundBackground: React.FC = () => {
-  const canvasRef = useRef<HTMLCanvasElement | null>(null);
+  const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -17,7 +17,9 @@ const ProceduralGroundBackground: React.FC = () => {
       }
     `;
 
-    // Green palette (Reset / huella verde)
+    // Green shader with PURE BLACK base (vec3(0.0)) so mix-blend-mode: screen
+    // turns the black into transparency and only the green accents paint over
+    // the page's solid black background.
     const fsSource = `
       precision highp float;
       uniform float u_time;
@@ -44,17 +46,20 @@ const ProceduralGroundBackground: React.FC = () => {
         float n = noise(gridUv * 3.5);
         float ripples = sin(gridUv.y * 18.0 + n * 8.0 + u_time * 0.5);
 
-        float topoLine = smoothstep(0.03, 0.0, abs(ripples));
+        float topoLine = smoothstep(0.04, 0.0, abs(ripples));
 
-        vec3 baseColor   = vec3(0.01, 0.05, 0.03);
-        vec3 accentColor = vec3(0.05, 0.35, 0.15);
-        vec3 neonColor   = vec3(0.13, 0.77, 0.37);
+        vec3 baseColor   = vec3(0.0, 0.0, 0.0);
+        vec3 accentColor = vec3(0.02, 0.15, 0.08);
+        vec3 neonColor   = vec3(0.2, 1.0, 0.45);
 
-        vec3 finalColor = mix(baseColor, accentColor, n * 0.6);
-        finalColor += topoLine * neonColor * depth * 0.5;
+        vec3 finalColor = mix(baseColor, accentColor, n * 0.35);
+        finalColor += topoLine * neonColor * depth * 0.9;
 
-        float fade = smoothstep(0.1, -1.0, uv.y);
-        finalColor *= (1.0 - length(uv) * 0.45) * (1.0 - fade);
+        float vignette = 1.0 - length(uv) * 0.35;
+        finalColor *= vignette;
+
+        float fadeTop = smoothstep(0.4, -0.6, uv.y);
+        finalColor *= (0.3 + fadeTop * 0.7);
 
         gl_FragColor = vec4(finalColor, 1.0);
       }
@@ -115,13 +120,27 @@ const ProceduralGroundBackground: React.FC = () => {
       style={{
         position: "fixed",
         inset: 0,
+        width: "100%",
+        height: "100%",
+        background: "#000000",
         zIndex: -10,
         pointerEvents: "none",
-        opacity: 0.5,
+        overflow: "hidden",
       }}
       aria-hidden="true"
     >
-      <canvas ref={canvasRef} style={{ width: "100%", height: "100%", display: "block" }} />
+      <canvas
+        ref={canvasRef}
+        style={{
+          width: "100%",
+          height: "100%",
+          display: "block",
+          touchAction: "none",
+          mixBlendMode: "screen",
+          opacity: 1,
+          filter: "none",
+        }}
+      />
     </div>
   );
 };
