@@ -8,6 +8,7 @@ import { Dock, DockIcon } from "@/components/ui/dock";
 import ElectricBorder from "@/components/ElectricBorder";
 import BackToHomeButton from "@/components/BackToHomeButton";
 import chefImage from "@/assets/meet-the-chef.jpg";
+import heroHackbarDesktop from "@/assets/hero-hackbar-desktop.jpg";
 
 /* ── Inline SVG ── */
 const FingerprintSVG = ({ color, size = 48 }: { color: string; size?: number }) => (
