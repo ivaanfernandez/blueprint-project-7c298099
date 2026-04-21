@@ -369,12 +369,12 @@ const Home = ({ showDock }: { showDock: boolean }) => {
         zIndex: 2,
       }}>
       <div ref={aboutRef} style={{ position: "relative", zIndex: 1 }}>
-        <div className="about-section-new" style={{
-          padding: "64px 7%", display: "flex", alignItems: window.innerWidth < 768 ? "flex-start" : "stretch", gap: 36,
+        <div className="about-section-new about-grid-desktop" style={{
+          padding: "64px 7%",
           position: "relative", zIndex: 1,
         }}>
           {/* Left — Title + Subtitle + Timeline */}
-          <div style={{ flex: 1, display: "flex", flexDirection: "column" as const, ...(window.innerWidth >= 768 ? {} : { flexGrow: 0 }) }}>
+          <div style={{ display: "flex", flexDirection: "column" as const, minHeight: 0 }}>
             <motion.h2 {...scrollReveal} className="about-title-line" style={{
               fontFamily: "'Michroma', sans-serif",
               fontSize: "clamp(18px, 2.2vw, 28px)", color: "#000",
@@ -385,10 +385,10 @@ const Home = ({ showDock }: { showDock: boolean }) => {
             </motion.h2>
 
             {/* Features (DESKTOP) — Apple-style frosted white cards */}
-            <motion.div {...scrollStagger} className="about-features-desktop" style={{ position: "relative", flexGrow: 1, display: "flex", flexDirection: "column" as const, gap: 16, justifyContent: window.innerWidth < 768 ? "flex-start" : "space-between" }}>
+            <motion.div {...scrollStagger} className="about-features-desktop features-stack" style={{ position: "relative", flexGrow: 1, minHeight: 0 }}>
               {[
                 {
-                  title: "Precision Training",
+                  title: "Professional Training",
                   desc: "Data-driven methodology built to forge strength, endurance, and resilience.",
                   rgba: "26,107,255",
                   icon: (
@@ -424,7 +424,7 @@ const Home = ({ showDock }: { showDock: boolean }) => {
                   rgba: "34,197,94",
                   icon: (
                     <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#22C55E" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                      <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" />
+                      <path d="M22 12h-4l-3 9L9 3l-3 9H2" />
                     </svg>
                   ),
                 },
@@ -527,9 +527,11 @@ const Home = ({ showDock }: { showDock: boolean }) => {
           </div>
 
           {/* Right — Rotating Image Slideshow */}
-          <div className="about-photo-col" style={{
-            flex: "0 0 34%", maxWidth: 320, borderRadius: 16, overflow: "hidden", aspectRatio: "3/4",
+          <div className="about-photo-col rotativo-container" style={{
+            borderRadius: 16, overflow: "hidden",
             position: "relative",
+            aspectRatio: window.innerWidth < 1024 ? "3/4" : "auto",
+            maxWidth: window.innerWidth < 1024 ? 320 : "none",
           }}>
             {aboutImages.map((src, index) => (
               <img
