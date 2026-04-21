@@ -43,6 +43,16 @@ const BiometricScan = ({ onComplete }: BiometricScanProps) => {
           0% { opacity: 1; }
           100% { opacity: 0; }
         }
+        @keyframes bs-shimmer-sweep {
+          0% { transform: translateX(-120%) skewX(-15deg); opacity: 0; }
+          20% { opacity: 1; }
+          80% { opacity: 1; }
+          100% { transform: translateX(120%) skewX(-15deg); opacity: 0; }
+        }
+        @keyframes bs-shimmer-pulse {
+          0%, 100% { opacity: 0.15; transform: scale(0.95); }
+          50% { opacity: 0.45; transform: scale(1.05); }
+        }
         @media (min-width: 768px) {
           .bs-wordmark { font-size: 24px !important; }
           .bs-fingerprint-container { width: 220px !important; height: 220px !important; }
