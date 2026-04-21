@@ -530,8 +530,6 @@ const Home = ({ showDock }: { showDock: boolean }) => {
           <div className="about-photo-col rotativo-container" style={{
             borderRadius: 16, overflow: "hidden",
             position: "relative",
-            aspectRatio: window.innerWidth < 1024 ? "3/4" : "auto",
-            maxWidth: window.innerWidth < 1024 ? 320 : "none",
           }}>
             {aboutImages.map((src, index) => (
               <img
