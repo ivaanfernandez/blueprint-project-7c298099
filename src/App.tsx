@@ -10,6 +10,7 @@ import MainLanding from "./pages/MainLanding";
 import HuellaRoja from "./pages/HuellaRoja";
 import HuellaVerde from "./pages/HuellaVerde";
 import NotFound from "./pages/NotFound.tsx";
+import ScrollToTop from "@/components/ScrollToTop";
 
 const queryClient = new QueryClient();
 
@@ -36,6 +37,7 @@ const App = () => {
         {phase === "scan" && <BiometricScan onComplete={handleScanComplete} />}
         {phase === "landing" && (
           <BrowserRouter>
+            <ScrollToTop />
             <Routes>
               <Route path="/" element={<Home showDock={showDock} />} />
               <Route path="/huella-azul" element={<MainLanding showDock={showDock} />} />
