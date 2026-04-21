@@ -479,12 +479,11 @@ const Home = ({ showDock }: { showDock: boolean }) => {
         }} />
       </div>
 
-      {/* ══════════════════════════════════════════════════════ */}
+{/* ══════════════════════════════════════════════════════ */}
       {/* ── WHITE ZONE WRAPPER (card emergence over hero black) ── */}
       {/* ══════════════════════════════════════════════════════ */}
-      <div style={{
+      <div className="home-white-section" style={{
         position: "relative",
-        background: "#FFFFFF",
         borderTopLeftRadius: window.innerWidth < 768 ? 24 : 32,
         borderTopRightRadius: window.innerWidth < 768 ? 24 : 32,
         marginTop: window.innerWidth < 768 ? -24 : -32,
