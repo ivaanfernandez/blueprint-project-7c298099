@@ -1,53 +1,69 @@
 
 
-## Plan: Extend scroll animations to HuellaVerde + audit & polish across pages
+## Plan: Test-mode bypass + per-route diff thresholds + targeted Verde snapshots
 
-Four targeted sub-tasks. No new dependencies.
+Four sub-tasks, all isolated to test infrastructure and a tiny `App.tsx` guard. No production behavior changes for real users.
 
-### 1. HuellaVerde — apply blurReveal + stagger pattern
-File: `src/pages/HuellaVerde.tsx`.
+### 1. Global test-only bypass switch
 
-- Add imports: `scrollReveal`, `scrollStagger`, `blurRevealItem` from `@/lib/scrollAnimations`.
-- **Hero photo strip** (line 168): leave as-is — it's above the fold and is an empty placeholder strip, no reveal needed.
-- **RECOVERY ROOM section** (lines 182–230): keep the outer `motion.section` wrapper but replace its inline `initial/whileInView` with `{...scrollReveal}` (consistency). Convert the title `<h2>` and intro `<p>` into `motion.h2`/`motion.p` with `{...scrollReveal}`.
-- **Top 3 + Bottom 2 cards grids**: wrap each grid in `motion.div {...scrollStagger}`; convert each card `<div>` to `motion.div variants={blurRevealItem}`. Remove the existing `animation: hvFadeUp ...` inline animation on each card to avoid double-animation (keep the `hvScanLine` keyframe — it's a perpetual scanner, not an entrance animation).
-- **SERVICIOS PREMIUM section** (lines 233–265): swap inline section motion to `{...scrollReveal}`; wrap the list in `motion.div {...scrollStagger}`; replace each item's per-index `delay: i * 0.1` motion props with `variants={blurRevealItem}` so the parent stagger drives the timing.
-- **Footer** (line 268): one `motion.footer {...scrollReveal}`.
+**`src/App.tsx`** — read a one-time bypass signal at mount and skip the biometric scan entirely when present.
 
-No `ParallaxImage` here — recovery cards are empty colored backgrounds, not photos.
+- Detect any of: `?e2e=1` query param, `localStorage.getItem("bp_skip_intro") === "1"`, or `window.__BP_E2E__ === true`.
+- When detected, initial `phase` is `"landing"` and `showDock` is `true` immediately. The `<BiometricScan>` component never mounts.
+- A second flag, `?nomotion=1` / `localStorage.bp_no_motion`, sets a `<html data-no-motion="true">` attribute that a CSS rule in `src/index.css` uses to neuter all CSS animations/transitions. Framer Motion already respects `prefers-reduced-motion` via the JS guard in `scrollAnimations.ts`; we'll extend that guard to also check `document.documentElement.dataset.noMotion === "true"` so JS-driven blur/parallax is skipped under the same flag.
+- Same for `ParallaxImage.tsx` — short-circuit when the `data-no-motion` attribute is present.
 
-### 2. Audit — remove conflicts on existing pages
-- **HuellaRoja.tsx** (lines 510, 539, 664): three `motion.section` blocks still use the legacy inline `initial={{ opacity: 0, y: 20 }} whileInView=...` props. Replace with `{...scrollReveal}` for consistency with the rest of the system. No structural changes — purely prop swap. Confirms parity of margin/easing/duration.
-- **MainLanding.tsx**: `InteractiveImageAccordion` and `BentoGrid` are wrapped in `motion.div {...scrollReveal}`. The blur filter on a wrapper containing radix Accordion (which animates `height` via CSS variables) is fine — `filter` and `height` don't conflict — but to avoid any layout-shift jank during the 0.6s blur, switch the accordion wrapper from `scrollReveal` (which animates `y: 20`) to a no-translate variant. **Add a new variant** in `scrollAnimations.ts` called `scrollRevealNoShift` (same as `scrollReveal` but `y: 0` in hidden state) and use it on the two MainLanding wrappers and on the HuellaRoja `ElectricBorder` wrappers (lines 711, 806) — translating the ElectricBorder canvas during reveal can cause a 1-frame flicker on the SVG filter.
-- **Home.tsx**: spot-check confirms `WordRotate`-equivalent (TextScramble) titles are wrapped only at the heading level, not the inner animated text. No changes.
-- **Hero CTAs above-the-fold** on Home and MainLanding stay un-wrapped (already correct).
+These flags are opt-in — no production user ever sets them, so the live experience is unchanged.
 
-### 3. `prefers-reduced-motion` toggle that fully disables JS-driven motion
-The existing `src/index.css` rule only neuters CSS animations/transitions — it does NOT stop Framer Motion's JS animations. Add a JS-side guard:
+### 2. Deterministic Playwright helper
 
-- In `src/lib/scrollAnimations.ts`:
-  - Add a small helper `prefersReducedMotion()` that reads `window.matchMedia('(prefers-reduced-motion: reduce)').matches` (SSR-safe with `typeof window` check).
-  - When true, export the variants with `hidden` collapsed to the same values as `visible` (opacity 1, no blur, y 0) and `transition.duration: 0`. This guarantees content is rendered in place, fully readable, with zero animation.
-  - Concretely: build the variant objects via a function, e.g. `const reduce = prefersReducedMotion(); export const blurReveal = reduce ? STATIC : ANIMATED;`. Same for `blurRevealItem` and `staggerContainer`.
-- In `src/components/ParallaxImage.tsx`: short-circuit when reduced motion is on — render a plain `<img>` with `scale: 1` and no `useTransform`. Image stays sharp, in place, fully visible.
-- Keep the existing CSS `@media (prefers-reduced-motion: reduce)` block in `index.css` (covers third-party CSS animations like the dock and `hvScanLine`).
+**`tests/visual/helpers.ts`** (new) — shared utilities:
 
-This is a static read at module load; users who toggle the OS preference need a refresh, which is the standard expectation.
+- `prepPage(page)` — sets `localStorage` flags **before** navigation via `page.addInitScript(...)`, runs `page.goto(path)`, waits for fonts + `networkidle`, injects an animation-killing `<style>` tag, scrolls to bottom and back to settle scroll-triggered reveals, returns. Replaces the per-test boilerplate in `layout.spec.ts`.
+- `forceCompleteIntro(page)` — fallback for any future surprise gate: dispatches a `window` event `"bp:force-complete-intro"` and also calls `window.__BP_FORCE_COMPLETE__?.()` if present. `App.tsx` registers a listener that flips `phase` to `"landing"`. This means tests don't depend on `setTimeout(5500)` ever again — the helper resolves as soon as the landing root renders.
+- The 5.5-second `skipBiometricIntro` is removed from the suite.
 
-### 4. Tune timing for 390px (mobile)
-The current viewport margin `0px 0px -100px 0px` means reveals fire only after the element is 100px inside the viewport. On a 390×844 phone where each section nearly fills the screen, this delays reveals noticeably and creates inconsistent feel between Home's About features and the Choose Your Fingerprint cards.
+### 3. Configurable per-route/viewport pixel-diff thresholds
 
-- In `scrollAnimations.ts`, change the viewport prop on both `scrollReveal` and `scrollStagger` to `{ once: true, amount: 0.15, margin: "0px 0px -10% 0px" }`. Using `amount: 0.15` (fires when 15% of the element is visible) plus a percentage-based bottom margin scales naturally across viewport sizes — no separate mobile branch needed.
-- Reduce `staggerChildren` from `0.1` to `0.08` and `delayChildren` from `0.1` to `0.05`. On mobile (390px) the four About features and the three fingerprint cards sit visually closer; the tighter cascade reads as one coherent motion instead of a long drip.
-- Keep `duration: 0.6` and the easing `[0.22, 1, 0.36, 1]` — both feel right per memory.
+**`tests/visual/thresholds.ts`** (new) — single source of truth:
+
+```ts
+export const THRESHOLDS = {
+  default: { maxDiffPixelRatio: 0.01, threshold: 0.2 },
+  routes: {
+    "home":          { "mobile-390": { maxDiffPixelRatio: 0.02 }, "desktop-1280": { maxDiffPixelRatio: 0.015 } },
+    "main-landing":  { "mobile-390": { maxDiffPixelRatio: 0.02 } },
+    "huella-roja":   { "mobile-390": { maxDiffPixelRatio: 0.025 } }, // ElectricBorder canvas noise
+    "huella-verde":  { "mobile-390": { maxDiffPixelRatio: 0.02 } },
+  },
+} as const;
+
+export function thresholdFor(route: string, viewport: string) { /* deep-merge default + override */ }
+```
+
+`layout.spec.ts` reads from this and spreads the result into `toHaveScreenshot(...)`. CI tweaks happen by editing one file; no test code touched. `threshold` (per-pixel color tolerance) absorbs font-rendering differences; `maxDiffPixelRatio` caps the overall diff.
+
+### 4. Targeted Huella Verde mobile snapshots
+
+In `layout.spec.ts`, add a new `describe("Visual @ Huella Verde regions (mobile 390)")` block with three focused snapshots:
+
+- **`hv-grid-top`** — the 3-card recovery grid. Asserts `border-radius: 14px`, `gap: 20px`, `min-height: 320px`, and the section's `padding: 72px 7%`. Snapshot scoped to `.hv-grid-top` after `scrollIntoViewIfNeeded()`.
+- **`hv-grid-bot`** — the 2-card grid. Same checks at `min-height: 220px`.
+- **`fingerprint-card-mobile`** — Blueprint Lab's mobile bento `BiometricScanCard`. Scope to the `.bento-cell` ancestor; verifies `border-radius: 16px`, `padding: 32px 24px`, `max-width` of the bento mobile column.
+
+Each region snapshot uses the `huella-verde` / `main-landing` thresholds from step 3. Region tests use `expect(locator).toHaveScreenshot(...)` to avoid full-page noise.
 
 ### Files modified / created
-- `src/lib/scrollAnimations.ts` — add `scrollRevealNoShift`, add reduced-motion branching, retune viewport + stagger timings.
-- `src/components/ParallaxImage.tsx` — reduced-motion short-circuit.
-- `src/pages/HuellaVerde.tsx` — full integration of motion variants.
-- `src/pages/HuellaRoja.tsx` — swap legacy inline motion props on sections B/C/D for `{...scrollReveal}`; switch ElectricBorder wrappers to `scrollRevealNoShift`.
-- `src/pages/MainLanding.tsx` — switch accordion + bento wrappers to `scrollRevealNoShift`.
+
+- `src/App.tsx` — add bypass-flag detection (production-safe, opt-in).
+- `src/lib/scrollAnimations.ts` — extend reduced-motion guard to also check `data-no-motion`.
+- `src/components/ParallaxImage.tsx` — same guard extension.
+- `src/index.css` — add `html[data-no-motion="true"] *, *::before, *::after { animation: none !important; transition: none !important; }`.
+- `tests/visual/helpers.ts` — new (`prepPage`, `forceCompleteIntro`).
+- `tests/visual/thresholds.ts` — new (per-route/viewport overrides).
+- `tests/visual/layout.spec.ts` — refactor to use helpers + thresholds; add Huella Verde region block; remove 5.5s wait.
 
 ### Untouched
-- Hero videos, `WordRotate`, `TextScramble`, `ElectricBorder` internals, biometric scan components, dock, BackToHomeButton, ScrollToTop, `hvScanLine` perpetual scanner animation, all routing logic.
+
+- `BiometricScan.tsx` internals, `playwright.config.ts`, `playwright-fixture.ts`, all page content, navigation, dock, ScrollToTop, BackToHomeButton, snapshot baselines (will need a one-time `--update-snapshots` after merge).
 
