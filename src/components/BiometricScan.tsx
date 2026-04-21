@@ -152,6 +152,50 @@ const BiometricScan = ({ onComplete }: BiometricScanProps) => {
             ))}
           </svg>
 
+          {/* Soft "scan starting" pulse — bridges phase 2 → phase 3 */}
+          {(phase === 2 || phase === 3) && (
+            <div
+              aria-hidden
+              style={{
+                position: "absolute",
+                inset: "-10%",
+                borderRadius: "50%",
+                background:
+                  "radial-gradient(circle, rgba(26,107,255,0.35) 0%, rgba(26,107,255,0) 65%)",
+                animation: "bs-shimmer-pulse 1.6s ease-in-out infinite",
+                pointerEvents: "none",
+              }}
+            />
+          )}
+
+          {/* Diagonal shimmer sweep — runs once just before the scan line */}
+          {phase === 2 && (
+            <div
+              aria-hidden
+              style={{
+                position: "absolute",
+                inset: 0,
+                overflow: "hidden",
+                borderRadius: "50%",
+                pointerEvents: "none",
+              }}
+            >
+              <div
+                style={{
+                  position: "absolute",
+                  top: 0,
+                  left: 0,
+                  width: "60%",
+                  height: "100%",
+                  background:
+                    "linear-gradient(90deg, transparent 0%, rgba(125,211,252,0.0) 20%, rgba(125,211,252,0.55) 50%, rgba(125,211,252,0.0) 80%, transparent 100%)",
+                  filter: "blur(6px)",
+                  animation: "bs-shimmer-sweep 1.2s ease-out forwards",
+                }}
+              />
+            </div>
+          )}
+
           {/* Scan line */}
           {phase === 3 && (
             <div
