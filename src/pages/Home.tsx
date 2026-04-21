@@ -481,12 +481,13 @@ const Home = ({ showDock }: { showDock: boolean }) => {
                       color: "#000",
                     }}>{c.title}</span>
                   </div>
-                </div>
+                </motion.div>
               ))}
-            </div>
+            </motion.div>
 
             {/* ── ABOUT MOBILE EDGE-TO-EDGE IMAGE ── */}
-            <div
+            <motion.div
+              {...scrollReveal}
               className="block md:hidden"
               style={{
                 width: "100vw",
@@ -517,7 +518,7 @@ const Home = ({ showDock }: { showDock: boolean }) => {
                   }}
                 />
               </div>
-            </div>
+            </motion.div>
           </div>
 
           {/* Right — Rotating Image Slideshow */}
