@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { Clock, Phone } from "lucide-react";
+import LocationCardInteractive from "./LocationCardInteractive";
+
 
 const CornerBrackets = ({ color }: { color: string }) => (
   <>
