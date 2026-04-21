@@ -7,6 +7,7 @@ import { TextScramble } from "@/components/ui/text-scramble";
 import { Dock, DockIcon } from "@/components/ui/dock";
 import ElectricBorder from "@/components/ElectricBorder";
 import BackToHomeButton from "@/components/BackToHomeButton";
+import chefImage from "@/assets/meet-the-chef.jpg";
 
 /* ── Inline SVG ── */
 const FingerprintSVG = ({ color, size = 48 }: { color: string; size?: number }) => (
@@ -683,7 +684,7 @@ const HuellaRoja = ({ showDock }: { showDock: boolean }) => {
           {/* Right: chef photo */}
           <div className="hr-chef-right" style={{ flex: "0 0 45%", minHeight: 450, height: "auto", aspectRatio: "16 / 10", borderRadius: 16, overflow: "hidden", position: "relative" }}>
             <div style={{ width: "100%", height: "100%", borderRadius: 16, border: "1px solid rgba(255,59,59,0.15)", overflow: "hidden", position: "relative" }}>
-              <img src="/hackbar/chef.jpg" alt="Chef" style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", objectPosition: "center top" }} />
+              <img src={chefImage} alt="Chef preparing a dish in a professional kitchen" style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", objectPosition: "center top" }} />
               {/* Subtle gradient for legibility / cohesion */}
               <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.1) 50%, rgba(0,0,0,0.25) 100%)", zIndex: 1, pointerEvents: "none" }} />
               {/* Corner brackets */}
