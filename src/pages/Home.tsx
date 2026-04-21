@@ -264,21 +264,17 @@ const Home = ({ showDock }: { showDock: boolean }) => {
         }} />
       </div>
 
-      {/* ── Dark to white transition strip ── */}
-      <div
-        style={{
-          width: "100%",
-          height: window.innerWidth < 768 ? 80 : 120,
-          background: "linear-gradient(to bottom, #000000, #FFFFFF)",
-          position: "relative",
-          zIndex: 1,
-        }}
-      />
-
       {/* ══════════════════════════════════════════════════════ */}
-      {/* ── WHITE ZONE WRAPPER ── */}
+      {/* ── WHITE ZONE WRAPPER (card emergence over hero black) ── */}
       {/* ══════════════════════════════════════════════════════ */}
-      <div style={{ position: "relative", background: "#FFFFFF" }}>
+      <div style={{
+        position: "relative",
+        background: "#FFFFFF",
+        borderTopLeftRadius: window.innerWidth < 768 ? 24 : 32,
+        borderTopRightRadius: window.innerWidth < 768 ? 24 : 32,
+        marginTop: window.innerWidth < 768 ? -24 : -32,
+        zIndex: 2,
+      }}>
         <ProceduralBackgroundWhite />
 
       {/* ── C: ABOUT (WHITE) ── */}
@@ -292,17 +288,11 @@ const Home = ({ showDock }: { showDock: boolean }) => {
             <h2 className="about-title-line" style={{
               fontFamily: "'Michroma', sans-serif",
               fontSize: "clamp(18px, 2.2vw, 28px)", color: "#000",
-              textTransform: "uppercase", lineHeight: 1.12, marginBottom: 10, marginTop: 0,
+              textTransform: "uppercase", lineHeight: 1.12,
+              marginBottom: window.innerWidth < 768 ? 32 : 48, marginTop: 0,
             }}>
               DESIGNED FOR THE HUMAN MACHINE
             </h2>
-            <p className="about-subtext-line" style={{
-              fontFamily: "'Inter', sans-serif", fontSize: 16, fontWeight: 400,
-              color: "#6B7280", lineHeight: 1.6, marginTop: 16, marginBottom: 32,
-              whiteSpace: "nowrap",
-            }}>
-              Where human performance connects his mind, body and soul.
-            </p>
 
             {/* Features (DESKTOP) — glassmorphism with animated glow border */}
             <div className="about-features-desktop" style={{ position: "relative", flexGrow: 1, display: "flex", flexDirection: "column" as const, gap: 16, justifyContent: window.innerWidth < 768 ? "flex-start" : "space-between" }}>
