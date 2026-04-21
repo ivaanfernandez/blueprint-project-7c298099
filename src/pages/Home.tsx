@@ -78,6 +78,16 @@ const Home = ({ showDock }: { showDock: boolean }) => {
   const [currentAboutImage, setCurrentAboutImage] = useState(0);
   const [currentLabImage, setCurrentLabImage] = useState(0);
   const [currentHackbarImage, setCurrentHackbarImage] = useState(0);
+  // Mount hero <video> only on viewports ≥768px to avoid downloading on mobile
+  const [isDesktop, setIsDesktop] = useState<boolean>(() =>
+    typeof window !== "undefined" ? window.matchMedia("(min-width: 768px)").matches : false
+  );
+  useEffect(() => {
+    const mq = window.matchMedia("(min-width: 768px)");
+    const onChange = (e: MediaQueryListEvent) => setIsDesktop(e.matches);
+    mq.addEventListener("change", onChange);
+    return () => mq.removeEventListener("change", onChange);
+  }, []);
   useEffect(() => {
     const id = setInterval(
       () => setCurrentAboutImage((p) => (p + 1) % aboutImages.length),
@@ -212,29 +222,31 @@ const Home = ({ showDock }: { showDock: boolean }) => {
               zIndex: 1,
             }}
           />
-          <video
-            src="/hero-bg.mp4"
-            poster="/poster_image.jpg"
-            autoPlay
-            muted
-            loop
-            playsInline
-            preload="auto"
-            onLoadedData={(e) => {
-              (e.currentTarget as HTMLVideoElement).style.opacity = "1";
-            }}
-            style={{
-              position: "absolute",
-              inset: 0,
-              width: "100%",
-              height: "100%",
-              objectFit: "cover",
-              objectPosition: "center center",
-              opacity: 0,
-              transition: "opacity 0.8s ease-in-out",
-              zIndex: 2,
-            }}
-          />
+          {isDesktop && (
+            <video
+              src="/hero-bg.mp4"
+              poster="/poster_image.jpg"
+              autoPlay
+              muted
+              loop
+              playsInline
+              preload="auto"
+              onLoadedData={(e) => {
+                (e.currentTarget as HTMLVideoElement).style.opacity = "1";
+              }}
+              style={{
+                position: "absolute",
+                inset: 0,
+                width: "100%",
+                height: "100%",
+                objectFit: "cover",
+                objectPosition: "center center",
+                opacity: 0,
+                transition: "opacity 0.8s ease-in-out",
+                zIndex: 2,
+              }}
+            />
+          )}
         </div>
 
         {/* Mobile: poster image only (no video) */}
