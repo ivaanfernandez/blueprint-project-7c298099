@@ -179,12 +179,104 @@ const MapCell = () => {
 };
 
 
+const BlueprintLocationCardMobile = () => (
+  <div
+    style={{
+      position: "relative",
+      width: "100%",
+      background: "#000000",
+      border: "1px solid rgba(26, 107, 255, 0.25)",
+      borderRadius: 16,
+      padding: "28px 24px",
+      overflow: "hidden",
+      display: "flex",
+      flexDirection: "column",
+      gap: 20,
+    }}
+  >
+    {/* Corner brackets */}
+    <div style={{ position: "absolute", top: 10, left: 10, width: 16, height: 16, borderTop: "2px solid rgba(26, 107, 255, 0.6)", borderLeft: "2px solid rgba(26, 107, 255, 0.6)", pointerEvents: "none" }} />
+    <div style={{ position: "absolute", top: 10, right: 10, width: 16, height: 16, borderTop: "2px solid rgba(26, 107, 255, 0.6)", borderRight: "2px solid rgba(26, 107, 255, 0.6)", pointerEvents: "none" }} />
+    <div style={{ position: "absolute", bottom: 10, left: 10, width: 16, height: 16, borderBottom: "2px solid rgba(26, 107, 255, 0.6)", borderLeft: "2px solid rgba(26, 107, 255, 0.6)", pointerEvents: "none" }} />
+    <div style={{ position: "absolute", bottom: 10, right: 10, width: 16, height: 16, borderBottom: "2px solid rgba(26, 107, 255, 0.6)", borderRight: "2px solid rgba(26, 107, 255, 0.6)", pointerEvents: "none" }} />
+
+    {/* LIVE badge */}
+    <div
+      style={{
+        position: "absolute",
+        top: 16,
+        right: 16,
+        display: "flex",
+        alignItems: "center",
+        gap: 6,
+        padding: "4px 10px",
+        background: "rgba(0, 0, 0, 0.6)",
+        border: "1px solid rgba(255, 255, 255, 0.15)",
+        borderRadius: 999,
+        fontFamily: "'Orbitron', sans-serif",
+        fontSize: 10,
+        letterSpacing: "0.15em",
+        color: "rgba(255, 255, 255, 0.85)",
+        textTransform: "uppercase",
+      }}
+    >
+      <span style={{ width: 6, height: 6, borderRadius: "50%", background: "#22C55E", boxShadow: "0 0 8px rgba(34, 197, 94, 0.8)" }} />
+      LIVE
+    </div>
+
+    <h3 style={{ fontFamily: "'Michroma', sans-serif", fontSize: 22, fontWeight: 500, color: "#FFFFFF", margin: 0, marginTop: 8, lineHeight: 1.2 }}>
+      Blueprint Project
+    </h3>
+
+    <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 14, fontWeight: 400, color: "rgba(255, 255, 255, 0.75)", margin: 0, lineHeight: 1.5 }}>
+      1951 Calle Loíza, Santurce, PR 00911
+    </p>
+
+    <div style={{ display: "flex", alignItems: "center", gap: 10, fontFamily: "'Inter', sans-serif", fontSize: 14, color: "rgba(255, 255, 255, 0.85)" }}>
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1A6BFF" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <circle cx="12" cy="12" r="10" />
+        <polyline points="12 6 12 12 16 14" />
+      </svg>
+      Mon–Fri: 5:00 AM – 10:00 PM
+    </div>
+
+    <div style={{ display: "flex", alignItems: "center", gap: 10, fontFamily: "'Inter', sans-serif", fontSize: 14, color: "rgba(255, 255, 255, 0.85)" }}>
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1A6BFF" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+      </svg>
+      (787) 000-0000
+    </div>
+
+    <a
+      href="https://www.google.com/maps/search/?api=1&query=1951+Calle+Loíza,+Santurce,+PR+00911"
+      target="_blank"
+      rel="noopener noreferrer"
+      style={{
+        fontFamily: "'Orbitron', sans-serif",
+        fontSize: 13,
+        fontWeight: 600,
+        letterSpacing: "0.15em",
+        color: "#1A6BFF",
+        textTransform: "uppercase",
+        textDecoration: "none",
+        marginTop: 4,
+        display: "inline-flex",
+        alignItems: "center",
+        gap: 8,
+        cursor: "pointer",
+      }}
+    >
+      OPEN IN MAPS →
+    </a>
+  </div>
+);
+
 const BentoGrid = () => (
   <section className="relative z-10 pb-8 md:pb-12" style={{ background: "transparent", paddingTop: 0, marginTop: 0 }}>
+    {/* DESKTOP: original 2-col bento */}
     <div
-      className="bento-grid-2col mx-4 md:mx-auto"
+      className="bento-grid-2col mx-4 md:mx-auto hidden md:grid"
       style={{
-        display: "grid",
         gridTemplateColumns: "repeat(2, 1fr)",
         gap: 20,
         alignItems: "stretch",
@@ -193,6 +285,20 @@ const BentoGrid = () => (
     >
       <BiometricScanCard />
       <MapCell />
+    </div>
+
+    {/* MOBILE: Location card on top, Fingerprint scan below */}
+    <div
+      className="block md:hidden"
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        gap: 16,
+        margin: "0 16px",
+      }}
+    >
+      <BlueprintLocationCardMobile />
+      <BiometricScanCard />
     </div>
     <style>{`
       .bento-cell {
