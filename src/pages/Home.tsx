@@ -553,14 +553,6 @@ const Home = ({ showDock }: { showDock: boolean }) => {
         </div>
       </div>
 
-      {/* ── Divider ── */}
-      <SectionDivider />
-
-      {/* ── DECORATIVE ROTATIVE ASSETS (scan video + 3 images) ── */}
-      <RotativoAssets />
-
-      {/* ── Divider ── */}
-      <SectionDivider />
 
       {/* ── PROGRAMS SECTION (WHITE) ── */}
       <div className="programs-section" style={{ padding: "56px 7%", position: "relative", zIndex: 1 }}>
