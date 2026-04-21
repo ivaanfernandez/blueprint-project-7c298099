@@ -876,15 +876,17 @@ const Home = ({ showDock }: { showDock: boolean }) => {
           <span style={{
             fontFamily: "'Michroma', sans-serif",
             fontSize: 8,
-            color: "rgba(255,255,255,0.25)",
+            color: "rgba(255,255,255,0.55)",
             letterSpacing: "0.2em",
+            textShadow: "0 1px 4px rgba(0, 0, 0, 0.7)",
           }}>
             BLUEPRINT PROJECT
           </span>
           <span style={{
             fontFamily: "'Inter', sans-serif",
             fontSize: 8,
-            color: "rgba(255,255,255,0.1)",
+            color: "rgba(255,255,255,0.4)",
+            textShadow: "0 1px 4px rgba(0, 0, 0, 0.7)",
           }}>
             © 2025 Blueprint Project
           </span>
