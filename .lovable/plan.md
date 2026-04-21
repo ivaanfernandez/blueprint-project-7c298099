@@ -1,52 +1,53 @@
 
 
-## Status: Already implemented — minor cleanup only
+## Add Neon Green Glitch Halftone Background to RESET Hero
 
-All four requested changes from your prompt are **already live** in the codebase from the previous turn. Verified line-by-line:
+The uploaded image will become the hero background, with a black radial fade ensuring the centered "RESET" word remains crisp and readable.
 
-| Item | Status |
-|---|---|
-| Title rename "Precision" → "Professional Training" | ✅ Done (Home.tsx line 391, mobile line 463) |
-| Dumbbell icon (blue #1A6BFF) | ✅ Done |
-| Plate icon (red #FF3B3B) | ✅ Done |
-| Pulse wave (green #22C55E) Recovery — unchanged | ✅ Done |
-| Brain icon (gray #9CA3AF) | ✅ Done |
-| Desktop CSS Grid `1fr 1fr` + `align-items: stretch` | ✅ Done (index.css line 240-278) |
-| `features-stack` with `flex: 1` per card | ✅ Done |
-| `rotativo-container` with `height: 100%` + `aspect-ratio: auto !important` | ✅ Done |
-| FeatureCard desktop variant: `height: 100%`, centered content | ✅ Done |
-| Mobile stack vertical preserved | ✅ Done |
-| IntersectionObserver hover preserved | ✅ Done |
+### What changes
 
-## Proposed cleanup (one small change)
+**`src/pages/HuellaVerde.tsx` — HERO section only**
 
-The rotativo container has stale inline styles tied to `window.innerWidth`:
+1. Copy the uploaded image to `src/assets/reset-hero-bg.jpg` and import it.
+2. Inside the `<section>` for the hero (currently line 144), add a background image layer behind the title:
+   - Full-bleed `<img>` absolutely positioned at `inset: 0`, `objectFit: cover`, `objectPosition: center`, `opacity: 0.85`.
+   - Above it, a dark overlay using a radial gradient: transparent at the edges fading to near-black at the center, plus a subtle bottom-to-top linear darken — guarantees the white "RESET" stays legible regardless of where the green halftone falls.
+3. Keep the existing ambient green glow and the green accent bottom line.
+4. Title block stays exactly as-is: centered via the section's flex `alignItems: center` + `justifyContent: center`. "RESET" remains in Michroma, white, with its current green text-shadow — no copy or font changes.
 
-```tsx
-<div className="about-photo-col rotativo-container" style={{
-  borderRadius: 16, overflow: "hidden",
-  position: "relative",
-  aspectRatio: window.innerWidth < 1024 ? "3/4" : "auto",  // ← dead, overridden by CSS !important
-  maxWidth: window.innerWidth < 1024 ? 320 : "none",        // ← dead, overridden by CSS !important
-}}>
+### Layer stack (back → front)
+
+```text
+[ProceduralGroundBackground]   ← page-wide, untouched
+  └─ <section> hero
+       ├─ <img reset-hero-bg>          opacity 0.85, cover
+       ├─ radial black fade overlay    center darkest → edges transparent
+       ├─ existing green ambient glow  (kept)
+       ├─ "RESET" title                centered, z-index 2
+       └─ green accent bottom line     (kept)
 ```
 
-These two inline values are already neutralized by the desktop media query's `!important` rules, and on mobile the column is hidden with `display: none !important`. They serve no purpose and rely on `window.innerWidth` evaluated only at first render (no resize listener), which makes them brittle.
+### Black fade formula
 
-**Single edit:** remove `aspectRatio` and `maxWidth` from the inline style. The remaining inline style becomes:
-
-```tsx
-<div className="about-photo-col rotativo-container" style={{
-  borderRadius: 16, overflow: "hidden",
-  position: "relative",
-}}>
+```text
+background:
+  radial-gradient(ellipse at center,
+    rgba(0,0,0,0.75) 0%,
+    rgba(0,0,0,0.45) 40%,
+    rgba(0,0,0,0.15) 80%,
+    transparent 100%);
 ```
 
-No visual change — the CSS already handled everything. Just removes dead code.
+This darkens the area directly behind the word while letting the green glitch texture breathe at the edges.
 
-## Files touched
+### Scope guardrails
 
-- `src/pages/Home.tsx` — strip two unused inline style properties from the rotativo container
+- Only the hero `<section>` is touched.
+- No changes to Recovery Room grid, Premium Services, dock, footer, or background component.
+- Mobile (390px): image uses `objectFit: cover` so the vertical glitch composition fills naturally; "RESET" title sizing untouched.
 
-Nothing else needs changing. Approve and I'll apply the cleanup; or skip if you'd rather leave it as-is.
+### Files modified
+
+- `src/assets/reset-hero-bg.jpg` (new — copied from upload)
+- `src/pages/HuellaVerde.tsx` (hero `<section>` only)
 
