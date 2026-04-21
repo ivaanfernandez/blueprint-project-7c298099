@@ -177,9 +177,14 @@ const HuellaVerde = ({ showDock = true }: HuellaVerdeProps) => {
           <motion.div {...scrollStagger} className="hv-grid-top" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 20, marginBottom: 20 }}>
             {RECOVERY_TOP.map((card, i) => (
               <motion.div variants={blurRevealItem} key={card.name} className="hv-card" style={{ borderRadius: 14, minHeight: 320, position: "relative", overflow: "hidden", display: "flex", flexDirection: "column", justifyContent: "flex-end", padding: "24px 20px", cursor: "pointer", background: "rgba(0,0,0,0.7)", backdropFilter: "blur(8px)", WebkitBackdropFilter: "blur(8px)" }}>
-                {/* Image placeholder */}
-                <div aria-hidden style={{ position: "absolute", inset: 0, background: "linear-gradient(135deg, rgba(34,197,94,0.08) 0%, rgba(0,0,0,0.6) 100%)", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                  <span style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 9, letterSpacing: "0.3em", color: "rgba(255,255,255,0.18)", textTransform: "uppercase" }}>IMAGE COMING SOON</span>
+                {/* Image placeholder (real img with onError fallback to gradient) */}
+                <div aria-hidden style={{ position: "absolute", inset: 0, background: "linear-gradient(135deg, rgba(34,197,94,0.15) 0%, rgba(0,0,0,0.8) 100%)", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                  <img
+                    src={card.img}
+                    alt={card.name}
+                    style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
+                    onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = "none"; }}
+                  />
                 </div>
                 <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(0,0,0,0.85) 10%, rgba(0,0,0,0.3) 55%, rgba(0,0,0,0.05) 100%)", zIndex: 1 }} />
                 {/* Scan line */}
