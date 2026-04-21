@@ -540,60 +540,7 @@ const Home = ({ showDock }: { showDock: boolean }) => {
               ))}
             </motion.div>
 
-            {/* ── ABOUT MOBILE EDGE-TO-EDGE IMAGE ── */}
-            <motion.div
-              {...scrollReveal}
-              className="block md:hidden"
-              style={{
-                width: "100vw",
-                marginLeft: "calc(-50vw + 50%)",
-                marginTop: 56,
-                marginBottom: 24,
-              }}
-            >
-              <div
-                style={{
-                  position: "relative",
-                  width: "100%",
-                  aspectRatio: "16 / 9",
-                  overflow: "hidden",
-                  borderRadius: 16,
-                }}
-              >
-                <img
-                  src={aboutImages[0]}
-                  alt="Designed for the human machine"
-                  style={{
-                    width: "100%",
-                    height: "100%",
-                    objectFit: "cover",
-                    objectPosition: "center center",
-                    display: "block",
-                  }}
-                />
-                {/* Vertical scan line */}
-                <div
-                  aria-hidden
-                  style={{
-                    position: "absolute",
-                    left: 0,
-                    top: 0,
-                    width: "100%",
-                    height: 2,
-                    background: "linear-gradient(90deg, transparent, rgba(125,249,255,0.9), transparent)",
-                    boxShadow: "0 0 12px rgba(125,249,255,0.7)",
-                    animation: "scan-vertical 4s linear infinite",
-                    pointerEvents: "none",
-                    zIndex: 2,
-                  }}
-                />
-                {/* Corner brackets */}
-                <div aria-hidden style={{ position: "absolute", top: 12, left: 12, width: 24, height: 24, borderTop: "2px solid rgba(125,249,255,0.85)", borderLeft: "2px solid rgba(125,249,255,0.85)", pointerEvents: "none", zIndex: 2 }} />
-                <div aria-hidden style={{ position: "absolute", top: 12, right: 12, width: 24, height: 24, borderTop: "2px solid rgba(125,249,255,0.85)", borderRight: "2px solid rgba(125,249,255,0.85)", pointerEvents: "none", zIndex: 2 }} />
-                <div aria-hidden style={{ position: "absolute", bottom: 12, left: 12, width: 24, height: 24, borderBottom: "2px solid rgba(125,249,255,0.85)", borderLeft: "2px solid rgba(125,249,255,0.85)", pointerEvents: "none", zIndex: 2 }} />
-                <div aria-hidden style={{ position: "absolute", bottom: 12, right: 12, width: 24, height: 24, borderBottom: "2px solid rgba(125,249,255,0.85)", borderRight: "2px solid rgba(125,249,255,0.85)", pointerEvents: "none", zIndex: 2 }} />
-              </div>
-            </motion.div>
+            {/* ── ABOUT MOBILE EDGE-TO-EDGE IMAGE — REMOVED (replaced by RotativoAssets below) ── */}
           </div>
 
           {/* Right — Rotating Image Slideshow */}
@@ -622,59 +569,8 @@ const Home = ({ showDock }: { showDock: boolean }) => {
       {/* ── Divider ── */}
       <SectionDivider />
 
-      {/* ── DECORATIVE SCAN VIDEO ── */}
-      <div className="scan-video-wrapper" style={{ padding: "48px 6%", position: "relative", zIndex: 1 }}>
-        <div style={{
-          position: "relative",
-          width: "100%",
-          aspectRatio: "4 / 3",
-          overflow: "hidden",
-          borderRadius: 16,
-          border: "1px solid rgba(125, 249, 255, 0.2)",
-          background: "#0a0a0a",
-        }}>
-          {/* Video base */}
-          <video
-            autoPlay
-            muted
-            loop
-            playsInline
-            style={{
-              position: "absolute",
-              inset: 0,
-              width: "100%",
-              height: "100%",
-              objectFit: "cover",
-              display: "block",
-            }}
-          >
-            <source src="/videos/blueprint-gym.mp4" type="video/mp4" />
-          </video>
-
-          {/* Vertical scan line */}
-          <div
-            aria-hidden
-            style={{
-              position: "absolute",
-              left: 0,
-              top: 0,
-              width: "100%",
-              height: 2,
-              background: "linear-gradient(90deg, transparent, rgba(125,249,255,0.9), transparent)",
-              boxShadow: "0 0 12px rgba(125,249,255,0.7)",
-              animation: "scan-vertical 4s linear infinite",
-              pointerEvents: "none",
-              zIndex: 2,
-            }}
-          />
-
-          {/* Corner brackets */}
-          <div aria-hidden style={{ position: "absolute", top: 12, left: 12, width: 24, height: 24, borderTop: "2px solid rgba(125,249,255,0.85)", borderLeft: "2px solid rgba(125,249,255,0.85)", pointerEvents: "none", zIndex: 2 }} />
-          <div aria-hidden style={{ position: "absolute", top: 12, right: 12, width: 24, height: 24, borderTop: "2px solid rgba(125,249,255,0.85)", borderRight: "2px solid rgba(125,249,255,0.85)", pointerEvents: "none", zIndex: 2 }} />
-          <div aria-hidden style={{ position: "absolute", bottom: 12, left: 12, width: 24, height: 24, borderBottom: "2px solid rgba(125,249,255,0.85)", borderLeft: "2px solid rgba(125,249,255,0.85)", pointerEvents: "none", zIndex: 2 }} />
-          <div aria-hidden style={{ position: "absolute", bottom: 12, right: 12, width: 24, height: 24, borderBottom: "2px solid rgba(125,249,255,0.85)", borderRight: "2px solid rgba(125,249,255,0.85)", pointerEvents: "none", zIndex: 2 }} />
-        </div>
-      </div>
+      {/* ── DECORATIVE ROTATIVE ASSETS (scan video + 3 images) ── */}
+      <RotativoAssets />
 
       {/* ── Divider ── */}
       <SectionDivider />
