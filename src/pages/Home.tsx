@@ -5,6 +5,7 @@ import { scrollReveal, scrollStagger, blurRevealItem } from "@/lib/scrollAnimati
 import ProceduralBackgroundWhite from "@/components/ProceduralBackgroundWhite";
 import FooterBackground from "@/components/FooterBackground";
 import HomeLoader from "@/components/HomeLoader";
+import FeatureCard from "@/components/FeatureCard";
 
 
 import { TextScramble } from "@/components/ui/text-scramble";
@@ -521,68 +522,72 @@ const Home = ({ showDock }: { showDock: boolean }) => {
             {/* Features (DESKTOP) — Apple-style frosted white cards */}
             <motion.div {...scrollStagger} className="about-features-desktop" style={{ position: "relative", flexGrow: 1, display: "flex", flexDirection: "column" as const, gap: 16, justifyContent: window.innerWidth < 768 ? "flex-start" : "space-between" }}>
               {[
-                { title: "Precision Training", desc: "Data-driven methodology built to forge strength, endurance, and resilience.", rgba: "26,107,255", icon: (
-                  <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#1A6BFF" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M6.5 6.5h-2a1 1 0 0 0-1 1v9a1 1 0 0 0 1 1h2"/><path d="M17.5 6.5h2a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1h-2"/><path d="M6.5 4v16"/><path d="M17.5 4v16"/><path d="M6.5 12h11"/>
-                  </svg>
-                )},
-                { title: "Nutrition Engineering", desc: "Every meal is a signal. Optimize input, transform output.", rgba: "255,59,59", icon: (
-                  <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#FF3B3B" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M11 20A7 7 0 0 1 9.8 6.9C15.5 4.9 17 3.5 19 2c1 2 2 4.5 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/>
-                  </svg>
-                )},
-                { title: "Recovery Science", desc: "Strategic rest, optimized sleep, and complete restoration protocols.", rgba: "34,197,94", icon: (
-                  <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#22C55E" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/>
-                  </svg>
-                )},
-                { title: "Mental Growth", desc: "Build focus, discipline, and unshakable mental clarity.", rgba: "245,158,11", icon: (
-                  <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/>
-                  </svg>
-                )},
+                {
+                  title: "Precision Training",
+                  desc: "Data-driven methodology built to forge strength, endurance, and resilience.",
+                  rgba: "26,107,255",
+                  icon: (
+                    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#1A6BFF" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      {/* Dumbbell */}
+                      <rect x="2" y="8" width="2.5" height="8" rx="0.6" />
+                      <rect x="4.5" y="10" width="1.8" height="4" rx="0.4" />
+                      <line x1="6.3" y1="12" x2="17.7" y2="12" />
+                      <rect x="17.7" y="10" width="1.8" height="4" rx="0.4" />
+                      <rect x="19.5" y="8" width="2.5" height="8" rx="0.6" />
+                    </svg>
+                  ),
+                },
+                {
+                  title: "Nutrition Engineering",
+                  desc: "Every meal is a signal. Optimize input, transform output.",
+                  rgba: "255,59,59",
+                  icon: (
+                    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#FF3B3B" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      {/* Plate with fork & knife */}
+                      <circle cx="12" cy="12" r="9" />
+                      <circle cx="12" cy="12" r="6" />
+                      <line x1="8" y1="3" x2="8" y2="7" />
+                      <line x1="10" y1="3" x2="10" y2="7" />
+                      <line x1="9" y1="7" x2="9" y2="11" />
+                      <line x1="15" y1="3" x2="15" y2="11" />
+                    </svg>
+                  ),
+                },
+                {
+                  title: "Recovery Science",
+                  desc: "Strategic rest, optimized sleep, and complete restoration protocols.",
+                  rgba: "34,197,94",
+                  icon: (
+                    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#22C55E" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" />
+                    </svg>
+                  ),
+                },
+                {
+                  title: "Mental Growth",
+                  desc: "Build focus, discipline, and unshakable mental clarity.",
+                  rgba: "156,163,175",
+                  icon: (
+                    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#9CA3AF" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      {/* Brain */}
+                      <path d="M9.5 4a3 3 0 0 0-3 3v0a2.5 2.5 0 0 0-1.5 4.5A2.5 2.5 0 0 0 6.5 16 3 3 0 0 0 9.5 19a2.5 2.5 0 0 0 2.5-2.5V5.5A1.5 1.5 0 0 0 10.5 4Z" />
+                      <path d="M14.5 4a3 3 0 0 1 3 3v0a2.5 2.5 0 0 1 1.5 4.5A2.5 2.5 0 0 1 17.5 16a3 3 0 0 1-3 3 2.5 2.5 0 0 1-2.5-2.5V5.5A1.5 1.5 0 0 1 13.5 4Z" />
+                      <path d="M9 9h2" />
+                      <path d="M9 13h2" />
+                      <path d="M13 9h2" />
+                      <path d="M13 13h2" />
+                    </svg>
+                  ),
+                },
               ].map((step) => (
-                <motion.div
-                  variants={blurRevealItem}
+                <FeatureCard
                   key={step.title}
-                  style={{
-                    position: "relative",
-                    background: "rgba(255, 255, 255, 0.65)",
-                    backdropFilter: "blur(20px) saturate(180%)",
-                    WebkitBackdropFilter: "blur(20px) saturate(180%)",
-                    border: "1px solid rgba(0, 0, 0, 0.06)",
-                    borderRadius: 16,
-                    padding: "24px",
-                    boxShadow: "0 1px 2px rgba(0, 0, 0, 0.04), 0 4px 12px rgba(0, 0, 0, 0.06), 0 12px 32px rgba(0, 0, 0, 0.05)",
-                    transition: "box-shadow 0.3s ease, transform 0.3s ease, border-color 0.3s ease",
-                    cursor: "pointer",
-                  }}
-                  whileHover={{
-                    boxShadow: "0 2px 4px rgba(0, 0, 0, 0.05), 0 8px 20px rgba(0, 0, 0, 0.08), 0 20px 48px rgba(0, 0, 0, 0.06)",
-                    borderColor: "rgba(0, 0, 0, 0.1)",
-                    y: -2,
-                  }}
-                >
-                  {/* Title row */}
-                  <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 6 }}>
-                    <div style={{
-                      width: 34, height: 34, borderRadius: 9,
-                      background: `rgba(${step.rgba}, 0.06)`,
-                      border: `1px solid rgba(${step.rgba}, 0.1)`,
-                      display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0,
-                    }}>
-                      {step.icon}
-                    </div>
-                    <div style={{
-                      fontFamily: "'Rajdhani', sans-serif", fontSize: 18, fontWeight: 600, color: "#000", letterSpacing: "1.5px", textTransform: "uppercase" as const,
-                    }}>{step.title}</div>
-                  </div>
-                  {/* Description */}
-                  <div style={{
-                    fontFamily: "'Inter', sans-serif", fontSize: 15, fontWeight: 300,
-                    color: "#6B7280", lineHeight: 1.6, paddingLeft: 44,
-                  }}>{step.desc}</div>
-                </motion.div>
+                  variant="desktop"
+                  icon={step.icon}
+                  title={step.title}
+                  description={step.desc}
+                  rgba={step.rgba}
+                />
               ))}
             </motion.div>
 
@@ -592,92 +597,64 @@ const Home = ({ showDock }: { showDock: boolean }) => {
                 {
                   title: "PROFESSIONAL TRAINING",
                   desc: "Data-driven methodology built to forge strength, endurance, and resilience.",
-                  stroke: "#1A6BFF",
-                  icon: <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />,
+                  icon: (
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1A6BFF" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      {/* Dumbbell */}
+                      <rect x="2" y="8" width="2.5" height="8" rx="0.6" />
+                      <rect x="4.5" y="10" width="1.8" height="4" rx="0.4" />
+                      <line x1="6.3" y1="12" x2="17.7" y2="12" />
+                      <rect x="17.7" y="10" width="1.8" height="4" rx="0.4" />
+                      <rect x="19.5" y="8" width="2.5" height="8" rx="0.6" />
+                    </svg>
+                  ),
                 },
                 {
                   title: "NUTRITION ENGINEERING",
                   desc: "Every meal is a signal. Optimize input, transform output.",
-                  stroke: "#FF3B3B",
                   icon: (
-                    <>
-                      <path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9" />
-                      <path d="M13.73 21a2 2 0 01-3.46 0" />
-                    </>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#FF3B3B" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      {/* Plate with fork & knife */}
+                      <circle cx="12" cy="12" r="9" />
+                      <circle cx="12" cy="12" r="6" />
+                      <line x1="8" y1="3" x2="8" y2="7" />
+                      <line x1="10" y1="3" x2="10" y2="7" />
+                      <line x1="9" y1="7" x2="9" y2="11" />
+                      <line x1="15" y1="3" x2="15" y2="11" />
+                    </svg>
                   ),
                 },
                 {
                   title: "RECOVERY SCIENCE",
                   desc: "Strategic rest, optimized sleep, and complete restoration protocols.",
-                  stroke: "#22C55E",
-                  icon: <path d="M22 12h-4l-3 9L9 3l-3 9H2" />,
+                  icon: (
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#22C55E" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M22 12h-4l-3 9L9 3l-3 9H2" />
+                    </svg>
+                  ),
                 },
                 {
                   title: "MENTAL GROWTH",
                   desc: "Build focus, discipline, and unshakable mental clarity.",
-                  stroke: "#9CA3AF",
                   icon: (
-                    <>
-                      <circle cx="12" cy="12" r="10" />
-                      <path d="M12 16v-4M12 8h.01" />
-                    </>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#9CA3AF" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      {/* Brain */}
+                      <path d="M9.5 4a3 3 0 0 0-3 3v0a2.5 2.5 0 0 0-1.5 4.5A2.5 2.5 0 0 0 6.5 16 3 3 0 0 0 9.5 19a2.5 2.5 0 0 0 2.5-2.5V5.5A1.5 1.5 0 0 0 10.5 4Z" />
+                      <path d="M14.5 4a3 3 0 0 1 3 3v0a2.5 2.5 0 0 1 1.5 4.5A2.5 2.5 0 0 1 17.5 16a3 3 0 0 1-3 3 2.5 2.5 0 0 1-2.5-2.5V5.5A1.5 1.5 0 0 1 13.5 4Z" />
+                      <path d="M9 9h2" />
+                      <path d="M9 13h2" />
+                      <path d="M13 9h2" />
+                      <path d="M13 13h2" />
+                    </svg>
                   ),
                 },
               ].map((c) => (
-                <motion.div
-                  variants={blurRevealItem}
+                <FeatureCard
                   key={c.title}
-                  style={{
-                    position: "relative",
-                    background: "rgba(255, 255, 255, 0.65)",
-                    backdropFilter: "blur(20px) saturate(180%)",
-                    WebkitBackdropFilter: "blur(20px) saturate(180%)",
-                    border: "1px solid rgba(0, 0, 0, 0.06)",
-                    borderRadius: 16,
-                    padding: "16px 18px",
-                    display: "flex",
-                    alignItems: "flex-start",
-                    gap: 14,
-                    boxShadow: "0 1px 2px rgba(0, 0, 0, 0.04), 0 4px 12px rgba(0, 0, 0, 0.06), 0 12px 32px rgba(0, 0, 0, 0.05)",
-                    transition: "box-shadow 0.3s ease, transform 0.3s ease, border-color 0.3s ease",
-                    
-                  }}
-                >
-                  <div style={{
-                    width: 40,
-                    height: 40,
-                    borderRadius: 12,
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    flexShrink: 0,
-                    background: "rgba(255, 255, 255, 0.5)",
-                    border: "1px solid rgba(0, 0, 0, 0.06)",
-                    boxShadow: "inset 0 1px 0 rgba(255,255,255,0.8)",
-                  }}>
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke={c.stroke} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                      {c.icon}
-                    </svg>
-                  </div>
-                  <div style={{ display: "flex", flexDirection: "column", gap: 4, minWidth: 0, flex: 1 }}>
-                    <span style={{
-                      fontFamily: "'Michroma', sans-serif",
-                      fontSize: 11,
-                      textTransform: "uppercase",
-                      letterSpacing: "0.02em",
-                      color: "#000",
-                      lineHeight: 1.3,
-                    }}>{c.title}</span>
-                    <p style={{
-                      fontFamily: "'Inter', sans-serif",
-                      fontSize: 13,
-                      fontWeight: 400,
-                      lineHeight: 1.5,
-                      color: "rgba(0,0,0,0.6)",
-                      margin: "4px 0 0 0",
-                    }}>{c.desc}</p>
-                  </div>
-                </motion.div>
+                  variant="mobile"
+                  icon={c.icon}
+                  title={c.title}
+                  description={c.desc}
+                />
               ))}
             </motion.div>
 
