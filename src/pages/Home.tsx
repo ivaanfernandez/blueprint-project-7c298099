@@ -763,6 +763,7 @@ const Home = ({ showDock }: { showDock: boolean }) => {
           letterSpacing: "0.04em",
           marginBottom: 10,
           marginTop: 0,
+          textShadow: "0 2px 16px rgba(0, 0, 0, 0.85)",
         }}>
           Enter the Blueprint
         </h2>
@@ -772,8 +773,9 @@ const Home = ({ showDock }: { showDock: boolean }) => {
           fontFamily: "'Inter', sans-serif",
           fontSize: 13,
           fontWeight: 300,
-          color: "rgba(255,255,255,0.3)",
+          color: "rgba(255,255,255,0.75)",
           marginBottom: 32,
+          textShadow: "0 1px 8px rgba(0, 0, 0, 0.75)",
         }}>
           Your evolution begins with a single step.
         </p>
