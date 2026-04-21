@@ -373,6 +373,10 @@ const HuellaRoja = ({ showDock }: { showDock: boolean }) => {
           0% { transform: rotate(0deg); }
           100% { transform: rotate(360deg); }
         }
+        @keyframes stationBorderSpin {
+          from { transform: rotate(0deg); }
+          to { transform: rotate(360deg); }
+        }
         @keyframes labHeartPulse {
           0%, 100% { opacity: 0.4; transform: scaleY(1); }
           50% { opacity: 0.9; transform: scaleY(1.15); }
@@ -577,7 +581,11 @@ const HuellaRoja = ({ showDock }: { showDock: boolean }) => {
             },
           ];
           return (
-            <div style={{ maxWidth: 760, margin: "0 auto", border: "1px solid rgba(255,255,255,0.06)", borderRadius: 14, overflow: "hidden", backgroundColor: "rgba(255,255,255,0.015)" }}>
+            <div className="hr-station-shell" style={{ position: "relative", maxWidth: 760, margin: "0 auto", padding: 1, borderRadius: 14, overflow: "hidden", boxShadow: "0 0 30px rgba(255, 59, 59, 0.06)" }}>
+              <div style={{ position: "absolute", inset: -40, zIndex: 0, background: "conic-gradient(from 0deg, transparent 0%, #FF3B3B 15%, transparent 35%, transparent 65%, #FF3B3B 85%, transparent 100%)", animation: "stationBorderSpin 6s linear infinite", pointerEvents: "none" }} />
+              <div style={{ position: "absolute", inset: -40, zIndex: 0, background: "conic-gradient(from 180deg, transparent, rgba(255,59,59,0.5), transparent 50%, rgba(255,59,59,0.4), transparent)", filter: "blur(14px)", opacity: 0.7, animation: "stationBorderSpin 9s linear infinite reverse", pointerEvents: "none" }} />
+              <div style={{ position: "absolute", inset: -40, zIndex: 0, background: "conic-gradient(from 90deg, transparent 0%, transparent 80%, #FF6B6B 90%, transparent 100%)", animation: "stationBorderSpin 4s linear infinite", pointerEvents: "none" }} />
+              <div style={{ position: "relative", zIndex: 1, borderRadius: 13, overflow: "hidden", backgroundColor: "#0a0a0a" }}>
               {stationItems.map((item, index) => {
                 const isActive = activeStation === index;
                 return (
@@ -643,6 +651,7 @@ const HuellaRoja = ({ showDock }: { showDock: boolean }) => {
                   </div>
                 );
               })}
+              </div>
             </div>
           );
         })()}
