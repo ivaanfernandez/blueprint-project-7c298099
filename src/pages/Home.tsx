@@ -492,7 +492,7 @@ const Home = ({ showDock }: { showDock: boolean }) => {
       <div ref={aboutRef} style={{ position: "relative", zIndex: 1 }}>
         <div className="about-section-new" style={{
           padding: "64px 7%", display: "flex", alignItems: window.innerWidth < 768 ? "flex-start" : "stretch", gap: 36,
-          position: "relative", zIndex: 1, background: "#FFFFFF",
+          position: "relative", zIndex: 1,
         }}>
           {/* Left — Title + Subtitle + Timeline */}
           <div style={{ flex: 1, display: "flex", flexDirection: "column" as const, ...(window.innerWidth >= 768 ? {} : { flexGrow: 0 }) }}>
