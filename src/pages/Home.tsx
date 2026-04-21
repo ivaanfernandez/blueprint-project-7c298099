@@ -489,9 +489,6 @@ const Home = ({ showDock }: { showDock: boolean }) => {
         marginTop: window.innerWidth < 768 ? -24 : -32,
         zIndex: 2,
       }}>
-        <ProceduralBackgroundWhite />
-
-      {/* ── C: ABOUT (WHITE) ── */}
       <div ref={aboutRef} style={{ position: "relative", zIndex: 1 }}>
         <div className="about-section-new" style={{
           padding: "64px 7%", display: "flex", alignItems: window.innerWidth < 768 ? "flex-start" : "stretch", gap: 36,
