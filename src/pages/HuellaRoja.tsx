@@ -1,4 +1,4 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import BiometricScanRed from "@/components/BiometricScanRed";
@@ -165,6 +165,158 @@ const ChefCard = ({ name, desc, index }: { name: string; desc: string; index: nu
 };
 
 
+/* ── 3D Perspective Carousel ── */
+const CAROUSEL_CARDS = [
+  { title: "MEAL PREPS", desc: "High-performance meals with perfect macro balance.", icon: "M3 3h18v18H3zM3 9h18M9 3v18", image: "/hackbar/meal-preps.png" },
+  { title: "DETOX JUICE", desc: "Cold-pressed functional blends for cleansing and energy.", icon: "M12 2a10 10 0 100 20 10 10 0 000-20zM12 6v6l4 2", image: "/hackbar/detox-juice.jpg" },
+  { title: "SUPPLEMENTS", desc: "Blueprint Approved stack for recovery and focus.", icon: "M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5", image: "/hackbar/supplements-stack.jpg" },
+];
+
+const Carousel3D = () => {
+  const [activeCard, setActiveCard] = useState(1);
+  const [autoRotateCard, setAutoRotateCard] = useState(0);
+  const touchStartX = useRef<number | null>(null);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setActiveCard((prev) => (prev + 1) % CAROUSEL_CARDS.length);
+    }, 4000);
+    return () => clearInterval(interval);
+  }, [activeCard]);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setAutoRotateCard((prev) => (prev + 1) % CAROUSEL_CARDS.length);
+    }, 3500);
+    return () => clearInterval(interval);
+  }, []);
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX;
+  };
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    if (touchStartX.current === null) return;
+    const dx = e.changedTouches[0].clientX - touchStartX.current;
+    const threshold = 40;
+    if (dx <= -threshold && activeCard < CAROUSEL_CARDS.length - 1) {
+      setActiveCard(activeCard + 1);
+    } else if (dx >= threshold && activeCard > 0) {
+      setActiveCard(activeCard - 1);
+    }
+    touchStartX.current = null;
+  };
+
+  return (
+    <>
+      <div
+        onTouchStart={handleTouchStart}
+        onTouchEnd={handleTouchEnd}
+        className="carousel-3d-container hidden md:flex"
+        style={{ alignItems: "center", justifyContent: "center", padding: "60px 7%", perspective: "1000px", position: "relative", minHeight: 400, touchAction: "pan-y" }}
+      >
+        {CAROUSEL_CARDS.map((card, index) => {
+          const isActive = index === activeCard;
+          const isLeft = index < activeCard;
+          return (
+            <div
+              key={card.title}
+              className={`carousel-3d-card${isActive ? " is-active" : ""}${isLeft ? " is-left" : index > activeCard ? " is-right" : ""}`}
+              onClick={() => setActiveCard(index)}
+              style={{
+                width: isActive ? 320 : 260,
+                minHeight: isActive ? 380 : 340,
+                borderRadius: 20,
+                background: "rgba(255,255,255,0.03)",
+                border: `1px solid rgba(255,59,59,${isActive ? 0.3 : 0.1})`,
+                backdropFilter: "blur(12px)",
+                WebkitBackdropFilter: "blur(12px)",
+                padding: "32px 24px",
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                justifyContent: "center",
+                gap: 20,
+                textAlign: "center",
+                cursor: isActive ? "default" : "pointer",
+                transition: "all 0.5s cubic-bezier(0.4,0,0.2,1)",
+                transform: isActive
+                  ? "translateX(0) rotateY(0deg) scale(1)"
+                  : isLeft
+                  ? "translateX(-40px) rotateY(15deg) scale(0.85)"
+                  : "translateX(40px) rotateY(-15deg) scale(0.85)",
+                opacity: isActive ? 1 : 0.4,
+                zIndex: isActive ? 10 : 5,
+                position: "relative",
+                boxShadow: isActive ? "0 0 40px rgba(255,59,59,0.1), inset 0 1px 0 rgba(255,255,255,0.05)" : "none",
+                flexShrink: 0,
+              }}
+            >
+              {isActive && (
+                <div style={{ position: "absolute", inset: -1, borderRadius: 21, background: "linear-gradient(135deg, rgba(255,59,59,0.25), transparent 50%, rgba(255,59,59,0.15))", zIndex: -1, pointerEvents: "none" }} />
+              )}
+              {card.image && (
+                <>
+                  <img src={card.image} alt={card.title} style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", borderRadius: 20, opacity: isActive ? 0.55 : 0.35, transition: "opacity 0.5s ease", zIndex: 0, pointerEvents: "none" }} />
+                  <div style={{ position: "absolute", inset: 0, borderRadius: 20, background: "linear-gradient(to top, rgba(0,0,0,0.85) 10%, rgba(0,0,0,0.45) 60%, rgba(0,0,0,0.25) 100%)", zIndex: 1, pointerEvents: "none" }} />
+                </>
+              )}
+              <div style={{ position: "relative", zIndex: 2, display: "flex", flexDirection: "column", alignItems: "center", gap: 20 }}>
+                <div style={{ width: 60, height: 60, borderRadius: 16, background: isActive ? "rgba(255,59,59,0.08)" : "rgba(255,255,255,0.03)", border: `1px solid ${isActive ? "rgba(255,59,59,0.2)" : "rgba(255,255,255,0.05)"}`, display: "flex", alignItems: "center", justifyContent: "center", transition: "all 0.5s ease" }}>
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke={isActive ? "#FF3B3B" : "rgba(255,255,255,0.2)"} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" style={{ transition: "stroke 0.5s ease" }}>
+                    {card.icon.split(/(?=M)/).map((d, i) => (<path key={i} d={d} />))}
+                  </svg>
+                </div>
+                <h3 className="carousel-3d-title" style={{ fontFamily: "'Michroma', sans-serif", fontSize: isActive ? 18 : 14, color: "#FFFFFF", textTransform: "uppercase", letterSpacing: "0.03em", transition: "font-size 0.5s ease", margin: 0 }}>{card.title}</h3>
+                <p className="carousel-3d-desc" style={{ fontFamily: "'Inter', sans-serif", fontSize: 13, color: "rgba(255,255,255,0.45)", lineHeight: 1.6, maxWidth: 260, opacity: isActive ? 1 : 0, maxHeight: isActive ? 80 : 0, overflow: "hidden", transition: "opacity 0.5s ease, max-height 0.5s ease", margin: 0 }}>{card.desc}</p>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+      <div className="hidden md:flex" style={{ justifyContent: "center", gap: 8, paddingBottom: 40 }}>
+        {CAROUSEL_CARDS.map((_, index) => (
+          <div key={index} onClick={() => setActiveCard(index)} style={{ width: index === activeCard ? 24 : 8, height: 8, borderRadius: 4, background: index === activeCard ? "#FF3B3B" : "rgba(255,255,255,0.15)", cursor: "pointer", transition: "all 0.3s ease" }} />
+        ))}
+      </div>
+
+      {/* Mobile auto-rotating single card */}
+      <div className="flex md:hidden" style={{ padding: "32px 24px 16px", flexDirection: "column", alignItems: "center", gap: 20 }}>
+        <div style={{ position: "relative", width: "100%", maxWidth: 340, minHeight: 360, borderRadius: 20, overflow: "hidden", border: "1px solid rgba(255,59,59,0.25)", background: "rgba(255,255,255,0.03)", backdropFilter: "blur(12px)", WebkitBackdropFilter: "blur(12px)", boxShadow: "0 0 40px rgba(255,59,59,0.1), inset 0 1px 0 rgba(255,255,255,0.05)" }}>
+          <div style={{ position: "absolute", inset: -1, borderRadius: 21, background: "linear-gradient(135deg, rgba(255,59,59,0.25), transparent 50%, rgba(255,59,59,0.15))", zIndex: 0, pointerEvents: "none" }} />
+          {CAROUSEL_CARDS.map((card, index) => {
+            const isVisible = index === autoRotateCard;
+            return (
+              <div key={card.title} style={{ position: "absolute", inset: 0, opacity: isVisible ? 1 : 0, transition: "opacity 0.8s ease", pointerEvents: isVisible ? "auto" : "none", zIndex: 1 }}>
+                {card.image && (
+                  <>
+                    <img src={card.image} alt={card.title} style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", borderRadius: 20, opacity: 0.55, zIndex: 0, pointerEvents: "none" }} />
+                    <div style={{ position: "absolute", inset: 0, borderRadius: 20, background: "linear-gradient(to top, rgba(0,0,0,0.85) 10%, rgba(0,0,0,0.45) 60%, rgba(0,0,0,0.25) 100%)", zIndex: 1, pointerEvents: "none" }} />
+                  </>
+                )}
+                <div style={{ position: "relative", zIndex: 2, height: "100%", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 16, padding: "32px 24px", textAlign: "center" }}>
+                  <div style={{ width: 60, height: 60, borderRadius: 16, background: "rgba(255,59,59,0.08)", border: "1px solid rgba(255,59,59,0.2)", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#FF3B3B" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                      {card.icon.split(/(?=M)/).map((d, i) => (<path key={i} d={d} />))}
+                    </svg>
+                  </div>
+                  <h3 style={{ fontFamily: "'Michroma', sans-serif", fontSize: 16, color: "#FFFFFF", textTransform: "uppercase", letterSpacing: "0.03em", margin: 0 }}>{card.title}</h3>
+                  <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 13, color: "rgba(255,255,255,0.6)", lineHeight: 1.6, maxWidth: 260, margin: 0 }}>{card.desc}</p>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+        <div style={{ display: "flex", justifyContent: "center", gap: 8 }}>
+          {CAROUSEL_CARDS.map((_, i) => (
+            <div key={i} style={{ width: i === autoRotateCard ? 24 : 8, height: 8, borderRadius: 4, background: i === autoRotateCard ? "#FF3B3B" : "rgba(255,255,255,0.15)", transition: "all 0.4s ease" }} />
+          ))}
+        </div>
+      </div>
+    </>
+  );
+};
+
+
 /* ══════════════════════════════════════════════════════════ */
 /*  HUELLA ROJA — HACK BAR PAGE                              */
 /* ══════════════════════════════════════════════════════════ */
@@ -244,6 +396,14 @@ const HuellaRoja = ({ showDock }: { showDock: boolean }) => {
           .hr-chef-right > div { min-height: 300px !important; }
           .hr-chef-grid { grid-template-columns: 1fr !important; gap: 16px !important; }
           .hr-chef-card { min-height: 180px !important; }
+          .carousel-3d-container { min-height: 320px !important; padding: 32px 4% !important; }
+          .carousel-3d-card { width: 170px !important; min-height: 240px !important; padding: 20px 16px !important; }
+          .carousel-3d-card.is-active { width: 220px !important; min-height: 280px !important; padding: 20px 16px !important; }
+          .carousel-3d-card.is-left { transform: translateX(-15px) rotateY(10deg) scale(0.8) !important; }
+          .carousel-3d-card.is-right { transform: translateX(15px) rotateY(-10deg) scale(0.8) !important; }
+          .carousel-3d-card .carousel-3d-title { font-size: 11px !important; }
+          .carousel-3d-card.is-active .carousel-3d-title { font-size: 14px !important; }
+          .carousel-3d-card .carousel-3d-desc { font-size: 11px !important; }
           .hr-footer { padding: 32px 6% !important; }
           .lab-footer { height: auto !important; min-height: 500px !important; padding: 32px 24px !important; }
           .lab-footer-row { flex-direction: column !important; gap: 40px !important; padding: 32px 24px !important; height: auto !important; }
@@ -531,6 +691,8 @@ const HuellaRoja = ({ showDock }: { showDock: boolean }) => {
             </div>
           </div>
         </div>
+        {/* 3D Carousel */}
+        <Carousel3D />
       </motion.section>
 
       {/* ═══ SECTION E: LAB MONITOR FOOTER ═══ */}
