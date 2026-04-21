@@ -651,6 +651,7 @@ const HuellaRoja = ({ showDock }: { showDock: boolean }) => {
                   </div>
                 );
               })}
+              </div>
             </div>
           );
         })()}
