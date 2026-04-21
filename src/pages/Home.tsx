@@ -267,8 +267,8 @@ const Home = ({ showDock }: { showDock: boolean }) => {
         .pillar-card:hover .pillar-card-fp { opacity: 1 !important; }
         .pillar-card:hover .pillar-card-hover-fp { opacity: 0.15 !important; transform: translate(-50%, -50%) scale(1) !important; }
 
-        .scan-video-wrapper { padding: 72px 7%; }
-        .scan-rotativo-wrapper { padding: 72px 7%; }
+.scan-video-wrapper { padding: 72px 7%; }
+        .scan-rotativo-wrapper { padding: 48px 7% 72px; }
 
         @media (max-width: 767px) {
           .programs-grid { grid-template-columns: 1fr !important; max-width: 400px !important; margin: 0 auto !important; }
@@ -292,8 +292,8 @@ const Home = ({ showDock }: { showDock: boolean }) => {
             transform-origin: top center;
             margin-bottom: -120px;
           }
-          .scan-video-wrapper { padding: 48px 6% !important; }
-          .scan-rotativo-wrapper { padding: 48px 6% !important; }
+.scan-video-wrapper { padding: 48px 6% !important; }
+          .scan-rotativo-wrapper { padding: 32px 6% 48px !important; }
           .footer-section {
             padding: 60px 6% 32px !important;
           }
@@ -479,24 +479,20 @@ const Home = ({ showDock }: { showDock: boolean }) => {
         }} />
       </div>
 
-      {/* ══════════════════════════════════════════════════════ */}
+{/* ══════════════════════════════════════════════════════ */}
       {/* ── WHITE ZONE WRAPPER (card emergence over hero black) ── */}
       {/* ══════════════════════════════════════════════════════ */}
-      <div style={{
+      <div className="home-white-section" style={{
         position: "relative",
-        background: "#FFFFFF",
         borderTopLeftRadius: window.innerWidth < 768 ? 24 : 32,
         borderTopRightRadius: window.innerWidth < 768 ? 24 : 32,
         marginTop: window.innerWidth < 768 ? -24 : -32,
         zIndex: 2,
       }}>
-        <ProceduralBackgroundWhite />
-
-      {/* ── C: ABOUT (WHITE) ── */}
       <div ref={aboutRef} style={{ position: "relative", zIndex: 1 }}>
         <div className="about-section-new" style={{
           padding: "64px 7%", display: "flex", alignItems: window.innerWidth < 768 ? "flex-start" : "stretch", gap: 36,
-          position: "relative", zIndex: 1, background: "#FFFFFF",
+          position: "relative", zIndex: 1,
         }}>
           {/* Left — Title + Subtitle + Timeline */}
           <div style={{ flex: 1, display: "flex", flexDirection: "column" as const, ...(window.innerWidth >= 768 ? {} : { flexGrow: 0 }) }}>
