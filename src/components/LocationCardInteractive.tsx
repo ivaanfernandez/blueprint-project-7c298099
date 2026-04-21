@@ -257,17 +257,16 @@ const LocationCardInteractive = () => {
           {gymStatus.nextChange}
         </div>
 
-        {/* Members training now */}
+        {/* Slots open now (gimmick de urgencia / conversión) */}
         <div style={{ display: "flex", alignItems: "center", gap: 10, fontFamily: "'Inter', sans-serif", fontSize: 14, color: "rgba(255, 255, 255, 0.85)" }}>
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1A6BFF" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
-            <circle cx="9" cy="7" r="4" />
-            <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
-            <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+            <path d="M9 11H5a2 2 0 0 0-2 2v7a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7a2 2 0 0 0-2-2h-4" />
+            <polyline points="9 6 12 3 15 6" />
+            <line x1="12" y1="3" x2="12" y2="15" />
           </svg>
           <span>
-            <span style={{ color: "#1A6BFF", fontWeight: 600 }}>{membersTraining}</span>{" "}
-            members training now
+            <span style={{ color: "#1A6BFF", fontWeight: 600 }}>{slotsOpen}</span>{" "}
+            slots open
           </span>
         </div>
 
