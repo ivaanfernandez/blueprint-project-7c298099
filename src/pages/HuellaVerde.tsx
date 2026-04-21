@@ -85,13 +85,13 @@ const Dock = ({ show }: { show: boolean }) => {
 
 /* ── Data (English) ── */
 const RECOVERY_TOP = [
-  { name: "INFRARED SAUNA", desc: "Deep toxin elimination, restorative sleep enhancement and natural collagen stimulation." },
-  { name: "ICE BATH THERAPY", desc: "Nervous system control, inflammation reduction and mental clarity optimization." },
-  { name: "COMPRESSION THERAPY", desc: "Advanced lymphatic drainage, improved circulation and accelerated recovery." },
+  { name: "INFRARED SAUNA", desc: "Deep toxin elimination, restorative sleep enhancement and natural collagen stimulation.", img: "/reset/infrared-sauna.jpg" },
+  { name: "ICE BATH THERAPY", desc: "Nervous system control, inflammation reduction and mental clarity optimization.", img: "/reset/ice-bath.jpg" },
+  { name: "COMPRESSION THERAPY", desc: "Advanced lymphatic drainage, improved circulation and accelerated recovery.", img: "/reset/compression.jpg" },
 ];
 const RECOVERY_BOT = [
-  { name: "MOBILITY & BREATHING", desc: "Conscious breathing and functional mobility to restore range of motion." },
-  { name: "MASSAGES & BODYWORK", desc: "Sports, deep relaxation or deep-tissue massage tailored to your needs." },
+  { name: "MOBILITY & BREATHING", desc: "Conscious breathing and functional mobility to restore range of motion.", img: "/reset/mobility.jpg" },
+  { name: "MASSAGES & BODYWORK", desc: "Sports, deep relaxation or deep-tissue massage tailored to your needs.", img: "/reset/massages.jpg" },
 ];
 const SERVICIOS = [
   { num: "01", name: "PERSONALIZED RECOVERY PROTOCOLS", desc: "Designed by our expert team based on your goals: athletic performance, cellular longevity, deep relaxation or superior mental focus." },
@@ -150,24 +150,14 @@ const HuellaVerde = ({ showDock = true }: HuellaVerdeProps) => {
           {/* Ambient glow */}
           <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse at 50% 30%, rgba(34,197,94,0.06) 0%, transparent 60%)", pointerEvents: "none" }} />
 
-          {/* Text */}
-          <div className="hv-hero-text" style={{ textAlign: "center", display: "flex", flexDirection: "column", alignItems: "center", gap: 16, padding: "80px 7% 32px", zIndex: 2 }}>
+          {/* Title */}
+          <div className="hv-hero-text" style={{ textAlign: "center", display: "flex", flexDirection: "column", alignItems: "center", gap: 16, padding: "80px 7%", zIndex: 2 }}>
             <TextScramble
               className="hv-hero-title"
-              style={{ fontFamily: "'Michroma', sans-serif", fontSize: "clamp(40px, 6vw, 72px)", color: "#FFFFFF", textTransform: "uppercase", letterSpacing: "0.04em", lineHeight: 1.08 }}
+              style={{ fontFamily: "'Michroma', sans-serif", fontSize: "clamp(56px, 12vw, 120px)", color: "#FFFFFF", textTransform: "uppercase", letterSpacing: "0.02em", lineHeight: 1.08, textShadow: "0 0 40px rgba(34,197,94,0.3)" }}
             >
               RESET
             </TextScramble>
-          </div>
-
-          {/* Photo strip */}
-          <div className="hv-photo-strip" style={{ width: "100%", height: "35vh", minHeight: 250, maxHeight: 400, position: "relative", overflow: "hidden", marginTop: 20 }}>
-            <div style={{ width: "100%", height: "100%", backgroundColor: "rgba(26,26,26,0.5)" }} />
-            {/* Fades */}
-            <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 80, background: "linear-gradient(to bottom, rgba(10,10,10,0.6), transparent)", zIndex: 1 }} />
-            <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, height: 60, background: "linear-gradient(to bottom, transparent, rgba(10,10,10,0.6))", zIndex: 1 }} />
-            <div style={{ position: "absolute", top: 0, left: 0, width: 60, height: "100%", background: "linear-gradient(to right, rgba(10,10,10,0.6), transparent)", zIndex: 1 }} />
-            <div style={{ position: "absolute", top: 0, right: 0, width: 60, height: "100%", background: "linear-gradient(to left, rgba(10,10,10,0.6), transparent)", zIndex: 1 }} />
           </div>
 
           {/* Green accent line */}
@@ -179,7 +169,7 @@ const HuellaVerde = ({ showDock = true }: HuellaVerdeProps) => {
           {...scrollReveal}
           style={{ background: "rgba(0,0,0,0.4)", padding: "72px 7%", position: "relative", zIndex: 1 }}
         >
-          <motion.h2 {...scrollReveal} style={{ fontFamily: "'Michroma', sans-serif", fontSize: "clamp(16px, 2vw, 24px)", color: "#FFFFFF", textTransform: "uppercase", letterSpacing: "0.04em", marginBottom: 32, textAlign: "center" }}>
+          <motion.h2 {...scrollReveal} style={{ fontFamily: "'Michroma', sans-serif", fontSize: "clamp(28px, 5vw, 42px)", fontWeight: 400, color: "#FFFFFF", textTransform: "uppercase", letterSpacing: "0.05em", margin: "0 0 48px 0", textAlign: "center" }}>
             RECOVERY ROOM
           </motion.h2>
 
@@ -187,9 +177,14 @@ const HuellaVerde = ({ showDock = true }: HuellaVerdeProps) => {
           <motion.div {...scrollStagger} className="hv-grid-top" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 20, marginBottom: 20 }}>
             {RECOVERY_TOP.map((card, i) => (
               <motion.div variants={blurRevealItem} key={card.name} className="hv-card" style={{ borderRadius: 14, minHeight: 320, position: "relative", overflow: "hidden", display: "flex", flexDirection: "column", justifyContent: "flex-end", padding: "24px 20px", cursor: "pointer", background: "rgba(0,0,0,0.7)", backdropFilter: "blur(8px)", WebkitBackdropFilter: "blur(8px)" }}>
-                {/* Image placeholder */}
-                <div aria-hidden style={{ position: "absolute", inset: 0, background: "linear-gradient(135deg, rgba(34,197,94,0.08) 0%, rgba(0,0,0,0.6) 100%)", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                  <span style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 9, letterSpacing: "0.3em", color: "rgba(255,255,255,0.18)", textTransform: "uppercase" }}>IMAGE COMING SOON</span>
+                {/* Image placeholder (real img with onError fallback to gradient) */}
+                <div aria-hidden style={{ position: "absolute", inset: 0, background: "linear-gradient(135deg, rgba(34,197,94,0.15) 0%, rgba(0,0,0,0.8) 100%)", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                  <img
+                    src={card.img}
+                    alt={card.name}
+                    style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
+                    onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = "none"; }}
+                  />
                 </div>
                 <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(0,0,0,0.85) 10%, rgba(0,0,0,0.3) 55%, rgba(0,0,0,0.05) 100%)", zIndex: 1 }} />
                 {/* Scan line */}
@@ -209,8 +204,13 @@ const HuellaVerde = ({ showDock = true }: HuellaVerdeProps) => {
           <motion.div {...scrollStagger} className="hv-grid-bot" style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: 20 }}>
             {RECOVERY_BOT.map((card, i) => (
               <motion.div variants={blurRevealItem} key={card.name} className="hv-card" style={{ borderRadius: 14, minHeight: 220, position: "relative", overflow: "hidden", display: "flex", flexDirection: "column", justifyContent: "flex-end", padding: "24px 20px", cursor: "pointer", background: "rgba(0,0,0,0.7)", backdropFilter: "blur(8px)", WebkitBackdropFilter: "blur(8px)" }}>
-                <div aria-hidden style={{ position: "absolute", inset: 0, background: "linear-gradient(135deg, rgba(34,197,94,0.08) 0%, rgba(0,0,0,0.6) 100%)", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                  <span style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 9, letterSpacing: "0.3em", color: "rgba(255,255,255,0.18)", textTransform: "uppercase" }}>IMAGE COMING SOON</span>
+                <div aria-hidden style={{ position: "absolute", inset: 0, background: "linear-gradient(135deg, rgba(34,197,94,0.15) 0%, rgba(0,0,0,0.8) 100%)", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                  <img
+                    src={card.img}
+                    alt={card.name}
+                    style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
+                    onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = "none"; }}
+                  />
                 </div>
                 <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(0,0,0,0.85) 10%, rgba(0,0,0,0.3) 55%, rgba(0,0,0,0.05) 100%)", zIndex: 1 }} />
                 <div style={{ position: "absolute", left: 0, right: 0, height: 1, background: "linear-gradient(to right, transparent, rgba(34,197,94,0.25), transparent)", animation: `hvScanLine 5s ease-in-out ${scanDelays[i + 3]}s infinite`, zIndex: 2, pointerEvents: "none" }} />
