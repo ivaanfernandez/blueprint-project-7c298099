@@ -801,97 +801,94 @@ const HuellaRoja = ({ showDock }: { showDock: boolean }) => {
       </div>
 
       {/* Mobile Lab Footer */}
-      <div className="flex md:hidden" style={{
+      <div className="block md:hidden" style={{
         background: "#050505",
         borderTop: "1px solid rgba(255,59,59,0.1)",
-        padding: "32px 20px",
-        flexDirection: "column",
-        alignItems: "center",
-        gap: "24px",
+        padding: "48px 6% 64px",
         position: "relative",
-        overflow: "hidden",
       }}>
-        {/* Grid background */}
-        <div style={{
-          position: "absolute",
-          inset: 0,
-          backgroundImage: "linear-gradient(rgba(255,59,59,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,59,59,0.03) 1px, transparent 1px)",
-          backgroundSize: "30px 30px",
-          pointerEvents: "none",
-        }} />
+        <ElectricBorder color="#FF3B3B" speed={1} chaos={0.5} borderRadius={16} style={{ width: "100%" }}>
+          <div style={{
+            background: "#050505",
+            padding: "32px 20px",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            gap: "24px",
+            position: "relative",
+            borderRadius: 16,
+            overflow: "hidden",
+          }}>
+            {/* Grid background */}
+            <div style={{
+              position: "absolute",
+              inset: 0,
+              backgroundImage: "linear-gradient(rgba(255,59,59,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,59,59,0.03) 1px, transparent 1px)",
+              backgroundSize: "30px 30px",
+              pointerEvents: "none",
+            }} />
 
-        {/* Corner brackets */}
-        <div style={{ position: "absolute", top: "12px", left: "12px", width: "28px", height: "28px", borderTop: "2px solid rgba(255,59,59,0.25)", borderLeft: "2px solid rgba(255,59,59,0.25)" }} />
-        <div style={{ position: "absolute", top: "12px", right: "12px", width: "28px", height: "28px", borderTop: "2px solid rgba(255,59,59,0.25)", borderRight: "2px solid rgba(255,59,59,0.25)" }} />
-        <div style={{ position: "absolute", bottom: "12px", left: "12px", width: "28px", height: "28px", borderBottom: "2px solid rgba(255,59,59,0.25)", borderLeft: "2px solid rgba(255,59,59,0.25)" }} />
-        <div style={{ position: "absolute", bottom: "12px", right: "12px", width: "28px", height: "28px", borderBottom: "2px solid rgba(255,59,59,0.25)", borderRight: "2px solid rgba(255,59,59,0.25)" }} />
+            {/* Corner brackets */}
+            <div style={{ position: "absolute", top: "12px", left: "12px", width: "28px", height: "28px", borderTop: "2px solid rgba(255,59,59,0.25)", borderLeft: "2px solid rgba(255,59,59,0.25)" }} />
+            <div style={{ position: "absolute", top: "12px", right: "12px", width: "28px", height: "28px", borderTop: "2px solid rgba(255,59,59,0.25)", borderRight: "2px solid rgba(255,59,59,0.25)" }} />
+            <div style={{ position: "absolute", bottom: "12px", left: "12px", width: "28px", height: "28px", borderBottom: "2px solid rgba(255,59,59,0.25)", borderLeft: "2px solid rgba(255,59,59,0.25)" }} />
+            <div style={{ position: "absolute", bottom: "12px", right: "12px", width: "28px", height: "28px", borderBottom: "2px solid rgba(255,59,59,0.25)", borderRight: "2px solid rgba(255,59,59,0.25)" }} />
 
-        {/* Fingerprint + title */}
-        <div style={{ position: "relative", zIndex: 1, display: "flex", flexDirection: "column", alignItems: "center", gap: "12px" }}>
-          <svg width="80" height="80" viewBox="0 0 140 140" fill="none">
-            <ellipse cx="70" cy="75" rx="12" ry="18" stroke="#FF3B3B" strokeWidth="1.5" opacity="0.9"/>
-            <ellipse cx="70" cy="75" rx="20" ry="30" stroke="#FF3B3B" strokeWidth="1.5" opacity="0.6"/>
-            <ellipse cx="70" cy="75" rx="28" ry="42" stroke="#FF3B3B" strokeWidth="1.5" opacity="0.35"/>
-          </svg>
-          <span style={{ fontFamily: "'Michroma', sans-serif", fontSize: "20px", color: "#fff", textTransform: "uppercase", letterSpacing: "0.08em" }}>Hack Bar</span>
-        </div>
-
-        {/* Data grid 2x2 */}
-        <div style={{
-          position: "relative",
-          zIndex: 1,
-          display: "grid",
-          gridTemplateColumns: "1fr 1fr",
-          gap: "14px",
-          width: "100%",
-        }}>
-          {[
-            { label: "METABOLIC RATE", value: "1,847 kcal", active: false },
-            { label: "PROTEIN INTAKE", value: "142g", active: false },
-            { label: "HYDRATION LVL", value: "94.2%", active: false },
-            { label: "SYSTEM STATUS", value: "ACTIVE", active: true },
-          ].map((item) => (
-            <div key={item.label} style={{
-              padding: "16px",
-              borderRadius: "12px",
-              background: "rgba(255,59,59,0.03)",
-              border: "1px solid rgba(255,59,59,0.08)",
-              textAlign: "center",
-            }}>
-              <div style={{ fontFamily: "'Orbitron', sans-serif", fontSize: "9px", letterSpacing: "0.1em", color: "rgba(255,255,255,0.25)", marginBottom: "6px" }}>
-                {item.label}
-              </div>
-              <div style={{
-                fontFamily: "'Orbitron', sans-serif",
-                fontSize: "22px",
-                fontWeight: 500,
-                color: "#FF3B3B",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                gap: "6px",
-              }}>
-                {item.active && (
-                  <div style={{ width: "8px", height: "8px", borderRadius: "50%", background: "#FF3B3B", animation: "labPulse 2s infinite" }} />
-                )}
-                {item.value}
-              </div>
+            {/* Fingerprint + title */}
+            <div style={{ position: "relative", zIndex: 1, display: "flex", flexDirection: "column", alignItems: "center", gap: "12px" }}>
+              <svg width="80" height="80" viewBox="0 0 140 140" fill="none">
+                <ellipse cx="70" cy="75" rx="12" ry="18" stroke="#FF3B3B" strokeWidth="1.5" opacity="0.9"/>
+                <ellipse cx="70" cy="75" rx="20" ry="30" stroke="#FF3B3B" strokeWidth="1.5" opacity="0.6"/>
+                <ellipse cx="70" cy="75" rx="28" ry="42" stroke="#FF3B3B" strokeWidth="1.5" opacity="0.35"/>
+              </svg>
+              <span style={{ fontFamily: "'Michroma', sans-serif", fontSize: "20px", color: "#fff", textTransform: "uppercase", letterSpacing: "0.08em" }}>Hack Bar</span>
             </div>
-          ))}
-        </div>
 
-        {/* Bottom bar */}
-        <div style={{
-          position: "relative",
-          zIndex: 1,
-          display: "flex",
-          justifyContent: "space-between",
-          width: "100%",
-          alignItems: "center",
-        }}>
-          <span style={{ fontFamily: "'Inter', sans-serif", fontSize: "10px", color: "rgba(255,255,255,0.3)" }}>© 2025 Blueprint Project</span>
-          <span style={{ fontFamily: "'Inter', sans-serif", fontSize: "10px", color: "rgba(255,255,255,0.3)" }}>Hack Bar — Blueprint Project</span>
-        </div>
+            {/* Data grid 2x2 */}
+            <div style={{
+              position: "relative",
+              zIndex: 1,
+              display: "grid",
+              gridTemplateColumns: "1fr 1fr",
+              gap: "14px",
+              width: "100%",
+            }}>
+              {[
+                { label: "METABOLIC RATE", value: "1,847 kcal", active: false },
+                { label: "PROTEIN INTAKE", value: "142g", active: false },
+                { label: "HYDRATION LVL", value: "94.2%", active: false },
+                { label: "SYSTEM STATUS", value: "ACTIVE", active: true },
+              ].map((item) => (
+                <div key={item.label} style={{
+                  padding: "16px",
+                  borderRadius: "12px",
+                  background: "rgba(255,59,59,0.03)",
+                  border: "1px solid rgba(255,59,59,0.08)",
+                  textAlign: "center",
+                }}>
+                  <div style={{ fontFamily: "'Orbitron', sans-serif", fontSize: "9px", letterSpacing: "0.1em", color: "rgba(255,255,255,0.25)", marginBottom: "6px" }}>
+                    {item.label}
+                  </div>
+                  <div style={{
+                    fontFamily: "'Orbitron', sans-serif",
+                    fontSize: "22px",
+                    fontWeight: 500,
+                    color: "#FF3B3B",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    gap: "6px",
+                  }}>
+                    {item.active && (
+                      <div style={{ width: "8px", height: "8px", borderRadius: "50%", background: "#FF3B3B", animation: "labPulse 2s infinite" }} />
+                    )}
+                    {item.value}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </ElectricBorder>
       </div>
 
       {/* Bottom spacer for dock (desktop only) */}
