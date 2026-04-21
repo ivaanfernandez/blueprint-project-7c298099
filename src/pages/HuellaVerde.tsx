@@ -85,13 +85,13 @@ const Dock = ({ show }: { show: boolean }) => {
 
 /* ── Data (English) ── */
 const RECOVERY_TOP = [
-  { name: "INFRARED SAUNA", desc: "Deep toxin elimination, restorative sleep enhancement and natural collagen stimulation." },
-  { name: "ICE BATH THERAPY", desc: "Nervous system control, inflammation reduction and mental clarity optimization." },
-  { name: "COMPRESSION THERAPY", desc: "Advanced lymphatic drainage, improved circulation and accelerated recovery." },
+  { name: "INFRARED SAUNA", desc: "Deep toxin elimination, restorative sleep enhancement and natural collagen stimulation.", img: "/reset/infrared-sauna.jpg" },
+  { name: "ICE BATH THERAPY", desc: "Nervous system control, inflammation reduction and mental clarity optimization.", img: "/reset/ice-bath.jpg" },
+  { name: "COMPRESSION THERAPY", desc: "Advanced lymphatic drainage, improved circulation and accelerated recovery.", img: "/reset/compression.jpg" },
 ];
 const RECOVERY_BOT = [
-  { name: "MOBILITY & BREATHING", desc: "Conscious breathing and functional mobility to restore range of motion." },
-  { name: "MASSAGES & BODYWORK", desc: "Sports, deep relaxation or deep-tissue massage tailored to your needs." },
+  { name: "MOBILITY & BREATHING", desc: "Conscious breathing and functional mobility to restore range of motion.", img: "/reset/mobility.jpg" },
+  { name: "MASSAGES & BODYWORK", desc: "Sports, deep relaxation or deep-tissue massage tailored to your needs.", img: "/reset/massages.jpg" },
 ];
 const SERVICIOS = [
   { num: "01", name: "PERSONALIZED RECOVERY PROTOCOLS", desc: "Designed by our expert team based on your goals: athletic performance, cellular longevity, deep relaxation or superior mental focus." },
