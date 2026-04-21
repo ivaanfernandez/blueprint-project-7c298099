@@ -509,6 +509,7 @@ const Home = ({ showDock }: { showDock: boolean }) => {
             >
               <div
                 style={{
+                  position: "relative",
                   width: "100%",
                   aspectRatio: "16 / 9",
                   overflow: "hidden",
@@ -526,6 +527,27 @@ const Home = ({ showDock }: { showDock: boolean }) => {
                     display: "block",
                   }}
                 />
+                {/* Vertical scan line */}
+                <div
+                  aria-hidden
+                  style={{
+                    position: "absolute",
+                    left: 0,
+                    top: 0,
+                    width: "100%",
+                    height: 2,
+                    background: "linear-gradient(90deg, transparent, rgba(125,249,255,0.9), transparent)",
+                    boxShadow: "0 0 12px rgba(125,249,255,0.7)",
+                    animation: "scan-vertical 4s linear infinite",
+                    pointerEvents: "none",
+                    zIndex: 2,
+                  }}
+                />
+                {/* Corner brackets */}
+                <div aria-hidden style={{ position: "absolute", top: 12, left: 12, width: 24, height: 24, borderTop: "2px solid rgba(125,249,255,0.85)", borderLeft: "2px solid rgba(125,249,255,0.85)", pointerEvents: "none", zIndex: 2 }} />
+                <div aria-hidden style={{ position: "absolute", top: 12, right: 12, width: 24, height: 24, borderTop: "2px solid rgba(125,249,255,0.85)", borderRight: "2px solid rgba(125,249,255,0.85)", pointerEvents: "none", zIndex: 2 }} />
+                <div aria-hidden style={{ position: "absolute", bottom: 12, left: 12, width: 24, height: 24, borderBottom: "2px solid rgba(125,249,255,0.85)", borderLeft: "2px solid rgba(125,249,255,0.85)", pointerEvents: "none", zIndex: 2 }} />
+                <div aria-hidden style={{ position: "absolute", bottom: 12, right: 12, width: 24, height: 24, borderBottom: "2px solid rgba(125,249,255,0.85)", borderRight: "2px solid rgba(125,249,255,0.85)", pointerEvents: "none", zIndex: 2 }} />
               </div>
             </motion.div>
           </div>
