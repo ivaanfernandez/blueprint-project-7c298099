@@ -700,7 +700,7 @@ const HuellaRoja = ({ showDock }: { showDock: boolean }) => {
       </motion.section>
 
       {/* ═══ SECTION E: LAB MONITOR FOOTER (DESKTOP) ═══ */}
-      <motion.div {...scrollRevealNoShift} className="hidden md:block" style={{ background: "#050505", padding: "60px 5% 80px", borderTop: "1px solid rgba(255,59,59,0.1)", position: "relative" }}>
+      <motion.div {...scrollRevealNoShift} className="hackbar-scan-wrapper hidden md:block" style={{ background: "#050505", padding: "60px 5% 0", borderTop: "1px solid rgba(255,59,59,0.1)", position: "relative" }}>
 <ElectricBorder color="#FF3B3B" speed={0.5} chaos={0.12} thickness={1} borderRadius={16} style={{ width: "100%" }}>
           <footer className="lab-footer" style={{ background: "#050505", padding: 0, position: "relative", height: 500, borderRadius: 16, overflow: "hidden" }}>
             {/* LAYER 1 — Grid */}
@@ -717,7 +717,7 @@ const HuellaRoja = ({ showDock }: { showDock: boolean }) => {
               {/* LEFT COLUMN — System monitor */}
               <div className="lab-col-left" style={{ flex: "0 0 30%", display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
                 <div>
-                  <p style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 8, letterSpacing: "0.2em", color: "rgba(255,59,59,0.4)", textTransform: "uppercase", margin: 0 }}>SYSTEM MONITOR</p>
+                  <p className="hackbar-scan-label" style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 8, letterSpacing: "0.2em", color: "rgba(255,59,59,0.4)", textTransform: "uppercase", margin: 0 }}>SYSTEM MONITOR</p>
                   <div style={{ marginTop: 16, display: "flex", flexDirection: "column" }}>
                     {[
                       { label: "METABOLIC RATE", value: "1,847 kcal", flicker: true },
@@ -725,13 +725,13 @@ const HuellaRoja = ({ showDock }: { showDock: boolean }) => {
                       { label: "HYDRATION LVL", value: "94.2%" },
                     ].map((item) => (
                       <div key={item.label} className="lab-data-item" style={{ padding: "12px 0", borderBottom: "1px solid rgba(255,59,59,0.06)" }}>
-                        <p className="lab-data-label" style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 7, letterSpacing: "0.15em", color: "rgba(255,255,255,0.2)", margin: 0, textTransform: "uppercase" }}>{item.label}</p>
-                        <p className="lab-data-value" style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 16, color: "#FF3B3B", margin: "4px 0 0", animation: item.flicker ? "labDataFlicker 3s infinite" : undefined }}>{item.value}</p>
+                        <p className="lab-data-label hackbar-scan-label" style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 7, letterSpacing: "0.15em", color: "rgba(255,255,255,0.2)", margin: 0, textTransform: "uppercase" }}>{item.label}</p>
+                        <p className="lab-data-value hackbar-scan-value" style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 16, color: "#FF3B3B", margin: "4px 0 0", animation: item.flicker ? "labDataFlicker 3s infinite" : undefined }}>{item.value}</p>
                       </div>
                     ))}
                     <div className="lab-data-item" style={{ padding: "12px 0", borderBottom: "1px solid rgba(255,59,59,0.06)" }}>
-                      <p className="lab-data-label" style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 7, letterSpacing: "0.15em", color: "rgba(255,255,255,0.2)", margin: 0, textTransform: "uppercase" }}>SYSTEM STATUS</p>
-                      <p className="lab-data-value" style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 16, color: "#FF3B3B", margin: "4px 0 0", display: "flex", alignItems: "center", gap: 8 }}>
+                      <p className="lab-data-label hackbar-scan-label" style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 7, letterSpacing: "0.15em", color: "rgba(255,255,255,0.2)", margin: 0, textTransform: "uppercase" }}>SYSTEM STATUS</p>
+                      <p className="lab-data-value hackbar-scan-value" style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 16, color: "#FF3B3B", margin: "4px 0 0", display: "flex", alignItems: "center", gap: 8 }}>
                         <span style={{ width: 6, height: 6, borderRadius: "50%", background: "#FF3B3B", animation: "labPulse 2s infinite", display: "inline-block" }} />
                         ACTIVE
                       </p>
@@ -758,7 +758,7 @@ const HuellaRoja = ({ showDock }: { showDock: boolean }) => {
                   </svg>
                   <div style={{ position: "absolute", left: "50%", transform: "translateX(-50%)", width: 160, height: 2, background: "linear-gradient(to right, transparent, #FF3B3B, transparent)", boxShadow: "0 0 15px rgba(255,59,59,0.5)", animation: "labScanLine 3s ease-in-out infinite", zIndex: 3 }} />
                 </div>
-                <p style={{ fontFamily: "'Michroma', sans-serif", fontSize: 20, color: "#FFFFFF", textTransform: "uppercase", letterSpacing: "0.06em", marginTop: 24, marginBottom: 0 }}>HACK BAR</p>
+                <p className="hackbar-scan-title" style={{ fontFamily: "'Michroma', sans-serif", fontSize: 20, color: "#FFFFFF", textTransform: "uppercase", letterSpacing: "0.06em", marginTop: 24, marginBottom: 0 }}>HACK BAR</p>
                 <svg width="200" height="50" viewBox="0 0 100 50" style={{ marginTop: 16, overflow: "visible", animation: "labHeartPulse 1.5s ease-in-out infinite", transformOrigin: "center" }}>
                   <path
                     d="M0 25 L15 25 L20 10 L25 40 L30 20 L35 30 L40 25 L55 25 L60 25 L65 15 L70 35 L75 22 L80 28 L85 25 L100 25"
@@ -773,7 +773,7 @@ const HuellaRoja = ({ showDock }: { showDock: boolean }) => {
               {/* RIGHT COLUMN — Nutrition lab */}
               <div className="lab-col-right" style={{ flex: "0 0 30%", display: "flex", flexDirection: "column", justifyContent: "space-between", alignItems: "flex-end", textAlign: "right" }}>
                 <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-end", width: "100%" }}>
-                  <p style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 8, letterSpacing: "0.2em", color: "rgba(255,59,59,0.4)", textTransform: "uppercase", margin: 0 }}>NUTRITION LAB</p>
+                  <p className="hackbar-scan-label" style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 8, letterSpacing: "0.2em", color: "rgba(255,59,59,0.4)", textTransform: "uppercase", margin: 0 }}>NUTRITION LAB</p>
                   <div style={{ width: 60, height: 60, border: "1px solid rgba(255,59,59,0.15)", borderTop: "1px solid rgba(255,59,59,0.5)", borderRadius: "50%", animation: "labRotate 8s linear infinite", margin: "16px 0" }} />
                   <div style={{ width: "100%" }}>
                     {[
@@ -781,9 +781,9 @@ const HuellaRoja = ({ showDock }: { showDock: boolean }) => {
                       { label: "SUPPLEMENT STACK", value: "3 ACTIVE" },
                       { label: "MEAL PREP QUEUE", value: "12 READY" },
                     ].map((item) => (
-                      <div key={item.label} className="lab-data-item" style={{ padding: "12px 0", borderBottom: "1px solid rgba(255,59,59,0.06)", textAlign: "right" }}>
-                        <p className="lab-data-label" style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 7, letterSpacing: "0.15em", color: "rgba(255,255,255,0.2)", margin: 0, textTransform: "uppercase" }}>{item.label}</p>
-                        <p className="lab-data-value" style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 16, color: "#FF3B3B", margin: "4px 0 0" }}>{item.value}</p>
+                    <div key={item.label} className="lab-data-item" style={{ padding: "12px 0", borderBottom: "1px solid rgba(255,59,59,0.06)", textAlign: "right" }}>
+                        <p className="lab-data-label hackbar-scan-label" style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 7, letterSpacing: "0.15em", color: "rgba(255,255,255,0.2)", margin: 0, textTransform: "uppercase" }}>{item.label}</p>
+                        <p className="lab-data-value hackbar-scan-value" style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 16, color: "#FF3B3B", margin: "4px 0 0" }}>{item.value}</p>
                       </div>
                     ))}
                   </div>
@@ -886,7 +886,7 @@ const HuellaRoja = ({ showDock }: { showDock: boolean }) => {
       </motion.div>
 
       {/* Bottom spacer for dock (desktop only) */}
-      <div className="hidden md:block" style={{ height: 120 }} />
+      <div className="hidden md:block back-to-home-wrapper" style={{ height: 16 }} />
       <BackToHomeButton />
     </motion.div>
   );
