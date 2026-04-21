@@ -147,6 +147,13 @@ All colors MUST be HSL.
   100% { opacity: 0.3; transform: scaleY(0.98) translateX(-4px); }
 }
 
+@keyframes scan-vertical {
+  0%   { top: 0; opacity: 0; }
+  5%   { opacity: 1; }
+  95%  { opacity: 1; }
+  100% { top: calc(100% - 2px); opacity: 0; }
+}
+
 @media (max-width: 767px) {
   .about-section-new {
     flex-direction: column !important;
