@@ -137,7 +137,7 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
       {/* FIXED DOCK NAV */}
       <div style={{
         position: 'fixed',
-        top: '16px',
+        top: '24px',
         left: '50%',
         transform: 'translateX(-50%)',
         zIndex: 50,

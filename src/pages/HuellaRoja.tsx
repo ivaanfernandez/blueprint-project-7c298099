@@ -428,7 +428,7 @@ const HuellaRoja = ({ showDock }: { showDock: boolean }) => {
 
       {/* ── DOCK ── */}
       {showDock && (
-        <div style={{ position: "fixed", top: 14, left: "50%", transform: "translateX(-50%)", zIndex: 50 }}>
+        <div style={{ position: "fixed", top: 24, left: "50%", transform: "translateX(-50%)", zIndex: 50 }}>
           <Dock magnification={64} distance={100}>
             {HUELLAS.map((h) => (
               <DockIcon key={h.route} tooltip={h.tooltip} onClick={() => navigate(h.route)}>
