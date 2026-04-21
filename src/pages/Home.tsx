@@ -159,7 +159,7 @@ const Home = ({ showDock }: { showDock: boolean }) => {
             transform-origin: top center;
             margin-bottom: -120px;
           }
-          .video-cinematic-section { height: 60vh !important; }
+          .scan-video-wrapper { padding: 48px 6% !important; }
           .footer-section {
             padding: 60px 6% 32px !important;
           }
