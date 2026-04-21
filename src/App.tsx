@@ -1,16 +1,12 @@
 import { useState, useCallback, useEffect } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter } from "react-router-dom";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import BiometricScan from "./components/BiometricScan";
-import Home from "./pages/Home";
-import MainLanding from "./pages/MainLanding";
-import HuellaRoja from "./pages/HuellaRoja";
-import HuellaVerde from "./pages/HuellaVerde";
-import NotFound from "./pages/NotFound.tsx";
 import ScrollToTop from "@/components/ScrollToTop";
+import AnimatedRoutes from "@/components/AnimatedRoutes";
 
 const queryClient = new QueryClient();
 
@@ -38,13 +34,7 @@ const App = () => {
         {phase === "landing" && (
           <BrowserRouter>
             <ScrollToTop />
-            <Routes>
-              <Route path="/" element={<Home showDock={showDock} />} />
-              <Route path="/huella-azul" element={<MainLanding showDock={showDock} />} />
-              <Route path="/huella-roja" element={<HuellaRoja showDock={showDock} />} />
-              <Route path="/huella-verde" element={<HuellaVerde showDock={showDock} />} />
-              <Route path="*" element={<NotFound />} />
-            </Routes>
+            <AnimatedRoutes showDock={showDock} />
           </BrowserRouter>
         )}
       </TooltipProvider>
