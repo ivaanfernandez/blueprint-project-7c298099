@@ -1,6 +1,7 @@
 import { useRef, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
+import { scrollReveal, scrollStagger, blurRevealItem } from "@/lib/scrollAnimations";
 import ProceduralBackgroundWhite from "@/components/ProceduralBackgroundWhite";
 import FooterBackground from "@/components/FooterBackground";
 
@@ -285,17 +286,17 @@ const Home = ({ showDock }: { showDock: boolean }) => {
         }}>
           {/* Left — Title + Subtitle + Timeline */}
           <div style={{ flex: 1, display: "flex", flexDirection: "column" as const, ...(window.innerWidth >= 768 ? {} : { flexGrow: 0 }) }}>
-            <h2 className="about-title-line" style={{
+            <motion.h2 {...scrollReveal} className="about-title-line" style={{
               fontFamily: "'Michroma', sans-serif",
               fontSize: "clamp(18px, 2.2vw, 28px)", color: "#000",
               textTransform: "uppercase", lineHeight: 1.12,
               marginBottom: window.innerWidth < 768 ? 32 : 48, marginTop: 0,
             }}>
               DESIGNED FOR THE HUMAN MACHINE
-            </h2>
+            </motion.h2>
 
             {/* Features (DESKTOP) — glassmorphism with animated glow border */}
-            <div className="about-features-desktop" style={{ position: "relative", flexGrow: 1, display: "flex", flexDirection: "column" as const, gap: 16, justifyContent: window.innerWidth < 768 ? "flex-start" : "space-between" }}>
+            <motion.div {...scrollStagger} className="about-features-desktop" style={{ position: "relative", flexGrow: 1, display: "flex", flexDirection: "column" as const, gap: 16, justifyContent: window.innerWidth < 768 ? "flex-start" : "space-between" }}>
               {[
                 { title: "Precision Training", desc: "Data-driven methodology built to forge strength, endurance, and resilience.", rgba: "26,107,255", sharpSpeed: 6, blurSpeed: 8, icon: (
                   <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#1A6BFF" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
@@ -318,7 +319,7 @@ const Home = ({ showDock }: { showDock: boolean }) => {
                   </svg>
                 )},
               ].map((step) => (
-                <div key={step.title} style={{
+                <motion.div variants={blurRevealItem} key={step.title} style={{
                   position: "relative",
                   padding: 1,
                   borderRadius: 17,
@@ -374,12 +375,12 @@ const Home = ({ showDock }: { showDock: boolean }) => {
                       color: "#6B7280", lineHeight: 1.6, paddingLeft: 44,
                     }}>{step.desc}</div>
                   </div>
-                </div>
+                </motion.div>
               ))}
-            </div>
+            </motion.div>
 
             {/* Mobile features — glassmorphism with animated glow border */}
-            <div className="about-features-mobile" style={{ display: "none", flexDirection: "column", padding: "0 16px", gap: 14 }}>
+            <motion.div {...scrollStagger} className="about-features-mobile" style={{ display: "none", flexDirection: "column", padding: "0 16px", gap: 14 }}>
               <style>{`
                 @keyframes glowSpin {
                   0% { transform: rotate(0deg); }
@@ -418,7 +419,7 @@ const Home = ({ showDock }: { showDock: boolean }) => {
                   ),
                 },
               ].map((c) => (
-                <div key={c.title} style={{
+                <motion.div variants={blurRevealItem} key={c.title} style={{
                   position: "relative",
                   padding: 1,
                   borderRadius: 17,
@@ -480,12 +481,13 @@ const Home = ({ showDock }: { showDock: boolean }) => {
                       color: "#000",
                     }}>{c.title}</span>
                   </div>
-                </div>
+                </motion.div>
               ))}
-            </div>
+            </motion.div>
 
             {/* ── ABOUT MOBILE EDGE-TO-EDGE IMAGE ── */}
-            <div
+            <motion.div
+              {...scrollReveal}
               className="block md:hidden"
               style={{
                 width: "100vw",
@@ -516,7 +518,7 @@ const Home = ({ showDock }: { showDock: boolean }) => {
                   }}
                 />
               </div>
-            </div>
+            </motion.div>
           </div>
 
           {/* Right — Rotating Image Slideshow */}
@@ -563,15 +565,15 @@ const Home = ({ showDock }: { showDock: boolean }) => {
 
       {/* ── PROGRAMS SECTION (WHITE) ── */}
       <div className="programs-section" style={{ padding: "56px 7%", position: "relative", zIndex: 1 }}>
-        <h2 style={{
+        <motion.h2 {...scrollReveal} style={{
           fontFamily: "'Michroma', sans-serif",
           fontSize: "clamp(20px, 2.5vw, 32px)", color: "#000",
           textTransform: "uppercase", textAlign: "center", marginBottom: 40,
         }}>
           CHOOSE YOUR FINGERPRINT
-        </h2>
+        </motion.h2>
 
-        <div className="programs-grid" style={{
+        <motion.div {...scrollStagger} className="programs-grid" style={{
           display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 16,
         }}>
           {[
@@ -579,7 +581,8 @@ const Home = ({ showDock }: { showDock: boolean }) => {
             { name: "Hack Bar", color: "#FF3B3B", rgba: "255,59,59", img: slider2, route: "/huella-roja", desc: "Nutrition engineered for performance. Every meal is a signal to your body." },
             { name: "Reset", color: "#22C55E", rgba: "34,197,94", img: slider3, video: "/videos/reset-card.mp4", route: "/huella-verde", desc: "Strategic recovery. Optimized sleep, restoration, and rebuilding protocols." },
           ].map((item) => (
-            <div
+            <motion.div
+              variants={blurRevealItem}
               key={item.name}
               className="pillar-card"
               onClick={() => navigate(item.route)}
@@ -704,9 +707,9 @@ const Home = ({ showDock }: { showDock: boolean }) => {
                   color: "rgba(255,255,255,0.5)", lineHeight: 1.5, textAlign: "left", margin: 0,
                 }}>{item.desc}</p>
               </div>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
 
       {/* ── Divider ── */}
@@ -755,7 +758,7 @@ const Home = ({ showDock }: { showDock: boolean }) => {
         }} />
 
         {/* Title */}
-        <h2 style={{
+        <motion.h2 {...scrollReveal} style={{
           fontFamily: "'Michroma', sans-serif",
           fontSize: "clamp(24px, 4vw, 36px)",
           color: "#FFFFFF",
@@ -766,10 +769,10 @@ const Home = ({ showDock }: { showDock: boolean }) => {
           textShadow: "0 2px 16px rgba(0, 0, 0, 0.85)",
         }}>
           Enter the Blueprint
-        </h2>
+        </motion.h2>
 
         {/* Subtitle */}
-        <p style={{
+        <motion.p {...scrollReveal} style={{
           fontFamily: "'Inter', sans-serif",
           fontSize: 13,
           fontWeight: 300,
@@ -778,17 +781,18 @@ const Home = ({ showDock }: { showDock: boolean }) => {
           textShadow: "0 1px 8px rgba(0, 0, 0, 0.75)",
         }}>
           Your evolution begins with a single step.
-        </p>
+        </motion.p>
 
         {/* Buttons */}
-        <div style={{
+        <motion.div {...scrollStagger} style={{
           display: "flex",
           justifyContent: "center",
           gap: 14,
           marginBottom: 48,
           ...(window.innerWidth < 768 ? { flexDirection: "column" as const, gap: 10, alignItems: "stretch" as const } : {}),
         }}>
-          <button
+          <motion.button
+            variants={blurRevealItem}
             onClick={() => navigate("/huella-azul")}
             style={{
               fontFamily: "'Orbitron', sans-serif",
@@ -816,9 +820,10 @@ const Home = ({ showDock }: { showDock: boolean }) => {
             }}
           >
             JOIN NOW
-          </button>
+          </motion.button>
 
-          <button
+          <motion.button
+            variants={blurRevealItem}
             onClick={() => window.open("https://instagram.com/blueprintproject", "_blank")}
             style={{
               fontFamily: "'Orbitron', sans-serif",
@@ -855,8 +860,8 @@ const Home = ({ showDock }: { showDock: boolean }) => {
               <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
             </svg>
             INSTAGRAM
-          </button>
-        </div>
+          </motion.button>
+        </motion.div>
 
         {/* Divider */}
         <div style={{

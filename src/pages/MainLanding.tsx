@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
+import { scrollReveal } from "@/lib/scrollAnimations";
 import ProceduralBackground from "@/components/ProceduralBackground";
 import { WordRotate } from "@/components/ui/word-rotate";
 import { Dock, DockIcon } from "@/components/ui/dock";
@@ -473,16 +474,18 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
         <ImageAutoSlider images={GYM_SLIDER_IMAGES} />
       </div>
 
-      <div style={{ position: 'relative', zIndex: 10 }}>
+      <motion.div {...scrollReveal} style={{ position: 'relative', zIndex: 10 }}>
         <InteractiveImageAccordion />
-      </div>
+      </motion.div>
 
 
       {/* PRICING */}
       <PricingSection />
 
       {/* BENTO GRID */}
-      <BentoGrid />
+      <motion.div {...scrollReveal}>
+        <BentoGrid />
+      </motion.div>
 
       {/* FOOTER */}
       <Footer />

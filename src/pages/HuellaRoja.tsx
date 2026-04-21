@@ -1,6 +1,7 @@
 import { useState, useCallback, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
+import { scrollReveal } from "@/lib/scrollAnimations";
 import BiometricScanRed from "@/components/BiometricScanRed";
 import { TextScramble } from "@/components/ui/text-scramble";
 import { Dock, DockIcon } from "@/components/ui/dock";
@@ -707,7 +708,7 @@ const HuellaRoja = ({ showDock }: { showDock: boolean }) => {
       </motion.section>
 
       {/* ═══ SECTION E: LAB MONITOR FOOTER (DESKTOP) ═══ */}
-      <div className="hidden md:block" style={{ background: "#050505", padding: "60px 5% 80px", borderTop: "1px solid rgba(255,59,59,0.1)", position: "relative" }}>
+      <motion.div {...scrollReveal} className="hidden md:block" style={{ background: "#050505", padding: "60px 5% 80px", borderTop: "1px solid rgba(255,59,59,0.1)", position: "relative" }}>
         <ElectricBorder color="#FF3B3B" speed={0.2} chaos={0.3} borderRadius={16} style={{ width: "100%" }}>
           <footer className="lab-footer" style={{ background: "#050505", padding: 0, position: "relative", height: 500, borderRadius: 16, overflow: "hidden" }}>
             {/* LAYER 1 — Grid */}
@@ -799,10 +800,10 @@ const HuellaRoja = ({ showDock }: { showDock: boolean }) => {
             </div>
           </footer>
         </ElectricBorder>
-      </div>
+      </motion.div>
 
       {/* Mobile Lab Footer */}
-      <div className="block md:hidden" style={{
+      <motion.div {...scrollReveal} className="block md:hidden" style={{
         background: "#050505",
         borderTop: "1px solid rgba(255,59,59,0.1)",
         padding: "48px 6% 64px",
@@ -890,7 +891,7 @@ const HuellaRoja = ({ showDock }: { showDock: boolean }) => {
             </div>
           </div>
         </ElectricBorder>
-      </div>
+      </motion.div>
 
       {/* Bottom spacer for dock (desktop only) */}
       <div className="hidden md:block" style={{ height: 120 }} />
