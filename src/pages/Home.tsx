@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { scrollReveal, scrollStagger, blurRevealItem } from "@/lib/scrollAnimations";
 import ProceduralBackgroundWhite from "@/components/ProceduralBackgroundWhite";
 import FooterBackground from "@/components/FooterBackground";
+import HomeLoader from "@/components/HomeLoader";
 
 
 import { TextScramble } from "@/components/ui/text-scramble";
@@ -240,10 +241,22 @@ const Home = ({ showDock }: { showDock: boolean }) => {
     return () => clearInterval(id);
   }, []);
 
-
-
+  // First-visit loader (sessionStorage gated)
+  const [showLoader, setShowLoader] = useState(false);
+  useEffect(() => {
+    const hasSeenLoader = sessionStorage.getItem("home-loader-seen");
+    if (!hasSeenLoader) {
+      setShowLoader(true);
+    }
+  }, []);
+  const handleLoaderComplete = () => {
+    sessionStorage.setItem("home-loader-seen", "true");
+    setShowLoader(false);
+  };
 
   return (
+    <>
+      {showLoader && <HomeLoader onComplete={handleLoaderComplete} />}
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
@@ -1039,6 +1052,7 @@ const Home = ({ showDock }: { showDock: boolean }) => {
         </div>{/* end z-index wrapper */}
       </div>
     </motion.div>
+    </>
   );
 };
 
