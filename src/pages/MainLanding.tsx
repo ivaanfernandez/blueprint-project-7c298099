@@ -9,11 +9,9 @@ import { ShinyButton } from '@/components/ui/shiny-button';
 import { LocationMap } from '@/components/ui/expand-map';
 import { FadeText } from '@/components/ui/fade-text';
 import { ImageAutoSlider } from '@/components/ui/image-auto-slider';
-import { ChevronDown } from 'lucide-react';
 import { InteractiveImageAccordion } from '@/components/ui/interactive-image-accordion';
 import PricingSection from '@/components/PricingSection';
 import BentoGrid from '@/components/BentoGrid';
-import Footer from '@/components/Footer';
 import BackToHomeButton from '@/components/BackToHomeButton';
 import slider1 from '@/assets/slider/slider-1.jpg';
 import slider2 from '@/assets/slider/slider-2.jpg';
@@ -279,64 +277,6 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
               className=""
             />
           </span>
-        </div>
-
-        <div className="hero-subtext-container" style={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          gap: '2px',
-          margin: '12px auto 0',
-          position: 'relative',
-          zIndex: 10,
-          textAlign: 'center'
-        }}>
-          {[
-            { text: "This is where discipline meets design.", delay: 0.1 },
-            { text: "Welcome to the future of self mastery.", delay: 0.25 },
-          ].map((item) => (
-            <div key={item.text} className="hero-subtext-line" style={{
-              color: 'rgba(255,255,255,0.6)',
-              fontSize: 'clamp(10px, 1vw, 15px)',
-              fontFamily: 'Space Grotesk, sans-serif',
-              whiteSpace: 'nowrap',
-              letterSpacing: '0.04em',
-              lineHeight: '2'
-            }}>
-              <FadeText
-                direction="up"
-                text={item.text}
-                framerProps={{ show: { transition: { delay: item.delay, type: 'spring' } } }}
-                className=""
-              />
-            </div>
-          ))}
-          <div className="hero-subtext-line" style={{
-            color: '#1A6BFF',
-            fontSize: 'clamp(10px, 1vw, 15px)',
-            fontFamily: 'Space Grotesk, sans-serif',
-            fontWeight: '600',
-            whiteSpace: 'nowrap',
-            letterSpacing: '0.04em',
-            lineHeight: '2'
-          }}>
-            <FadeText
-              direction="up"
-              text="Follow the BLUEPRINT."
-              framerProps={{ show: { transition: { delay: 0.4, type: 'spring' } } }}
-              className=""
-            />
-          </div>
-        </div>
-
-        {/* CTA Button */}
-        <div className="hero-cta-button" style={{ marginTop: "48px", display: "flex", justifyContent: "center", width: "100%" }}>
-          <ShinyButton fontSize="14px" className="hero-shiny-btn">HAVE YOUR BLUEPRINT</ShinyButton>
-        </div>
-
-        {/* Scroll indicator */}
-        <div className="hero-scroll-indicator" style={{ marginTop: 40, display: 'flex', justifyContent: 'center', width: '100%', pointerEvents: 'none' }}>
-          <ChevronDown size={24} style={{ color: 'rgba(255,255,255,0.3)', animation: 'hero-bounce 2s ease-in-out infinite' }} />
         </div>
 
         </div>
