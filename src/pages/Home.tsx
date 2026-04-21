@@ -565,15 +565,15 @@ const Home = ({ showDock }: { showDock: boolean }) => {
 
       {/* ── PROGRAMS SECTION (WHITE) ── */}
       <div className="programs-section" style={{ padding: "56px 7%", position: "relative", zIndex: 1 }}>
-        <h2 style={{
+        <motion.h2 {...scrollReveal} style={{
           fontFamily: "'Michroma', sans-serif",
           fontSize: "clamp(20px, 2.5vw, 32px)", color: "#000",
           textTransform: "uppercase", textAlign: "center", marginBottom: 40,
         }}>
           CHOOSE YOUR FINGERPRINT
-        </h2>
+        </motion.h2>
 
-        <div className="programs-grid" style={{
+        <motion.div {...scrollStagger} className="programs-grid" style={{
           display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 16,
         }}>
           {[
@@ -581,7 +581,8 @@ const Home = ({ showDock }: { showDock: boolean }) => {
             { name: "Hack Bar", color: "#FF3B3B", rgba: "255,59,59", img: slider2, route: "/huella-roja", desc: "Nutrition engineered for performance. Every meal is a signal to your body." },
             { name: "Reset", color: "#22C55E", rgba: "34,197,94", img: slider3, video: "/videos/reset-card.mp4", route: "/huella-verde", desc: "Strategic recovery. Optimized sleep, restoration, and rebuilding protocols." },
           ].map((item) => (
-            <div
+            <motion.div
+              variants={blurRevealItem}
               key={item.name}
               className="pillar-card"
               onClick={() => navigate(item.route)}
@@ -706,9 +707,9 @@ const Home = ({ showDock }: { showDock: boolean }) => {
                   color: "rgba(255,255,255,0.5)", lineHeight: 1.5, textAlign: "left", margin: 0,
                 }}>{item.desc}</p>
               </div>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
 
       {/* ── Divider ── */}
