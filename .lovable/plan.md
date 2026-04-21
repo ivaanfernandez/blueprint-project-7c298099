@@ -1,54 +1,47 @@
 
-## Plan: Home About — descriptions, intensified glows, futuristic frame
+## Plan: Hero — poster + preload + fade-in, mobile = image only
 
-All three changes target only `src/pages/Home.tsx` (mobile features map at lines ~390–485 and edge-to-edge image at lines ~488–519). Keyframe additions go to `src/index.css`. No other files touched.
+Two files touched: `src/pages/Home.tsx` (hero block lines ~195–266) and `index.html` (preload links). Plus copy the uploaded poster into `public/`.
 
-### 1. Mobile feature descriptions
-Inside the mobile features array (lines ~390–420), add a `desc` field to each of the 4 entries:
-- `PROFESSIONAL TRAINING` → "Data-driven methodology built to forge strength, endurance, and resilience."
-- `NUTRITION ENGINEERING` → "Every meal is a signal. Optimize input, transform output."
-- `RECOVERY SCIENCE` → "Strategic rest, optimized sleep, and complete restoration protocols."
-- `MENTAL GROWTH` → "Build focus, discipline, and unshakable mental clarity."
+### 1. Add poster asset
+Copy the uploaded fingerprint poster to `public/poster_image.jpg` so `/poster_image.jpg` resolves at runtime. Filename kept exactly as specified.
 
-Restructure the card inner (line ~447) so the text region (currently a single `<span>` with the title) becomes a flex column `<div>` containing:
-- The existing title `<span>` (Michroma, 11px, uppercase) — unchanged.
-- A new `<p>` description: `font-family: 'Inter'`, `font-size: 13px`, `font-weight: 400`, `line-height: 1.5`, `color: rgba(0,0,0,0.6)`, `margin: 4px 0 0 0`.
+### 2. Rewrite hero background block (`src/pages/Home.tsx`, ~195–266)
+Keep the outer hero `<div>` (background `#070612`/black, `minHeight: 100vh`, flex centering, `overflow: hidden`) — only the background media layer changes. Inside it, before the existing dark overlay + `TextScramble` + bottom fade, render two breakpoint-scoped layers:
 
-The icon stays at left (flex-row of icon + text-column with `gap: 14`, `alignItems: flex-start` so icon aligns with the title line).
+- **Desktop (`hidden md:block`, `position: absolute, inset: 0`)**:
+  - `<img src="/poster_image.jpg">` — `objectFit: cover`, `objectPosition: center center`, `zIndex: 1`, `aria-hidden`.
+  - `<video src="/hero-bg.mp4" poster="/poster_image.jpg" autoPlay muted loop playsInline preload="auto">` — starts `opacity: 0`, `transition: opacity 0.8s ease-in-out`, `zIndex: 2`. `onLoadedData` sets `opacity: 1` on the element to crossfade in. Replaces the current `<source>`-based markup so we can attach `onLoadedData` and `poster` directly.
+- **Mobile (`block md:hidden`, `position: absolute, inset: 0`)**:
+  - Single `<img src="/poster_image.jpg">` — same cover/center styles, `zIndex: 1`. No `<video>` mounted on mobile, saving the 1.24 MB download.
 
-### 2. Intensified cyan glows on the 4 mobile feature cards
-Replace the two existing white/sky `conic-gradient` divs (lines ~430–445) with a single rotating cyan/white conic ring per card and update the static styling:
+The existing dark `rgba(0,0,0,0.65)` overlay stays but is bumped to `zIndex: 3` so it sits over both poster and video. The existing `hero-fade-bottom` gradient stays at `zIndex: 3` (now functions over either media). The `TextScramble` BLUEPRINT title is bumped from `zIndex: 2` to `zIndex: 4` so it stays above the new layering pile (poster 1 → video 2 → overlays 3 → content 4).
 
-- Outer wrapper: keep `padding: 1`, `borderRadius: 17`, `position: relative`, `overflow: hidden`, `isolation: isolate`. Add `border: 1px solid rgba(125,249,255,0.35)` and `boxShadow` stack:
-  - `0 0 0 1px rgba(125,249,255,0.15), 0 0 20px rgba(125,249,255,0.25), 0 0 40px rgba(125,249,255,0.15), inset 0 0 20px rgba(125,249,255,0.05)`.
-- Rotating ring `<div>` (`inset: -2px`): `background: conic-gradient(from 0deg, transparent 0%, rgba(125,249,255,0.8) 25%, rgba(255,255,255,1) 50%, rgba(125,249,255,0.8) 75%, transparent 100%)`, `borderRadius: 18`, `animation: glowSpin <speed> linear infinite`, `zIndex: 0`. The white card inner already covers the center, leaving only a bright rotating perimeter.
-- Per-card durations via inline animation override (passed in the array): 4s / 5s / 4.5s / 5.5s (Professional / Nutrition / Recovery / Mental).
-- Reuse the existing `@keyframes glowSpin` already injected at line ~385 — no CSS file edit needed for the spin.
+The floating dock above the hero (`position: fixed`, `zIndex: 50`) is untouched — its z-index already sits well above everything.
 
-Card inner background stays solid white `#FFFFFF` (replace the current `rgba(255,255,255,0.82)`/backdropFilter so the cyan ring reads cleanly against pure white).
+### 3. Preload links (`index.html`)
+Inside `<head>`, after the existing Google Fonts `<link>` and before `</head>`, add:
+```html
+<link rel="preload" as="image" href="/poster_image.jpg" />
+<link rel="preload" as="video" href="/hero-bg.mp4" type="video/mp4" media="(min-width: 768px)" />
+```
+The `media` attribute on the video preload prevents mobile browsers from prefetching the 1.24 MB video.
 
-### 3. Futuristic frame on the mobile edge-to-edge image
-Rebuild the inner image container (lines ~499–518) as a `position: relative` block keeping `aspectRatio: 16/9`, `borderRadius: 16`, `overflow: hidden`. Inside it:
-
-- The existing `<img>` (unchanged src `aboutImages[0]`, unchanged styles).
-- Vertical scan line: 100% width × 2px tall, absolutely positioned `left: 0`, `top: 0`, `background: linear-gradient(90deg, transparent, rgba(125,249,255,0.9), transparent)`, `boxShadow: 0 0 12px rgba(125,249,255,0.7)`, `animation: scan-vertical 4s linear infinite`, `pointerEvents: none`.
-- 4 corner brackets, each a 24×24 absolute div with `borderColor: rgba(125,249,255,0.85)`, `borderWidth: 2px`, offset 12px from the matching edges, with the appropriate `borderTop/Left/Right/Bottom` enabled per corner, `pointerEvents: none`.
-
-Add to `src/index.css` (positional keyframe — variant works inside `overflow: hidden`):
-```css
-@keyframes scan-vertical {
-  0%   { top: 0;             opacity: 0; }
-  5%   {                     opacity: 1; }
-  95%  {                     opacity: 1; }
-  100% { top: calc(100% - 2px); opacity: 0; }
-}
+### Layering summary
+```text
+zIndex 1  → poster <img>
+zIndex 2  → <video> (desktop only, fades 0→1 on loadeddata)
+zIndex 3  → dark overlay + bottom black fade
+zIndex 4  → TextScramble BLUEPRINT PROJECT title
+zIndex 50 → floating Dock (already fixed, untouched)
 ```
 
 ### Untouched
-- Desktop features array (line ~300) and rendering — keeps `Precision Training` casing it already has there only if not flagged; per prompt, the change is in the mobile/PROFESSIONAL block, which is already correct.
-- About slideshow column, "DESIGNED FOR THE HUMAN MACHINE" title, outer About card wrapper, "Choose Your Fingerprint" section, dock, footer.
-- All other pages and `scrollAnimations.ts`.
+- `<source>` → direct `src` swap on `<video>` is intentional (needed for `onLoadedData` + `poster`); all other video props (`autoPlay`, `muted`, `loop`, `playsInline`) preserved.
+- Dock, BLUEPRINT title content/animation, bottom fade height/colors, white-card About wrapper (`borderTopLeftRadius`, `marginTop` negative), every section after the hero.
+- `HuellaAzul.tsx`, `HuellaRoja.tsx`, `HuellaVerde.tsx`, `MainLanding.tsx`, all other files.
 
-### Files modified
-- `src/pages/Home.tsx`
-- `src/index.css` (single new keyframe)
+### Files modified / created
+- `public/poster_image.jpg` — new (copied from upload).
+- `src/pages/Home.tsx` — hero background block only.
+- `index.html` — two preload `<link>` tags in `<head>`.
