@@ -88,6 +88,32 @@ const Home = ({ showDock }: { showDock: boolean }) => {
     mq.addEventListener("change", onChange);
     return () => mq.removeEventListener("change", onChange);
   }, []);
+
+  // Hero video readiness — crossfade poster→video once enough data is buffered.
+  // Defensive: also check readyState on mount in case the video is already cached
+  // and the `canplay` event already fired before the listener attached.
+  const desktopVideoRef = useRef<HTMLVideoElement>(null);
+  const mobileVideoRef = useRef<HTMLVideoElement>(null);
+  const [desktopVideoReady, setDesktopVideoReady] = useState(false);
+  const [mobileVideoReady, setMobileVideoReady] = useState(false);
+
+  useEffect(() => {
+    const v = desktopVideoRef.current;
+    if (!v) return;
+    const onReady = () => setDesktopVideoReady(true);
+    v.addEventListener("canplay", onReady);
+    if (v.readyState >= 3) setDesktopVideoReady(true);
+    return () => v.removeEventListener("canplay", onReady);
+  }, [isDesktop]);
+
+  useEffect(() => {
+    const v = mobileVideoRef.current;
+    if (!v) return;
+    const onReady = () => setMobileVideoReady(true);
+    v.addEventListener("canplay", onReady);
+    if (v.readyState >= 3) setMobileVideoReady(true);
+    return () => v.removeEventListener("canplay", onReady);
+  }, []);
   useEffect(() => {
     const id = setInterval(
       () => setCurrentAboutImage((p) => (p + 1) % aboutImages.length),
@@ -213,6 +239,9 @@ const Home = ({ showDock }: { showDock: boolean }) => {
             src="/poster_image.jpg"
             alt=""
             aria-hidden="true"
+            fetchPriority="high"
+            loading="eager"
+            decoding="async"
             style={{
               position: "absolute",
               inset: 0,
@@ -221,10 +250,13 @@ const Home = ({ showDock }: { showDock: boolean }) => {
               objectFit: "cover",
               objectPosition: "center center",
               zIndex: 1,
+              opacity: desktopVideoReady ? 0 : 1,
+              transition: "opacity 0.8s ease-in-out",
             }}
           />
           {isDesktop && (
             <video
+              ref={desktopVideoRef}
               src="/hero-bg.mp4"
               poster="/poster_image.jpg"
               autoPlay
@@ -232,9 +264,6 @@ const Home = ({ showDock }: { showDock: boolean }) => {
               loop
               playsInline
               preload="auto"
-              onLoadedData={(e) => {
-                (e.currentTarget as HTMLVideoElement).style.opacity = "1";
-              }}
               style={{
                 position: "absolute",
                 inset: 0,
@@ -242,7 +271,7 @@ const Home = ({ showDock }: { showDock: boolean }) => {
                 height: "100%",
                 objectFit: "cover",
                 objectPosition: "center center",
-                opacity: 0,
+                opacity: desktopVideoReady ? 1 : 0,
                 transition: "opacity 0.8s ease-in-out",
                 zIndex: 2,
               }}
@@ -256,6 +285,9 @@ const Home = ({ showDock }: { showDock: boolean }) => {
             src="/poster_image.jpg"
             alt=""
             aria-hidden="true"
+            fetchPriority="high"
+            loading="eager"
+            decoding="async"
             style={{
               position: "absolute",
               inset: 0,
@@ -264,9 +296,12 @@ const Home = ({ showDock }: { showDock: boolean }) => {
               objectFit: "cover",
               objectPosition: "center center",
               zIndex: 1,
+              opacity: mobileVideoReady ? 0 : 1,
+              transition: "opacity 0.8s ease-in-out",
             }}
           />
           <video
+            ref={mobileVideoRef}
             src="/hero-bg-mobile.mp4"
             poster="/poster_image.jpg"
             autoPlay
@@ -274,9 +309,6 @@ const Home = ({ showDock }: { showDock: boolean }) => {
             loop
             playsInline
             preload="auto"
-            onLoadedData={(e) => {
-              (e.currentTarget as HTMLVideoElement).style.opacity = "1";
-            }}
             style={{
               position: "absolute",
               inset: 0,
@@ -284,7 +316,7 @@ const Home = ({ showDock }: { showDock: boolean }) => {
               height: "100%",
               objectFit: "cover",
               objectPosition: "center center",
-              opacity: 0,
+              opacity: mobileVideoReady ? 1 : 0,
               transition: "opacity 0.8s ease-in-out",
               zIndex: 2,
             }}
