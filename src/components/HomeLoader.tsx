@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 
 interface HomeLoaderProps {
   onComplete: () => void;
@@ -41,26 +41,36 @@ const HomeLoader = ({ onComplete }: HomeLoaderProps) => {
     return lines;
   }, [particles]);
 
+  // Keep latest onComplete in a ref so the timer effect runs exactly once
+  const onCompleteRef = useRef(onComplete);
+  useEffect(() => {
+    onCompleteRef.current = onComplete;
+  }, [onComplete]);
+  const hasCompletedRef = useRef(false);
+
   useEffect(() => {
     const exitTimer = setTimeout(() => {
       setIsExiting(true);
     }, 2500);
 
     const completeTimer = setTimeout(() => {
-      onComplete();
+      if (hasCompletedRef.current) return;
+      hasCompletedRef.current = true;
+      onCompleteRef.current();
     }, TOTAL_DURATION);
 
     return () => {
       clearTimeout(exitTimer);
       clearTimeout(completeTimer);
     };
-  }, [onComplete]);
+  }, []);
 
   return (
     <motion.div
       initial={{ opacity: 1 }}
       animate={{ opacity: isExiting ? 0 : 1 }}
       transition={{ duration: 0.3, ease: "easeOut" }}
+      aria-hidden={isExiting}
       style={{
         position: "fixed",
         inset: 0,
@@ -70,6 +80,7 @@ const HomeLoader = ({ onComplete }: HomeLoaderProps) => {
         justifyContent: "center",
         zIndex: 9999,
         overflow: "hidden",
+        pointerEvents: isExiting ? "none" : "auto",
       }}
     >
       <svg
