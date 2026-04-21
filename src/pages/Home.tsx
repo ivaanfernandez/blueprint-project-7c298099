@@ -42,7 +42,137 @@ const HUELLAS = [
   { color: "#22C55E", glow: "rgba(34,197,94,0.7)", route: "/huella-verde", tooltip: "RECUPERACIÓN" },
 ];
 
+/* ── Rotativo Assets (scan video + 3 holographic images) ── */
+const ROTATIVO_ASSETS = [
+  { type: "video" as const, src: "/videos/blueprint-gym.mp4", alt: "Laboratory scan" },
+  { type: "image" as const, src: "/rotativo/chef-holographic.jpg", alt: "Holographic kitchen" },
+  { type: "image" as const, src: "/rotativo/gym-holographic.jpg", alt: "Interactive home gym" },
+  { type: "image" as const, src: "/rotativo/project-blueprint.jpg", alt: "Project Blueprint community" },
+];
 
+const ROTATE_INTERVAL_MS = 6000;
+
+const RotativoAssets = () => {
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setActiveIndex((prev) => (prev + 1) % ROTATIVO_ASSETS.length);
+    }, ROTATE_INTERVAL_MS);
+    return () => clearInterval(interval);
+  }, []);
+
+  return (
+    <div className="scan-rotativo-wrapper" style={{ position: "relative", zIndex: 1 }}>
+      <div
+        style={{
+          position: "relative",
+          width: "100%",
+          aspectRatio: "3 / 4",
+          overflow: "hidden",
+          borderRadius: 16,
+          border: "1px solid rgba(125, 249, 255, 0.2)",
+          background: "#000000",
+        }}
+      >
+        {ROTATIVO_ASSETS.map((asset, index) => {
+          const isActive = index === activeIndex;
+          const commonStyle: React.CSSProperties = {
+            position: "absolute",
+            inset: 0,
+            width: "100%",
+            height: "100%",
+            objectFit: "cover",
+            objectPosition: "center center",
+            display: "block",
+            opacity: isActive ? 1 : 0,
+            transition: "opacity 0.8s ease-in-out",
+            zIndex: isActive ? 1 : 0,
+          };
+
+          if (asset.type === "video") {
+            return (
+              <video
+                key={asset.src}
+                autoPlay
+                muted
+                loop
+                playsInline
+                style={commonStyle}
+                aria-label={asset.alt}
+              >
+                <source src={asset.src} type="video/mp4" />
+              </video>
+            );
+          }
+          return (
+            <img
+              key={asset.src}
+              src={asset.src}
+              alt={asset.alt}
+              style={commonStyle}
+            />
+          );
+        })}
+
+        {/* Vertical scan line */}
+        <div
+          aria-hidden
+          style={{
+            position: "absolute",
+            left: 0,
+            top: 0,
+            width: "100%",
+            height: 2,
+            background: "linear-gradient(90deg, transparent, rgba(125,249,255,0.9), transparent)",
+            boxShadow: "0 0 12px rgba(125,249,255,0.7)",
+            animation: "scan-vertical 4s linear infinite",
+            pointerEvents: "none",
+            zIndex: 5,
+          }}
+        />
+
+        {/* Corner brackets */}
+        <div aria-hidden style={{ position: "absolute", top: 12, left: 12, width: 24, height: 24, borderTop: "2px solid rgba(125,249,255,0.85)", borderLeft: "2px solid rgba(125,249,255,0.85)", pointerEvents: "none", zIndex: 6 }} />
+        <div aria-hidden style={{ position: "absolute", top: 12, right: 12, width: 24, height: 24, borderTop: "2px solid rgba(125,249,255,0.85)", borderRight: "2px solid rgba(125,249,255,0.85)", pointerEvents: "none", zIndex: 6 }} />
+        <div aria-hidden style={{ position: "absolute", bottom: 12, left: 12, width: 24, height: 24, borderBottom: "2px solid rgba(125,249,255,0.85)", borderLeft: "2px solid rgba(125,249,255,0.85)", pointerEvents: "none", zIndex: 6 }} />
+        <div aria-hidden style={{ position: "absolute", bottom: 12, right: 12, width: 24, height: 24, borderBottom: "2px solid rgba(125,249,255,0.85)", borderRight: "2px solid rgba(125,249,255,0.85)", pointerEvents: "none", zIndex: 6 }} />
+
+        {/* Dots indicator */}
+        <div
+          aria-hidden
+          style={{
+            position: "absolute",
+            bottom: 20,
+            left: "50%",
+            transform: "translateX(-50%)",
+            display: "flex",
+            gap: 8,
+            alignItems: "center",
+            zIndex: 7,
+          }}
+        >
+          {ROTATIVO_ASSETS.map((_, index) => {
+            const isActive = index === activeIndex;
+            return (
+              <div
+                key={index}
+                style={{
+                  width: isActive ? 24 : 6,
+                  height: 6,
+                  borderRadius: 3,
+                  background: isActive ? "rgba(125,249,255,0.95)" : "rgba(255,255,255,0.4)",
+                  boxShadow: isActive ? "0 0 8px rgba(125,249,255,0.6)" : "none",
+                  transition: "width 0.4s ease, background 0.4s ease, box-shadow 0.4s ease",
+                }}
+              />
+            );
+          })}
+        </div>
+      </div>
+    </div>
+  );
+};
 
 
 /* ══════════════════════════════════════════════════════════ */
