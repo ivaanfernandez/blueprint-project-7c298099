@@ -11,8 +11,12 @@ interface ParallaxImageProps {
 }
 
 // SSR-safe reduced-motion check, read at module load.
+// Also honors test-only data-no-motion attribute on <html>.
 const prefersReducedMotion = (): boolean => {
   if (typeof window === "undefined" || !window.matchMedia) return false;
+  if (typeof document !== "undefined" && document.documentElement?.dataset?.noMotion === "true") {
+    return true;
+  }
   return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 };
 

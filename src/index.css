@@ -193,3 +193,13 @@ All colors MUST be HSL.
     transition-duration: 0.01ms !important;
   }
 }
+
+/* Test-only motion kill switch — set by App.tsx when ?nomotion=1 is present.
+   Used by visual regression tests to guarantee deterministic snapshots. */
+html[data-no-motion="true"] *,
+html[data-no-motion="true"] *::before,
+html[data-no-motion="true"] *::after {
+  animation: none !important;
+  transition: none !important;
+  scroll-behavior: auto !important;
+}
