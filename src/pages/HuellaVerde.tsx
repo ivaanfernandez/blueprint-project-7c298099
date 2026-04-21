@@ -5,6 +5,7 @@ import { scrollReveal, scrollStagger, blurRevealItem } from "@/lib/scrollAnimati
 import BiometricScanGreen from "@/components/BiometricScanGreen";
 import { TextScramble } from "@/components/ui/text-scramble";
 import BackToHomeButton from "@/components/BackToHomeButton";
+import ProceduralGroundBackground from "@/components/ProceduralGroundBackground";
 
 interface HuellaVerdeProps {
   showDock?: boolean;
@@ -20,7 +21,7 @@ const FingerprintSVG = ({ color = "#22C55E", size = 20 }: { color?: string; size
   </svg>
 );
 
-/* ── Dock (same pattern as other pages) ── */
+/* ── Dock (top of page) ── */
 const HUELLAS = [
   { label: "Training", color: "#1A6BFF", path: "/huella-azul" },
   { label: "Hack Bar", color: "#FF3B3B", path: "/huella-roja" },
@@ -33,9 +34,9 @@ const Dock = ({ show }: { show: boolean }) => {
     <div
       style={{
         position: "fixed",
-        bottom: 24,
+        top: 24,
         left: "50%",
-        transform: `translateX(-50%) translateY(${show ? 0 : 80}px)`,
+        transform: `translateX(-50%) translateY(${show ? 0 : -80}px)`,
         opacity: show ? 1 : 0,
         transition: "transform 0.6s cubic-bezier(.4,0,.2,1), opacity 0.6s ease",
         zIndex: 50,
@@ -82,21 +83,21 @@ const Dock = ({ show }: { show: boolean }) => {
   );
 };
 
-/* ── Data ── */
+/* ── Data (English) ── */
 const RECOVERY_TOP = [
-  { name: "INFRARED SAUNA", desc: "Eliminación profunda de toxinas, mejora del sueño reparador y estimulación natural de colágeno." },
-  { name: "ICE BATH THERAPY", desc: "Control del sistema nervioso, reducción de inflamación y optimización de claridad mental." },
-  { name: "COMPRESSION THERAPY", desc: "Drenaje linfático avanzado, mejora de circulación y recuperación acelerada." },
+  { name: "INFRARED SAUNA", desc: "Deep toxin elimination, restorative sleep enhancement and natural collagen stimulation." },
+  { name: "ICE BATH THERAPY", desc: "Nervous system control, inflammation reduction and mental clarity optimization." },
+  { name: "COMPRESSION THERAPY", desc: "Advanced lymphatic drainage, improved circulation and accelerated recovery." },
 ];
 const RECOVERY_BOT = [
-  { name: "MOBILITY & BREATHING", desc: "Respiración consciente y movilidad funcional para restaurar rango de movimiento." },
-  { name: "MASSAGES & BODYWORK", desc: "Masaje deportivo, relajante profundo o tejidos profundos adaptados a tus necesidades." },
+  { name: "MOBILITY & BREATHING", desc: "Conscious breathing and functional mobility to restore range of motion." },
+  { name: "MASSAGES & BODYWORK", desc: "Sports, deep relaxation or deep-tissue massage tailored to your needs." },
 ];
 const SERVICIOS = [
-  { num: "01", name: "RECOVERY PROTOCOLS PERSONALIZADOS", desc: "Diseñados específicamente por nuestro equipo de expertos según tus objetivos: rendimiento deportivo, longevidad celular, relajación profunda o enfoque mental superior." },
-  { num: "02", name: "RESET PASS", desc: "Acceso ilimitado a todos los Wellness Days, descuentos especiales en masajes profesionales y productos exclusivos del HackBar." },
-  { num: "03", name: "CORPORATE RECOVERY PROGRAMS", desc: "Paquetes empresariales diseñados para mejorar la salud física, mental y el rendimiento de tus empleados. Invierte en tu equipo, invierte en resultados." },
-  { num: "04", name: "RESET RETREATS", desc: "Próximamente: experiencias inmersivas de 72 horas con detox guiado, ayuno terapéutico, sauna prolongada, meditación profunda y reconexión total con la naturaleza." },
+  { num: "01", name: "PERSONALIZED RECOVERY PROTOCOLS", desc: "Designed by our expert team based on your goals: athletic performance, cellular longevity, deep relaxation or superior mental focus." },
+  { num: "02", name: "RESET PASS", desc: "Unlimited access to all Wellness Days, special discounts on professional massages and exclusive HackBar products." },
+  { num: "03", name: "CORPORATE RECOVERY PROGRAMS", desc: "Corporate packages designed to improve physical and mental health and the performance of your team. Invest in your team, invest in results." },
+  { num: "04", name: "RESET RETREATS", desc: "Coming soon: 72-hour immersive experiences with guided detox, therapeutic fasting, extended sauna, deep meditation and full reconnection with nature." },
 ];
 
 const scanDelays = [0, 1, 2, 0.5, 1.5];
@@ -110,6 +111,7 @@ const HuellaVerde = ({ showDock = true }: HuellaVerdeProps) => {
 
   return (
     <>
+      <ProceduralGroundBackground />
       <style>{`
         @keyframes hvScanLine {
           0% { top: 0; opacity: 0; }
@@ -126,7 +128,6 @@ const HuellaVerde = ({ showDock = true }: HuellaVerdeProps) => {
         @media (max-width: 767px) {
           .hv-hero-text { padding: 60px 6% 20px !important; }
           .hv-hero-title { font-size: clamp(32px, 10vw, 48px) !important; }
-          .hv-hero-subtitle { font-size: 13px !important; padding: 0 4%; }
           .hv-photo-strip { height: 200px !important; min-height: 180px !important; }
           .hv-grid-top, .hv-grid-bot { grid-template-columns: 1fr !important; }
           .hv-grid-top .hv-card, .hv-grid-bot .hv-card { min-height: 240px !important; }
@@ -140,39 +141,33 @@ const HuellaVerde = ({ showDock = true }: HuellaVerdeProps) => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.8 }}
-        style={{ backgroundColor: "#0a0a0a", minHeight: "100vh", overflowX: "hidden", fontFamily: "'Space Grotesk', sans-serif" }}
+        style={{ backgroundColor: "transparent", minHeight: "100vh", overflowX: "hidden", fontFamily: "'Space Grotesk', sans-serif", position: "relative", zIndex: 1 }}
       >
         <Dock show={showDock} />
 
         {/* ── HERO ── */}
-        <section style={{ minHeight: "100vh", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", position: "relative", overflow: "hidden" }}>
+        <section style={{ minHeight: "100vh", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", position: "relative", overflow: "hidden", background: "transparent" }}>
           {/* Ambient glow */}
           <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse at 50% 30%, rgba(34,197,94,0.06) 0%, transparent 60%)", pointerEvents: "none" }} />
 
           {/* Text */}
           <div className="hv-hero-text" style={{ textAlign: "center", display: "flex", flexDirection: "column", alignItems: "center", gap: 16, padding: "80px 7% 32px", zIndex: 2 }}>
-            <span style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 10, letterSpacing: "0.25em", color: "rgba(34,197,94,0.5)", textTransform: "uppercase" }}>
-              BLUEPRINT SYSTEM
-            </span>
             <TextScramble
               className="hv-hero-title"
               style={{ fontFamily: "'Michroma', sans-serif", fontSize: "clamp(40px, 6vw, 72px)", color: "#FFFFFF", textTransform: "uppercase", letterSpacing: "0.04em", lineHeight: 1.08 }}
             >
               RESET
             </TextScramble>
-            <p className="hv-hero-subtitle" style={{ fontFamily: "'Inter', sans-serif", fontSize: 15, fontWeight: 300, color: "rgba(255,255,255,0.4)", lineHeight: 1.7, maxWidth: 520, textAlign: "center" }}>
-              Donde el cuerpo se restaura, la mente se recalibra y la energía se regenera desde lo más profundo.
-            </p>
           </div>
 
           {/* Photo strip */}
           <div className="hv-photo-strip" style={{ width: "100%", height: "35vh", minHeight: 250, maxHeight: 400, position: "relative", overflow: "hidden", marginTop: 20 }}>
-            <div style={{ width: "100%", height: "100%", backgroundColor: "#1a1a1a" }} />
+            <div style={{ width: "100%", height: "100%", backgroundColor: "rgba(26,26,26,0.5)" }} />
             {/* Fades */}
-            <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 80, background: "linear-gradient(to bottom, #0a0a0a, transparent)", zIndex: 1 }} />
-            <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, height: 60, background: "linear-gradient(to bottom, transparent, #0a0a0a)", zIndex: 1 }} />
-            <div style={{ position: "absolute", top: 0, left: 0, width: 60, height: "100%", background: "linear-gradient(to right, #0a0a0a, transparent)", zIndex: 1 }} />
-            <div style={{ position: "absolute", top: 0, right: 0, width: 60, height: "100%", background: "linear-gradient(to left, #0a0a0a, transparent)", zIndex: 1 }} />
+            <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 80, background: "linear-gradient(to bottom, rgba(10,10,10,0.6), transparent)", zIndex: 1 }} />
+            <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, height: 60, background: "linear-gradient(to bottom, transparent, rgba(10,10,10,0.6))", zIndex: 1 }} />
+            <div style={{ position: "absolute", top: 0, left: 0, width: 60, height: "100%", background: "linear-gradient(to right, rgba(10,10,10,0.6), transparent)", zIndex: 1 }} />
+            <div style={{ position: "absolute", top: 0, right: 0, width: 60, height: "100%", background: "linear-gradient(to left, rgba(10,10,10,0.6), transparent)", zIndex: 1 }} />
           </div>
 
           {/* Green accent line */}
@@ -182,20 +177,20 @@ const HuellaVerde = ({ showDock = true }: HuellaVerdeProps) => {
         {/* ── RECOVERY ROOM ── */}
         <motion.section
           {...scrollReveal}
-          style={{ background: "#0a0a0a", padding: "72px 7%", position: "relative", zIndex: 1 }}
+          style={{ background: "rgba(0,0,0,0.4)", padding: "72px 7%", position: "relative", zIndex: 1 }}
         >
-          <motion.h2 {...scrollReveal} style={{ fontFamily: "'Michroma', sans-serif", fontSize: "clamp(16px, 2vw, 24px)", color: "#FFFFFF", textTransform: "uppercase", letterSpacing: "0.04em", marginBottom: 8 }}>
+          <motion.h2 {...scrollReveal} style={{ fontFamily: "'Michroma', sans-serif", fontSize: "clamp(16px, 2vw, 24px)", color: "#FFFFFF", textTransform: "uppercase", letterSpacing: "0.04em", marginBottom: 32, textAlign: "center" }}>
             RECOVERY ROOM
           </motion.h2>
-          <motion.p {...scrollReveal} style={{ fontFamily: "'Inter', sans-serif", fontSize: 14, color: "rgba(255,255,255,0.35)", marginBottom: 32 }}>
-            Tu zona de Reset. Disponible exclusivamente para miembros de BlueprintLab.
-          </motion.p>
 
           {/* Top 3 */}
           <motion.div {...scrollStagger} className="hv-grid-top" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 20, marginBottom: 20 }}>
             {RECOVERY_TOP.map((card, i) => (
-              <motion.div variants={blurRevealItem} key={card.name} className="hv-card" style={{ borderRadius: 14, minHeight: 320, position: "relative", overflow: "hidden", display: "flex", flexDirection: "column", justifyContent: "flex-end", padding: "24px 20px", cursor: "pointer" }}>
-                <div style={{ position: "absolute", inset: 0, backgroundColor: "#1a1a1a" }} />
+              <motion.div variants={blurRevealItem} key={card.name} className="hv-card" style={{ borderRadius: 14, minHeight: 320, position: "relative", overflow: "hidden", display: "flex", flexDirection: "column", justifyContent: "flex-end", padding: "24px 20px", cursor: "pointer", background: "rgba(0,0,0,0.7)", backdropFilter: "blur(8px)", WebkitBackdropFilter: "blur(8px)" }}>
+                {/* Image placeholder */}
+                <div aria-hidden style={{ position: "absolute", inset: 0, background: "linear-gradient(135deg, rgba(34,197,94,0.08) 0%, rgba(0,0,0,0.6) 100%)", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                  <span style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 9, letterSpacing: "0.3em", color: "rgba(255,255,255,0.18)", textTransform: "uppercase" }}>IMAGE COMING SOON</span>
+                </div>
                 <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(0,0,0,0.85) 10%, rgba(0,0,0,0.3) 55%, rgba(0,0,0,0.05) 100%)", zIndex: 1 }} />
                 {/* Scan line */}
                 <div style={{ position: "absolute", left: 0, right: 0, height: 1, background: "linear-gradient(to right, transparent, rgba(34,197,94,0.25), transparent)", animation: `hvScanLine 5s ease-in-out ${scanDelays[i]}s infinite`, zIndex: 2, pointerEvents: "none" }} />
@@ -213,8 +208,10 @@ const HuellaVerde = ({ showDock = true }: HuellaVerdeProps) => {
           {/* Bottom 2 */}
           <motion.div {...scrollStagger} className="hv-grid-bot" style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: 20 }}>
             {RECOVERY_BOT.map((card, i) => (
-              <motion.div variants={blurRevealItem} key={card.name} className="hv-card" style={{ borderRadius: 14, minHeight: 220, position: "relative", overflow: "hidden", display: "flex", flexDirection: "column", justifyContent: "flex-end", padding: "24px 20px", cursor: "pointer" }}>
-                <div style={{ position: "absolute", inset: 0, backgroundColor: "#1a1a1a" }} />
+              <motion.div variants={blurRevealItem} key={card.name} className="hv-card" style={{ borderRadius: 14, minHeight: 220, position: "relative", overflow: "hidden", display: "flex", flexDirection: "column", justifyContent: "flex-end", padding: "24px 20px", cursor: "pointer", background: "rgba(0,0,0,0.7)", backdropFilter: "blur(8px)", WebkitBackdropFilter: "blur(8px)" }}>
+                <div aria-hidden style={{ position: "absolute", inset: 0, background: "linear-gradient(135deg, rgba(34,197,94,0.08) 0%, rgba(0,0,0,0.6) 100%)", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                  <span style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 9, letterSpacing: "0.3em", color: "rgba(255,255,255,0.18)", textTransform: "uppercase" }}>IMAGE COMING SOON</span>
+                </div>
                 <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(0,0,0,0.85) 10%, rgba(0,0,0,0.3) 55%, rgba(0,0,0,0.05) 100%)", zIndex: 1 }} />
                 <div style={{ position: "absolute", left: 0, right: 0, height: 1, background: "linear-gradient(to right, transparent, rgba(34,197,94,0.25), transparent)", animation: `hvScanLine 5s ease-in-out ${scanDelays[i + 3]}s infinite`, zIndex: 2, pointerEvents: "none" }} />
                 <div style={{ position: "absolute", bottom: 0, left: "20%", right: "20%", height: 2, background: "linear-gradient(to right, transparent, #22C55E, transparent)", zIndex: 2 }} />
@@ -227,17 +224,17 @@ const HuellaVerde = ({ showDock = true }: HuellaVerdeProps) => {
           </motion.div>
         </motion.section>
 
-        {/* ── SERVICIOS PREMIUM ── */}
+        {/* ── PREMIUM SERVICES ── */}
         <motion.section
           {...scrollReveal}
           className="hv-servicios"
-          style={{ background: "#0a0a0a", padding: "0 7% 72px", position: "relative", zIndex: 1 }}
+          style={{ background: "rgba(0,0,0,0.4)", padding: "0 7% 72px", position: "relative", zIndex: 1 }}
         >
           <motion.h2 {...scrollReveal} style={{ fontFamily: "'Michroma', sans-serif", fontSize: "clamp(16px, 2vw, 24px)", color: "#FFFFFF", textTransform: "uppercase", letterSpacing: "0.04em", marginBottom: 8 }}>
-            SERVICIOS PREMIUM
+            PREMIUM SERVICES
           </motion.h2>
           <motion.p {...scrollReveal} style={{ fontFamily: "'Inter', sans-serif", fontSize: 14, color: "rgba(255,255,255,0.35)", marginBottom: 32 }}>
-            Protocolos avanzados para miembros comprometidos con su evolución.
+            Advanced protocols for members committed to their evolution.
           </motion.p>
 
           <motion.div {...scrollStagger}>
@@ -259,7 +256,7 @@ const HuellaVerde = ({ showDock = true }: HuellaVerdeProps) => {
         </motion.section>
 
         {/* ── FOOTER ── */}
-        <motion.footer {...scrollReveal} className="hv-footer" style={{ padding: "40px 7%", borderTop: "1px solid rgba(34,197,94,0.08)", display: "flex", flexDirection: "column", alignItems: "center", gap: 16, background: "#0a0a0a" }}>
+        <motion.footer {...scrollReveal} className="hv-footer" style={{ padding: "40px 7%", borderTop: "1px solid rgba(34,197,94,0.08)", display: "flex", flexDirection: "column", alignItems: "center", gap: 16, background: "rgba(0,0,0,0.4)" }}>
           <FingerprintSVG color="#22C55E" size={32} />
           <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 12, color: "rgba(255,255,255,0.25)" }}>Reset — Blueprint Project</p>
           <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 10, color: "rgba(255,255,255,0.15)" }}>© 2025 Blueprint Project</p>
