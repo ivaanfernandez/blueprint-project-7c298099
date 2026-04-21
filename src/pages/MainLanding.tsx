@@ -13,6 +13,7 @@ import { InteractiveImageAccordion } from '@/components/ui/interactive-image-acc
 import PricingSection from '@/components/PricingSection';
 import BentoGrid from '@/components/BentoGrid';
 import Footer from '@/components/Footer';
+import BackToHomeButton from '@/components/BackToHomeButton';
 import slider1 from '@/assets/slider/slider-1.jpg';
 import slider2 from '@/assets/slider/slider-2.jpg';
 import slider3 from '@/assets/slider/slider-3.jpg';
@@ -696,6 +697,7 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
           }
         }
       `}</style>
+      <BackToHomeButton />
     </motion.div>
   );
 };
