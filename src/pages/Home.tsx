@@ -286,17 +286,17 @@ const Home = ({ showDock }: { showDock: boolean }) => {
         }}>
           {/* Left — Title + Subtitle + Timeline */}
           <div style={{ flex: 1, display: "flex", flexDirection: "column" as const, ...(window.innerWidth >= 768 ? {} : { flexGrow: 0 }) }}>
-            <h2 className="about-title-line" style={{
+            <motion.h2 {...scrollReveal} className="about-title-line" style={{
               fontFamily: "'Michroma', sans-serif",
               fontSize: "clamp(18px, 2.2vw, 28px)", color: "#000",
               textTransform: "uppercase", lineHeight: 1.12,
               marginBottom: window.innerWidth < 768 ? 32 : 48, marginTop: 0,
             }}>
               DESIGNED FOR THE HUMAN MACHINE
-            </h2>
+            </motion.h2>
 
             {/* Features (DESKTOP) — glassmorphism with animated glow border */}
-            <div className="about-features-desktop" style={{ position: "relative", flexGrow: 1, display: "flex", flexDirection: "column" as const, gap: 16, justifyContent: window.innerWidth < 768 ? "flex-start" : "space-between" }}>
+            <motion.div {...scrollStagger} className="about-features-desktop" style={{ position: "relative", flexGrow: 1, display: "flex", flexDirection: "column" as const, gap: 16, justifyContent: window.innerWidth < 768 ? "flex-start" : "space-between" }}>
               {[
                 { title: "Precision Training", desc: "Data-driven methodology built to forge strength, endurance, and resilience.", rgba: "26,107,255", sharpSpeed: 6, blurSpeed: 8, icon: (
                   <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#1A6BFF" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
@@ -319,7 +319,7 @@ const Home = ({ showDock }: { showDock: boolean }) => {
                   </svg>
                 )},
               ].map((step) => (
-                <div key={step.title} style={{
+                <motion.div variants={blurRevealItem} key={step.title} style={{
                   position: "relative",
                   padding: 1,
                   borderRadius: 17,
