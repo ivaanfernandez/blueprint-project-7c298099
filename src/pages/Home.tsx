@@ -716,15 +716,36 @@ const Home = ({ showDock }: { showDock: boolean }) => {
 
       </div>{/* END WHITE ZONE WRAPPER */}
 
-      {/* ── FOOTER (DARK) ── */}
-      <div style={{
-        background: "#0a0a0a",
-        padding: "60px 7% 32px",
-        textAlign: "center" as const,
+      {/* ── FOOTER (DARK with hands background) ── */}
+      <div className="footer-bg-wrapper" style={{
         position: "relative" as const,
+        backgroundImage: "url('/footer-bg.jpeg')",
+        backgroundSize: "cover",
+        backgroundPosition: "center center",
+        backgroundRepeat: "no-repeat",
+        overflow: "hidden",
+        minHeight: 560,
+        padding: "96px 7% 48px",
+        display: "flex",
+        flexDirection: "column" as const,
+        justifyContent: "center" as const,
+        alignItems: "center" as const,
+        textAlign: "center" as const,
       }}>
-        <FooterBackground />
-        <div style={{ position: "relative", zIndex: 1 }}>
+        <style>{`
+          @media (max-width: 767px) {
+            .footer-bg-wrapper { min-height: 480px !important; padding: 72px 6% 32px !important; }
+            .footer-bg-overlay { background: rgba(0, 0, 0, 0.65) !important; }
+          }
+        `}</style>
+        <div className="footer-bg-overlay" style={{
+          position: "absolute" as const,
+          inset: 0,
+          background: "rgba(0, 0, 0, 0.55)",
+          pointerEvents: "none" as const,
+          zIndex: 1,
+        }} />
+        <div style={{ position: "relative", zIndex: 2, width: "100%", display: "flex", flexDirection: "column" as const, alignItems: "center" as const, gap: 0 }}>
         {/* Blue accent line */}
         <div style={{
           width: 40,
@@ -742,6 +763,7 @@ const Home = ({ showDock }: { showDock: boolean }) => {
           letterSpacing: "0.04em",
           marginBottom: 10,
           marginTop: 0,
+          textShadow: "0 2px 16px rgba(0, 0, 0, 0.85)",
         }}>
           Enter the Blueprint
         </h2>
@@ -751,8 +773,9 @@ const Home = ({ showDock }: { showDock: boolean }) => {
           fontFamily: "'Inter', sans-serif",
           fontSize: 13,
           fontWeight: 300,
-          color: "rgba(255,255,255,0.3)",
+          color: "rgba(255,255,255,0.75)",
           marginBottom: 32,
+          textShadow: "0 1px 8px rgba(0, 0, 0, 0.75)",
         }}>
           Your evolution begins with a single step.
         </p>
@@ -853,15 +876,17 @@ const Home = ({ showDock }: { showDock: boolean }) => {
           <span style={{
             fontFamily: "'Michroma', sans-serif",
             fontSize: 8,
-            color: "rgba(255,255,255,0.25)",
+            color: "rgba(255,255,255,0.55)",
             letterSpacing: "0.2em",
+            textShadow: "0 1px 4px rgba(0, 0, 0, 0.7)",
           }}>
             BLUEPRINT PROJECT
           </span>
           <span style={{
             fontFamily: "'Inter', sans-serif",
             fontSize: 8,
-            color: "rgba(255,255,255,0.1)",
+            color: "rgba(255,255,255,0.4)",
+            textShadow: "0 1px 4px rgba(0, 0, 0, 0.7)",
           }}>
             © 2025 Blueprint Project
           </span>
