@@ -758,7 +758,7 @@ const Home = ({ showDock }: { showDock: boolean }) => {
         }} />
 
         {/* Title */}
-        <h2 style={{
+        <motion.h2 {...scrollReveal} style={{
           fontFamily: "'Michroma', sans-serif",
           fontSize: "clamp(24px, 4vw, 36px)",
           color: "#FFFFFF",
@@ -769,10 +769,10 @@ const Home = ({ showDock }: { showDock: boolean }) => {
           textShadow: "0 2px 16px rgba(0, 0, 0, 0.85)",
         }}>
           Enter the Blueprint
-        </h2>
+        </motion.h2>
 
         {/* Subtitle */}
-        <p style={{
+        <motion.p {...scrollReveal} style={{
           fontFamily: "'Inter', sans-serif",
           fontSize: 13,
           fontWeight: 300,
@@ -781,10 +781,10 @@ const Home = ({ showDock }: { showDock: boolean }) => {
           textShadow: "0 1px 8px rgba(0, 0, 0, 0.75)",
         }}>
           Your evolution begins with a single step.
-        </p>
+        </motion.p>
 
         {/* Buttons */}
-        <div style={{
+        <motion.div {...scrollStagger} style={{
           display: "flex",
           justifyContent: "center",
           gap: 14,
