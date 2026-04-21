@@ -870,7 +870,6 @@ const Home = ({ showDock }: { showDock: boolean }) => {
         </div>{/* end z-index wrapper */}
       </div>
     </motion.div>
-    </>
   );
 };
 
