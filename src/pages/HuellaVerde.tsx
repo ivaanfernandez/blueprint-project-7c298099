@@ -204,8 +204,13 @@ const HuellaVerde = ({ showDock = true }: HuellaVerdeProps) => {
           <motion.div {...scrollStagger} className="hv-grid-bot" style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: 20 }}>
             {RECOVERY_BOT.map((card, i) => (
               <motion.div variants={blurRevealItem} key={card.name} className="hv-card" style={{ borderRadius: 14, minHeight: 220, position: "relative", overflow: "hidden", display: "flex", flexDirection: "column", justifyContent: "flex-end", padding: "24px 20px", cursor: "pointer", background: "rgba(0,0,0,0.7)", backdropFilter: "blur(8px)", WebkitBackdropFilter: "blur(8px)" }}>
-                <div aria-hidden style={{ position: "absolute", inset: 0, background: "linear-gradient(135deg, rgba(34,197,94,0.08) 0%, rgba(0,0,0,0.6) 100%)", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                  <span style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 9, letterSpacing: "0.3em", color: "rgba(255,255,255,0.18)", textTransform: "uppercase" }}>IMAGE COMING SOON</span>
+                <div aria-hidden style={{ position: "absolute", inset: 0, background: "linear-gradient(135deg, rgba(34,197,94,0.15) 0%, rgba(0,0,0,0.8) 100%)", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                  <img
+                    src={card.img}
+                    alt={card.name}
+                    style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
+                    onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = "none"; }}
+                  />
                 </div>
                 <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(0,0,0,0.85) 10%, rgba(0,0,0,0.3) 55%, rgba(0,0,0,0.05) 100%)", zIndex: 1 }} />
                 <div style={{ position: "absolute", left: 0, right: 0, height: 1, background: "linear-gradient(to right, transparent, rgba(34,197,94,0.25), transparent)", animation: `hvScanLine 5s ease-in-out ${scanDelays[i + 3]}s infinite`, zIndex: 2, pointerEvents: "none" }} />
