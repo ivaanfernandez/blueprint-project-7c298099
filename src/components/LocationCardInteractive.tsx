@@ -58,19 +58,20 @@ const getGymStatus = () => {
   return { isOpen: false, label: "CLOSED", nextChange: "Opens tomorrow 5:00 AM" };
 };
 
-// Gimmick: número plausible de miembros entrenando según hora del día
-const getMembersTraining = () => {
+// Generar número de cupos/slots disponibles (gimmick de conversión)
+const getSlotsOpen = () => {
   const prTime = getPRTime();
   const hour = prTime.getHours();
 
-  let baseMin = 5;
-  let baseMax = 12;
+  // En horas pico hay MENOS slots (mayor urgencia). En horas bajas hay MÁS.
+  let baseMin = 8;
+  let baseMax = 18;
 
-  if (hour >= 6 && hour < 9) { baseMin = 18; baseMax = 32; }
-  else if (hour >= 9 && hour < 12) { baseMin = 10; baseMax = 20; }
-  else if (hour >= 12 && hour < 16) { baseMin = 8; baseMax = 15; }
-  else if (hour >= 16 && hour < 20) { baseMin = 20; baseMax = 34; }
-  else if (hour >= 20 && hour < 22) { baseMin = 10; baseMax = 18; }
+  if (hour >= 6 && hour < 9) { baseMin = 2; baseMax = 6; }
+  else if (hour >= 9 && hour < 12) { baseMin = 5; baseMax = 12; }
+  else if (hour >= 12 && hour < 16) { baseMin = 8; baseMax = 16; }
+  else if (hour >= 16 && hour < 20) { baseMin = 2; baseMax = 5; }
+  else if (hour >= 20 && hour < 22) { baseMin = 6; baseMax = 12; }
 
   return Math.floor(Math.random() * (baseMax - baseMin + 1)) + baseMin;
 };
