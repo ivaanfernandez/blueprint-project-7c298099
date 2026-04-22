@@ -7,7 +7,7 @@ const BackToHomeButton = () => {
     <div
       style={{
         width: "100%",
-        background: "#000000",
+        background: "transparent",
         padding: "48px 6% 72px",
         display: "flex",
         justifyContent: "center",
