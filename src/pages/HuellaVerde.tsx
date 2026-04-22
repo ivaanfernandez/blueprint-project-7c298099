@@ -5,7 +5,6 @@ import { scrollReveal, scrollStagger, blurRevealItem } from "@/lib/scrollAnimati
 import BiometricScanGreen from "@/components/BiometricScanGreen";
 import { TextScramble } from "@/components/ui/text-scramble";
 import BackToHomeButton from "@/components/BackToHomeButton";
-import ProceduralGroundBackground from "@/components/ProceduralGroundBackground";
 import resetHeroBg from "@/assets/reset-hero-bg.jpg";
 
 interface HuellaVerdeProps {
@@ -86,7 +85,7 @@ const Dock = ({ show }: { show: boolean }) => {
 
 /* ── Data (English) ── */
 const RECOVERY_CARDS = [
-  { name: "INFRARED SAUNA", img: "https://images.unsplash.com/photo-1635321593200-e88cbd876f56?w=800&auto=format&fit=crop" },
+  { name: "INFRARED SAUNA", img: "https://images.unsplash.com/photo-1685948670617-0f26cb4997bb?w=800&auto=format&fit=crop" },
   { name: "ICE BATH THERAPY", img: "https://images.unsplash.com/photo-1682687220795-796d3f6f7000?w=800&auto=format&fit=crop" },
   { name: "MOBILITY & BREATHING", img: "https://images.unsplash.com/photo-1545205597-3d9d02c29597?w=800&auto=format&fit=crop" },
   { name: "MASSAGES & BODYWORK", img: "https://images.unsplash.com/photo-1600334129128-685c5582fd35?w=800&auto=format&fit=crop" },
@@ -109,7 +108,7 @@ const HuellaVerde = ({ showDock = true }: HuellaVerdeProps) => {
 
   return (
     <>
-      <ProceduralGroundBackground />
+      <div className="verde-animated-bg" aria-hidden="true" />
       <style>{`
         @keyframes hvScanLine {
           0% { top: 0; opacity: 0; }
