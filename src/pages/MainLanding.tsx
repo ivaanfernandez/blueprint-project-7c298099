@@ -12,6 +12,7 @@ import { InteractiveImageAccordion } from '@/components/ui/interactive-image-acc
 import PricingSection from '@/components/PricingSection';
 import BentoGrid from '@/components/BentoGrid';
 import BackToHomeButton from '@/components/BackToHomeButton';
+import GradualBlur from '@/components/GradualBlur';
 import slider1 from '@/assets/slider/slider-1.jpg';
 import slider2 from '@/assets/slider/slider-2.jpg';
 import slider3 from '@/assets/slider/slider-3.jpg';
@@ -348,6 +349,16 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
           </div>
         </div>
 
+        {/* Cinematic blur fade-out at hero bottom */}
+        <GradualBlur
+          position="bottom"
+          height="6rem"
+          strength={2}
+          divCount={5}
+          opacity={0.9}
+          curve="bezier"
+          zIndex={20}
+        />
       </section>
 
       <ProceduralBackground />

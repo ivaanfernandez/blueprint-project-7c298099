@@ -5,6 +5,7 @@ import { scrollReveal, scrollStagger, blurRevealItem } from "@/lib/scrollAnimati
 import BiometricScanGreen from "@/components/BiometricScanGreen";
 import { TextScramble } from "@/components/ui/text-scramble";
 import BackToHomeButton from "@/components/BackToHomeButton";
+import GradualBlur from "@/components/GradualBlur";
 import resetHeroBg from "@/assets/reset-hero-bg.jpg";
 
 interface HuellaVerdeProps {
@@ -176,6 +177,9 @@ const HuellaVerde = ({ showDock = true }: HuellaVerdeProps) => {
 
           {/* Green accent line */}
           <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, height: 1, background: "linear-gradient(to right, transparent, rgba(34,197,94,0.3), transparent)", zIndex: 2 }} />
+
+          {/* Cinematic blur fade-out at hero bottom */}
+          <GradualBlur position="bottom" height="6rem" strength={2} divCount={5} opacity={0.9} curve="bezier" zIndex={3} />
         </section>
 
         {/* ── RECOVERY ROOM ── */}

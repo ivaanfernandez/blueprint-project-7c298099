@@ -5,6 +5,7 @@ import { scrollReveal, scrollStagger, blurRevealItem } from "@/lib/scrollAnimati
 import ProceduralBackgroundWhite from "@/components/ProceduralBackgroundWhite";
 import FooterBackground from "@/components/FooterBackground";
 import FeatureCard from "@/components/FeatureCard";
+import GradualBlur from "@/components/GradualBlur";
 
 
 import { TextScramble } from "@/components/ui/text-scramble";
@@ -372,6 +373,17 @@ const Home = ({ showDock }: { showDock: boolean }) => {
           zIndex: 3,
           pointerEvents: "none",
         }} />
+
+        {/* Cinematic blur fade-out at hero bottom (subtle — Silk WebGL co-exists) */}
+        <GradualBlur
+          position="bottom"
+          height="5rem"
+          strength={1.5}
+          divCount={4}
+          opacity={0.85}
+          curve="bezier"
+          zIndex={4}
+        />
       </div>
 
 {/* ══════════════════════════════════════════════════════ */}

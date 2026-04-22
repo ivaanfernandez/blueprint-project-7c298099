@@ -7,6 +7,7 @@ import { TextScramble } from "@/components/ui/text-scramble";
 import { Dock, DockIcon } from "@/components/ui/dock";
 import ElectricBorder from "@/components/ElectricBorder";
 import BackToHomeButton from "@/components/BackToHomeButton";
+import GradualBlur from "@/components/GradualBlur";
 import chefImage from "@/assets/meet-the-chef.jpg";
 import heroHackbarDesktop from "@/assets/hero-hackbar-desktop.jpg";
 
@@ -466,6 +467,8 @@ const HuellaRoja = ({ showDock }: { showDock: boolean }) => {
           }}>HACK<br />BAR</h1>
         </div>
         <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, height: 100, background: "linear-gradient(to bottom, transparent, #0a0a0a)", zIndex: 2, pointerEvents: "none" }} />
+        {/* Cinematic blur fade-out — mobile hero */}
+        <GradualBlur position="bottom" height="6rem" strength={2} divCount={5} opacity={0.9} curve="bezier" zIndex={3} />
       </section>
 
       {/* ═══ SECTION A: HERO (DESKTOP) ═══ */}
@@ -498,9 +501,9 @@ const HuellaRoja = ({ showDock }: { showDock: boolean }) => {
             />
           </div>
         </div>
+        {/* Cinematic blur fade-out — desktop hero */}
+        <GradualBlur position="bottom" height="6rem" strength={2} divCount={5} opacity={0.9} curve="bezier" zIndex={4} />
       </section>
-
-      {/* ═══ SECTION B: FUEL YOUR SYSTEM ═══ */}
       <motion.section
         {...scrollReveal}
         style={{ backgroundColor: "#0a0a0a", padding: "72px 7%", position: "relative", zIndex: 1 }}
