@@ -8,6 +8,7 @@ import BackToHomeButton from "@/components/BackToHomeButton";
 import GradualBlur from "@/components/GradualBlur";
 import { useLowPerfBackground } from "@/hooks/use-low-perf-background";
 import resetHeroBg from "@/assets/reset-hero-bg.jpg";
+import PremiumServiceAccordion from "@/components/PremiumServiceAccordion";
 
 interface HuellaVerdeProps {
   showDock?: boolean;
@@ -244,21 +245,8 @@ const HuellaVerde = ({ showDock = true }: HuellaVerdeProps) => {
             Advanced protocols for members committed to their evolution.
           </motion.p>
 
-          <motion.div {...scrollStagger}>
-            {SERVICIOS.map((s, i) => (
-              <motion.div
-                variants={blurRevealItem}
-                key={s.num}
-                style={{ display: "flex", alignItems: "flex-start", gap: 20, padding: "24px 0", borderBottom: i < SERVICIOS.length - 1 ? "1px solid rgba(255,255,255,0.06)" : "none" }}
-              >
-                <span style={{ fontFamily: "'Orbitron', sans-serif", fontSize: 14, fontWeight: 500, color: "#22C55E", flexShrink: 0, width: 32 }}>{s.num}</span>
-                <div>
-                  <div className="hv-servicio-line" style={{ height: 1, background: "linear-gradient(to right, #22C55E, transparent)", width: 200, marginBottom: 8 }} />
-                  <h3 style={{ fontFamily: "'Michroma', sans-serif", fontSize: 14, color: "#FFFFFF", textTransform: "uppercase", letterSpacing: "0.02em", marginBottom: 8 }}>{s.name}</h3>
-                  <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 13, color: "rgba(255,255,255,0.35)", lineHeight: 1.6, maxWidth: 600 }}>{s.desc}</p>
-                </div>
-              </motion.div>
-            ))}
+          <motion.div {...scrollReveal}>
+            <PremiumServiceAccordion />
           </motion.div>
         </motion.section>
 
