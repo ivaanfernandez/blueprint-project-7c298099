@@ -349,6 +349,16 @@ const MainLanding = ({ showDock }: { showDock: boolean }) => {
           </div>
         </div>
 
+        {/* Cinematic blur fade-out at hero bottom */}
+        <GradualBlur
+          position="bottom"
+          height="6rem"
+          strength={2}
+          divCount={5}
+          opacity={0.9}
+          curve="bezier"
+          zIndex={20}
+        />
       </section>
 
       <ProceduralBackground />

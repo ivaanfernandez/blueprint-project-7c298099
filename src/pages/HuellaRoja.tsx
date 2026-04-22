@@ -467,6 +467,8 @@ const HuellaRoja = ({ showDock }: { showDock: boolean }) => {
           }}>HACK<br />BAR</h1>
         </div>
         <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, height: 100, background: "linear-gradient(to bottom, transparent, #0a0a0a)", zIndex: 2, pointerEvents: "none" }} />
+        {/* Cinematic blur fade-out — mobile hero */}
+        <GradualBlur position="bottom" height="6rem" strength={2} divCount={5} opacity={0.9} curve="bezier" zIndex={3} />
       </section>
 
       {/* ═══ SECTION A: HERO (DESKTOP) ═══ */}
