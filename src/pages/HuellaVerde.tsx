@@ -89,7 +89,7 @@ const Dock = ({ show }: { show: boolean }) => {
 const RECOVERY_CARDS = [
   {
     name: "INFRARED SAUNA",
-    img: "https://images.unsplash.com/photo-1685948670617-0f26cb4997bb?w=800&auto=format&fit=crop",
+    img: "https://images.unsplash.com/photo-1685948670617-0f26cb4997bb?w=1200&auto=format&fit=crop",
     srcSet: [
       "https://images.unsplash.com/photo-1685948670617-0f26cb4997bb?w=400&auto=format&fit=crop&q=70 400w",
       "https://images.unsplash.com/photo-1685948670617-0f26cb4997bb?w=600&auto=format&fit=crop&q=75 600w",
