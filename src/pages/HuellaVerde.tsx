@@ -6,6 +6,7 @@ import BiometricScanGreen from "@/components/BiometricScanGreen";
 import { TextScramble } from "@/components/ui/text-scramble";
 import BackToHomeButton from "@/components/BackToHomeButton";
 import GradualBlur from "@/components/GradualBlur";
+import { useLowPerfBackground } from "@/hooks/use-low-perf-background";
 import resetHeroBg from "@/assets/reset-hero-bg.jpg";
 
 interface HuellaVerdeProps {
@@ -114,6 +115,7 @@ const scanDelays = [0, 1, 2, 0.5, 1.5];
 const HuellaVerde = ({ showDock = true }: HuellaVerdeProps) => {
   const [scanDone, setScanDone] = useState(false);
   const handleScanDone = useCallback(() => setScanDone(true), []);
+  useLowPerfBackground(".verde-animated-bg");
 
   if (!scanDone) return <BiometricScanGreen onComplete={handleScanDone} />;
 
