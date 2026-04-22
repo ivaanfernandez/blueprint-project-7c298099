@@ -108,7 +108,7 @@ const HuellaVerde = ({ showDock = true }: HuellaVerdeProps) => {
 
   return (
     <>
-      <ProceduralGroundBackground />
+      <div className="verde-animated-bg" aria-hidden="true" />
       <style>{`
         @keyframes hvScanLine {
           0% { top: 0; opacity: 0; }
