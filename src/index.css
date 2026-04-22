@@ -507,3 +507,33 @@ html[data-no-motion="true"] *::after {
   33% { background-position: 60% 30%, 40% 70%; }
   66% { background-position: 30% 70%, 70% 30%; }
 }
+
+/* ── Low-perf / reduced-motion fallback ──
+   Triggered by:
+   - prefers-reduced-motion: reduce
+   - .verde-bg-lite class added by FPS detector for sustained < 30fps,
+     navigator.deviceMemory <= 2, or navigator.hardwareConcurrency <= 2 */
+@media (prefers-reduced-motion: reduce) {
+  .verde-animated-bg::before,
+  .verde-animated-bg::after {
+    animation: none !important;
+    background-size: 100% 100% !important;
+  }
+}
+
+.verde-animated-bg.verde-bg-lite::before {
+  /* Slower (3x) and lighter — fewer layers via simplified gradient */
+  animation-duration: 150s !important;
+  background-image:
+    radial-gradient(circle at 30% 40%, rgba(34, 197, 94, 0.16) 0%, transparent 55%),
+    radial-gradient(circle at 70% 70%, rgba(22, 163, 74, 0.14) 0%, transparent 55%) !important;
+  background-size: 180% 180% !important;
+}
+
+.verde-animated-bg.verde-bg-lite::after {
+  /* Static — disables the second animated layer entirely */
+  animation: none !important;
+  background-size: 100% 100% !important;
+  opacity: 0.5 !important;
+}
+
