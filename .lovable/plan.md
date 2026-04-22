@@ -1,58 +1,66 @@
 
 
-## Huella Verde Recovery Room — Asymmetric Bento Desktop
+## Huella Verde Premium Services — Interactive Accordion with HUD Stats
 
-Restructure the Recovery Room grid on desktop (≥1024px) into an asymmetric bento layout while preserving the existing 2×2 mobile grid.
+Replace the static stack of 4 numbered service items with an interactive accordion that expands on hover (desktop) or tap (mobile), revealing a description plus a 4-stat HUD panel per service.
 
 ### Current state
 
-`src/pages/HuellaVerde.tsx` renders 4 recovery cards in a `.recovery-grid` wrapper. All cards currently render as 1:1 squares on every breakpoint. Card order in JSX: Infrared Sauna → Ice Bath → Mobility → Massages.
+`src/pages/HuellaVerde.tsx` (lines 234–263) renders a `SERVICIOS.map(...)` block. Each row shows number + green underline + title + description, all visible at once. No interactivity, no stats, ~50% of desktop width unused.
 
-### Target desktop layout
+### Target
 
 ```text
-┌─────────────┬──────────────────┐
-│             │   Ice Bath       │
-│  Infrared   │   (top, wide)    │
-│  Sauna      ├────────┬─────────┤
-│  (tall)     │Mobility│Massages │
-│             │(square)│(square) │
-└─────────────┴────────┴─────────┘
-   1.4fr           1fr      1fr
+┌─ accent line (40px → 100% on active) ───────────────┐
+│ 01  PERSONALIZED RECOVERY PROTOCOLS            ▸/▾ │
+│  ─ description (hidden until active) ─             │
+│  ┌──────────┬──────────┬──────────┬──────────┐    │
+│  │ ⚡ 94%   │ ⏱ 60MIN  │ ⚙ 12     │ ★ ELITE  │    │
+│  └──────────┴──────────┴──────────┴──────────┘    │
+└─────────────────────────────────────────────────────┘
 ```
 
-3 columns × 2 rows, gap 16px, max-width 1280px, min-height 640px on the large card.
+- Desktop ≥1024px: hover expands, mouseleave collapses; HUD stats in 1×4 row.
+- Mobile <1024px: tap toggles; HUD stats in 2×2 grid.
 
 ### Plan
 
-**1. `src/index.css` — append `.recovery-grid` bento rules**
+**1. Create `src/components/PremiumServiceAccordion.tsx`**
 
-- Mobile fallback `@media (max-width: 1023px)`: keep `grid-template-columns: 1fr 1fr`, gap 12px, all cards `aspect-ratio: 1/1`.
-- Desktop `@media (min-width: 1024px)`: 
-  - Grid: `1.4fr 1fr 1fr` × `1fr 1fr`, gap 16px, max-width 1280px, centered.
-  - `:nth-child(1)` (Infrared) → `grid-column: 1`, `grid-row: 1 / span 2`, `min-height: 640px`, override aspect-ratio to `auto`.
-  - `:nth-child(2)` (Ice Bath) → `grid-column: 2 / span 2`, `grid-row: 1`, aspect-ratio `auto`, full height.
-  - `:nth-child(3)` (Mobility) → `grid-column: 2`, `grid-row: 2`, aspect-ratio 1/1.
-  - `:nth-child(4)` (Massages) → `grid-column: 3`, `grid-row: 2`, aspect-ratio 1/1.
-  - Title scaling: card 1 → 28px, card 2 → 24px, others → 18px.
-  - Hover: `translateY(-6px)` + green shadow `rgba(34,197,94,0.4)` + image `scale(1.12)`.
-  - Use `!important` to override existing inline aspect-ratio/height styles on the cards.
+- Local `SERVICES` array with 4 items. Each item: `{ number, title, description, stats: HudStat[4] }`. Content as specified by the user (Personalized Recovery / Reset Pass / Corporate / Reset Retreats), each with 4 unique HUD stats (label, value, unicode icon).
+- State: `activeIndex: number | null`, `isDesktop: boolean` (from `window.innerWidth >= 1024`, updated on resize).
+- Behavior: `onMouseEnter`/`onMouseLeave` set/clear `activeIndex` only when desktop; `onClick` toggles `activeIndex` only when not desktop.
+- Render: `.premium-accordion` wrapper → 4 `.premium-item` children, each with `.premium-accent-line`, `.premium-header` (number + title + chevron `▸`/`▾`), and `.premium-content` containing description + `.premium-hud` grid of 4 `.premium-stat` cells (icon + label + value). Toggle `is-active` class on the item when `activeIndex === index`.
 
-**2. `src/pages/HuellaVerde.tsx` — verify className + bump Infrared image resolution**
+**2. Append CSS to `src/index.css`** (Premium Services Accordion block)
 
-- Confirm the `.recovery-grid` wrapper exists and the 4 `.recovery-card` children render in order: Infrared → Ice Bath → Mobility → Massages. The CSS targets via `:nth-child`, so JSX order stays untouched.
-- Update Infrared Sauna `src` to `https://images.unsplash.com/photo-1685948670617-0f26cb4997bb?w=1200&auto=format&fit=crop` (bump from `w=800` → `w=1200` for the larger desktop slot). Keep existing `srcSet`/`sizes` and update the largest `srcSet` entry to 1600w if needed; otherwise leave the responsive set as-is.
+- `.premium-accordion`: max-width 1100px, centered, vertical flex, gap 2px.
+- `.premium-item`: rounded card, dark bg, faint green border, `cursor: pointer`, transitions on bg/border/transform. `.is-active` and `:hover` lift bg to `rgba(34,197,94,0.06)` and border to `rgba(34,197,94,0.35)`.
+- `.premium-accent-line`: 2px green bar top-left, width 40px → 100% with green glow when `.is-active`, easing `cubic-bezier(0.22, 1, 0.36, 1)`.
+- `.premium-header`: flex row, number (Orbitron 14px green), title (Michroma 18px), chevron (mono).
+- `.premium-content`: collapsed by default via `max-height: 0; opacity: 0` → expanded `max-height: 600px; opacity: 1` when `.is-active`, transition 0.5s.
+- `.premium-hud`: 4-col grid, dark bg, green corner brackets via `::before`/`::after`.
+- `.premium-stat`: hidden until `.is-active`, then fades in with `translateY(10px) → 0`. Stagger via `transition-delay: calc(var(--i) * 80ms)` set inline through `style={{ ['--i' as any]: i }}` on each stat.
+- Breakpoints:
+  - `@media (max-width: 767px)`: HUD becomes 2×2; title 14px; padding tightened.
+  - `@media (min-width: 1024px)`: padding 28px 36px; title 20px; description 15px.
+
+**3. Wire into `src/pages/HuellaVerde.tsx`**
+
+- Add `import PremiumServiceAccordion from "@/components/PremiumServiceAccordion";`.
+- Replace lines 247–262 (the `SERVICIOS.map` block) with `<PremiumServiceAccordion />`. Keep the section heading "PREMIUM SERVICES" and subtitle untouched.
+- Leave the existing `SERVICIOS` data array in place if it is used elsewhere; otherwise it can stay unused (no removal required for this scope).
 
 ### Out of scope
 
-- Mobile layout (untouched).
-- Card titles, copy, gradient overlays, green accent glows.
-- Other 3 image URLs (Ice Bath, Mobility, Massages).
-- Premium Services section, footer fingerprint, hero RESET, floating dock, animated green background.
-- Any other page or component.
+- Recovery Room bento (Prompt 1/3 — already shipped).
+- Footer fingerprint (Prompt 3/3).
+- Hero RESET, animated green background, floating dock, BackToHomeButton.
+- Other pages (`Home.tsx`, `MainLanding.tsx`, `HuellaRoja.tsx`).
 
 ### Files modified
 
-- `src/index.css` — append Recovery Room bento CSS block.
-- `src/pages/HuellaVerde.tsx` — update Infrared Sauna image URL only; verify class names already match.
+- **New**: `src/components/PremiumServiceAccordion.tsx`
+- **Edit**: `src/index.css` — append accordion CSS block
+- **Edit**: `src/pages/HuellaVerde.tsx` — add import + replace 4-item map with `<PremiumServiceAccordion />`
 
