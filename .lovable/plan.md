@@ -1,57 +1,58 @@
 
 
-## Home Hero — Aggressive Preload + Cache Hardening
+## Huella Verde Recovery Room — Asymmetric Bento Desktop
 
-The Home hero already uses `preload="auto"` and a poster crossfade, but it's missing modern priority hints, the cache layer, and a defensive ready-state check. This plan adds those without changing behavior or visuals.
+Restructure the Recovery Room grid on desktop (≥1024px) into an asymmetric bento layout while preserving the existing 2×2 mobile grid.
 
-The user also mentioned a "lightweight loading indicator for asynchronous data sections in Home" — Home has no async data fetches (only static images, intervals, and the hero video). So no spinner is added; the work is purely hero preload.
+### Current state
 
-### 1. `index.html` — verify `<head>` preload tags
+`src/pages/HuellaVerde.tsx` renders 4 recovery cards in a `.recovery-grid` wrapper. All cards currently render as 1:1 squares on every breakpoint. Card order in JSX: Infrared Sauna → Ice Bath → Mobility → Massages.
 
-Current `<head>` already has preload tags for poster + both videos. Add `fetchpriority="high"` to each so modern browsers prioritize them above CSS/JS:
+### Target desktop layout
 
-```html
-<link rel="preload" as="image" href="/poster_image.jpg" fetchpriority="high" />
-<link rel="preload" as="video" href="/hero-bg.mp4" type="video/mp4" fetchpriority="high" media="(min-width: 768px)" />
-<link rel="preload" as="video" href="/hero-bg-mobile.mp4" type="video/mp4" fetchpriority="high" media="(max-width: 767px)" />
+```text
+┌─────────────┬──────────────────┐
+│             │   Ice Bath       │
+│  Infrared   │   (top, wide)    │
+│  Sauna      ├────────┬─────────┤
+│  (tall)     │Mobility│Massages │
+│             │(square)│(square) │
+└─────────────┴────────┴─────────┘
+   1.4fr           1fr      1fr
 ```
 
-### 2. `src/pages/Home.tsx` — harden hero markup
+3 columns × 2 rows, gap 16px, max-width 1280px, min-height 640px on the large card.
 
-Two `<img>` poster tags (desktop + mobile blocks) and two `<video>` tags. Apply per element:
+### Plan
 
-- Posters: add `fetchPriority="high"`, `loading="eager"`, `decoding="async"`.
-- Videos: keep `preload="auto"`, `autoPlay muted loop playsInline`, `src`, and the existing crossfade. Replace the inline `onLoadedData` style mutation with a small `videoReady` state + `useEffect` that listens to `canplay` and also checks `videoRef.current.readyState >= 3` on mount (handles cached returns where the event already fired). Poster `opacity` becomes `videoReady ? 0 : 1`; video `opacity` becomes `videoReady ? 1 : 0`. One state per video (desktop + mobile) since both blocks render but only the matching one is visible.
+**1. `src/index.css` — append `.recovery-grid` bento rules**
 
-No structural changes: the desktop/mobile split, Silk background, hero text, CTAs, dock, and all sections below stay identical.
+- Mobile fallback `@media (max-width: 1023px)`: keep `grid-template-columns: 1fr 1fr`, gap 12px, all cards `aspect-ratio: 1/1`.
+- Desktop `@media (min-width: 1024px)`: 
+  - Grid: `1.4fr 1fr 1fr` × `1fr 1fr`, gap 16px, max-width 1280px, centered.
+  - `:nth-child(1)` (Infrared) → `grid-column: 1`, `grid-row: 1 / span 2`, `min-height: 640px`, override aspect-ratio to `auto`.
+  - `:nth-child(2)` (Ice Bath) → `grid-column: 2 / span 2`, `grid-row: 1`, aspect-ratio `auto`, full height.
+  - `:nth-child(3)` (Mobility) → `grid-column: 2`, `grid-row: 2`, aspect-ratio 1/1.
+  - `:nth-child(4)` (Massages) → `grid-column: 3`, `grid-row: 2`, aspect-ratio 1/1.
+  - Title scaling: card 1 → 28px, card 2 → 24px, others → 18px.
+  - Hover: `translateY(-6px)` + green shadow `rgba(34,197,94,0.4)` + image `scale(1.12)`.
+  - Use `!important` to override existing inline aspect-ratio/height styles on the cards.
 
-### 3. `vercel.json` — long-lived cache for hero assets
+**2. `src/pages/HuellaVerde.tsx` — verify className + bump Infrared image resolution**
 
-Add (or extend) at project root:
+- Confirm the `.recovery-grid` wrapper exists and the 4 `.recovery-card` children render in order: Infrared → Ice Bath → Mobility → Massages. The CSS targets via `:nth-child`, so JSX order stays untouched.
+- Update Infrared Sauna `src` to `https://images.unsplash.com/photo-1685948670617-0f26cb4997bb?w=1200&auto=format&fit=crop` (bump from `w=800` → `w=1200` for the larger desktop slot). Keep existing `srcSet`/`sizes` and update the largest `srcSet` entry to 1600w if needed; otherwise leave the responsive set as-is.
 
-```json
-{
-  "headers": [
-    { "source": "/poster_image.jpg",   "headers": [{ "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }] },
-    { "source": "/hero-bg.mp4",        "headers": [{ "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }] },
-    { "source": "/hero-bg-mobile.mp4", "headers": [{ "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }] }
-  ]
-}
-```
+### Out of scope
 
-If `vercel.json` already exists, merge into the existing `headers` array without removing other entries.
-
-### Out of scope (unchanged)
-
-- Pillar pages (Huella Azul / Roja / Verde) and their loaders.
-- Silk background, dock, About slider, Lab slider, Hackbar slider intervals.
-- Filenames `/poster_image.jpg`, `/hero-bg.mp4`, `/hero-bg-mobile.mp4`.
-- Video attributes `muted`, `loop`, `playsInline`, no controls, no audio.
-- No new spinner — Home has no async data sections that need one.
+- Mobile layout (untouched).
+- Card titles, copy, gradient overlays, green accent glows.
+- Other 3 image URLs (Ice Bath, Mobility, Massages).
+- Premium Services section, footer fingerprint, hero RESET, floating dock, animated green background.
+- Any other page or component.
 
 ### Files modified
 
-- `index.html` — add `fetchpriority="high"` to existing preload links.
-- `src/pages/Home.tsx` — `videoReady` state + `canplay`/`readyState` effect; `fetchPriority`/`loading`/`decoding` on posters.
-- `vercel.json` — create or extend with cache-control headers for hero assets.
+- `src/index.css` — append Recovery Room bento CSS block.
+- `src/pages/HuellaVerde.tsx` — update Infrared Sauna image URL only; verify class names already match.
 
