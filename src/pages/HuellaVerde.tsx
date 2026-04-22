@@ -5,6 +5,7 @@ import { scrollReveal, scrollStagger, blurRevealItem } from "@/lib/scrollAnimati
 import BiometricScanGreen from "@/components/BiometricScanGreen";
 import { TextScramble } from "@/components/ui/text-scramble";
 import BackToHomeButton from "@/components/BackToHomeButton";
+import GradualBlur from "@/components/GradualBlur";
 import resetHeroBg from "@/assets/reset-hero-bg.jpg";
 
 interface HuellaVerdeProps {

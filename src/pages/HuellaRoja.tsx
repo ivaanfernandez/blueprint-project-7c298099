@@ -7,6 +7,7 @@ import { TextScramble } from "@/components/ui/text-scramble";
 import { Dock, DockIcon } from "@/components/ui/dock";
 import ElectricBorder from "@/components/ElectricBorder";
 import BackToHomeButton from "@/components/BackToHomeButton";
+import GradualBlur from "@/components/GradualBlur";
 import chefImage from "@/assets/meet-the-chef.jpg";
 import heroHackbarDesktop from "@/assets/hero-hackbar-desktop.jpg";
 
@@ -498,9 +499,9 @@ const HuellaRoja = ({ showDock }: { showDock: boolean }) => {
             />
           </div>
         </div>
+        {/* Cinematic blur fade-out — desktop hero */}
+        <GradualBlur position="bottom" height="6rem" strength={2} divCount={5} opacity={0.9} curve="bezier" zIndex={4} />
       </section>
-
-      {/* ═══ SECTION B: FUEL YOUR SYSTEM ═══ */}
       <motion.section
         {...scrollReveal}
         style={{ backgroundColor: "#0a0a0a", padding: "72px 7%", position: "relative", zIndex: 1 }}

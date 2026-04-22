@@ -5,6 +5,7 @@ import { scrollReveal, scrollStagger, blurRevealItem } from "@/lib/scrollAnimati
 import ProceduralBackgroundWhite from "@/components/ProceduralBackgroundWhite";
 import FooterBackground from "@/components/FooterBackground";
 import FeatureCard from "@/components/FeatureCard";
+import GradualBlur from "@/components/GradualBlur";
 
 
 import { TextScramble } from "@/components/ui/text-scramble";
