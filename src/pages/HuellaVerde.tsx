@@ -201,8 +201,11 @@ const HuellaVerde = ({ showDock = true }: HuellaVerdeProps) => {
               >
                 <img
                   src={card.img}
+                  srcSet={(card as { srcSet?: string }).srcSet}
+                  sizes={(card as { sizes?: string }).sizes}
                   alt={card.name}
                   loading="lazy"
+                  decoding="async"
                   style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", transition: "transform 0.6s ease" }}
                 />
                 {/* Gradient overlay: transparent top → dark bottom */}
