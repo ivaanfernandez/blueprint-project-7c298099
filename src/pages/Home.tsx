@@ -168,6 +168,14 @@ const Home = ({ showDock }: { showDock: boolean }) => {
     return () => clearInterval(id);
   }, []);
 
+  // First-visit loader: render full-screen and bail out of the rest of Home
+  // until it completes. We deliberately don't mount Home content underneath
+  // — it stays unmounted so heavy children (videos, WebGL bg) don't compete
+  // for the main thread during the loader.
+  if (loaderActive) {
+    return <HomeLoader onComplete={handleLoaderComplete} />;
+  }
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
