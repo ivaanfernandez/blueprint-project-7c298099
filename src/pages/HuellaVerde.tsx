@@ -8,6 +8,7 @@ import BackToHomeButton from "@/components/BackToHomeButton";
 import GradualBlur from "@/components/GradualBlur";
 import { useLowPerfBackground } from "@/hooks/use-low-perf-background";
 import resetHeroBg from "@/assets/reset-hero-bg.jpg";
+import infraredSaunaImg from "@/assets/infrared-sauna-green.png";
 import PremiumServiceAccordion from "@/components/PremiumServiceAccordion";
 
 interface HuellaVerdeProps {
@@ -90,14 +91,7 @@ const Dock = ({ show }: { show: boolean }) => {
 const RECOVERY_CARDS = [
   {
     name: "INFRARED SAUNA",
-    img: "https://images.unsplash.com/photo-1685948670617-0f26cb4997bb?w=1200&auto=format&fit=crop",
-    srcSet: [
-      "https://images.unsplash.com/photo-1685948670617-0f26cb4997bb?w=400&auto=format&fit=crop&q=70 400w",
-      "https://images.unsplash.com/photo-1685948670617-0f26cb4997bb?w=600&auto=format&fit=crop&q=75 600w",
-      "https://images.unsplash.com/photo-1685948670617-0f26cb4997bb?w=800&auto=format&fit=crop&q=80 800w",
-      "https://images.unsplash.com/photo-1685948670617-0f26cb4997bb?w=1200&auto=format&fit=crop&q=80 1200w",
-    ].join(", "),
-    sizes: "(max-width: 767px) 47vw, (max-width: 1100px) 45vw, 540px",
+    img: infraredSaunaImg,
   },
   { name: "ICE BATH THERAPY", img: "https://images.unsplash.com/photo-1682687220795-796d3f6f7000?w=800&auto=format&fit=crop" },
   { name: "MOBILITY & BREATHING", img: "https://images.unsplash.com/photo-1545205597-3d9d02c29597?w=800&auto=format&fit=crop" },
