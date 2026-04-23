@@ -805,14 +805,23 @@ html[data-no-motion="true"] *::after {
 
 @media (max-width: 767px) {
   .premium-hud {
-    grid-template-columns: 1fr 1fr;
-    gap: 8px;
+    grid-template-columns: 1fr;
+    gap: 10px;
   }
   .premium-title {
     font-size: 14px;
   }
   .premium-item {
     padding: 20px;
+  }
+  .premium-stat {
+    padding: 10px 14px;
+  }
+  .premium-stat-label {
+    font-size: 10px;
+  }
+  .premium-stat-value {
+    font-size: 15px;
   }
 }
 
