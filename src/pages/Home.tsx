@@ -1,4 +1,4 @@
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState, useEffect, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { scrollReveal, scrollStagger, blurRevealItem } from "@/lib/scrollAnimations";
@@ -6,6 +6,26 @@ import ProceduralBackgroundWhite from "@/components/ProceduralBackgroundWhite";
 import FooterBackground from "@/components/FooterBackground";
 import FeatureCard from "@/components/FeatureCard";
 import GradualBlur from "@/components/GradualBlur";
+import HomeLoader from "@/components/HomeLoader";
+
+// ── First-visit-only loader gate.
+//    Persisted in localStorage so the loader plays exactly once per browser.
+//    Bypassed automatically when the existing E2E flags are present
+//    (?e2e=1, localStorage.bp_skip_intro, window.__BP_E2E__).
+const HOME_LOADER_KEY = "bp_home_loader_seen";
+
+const shouldShowHomeLoader = (): boolean => {
+  if (typeof window === "undefined") return false;
+  try {
+    const params = new URLSearchParams(window.location.search);
+    if (params.get("e2e") === "1") return false;
+    if (window.localStorage?.getItem("bp_skip_intro") === "1") return false;
+    if ((window as unknown as { __BP_E2E__?: boolean }).__BP_E2E__ === true) return false;
+    return window.localStorage?.getItem(HOME_LOADER_KEY) !== "1";
+  } catch {
+    return false;
+  }
+};
 
 
 import { TextScramble } from "@/components/ui/text-scramble";
