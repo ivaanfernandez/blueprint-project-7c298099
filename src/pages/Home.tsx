@@ -99,6 +99,17 @@ const Home = ({ showDock }: { showDock: boolean }) => {
   const [currentAboutImage, setCurrentAboutImage] = useState(0);
   const [currentLabImage, setCurrentLabImage] = useState(0);
   const [currentHackbarImage, setCurrentHackbarImage] = useState(0);
+
+  // ── First-visit loader (white/gray lab scan). Plays once per browser.
+  const [loaderActive, setLoaderActive] = useState<boolean>(() => shouldShowHomeLoader());
+  const handleLoaderComplete = useCallback(() => {
+    try {
+      window.localStorage?.setItem(HOME_LOADER_KEY, "1");
+    } catch {
+      // localStorage unavailable (private mode) — silently ignore.
+    }
+    setLoaderActive(false);
+  }, []);
   // Mount hero <video> only on viewports ≥768px to avoid downloading on mobile
   const [isDesktop, setIsDesktop] = useState<boolean>(() =>
     typeof window !== "undefined" ? window.matchMedia("(min-width: 768px)").matches : false
