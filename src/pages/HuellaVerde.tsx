@@ -10,6 +10,7 @@ import { useLowPerfBackground } from "@/hooks/use-low-perf-background";
 import resetHeroBg from "@/assets/reset-hero-bg.jpg";
 import infraredSaunaImg from "@/assets/infrared-sauna-green.png";
 import PremiumServiceAccordion from "@/components/PremiumServiceAccordion";
+import HuellaVerdeHUDFooter from "@/components/HuellaVerdeHUDFooter";
 
 interface HuellaVerdeProps {
   showDock?: boolean;
@@ -244,12 +245,8 @@ const HuellaVerde = ({ showDock = true }: HuellaVerdeProps) => {
           </motion.div>
         </motion.section>
 
-        {/* ── FOOTER ── */}
-        <motion.footer {...scrollReveal} className="hv-footer" style={{ padding: "40px 7%", borderTop: "1px solid rgba(34,197,94,0.08)", display: "flex", flexDirection: "column", alignItems: "center", gap: 16, background: "transparent" }}>
-          <FingerprintSVG color="#22C55E" size={32} />
-          <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 12, color: "rgba(255,255,255,0.25)" }}>Reset — Blueprint Project</p>
-          <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 10, color: "rgba(255,255,255,0.15)" }}>© 2025 Blueprint Project</p>
-        </motion.footer>
+        {/* ── HUD LAB FOOTER ── */}
+        <HuellaVerdeHUDFooter />
         <BackToHomeButton />
       </motion.div>
     </>

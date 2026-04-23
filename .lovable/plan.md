@@ -1,34 +1,68 @@
+## Huella Verde HUD Laboratory Footer
 
+Replace the minimal Huella Verde footer (fingerprint + 2 text lines) with a cinematic wellness-lab HUD: rotating DNA helix, fingerprint + animated ECG line, and an animated 94% Recovery Index gauge — all over a topographic grid with floating molecular structures. The existing `← HOME` button stays untouched directly below.
 
-## Premium Services Accordion — Already Shipped ✅
+### Current state
 
-The Premium Services interactive accordion with HUD stats was fully implemented in the previous turn and is already live on `/huella-verde`. No changes needed.
+`src/pages/HuellaVerde.tsx` lines 247–253:
+```text
+<motion.footer> FingerprintSVG + "Reset — Blueprint Project" + "© 2025 Blueprint Project" </motion.footer>
+<BackToHomeButton />
+```
 
-### Verification of current state
+### Target
 
-**`src/components/PremiumServiceAccordion.tsx`** — exists with all 4 services (Personalized Recovery / Reset Pass / Corporate / Reset Retreats), each with 4 unique HUD stats, hover-on-desktop / tap-on-mobile behavior, and inline `--i` index for stagger.
+```text
+┌──────────────── · SYSTEM LAB · BIOMETRIC OUTPUT ────────────────┐
+│  ┌─ DNA ─┐    ┌── FINGERPRINT + ECG ──┐    ┌── GAUGE 94% ──┐  │
+│  │ ╲╱╲╱  │    │   ▒▒▒▒▒    ∿∿∿∿∿     │    │     ◠ 94%     │  │
+│  │ GENETIC│   │   RESET SYSTEM ●ACTIVE│    │ RECOVERY OPTIMAL│ │
+│  └───────┘    └───────────────────────┘    └───────────────┘  │
+│        Reset — Blueprint Project · © 2026 Blueprint Project    │
+└─────────────── (topographic grid + floating molecules) ────────┘
+        [ ← HOME ]   ← existing BackToHomeButton, unchanged
+```
 
-**`src/index.css`** (lines 616–828) — full accordion CSS block present:
-- `.premium-accordion`, `.premium-item`, `.premium-accent-line` (40px → 100% with glow)
-- `.premium-header` with Orbitron number, Michroma title, chevron
-- `.premium-content` collapse/expand via `max-height` + `opacity`
-- `.premium-hud` 4-col grid with green corner brackets (`::before` / `::after`)
-- `.premium-stat` fade-in with `transition-delay: calc(var(--i, 0) * 80ms)` for 80ms stagger
-- Mobile breakpoint: HUD becomes 2×2, title 14px, padding tightened
-- Desktop breakpoint: padding 28px 36px, title 20px, description 15px
+- Desktop ≥1024px: 3 panels in a row (1fr / 1.4fr / 1fr), max-width 1000px.
+- Tablet 768–1023px: 3 compact columns.
+- Mobile <768px: panels stacked.
 
-**`src/pages/HuellaVerde.tsx`** (line 11, 249) — imports `PremiumServiceAccordion` and renders `<PremiumServiceAccordion />` inside the Premium Services section.
+### Plan
 
-### What you can do now
+**1. Create `src/components/HuellaVerdeHUDFooter.tsx`**
 
-Test it live at `/huella-verde`:
-- Desktop ≥1024px: hover any item → expands with HUD; mouseleave collapses
-- Mobile <1024px: tap to toggle
-- Watch the green accent line glow + 80ms staggered stat fade-in
+- Animated `gaugeValue` from 0 → 94 over 2s (ease-out cubic) via `requestAnimationFrame` in `useEffect`.
+- Inline SVG for: topographic grid layer, 3 background molecule SVGs (serotonin-like hexagon + chain, dopamine-like, small extra hexagon), DNA helix (8 rungs, sine-wave x-positions, green/cyan dot pairs connected by lines), fingerprint (concentric ellipses + central swirl), ECG zig-zag path with stroke-dash animation, and a 270° gauge arc with progress arc + needle rotated by `gaugeAngle = -90 + (gaugeValue/100)*270`.
+- Each panel wrapped with 4 corner brackets (`.corner-tl/tr/bl/br`) and labels: "GENETIC BLUEPRINT / 23 CHR · ACTIVE", "RESET SYSTEM / ●ACTIVE", "RECOVERY INDEX / OPTIMAL".
+- Top label "· SYSTEM LAB · BIOMETRIC OUTPUT" with pulsing dot.
+- Bottom centered text: `Reset — Blueprint Project · © 2026 Blueprint Project`.
 
-If you're seeing the old static layout instead of the accordion, hard-refresh the preview (Cmd/Ctrl+Shift+R) to clear cache. If something specific is broken or you want a tweak (e.g. different stats, colors, timing, keep-open behavior), let me know what to change and I'll plan that delta.
+**2. Append CSS to `src/index.css`** — full `.hud-footer / .hud-topo-grid / .hud-molecules / .hud-label-top / .hud-panels / .hud-panel / .corner-* / .dna-* / .fingerprint-svg / .ecg-* / .gauge-* / .hud-panel-label / .hud-panel-value / .hud-active / .hud-footer-text` rules with keyframes `dot-pulse`, `dna-spin`, `ecg-pulse`, `molecule-rotate`. Includes mobile (<768px stacked) and tablet (768–1023px compact) breakpoints, topographic radial mask, glassmorphism panels, and green glow drop-shadows.
 
-### Out of scope for this turn
+**3. Wire into `src/pages/HuellaVerde.tsx`**
 
-No changes proposed — work is complete. Footer fingerprint (Prompt 3/3) is the next pending item.
+- Add `import HuellaVerdeHUDFooter from "@/components/HuellaVerdeHUDFooter";`.
+- Replace lines 247–252 (`<motion.footer>...</motion.footer>`) with `<HuellaVerdeHUDFooter />`.
+- Keep `<BackToHomeButton />` on line 253 exactly as-is, immediately after.
+- Leave the inline `FingerprintSVG` component definition in place (still used by the dock).
 
+### Constraints (from spec)
+
+- Colors locked: green `#22C55E`, accent cyan `#7DF9FF`, white needle.
+- Gauge value locked at 94%.
+- Animation durations locked: DNA 5s, ECG 2.5s, gauge 2s, dot-pulse 1.5–2s, molecules 15–28s.
+- Copyright year: **2026** (not 2025).
+- Pure CSS + SVG + `requestAnimationFrame`. No Framer Motion in this component, no audio, no extra libraries.
+
+### Out of scope
+
+- Recovery Room bento (Prompt 1/3 ✅).
+- Premium Services accordion (Prompt 2/3 ✅).
+- Hero RESET, animated green background, floating dock, `BackToHomeButton`.
+- Other pages (`Home`, `MainLanding`, `HuellaRoja`).
+
+### Files modified
+
+- **New**: `src/components/HuellaVerdeHUDFooter.tsx`
+- **Edit**: `src/index.css` — append HUD footer CSS block
+- **Edit**: `src/pages/HuellaVerde.tsx` — add import + replace footer block with `<HuellaVerdeHUDFooter />`
