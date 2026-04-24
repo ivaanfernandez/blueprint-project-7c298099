@@ -139,6 +139,10 @@ const HuellaVerde = ({ showDock = true }: HuellaVerdeProps) => {
           .hv-servicios { padding: 0 6% 48px !important; }
           .hv-servicio-line { width: 100% !important; }
           .hv-footer { padding: 32px 6% !important; }
+          .hv-hero-img { object-position: 50% 35% !important; }
+        }
+        @media (min-width: 768px) {
+          .hv-hero-img { object-position: 50% 45% !important; }
         }
       `}</style>
 
@@ -160,7 +164,8 @@ const HuellaVerde = ({ showDock = true }: HuellaVerdeProps) => {
               alt=""
               aria-hidden="true"
               loading="eager"
-              fetchPriority="high"
+              className="hv-hero-img"
+              {...({ fetchpriority: "high" } as Record<string, string>)}
               style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", objectPosition: "center", opacity: 0.85, zIndex: 0, pointerEvents: "none" }}
             />
           </picture>
