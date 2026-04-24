@@ -164,7 +164,8 @@ const HuellaVerde = ({ showDock = true }: HuellaVerdeProps) => {
               alt=""
               aria-hidden="true"
               loading="eager"
-              fetchPriority="high"
+              className="hv-hero-img"
+              {...({ fetchpriority: "high" } as Record<string, string>)}
               style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", objectPosition: "center", opacity: 0.85, zIndex: 0, pointerEvents: "none" }}
             />
           </picture>
