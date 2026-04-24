@@ -7,7 +7,8 @@ import { TextScramble } from "@/components/ui/text-scramble";
 import BackToHomeButton from "@/components/BackToHomeButton";
 import GradualBlur from "@/components/GradualBlur";
 import { useLowPerfBackground } from "@/hooks/use-low-perf-background";
-import resetHeroBg from "@/assets/reset-hero-bg.jpg";
+import heroResetDesktop from "@/assets/reset-hero-desktop.jpg";
+import heroResetMobile from "@/assets/reset-hero-mobile.jpg";
 import infraredSaunaImg from "@/assets/infrared-sauna-green.png";
 import PremiumServiceAccordion from "@/components/PremiumServiceAccordion";
 import HuellaVerdeHUDFooter from "@/components/HuellaVerdeHUDFooter";
@@ -151,13 +152,18 @@ const HuellaVerde = ({ showDock = true }: HuellaVerdeProps) => {
 
         {/* ── HERO ── */}
         <section style={{ minHeight: "100vh", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", position: "relative", overflow: "hidden", background: "transparent" }}>
-          {/* Background image */}
-          <img
-            src={resetHeroBg}
-            alt=""
-            aria-hidden="true"
-            style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", objectPosition: "center", opacity: 0.85, zIndex: 0, pointerEvents: "none" }}
-          />
+          {/* Background image (responsive: mobile < 768px, desktop ≥ 768px) */}
+          <picture style={{ position: "absolute", inset: 0, zIndex: 0, pointerEvents: "none" }}>
+            <source media="(max-width: 767px)" srcSet={heroResetMobile} />
+            <img
+              src={heroResetDesktop}
+              alt=""
+              aria-hidden="true"
+              loading="eager"
+              fetchPriority="high"
+              style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", objectPosition: "center", opacity: 0.85, zIndex: 0, pointerEvents: "none" }}
+            />
+          </picture>
           {/* Black radial fade overlay for title legibility */}
           <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse at center, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.45) 40%, rgba(0,0,0,0.15) 80%, transparent 100%)", zIndex: 1, pointerEvents: "none" }} />
           {/* Ambient glow */}
