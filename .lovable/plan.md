@@ -1,52 +1,58 @@
 
 
-## Loading Spinner + Scroll Reveal — Conflict Check Before Building
+## Huella Verde — Hero Image Swap (Desktop + Mobile)
 
-The request describes a **minimalist white/gray gym** with a generic vanilla loading spinner and a vanilla scroll-reveal hook. Your project is the opposite of that and already ships both pieces in branded form. Building the prompt as-written would duplicate logic, conflict with brand memory, and break the established UX flow.
+Replace the current single hero background image (`@/assets/reset-hero-bg.jpg`) on `/huella-verde` with two new uploaded images — one tuned for desktop, one for mobile vertical viewport — using a responsive `<picture>` element. Nothing else changes.
 
-Flagging before any code changes so you can decide.
+### What changes
 
-### Conflict 1 — Brand palette
+**Only one file:** `src/pages/HuellaVerde.tsx`
 
-Prompt asks for: white `#FFFFFF`, grays `#E5E5E5 / #808080 / #2D2D2D`, dark gray `#1F1F1F` background.
-Project memory (`Core`): Dark Luxury for pillars, NeoVision for Home. Blue `#1A6BFF` (Training), Green `#22C55E` (Nutrition), Red `#FF3B3B` (Recovery). Typography Bebas Neue / Michroma / Orbitron — not minimalist.
-A neutral white/gray loader + page wrapper would visually break every page on first paint.
+**Hero section (lines 152–164):**
+- Replace the single `<img src={resetHeroBg}>` with a `<picture>` block:
+  - `<source media="(max-width: 767px)" srcSet={heroResetMobile} />`
+  - `<img src={heroResetDesktop} ... loading="eager" fetchPriority="high" />`
+- Keep all current inline styles on the `<img>` (absolute inset 0, objectFit cover, opacity 0.85, zIndex 0, pointerEvents none)
+- Wrap the `<picture>` itself with the same `position: absolute; inset: 0` so layout is identical
+- The radial black fade overlay, ambient green glow, bottom green gradient line, and `GradualBlur` stay byte-identical
 
-### Conflict 2 — Loading spinner duplicates the Biometric Intro
+**Imports (top of file):**
+- Remove: `import resetHeroBg from "@/assets/reset-hero-bg.jpg";`
+- Add: `import heroResetDesktop from "@/assets/reset-hero-desktop.jpg";`
+- Add: `import heroResetMobile from "@/assets/reset-hero-mobile.jpg";`
 
-You already have a 5-second cinematic intro at app load:
-- `src/components/BiometricScan.tsx` (blue, Home) — 5000 ms, scan line, glow pulse, ripple, shimmer sweep, then `onComplete` → reveals dock
-- `src/components/BiometricScanGreen.tsx`, `BiometricScanRed.tsx` (per-pillar)
-- Wired in `App.tsx` via `showDock` state and the `bp:force-complete-intro` E2E hatch
-- Memory: `features/biometric-intro-screen` documents this as the canonical entry animation
+### Asset work (in default mode)
 
-A second `LoadingSpinner` showing 0–100% would either run **before** the biometric intro (10 s total before content) or **replace** it (loses the brand moment). Both are bad.
+Copy the two uploaded images into the project as compressed JPGs (already pre-compressed per user):
 
-### Conflict 3 — ScrollRevealWrapper duplicates `scrollAnimations.ts`
+- `user-uploads://94D4ADBD-D938-4280-B244-1D86B00A955A.jpg` → `src/assets/reset-hero-desktop.jpg` (vertical, full grid + figures — works as wide hero with center crop, also used as desktop default)
+- `user-uploads://adam_and_god.jpg` → `src/assets/reset-hero-mobile.jpg` (tighter horizontal Adam-and-God-style figures crop, better fit for 390 px portrait viewport)
 
-`src/lib/scrollAnimations.ts` already exports `scrollReveal`, `scrollRevealNoShift`, `scrollStagger`, `blurReveal`, `blurRevealItem` — used across `Home.tsx`, `HuellaVerde.tsx`, etc. It uses Framer Motion's `whileInView` (IntersectionObserver under the hood), supports stagger, honors `prefers-reduced-motion` AND the test-only `data-no-motion` flag, and has tuned viewport thresholds for the 390 px mobile target.
+Note on mapping: the vertical-format image is the more cinematic, atmospheric "scene" → desktop. The square cropped figures image is tighter and reads better at narrow widths → mobile. Confirm this mapping in the question below if you'd prefer it inverted.
 
-The proposed vanilla `useScrollReveal` + `ScrollRevealWrapper` would:
-- Re-implement what already works
-- Lose reduced-motion handling, the no-motion test flag, and per-breakpoint stagger tuning
-- Mix two animation systems on the same page (the project's memory rule for animation libraries says: pure CSS for the intro, Framer Motion for complex UI — adding a third vanilla layer violates this)
+### What stays untouched
 
-### Recommended paths — pick one
+- "RESET" headline, subtext, font sizes, Michroma typography
+- Black radial fade overlay (`rgba(0,0,0,0.75) → transparent`)
+- Ambient green glow (`rgba(34,197,94,0.06)`)
+- Bottom green gradient hairline
+- `GradualBlur` cinematic fade at hero bottom
+- Recovery Room bento, Premium Services accordion, HUD footer, green animated background, floating dock
+- Old asset file `src/assets/reset-hero-bg.jpg` stays on disk (orphaned, safe — can be removed later if desired)
+- Every other page (`Home`, `MainLanding`, `HuellaAzul`, `HuellaRoja`)
+- Green fingerprint biometric loader on this page
 
-**A. Skip — already covered.** Do nothing. Biometric intro = your loader. `scrollReveal` props = your reveal wrapper. This is my recommendation.
+### Technical notes
 
-**B. Apply the white/gray loader + vanilla wrapper to a NEW page only** (e.g. a future `/lab` or admin page) so it doesn't fight the brand. Tell me which route.
+- `<picture>` + `<source media>` is the native, zero-JS way to serve different images per viewport — no `useState`/`useEffect`/resize listener needed, no flash of wrong image, no re-render on rotate.
+- `loading="eager"` + `fetchPriority="high"` because hero is above-the-fold.
+- `objectPosition: center` keeps both crops centered; if either image needs a vertical bias (e.g. `center 30%`), we can tune after first preview.
+- Breakpoint `767px` matches the existing `@media (max-width: 767px)` rule already in the page's style block (line 134), so image swap and text padding swap happen at the same threshold.
 
-**C. Build a thin `ScrollRevealWrapper` component that wraps the existing `scrollReveal` props** so JSX is shorter, but keep Framer Motion + reduced-motion guards underneath. No new loader. No palette change.
+### Out of scope (will not touch)
 
-**D. Replace the biometric intro with the white/gray spinner globally.** This rewrites brand memory and removes the cinematic entry. Strongly not recommended — only choose if you've decided to pivot the whole identity.
-
-### What I will NOT do without an explicit answer
-
-- Add a second loader on top of `BiometricScan`
-- Introduce white `#FFFFFF` / gray `#1F1F1F` as global page colors
-- Replace `scrollAnimations.ts` usages with a vanilla hook
-- Touch `App.tsx` intro flow, `Home.tsx`, the pillar pages, or the dock
-
-Reply with **A**, **B (+route)**, **C**, or **D** and I'll write the precise plan.
+- No image processing/compression — files used as uploaded
+- No lazy loading on the hero `<img>`
+- No copy, color, gradient, layout, typography, or component change
+- No edits to any other route or file
 
