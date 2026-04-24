@@ -139,6 +139,10 @@ const HuellaVerde = ({ showDock = true }: HuellaVerdeProps) => {
           .hv-servicios { padding: 0 6% 48px !important; }
           .hv-servicio-line { width: 100% !important; }
           .hv-footer { padding: 32px 6% !important; }
+          .hv-hero-img { object-position: 50% 35% !important; }
+        }
+        @media (min-width: 768px) {
+          .hv-hero-img { object-position: 50% 45% !important; }
         }
       `}</style>
 
