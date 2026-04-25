@@ -1111,3 +1111,329 @@ html[data-no-motion="true"] *::after {
     min-height: 200px;
   }
 }
+
+/* ── BLUEPRINT PRICING · HARSH GLOW MAGNETIC REVEAL ── */
+
+.harsh-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  max-width: 1100px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+.harsh-card {
+  background: #050505;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  padding: 28px 22px;
+  transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.harsh-card:hover {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: #ffffff;
+  transform: translateY(-8px);
+  box-shadow:
+    0 0 0 1px #ffffff,
+    0 0 40px rgba(255, 255, 255, 0.4),
+    0 0 80px rgba(255, 255, 255, 0.2),
+    0 30px 60px rgba(0, 0, 0, 0.8);
+}
+
+/* Corner brackets HUD */
+.harsh-corner {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  pointer-events: none;
+  transition: all 0.4s ease;
+  z-index: 2;
+}
+
+.harsh-corner-tl {
+  top: 8px;
+  left: 8px;
+  border-top: 1.5px solid rgba(255, 255, 255, 0.5);
+  border-left: 1.5px solid rgba(255, 255, 255, 0.5);
+}
+
+.harsh-corner-tr {
+  top: 8px;
+  right: 8px;
+  border-top: 1.5px solid rgba(255, 255, 255, 0.5);
+  border-right: 1.5px solid rgba(255, 255, 255, 0.5);
+}
+
+.harsh-corner-bl {
+  bottom: 8px;
+  left: 8px;
+  border-bottom: 1.5px solid rgba(255, 255, 255, 0.5);
+  border-left: 1.5px solid rgba(255, 255, 255, 0.5);
+}
+
+.harsh-corner-br {
+  bottom: 8px;
+  right: 8px;
+  border-bottom: 1.5px solid rgba(255, 255, 255, 0.5);
+  border-right: 1.5px solid rgba(255, 255, 255, 0.5);
+}
+
+.harsh-card:hover .harsh-corner {
+  border-color: #ffffff;
+  box-shadow:
+    0 0 12px #ffffff,
+    0 0 24px rgba(255, 255, 255, 0.6);
+  width: 16px;
+  height: 16px;
+}
+
+/* Scan line */
+.harsh-scan {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.8),
+    transparent
+  );
+  opacity: 0;
+  transition: opacity 0.3s;
+  pointer-events: none;
+}
+
+.harsh-card:hover .harsh-scan {
+  opacity: 1;
+  animation: harsh-scan 2s linear infinite;
+}
+
+@keyframes harsh-scan {
+  0% { top: 0; }
+  100% { top: 100%; }
+}
+
+/* Tier label + pips */
+.harsh-tier {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: "Orbitron", monospace;
+  font-size: 9px;
+  color: rgba(255, 255, 255, 0.5);
+  letter-spacing: 0.3em;
+  margin-bottom: 18px;
+  transition: all 0.4s;
+}
+
+.harsh-card:hover .harsh-tier {
+  color: #ffffff;
+  text-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
+}
+
+.harsh-pips {
+  display: flex;
+  gap: 2px;
+}
+
+.harsh-pip {
+  width: 4px;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.3);
+  transition: all 0.4s;
+}
+
+.harsh-pip-on {
+  background: #ffffff;
+}
+
+.harsh-card:hover .harsh-pip-on {
+  box-shadow:
+    0 0 6px #ffffff,
+    0 0 12px rgba(255, 255, 255, 0.6);
+}
+
+/* Plan name */
+.harsh-name {
+  font-family: "Michroma", sans-serif;
+  font-size: 13px;
+  color: #ffffff;
+  letter-spacing: 0.06em;
+  margin-bottom: 6px;
+  transition: all 0.4s;
+}
+
+.harsh-card:hover .harsh-name {
+  text-shadow:
+    0 0 16px rgba(255, 255, 255, 0.8),
+    0 0 32px rgba(255, 255, 255, 0.4);
+  letter-spacing: 0.1em;
+}
+
+/* System number */
+.harsh-system {
+  font-family: "Orbitron", monospace;
+  font-size: 10px;
+  color: rgba(255, 255, 255, 0.3);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin-bottom: 22px;
+}
+
+/* Price */
+.harsh-price-area {
+  margin-bottom: 22px;
+}
+
+.harsh-price {
+  font-family: "Orbitron", monospace;
+  font-size: 48px;
+  font-weight: 800;
+  color: #ffffff;
+  line-height: 1;
+  transition: all 0.5s;
+}
+
+.harsh-card:hover .harsh-price {
+  text-shadow:
+    0 0 32px rgba(255, 255, 255, 0.9),
+    0 0 64px rgba(255, 255, 255, 0.5),
+    0 0 96px rgba(255, 255, 255, 0.25);
+}
+
+.harsh-permo {
+  font-size: 10px;
+  color: rgba(255, 255, 255, 0.4);
+  margin-top: 6px;
+  letter-spacing: 0.25em;
+  font-family: "Orbitron", monospace;
+}
+
+/* Features (hidden until hover) */
+.harsh-features {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: max-height 0.5s, opacity 0.4s, padding-top 0.4s;
+  position: relative;
+  padding-top: 0;
+}
+
+.harsh-card:hover .harsh-features {
+  max-height: 280px;
+  opacity: 1;
+  padding-top: 12px;
+}
+
+.harsh-features::before {
+  content: "";
+  display: block;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.4),
+    transparent
+  );
+  margin-bottom: 14px;
+}
+
+.harsh-feat {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.75);
+  padding: 7px 0;
+  font-family: "Inter", sans-serif;
+}
+
+.harsh-feat-icon {
+  width: 16px;
+  height: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 2px;
+  font-size: 8px;
+  flex-shrink: 0;
+  color: #ffffff;
+  transition: all 0.4s;
+}
+
+.harsh-card:hover .harsh-feat-icon {
+  border-color: #ffffff;
+  box-shadow: 0 0 6px rgba(255, 255, 255, 0.5);
+}
+
+/* CTA */
+.harsh-cta {
+  margin-top: 20px;
+  width: 100%;
+  padding: 13px;
+  border-radius: 4px;
+  font-family: "Orbitron", monospace;
+  font-size: 11px;
+  letter-spacing: 0.3em;
+  text-align: center;
+  transition: all 0.4s;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  color: rgba(255, 255, 255, 0.9);
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.harsh-card:hover .harsh-cta {
+  background: #ffffff;
+  color: #000000;
+  border-color: #ffffff;
+  box-shadow:
+    0 0 24px rgba(255, 255, 255, 0.6),
+    0 0 48px rgba(255, 255, 255, 0.3);
+}
+
+/* Mobile <768px */
+@media (max-width: 767px) {
+  .harsh-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .harsh-card {
+    padding: 24px 20px;
+  }
+
+  .harsh-price {
+    font-size: 42px;
+  }
+}
+
+/* Tablet 768-1023px */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .harsh-grid {
+    gap: 10px;
+  }
+
+  .harsh-card {
+    padding: 22px 16px;
+  }
+
+  .harsh-price {
+    font-size: 38px;
+  }
+
+  .harsh-name {
+    font-size: 12px;
+  }
+}
