@@ -1437,3 +1437,303 @@ html[data-no-motion="true"] *::after {
     font-size: 12px;
   }
 }
+
+/* ── BLUEPRINT HOME · BIOMETRIC TERMINAL LOCATION CARD ── */
+
+.bio-terminal-card {
+  width: 100%;
+  height: 100%;
+  background: #000;
+  border: 1px solid rgba(59, 130, 246, 0.3);
+  border-radius: 8px;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.bio-terminal-card:hover {
+  border-color: rgba(59, 130, 246, 0.7);
+  box-shadow: 0 0 50px rgba(59, 130, 246, 0.2);
+}
+
+.bio-terminal-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 16px;
+  background: rgba(59, 130, 246, 0.08);
+  border-bottom: 1px solid rgba(59, 130, 246, 0.25);
+  flex-shrink: 0;
+}
+
+.bio-terminal-left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: "Orbitron", monospace;
+  font-size: 10px;
+  color: rgba(59, 130, 246, 0.85);
+  letter-spacing: 0.25em;
+}
+
+.bio-terminal-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #3b82f6;
+  box-shadow: 0 0 6px #3b82f6;
+  animation: bio-pulse 1.5s ease-in-out infinite;
+}
+
+.bio-terminal-right {
+  font-family: "Orbitron", monospace;
+  font-size: 9px;
+  color: rgba(255, 255, 255, 0.45);
+  letter-spacing: 0.2em;
+}
+
+@keyframes bio-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+.bio-map-wrap {
+  position: relative;
+  padding: 14px;
+  flex-shrink: 0;
+}
+
+.bio-map-iframe {
+  width: 100%;
+  height: 220px;
+  border: 0;
+  border-radius: 6px;
+  filter: brightness(0.9) contrast(1.1) hue-rotate(190deg) saturate(0.7);
+  display: block;
+}
+
+.bio-map-crosshair {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 80px;
+  height: 80px;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: 2;
+}
+
+.bio-map-crosshair::before,
+.bio-map-crosshair::after {
+  content: "";
+  position: absolute;
+  background: rgba(59, 130, 246, 0.5);
+}
+
+.bio-map-crosshair::before {
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 1px;
+}
+
+.bio-map-crosshair::after {
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+}
+
+.bio-open-now {
+  position: absolute;
+  top: 22px;
+  right: 22px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 10px;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-radius: 16px;
+  font-family: "Orbitron", monospace;
+  font-size: 9px;
+  color: #fff;
+  letter-spacing: 0.2em;
+  z-index: 3;
+}
+
+.bio-open-now-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #22c55e;
+  box-shadow: 0 0 8px #22c55e;
+  animation: bio-pulse 1.5s ease-in-out infinite;
+}
+
+.bio-content {
+  padding: 14px 18px 14px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.bio-row-name {
+  font-family: "Michroma", sans-serif;
+  font-size: 16px;
+  color: #fff;
+  letter-spacing: 0.04em;
+  padding: 8px 0 14px;
+}
+
+.bio-row {
+  display: flex;
+  align-items: center;
+  padding: 9px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.85);
+  font-family: "Inter", sans-serif;
+}
+
+.bio-row:last-child {
+  border-bottom: none;
+}
+
+.bio-row-prefix {
+  display: inline-block;
+  font-family: "Orbitron", monospace;
+  font-size: 9px;
+  color: rgba(59, 130, 246, 0.6);
+  letter-spacing: 0.2em;
+  width: 70px;
+  flex-shrink: 0;
+}
+
+.bio-row-value {
+  flex: 1;
+}
+
+.bio-phone-value {
+  font-family: "Orbitron", monospace;
+  letter-spacing: 0.1em;
+}
+
+.bio-status-active {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 8px;
+  background: rgba(34, 197, 94, 0.15);
+  border: 1px solid rgba(34, 197, 94, 0.4);
+  border-radius: 12px;
+  font-family: "Orbitron", monospace;
+  font-size: 9px;
+  color: #22c55e;
+  letter-spacing: 0.15em;
+}
+
+.bio-status-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #22c55e;
+  box-shadow: 0 0 6px #22c55e;
+}
+
+.bio-counter {
+  font-family: "Orbitron", monospace;
+  font-size: 13px;
+  color: #3b82f6;
+  font-weight: 700;
+  text-shadow: 0 0 8px rgba(59, 130, 246, 0.5);
+}
+
+.bio-actions {
+  display: flex;
+  gap: 8px;
+  padding: 14px 18px;
+  border-top: 1px solid rgba(59, 130, 246, 0.15);
+  background: rgba(59, 130, 246, 0.03);
+  flex-shrink: 0;
+}
+
+.bio-action {
+  flex: 1;
+  padding: 12px;
+  background: transparent;
+  border: 1px solid rgba(59, 130, 246, 0.3);
+  border-radius: 4px;
+  color: rgba(59, 130, 246, 0.85);
+  font-family: "Orbitron", monospace;
+  font-size: 10px;
+  letter-spacing: 0.25em;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  text-decoration: none;
+}
+
+.bio-action:hover {
+  background: rgba(59, 130, 246, 0.15);
+  border-color: #3b82f6;
+  color: #3b82f6;
+  box-shadow: 0 0 12px rgba(59, 130, 246, 0.2);
+}
+
+.bio-action-primary {
+  background: rgba(59, 130, 246, 0.15);
+  border-color: rgba(59, 130, 246, 0.5);
+  color: #3b82f6;
+}
+
+.bio-action-primary:hover {
+  background: rgba(59, 130, 246, 0.25);
+  box-shadow: 0 0 20px rgba(59, 130, 246, 0.4);
+}
+
+.bio-location-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  max-width: 1100px;
+  margin: 0 auto;
+  align-items: stretch;
+}
+
+@media (max-width: 767px) {
+  .bio-location-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .bio-map-iframe {
+    height: 180px;
+  }
+
+  .bio-row-prefix {
+    width: 60px;
+    font-size: 8px;
+  }
+
+  .bio-action {
+    font-size: 9px;
+    padding: 10px;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .bio-location-grid {
+    gap: 12px;
+  }
+
+  .bio-map-iframe {
+    height: 200px;
+  }
+}
