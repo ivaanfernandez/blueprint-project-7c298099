@@ -1546,12 +1546,29 @@ html[data-no-motion="true"] *::after {
     font-size: 8px;
   }
 
+  /* CTA base mobile — SIEMPRE LEGIBLE */
   .harsh-card .harsh-cta {
     grid-area: cta;
     margin-top: 14px;
-    padding: 11px;
-    font-size: 9px;
+    padding: 12px;
+    font-family: "Orbitron", monospace;
+    font-size: 10px;
     letter-spacing: 0.22em;
+    text-align: center;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    color: #ffffff;
+    font-weight: 700;
+  }
+
+  .harsh-card .harsh-cta:hover,
+  .harsh-card .harsh-cta:active {
+    background: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.7);
   }
 
   .harsh-scan {
@@ -1565,9 +1582,18 @@ html[data-no-motion="true"] *::after {
   }
 
   .harsh-card.harsh-popular .harsh-cta {
-    background: #ffffff;
-    color: #000000;
-    border-color: #ffffff;
+    background: #93c5fd;
+    border: 1px solid #93c5fd;
+    color: #0a1f44;
+    font-weight: 800;
+    box-shadow: 0 0 20px rgba(147, 197, 253, 0.5);
+  }
+
+  .harsh-card.harsh-popular .harsh-cta:hover,
+  .harsh-card.harsh-popular .harsh-cta:active {
+    background: #bfdbfe;
+    border-color: #bfdbfe;
+    box-shadow: 0 0 28px rgba(147, 197, 253, 0.7);
   }
 
   .harsh-card.harsh-popular .harsh-tier {
@@ -1581,15 +1607,21 @@ html[data-no-motion="true"] *::after {
     box-shadow: 0 0 24px rgba(255, 255, 255, 0.1);
   }
 
-  .harsh-card.harsh-expanded .harsh-cta {
-    background: #ffffff;
-    color: #000000;
-    border-color: #ffffff;
+  .harsh-card.harsh-expanded:not(.harsh-popular) .harsh-cta {
+    background: rgba(255, 255, 255, 0.18);
+    border-color: rgba(255, 255, 255, 0.6);
+    color: #ffffff;
   }
 
   .harsh-card.harsh-expanded.harsh-popular {
     border-color: rgba(255, 255, 255, 0.7);
     background: rgba(255, 255, 255, 0.05);
+  }
+
+  .harsh-card.harsh-expanded.harsh-popular .harsh-cta {
+    background: #93c5fd;
+    border-color: #93c5fd;
+    color: #0a1f44;
   }
 }
 
