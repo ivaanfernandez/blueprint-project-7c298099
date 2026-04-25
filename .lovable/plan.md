@@ -1,58 +1,68 @@
+## Pricing Cards — Harsh Glow Magnetic Reveal
 
+Replace the 3 existing pricing cards inside `src/components/PricingSection.tsx` with a new HUD-style component. Title "YOUR SYSTEM STARTS HERE", the Monthly/Yearly toggle, and the section wrapper stay byte-identical. Only the cards block changes.
 
-## Huella Verde — Hero Image Swap (Desktop + Mobile)
+### Files touched
 
-Replace the current single hero background image (`@/assets/reset-hero-bg.jpg`) on `/huella-verde` with two new uploaded images — one tuned for desktop, one for mobile vertical viewport — using a responsive `<picture>` element. Nothing else changes.
+1. **New** — `src/components/PricingCardsHarshGlow.tsx`
+2. **Edit** — `src/components/PricingSection.tsx` (swap card grid for new component, remove now-unused code)
+3. **Edit** — `src/index.css` (append Harsh Glow styles)
 
 ### What changes
 
-**Only one file:** `src/pages/HuellaVerde.tsx`
+**`src/components/PricingCardsHarshGlow.tsx`** (new)
+- Receives `isYearly: boolean` prop.
+- Internal `TIERS` array with 3 tiers: Blueprint (SYSTEM 01 / FOUNDATION / 1 pip / $75 / INITIALIZE), Blueprint+ (SYSTEM 02 / POPULAR / 2 pips / $150 / ACTIVATE / `isPopular`), Blueprint Elite (SYSTEM 03 / MAXIMUM / 3 pips / $250 / DEPLOY).
+- Renders a `.harsh-grid` containing 3 `.harsh-card` divs. Each card contains, in order:
+  - 4 corner bracket divs (`.harsh-corner harsh-corner-tl/tr/bl/br`)
+  - Scan line div (`.harsh-scan`)
+  - Tier row: pips (`.harsh-pips` with 3 `.harsh-pip`, first N marked `.harsh-pip-on` based on `pipsActive`) + `tier.tierLabel`
+  - Plan name (`.harsh-name`)
+  - System number (`.harsh-system`)
+  - Price area (`.harsh-price-area`): `${price}` in `.harsh-price`, `PER MONTH` in `.harsh-permo`
+  - Features list (`.harsh-features`) — hidden until hover via CSS
+  - CTA button (`.harsh-cta`) showing `tier.cta`
+- The user's pasted JSX had blank gaps; I'll reconstruct it cleanly using the CSS class names defined below. No internal state, no Framer Motion — pure CSS hover.
 
-**Hero section (lines 152–164):**
-- Replace the single `<img src={resetHeroBg}>` with a `<picture>` block:
-  - `<source media="(max-width: 767px)" srcSet={heroResetMobile} />`
-  - `<img src={heroResetDesktop} ... loading="eager" fetchPriority="high" />`
-- Keep all current inline styles on the `<img>` (absolute inset 0, objectFit cover, opacity 0.85, zIndex 0, pointerEvents none)
-- Wrap the `<picture>` itself with the same `position: absolute; inset: 0` so layout is identical
-- The radial black fade overlay, ambient green glow, bottom green gradient line, and `GradualBlur` stay byte-identical
+**`src/components/PricingSection.tsx`** (edit)
+- Add `import PricingCardsHarshGlow from "./PricingCardsHarshGlow";`
+- Keep: section wrapper, title, Monthly/Yearly toggle + its `isYearly` state.
+- Replace the entire `{isMobile ? (...) : (...)}` cards block (the mobile stack + desktop grid) with a single `<PricingCardsHarshGlow isYearly={isYearly} />`.
+- Remove now-unused: `MobileCard`, `PricingCard`, `FingerprintSVG`, `CheckIcon`, `FingerprintDot`, `TripleDots`, `PLANS`, `Plan` interface, `expandedCard` state, `useIsMobile` hook, `motion` / `AnimatePresence` / `User` / `Check` imports. (Responsiveness now handled in CSS via media queries on `.harsh-grid`.)
 
-**Imports (top of file):**
-- Remove: `import resetHeroBg from "@/assets/reset-hero-bg.jpg";`
-- Add: `import heroResetDesktop from "@/assets/reset-hero-desktop.jpg";`
-- Add: `import heroResetMobile from "@/assets/reset-hero-mobile.jpg";`
+**`src/index.css`** (append)
+- Append the full Harsh Glow CSS block (~280 lines) from the spec, exactly as provided. Includes:
+  - `.harsh-grid` (3-col desktop, 1-col mobile, tablet compact)
+  - `.harsh-card` base + hover (translateY -8px, triple white box-shadow glow)
+  - `.harsh-corner-*` (12px → 16px on hover with double glow)
+  - `.harsh-scan` keyframes 2s linear infinite, only on hover
+  - `.harsh-tier`, `.harsh-pips`, `.harsh-pip(-on)`
+  - `.harsh-name`, `.harsh-system`
+  - `.harsh-price-area`, `.harsh-price` (triple text-shadow on hover), `.harsh-permo`
+  - `.harsh-features` (max-height/opacity reveal), `.harsh-feat`, `.harsh-feat-icon`
+  - `.harsh-cta` (inverts to white bg + black text on hover with double glow)
+  - `@media (max-width: 767px)` and `@media (768–1023px)` blocks
 
-### Asset work (in default mode)
+### Pricing values — needs your call
 
-Copy the two uploaded images into the project as compressed JPGs (already pre-compressed per user):
+The prompt's placeholder yearly prices (`$60 / $120 / $200`) are 20% off and **don't match** the current site's yearly values (`$64 / $128 / $213`, ~15% off). I'll keep the current site's actual yearly prices in the new `TIERS` array so the toggle keeps showing the same numbers users already see. If you want the 20%-off placeholders instead, say so and I'll swap.
 
-- `user-uploads://94D4ADBD-D938-4280-B244-1D86B00A955A.jpg` → `src/assets/reset-hero-desktop.jpg` (vertical, full grid + figures — works as wide hero with center crop, also used as desktop default)
-- `user-uploads://adam_and_god.jpg` → `src/assets/reset-hero-mobile.jpg` (tighter horizontal Adam-and-God-style figures crop, better fit for 390 px portrait viewport)
+### Strict preservations
 
-Note on mapping: the vertical-format image is the more cinematic, atmospheric "scene" → desktop. The square cropped figures image is tighter and reads better at narrow widths → mobile. Confirm this mapping in the question below if you'd prefer it inverted.
+- Title "YOUR SYSTEM STARTS HERE" — unchanged
+- Monthly/Yearly toggle UI + `isYearly` state — unchanged
+- Section wrapper `<section className="relative z-10 py-8 md:py-12 px-4">` — unchanged
+- Save 15% pill on yearly toggle — unchanged
+- No other page or component touched
+- No color other than white/gray; all glows are pure white
+- All animation timings preserved exactly per spec (0.5s card, 0.4s hover details, 2s scan)
+- Middle card (Blueprint+) marked POPULAR via `tierLabel` only — no scale, no extra border/shadow in base state
+- 3 tiers exactly, in order: Blueprint, Blueprint+, Blueprint Elite
+- Features hidden in base state, revealed on hover (mobile tap will trigger via `:hover` on touch)
 
-### What stays untouched
+### Out of scope
 
-- "RESET" headline, subtext, font sizes, Michroma typography
-- Black radial fade overlay (`rgba(0,0,0,0.75) → transparent`)
-- Ambient green glow (`rgba(34,197,94,0.06)`)
-- Bottom green gradient hairline
-- `GradualBlur` cinematic fade at hero bottom
-- Recovery Room bento, Premium Services accordion, HUD footer, green animated background, floating dock
-- Old asset file `src/assets/reset-hero-bg.jpg` stays on disk (orphaned, safe — can be removed later if desired)
-- Every other page (`Home`, `MainLanding`, `HuellaAzul`, `HuellaRoja`)
-- Green fingerprint biometric loader on this page
-
-### Technical notes
-
-- `<picture>` + `<source media>` is the native, zero-JS way to serve different images per viewport — no `useState`/`useEffect`/resize listener needed, no flash of wrong image, no re-render on rotate.
-- `loading="eager"` + `fetchPriority="high"` because hero is above-the-fold.
-- `objectPosition: center` keeps both crops centered; if either image needs a vertical bias (e.g. `center 30%`), we can tune after first preview.
-- Breakpoint `767px` matches the existing `@media (max-width: 767px)` rule already in the page's style block (line 134), so image swap and text padding swap happen at the same threshold.
-
-### Out of scope (will not touch)
-
-- No image processing/compression — files used as uploaded
-- No lazy loading on the hero `<img>`
-- No copy, color, gradient, layout, typography, or component change
-- No edits to any other route or file
-
+- No changes to fonts (Orbitron/Michroma already loaded in `index.html`)
+- No new dependencies
+- No edits to Home, HuellaAzul, HuellaRoja, HuellaVerde
+- No changes to background, dock, footer, or any other section of MainLanding
