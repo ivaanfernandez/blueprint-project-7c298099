@@ -1,5 +1,3 @@
-import LocationCardInteractive from "./LocationCardInteractive";
-
 const FingerprintBigSVG = ({ color, size = 160 }: { color: string; size?: number }) => (
   <svg viewBox="0 0 140 140" width={size} height={size} fill="none" xmlns="http://www.w3.org/2000/svg" style={{ display: "block" }}>
     {[18, 26, 34, 42, 50].map((ry, i) => (
@@ -82,31 +80,12 @@ const BiometricScanCard = () => (
 
 const BentoGrid = () => (
   <section className="relative z-10 pb-8 md:pb-12" style={{ background: "transparent", paddingTop: 0, marginTop: 0 }}>
-    {/* DESKTOP: 2-col bento */}
     <div
-      className="bento-grid-2col mx-4 md:mx-auto hidden md:grid"
+      className="mx-4 md:mx-auto"
       style={{
-        gridTemplateColumns: "repeat(2, 1fr)",
-        gap: 20,
-        alignItems: "stretch",
-        maxWidth: 900,
+        maxWidth: 440,
       }}
     >
-      <BiometricScanCard />
-      <LocationCardInteractive />
-    </div>
-
-    {/* MOBILE: Location card on top, Fingerprint scan below */}
-    <div
-      className="block md:hidden"
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        gap: 16,
-        margin: "0 16px",
-      }}
-    >
-      <LocationCardInteractive />
       <BiometricScanCard />
     </div>
     <style>{`
@@ -134,12 +113,6 @@ const BentoGrid = () => (
       @keyframes bentoFpBlink {
         0%, 100% { opacity: 1; }
         50% { opacity: 0.3; }
-      }
-      @media (max-width: 767px) {
-        .bento-grid-2col {
-          grid-template-columns: 1fr !important;
-          gap: 16px !important;
-        }
       }
     `}</style>
   </section>
