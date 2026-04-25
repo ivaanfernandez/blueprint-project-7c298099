@@ -71,12 +71,27 @@ interface Props {
 }
 
 const PricingCardsHarshGlow = ({ isYearly }: Props) => {
+  const popularIndex = TIERS.findIndex((t) => t.isPopular);
+  const [expandedIndex, setExpandedIndex] = useState<number | null>(
+    popularIndex !== -1 ? popularIndex : null
+  );
+
+  const handleCardClick = (index: number) => {
+    if (typeof window !== "undefined" && window.innerWidth >= 768) return;
+    setExpandedIndex(expandedIndex === index ? null : index);
+  };
+
   return (
     <div className="harsh-grid">
-      {TIERS.map((tier) => {
+      {TIERS.map((tier, index) => {
         const price = isYearly ? tier.priceYearly : tier.priceMonthly;
+        const isExpanded = expandedIndex === index;
         return (
-          <div key={tier.name} className={`harsh-card ${tier.isPopular ? "harsh-popular" : ""}`}>
+          <div
+            key={tier.name}
+            className={`harsh-card ${tier.isPopular ? "harsh-popular" : ""} ${isExpanded ? "harsh-expanded" : ""}`}
+            onClick={() => handleCardClick(index)}
+          >
             {/* Corner brackets HUD */}
             <div className="harsh-corner harsh-corner-tl" />
             <div className="harsh-corner harsh-corner-tr" />
