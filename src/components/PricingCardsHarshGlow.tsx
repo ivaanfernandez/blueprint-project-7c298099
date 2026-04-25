@@ -76,7 +76,7 @@ const PricingCardsHarshGlow = ({ isYearly }: Props) => {
       {TIERS.map((tier) => {
         const price = isYearly ? tier.priceYearly : tier.priceMonthly;
         return (
-          <div key={tier.name} className="harsh-card">
+          <div key={tier.name} className={`harsh-card ${tier.isPopular ? "harsh-popular" : ""}`}>
             {/* Corner brackets HUD */}
             <div className="harsh-corner harsh-corner-tl" />
             <div className="harsh-corner harsh-corner-tr" />
