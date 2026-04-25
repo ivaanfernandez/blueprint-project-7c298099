@@ -1737,3 +1737,350 @@ html[data-no-motion="true"] *::after {
     height: 200px;
   }
 }
+
+/* ── BLUEPRINT HOME · FINGERPRINT HUD CARD (TRIPTYCH + CARDIAC) ── */
+
+.fp-hud-card {
+  width: 100%;
+  height: 100%;
+  background: #000;
+  border: 1px solid rgba(59, 130, 246, 0.3);
+  border-radius: 12px;
+  padding: 20px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.4s ease;
+}
+
+.fp-hud-card:hover {
+  border-color: rgba(59, 130, 246, 0.6);
+  box-shadow: 0 0 40px rgba(59, 130, 246, 0.15);
+}
+
+.fp-hud-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(59, 130, 246, 0.15);
+  margin-bottom: 16px;
+  flex-shrink: 0;
+}
+
+.fp-hud-header-left {
+  font-family: "Orbitron", monospace;
+  font-size: 9px;
+  color: rgba(255, 255, 255, 0.4);
+  letter-spacing: 0.25em;
+}
+
+.fp-hud-header-center {
+  font-family: "Michroma", sans-serif;
+  font-size: 11px;
+  color: #3b82f6;
+  letter-spacing: 0.2em;
+  text-shadow: 0 0 8px rgba(59, 130, 246, 0.5);
+}
+
+.fp-hud-header-right {
+  display: flex;
+  gap: 4px;
+}
+
+.fp-hud-pagination-dot {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.fp-hud-pagination-dot.active {
+  background: #3b82f6;
+  box-shadow: 0 0 6px #3b82f6;
+}
+
+.fp-hud-body {
+  display: grid;
+  grid-template-columns: 180px 1fr;
+  gap: 16px;
+  align-items: stretch;
+  margin-bottom: 16px;
+  flex: 1;
+}
+
+.fp-hud-side {
+  position: relative;
+  background: rgba(59, 130, 246, 0.04);
+  border: 1px solid rgba(59, 130, 246, 0.2);
+  border-radius: 8px;
+  padding: 16px 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.fp-hud-corner {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-color: rgba(59, 130, 246, 0.7);
+  pointer-events: none;
+}
+
+.fp-hud-corner-tl { top: 6px; left: 6px; border-top: 1.5px solid; border-left: 1.5px solid; }
+.fp-hud-corner-tr { top: 6px; right: 6px; border-top: 1.5px solid; border-right: 1.5px solid; }
+.fp-hud-corner-bl { bottom: 6px; left: 6px; border-bottom: 1.5px solid; border-left: 1.5px solid; }
+.fp-hud-corner-br { bottom: 6px; right: 6px; border-bottom: 1.5px solid; border-right: 1.5px solid; }
+
+.fp-hud-svg-wrap {
+  width: 100px;
+  height: 100px;
+  position: relative;
+  margin-bottom: 14px;
+}
+
+.fp-hud-svg {
+  width: 100%;
+  height: 100%;
+}
+
+.fp-hud-scan-line {
+  position: absolute;
+  left: 10%;
+  right: 10%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #3b82f6, transparent);
+  box-shadow: 0 0 8px #3b82f6, 0 0 16px rgba(59, 130, 246, 0.5);
+  animation: fp-hud-scan 3s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes fp-hud-scan {
+  0%, 100% { top: 15%; opacity: 1; }
+  50% { top: 85%; opacity: 0.8; }
+}
+
+.fp-hud-id {
+  font-family: "Orbitron", monospace;
+  font-size: 8px;
+  color: rgba(255, 255, 255, 0.5);
+  letter-spacing: 0.2em;
+  margin-bottom: 4px;
+}
+
+.fp-hud-status {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-family: "Orbitron", monospace;
+  font-size: 9px;
+  color: #22c55e;
+  letter-spacing: 0.2em;
+}
+
+.fp-hud-status-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #22c55e;
+  box-shadow: 0 0 6px #22c55e;
+  animation: fp-hud-dot-pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes fp-hud-dot-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+.fp-hud-panels {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.fp-hud-panel {
+  padding: 12px 14px;
+  background: rgba(59, 130, 246, 0.04);
+  border: 1px solid rgba(59, 130, 246, 0.18);
+  border-radius: 6px;
+  position: relative;
+  overflow: hidden;
+  flex: 1;
+}
+
+.fp-hud-panel-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.fp-hud-panel-label {
+  font-family: "Orbitron", monospace;
+  font-size: 8px;
+  color: rgba(255, 255, 255, 0.5);
+  letter-spacing: 0.25em;
+}
+
+.fp-hud-panel-trend {
+  font-family: "Orbitron", monospace;
+  font-size: 9px;
+  color: #22c55e;
+}
+
+.fp-hud-panel-value-row {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+}
+
+.fp-hud-panel-value {
+  font-family: "Orbitron", monospace;
+  font-size: 22px;
+  font-weight: 700;
+  color: #ffffff;
+  line-height: 1;
+}
+
+.fp-hud-panel-unit {
+  font-family: "Orbitron", monospace;
+  font-size: 9px;
+  color: rgba(59, 130, 246, 0.7);
+  letter-spacing: 0.15em;
+}
+
+.fp-hud-panel-bar {
+  margin-top: 8px;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 2px;
+  overflow: hidden;
+  position: relative;
+}
+
+.fp-hud-panel-bar-fill {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  background: linear-gradient(90deg, #3b82f6, #60a5fa);
+  border-radius: 2px;
+  box-shadow: 0 0 8px rgba(59, 130, 246, 0.6);
+  animation: fp-hud-bar-flux-1 4s ease-in-out infinite;
+}
+
+.fp-hud-panel-bar-fill.fp-hud-bar-2 {
+  animation: fp-hud-bar-flux-2 5s ease-in-out infinite;
+  background: linear-gradient(90deg, #3b82f6, #93c5fd);
+}
+
+.fp-hud-panel-bar-fill.fp-hud-bar-3 {
+  animation: fp-hud-bar-flux-3 3.5s ease-in-out infinite;
+}
+
+@keyframes fp-hud-bar-flux-1 {
+  0%, 100% { width: 78%; }
+  50% { width: 86%; }
+}
+
+@keyframes fp-hud-bar-flux-2 {
+  0%, 100% { width: 64%; }
+  50% { width: 72%; }
+}
+
+@keyframes fp-hud-bar-flux-3 {
+  0%, 100% { width: 91%; }
+  50% { width: 95%; }
+}
+
+.fp-hud-cardiac {
+  padding: 12px 14px;
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(59, 130, 246, 0.2);
+  border-radius: 6px;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.fp-hud-cardiac-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 6px;
+}
+
+.fp-hud-cardiac-label {
+  font-family: "Orbitron", monospace;
+  font-size: 8px;
+  color: rgba(255, 255, 255, 0.5);
+  letter-spacing: 0.25em;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.fp-hud-cardiac-live-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #22c55e;
+  box-shadow: 0 0 6px #22c55e;
+  animation: fp-hud-dot-pulse 1s ease-in-out infinite;
+}
+
+.fp-hud-cardiac-bpm {
+  font-family: "Orbitron", monospace;
+  font-size: 13px;
+  color: #3b82f6;
+  font-weight: 700;
+  text-shadow: 0 0 6px rgba(59, 130, 246, 0.5);
+}
+
+.fp-hud-cardiac-bpm-unit {
+  font-size: 8px;
+  color: rgba(59, 130, 246, 0.5);
+  margin-left: 4px;
+}
+
+.fp-hud-cardiac-svg {
+  width: 100%;
+  height: 30px;
+}
+
+.fp-hud-cardiac-path {
+  fill: none;
+  stroke: #3b82f6;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  filter: drop-shadow(0 0 4px rgba(59, 130, 246, 0.7));
+  stroke-dasharray: 600;
+  animation: fp-hud-ecg 2s linear infinite;
+}
+
+@keyframes fp-hud-ecg {
+  0% { stroke-dashoffset: 600; }
+  100% { stroke-dashoffset: -600; }
+}
+
+@media (max-width: 767px) {
+  .fp-hud-body {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  .fp-hud-side { padding: 14px 12px; }
+  .fp-hud-svg-wrap { width: 80px; height: 80px; }
+  .fp-hud-panel-value { font-size: 20px; }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .fp-hud-body {
+    grid-template-columns: 140px 1fr;
+    gap: 12px;
+  }
+  .fp-hud-side { padding: 12px 8px; }
+  .fp-hud-svg-wrap { width: 80px; height: 80px; }
+}
