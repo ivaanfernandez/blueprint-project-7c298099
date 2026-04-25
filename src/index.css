@@ -1403,19 +1403,129 @@ html[data-no-motion="true"] *::after {
     0 0 48px rgba(255, 255, 255, 0.3);
 }
 
-/* Mobile <768px */
+/* Mobile <768px: COMPACT ROW LAYOUT — reduce ~65% scroll */
 @media (max-width: 767px) {
   .harsh-grid {
     grid-template-columns: 1fr;
-    gap: 12px;
+    gap: 8px;
+    padding: 0 4px;
   }
 
   .harsh-card {
-    padding: 24px 20px;
+    padding: 14px 16px;
+    display: grid;
+    grid-template-rows: auto auto auto;
+    grid-template-areas:
+      "tier tier"
+      "name price"
+      "cta cta";
+    grid-template-columns: 1fr auto;
+    column-gap: 12px;
+  }
+
+  .harsh-card:hover {
+    transform: none;
+  }
+
+  .harsh-corner {
+    width: 8px;
+    height: 8px;
+  }
+
+  .harsh-corner-tl { top: 5px; left: 5px; }
+  .harsh-corner-tr { top: 5px; right: 5px; }
+  .harsh-corner-bl { bottom: 5px; left: 5px; }
+  .harsh-corner-br { bottom: 5px; right: 5px; }
+
+  .harsh-tier {
+    grid-area: tier;
+    margin-bottom: 6px;
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    gap: 8px;
+  }
+
+  .harsh-pip {
+    width: 4px;
+    height: 4px;
+  }
+
+  .harsh-name {
+    grid-area: name;
+    align-self: end;
+    font-size: 13px;
+    letter-spacing: 0.04em;
+    margin-bottom: 2px;
+  }
+
+  .harsh-card:hover .harsh-name {
+    text-shadow: none;
+    letter-spacing: 0.04em;
+  }
+
+  .harsh-system {
+    grid-column: 1 / 2;
+    grid-row: 2 / 3;
+    align-self: start;
+    margin-top: 14px;
+    font-size: 8px;
+    letter-spacing: 0.18em;
+    margin-bottom: 0;
+  }
+
+  .harsh-price-area {
+    grid-area: price;
+    margin-bottom: 0;
+    text-align: right;
+    align-self: center;
   }
 
   .harsh-price {
-    font-size: 42px;
+    font-size: 26px;
+    font-weight: 800;
+    line-height: 1;
+  }
+
+  .harsh-card:hover .harsh-price {
+    text-shadow: none;
+  }
+
+  .harsh-permo {
+    font-size: 7px;
+    letter-spacing: 0.18em;
+    margin-top: 3px;
+  }
+
+  .harsh-features {
+    display: none;
+  }
+
+  .harsh-cta {
+    grid-area: cta;
+    margin-top: 12px;
+    padding: 10px;
+    font-size: 9px;
+    letter-spacing: 0.22em;
+  }
+
+  .harsh-scan {
+    display: none;
+  }
+
+  /* POPULAR card: stronger border + inverted CTA */
+  .harsh-card.harsh-popular {
+    border-color: rgba(255, 255, 255, 0.4);
+    background: rgba(255, 255, 255, 0.025);
+  }
+
+  .harsh-card.harsh-popular .harsh-cta {
+    background: #ffffff;
+    color: #000000;
+    border-color: #ffffff;
+  }
+
+  .harsh-card.harsh-popular .harsh-tier {
+    color: rgba(255, 255, 255, 0.9);
   }
 }
 
