@@ -1403,7 +1403,7 @@ html[data-no-motion="true"] *::after {
     0 0 48px rgba(255, 255, 255, 0.3);
 }
 
-/* Mobile <768px: COMPACT ROW LAYOUT — reduce ~65% scroll */
+/* Mobile <768px: COMPACT ROW + TAP TO EXPAND */
 @media (max-width: 767px) {
   .harsh-grid {
     grid-template-columns: 1fr;
@@ -1413,14 +1413,18 @@ html[data-no-motion="true"] *::after {
 
   .harsh-card {
     padding: 14px 16px;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
     display: grid;
-    grid-template-rows: auto auto auto;
-    grid-template-areas:
-      "tier tier"
-      "name price"
-      "cta cta";
     grid-template-columns: 1fr auto;
+    grid-template-areas:
+      "tier   tier"
+      "name   price"
+      "system price"
+      "feat   feat"
+      "cta    cta";
     column-gap: 12px;
+    row-gap: 0;
   }
 
   .harsh-card:hover {
@@ -1437,9 +1441,9 @@ html[data-no-motion="true"] *::after {
   .harsh-corner-bl { bottom: 5px; left: 5px; }
   .harsh-corner-br { bottom: 5px; right: 5px; }
 
-  .harsh-tier {
+  .harsh-card .harsh-tier {
     grid-area: tier;
-    margin-bottom: 6px;
+    margin-bottom: 8px;
     font-size: 9px;
     letter-spacing: 0.2em;
     gap: 8px;
@@ -1450,38 +1454,39 @@ html[data-no-motion="true"] *::after {
     height: 4px;
   }
 
-  .harsh-name {
+  .harsh-card .harsh-name {
     grid-area: name;
     align-self: end;
-    font-size: 13px;
+    font-size: 14px;
     letter-spacing: 0.04em;
-    margin-bottom: 2px;
+    margin: 0;
+    line-height: 1.1;
   }
 
-  .harsh-card:hover .harsh-name {
+  .harsh-card:hover .harsh-name,
+  .harsh-card.harsh-expanded .harsh-name {
     text-shadow: none;
     letter-spacing: 0.04em;
   }
 
-  .harsh-system {
-    grid-column: 1 / 2;
-    grid-row: 2 / 3;
+  .harsh-card .harsh-system {
+    grid-area: system;
     align-self: start;
-    margin-top: 14px;
+    margin: 4px 0 0 0;
     font-size: 8px;
     letter-spacing: 0.18em;
-    margin-bottom: 0;
+    color: rgba(255, 255, 255, 0.35);
   }
 
-  .harsh-price-area {
+  .harsh-card .harsh-price-area {
     grid-area: price;
-    margin-bottom: 0;
-    text-align: right;
     align-self: center;
+    margin: 0;
+    text-align: right;
   }
 
   .harsh-price {
-    font-size: 26px;
+    font-size: 28px;
     font-weight: 800;
     line-height: 1;
   }
@@ -1496,14 +1501,55 @@ html[data-no-motion="true"] *::after {
     margin-top: 3px;
   }
 
-  .harsh-features {
-    display: none;
+  /* FEATURES: hidden by default, expand on .harsh-expanded */
+  .harsh-card .harsh-features {
+    grid-area: feat;
+    display: block;
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    padding-top: 0;
+    margin-top: 0;
+    transition: max-height 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+      opacity 0.4s ease, padding-top 0.3s ease, margin-top 0.3s ease;
   }
 
-  .harsh-cta {
+  .harsh-card.harsh-expanded .harsh-features {
+    max-height: 280px;
+    opacity: 1;
+    padding-top: 12px;
+    margin-top: 14px;
+  }
+
+  .harsh-features::before {
+    content: "";
+    display: block;
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.4),
+      transparent
+    );
+    margin-bottom: 12px;
+  }
+
+  .harsh-feat {
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.75);
+    padding: 6px 0;
+  }
+
+  .harsh-feat-icon {
+    width: 14px;
+    height: 14px;
+    font-size: 8px;
+  }
+
+  .harsh-card .harsh-cta {
     grid-area: cta;
-    margin-top: 12px;
-    padding: 10px;
+    margin-top: 14px;
+    padding: 11px;
     font-size: 9px;
     letter-spacing: 0.22em;
   }
@@ -1512,7 +1558,7 @@ html[data-no-motion="true"] *::after {
     display: none;
   }
 
-  /* POPULAR card: stronger border + inverted CTA */
+  /* POPULAR */
   .harsh-card.harsh-popular {
     border-color: rgba(255, 255, 255, 0.4);
     background: rgba(255, 255, 255, 0.025);
@@ -1526,6 +1572,24 @@ html[data-no-motion="true"] *::after {
 
   .harsh-card.harsh-popular .harsh-tier {
     color: rgba(255, 255, 255, 0.9);
+  }
+
+  /* EXPANDED */
+  .harsh-card.harsh-expanded {
+    border-color: rgba(255, 255, 255, 0.6);
+    background: rgba(255, 255, 255, 0.04);
+    box-shadow: 0 0 24px rgba(255, 255, 255, 0.1);
+  }
+
+  .harsh-card.harsh-expanded .harsh-cta {
+    background: #ffffff;
+    color: #000000;
+    border-color: #ffffff;
+  }
+
+  .harsh-card.harsh-expanded.harsh-popular {
+    border-color: rgba(255, 255, 255, 0.7);
+    background: rgba(255, 255, 255, 0.05);
   }
 }
 
