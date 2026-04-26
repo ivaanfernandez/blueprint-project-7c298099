@@ -771,8 +771,7 @@ const Home = ({ showDock }: { showDock: boolean }) => {
           ))}
         </motion.div>
       </div>
-
-      {/* ── Divider ── */}
+      </LazyMount>
       <SectionDivider />
 
 
