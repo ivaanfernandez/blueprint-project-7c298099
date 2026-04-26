@@ -45,7 +45,7 @@ const Footer = () => (
         <div>
           <p style={{ fontSize: 10, letterSpacing: '0.1em', color: 'rgba(255,255,255,0.2)', fontWeight: 600, marginBottom: 8 }}>SOCIAL</p>
           <a
-            href="https://instagram.com/projectoblueprint"
+            href="https://instagram.com/proyectoblueprint"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-1.5 transition-colors"
@@ -54,7 +54,7 @@ const Footer = () => (
             onMouseLeave={e => { e.currentTarget.style.color = 'rgba(255,255,255,0.4)'; }}
           >
             <Instagram size={16} />
-            @projectoblueprint
+            @proyectoblueprint
           </a>
         </div>
       </div>
