@@ -2,7 +2,6 @@ import { lazy, Suspense } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Route, Routes, useLocation } from "react-router-dom";
 import Home from "@/pages/Home";
-import RouteLoader from "@/components/RouteLoader";
 
 // Lazy-loaded routes (code splitting). Home stays static — it's the landing.
 const MainLanding = lazy(() => import("@/pages/MainLanding"));
@@ -42,7 +41,7 @@ const AnimatedRoutes = ({ showDock }: AnimatedRoutesProps) => {
 
   return (
     <AnimatePresence mode="wait">
-      <Suspense fallback={<RouteLoader />}>
+      <Suspense fallback={null}>
         <Routes location={location} key={location.pathname}>
           <Route path="/" element={<PageWrapper><Home showDock={showDock} /></PageWrapper>} />
           <Route path="/huella-azul" element={<PageWrapper><MainLanding showDock={showDock} /></PageWrapper>} />
