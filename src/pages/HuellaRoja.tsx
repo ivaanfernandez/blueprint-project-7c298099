@@ -1,6 +1,7 @@
 import { useState, useCallback, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
+import { Helmet } from "react-helmet-async";
 import { scrollReveal, scrollRevealNoShift } from "@/lib/scrollAnimations";
 import BiometricScanRed from "@/components/BiometricScanRed";
 import { TextScramble } from "@/components/ui/text-scramble";
