@@ -2394,3 +2394,42 @@ html[data-no-motion="true"] *::after {
     box-shadow: 0 0 16px rgba(255, 255, 255, 0.4);
   }
 }
+
+/* ── SCROLLBAR HIDDEN (mantiene scroll funcional, oculta visual) ── */
+
+/* Chrome, Safari, Edge (Webkit/Blink) */
+::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: transparent;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Firefox */
+html {
+  scrollbar-width: none;
+}
+
+/* IE / Legacy Edge */
+body {
+  -ms-overflow-style: none;
+}
+
+/* Asegurar que html y body permitan scroll vertical pero NO horizontal */
+html, body {
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+/* Para elementos internos que tengan scroll (si los hay), aplicar la misma regla */
+*::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
