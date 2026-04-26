@@ -78,6 +78,9 @@ const HomeLoader = ({ onComplete, duration = 4000 }: HomeLoaderProps) => {
       role="status"
       aria-live="polite"
       aria-label={`Initializing system, ${pctLabel} percent`}
+      data-testid="home-loader"
+      data-phase={fading ? "fading" : progress >= 100 ? "complete" : "loading"}
+      data-progress={pctLabel}
       className={`bp-home-loader${fading ? " bp-home-loader--fading" : ""}`}
     >
       {/* Faint grid backdrop */}
