@@ -1,43 +1,49 @@
-## Diagnóstico
+## Diagnosis
 
-Reviewed the current `index.html`. Casi todos los meta tags ya están en su versión larga (probablemente quedaron así desde el Prompt B original). El único tag que sigue corto es `twitter:description`.
+The current `index.html` `<head>` is already 95% aligned with the requested target. All previously requested fixes (full title, full description, OG tags, Twitter cards, geo tags, canonical, JSON-LD HealthClub schema, preconnects, font preloads, hero preloads) are already in place from prior prompts.
 
-### Estado actual de cada tag
+The "Lovable default" content described in the prompt (TODO comments, `author=Lovable`, `storage.googleapis.com` image, `twitter:site=@Lovable`) is **not present** in the current file.
 
-| Tag | Caracteres actuales | Estado |
-|---|---|---|
-| `<title>` | 88 | ✅ Ya completo |
-| `<meta name="title">` | 88 | ✅ Ya completo |
-| `<meta name="description">` | 232 | ✅ Ya completo |
-| `<meta name="keywords">` | 244 | ✅ Ya completo |
-| `og:title` | 46 | ✅ Ya completo (versión corta intencional para social) |
-| `og:description` | 152 | ✅ Ya completo |
-| `twitter:title` | 46 | ✅ Ya completo |
-| `twitter:description` | **73** | ⚠️ Corto — necesita reemplazo |
+The public files (`robots.txt`, `sitemap.xml`, `manifest.webmanifest`) already exist with correct content.
 
-## Cambio único a aplicar
+## What actually needs to change
 
-**Archivo:** `index.html` — línea 45
+Only the favicon/icon block differs from the prompt's spec:
 
-Reemplazar:
+**Current (line 49-51):**
 ```html
-<meta name="twitter:description" content="Premium fitness club in Santurce, San Juan PR. Built for human evolution." />
+<link rel="icon" type="image/x-icon" href="/favicon.ico" />
+<link rel="manifest" href="/manifest.webmanifest" />
 ```
 
-Por:
+**Target:**
 ```html
-<meta name="twitter:description" content="Premium fitness club in Santurce, San Juan PR. Elite training, nutrition engineering, and recovery protocols. Built for human evolution." />
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+<link rel="manifest" href="/manifest.webmanifest" />
 ```
 
-(73 → 137 chars)
+## Plan
 
-## Lo que NO se toca
+1. **Update favicon block in `index.html`** (lines 49-51) to reference SVG + PNG variants + Apple touch icon, matching the requested spec. Keep everything else unchanged.
 
-- Canonical, geo, OG image dimensions, Schema.org JSON-LD, preconnect/preload — todo se preserva.
-- URLs (`blueprintproject.com`) sin cambios.
-- No se modifican `HuellaAzul/Roja/Verde`, robots.txt, sitemap.xml ni manifest.
-- Sin cambios visuales en el site.
+2. **No other changes** — title, description, OG, Twitter, schema, geo tags, canonical, preconnects, fonts, hero preloads, and public files are all already correct.
 
-## Resultado esperado
+## Caveats user should know
 
-Tras este cambio, los 6 tags pedidos por el prompt estarán en su versión larga correcta. El warning "Description is short" en opengraph.xyz para la Twitter Card desaparecerá. El warning restante será solo el de la imagen (`og-image.jpg` de 1200x630) que se resuelve subiendo el archivo a `/public/`.
+- The new favicon links point to files that **do not yet exist** in `/public/` (`favicon.svg`, `favicon-32x32.png`, `favicon-16x16.png`, `apple-touch-icon.png`). Browsers will 404 on these requests until the user uploads them. This matches the user's existing pending TODO ("subir favicons").
+- Removing `favicon.ico` means until the new icons are uploaded, the tab will show no favicon. If preferred, we can keep the existing `favicon.ico` line as a fallback alongside the new ones.
+- The `og-image.jpg` reference at `https://blueprintproject.com/og-image.jpg` will only resolve once the user uploads the image to `/public/` and redeploys to the production domain.
+
+## Verification after change
+
+- `<title>` = 88 chars ✓ (already)
+- `<meta name="description">` > 200 chars ✓ (already, 232 chars)
+- `og:image` points to `blueprintproject.com/og-image.jpg` ✓ (already)
+- JSON-LD HealthClub schema present ✓ (already)
+- No TODO comments ✓ (already)
+- No `storage.googleapis.com` references ✓ (already)
+- `author` = "Blueprint Project" ✓ (already)
+- Favicon block updated ← only new change
