@@ -601,6 +601,8 @@ const Home = ({ showDock }: { showDock: boolean }) => {
                 key={src}
                 src={src}
                 alt={`Blueprint gym ${index + 1}`}
+                loading="lazy"
+                decoding="async"
                 style={{
                   position: "absolute", top: 0, left: 0,
                   width: "100%", height: "100%",
@@ -662,6 +664,8 @@ const Home = ({ showDock }: { showDock: boolean }) => {
                     className="pillar-card-img"
                     src={src}
                     alt={`Blueprint Lab ${index + 1}`}
+                    loading="lazy"
+                    decoding="async"
                     style={{
                       position: "absolute", top: 0, left: 0,
                       width: "100%", height: "100%",
@@ -678,6 +682,8 @@ const Home = ({ showDock }: { showDock: boolean }) => {
                     className="pillar-card-img"
                     src={src}
                     alt={`Hack Bar ${index + 1}`}
+                    loading="lazy"
+                    decoding="async"
                     style={{
                       position: "absolute", top: 0, left: 0,
                       width: "100%", height: "100%",
@@ -688,7 +694,7 @@ const Home = ({ showDock }: { showDock: boolean }) => {
                   />
                 ))
               ) : (
-                <img className="pillar-card-img" src={item.img} alt={item.name} style={{
+                <img className="pillar-card-img" src={item.img} alt={item.name} loading="lazy" decoding="async" style={{
                   position: "absolute", inset: 0, width: "100%", height: "100%",
                   objectFit: "cover", transition: "transform 0.6s ease",
                 }} />
