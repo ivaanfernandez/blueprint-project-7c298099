@@ -81,8 +81,17 @@ const BiometricTerminalLocation = () => {
 
       {/* Action buttons: CALL + OPEN IN MAPS */}
       <div className="bio-actions">
-        <a href={`tel:${phone}`} className="bio-action" aria-label="Call Blueprint Lab">
+        <a href={`tel:${phone}`} className="bio-action" aria-label="Llamar a Blueprint">
           ◉ CALL
+        </a>
+        <a
+          href={whatsappUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="bio-action"
+          aria-label="Contactar a Blueprint por WhatsApp"
+        >
+          ✦ WHATSAPP
         </a>
         <a
           href={mapsUrl}
