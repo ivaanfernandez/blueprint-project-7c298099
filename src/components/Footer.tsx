@@ -45,7 +45,7 @@ const Footer = () => (
         <div>
           <p style={{ fontSize: 10, letterSpacing: '0.1em', color: 'rgba(255,255,255,0.2)', fontWeight: 600, marginBottom: 8 }}>SOCIAL</p>
           <a
-            href="https://instagram.com/blueprintproject"
+            href="https://instagram.com/projectoblueprint"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-1.5 transition-colors"
