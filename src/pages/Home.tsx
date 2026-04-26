@@ -893,10 +893,10 @@ const Home = ({ showDock }: { showDock: boolean }) => {
 
           <motion.a
             variants={blurRevealItem}
-            href="https://instagram.com/projectoblueprint"
+            href="https://instagram.com/proyectoblueprint"
             target="_blank"
             rel="noopener noreferrer"
-            aria-label="Síguenos en Instagram @projectoblueprint"
+            aria-label="Síguenos en Instagram @proyectoblueprint"
             style={{
               fontFamily: "'Orbitron', sans-serif",
               fontSize: 10,
