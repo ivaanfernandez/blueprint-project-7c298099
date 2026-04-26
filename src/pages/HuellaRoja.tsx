@@ -541,6 +541,45 @@ const HuellaRoja = ({ showDock }: { showDock: boolean }) => {
         {/* Cinematic blur fade-out — desktop hero */}
         <GradualBlur position="bottom" height="6rem" strength={2} divCount={5} opacity={0.9} curve="bezier" zIndex={4} />
       </section>
+
+      {/* ═══ ABOUT BLUEPRINT HACKBAR ═══ */}
+      <section className="hackbar-about-section">
+        <div className="hackbar-about-container">
+          {/* IMAGE LEFT (desktop) / BOTTOM (mobile) */}
+          <div className="hackbar-about-image-wrap">
+            <img
+              src="/hackbar-about-image.jpg"
+              alt="Blueprint HackBar functional nutrition"
+              className="hackbar-about-image"
+              loading="lazy"
+              decoding="async"
+            />
+          </div>
+
+          {/* TEXT RIGHT (desktop) / TOP (mobile) */}
+          <div className="hackbar-about-content">
+            <p className="hackbar-about-eyebrow">ABOUT BLUEPRINT HACKBAR</p>
+            <h2 className="hackbar-about-title">
+              Functional nutrition<br />for people who expect more
+            </h2>
+            <div className="hackbar-about-body">
+              <p>
+                Blueprint HackBar is the nutrition division of Project Blueprint. Created for individuals who understand that performance begins with what enters the body, HackBar provides clean, intentional nutrition built to support energy, recovery, body composition, and long-term health.
+              </p>
+              <p>
+                Our focus is simple: reduce unnecessary preservatives, inflammatory ingredients, and low-quality inputs that slowly damage performance over time.
+              </p>
+              <p>
+                Every meal is designed to fuel clarity, strength, and better living.
+              </p>
+              <p className="hackbar-about-emphasis">
+                This is not fast food. This is functional nutrition for people who expect more from themselves.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <motion.section
         {...scrollReveal}
         style={{ backgroundColor: "#0a0a0a", padding: "72px 7%", position: "relative", zIndex: 1 }}
