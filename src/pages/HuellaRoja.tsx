@@ -938,6 +938,7 @@ const HuellaRoja = ({ showDock }: { showDock: boolean }) => {
       <div className="hidden md:block back-to-home-wrapper" style={{ height: 16 }} />
       <BackToHomeButton />
     </motion.div>
+    </>
   );
 };
 
