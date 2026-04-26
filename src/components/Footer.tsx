@@ -54,7 +54,7 @@ const Footer = () => (
             onMouseLeave={e => { e.currentTarget.style.color = 'rgba(255,255,255,0.4)'; }}
           >
             <Instagram size={16} />
-            @blueprintpr
+            @projectoblueprint
           </a>
         </div>
       </div>
