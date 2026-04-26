@@ -1,10 +1,14 @@
+import { lazy, Suspense } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Route, Routes, useLocation } from "react-router-dom";
 import Home from "@/pages/Home";
-import MainLanding from "@/pages/MainLanding";
-import HuellaRoja from "@/pages/HuellaRoja";
-import HuellaVerde from "@/pages/HuellaVerde";
-import NotFound from "@/pages/NotFound";
+import RouteLoader from "@/components/RouteLoader";
+
+// Lazy-loaded routes (code splitting). Home stays static — it's the landing.
+const MainLanding = lazy(() => import("@/pages/MainLanding"));
+const HuellaRoja = lazy(() => import("@/pages/HuellaRoja"));
+const HuellaVerde = lazy(() => import("@/pages/HuellaVerde"));
+const NotFound = lazy(() => import("@/pages/NotFound"));
 
 interface AnimatedRoutesProps {
   showDock: boolean;
@@ -38,13 +42,15 @@ const AnimatedRoutes = ({ showDock }: AnimatedRoutesProps) => {
 
   return (
     <AnimatePresence mode="wait">
-      <Routes location={location} key={location.pathname}>
-        <Route path="/" element={<PageWrapper><Home showDock={showDock} /></PageWrapper>} />
-        <Route path="/huella-azul" element={<PageWrapper><MainLanding showDock={showDock} /></PageWrapper>} />
-        <Route path="/huella-roja" element={<PageWrapper><HuellaRoja showDock={showDock} /></PageWrapper>} />
-        <Route path="/huella-verde" element={<PageWrapper><HuellaVerde showDock={showDock} /></PageWrapper>} />
-        <Route path="*" element={<PageWrapper><NotFound /></PageWrapper>} />
-      </Routes>
+      <Suspense fallback={<RouteLoader />}>
+        <Routes location={location} key={location.pathname}>
+          <Route path="/" element={<PageWrapper><Home showDock={showDock} /></PageWrapper>} />
+          <Route path="/huella-azul" element={<PageWrapper><MainLanding showDock={showDock} /></PageWrapper>} />
+          <Route path="/huella-roja" element={<PageWrapper><HuellaRoja showDock={showDock} /></PageWrapper>} />
+          <Route path="/huella-verde" element={<PageWrapper><HuellaVerde showDock={showDock} /></PageWrapper>} />
+          <Route path="*" element={<PageWrapper><NotFound /></PageWrapper>} />
+        </Routes>
+      </Suspense>
     </AnimatePresence>
   );
 };
