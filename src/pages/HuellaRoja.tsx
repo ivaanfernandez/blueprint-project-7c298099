@@ -9,7 +9,7 @@ import ElectricBorder from "@/components/ElectricBorder";
 import BackToHomeButton from "@/components/BackToHomeButton";
 import GradualBlur from "@/components/GradualBlur";
 import chefImage from "@/assets/meet-the-chef.jpg";
-import heroHackbarDesktop from "@/assets/hero-hackbar-desktop.jpg";
+import heroHackbarDesktop from "@/assets/hero-hackbar-desktop.jpg?preset=responsive";
 
 /* ── Inline SVG ── */
 const FingerprintSVG = ({ color, size = 48 }: { color: string; size?: number }) => (
@@ -494,11 +494,32 @@ const HuellaRoja = ({ showDock }: { showDock: boolean }) => {
           {/* Left fade */}
           <div className="hr-hero-fade" style={{ position: "absolute", top: 0, left: 0, width: 80, height: "100%", background: "linear-gradient(to right, #0a0a0a, transparent)", zIndex: 3, pointerEvents: "none" }} />
           <div style={{ position: "relative", zIndex: 2, width: "100%", height: "100%", overflow: "hidden", borderRadius: 12 }}>
-            <img
-              src={heroHackbarDesktop}
-              alt="Hack Bar meal prep"
-              style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
-            />
+            <picture>
+              {heroHackbarDesktop.sources.avif && (
+                <source
+                  type="image/avif"
+                  srcSet={heroHackbarDesktop.sources.avif}
+                  sizes="(max-width: 768px) 768px, (max-width: 1280px) 1280px, 1920px"
+                />
+              )}
+              {heroHackbarDesktop.sources.webp && (
+                <source
+                  type="image/webp"
+                  srcSet={heroHackbarDesktop.sources.webp}
+                  sizes="(max-width: 768px) 768px, (max-width: 1280px) 1280px, 1920px"
+                />
+              )}
+              <img
+                src={heroHackbarDesktop.img.src}
+                width={heroHackbarDesktop.img.w}
+                height={heroHackbarDesktop.img.h}
+                alt="Hack Bar meal prep"
+                loading="eager"
+                fetchPriority="high"
+                decoding="async"
+                style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
+              />
+            </picture>
           </div>
         </div>
         {/* Cinematic blur fade-out — desktop hero */}

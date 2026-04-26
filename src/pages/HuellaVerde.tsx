@@ -9,7 +9,7 @@ import GradualBlur from "@/components/GradualBlur";
 import { useLowPerfBackground } from "@/hooks/use-low-perf-background";
 import heroResetDesktop from "@/assets/reset-hero-desktop.jpg";
 import heroResetMobile from "@/assets/reset-hero-mobile.jpg";
-import infraredSaunaImg from "@/assets/infrared-sauna-green.png";
+import infraredSaunaImg from "@/assets/infrared-sauna-green.png?preset=responsive";
 import PremiumServiceAccordion from "@/components/PremiumServiceAccordion";
 import HuellaVerdeHUDFooter from "@/components/HuellaVerdeHUDFooter";
 
@@ -90,10 +90,14 @@ const Dock = ({ show }: { show: boolean }) => {
 };
 
 /* ── Data (English) ── */
-const RECOVERY_CARDS = [
+const RECOVERY_CARDS: Array<{ name: string; img: string; srcSet?: string; sizes?: string }> = [
   {
     name: "INFRARED SAUNA",
-    img: infraredSaunaImg,
+    img: infraredSaunaImg.img.src,
+    // Picks WebP variants (universal modern support); the existing <img srcSet>
+    // attribute below already accepts a comma-separated descriptor list.
+    srcSet: infraredSaunaImg.sources.webp ?? infraredSaunaImg.sources.avif,
+    sizes: "(max-width: 768px) 50vw, (max-width: 1280px) 40vw, 550px",
   },
   { name: "ICE BATH THERAPY", img: "https://images.unsplash.com/photo-1682687220795-796d3f6f7000?w=800&auto=format&fit=crop" },
   { name: "MOBILITY & BREATHING", img: "https://images.unsplash.com/photo-1545205597-3d9d02c29597?w=800&auto=format&fit=crop" },
