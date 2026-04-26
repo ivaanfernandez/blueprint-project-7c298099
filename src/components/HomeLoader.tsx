@@ -159,11 +159,11 @@ const HomeLoader = ({ onComplete, duration = 4000 }: HomeLoaderProps) => {
         </svg>
 
         <div className="bp-loader-readout">
-          <div className="bp-loader-pct">
+          <div className="bp-loader-pct" data-testid="home-loader-percent">
             {pctLabel.toString().padStart(2, "0")}
             <span className="bp-loader-pct-symbol">%</span>
           </div>
-          <div className="bp-loader-sublabel">CALIBRATING</div>
+          <div className="bp-loader-sublabel" data-testid="home-loader-sublabel">CALIBRATING</div>
         </div>
       </div>
 
