@@ -62,6 +62,9 @@ const BiometricScan = ({ onComplete }: BiometricScanProps) => {
       `}</style>
       <div
         className="fixed inset-0 z-50 flex flex-col items-center justify-center"
+        data-testid="biometric-scan"
+        data-variant="blue"
+        data-phase={phase}
         style={{
           backgroundColor: "#000000",
           fontFamily: "'Space Grotesk', sans-serif",
