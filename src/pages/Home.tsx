@@ -12,7 +12,7 @@ import HomeLoader from "@/components/HomeLoader";
 //    Bypassed automatically when the existing E2E flags are present
 //    (?e2e=1, localStorage.bp_skip_intro, window.__BP_E2E__) so visual
 //    regression tests and Playwright runs skip the intro.
-const HOME_LOADER_KEY = "bp_home_loader_seen"; // legacy key, retained to avoid lint break
+
 
 const shouldShowHomeLoader = (): boolean => {
   if (typeof window === "undefined") return false;
