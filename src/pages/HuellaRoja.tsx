@@ -1,7 +1,7 @@
 import { useState, useCallback, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Helmet } from "react-helmet-async";
+import SEO from "@/components/SEO";
 import { scrollReveal, scrollRevealNoShift } from "@/lib/scrollAnimations";
 import BiometricScanRed from "@/components/BiometricScanRed";
 import { TextScramble } from "@/components/ui/text-scramble";
@@ -340,19 +340,11 @@ const HuellaRoja = ({ showDock }: { showDock: boolean }) => {
 
   return (
     <>
-      <Helmet>
-        <title>Hack Bar — Nutrition Engineering | Blueprint Project</title>
-        <meta
-          name="description"
-          content="Hack Bar: meals designed to fuel performance, recovery and body composition with real ingredients. Nutrition engineering at Blueprint Project, Santurce PR."
-        />
-        <meta property="og:title" content="Hack Bar — Nutrition Engineering" />
-        <meta
-          property="og:description"
-          content="Meals designed to fuel performance and body composition with real ingredients."
-        />
-        <link rel="canonical" href="https://blueprintproject.com/huella-roja" />
-      </Helmet>
+      <SEO
+        title="Hack Bar — Nutrition Engineering | Blueprint Project"
+        description="Hack Bar: meals designed to fuel performance, recovery and body composition with real ingredients. Nutrition engineering at Blueprint Project, Santurce PR."
+        canonical="https://blueprintproject.com/huella-roja"
+      />
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
