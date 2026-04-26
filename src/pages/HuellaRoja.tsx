@@ -450,10 +450,19 @@ const HuellaRoja = ({ showDock }: { showDock: boolean }) => {
         overflow: "hidden", alignItems: "center", justifyContent: "center",
         backgroundColor: "#0a0a0a",
       }}>
-        <img src="/hackbar/hero-mobile.jpg" alt="Hack Bar" style={{
-          position: "absolute", inset: 0, width: "100%", height: "100%",
-          objectFit: "cover", objectPosition: "center", zIndex: 0,
-        }} />
+        <img
+          src="/hackbar/hero-mobile.jpg"
+          alt="Hack Bar"
+          width={768}
+          height={1024}
+          loading="eager"
+          decoding="async"
+          {...({ fetchpriority: "high" } as Record<string, string>)}
+          style={{
+            position: "absolute", inset: 0, width: "100%", height: "100%",
+            objectFit: "cover", objectPosition: "center", zIndex: 0,
+          }}
+        />
         <div style={{ position: "absolute", inset: 0, background: "rgba(0,0,0,0.45)", zIndex: 1 }} />
         <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse at 50% 50%, rgba(255,59,59,0.10) 0%, transparent 60%)", zIndex: 1, pointerEvents: "none" }} />
         <div style={{ position: "relative", zIndex: 2, textAlign: "center" }}>
@@ -701,7 +710,15 @@ const HuellaRoja = ({ showDock }: { showDock: boolean }) => {
           {/* Right: chef photo */}
           <div className="hr-chef-right" style={{ flex: "0 0 45%", minHeight: 450, height: "auto", aspectRatio: "16 / 10", borderRadius: 16, overflow: "hidden", position: "relative" }}>
             <div style={{ width: "100%", height: "100%", borderRadius: 16, border: "1px solid rgba(255,59,59,0.15)", overflow: "hidden", position: "relative" }}>
-              <img src={chefImage} alt="Chef preparing a dish in a professional kitchen" style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", objectPosition: "center top" }} />
+              <img
+                src={chefImage}
+                alt="Chef preparing a dish in a professional kitchen"
+                width={1280}
+                height={800}
+                loading="lazy"
+                decoding="async"
+                style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", objectPosition: "center top" }}
+              />
               {/* Subtle gradient for legibility / cohesion */}
               <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.1) 50%, rgba(0,0,0,0.25) 100%)", zIndex: 1, pointerEvents: "none" }} />
               {/* Corner brackets */}

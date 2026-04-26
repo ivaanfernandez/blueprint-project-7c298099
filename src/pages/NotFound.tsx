@@ -1,12 +1,11 @@
 import { useLocation } from "react-router-dom";
-import { useEffect } from "react";
 
 const NotFound = () => {
   const location = useLocation();
 
-  useEffect(() => {
-    console.error("404 Error: User attempted to access non-existent route:", location.pathname);
-  }, [location.pathname]);
+  // 404 path is intentionally not logged: in production the noise is unhelpful,
+  // and Lighthouse penalizes console.error in Best Practices.
+  void location;
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-muted">
