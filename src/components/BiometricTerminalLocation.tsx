@@ -27,6 +27,7 @@ const BiometricTerminalLocation = () => {
           src={embedUrl}
           title="Blueprint Lab location map"
           loading="lazy"
+          {...({ importance: "low" } as any)}
           referrerPolicy="no-referrer-when-downgrade"
           className="bio-map-iframe"
         />

@@ -1,59 +1,58 @@
-# Diagnóstico — Loader & Scroll Reveal en el Home
+# Performance Optimization 1/4 — Asset Quick Wins
 
-Antes de cambiar nada, esto es lo que encontré en el repo. **Tu prompt parte de una premisa incorrecta**: los dos sistemas ya existen y están integrados al Home. Solo tienen otros nombres.
+Apply non-visual, low-risk loading optimizations. No layout, styling, or logic changes.
 
-## Reporte de archivos
+## 1. `src/components/BiometricTerminalLocation.tsx` — Maps iframe
 
+Iframe (line 26-32) already has `loading="lazy"`. Add `importance="low"` so the browser deprioritizes it vs critical resources.
+
+```tsx
+<iframe
+  src={embedUrl}
+  title="Blueprint Lab location map"
+  loading="lazy"
+  importance="low"
+  referrerPolicy="no-referrer-when-downgrade"
+  className="bio-map-iframe"
+/>
 ```
-✗ src/components/LoadingSpinner.tsx        — MISSING
-✗ src/components/ScrollRevealWrapper.tsx   — MISSING
-✗ src/hooks/useScrollReveal.ts             — MISSING
-✗ src/styles/animations.css                — MISSING (no existe carpeta src/styles)
 
-✓ src/components/HomeLoader.tsx            — EXISTS  (equivalente al LoadingSpinner pedido)
-✓ src/lib/scrollAnimations.ts              — EXISTS  (equivalente al useScrollReveal/Wrapper pedido)
-✓ HomeLoader integrado en Home.tsx         — YES (línea 9 import, línea 176 render)
-✓ scrollReveal/scrollStagger usados en Home.tsx — YES (16 usos: about, programs, pricing)
+## 2. `index.html` — Preconnect hints
+
+Fonts preconnect already exists (lines 9-10). Add Google Maps preconnect + DNS-prefetch fallbacks right after them, before the fonts stylesheet:
+
+```html
+<link rel="preconnect" href="https://www.google.com" />
+<link rel="preconnect" href="https://maps.gstatic.com" crossorigin />
+<link rel="preconnect" href="https://maps.googleapis.com" crossorigin />
+<link rel="dns-prefetch" href="https://www.google.com" />
+<link rel="dns-prefetch" href="https://maps.gstatic.com" />
 ```
 
-## Lo que ya está funcionando (no es bug, es feature)
+Fonts preconnect remains as-is (no duplication).
 
-**1. El loader sí existe — es `HomeLoader.tsx`:**
-- Pantalla full-screen con ring SVG circular (220px), porcentaje 0→100%, fade-out 500ms
-- Header "BLUEPRINT // SYSTEM INIT", scan line vertical, corner brackets, grid
-- Paleta white/gray (`#1F1F1F` bg, `#FFFFFF` ring) — no negro puro
-- 4 segundos por defecto, drive con `requestAnimationFrame`
-- Honra `prefers-reduced-motion` y los E2E flags
+## 3. `src/pages/Home.tsx` — Image loading attributes
 
-**2. Por qué no lo ves:** está gateado por `localStorage.bp_home_loader_seen` — **solo aparece la primera visita por navegador** (línea 15-28 de Home.tsx). Tu prompt dice "Do NOT use localStorage" pero el código actual sí lo usa intencionalmente. Tras tu primera carga, la flag quedó set y nunca lo volverás a ver hasta limpiar localStorage.
+**Hero images (lines ~276 and ~322)**: already use `fetchPriority="high"` + `loading="eager"`. Add `decoding="sync"` for completeness. No other change.
 
-**3. El scroll reveal sí existe — es `lib/scrollAnimations.ts` + Framer Motion:**
-- `scrollReveal` / `scrollStagger` / `blurRevealItem` exports
-- Effect: opacity 0→1 + blur 8px→0 + y 20px→0, ease-out-quart, fires once
-- Honra `prefers-reduced-motion` y `data-no-motion` (E2E)
-- Usa Framer Motion (ya instalado, no es lib externa nueva)
-- Aplicado a 3 secciones del Home: about features, programs grid, pricing CTAs
+**Below-the-fold images** — add `loading="lazy"` + `decoding="async"` to:
+- `aboutImages` map (line 600) — gym rotator photos
+- `labImages` map (line 660) — Blueprint Lab pillar card
+- `hackbarImages` map (line 676) — Hack Bar pillar card
+- Fallback pillar `<img>` (line 691) — generic pillar card image
 
-## Conflicto con tu prompt
+The Reset card uses a `<video>` (line 652), not an `<img>` — leave untouched (video lazy-loading is a separate prompt).
 
-Tu prompt explícitamente dice "Do NOT añadir librerías externas (Framer Motion...)". El proyecto **ya usa Framer Motion** como dependencia central — está en todo Home.tsx, AnimatedRoutes.tsx, etc. Crear un sistema paralelo basado en IntersectionObserver vanilla duplicaría funcionalidad y crearía dos APIs para hacer lo mismo.
+**Width/height**: All these images are absolutely positioned with `width: 100%` / `height: 100%` driven by their container's `aspect-ratio` (e.g. `3/4` on pillar cards) or fixed container dimensions. Layout shift is already prevented by CSS — no `width`/`height` attributes needed. Will note this in the report.
 
-## Recomendación: 3 opciones
+**"Built for Human Evolution" feature cards**: those use lucide-react SVG icons, not `<img>` tags — nothing to change there.
 
-**Opción A — No tocar nada (recomendada).** Para verificar que el loader funciona, abre DevTools → Application → Local Storage → borra `bp_home_loader_seen` y recarga. Para ver más scroll reveal, podemos envolver más secciones con los wrappers ya existentes.
+## 4. Out of scope (per user)
 
-**Opción B — Quitar el gate de "first visit only" del loader.** Una línea: cambiar `useState(() => shouldShowHomeLoader())` por `useState(true)`. Loader aparece en cada carga del Home.
+- Huella Azul/Roja/Verde pages — untouched
+- Silk WebGL background, GradualBlur, Service Workers, image compression, code splitting — handled in prompts 2-4
+- No new dependencies, no visual changes, no removed elements
 
-**Opción C — Aplicar más scroll reveal a las secciones que aún no tienen.** Identificar qué secciones del Home (fingerprint card, location card, hero pillars) aún no usan `motion.div {...scrollReveal}` y envolverlas con los helpers que ya existen en `scrollAnimations.ts` — sin crear ningún archivo nuevo.
+## 5. Chat report after applying
 
-**Opción D (NO recomendada) — Crear los 4 archivos del prompt en paralelo a los existentes.** Resultado: dos loaders, dos sistemas de scroll reveal, deuda técnica.
-
-## Pregunta para ti
-
-¿Qué quieres hacer? Lo más probable, dada la queja "no veo el loader", es **B + C combinados**:
-- B: loader aparece siempre (no solo primera visita)
-- C: aplicar `scrollReveal` a las secciones del Home que aún no lo tienen (fingerprint card, location card, biometric terminal, sección de pillars)
-
-Si lo apruebas, esto se hace **sin crear archivos nuevos**, solo editando `src/pages/Home.tsx` (1 línea para el loader + envolver 3-4 secciones con `<motion.div {...scrollReveal}>`).
-
-Confírmame cuál opción quieres antes de implementar.
+Will report status of each change (applied / already present / not found).
