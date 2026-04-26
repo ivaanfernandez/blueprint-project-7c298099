@@ -1,6 +1,7 @@
 import { useState, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
+import { Helmet } from "react-helmet-async";
 import { scrollReveal, scrollStagger, blurRevealItem } from "@/lib/scrollAnimations";
 import BiometricScanGreen from "@/components/BiometricScanGreen";
 import { TextScramble } from "@/components/ui/text-scramble";
@@ -122,6 +123,19 @@ const HuellaVerde = ({ showDock = true }: HuellaVerdeProps) => {
 
   return (
     <>
+      <Helmet>
+        <title>Reset — Recovery Protocols | Blueprint Project</title>
+        <meta
+          name="description"
+          content="Reset: sauna, cold therapy and mobility systems to restore at a higher level. Recovery protocols at Blueprint Project, Santurce PR."
+        />
+        <meta property="og:title" content="Reset — Recovery Protocols" />
+        <meta
+          property="og:description"
+          content="Sauna, cold therapy and mobility systems to restore at a higher level."
+        />
+        <link rel="canonical" href="https://blueprintproject.com/huella-verde" />
+      </Helmet>
       <div className="verde-animated-bg" aria-hidden="true" />
       <style>{`
         @keyframes hvScanLine {

@@ -2,10 +2,55 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- TODO: Set the document title to the name of your application -->
-    <title>Blueprint Project</title>
-    <meta name="description" content="GYM | HACK BAR | RESET">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <!-- Theme color for mobile browsers -->
+    <meta name="theme-color" content="#0a0a0a" />
+    <meta name="color-scheme" content="dark" />
+
+    <!-- ============ PRIMARY META TAGS ============ -->
+    <title>Blueprint Project — Built for Human Evolution | Premium Gym Santurce, San Juan PR</title>
+    <meta name="title" content="Blueprint Project — Built for Human Evolution | Premium Gym Santurce, San Juan PR" />
+    <meta name="description" content="Blueprint Project is a premium fitness club in Santurce, San Juan, Puerto Rico. Elite training systems, nutrition engineering, and recovery protocols designed for human evolution. Located at 1951 Calle Loíza." />
+    <meta name="keywords" content="gimnasio Santurce, gym San Juan PR, premium fitness Puerto Rico, personal trainer Santurce, boutique gym Puerto Rico, fitness club Calle Loíza, premium gym PR, Blueprint Project, recovery protocols, nutrition engineering" />
+    <meta name="author" content="Blueprint Project" />
+    <meta name="robots" content="index, follow" />
+    <meta name="language" content="English, Spanish" />
+    <meta name="geo.region" content="PR-SJ" />
+    <meta name="geo.placename" content="Santurce, San Juan" />
+    <meta name="geo.position" content="18.4307;-66.0563" />
+    <meta name="ICBM" content="18.4307, -66.0563" />
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://blueprintproject.com" />
+
+    <!-- ============ OPEN GRAPH (Facebook, WhatsApp, LinkedIn) ============ -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://blueprintproject.com" />
+    <meta property="og:title" content="Blueprint Project — Built for Human Evolution" />
+    <meta property="og:description" content="Premium fitness club in Santurce, San Juan PR. Elite training systems, nutrition engineering, and recovery protocols designed for human evolution." />
+    <meta property="og:image" content="https://blueprintproject.com/og-image.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Blueprint Project — Premium Gym in Santurce, Puerto Rico" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:locale:alternate" content="es_PR" />
+    <meta property="og:site_name" content="Blueprint Project" />
+
+    <!-- ============ TWITTER CARDS ============ -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://blueprintproject.com" />
+    <meta name="twitter:title" content="Blueprint Project — Built for Human Evolution" />
+    <meta name="twitter:description" content="Premium fitness club in Santurce, San Juan PR. Built for human evolution." />
+    <meta name="twitter:image" content="https://blueprintproject.com/og-image.jpg" />
+    <meta name="twitter:image:alt" content="Blueprint Project — Premium Gym in Santurce, Puerto Rico" />
+
+    <!-- ============ FAVICON & WEB APP MANIFEST ============ -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="manifest" href="/manifest.webmanifest" />
+
+    <!-- ============ PRECONNECT HINTS (preserved from perf prompt) ============ -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="preconnect" href="https://www.google.com" />
@@ -13,30 +58,63 @@
     <link rel="preconnect" href="https://maps.googleapis.com" crossorigin />
     <link rel="dns-prefetch" href="https://www.google.com" />
     <link rel="dns-prefetch" href="https://maps.gstatic.com" />
+
+    <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Grotesk:wght@400;500;600;700&family=Orbitron:wght@400;500;600;700&family=Michroma&family=Inter:wght@300;400;500;600&family=Rajdhani:wght@600&display=swap" rel="stylesheet" />
+
+    <!-- Hero asset preloads -->
     <link rel="preload" as="image" href="/poster_image.jpg" fetchpriority="high" />
     <link rel="preload" as="video" href="/hero-bg.mp4" type="video/mp4" fetchpriority="high" media="(min-width: 768px)" />
     <link rel="preload" as="video" href="/hero-bg-mobile.mp4" type="video/mp4" fetchpriority="high" media="(max-width: 767px)" />
-    <meta name="author" content="Lovable" />
 
-    <!-- TODO: Update og:title to match your application name -->
-    
-    
-    <meta property="og:type" content="website" />
-    <meta property="og:image" content="https://storage.googleapis.com/gpt-engineer-file-uploads/3d6wUZQvlKavQBrhPi6xfcjgtTx2/social-images/social-1776815024947-5305c43681f239aa27b7cb46f6177131.webp">
-
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:site" content="@Lovable" />
-    <meta name="twitter:image" content="https://storage.googleapis.com/gpt-engineer-file-uploads/3d6wUZQvlKavQBrhPi6xfcjgtTx2/social-images/social-1776815024947-5305c43681f239aa27b7cb46f6177131.webp">
-    
-  
-  
-  
-  <meta property="og:title" content="Blueprint Project">
-  <meta name="twitter:title" content="Blueprint Project">
-  <meta property="og:description" content="GYM | HACK BAR | RESET">
-  <meta name="twitter:description" content="GYM | HACK BAR | RESET">
-</head>
+    <!-- ============ SCHEMA.ORG LOCAL BUSINESS (JSON-LD) ============ -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "HealthClub",
+      "@id": "https://blueprintproject.com/#localbusiness",
+      "name": "Blueprint Project",
+      "alternateName": "Blueprint Gym",
+      "description": "Premium fitness club in Santurce, San Juan, Puerto Rico. Elite training systems, nutrition engineering, and recovery protocols designed for human evolution.",
+      "url": "https://blueprintproject.com",
+      "telephone": "+1-939-273-5708",
+      "image": "https://blueprintproject.com/og-image.jpg",
+      "logo": "https://blueprintproject.com/logo.png",
+      "priceRange": "$$$",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "1951 Calle Loíza",
+        "addressLocality": "Santurce",
+        "addressRegion": "San Juan",
+        "postalCode": "00911",
+        "addressCountry": "PR"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 18.4307,
+        "longitude": -66.0563
+      },
+      "sameAs": [
+        "https://instagram.com/proyectoblueprint"
+      ],
+      "areaServed": {
+        "@type": "City",
+        "name": "San Juan",
+        "containedInPlace": {
+          "@type": "AdministrativeArea",
+          "name": "Puerto Rico"
+        }
+      },
+      "amenityFeature": [
+        { "@type": "LocationFeatureSpecification", "name": "Strength Training" },
+        { "@type": "LocationFeatureSpecification", "name": "Nutrition Coaching" },
+        { "@type": "LocationFeatureSpecification", "name": "Recovery Protocols" },
+        { "@type": "LocationFeatureSpecification", "name": "Sauna" },
+        { "@type": "LocationFeatureSpecification", "name": "Cold Therapy" }
+      ]
+    }
+    </script>
+  </head>
 
   <body>
     <div id="root"></div>
