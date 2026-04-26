@@ -1,5 +1,8 @@
-import { useState } from "react";
-import PricingCardsHarshGlow from "./PricingCardsHarshGlow";
+import { lazy, Suspense, useState } from "react";
+import LazyMount from "./LazyMount";
+
+// Lazy-loaded heavy component (below-the-fold)
+const PricingCardsHarshGlow = lazy(() => import("./PricingCardsHarshGlow"));
 
 const PricingSection = () => {
   const [isYearly, setIsYearly] = useState(false);
@@ -52,8 +55,12 @@ const PricingSection = () => {
         </span>
       </div>
 
-      {/* Cards */}
-      <PricingCardsHarshGlow isYearly={isYearly} />
+      {/* Cards: lazy mount + suspense */}
+      <LazyMount rootMargin="300px" placeholderHeight="600px">
+        <Suspense fallback={<div className="lazy-mount-skeleton" style={{ minHeight: "600px" }}><div className="lazy-mount-skeleton-pulse" /></div>}>
+          <PricingCardsHarshGlow isYearly={isYearly} />
+        </Suspense>
+      </LazyMount>
     </section>
   );
 };
