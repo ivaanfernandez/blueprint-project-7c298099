@@ -339,12 +339,26 @@ const HuellaRoja = ({ showDock }: { showDock: boolean }) => {
   }
 
   return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 0.8 }}
-      style={{ fontFamily: "'Inter', sans-serif", position: "relative", overflowX: "hidden", backgroundColor: "#0a0a0a" }}
-    >
+    <>
+      <Helmet>
+        <title>Hack Bar — Nutrition Engineering | Blueprint Project</title>
+        <meta
+          name="description"
+          content="Hack Bar: meals designed to fuel performance, recovery and body composition with real ingredients. Nutrition engineering at Blueprint Project, Santurce PR."
+        />
+        <meta property="og:title" content="Hack Bar — Nutrition Engineering" />
+        <meta
+          property="og:description"
+          content="Meals designed to fuel performance and body composition with real ingredients."
+        />
+        <link rel="canonical" href="https://blueprintproject.com/huella-roja" />
+      </Helmet>
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.8 }}
+        style={{ fontFamily: "'Inter', sans-serif", position: "relative", overflowX: "hidden", backgroundColor: "#0a0a0a" }}
+      >
       <style>{`
         @keyframes hrScanLine {
           0% { top: 0; opacity: 0; }
