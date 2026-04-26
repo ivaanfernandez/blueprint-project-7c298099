@@ -7,6 +7,7 @@ import FooterBackground from "@/components/FooterBackground";
 import FeatureCard from "@/components/FeatureCard";
 import GradualBlur from "@/components/GradualBlur";
 import HomeLoader from "@/components/HomeLoader";
+import LazyMount from "@/components/LazyMount";
 
 // ── Loader gate. Plays on every visit to the Home route.
 //    Bypassed automatically when the existing E2E flags are present
@@ -617,7 +618,8 @@ const Home = ({ showDock }: { showDock: boolean }) => {
       </div>
 
 
-      {/* ── PROGRAMS SECTION (WHITE) ── */}
+      {/* ── PROGRAMS SECTION (WHITE) — lazy-mounted: defers 3 pillar cards (image rotators + autoplay video) until user scrolls near ── */}
+      <LazyMount rootMargin="400px" placeholderHeight="640px">
       <div className="programs-section" style={{ padding: "56px 7%", position: "relative", zIndex: 1 }}>
         <motion.h2 {...scrollReveal} style={{
           fontFamily: "'Michroma', sans-serif",
@@ -769,6 +771,7 @@ const Home = ({ showDock }: { showDock: boolean }) => {
           ))}
         </motion.div>
       </div>
+      </LazyMount>
 
       {/* ── Divider ── */}
       <SectionDivider />
@@ -777,7 +780,8 @@ const Home = ({ showDock }: { showDock: boolean }) => {
 
       </div>{/* END WHITE ZONE WRAPPER */}
 
-      {/* ── FOOTER (DARK with hands background) ── */}
+      {/* ── FOOTER (DARK with hands background) — lazy-mounted: defers ~1MB bg image + dock subtree until user scrolls near bottom ── */}
+      <LazyMount rootMargin="500px" placeholderHeight="560px">
       <div className="footer-bg-wrapper" style={{
         position: "relative" as const,
         backgroundImage: "url('/footer-bg.jpeg')",
@@ -956,6 +960,7 @@ const Home = ({ showDock }: { showDock: boolean }) => {
         </div>
         </div>{/* end z-index wrapper */}
       </div>
+      </LazyMount>
     </motion.div>
   );
 };
