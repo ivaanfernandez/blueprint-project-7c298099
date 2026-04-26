@@ -1,69 +1,59 @@
-# Pricing Cards — Mobile Compact Row (<768px only)
+# Diagnóstico — Loader & Scroll Reveal en el Home
 
-Reduce mobile pricing card height from ~400px to ~110-130px using a 3-row CSS grid layout. Desktop (≥768px) Harsh Glow magnetic reveal stays byte-identical.
+Antes de cambiar nada, esto es lo que encontré en el repo. **Tu prompt parte de una premisa incorrecta**: los dos sistemas ya existen y están integrados al Home. Solo tienen otros nombres.
 
-## Files touched
+## Reporte de archivos
 
-1. **Edit** — `src/index.css` (replace mobile media query block at lines 1406–1420)
-2. **Edit** — `src/components/PricingCardsHarshGlow.tsx` (add conditional `harsh-popular` class to popular tier card)
+```
+✗ src/components/LoadingSpinner.tsx        — MISSING
+✗ src/components/ScrollRevealWrapper.tsx   — MISSING
+✗ src/hooks/useScrollReveal.ts             — MISSING
+✗ src/styles/animations.css                — MISSING (no existe carpeta src/styles)
 
-## Changes
-
-### 1. `src/index.css` — replace mobile block (lines 1406–1420)
-
-Swap the current 14-line mobile block for the new Compact Row CSS (~110 lines). Tablet block at lines 1422–1439 and all desktop rules above untouched.
-
-The new mobile block redefines `.harsh-card` as a CSS grid with three areas:
-```text
-[ tier   tier  ]   ← pips + label, full width
-[ name   price ]   ← name+system left, $price right (flex row)
-[ cta    cta   ]   ← full-width outline button
+✓ src/components/HomeLoader.tsx            — EXISTS  (equivalente al LoadingSpinner pedido)
+✓ src/lib/scrollAnimations.ts              — EXISTS  (equivalente al useScrollReveal/Wrapper pedido)
+✓ HomeLoader integrado en Home.tsx         — YES (línea 9 import, línea 176 render)
+✓ scrollReveal/scrollStagger usados en Home.tsx — YES (16 usos: about, programs, pricing)
 ```
 
-Plus mobile-specific tweaks:
-- `.harsh-grid`: gap 8px, padding 0 4px
-- `.harsh-card`: padding 14×16, hover transform disabled
-- `.harsh-corner`: 8×8 (down from 12×12), positioned at 5px
-- `.harsh-tier`: 9px font, gap 8px, margin-bottom 6px
-- `.harsh-pip`: 4×4
-- `.harsh-name`: 13px, hover text-shadow disabled
-- `.harsh-system`: 8px, pushed below name via `margin-top: 14px` in column 1 row 2
-- `.harsh-price-area`: right-aligned, center vertically
-- `.harsh-price`: 26px (down from 42px), hover glow disabled
-- `.harsh-permo`: 7px
-- `.harsh-features`: `display: none`
-- `.harsh-scan`: `display: none`
-- `.harsh-cta`: padding 10px, font 9px, margin-top 12px
+## Lo que ya está funcionando (no es bug, es feature)
 
-Plus `.harsh-popular` modifiers (mobile only):
-- Border `rgba(255,255,255,0.4)`, bg `rgba(255,255,255,0.025)`
-- CTA inverted: white bg, black text
-- Tier label opacity 0.9
+**1. El loader sí existe — es `HomeLoader.tsx`:**
+- Pantalla full-screen con ring SVG circular (220px), porcentaje 0→100%, fade-out 500ms
+- Header "BLUEPRINT // SYSTEM INIT", scan line vertical, corner brackets, grid
+- Paleta white/gray (`#1F1F1F` bg, `#FFFFFF` ring) — no negro puro
+- 4 segundos por defecto, drive con `requestAnimationFrame`
+- Honra `prefers-reduced-motion` y los E2E flags
 
-### 2. `src/components/PricingCardsHarshGlow.tsx`
+**2. Por qué no lo ves:** está gateado por `localStorage.bp_home_loader_seen` — **solo aparece la primera visita por navegador** (línea 15-28 de Home.tsx). Tu prompt dice "Do NOT use localStorage" pero el código actual sí lo usa intencionalmente. Tras tu primera carga, la flag quedó set y nunca lo volverás a ver hasta limpiar localStorage.
 
-Single-line change inside the `.map()` callback: change
-```tsx
-<div key={tier.name} className="harsh-card">
-```
-to
-```tsx
-<div key={tier.name} className={`harsh-card ${tier.isPopular ? "harsh-popular" : ""}`}>
-```
+**3. El scroll reveal sí existe — es `lib/scrollAnimations.ts` + Framer Motion:**
+- `scrollReveal` / `scrollStagger` / `blurRevealItem` exports
+- Effect: opacity 0→1 + blur 8px→0 + y 20px→0, ease-out-quart, fires once
+- Honra `prefers-reduced-motion` y `data-no-motion` (E2E)
+- Usa Framer Motion (ya instalado, no es lib externa nueva)
+- Aplicado a 3 secciones del Home: about features, programs grid, pricing CTAs
 
-No other component edits. `TIERS` data, toggle, JSX structure, CTAs all unchanged.
+## Conflicto con tu prompt
 
-## Strict preservations
+Tu prompt explícitamente dice "Do NOT añadir librerías externas (Framer Motion...)". El proyecto **ya usa Framer Motion** como dependencia central — está en todo Home.tsx, AnimatedRoutes.tsx, etc. Crear un sistema paralelo basado en IntersectionObserver vanilla duplicaría funcionalidad y crearía dos APIs para hacer lo mismo.
 
-- Desktop ≥768px: Harsh Glow hover effects, scan line, triple glow, magnetic reveal, corner growth, CTA invert, features stagger reveal — all intact
-- Tablet 768–1023px media query — unchanged
-- Monthly/Yearly toggle and `isYearly` prop — unchanged
-- Tier data (prices, names, system numbers, features, CTAs) — unchanged
-- Fonts Orbitron/Michroma — unchanged
-- No new markup elements; layout achieved purely via CSS grid
+## Recomendación: 3 opciones
 
-## Out of scope
+**Opción A — No tocar nada (recomendada).** Para verificar que el loader funciona, abre DevTools → Application → Local Storage → borra `bp_home_loader_seen` y recarga. Para ver más scroll reveal, podemos envolver más secciones con los wrappers ya existentes.
 
-- No edits to `HuellaAzul`, `HuellaRoja`, `HuellaVerde`, `Home`, or any other page
-- No new media queries; only the existing `@media (max-width: 767px)` is replaced
-- No new dependencies
+**Opción B — Quitar el gate de "first visit only" del loader.** Una línea: cambiar `useState(() => shouldShowHomeLoader())` por `useState(true)`. Loader aparece en cada carga del Home.
+
+**Opción C — Aplicar más scroll reveal a las secciones que aún no tienen.** Identificar qué secciones del Home (fingerprint card, location card, hero pillars) aún no usan `motion.div {...scrollReveal}` y envolverlas con los helpers que ya existen en `scrollAnimations.ts` — sin crear ningún archivo nuevo.
+
+**Opción D (NO recomendada) — Crear los 4 archivos del prompt en paralelo a los existentes.** Resultado: dos loaders, dos sistemas de scroll reveal, deuda técnica.
+
+## Pregunta para ti
+
+¿Qué quieres hacer? Lo más probable, dada la queja "no veo el loader", es **B + C combinados**:
+- B: loader aparece siempre (no solo primera visita)
+- C: aplicar `scrollReveal` a las secciones del Home que aún no lo tienen (fingerprint card, location card, biometric terminal, sección de pillars)
+
+Si lo apruebas, esto se hace **sin crear archivos nuevos**, solo editando `src/pages/Home.tsx` (1 línea para el loader + envolver 3-4 secciones con `<motion.div {...scrollReveal}>`).
+
+Confírmame cuál opción quieres antes de implementar.

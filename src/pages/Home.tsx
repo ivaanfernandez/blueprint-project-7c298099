@@ -8,11 +8,11 @@ import FeatureCard from "@/components/FeatureCard";
 import GradualBlur from "@/components/GradualBlur";
 import HomeLoader from "@/components/HomeLoader";
 
-// ── First-visit-only loader gate.
-//    Persisted in localStorage so the loader plays exactly once per browser.
+// ── Loader gate. Plays on every visit to the Home route.
 //    Bypassed automatically when the existing E2E flags are present
-//    (?e2e=1, localStorage.bp_skip_intro, window.__BP_E2E__).
-const HOME_LOADER_KEY = "bp_home_loader_seen";
+//    (?e2e=1, localStorage.bp_skip_intro, window.__BP_E2E__) so visual
+//    regression tests and Playwright runs skip the intro.
+
 
 const shouldShowHomeLoader = (): boolean => {
   if (typeof window === "undefined") return false;
@@ -21,7 +21,7 @@ const shouldShowHomeLoader = (): boolean => {
     if (params.get("e2e") === "1") return false;
     if (window.localStorage?.getItem("bp_skip_intro") === "1") return false;
     if ((window as unknown as { __BP_E2E__?: boolean }).__BP_E2E__ === true) return false;
-    return window.localStorage?.getItem(HOME_LOADER_KEY) !== "1";
+    return true;
   } catch {
     return false;
   }
@@ -100,14 +100,12 @@ const Home = ({ showDock }: { showDock: boolean }) => {
   const [currentLabImage, setCurrentLabImage] = useState(0);
   const [currentHackbarImage, setCurrentHackbarImage] = useState(0);
 
-  // ── First-visit loader (white/gray lab scan). Plays once per browser.
+  // ── Loader (white/gray lab scan). Plays on every load of the Home route.
+  //    The previous "first-visit-only" localStorage gate was removed per user request
+  //    so the loader is always visible. E2E flags (?e2e=1, bp_skip_intro, __BP_E2E__)
+  //    still bypass it via shouldShowHomeLoader.
   const [loaderActive, setLoaderActive] = useState<boolean>(() => shouldShowHomeLoader());
   const handleLoaderComplete = useCallback(() => {
-    try {
-      window.localStorage?.setItem(HOME_LOADER_KEY, "1");
-    } catch {
-      // localStorage unavailable (private mode) — silently ignore.
-    }
     setLoaderActive(false);
   }, []);
   // Mount hero <video> only on viewports ≥768px to avoid downloading on mobile
