@@ -7,7 +7,7 @@ import { TextScramble } from "@/components/ui/text-scramble";
 import BackToHomeButton from "@/components/BackToHomeButton";
 import GradualBlur from "@/components/GradualBlur";
 import { useLowPerfBackground } from "@/hooks/use-low-perf-background";
-import heroResetDesktop from "@/assets/reset-hero-desktop.jpg";
+import heroResetDesktop from "@/assets/reset-hero-desktop.jpg?preset=responsive";
 import heroResetMobile from "@/assets/reset-hero-mobile.jpg";
 import infraredSaunaImg from "@/assets/infrared-sauna-green.png?preset=responsive";
 import PremiumServiceAccordion from "@/components/PremiumServiceAccordion";
@@ -160,14 +160,31 @@ const HuellaVerde = ({ showDock = true }: HuellaVerdeProps) => {
 
         {/* ── HERO ── */}
         <section style={{ minHeight: "100vh", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", position: "relative", overflow: "hidden", background: "transparent" }}>
-          {/* Background image (responsive: mobile < 768px, desktop ≥ 768px) */}
+          {/* Background image (responsive: mobile < 768px → tiny JPG, desktop ≥ 768px → AVIF/WebP/JPG pipeline) */}
           <picture style={{ position: "absolute", inset: 0, zIndex: 0, pointerEvents: "none" }}>
             <source media="(max-width: 767px)" srcSet={heroResetMobile} />
+            {heroResetDesktop.sources.avif && (
+              <source
+                type="image/avif"
+                srcSet={heroResetDesktop.sources.avif}
+                sizes="(max-width: 1280px) 1280px, 1920px"
+              />
+            )}
+            {heroResetDesktop.sources.webp && (
+              <source
+                type="image/webp"
+                srcSet={heroResetDesktop.sources.webp}
+                sizes="(max-width: 1280px) 1280px, 1920px"
+              />
+            )}
             <img
-              src={heroResetDesktop}
+              src={heroResetDesktop.img.src}
+              width={heroResetDesktop.img.w}
+              height={heroResetDesktop.img.h}
               alt=""
               aria-hidden="true"
               loading="eager"
+              decoding="async"
               className="hv-hero-img"
               {...({ fetchpriority: "high" } as Record<string, string>)}
               style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", objectPosition: "center", opacity: 0.85, zIndex: 0, pointerEvents: "none" }}
