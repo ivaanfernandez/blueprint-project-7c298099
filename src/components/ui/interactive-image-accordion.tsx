@@ -21,7 +21,7 @@ const ACCORDION_ITEMS: AccordionItem[] = [
   stripLabel: "ABOUT BLUEPRINT",
   title: "ABOUT BLUEPRINT",
   description:
-  "Christian 'Goldie' Latorre created Blueprint Project with one mission: build a system where training, nutrition, and recovery work as one. This isn't just a gym. It's his vision brought to life.",
+  "Blueprint Lab is the physical performance division of Project Blueprint. Our laboratories are designed to build the human body with precision developing symmetry, strength, functionality, and long-term durability.",
   accentColor: "#1A6BFF",
   image: founderImage,
   objectPosition: "center 30%"
@@ -31,7 +31,7 @@ const ACCORDION_ITEMS: AccordionItem[] = [
   stripLabel: "VISION",
   title: "VISION",
   description:
-  "Blueprint Project exists to redefine what a fitness space can be. Where science meets discipline, and every detail is designed to unlock your potential.",
+  "Every training system is structured to improve how the body looks, moves, performs, and ages. We combine intelligent resistance training, mobility, conditioning, and recovery to create complete human development.",
   accentColor: "#1A6BFF",
   image: visionImage
 },
@@ -40,7 +40,7 @@ const ACCORDION_ITEMS: AccordionItem[] = [
   stripLabel: "SERVICES",
   title: "SERVICES",
   description:
-  "From personalized training programs to recovery protocols and nutrition guidance. Every service at Blueprint is built to work together as a complete system.",
+  "The goal is simple: build a body that performs at a high level and reflects discipline. This is not random fitness, this is engineered training for real results.",
   accentColor: "#1A6BFF",
   image: servicesImage
 }];
