@@ -361,7 +361,8 @@ export function LocationMap({ location, coordinates }: LocationMapProps) {
                       e.stopPropagation();
                       window.open(
                         `https://maps.google.com/?q=${encodeURIComponent(coordinates)}`,
-                        "_blank"
+                        "_blank",
+                        "noopener,noreferrer"
                       );
                     }}
                   >
