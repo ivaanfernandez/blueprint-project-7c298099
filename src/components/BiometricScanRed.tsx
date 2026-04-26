@@ -172,13 +172,15 @@ const BiometricScanRed = ({ onComplete }: BiometricScanRedProps) => {
                   }}
                 />
               ))}
-            </>
+            </div>
           )}
         </div>
 
         {phase === 3 && (
           <p
             className="bsr-status-text"
+            data-testid="biometric-scan-status"
+            data-status="scanning"
             style={{
               marginTop: "24px",
               fontSize: "10px",
@@ -194,6 +196,8 @@ const BiometricScanRed = ({ onComplete }: BiometricScanRedProps) => {
         {phase === 4 && (
           <p
             className="bsr-status-text"
+            data-testid="biometric-scan-status"
+            data-status="granted"
             style={{
               marginTop: "24px",
               fontSize: "10px",
