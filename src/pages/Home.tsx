@@ -446,15 +446,15 @@ const Home = ({ showDock }: { showDock: boolean }) => {
               textTransform: "uppercase", lineHeight: 1.12,
               marginBottom: window.innerWidth < 768 ? 32 : 48, marginTop: 0,
             }}>
-              DESIGNED FOR THE HUMAN MACHINE
+              BUILT FOR HUMAN EVOLUTION
             </motion.h2>
 
             {/* Features (DESKTOP) — Apple-style frosted white cards */}
             <motion.div {...scrollStagger} className="about-features-desktop features-stack" style={{ position: "relative", flexGrow: 1, minHeight: 0 }}>
               {[
                 {
-                  title: "Professional Training",
-                  desc: "Data-driven methodology built to forge strength, endurance, and resilience.",
+                  title: "Elite Training System",
+                  desc: "Strength, physique, mobility and real progression through structured coaching.",
                   rgba: "26,107,255",
                   icon: (
                     <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#1A6BFF" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -469,7 +469,7 @@ const Home = ({ showDock }: { showDock: boolean }) => {
                 },
                 {
                   title: "Nutrition Engineering",
-                  desc: "Every meal is a signal. Optimize input, transform output.",
+                  desc: "Meals designed to fuel performance, recovery and body composition with real ingredients.",
                   rgba: "255,59,59",
                   icon: (
                     <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#FF3B3B" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -484,8 +484,8 @@ const Home = ({ showDock }: { showDock: boolean }) => {
                   ),
                 },
                 {
-                  title: "Recovery Science",
-                  desc: "Strategic rest, optimized sleep, and complete restoration protocols.",
+                  title: "Recovery Reset",
+                  desc: "Sauna, cold therapy and mobility systems to restore at a higher level.",
                   rgba: "34,197,94",
                   icon: (
                     <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#22C55E" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
@@ -494,8 +494,8 @@ const Home = ({ showDock }: { showDock: boolean }) => {
                   ),
                 },
                 {
-                  title: "Mental Growth",
-                  desc: "Build focus, discipline, and unshakable mental clarity.",
+                  title: "Mindset Upgrade",
+                  desc: "Discipline, confidence and focus built through education, pressure and consistency.",
                   rgba: "156,163,175",
                   icon: (
                     <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#9CA3AF" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -525,8 +525,8 @@ const Home = ({ showDock }: { showDock: boolean }) => {
             <motion.div {...scrollStagger} className="about-features-mobile" style={{ display: "none", flexDirection: "column", padding: "0 16px", gap: 14 }}>
               {[
                 {
-                  title: "PROFESSIONAL TRAINING",
-                  desc: "Data-driven methodology built to forge strength, endurance, and resilience.",
+                  title: "ELITE TRAINING SYSTEM",
+                  desc: "Strength, physique, mobility and real progression through structured coaching.",
                   icon: (
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1A6BFF" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                       {/* Dumbbell */}
@@ -540,7 +540,7 @@ const Home = ({ showDock }: { showDock: boolean }) => {
                 },
                 {
                   title: "NUTRITION ENGINEERING",
-                  desc: "Every meal is a signal. Optimize input, transform output.",
+                  desc: "Meals designed to fuel performance, recovery and body composition with real ingredients.",
                   icon: (
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#FF3B3B" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                       {/* Plate with fork & knife */}
@@ -554,8 +554,8 @@ const Home = ({ showDock }: { showDock: boolean }) => {
                   ),
                 },
                 {
-                  title: "RECOVERY SCIENCE",
-                  desc: "Strategic rest, optimized sleep, and complete restoration protocols.",
+                  title: "RECOVERY RESET",
+                  desc: "Sauna, cold therapy and mobility systems to restore at a higher level.",
                   icon: (
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#22C55E" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                       <path d="M22 12h-4l-3 9L9 3l-3 9H2" />
@@ -563,8 +563,8 @@ const Home = ({ showDock }: { showDock: boolean }) => {
                   ),
                 },
                 {
-                  title: "MENTAL GROWTH",
-                  desc: "Build focus, discipline, and unshakable mental clarity.",
+                  title: "MINDSET UPGRADE",
+                  desc: "Discipline, confidence and focus built through education, pressure and consistency.",
                   icon: (
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#9CA3AF" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                       {/* Brain */}
