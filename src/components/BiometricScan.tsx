@@ -62,6 +62,9 @@ const BiometricScan = ({ onComplete }: BiometricScanProps) => {
       `}</style>
       <div
         className="fixed inset-0 z-50 flex flex-col items-center justify-center"
+        data-testid="biometric-scan"
+        data-variant="blue"
+        data-phase={phase}
         style={{
           backgroundColor: "#000000",
           fontFamily: "'Space Grotesk', sans-serif",
@@ -71,6 +74,7 @@ const BiometricScan = ({ onComplete }: BiometricScanProps) => {
         {/* Wordmark */}
         <p
           className="bs-wordmark"
+          data-testid="biometric-scan-wordmark"
           style={{
             fontSize: "clamp(14px, 4vw, 18px)",
             letterSpacing: "0.3em",
@@ -89,6 +93,7 @@ const BiometricScan = ({ onComplete }: BiometricScanProps) => {
         {/* Fingerprint container */}
         <div
           className="bs-fingerprint-container"
+          data-testid="biometric-scan-fingerprint"
           style={{
             position: "relative",
             width: "140px",
@@ -199,6 +204,7 @@ const BiometricScan = ({ onComplete }: BiometricScanProps) => {
           {/* Scan line */}
           {phase === 3 && (
             <div
+              data-testid="biometric-scan-line"
               style={{
                 position: "absolute",
                 left: 0,
@@ -214,7 +220,7 @@ const BiometricScan = ({ onComplete }: BiometricScanProps) => {
 
           {/* Ripple effect */}
           {phase === 4 && (
-            <>
+            <div data-testid="biometric-scan-ripple" style={{ position: "absolute", inset: 0, pointerEvents: "none" }}>
               {[0, 0.2, 0.4].map((delay, i) => (
                 <div
                   key={i}
@@ -231,7 +237,7 @@ const BiometricScan = ({ onComplete }: BiometricScanProps) => {
                   }}
                 />
               ))}
-            </>
+            </div>
           )}
         </div>
 
@@ -239,6 +245,8 @@ const BiometricScan = ({ onComplete }: BiometricScanProps) => {
         {phase === 3 && (
           <p
             className="bs-status-text"
+            data-testid="biometric-scan-status"
+            data-status="scanning"
             style={{
               marginTop: "24px",
               fontSize: "10px",
@@ -255,6 +263,8 @@ const BiometricScan = ({ onComplete }: BiometricScanProps) => {
         {phase === 4 && (
           <p
             className="bs-status-text"
+            data-testid="biometric-scan-status"
+            data-status="granted"
             style={{
               marginTop: "24px",
               fontSize: "10px",

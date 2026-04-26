@@ -49,6 +49,9 @@ const BiometricScanRed = ({ onComplete }: BiometricScanRedProps) => {
       `}</style>
       <div
         className="fixed inset-0 z-50 flex flex-col items-center justify-center"
+        data-testid="biometric-scan"
+        data-variant="red"
+        data-phase={phase}
         style={{
           backgroundColor: "#000000",
           fontFamily: "'Space Grotesk', sans-serif",
@@ -57,6 +60,7 @@ const BiometricScanRed = ({ onComplete }: BiometricScanRedProps) => {
       >
         <p
           className="bsr-wordmark"
+          data-testid="biometric-scan-wordmark"
           style={{
             fontSize: "clamp(14px, 4vw, 18px)",
             letterSpacing: "0.3em",
@@ -74,6 +78,7 @@ const BiometricScanRed = ({ onComplete }: BiometricScanRedProps) => {
 
         <div
           className="bsr-fingerprint-container"
+          data-testid="biometric-scan-fingerprint"
           style={{
             position: "relative",
             width: "140px",
@@ -135,6 +140,7 @@ const BiometricScanRed = ({ onComplete }: BiometricScanRedProps) => {
 
           {phase === 3 && (
             <div
+              data-testid="biometric-scan-line"
               style={{
                 position: "absolute",
                 left: 0,
@@ -149,7 +155,7 @@ const BiometricScanRed = ({ onComplete }: BiometricScanRedProps) => {
           )}
 
           {phase === 4 && (
-            <>
+            <div data-testid="biometric-scan-ripple" style={{ position: "absolute", inset: 0, pointerEvents: "none" }}>
               {[0, 0.2, 0.4].map((delay, i) => (
                 <div
                   key={i}
@@ -166,13 +172,15 @@ const BiometricScanRed = ({ onComplete }: BiometricScanRedProps) => {
                   }}
                 />
               ))}
-            </>
+            </div>
           )}
         </div>
 
         {phase === 3 && (
           <p
             className="bsr-status-text"
+            data-testid="biometric-scan-status"
+            data-status="scanning"
             style={{
               marginTop: "24px",
               fontSize: "10px",
@@ -188,6 +196,8 @@ const BiometricScanRed = ({ onComplete }: BiometricScanRedProps) => {
         {phase === 4 && (
           <p
             className="bsr-status-text"
+            data-testid="biometric-scan-status"
+            data-status="granted"
             style={{
               marginTop: "24px",
               fontSize: "10px",

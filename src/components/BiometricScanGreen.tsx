@@ -49,6 +49,9 @@ const BiometricScanGreen = ({ onComplete }: BiometricScanGreenProps) => {
       `}</style>
       <div
         className="fixed inset-0 z-50 flex flex-col items-center justify-center"
+        data-testid="biometric-scan"
+        data-variant="green"
+        data-phase={phase}
         style={{
           backgroundColor: "#000000",
           fontFamily: "'Space Grotesk', sans-serif",
@@ -57,6 +60,7 @@ const BiometricScanGreen = ({ onComplete }: BiometricScanGreenProps) => {
       >
         <p
           className="bsg-wordmark"
+          data-testid="biometric-scan-wordmark"
           style={{
             fontSize: "clamp(14px, 4vw, 18px)",
             letterSpacing: "0.3em",
@@ -74,6 +78,7 @@ const BiometricScanGreen = ({ onComplete }: BiometricScanGreenProps) => {
 
         <div
           className="bsg-fingerprint-container"
+          data-testid="biometric-scan-fingerprint"
           style={{
             position: "relative",
             width: "140px",
@@ -135,6 +140,7 @@ const BiometricScanGreen = ({ onComplete }: BiometricScanGreenProps) => {
 
           {phase === 3 && (
             <div
+              data-testid="biometric-scan-line"
               style={{
                 position: "absolute",
                 left: 0,
@@ -149,7 +155,7 @@ const BiometricScanGreen = ({ onComplete }: BiometricScanGreenProps) => {
           )}
 
           {phase === 4 && (
-            <>
+            <div data-testid="biometric-scan-ripple" style={{ position: "absolute", inset: 0, pointerEvents: "none" }}>
               {[0, 0.2, 0.4].map((delay, i) => (
                 <div
                   key={i}
@@ -166,13 +172,15 @@ const BiometricScanGreen = ({ onComplete }: BiometricScanGreenProps) => {
                   }}
                 />
               ))}
-            </>
+            </div>
           )}
         </div>
 
         {phase === 3 && (
           <p
             className="bsg-status-text"
+            data-testid="biometric-scan-status"
+            data-status="scanning"
             style={{
               marginTop: "24px",
               fontSize: "10px",
@@ -188,6 +196,8 @@ const BiometricScanGreen = ({ onComplete }: BiometricScanGreenProps) => {
         {phase === 4 && (
           <p
             className="bsg-status-text"
+            data-testid="biometric-scan-status"
+            data-status="granted"
             style={{
               marginTop: "24px",
               fontSize: "10px",
