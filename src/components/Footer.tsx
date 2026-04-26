@@ -31,7 +31,7 @@ const Footer = () => (
         <div>
           <p style={{ fontSize: 10, letterSpacing: '0.1em', color: 'rgba(255,255,255,0.2)', fontWeight: 600, marginBottom: 8 }}>CONTACT</p>
           <a href="mailto:info@blueprintpr.com" style={{ display: 'block', fontSize: 12, color: 'rgba(255,255,255,0.4)' }}>info@blueprintpr.com</a>
-          <a href="tel:7870000000" style={{ display: 'block', fontSize: 12, color: 'rgba(255,255,255,0.4)', marginTop: 2 }}>(787) 000-0000</a>
+          <a href="tel:+19392735708" style={{ display: 'block', fontSize: 12, color: 'rgba(255,255,255,0.4)', marginTop: 2 }}>(939) 273-5708</a>
         </div>
 
         {/* Location */}
@@ -45,7 +45,7 @@ const Footer = () => (
         <div>
           <p style={{ fontSize: 10, letterSpacing: '0.1em', color: 'rgba(255,255,255,0.2)', fontWeight: 600, marginBottom: 8 }}>SOCIAL</p>
           <a
-            href="https://instagram.com/blueprintproject"
+            href="https://instagram.com/projectoblueprint"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-1.5 transition-colors"
@@ -54,7 +54,7 @@ const Footer = () => (
             onMouseLeave={e => { e.currentTarget.style.color = 'rgba(255,255,255,0.4)'; }}
           >
             <Instagram size={16} />
-            @blueprintpr
+            @projectoblueprint
           </a>
         </div>
       </div>

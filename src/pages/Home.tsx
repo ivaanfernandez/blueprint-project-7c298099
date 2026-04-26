@@ -853,9 +853,12 @@ const Home = ({ showDock }: { showDock: boolean }) => {
           marginBottom: 48,
           ...(window.innerWidth < 768 ? { flexDirection: "column" as const, gap: 10, alignItems: "stretch" as const } : {}),
         }}>
-          <motion.button
+          <motion.a
             variants={blurRevealItem}
-            onClick={() => navigate("/huella-azul")}
+            href="https://wa.me/19392735708?text=Hola%20Blueprint!%20Vi%20su%20p%C3%A1gina%20web%20y%20estoy%20interesado%20en%20conocer%20m%C3%A1s%20sobre%20los%20planes%20y%20la%20membres%C3%ADa.%20%C2%BFMe%20pueden%20dar%20m%C3%A1s%20informaci%C3%B3n%3F"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Contactar a Blueprint por WhatsApp"
             style={{
               fontFamily: "'Orbitron', sans-serif",
               fontSize: 10,
@@ -869,6 +872,10 @@ const Home = ({ showDock }: { showDock: boolean }) => {
               cursor: "pointer",
               transition: "all 0.3s ease",
               boxShadow: "0 0 15px rgba(26,107,255,0.5), 0 0 30px rgba(26,107,255,0.3), 0 0 60px rgba(26,107,255,0.15)",
+              textDecoration: "none",
+              display: "inline-flex",
+              alignItems: "center" as const,
+              justifyContent: "center" as const,
             }}
             onMouseEnter={(e) => {
               e.currentTarget.style.borderColor = "rgba(26,107,255,0.5)";
@@ -882,11 +889,14 @@ const Home = ({ showDock }: { showDock: boolean }) => {
             }}
           >
             JOIN NOW
-          </motion.button>
+          </motion.a>
 
-          <motion.button
+          <motion.a
             variants={blurRevealItem}
-            onClick={() => window.open("https://instagram.com/blueprintproject", "_blank")}
+            href="https://instagram.com/projectoblueprint"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Síguenos en Instagram @projectoblueprint"
             style={{
               fontFamily: "'Orbitron', sans-serif",
               fontSize: 10,
@@ -900,10 +910,11 @@ const Home = ({ showDock }: { showDock: boolean }) => {
               cursor: "pointer",
               transition: "all 0.3s ease",
               boxShadow: "0 0 15px rgba(255,59,59,0.5), 0 0 30px rgba(255,59,59,0.3), 0 0 60px rgba(255,59,59,0.15)",
-              display: "flex",
+              display: "inline-flex",
               alignItems: "center" as const,
               justifyContent: "center" as const,
               gap: 8,
+              textDecoration: "none",
             }}
             onMouseEnter={(e) => {
               e.currentTarget.style.color = "#FFFFFF";
@@ -922,7 +933,7 @@ const Home = ({ showDock }: { showDock: boolean }) => {
               <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
             </svg>
             INSTAGRAM
-          </motion.button>
+          </motion.a>
         </motion.div>
 
         {/* Divider */}

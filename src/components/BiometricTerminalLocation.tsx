@@ -1,7 +1,9 @@
 const BiometricTerminalLocation = () => {
-  const phone = "+17870000000";
-  const phoneDisplay = "(787) 000-0000";
+  const phone = "+19392735708";
+  const phoneDisplay = "(939) 273-5708";
   const address = "1951 Calle Loíza, Santurce, PR 00911";
+  const whatsappUrl =
+    "https://wa.me/19392735708?text=Hola%20Blueprint!%20Vi%20su%20p%C3%A1gina%20web%20y%20estoy%20interesado%20en%20conocer%20m%C3%A1s%20sobre%20los%20planes%20y%20la%20membres%C3%ADa.%20%C2%BFMe%20pueden%20dar%20m%C3%A1s%20informaci%C3%B3n%3F";
   const mapsUrl =
     "https://www.google.com/maps/search/?api=1&query=1951+Calle+Loiza+Santurce+PR+00911";
 
@@ -79,8 +81,17 @@ const BiometricTerminalLocation = () => {
 
       {/* Action buttons: CALL + OPEN IN MAPS */}
       <div className="bio-actions">
-        <a href={`tel:${phone}`} className="bio-action" aria-label="Call Blueprint Lab">
+        <a href={`tel:${phone}`} className="bio-action" aria-label="Llamar a Blueprint">
           ◉ CALL
+        </a>
+        <a
+          href={whatsappUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="bio-action"
+          aria-label="Contactar a Blueprint por WhatsApp"
+        >
+          ✦ WHATSAPP
         </a>
         <a
           href={mapsUrl}
