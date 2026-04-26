@@ -1,35 +1,43 @@
-## Fix: Corregir handle de Instagram
+## Diagnóstico
 
-Cambio quirúrgico de typo: `projectoblueprint` → `proyectoblueprint` (con "y" en "proyecto"). Solo 1 letra cambia. Cero impacto visual, cero impacto funcional excepto que ahora los enlaces apuntan al perfil real de Instagram.
+Reviewed the current `index.html`. Casi todos los meta tags ya están en su versión larga (probablemente quedaron así desde el Prompt B original). El único tag que sigue corto es `twitter:description`.
 
-### Diagnóstico
+### Estado actual de cada tag
 
-4 instancias encontradas en 2 archivos:
+| Tag | Caracteres actuales | Estado |
+|---|---|---|
+| `<title>` | 88 | ✅ Ya completo |
+| `<meta name="title">` | 88 | ✅ Ya completo |
+| `<meta name="description">` | 232 | ✅ Ya completo |
+| `<meta name="keywords">` | 244 | ✅ Ya completo |
+| `og:title` | 46 | ✅ Ya completo (versión corta intencional para social) |
+| `og:description` | 152 | ✅ Ya completo |
+| `twitter:title` | 46 | ✅ Ya completo |
+| `twitter:description` | **73** | ⚠️ Corto — necesita reemplazo |
 
-| Archivo | Línea | Tipo | Contenido actual |
-|---|---|---|---|
-| `src/pages/Home.tsx` | 896 | `href` del botón Instagram | `https://instagram.com/projectoblueprint` |
-| `src/pages/Home.tsx` | 899 | `aria-label` del botón | `Síguenos en Instagram @projectoblueprint` |
-| `src/components/Footer.tsx` | 48 | `href` del enlace | `https://instagram.com/projectoblueprint` |
-| `src/components/Footer.tsx` | 57 | Texto visible | `@projectoblueprint` |
+## Cambio único a aplicar
 
-### Cambios a aplicar
+**Archivo:** `index.html` — línea 45
 
-En las 4 instancias, reemplazar la palabra completa `projectoblueprint` por `proyectoblueprint`. Resultado:
+Reemplazar:
+```html
+<meta name="twitter:description" content="Premium fitness club in Santurce, San Juan PR. Built for human evolution." />
+```
 
-- URLs finales: `https://instagram.com/proyectoblueprint`
-- Aria-label: `Síguenos en Instagram @proyectoblueprint`
-- Texto visible footer: `@proyectoblueprint`
+Por:
+```html
+<meta name="twitter:description" content="Premium fitness club in Santurce, San Juan PR. Elite training, nutrition engineering, and recovery protocols. Built for human evolution." />
+```
 
-### Lo que NO cambia
+(73 → 137 chars)
 
-- Estilos CSS, clases Tailwind, animaciones Framer Motion del botón
-- Atributos `target="_blank"` y `rel="noopener noreferrer"`
-- Ícono de Instagram
-- Botón JOIN NOW (WhatsApp) — sin tocar
-- Páginas Huella Azul/Roja/Verde — no contienen referencia al handle, no se modifican
-- URLs no relacionadas con Instagram
+## Lo que NO se toca
 
-### Verificación post-fix
+- Canonical, geo, OG image dimensions, Schema.org JSON-LD, preconnect/preload — todo se preserva.
+- URLs (`blueprintproject.com`) sin cambios.
+- No se modifican `HuellaAzul/Roja/Verde`, robots.txt, sitemap.xml ni manifest.
+- Sin cambios visuales en el site.
 
-Después del fix se confirmará: 0 instancias de `projectoblueprint`, 4 instancias de `proyectoblueprint`.
+## Resultado esperado
+
+Tras este cambio, los 6 tags pedidos por el prompt estarán en su versión larga correcta. El warning "Description is short" en opengraph.xyz para la Twitter Card desaparecerá. El warning restante será solo el de la imagen (`og-image.jpg` de 1200x630) que se resuelve subiendo el archivo a `/public/`.
