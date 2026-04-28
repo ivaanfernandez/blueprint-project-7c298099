@@ -40,14 +40,14 @@ const SERVICES: PremiumService[] = [
   },
   {
     number: "03",
-    title: "CORPORATE RECOVERY PROGRAMS",
+    title: "RECOVERY PROGRAMS",
     description:
-      "Corporate packages designed to improve physical and mental health and team performance. Invest in your team, invest in results.",
+      "Structured recovery protocols built to optimize how the body restores, adapts, and performs. Each program combines targeted modalities to deliver measurable results in performance, energy, and overall wellbeing.",
     stats: [
-      { label: "TEAM SIZE", value: "5-50+", icon: "◈" },
-      { label: "ROI INCREASE", value: "+38%", icon: "↑" },
-      { label: "ONSITE SESSIONS", value: "AVAILABLE", icon: "⌘" },
-      { label: "CUSTOM PACKAGES", value: "BESPOKE", icon: "✦" },
+      { label: "RECOVERY TIME", value: "-47%", icon: "◈" },
+      { label: "SLEEP QUALITY", value: "+62%", icon: "↑" },
+      { label: "ENERGY INCREASE", value: "+84%", icon: "⌘" },
+      { label: "STRESS REDUCTION", value: "-71%", icon: "✦" },
     ],
   },
   {

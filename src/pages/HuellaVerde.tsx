@@ -98,20 +98,22 @@ const RECOVERY_CARDS: Array<{ name: string; img: string; srcSet?: string; sizes?
     // Picks WebP variants (universal modern support); the existing <img srcSet>
     // attribute below already accepts a comma-separated descriptor list.
     srcSet: infraredSaunaImg.sources.webp ?? infraredSaunaImg.sources.avif,
-    sizes: "(max-width: 768px) 50vw, (max-width: 1280px) 40vw, 550px",
+    sizes: "(max-width: 768px) 100vw, (max-width: 1280px) 40vw, 460px",
   },
   { name: "ICE BATH THERAPY", img: "https://images.unsplash.com/photo-1682687220795-796d3f6f7000?w=800&auto=format&fit=crop" },
   { name: "MOBILITY & BREATHING", img: "https://images.unsplash.com/photo-1545205597-3d9d02c29597?w=800&auto=format&fit=crop" },
-  { name: "MASSAGES & BODYWORK", img: "https://images.unsplash.com/photo-1600334129128-685c5582fd35?w=800&auto=format&fit=crop" },
+  { name: "ADJUSTMENTS & MUSCLE REHAB", img: "https://images.unsplash.com/photo-1600334129128-685c5582fd35?w=800&auto=format&fit=crop" },
+  { name: "HYPERBARIC CHAMBER", img: "/hyperbaric-chamber.jpg" },
+  { name: "COMPRESSION BOOTS", img: "/compression-boots.jpg" },
 ];
 const SERVICIOS = [
   { num: "01", name: "PERSONALIZED RECOVERY PROTOCOLS", desc: "Designed by our expert team based on your goals: athletic performance, cellular longevity, deep relaxation or superior mental focus." },
   { num: "02", name: "RESET PASS", desc: "Unlimited access to all Wellness Days, special discounts on professional massages and exclusive HackBar products." },
-  { num: "03", name: "CORPORATE RECOVERY PROGRAMS", desc: "Corporate packages designed to improve physical and mental health and the performance of your team. Invest in your team, invest in results." },
+  { num: "03", name: "RECOVERY PROGRAMS", desc: "Structured recovery protocols built to optimize how the body restores, adapts, and performs. Each program combines targeted modalities to deliver measurable results in performance, energy, and overall wellbeing." },
   { num: "04", name: "RESET RETREATS", desc: "Coming soon: 72-hour immersive experiences with guided detox, therapeutic fasting, extended sauna, deep meditation and full reconnection with nature." },
 ];
 
-const scanDelays = [0, 1, 2, 0.5, 1.5];
+const scanDelays = [0, 1, 2, 0.5, 1.5, 2.5];
 
 /* ── Component ── */
 const HuellaVerde = ({ showDock = true }: HuellaVerdeProps) => {
@@ -153,6 +155,135 @@ const HuellaVerde = ({ showDock = true }: HuellaVerdeProps) => {
         }
         @media (min-width: 768px) {
           .hv-hero-img { object-position: 50% 45% !important; }
+        }
+
+        /* ── RECOVERY ARSENAL GRID (6 servicios) ── */
+        .recovery-arsenal-grid {
+          display: grid;
+          gap: 12px;
+          width: 100%;
+          max-width: 1400px;
+          margin: 0 auto;
+          padding: 0 6%;
+        }
+        .recovery-tile {
+          position: relative;
+          border-radius: 12px;
+          overflow: hidden;
+          border: 1px solid rgba(34, 197, 94, 0.4);
+          box-shadow: 0 0 20px rgba(34, 197, 94, 0.1);
+          aspect-ratio: 4 / 3;
+          cursor: pointer;
+          transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+                      box-shadow 0.4s ease,
+                      border-color 0.4s ease;
+        }
+        .recovery-tile img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          display: block;
+          transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        .recovery-tile::before {
+          content: '';
+          position: absolute;
+          inset: 0;
+          background: linear-gradient(
+            to top,
+            rgba(0, 0, 0, 0.85) 0%,
+            rgba(0, 0, 0, 0.3) 50%,
+            transparent 100%
+          );
+          pointer-events: none;
+          z-index: 1;
+        }
+        .recovery-tile-label {
+          position: absolute;
+          bottom: 16px;
+          left: 18px;
+          right: 18px;
+          font-family: "Michroma", sans-serif;
+          font-size: 14px;
+          font-weight: 400;
+          color: #ffffff;
+          letter-spacing: 0.05em;
+          text-transform: uppercase;
+          line-height: 1.2;
+          z-index: 2;
+          margin: 0;
+          text-shadow: 0 1px 4px rgba(0, 0, 0, 0.9);
+        }
+        @media (min-width: 768px) {
+          .recovery-tile:hover {
+            transform: translateY(-4px);
+            border-color: rgba(34, 197, 94, 0.7);
+            box-shadow: 0 8px 32px rgba(34, 197, 94, 0.2);
+          }
+          .recovery-tile:hover img {
+            transform: scale(1.05);
+          }
+        }
+        @media (min-width: 1024px) {
+          .recovery-arsenal-grid {
+            grid-template-columns: 1fr 1fr 1fr;
+            grid-template-rows: 1fr 1fr;
+            gap: 16px;
+          }
+          .recovery-tile-hero {
+            grid-column: auto;
+            grid-row: auto;
+          }
+          .recovery-tile {
+            aspect-ratio: 4 / 3;
+          }
+          .recovery-tile-label {
+            font-size: 16px;
+            bottom: 20px;
+            left: 24px;
+            right: 24px;
+          }
+        }
+        @media (min-width: 768px) and (max-width: 1023px) {
+          .recovery-arsenal-grid {
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: 1fr 1fr 1fr;
+            gap: 12px;
+          }
+          .recovery-tile {
+            aspect-ratio: 4 / 3;
+          }
+        }
+        @media (max-width: 767px) {
+          .recovery-arsenal-grid {
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: 200px 1fr 1fr 1fr;
+            gap: 10px;
+            padding: 0 4%;
+          }
+          .recovery-tile-hero {
+            grid-column: 1 / -1;
+            grid-row: 1;
+            aspect-ratio: auto;
+            height: 200px;
+          }
+          .recovery-tile:not(.recovery-tile-hero) {
+            aspect-ratio: 1 / 1;
+          }
+          .recovery-tile-label {
+            font-size: 11px;
+            bottom: 10px;
+            left: 12px;
+            right: 12px;
+            letter-spacing: 0.04em;
+          }
+          .recovery-tile-hero .recovery-tile-label {
+            font-size: 16px;
+            bottom: 14px;
+            left: 16px;
+            right: 16px;
+            letter-spacing: 0.05em;
+          }
         }
       `}</style>
 
@@ -230,14 +361,13 @@ const HuellaVerde = ({ showDock = true }: HuellaVerdeProps) => {
             Your Reset zone. Available exclusively for Blueprint Lab members.
           </motion.p>
 
-          {/* Grid 2x2 */}
-          <motion.div {...scrollStagger} className="recovery-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16, maxWidth: 1100, margin: "0 auto" }}>
+          {/* Grid 6 tiles — responsive */}
+          <motion.div {...scrollStagger} className="recovery-arsenal-grid">
             {RECOVERY_CARDS.map((card, i) => (
               <motion.div
                 variants={blurRevealItem}
                 key={card.name}
-                className="recovery-card"
-                style={{ position: "relative", aspectRatio: "1 / 1", borderRadius: 16, overflow: "hidden", cursor: "pointer", transition: "transform 0.4s ease, box-shadow 0.4s ease" }}
+                className={`recovery-tile${i === 0 ? " recovery-tile-hero" : ""}`}
               >
                 <img
                   src={card.img}
@@ -246,20 +376,10 @@ const HuellaVerde = ({ showDock = true }: HuellaVerdeProps) => {
                   alt={card.name}
                   loading="lazy"
                   decoding="async"
-                  style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", transition: "transform 0.6s ease" }}
                 />
-                {/* Gradient overlay: transparent top → dark bottom */}
-                <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0.2) 50%, rgba(0,0,0,0.85) 100%)", zIndex: 1 }} />
-                {/* Green accent glow bottom-left */}
-                <div style={{ position: "absolute", bottom: -40, left: -40, width: 160, height: 160, background: "radial-gradient(circle, rgba(34,197,94,0.25) 0%, transparent 70%)", zIndex: 1, pointerEvents: "none" }} />
                 {/* Scan line */}
                 <div style={{ position: "absolute", left: 0, right: 0, height: 1, background: "linear-gradient(to right, transparent, rgba(34,197,94,0.4), transparent)", animation: `hvScanLine 5s ease-in-out ${scanDelays[i]}s infinite`, zIndex: 2, pointerEvents: "none" }} />
-                {/* Title */}
-                <div style={{ position: "absolute", left: 0, right: 0, bottom: 0, padding: "20px 18px", zIndex: 2 }}>
-                  <h3 style={{ fontFamily: "'Michroma', sans-serif", fontSize: "clamp(13px, 2.2vw, 18px)", color: "#fff", textTransform: "uppercase", letterSpacing: "0.04em", lineHeight: 1.2, margin: 0, textShadow: "0 2px 12px rgba(0,0,0,0.8)" }}>
-                    {card.name}
-                  </h3>
-                </div>
+                <h3 className="recovery-tile-label">{card.name}</h3>
               </motion.div>
             ))}
           </motion.div>

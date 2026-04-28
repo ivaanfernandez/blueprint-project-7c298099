@@ -438,7 +438,7 @@ html[data-no-motion="true"] *::after {
     height: 100% !important;
   }
 
-  /* Card 4 — Massages: bottom-right square */
+  /* Card 4 — Adjustments & Muscle Rehab: bottom-right square (legacy 4-tile rule, superseded by .recovery-arsenal-grid) */
   .recovery-grid > .recovery-card:nth-child(4) {
     grid-column: 3 !important;
     grid-row: 2 !important;
