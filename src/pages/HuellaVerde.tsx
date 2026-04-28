@@ -232,14 +232,13 @@ const HuellaVerde = ({ showDock = true }: HuellaVerdeProps) => {
             Your Reset zone. Available exclusively for Blueprint Lab members.
           </motion.p>
 
-          {/* Grid 2x2 */}
-          <motion.div {...scrollStagger} className="recovery-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16, maxWidth: 1100, margin: "0 auto" }}>
+          {/* Grid 6 tiles — responsive */}
+          <motion.div {...scrollStagger} className="recovery-arsenal-grid">
             {RECOVERY_CARDS.map((card, i) => (
               <motion.div
                 variants={blurRevealItem}
                 key={card.name}
-                className="recovery-card"
-                style={{ position: "relative", aspectRatio: "1 / 1", borderRadius: 16, overflow: "hidden", cursor: "pointer", transition: "transform 0.4s ease, box-shadow 0.4s ease" }}
+                className={`recovery-tile${i === 0 ? " recovery-tile-hero" : ""}`}
               >
                 <img
                   src={card.img}
@@ -248,20 +247,10 @@ const HuellaVerde = ({ showDock = true }: HuellaVerdeProps) => {
                   alt={card.name}
                   loading="lazy"
                   decoding="async"
-                  style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", transition: "transform 0.6s ease" }}
                 />
-                {/* Gradient overlay: transparent top → dark bottom */}
-                <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0.2) 50%, rgba(0,0,0,0.85) 100%)", zIndex: 1 }} />
-                {/* Green accent glow bottom-left */}
-                <div style={{ position: "absolute", bottom: -40, left: -40, width: 160, height: 160, background: "radial-gradient(circle, rgba(34,197,94,0.25) 0%, transparent 70%)", zIndex: 1, pointerEvents: "none" }} />
                 {/* Scan line */}
                 <div style={{ position: "absolute", left: 0, right: 0, height: 1, background: "linear-gradient(to right, transparent, rgba(34,197,94,0.4), transparent)", animation: `hvScanLine 5s ease-in-out ${scanDelays[i]}s infinite`, zIndex: 2, pointerEvents: "none" }} />
-                {/* Title */}
-                <div style={{ position: "absolute", left: 0, right: 0, bottom: 0, padding: "20px 18px", zIndex: 2 }}>
-                  <h3 style={{ fontFamily: "'Michroma', sans-serif", fontSize: "clamp(13px, 2.2vw, 18px)", color: "#fff", textTransform: "uppercase", letterSpacing: "0.04em", lineHeight: 1.2, margin: 0, textShadow: "0 2px 12px rgba(0,0,0,0.8)" }}>
-                    {card.name}
-                  </h3>
-                </div>
+                <h3 className="recovery-tile-label">{card.name}</h3>
               </motion.div>
             ))}
           </motion.div>
