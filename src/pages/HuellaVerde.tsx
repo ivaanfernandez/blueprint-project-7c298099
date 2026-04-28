@@ -156,6 +156,135 @@ const HuellaVerde = ({ showDock = true }: HuellaVerdeProps) => {
         @media (min-width: 768px) {
           .hv-hero-img { object-position: 50% 45% !important; }
         }
+
+        /* ── RECOVERY ARSENAL GRID (6 servicios) ── */
+        .recovery-arsenal-grid {
+          display: grid;
+          gap: 12px;
+          width: 100%;
+          max-width: 1400px;
+          margin: 0 auto;
+          padding: 0 6%;
+        }
+        .recovery-tile {
+          position: relative;
+          border-radius: 12px;
+          overflow: hidden;
+          border: 1px solid rgba(34, 197, 94, 0.4);
+          box-shadow: 0 0 20px rgba(34, 197, 94, 0.1);
+          aspect-ratio: 4 / 3;
+          cursor: pointer;
+          transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+                      box-shadow 0.4s ease,
+                      border-color 0.4s ease;
+        }
+        .recovery-tile img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          display: block;
+          transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        .recovery-tile::before {
+          content: '';
+          position: absolute;
+          inset: 0;
+          background: linear-gradient(
+            to top,
+            rgba(0, 0, 0, 0.85) 0%,
+            rgba(0, 0, 0, 0.3) 50%,
+            transparent 100%
+          );
+          pointer-events: none;
+          z-index: 1;
+        }
+        .recovery-tile-label {
+          position: absolute;
+          bottom: 16px;
+          left: 18px;
+          right: 18px;
+          font-family: "Michroma", sans-serif;
+          font-size: 14px;
+          font-weight: 400;
+          color: #ffffff;
+          letter-spacing: 0.05em;
+          text-transform: uppercase;
+          line-height: 1.2;
+          z-index: 2;
+          margin: 0;
+          text-shadow: 0 1px 4px rgba(0, 0, 0, 0.9);
+        }
+        @media (min-width: 768px) {
+          .recovery-tile:hover {
+            transform: translateY(-4px);
+            border-color: rgba(34, 197, 94, 0.7);
+            box-shadow: 0 8px 32px rgba(34, 197, 94, 0.2);
+          }
+          .recovery-tile:hover img {
+            transform: scale(1.05);
+          }
+        }
+        @media (min-width: 1024px) {
+          .recovery-arsenal-grid {
+            grid-template-columns: 1fr 1fr 1fr;
+            grid-template-rows: 1fr 1fr;
+            gap: 16px;
+          }
+          .recovery-tile-hero {
+            grid-column: auto;
+            grid-row: auto;
+          }
+          .recovery-tile {
+            aspect-ratio: 4 / 3;
+          }
+          .recovery-tile-label {
+            font-size: 16px;
+            bottom: 20px;
+            left: 24px;
+            right: 24px;
+          }
+        }
+        @media (min-width: 768px) and (max-width: 1023px) {
+          .recovery-arsenal-grid {
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: 1fr 1fr 1fr;
+            gap: 12px;
+          }
+          .recovery-tile {
+            aspect-ratio: 4 / 3;
+          }
+        }
+        @media (max-width: 767px) {
+          .recovery-arsenal-grid {
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: 200px 1fr 1fr 1fr;
+            gap: 10px;
+            padding: 0 4%;
+          }
+          .recovery-tile-hero {
+            grid-column: 1 / -1;
+            grid-row: 1;
+            aspect-ratio: auto;
+            height: 200px;
+          }
+          .recovery-tile:not(.recovery-tile-hero) {
+            aspect-ratio: 1 / 1;
+          }
+          .recovery-tile-label {
+            font-size: 11px;
+            bottom: 10px;
+            left: 12px;
+            right: 12px;
+            letter-spacing: 0.04em;
+          }
+          .recovery-tile-hero .recovery-tile-label {
+            font-size: 16px;
+            bottom: 14px;
+            left: 16px;
+            right: 16px;
+            letter-spacing: 0.05em;
+          }
+        }
       `}</style>
 
       <motion.div
