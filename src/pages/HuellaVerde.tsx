@@ -98,20 +98,22 @@ const RECOVERY_CARDS: Array<{ name: string; img: string; srcSet?: string; sizes?
     // Picks WebP variants (universal modern support); the existing <img srcSet>
     // attribute below already accepts a comma-separated descriptor list.
     srcSet: infraredSaunaImg.sources.webp ?? infraredSaunaImg.sources.avif,
-    sizes: "(max-width: 768px) 50vw, (max-width: 1280px) 40vw, 550px",
+    sizes: "(max-width: 768px) 100vw, (max-width: 1280px) 40vw, 460px",
   },
   { name: "ICE BATH THERAPY", img: "https://images.unsplash.com/photo-1682687220795-796d3f6f7000?w=800&auto=format&fit=crop" },
   { name: "MOBILITY & BREATHING", img: "https://images.unsplash.com/photo-1545205597-3d9d02c29597?w=800&auto=format&fit=crop" },
-  { name: "MASSAGES & BODYWORK", img: "https://images.unsplash.com/photo-1600334129128-685c5582fd35?w=800&auto=format&fit=crop" },
+  { name: "ADJUSTMENTS & MUSCLE REHAB", img: "https://images.unsplash.com/photo-1600334129128-685c5582fd35?w=800&auto=format&fit=crop" },
+  { name: "HYPERBARIC CHAMBER", img: "/hyperbaric-chamber.jpg" },
+  { name: "COMPRESSION BOOTS", img: "/compression-boots.jpg" },
 ];
 const SERVICIOS = [
   { num: "01", name: "PERSONALIZED RECOVERY PROTOCOLS", desc: "Designed by our expert team based on your goals: athletic performance, cellular longevity, deep relaxation or superior mental focus." },
   { num: "02", name: "RESET PASS", desc: "Unlimited access to all Wellness Days, special discounts on professional massages and exclusive HackBar products." },
-  { num: "03", name: "CORPORATE RECOVERY PROGRAMS", desc: "Corporate packages designed to improve physical and mental health and the performance of your team. Invest in your team, invest in results." },
+  { num: "03", name: "RECOVERY PROGRAMS", desc: "Structured recovery protocols built to optimize how the body restores, adapts, and performs. Each program combines targeted modalities to deliver measurable results in performance, energy, and overall wellbeing." },
   { num: "04", name: "RESET RETREATS", desc: "Coming soon: 72-hour immersive experiences with guided detox, therapeutic fasting, extended sauna, deep meditation and full reconnection with nature." },
 ];
 
-const scanDelays = [0, 1, 2, 0.5, 1.5];
+const scanDelays = [0, 1, 2, 0.5, 1.5, 2.5];
 
 /* ── Component ── */
 const HuellaVerde = ({ showDock = true }: HuellaVerdeProps) => {
