@@ -157,15 +157,46 @@ const HuellaVerde = ({ showDock = true }: HuellaVerdeProps) => {
       <div className="verde-animated-bg" aria-hidden="true" />
       <style>{`
         @keyframes hvScanLine {
-          0% { top: 0; opacity: 0; }
-          10% { opacity: 0.2; }
-          90% { opacity: 0.2; }
-          100% { top: 100%; opacity: 0; }
+          0%   { transform: translate3d(0, 0, 0);    opacity: 0; }
+          10%  { opacity: 0.22; }
+          90%  { opacity: 0.22; }
+          100% { transform: translate3d(0, var(--hv-scan-distance, 240px), 0); opacity: 0; }
+        }
+        .hv-scan-line {
+          position: absolute;
+          left: 0;
+          right: 0;
+          top: 0;
+          height: 1px;
+          background: linear-gradient(to right, transparent, rgba(34,197,94,0.4), transparent);
+          z-index: 2;
+          pointer-events: none;
+          will-change: transform, opacity;
+          animation: hvScanLine 5s linear infinite;
+          animation-delay: calc(var(--i, 0) * 0.5s);
+          transform: translateZ(0);
+        }
+        @media (prefers-reduced-motion: reduce) {
+          .hv-scan-line { animation: none; opacity: 0; }
         }
         @keyframes hvFadeUp {
           from { opacity: 0; transform: translateY(20px); }
-          to { opacity: 1; transform: translateY(0); }
+          to   { opacity: 1; transform: translateY(0); }
         }
+        /* Atmospheric layers — promoted to compositor for cheap repaints */
+        .hv-atmos { position: absolute; pointer-events: none; z-index: 0; transform: translateZ(0); will-change: opacity; }
+        .hv-atmos-glow-top   { top: 0; left: 50%; transform: translate3d(-50%,0,0); width: 90%; height: 500px; background: radial-gradient(ellipse at center top, rgba(34,197,94,0.25) 0%, rgba(34,197,94,0.08) 40%, transparent 75%); }
+        .hv-atmos-glow-mid   { top: 60px; left: 50%; transform: translate3d(-50%,0,0); width: 70%; height: 300px; background: radial-gradient(ellipse at center, rgba(34,197,94,0.20) 0%, transparent 70%); }
+        .hv-atmos-grid       { inset: 0; background-image: linear-gradient(rgba(74,222,128,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(74,222,128,0.04) 1px, transparent 1px); background-size: 40px 40px; }
+        .hv-atmos-scanlines  { inset: 0; background: repeating-linear-gradient(0deg, transparent 0px, transparent 2px, rgba(74,222,128,0.025) 2px, rgba(74,222,128,0.025) 3px); }
+        .hv-atmos-vignette-b { bottom: 0; left: 0; right: 0; height: 200px; background: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.15) 100%); }
+        .hv-atmos-vignette-t { top: 0; left: 0; right: 0; height: 200px; background: linear-gradient(to top, transparent 0%, rgba(0,0,0,0.15) 100%); }
+        @media (max-width: 767px) {
+          /* Reduce overdraw on mobile */
+          .hv-atmos-grid { display: none; }
+          .hv-atmos-scanlines { opacity: 0.5; }
+        }
+
         .hv-card { transition: transform 0.3s ease, box-shadow 0.3s ease; }
         .hv-card:hover { transform: translateY(-4px); box-shadow: 0 8px 32px rgba(34,197,94,0.12); }
         @media (max-width: 767px) {
