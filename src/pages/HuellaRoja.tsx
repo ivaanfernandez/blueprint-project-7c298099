@@ -466,8 +466,10 @@ const HuellaRoja = ({ showDock }: { showDock: boolean }) => {
         </div>
       )}
 
+      {/* ═══ HACKBAR HERO FLOATING CARD WRAPPER ═══ */}
+      <div className="hackbar-hero-wrapper">
       {/* ═══ SECTION A: HERO (MOBILE) ═══ */}
-      <section className="flex md:hidden" style={{
+      <section className="hackbar-hero flex md:hidden" style={{
         position: "relative", minHeight: "100vh", width: "100%",
         overflow: "hidden", alignItems: "center", justifyContent: "center",
         backgroundColor: "#0a0a0a",
