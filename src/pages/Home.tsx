@@ -798,6 +798,7 @@ const Home = ({ showDock }: { showDock: boolean }) => {
 
 
       </div>{/* END WHITE ZONE WRAPPER */}
+      </div>{/* END home-white-wrapper */}
 
       {/* ── FOOTER (DARK with hands background) — lazy-mounted: defers ~1MB bg image + dock subtree until user scrolls near bottom ── */}
       <LazyMount rootMargin="500px" placeholderHeight="560px">
