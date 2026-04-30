@@ -379,11 +379,12 @@ const HuellaVerde = ({ showDock = true }: HuellaVerdeProps) => {
           {/* Cinematic blur fade-out at hero bottom */}
           <GradualBlur position="bottom" height="6rem" strength={2} divCount={5} opacity={0.9} curve="bezier" zIndex={3} />
         </section>
+        </div>
 
         {/* ── RECOVERY ROOM ── */}
         <motion.section
           {...scrollReveal}
-          style={{ background: "transparent", padding: "72px 7%", position: "relative", zIndex: 1 }}
+          style={{ background: "#050a05", padding: "72px 7%", position: "relative", zIndex: 1 }}
         >
           <motion.h2 {...scrollReveal} style={{ fontFamily: "'Michroma', sans-serif", fontSize: "clamp(28px, 5vw, 42px)", fontWeight: 400, color: "#FFFFFF", textTransform: "uppercase", letterSpacing: "0.05em", margin: "0 0 12px 0", textAlign: "center" }}>
             RECOVERY ROOM
