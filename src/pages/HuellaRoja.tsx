@@ -2,7 +2,11 @@ import { useState, useCallback, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import SEO from "@/components/SEO";
-import { scrollReveal, scrollRevealNoShift } from "@/lib/scrollAnimations";
+import {
+  scrollRevealCinematic as scrollReveal,
+  scrollRevealNoShift,
+  scrollRevealGlow,
+} from "@/lib/scrollAnimations";
 import BiometricScanRed from "@/components/BiometricScanRed";
 import { TextScramble } from "@/components/ui/text-scramble";
 import { Dock, DockIcon } from "@/components/ui/dock";
@@ -349,7 +353,7 @@ const HuellaRoja = ({ showDock }: { showDock: boolean }) => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.8 }}
-        style={{ fontFamily: "'Inter', sans-serif", position: "relative", overflowX: "hidden", backgroundColor: "#0a0a0a" }}
+        style={{ ["--reveal-glow" as never]: "rgba(255,59,59,0.4)", fontFamily: "'Inter', sans-serif", position: "relative", overflowX: "hidden", backgroundColor: "#0a0a0a" } as React.CSSProperties}
       >
       <style>{`
         @keyframes hrScanLine {
@@ -602,9 +606,9 @@ const HuellaRoja = ({ showDock }: { showDock: boolean }) => {
         {...scrollReveal}
         style={{ backgroundColor: "#0a0a0a", padding: "72px 7%", position: "relative", zIndex: 1 }}
       >
-        <p style={{ fontFamily: "'Michroma', sans-serif", fontSize: "clamp(16px, 2vw, 24px)", color: "#FFFFFF", textTransform: "uppercase", letterSpacing: "0.04em", marginBottom: 32, textAlign: "center", width: "100%" }}>
+        <motion.p {...scrollRevealGlow} style={{ fontFamily: "'Michroma', sans-serif", fontSize: "clamp(16px, 2vw, 24px)", color: "#FFFFFF", textTransform: "uppercase", letterSpacing: "0.04em", marginBottom: 32, textAlign: "center", width: "100%" }}>
           FUEL YOUR SYSTEM
-        </p>
+        </motion.p>
         <div className="hr-fuel-grid" style={{ display: "flex", gap: 20 }}>
           <FuelCard
             index={0}

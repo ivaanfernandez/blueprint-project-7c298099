@@ -2,35 +2,15 @@ import { useState, useCallback, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import SEO from "@/components/SEO";
-// (legacy global reveals replaced by stronger local hv* variants below)
-import type { Variants } from "framer-motion";
-
-/* ── Local stronger reveals for Reset page (more notable than the global ones) ── */
-const HV_REDUCE = typeof window !== "undefined" && (
-  (typeof document !== "undefined" && document.documentElement?.dataset?.noMotion === "true") ||
-  (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches)
-);
-const HV_VIEWPORT = { once: true, amount: 0.2, margin: "0px 0px -12% 0px" } as const;
-const hvRevealVariants: Variants = HV_REDUCE
-  ? { hidden: { opacity: 1, filter: "blur(0px)", y: 0 }, visible: { opacity: 1, filter: "blur(0px)", y: 0, transition: { duration: 0 } } }
-  : {
-      hidden: { opacity: 0, filter: "blur(14px)", y: 48 },
-      visible: { opacity: 1, filter: "blur(0px)", y: 0, transition: { duration: 0.95, ease: [0.22, 1, 0.36, 1] } },
-    };
-const hvStaggerVariants: Variants = HV_REDUCE
-  ? { hidden: { opacity: 1 }, visible: { opacity: 1, transition: { duration: 0 } } }
-  : {
-      hidden: { opacity: 1 },
-      visible: { opacity: 1, transition: { staggerChildren: 0.14, delayChildren: 0.08 } },
-    };
-const hvItemVariants: Variants = HV_REDUCE
-  ? { hidden: { opacity: 1, filter: "blur(0px)", y: 0 }, visible: { opacity: 1, filter: "blur(0px)", y: 0, transition: { duration: 0 } } }
-  : {
-      hidden: { opacity: 0, filter: "blur(12px)", y: 36 },
-      visible: { opacity: 1, filter: "blur(0px)", y: 0, transition: { duration: 0.85, ease: [0.22, 1, 0.36, 1] } },
-    };
-const hvReveal = { initial: "hidden" as const, whileInView: "visible" as const, viewport: HV_VIEWPORT, variants: hvRevealVariants };
-const hvStagger = { initial: "hidden" as const, whileInView: "visible" as const, viewport: HV_VIEWPORT, variants: hvStaggerVariants };
+import {
+  scrollRevealCinematic as hvReveal,
+  scrollStaggerCinematic as hvStagger,
+  scrollRevealSlideLeft as hvSlideLeft,
+  scrollRevealScaleFade as hvScaleFade,
+  scrollRevealGlow as hvGlow,
+  cinematicSlideUp as hvItemVariants,
+  cinematicScaleFade as hvTierItemVariants,
+} from "@/lib/scrollAnimations";
 import BiometricScanGreen from "@/components/BiometricScanGreen";
 import { TextScramble } from "@/components/ui/text-scramble";
 import BackToHomeButton from "@/components/BackToHomeButton";
@@ -721,7 +701,7 @@ const HuellaVerde = ({ showDock = true }: HuellaVerdeProps) => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.8 }}
-        style={{ backgroundColor: "transparent", minHeight: "100vh", overflowX: "hidden", fontFamily: "'Space Grotesk', sans-serif", position: "relative", zIndex: 1, color: "#FFFFFF" }}
+        style={{ ["--reveal-glow" as never]: "rgba(34,197,94,0.35)", backgroundColor: "transparent", minHeight: "100vh", overflowX: "hidden", fontFamily: "'Space Grotesk', sans-serif", position: "relative", zIndex: 1, color: "#FFFFFF" } as React.CSSProperties}
       >
         <Dock show={showDock} />
 
@@ -870,14 +850,14 @@ const HuellaVerde = ({ showDock = true }: HuellaVerdeProps) => {
           <div aria-hidden="true" className="hv-atmos hv-atmos-scanlines" />
 
           <div style={{ position: "relative", zIndex: 1 }}>
-            <motion.h2 {...hvReveal} style={{ fontFamily: "'Michroma', sans-serif", fontSize: "clamp(16px, 2vw, 24px)", color: "#FFFFFF", textTransform: "uppercase", letterSpacing: "0.04em", marginBottom: 8, textAlign: "center" }}>
+            <motion.h2 {...hvGlow} style={{ fontFamily: "'Michroma', sans-serif", fontSize: "clamp(16px, 2vw, 24px)", color: "#FFFFFF", textTransform: "uppercase", letterSpacing: "0.04em", marginBottom: 8, textAlign: "center" }}>
               PREMIUM SERVICES
             </motion.h2>
             <motion.p {...hvReveal} style={{ fontFamily: "'Inter', sans-serif", fontSize: 14, color: "rgba(255,255,255,0.35)", margin: "0 auto 32px", textAlign: "center", maxWidth: 540 }}>
               Advanced protocols for members committed to their evolution.
             </motion.p>
 
-            <motion.div {...hvReveal}>
+            <motion.div {...hvSlideLeft}>
               <PremiumServiceAccordion />
             </motion.div>
           </div>
@@ -895,7 +875,7 @@ const HuellaVerde = ({ showDock = true }: HuellaVerdeProps) => {
 
           <motion.div {...hvStagger} className="reset-membership-grid">
             {/* CARD 1 — STARTER */}
-            <motion.div variants={hvItemVariants} className="reset-tier-card reset-tier-starter">
+            <motion.div variants={hvTierItemVariants} className="reset-tier-card reset-tier-starter">
               <span className="reset-tier-corner-bracket reset-tier-corner-tl" />
               <span className="reset-tier-corner-bracket reset-tier-corner-tr" />
               <span className="reset-tier-corner-bracket reset-tier-corner-bl" />
@@ -926,7 +906,7 @@ const HuellaVerde = ({ showDock = true }: HuellaVerdeProps) => {
             </motion.div>
 
             {/* CARD 2 — MEDIUM */}
-            <motion.div ref={mediumCardRef} variants={hvItemVariants} className="reset-tier-card reset-tier-medium">
+            <motion.div ref={mediumCardRef} variants={hvTierItemVariants} className="reset-tier-card reset-tier-medium">
               <div className="reset-tier-badge">POPULAR</div>
               <span className="reset-tier-corner-bracket reset-tier-corner-tl" />
               <span className="reset-tier-corner-bracket reset-tier-corner-tr" />
@@ -958,7 +938,7 @@ const HuellaVerde = ({ showDock = true }: HuellaVerdeProps) => {
             </motion.div>
 
             {/* CARD 3 — GOLD */}
-            <motion.div variants={hvItemVariants} className="reset-tier-card reset-tier-gold">
+            <motion.div variants={hvTierItemVariants} className="reset-tier-card reset-tier-gold">
               <span className="reset-tier-corner-bracket reset-tier-corner-tl" />
               <span className="reset-tier-corner-bracket reset-tier-corner-tr" />
               <span className="reset-tier-corner-bracket reset-tier-corner-bl" />

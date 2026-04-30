@@ -1,75 +1,117 @@
-# Membership Tiers Section — Huella Verde (Reset)
 
-Add a new informational `Membership Tiers` section at the end of the Reset page, after the Premium Services block. Three cards with distinct visual treatments: gray Starter, green-highlighted Medium (with POPULAR badge + shimmer), gold luxury Gold. No CTAs — display-only.
+# Cinematic scroll-triggered animations — site-wide
 
-## Scope
-- Edit only `src/pages/HuellaVerde.tsx`.
-- Do not modify Home, Huella Azul (Lab), Huella Roja (HackBar), or any other section of Huella Verde.
+## Important context first
 
-## Implementation
+The project **already has a full scroll-reveal system** built on Framer Motion in `src/lib/scrollAnimations.ts`:
 
-### 1. Insert JSX after the `PREMIUM SERVICES` `motion.section` (and before `<HuellaVerdeHUDFooter />`)
+- `scrollReveal`, `scrollRevealNoShift`, `scrollStagger`, `blurReveal`, `blurRevealItem`, `staggerContainer`
+- Already honors `prefers-reduced-motion` AND the `data-no-motion` test flag
+- Already tuned for mobile (≤480px) with tighter stagger + earlier viewport triggers
+- Already in use on Home, HuellaVerde (with a stronger local `hvReveal` variant), HuellaRoja, MainLanding
 
-A new `<motion.section className="reset-membership-section">` containing:
-- Header: eyebrow `[ MEMBERSHIP TIERS ]`, title `Recovery Built for Every Level`, subtitle.
-- Grid `.reset-membership-grid` with 3 `.reset-tier-card` elements:
-  - **STARTER** (`.reset-tier-starter`) — $300/mo, 4 bullets + bonus.
-  - **MEDIUM** (`.reset-tier-medium`) — $500/mo, badge `POPULAR`, 4 bullets + bonus.
-  - **GOLD** (`.reset-tier-gold`) — $1,000/mo, 5 bullets + bonus.
-- Each card has 4 HUD corner-brackets (`.reset-tier-corner-bracket` × tl/tr/bl/br), header (num + name + price block), bullet list (`◆` + label + per-item price on right), and bonus footer with `+ Online Mobility Modules`.
-- Use `scrollReveal` / `scrollStagger` (already imported) for entrance animation, consistent with rest of page.
+`src/index.css` already has the global `@media (prefers-reduced-motion: reduce)` block.
 
-Exact bullet data (per spec):
+Given this, **building a second parallel system with a vanilla `useScrollReveal` hook + `<ScrollReveal>` wrapper (as the prompt proposes) would**:
+- Duplicate logic that already works
+- Create two competing animation philosophies on the same pages
+- Fight the existing `motion.section`/`motion.div` reveals (double-fade artifacts)
+- Add bundle weight without removing Framer Motion (still needed for HuellaVerde's complex variants)
 
-```text
-STARTER  $300/mo
-  2× Infrared Sauna       $60
-  2× Adjustments          $140
-  2× Compression Boots    $60
-  2× Muscle Therapy       $70
-  + Online Mobility Modules
+So the plan is to **extend the existing system** with cinematic presets and apply them consistently, rather than introduce a parallel API.
 
-MEDIUM   $500/mo  [POPULAR]
-  4× Infrared Sauna       $120
-  4× Adjustments          $280
-  2× Compression Boots    $60
-  2× Muscle Therapy       $70
-  + Online Mobility Modules
+## What we'll do
 
-GOLD     $1,000/mo
-  Unlimited Sauna         $240+
-  4× Adjustments          $280
-  4× Compression Boots    $60
-  4× Muscle Therapy       $140
-  4× Hyperbaric Chamber   $360
-  + Online Mobility Modules
-```
+### 1. Add cinematic variant presets to `src/lib/scrollAnimations.ts`
 
-### 2. Append CSS to the existing `<style>{`...`}</style>` block in HuellaVerde.tsx
+Add new exported variants alongside the existing ones (no breaking changes):
 
-To keep the change page-scoped (matching the existing pattern where all Reset CSS lives inside the page), append the membership styles to the same inline `<style>` already in the file, instead of touching `index.css`.
+- `cinematicSlideUp` — `y: 60`, `scale: 0.96`, `blur(6px)` → settled, 800ms, `cubic-bezier(0.22,1,0.36,1)`
+- `cinematicSlideLeft` — `x: -60`, `scale: 0.96`, `blur(6px)` → for accordions / lists
+- `cinematicSlideRight` — `x: 60`, `scale: 0.96`, `blur(6px)` → for paired image/text rows
+- `cinematicScaleFade` — `scale: 0.92`, `blur(8px)` → for pricing cards
+- `cinematicGlowFade` — `y: 20`, `scale: 0.98`, `blur(4px)` + temporary `drop-shadow` glow on enter, color via CSS var `--reveal-glow` (defaults transparent; pages set per-pillar: blue / green / red)
+- `cinematicStaggerContainer` — same as `staggerContainer` but with capped delay (≤600ms total, 100ms step)
+- Matching `*Props` helpers (e.g. `scrollRevealCinematic`, `scrollRevealSlideLeft`, etc.) returning the `{ initial, whileInView, viewport, variants }` bundle so usage matches the existing pattern.
 
-CSS additions (summary):
-- `.reset-membership-section` — `#050a05` bg, padding `100px 6%`, radial green glow `::before`.
-- `.reset-membership-header` + eyebrow (Orbitron green), title (Michroma 48px), subtitle (Inter).
-- `.reset-membership-grid` — `grid-template-columns: 1fr 1fr 1fr`, gap 24, max-width 1280, `align-items: stretch`.
-- `.reset-tier-card` base — radius 16, padding `36 28 32`, flex column gap 24, transition for hover lift.
-- `.reset-tier-corner-bracket` (tl/tr/bl/br) — 16×16 absolute, `currentColor` borders.
-- `.reset-tier-header` with bottom border, `.reset-tier-name-block`, `.reset-tier-num` (Orbitron 11px), `.reset-tier-name` (Michroma 18px), `.reset-tier-price-block`, `.reset-tier-price` (Orbitron 36px bold), `.reset-tier-price-suffix`.
-- `.reset-tier-bullets` list (no markers), `.reset-tier-bullet` (justify-between, baseline, padding-left 18, `::before` `◆`), `.reset-tier-bullet-text`, `.reset-tier-bullet-price` (Orbitron 12).
-- `.reset-tier-bonus` with dashed top border, `.reset-tier-bonus-icon`, `.reset-tier-bonus-text`.
-- `.reset-tier-badge` — green `#4ade80` on dark green text `#052e16`, top-right of card.
-- Variant: `.reset-tier-starter` — neutral gray gradient + border, hover lift.
-- Variant: `.reset-tier-medium` — green gradient + `#4ade80` border, glow box-shadow, `transform: scale(1.03)`, animated shimmer via `::before` + `@keyframes medium-shimmer`.
-- Variant: `.reset-tier-gold` — gold gradient + `rgba(212,175,55,0.7)` border, `#fbbf24` accents.
-- Responsive:
-  - Tablet `768–1023px`: grid 2 cols, Medium scale reset to 1, Gold spans 2 cols centered max-width 600.
-  - Mobile `<768px`: stack, section padding `70px 5%`, title 32, Medium `order: -1`, all hover transforms disabled.
+All variants collapse to the existing `STATIC_VARIANT` when `REDUCE` is true — accessibility preserved automatically.
 
-### 3. Verification
-- Run typecheck.
-- Confirm no other files are touched (Home, Lab, HackBar, index.css, index.html unchanged).
-- Visually verify section renders below Premium Services and above the HUD footer.
+### 2. Apply variants page-by-page (replace, don't duplicate)
 
-## Files changed
-- `src/pages/HuellaVerde.tsx` (JSX insert + appended CSS in existing `<style>` block)
+For each page, the existing `motion.*` elements get their `{...scrollReveal}` swapped to the appropriate cinematic preset. No new wrapper components, no DOM changes, no layout shift risk.
+
+**Home (`src/pages/Home.tsx`)**
+- Hero: leave as-is (above the fold, no reveal).
+- "BUILT FOR HUMAN EVOLUTION" title → `scrollRevealCinematic` (slide-up).
+- About feature cards (desktop + mobile stacks) → keep `scrollStagger` container, swap item variant to `cinematicSlideUp` (FeatureCard already uses `blurRevealItem`; we'll point it at the new item variant via the existing prop pattern).
+- "Programs" grid → `cinematicStaggerContainer` + `cinematicSlideUp` items.
+- Pricing cards section → `cinematicScaleFade` per card with 100ms stagger.
+
+**HuellaVerde (`src/pages/HuellaVerde.tsx`)** — `--reveal-glow: rgba(34,197,94,0.35)`
+- Replace local `hvReveal` / `hvStagger` / `hvItemVariants` with the shared cinematic versions to unify behavior across pages (keep the strength the user already approved — that's now the baseline).
+- Recovery Arsenal grid → `cinematicStaggerContainer` + `cinematicSlideUp` (6 items, 100ms step, capped 500ms).
+- Premium Services accordions → `cinematicSlideLeft` with 120ms stagger.
+- Membership Tiers cards → `cinematicScaleFade` with 150ms stagger; section title uses `cinematicGlowFade` (1 glow per page, as recommended).
+- Background bridge divs untouched.
+
+**HuellaRoja (`src/pages/HuellaRoja.tsx`)** — `--reveal-glow: rgba(255,59,59,0.4)`
+- Section titles → `cinematicSlideUp` (one `cinematicGlowFade` for the main "About Blueprint HackBar" heading).
+- About HackBar paired row: vertical 4:5 image → `cinematicSlideLeft`; text column → `cinematicSlideRight` (delay 100ms).
+- Nutrition services grid → `cinematicStaggerContainer` + `cinematicSlideUp`.
+- Existing `scrollRevealNoShift` wrappers around scan/HUD blocks are kept (translate would cause SVG-filter flicker — that's intentional).
+
+**HuellaAzul (`src/pages/HuellaAzul.tsx`)** — `--reveal-glow: rgba(26,107,255,0.4)`
+- Page is currently a 50-line stub with only a hero placeholder. No real sections to animate yet. Add the page-level glow CSS variable so future sections inherit the blue identity automatically. No further changes until real content lands.
+
+**MainLanding (`src/pages/MainLanding.tsx`)**
+- Two existing `scrollRevealNoShift` wrappers stay as-is (they wrap components with their own internal motion). No regressions.
+
+### 3. Footer
+- Wrap `Footer` content top-level in `cinematicSlideUp` (600ms, no stagger) — matches the prompt's spec.
+
+### 4. What we explicitly will NOT do
+
+- **Not** create `hooks/useScrollReveal.ts` or `components/ScrollReveal.tsx` — would duplicate the existing system.
+- **Not** add the global `@media (prefers-reduced-motion)` CSS block — already present in `src/index.css` (line 324 and 592).
+- **Not** animate heroes, the floating dock, the logo, or the home video.
+- **Not** use `triggerOnce: false` (existing viewport config already uses `once: true`).
+- **Not** exceed 1000ms duration or 600ms total stagger (caps enforced in the new presets).
+
+## Technical details
+
+- All new variants live in `src/lib/scrollAnimations.ts` as named exports — tree-shakeable, no runtime cost for unused ones.
+- Glow effect uses `filter: drop-shadow(0 0 24px var(--reveal-glow, transparent))` animated to `drop-shadow(... transparent)` after settle, so by default (no var set) it's a no-op — safe to leave on any element.
+- Per-page identity color set once on the page-root wrapper:
+  ```css
+  .huella-verde-root { --reveal-glow: rgba(34,197,94,0.35); }
+  .huella-roja-root  { --reveal-glow: rgba(255,59,59,0.40); }
+  .huella-azul-root  { --reveal-glow: rgba(26,107,255,0.40); }
+  ```
+- Easing: `cubic-bezier(0.22, 1, 0.36, 1)` (out-quint) — matches existing convention.
+- Mobile tuning reuses the existing `SMALL` flag (≤480px) — cinematic variants get `y: 40` / `x: 40` and 700ms duration on small screens to avoid feeling laggy.
+- No new dependencies. Framer Motion is already in the bundle.
+
+## Files touched
+
+- `src/lib/scrollAnimations.ts` — add cinematic variants + helper props
+- `src/pages/Home.tsx` — swap to cinematic presets
+- `src/pages/HuellaVerde.tsx` — replace local `hvReveal*` with shared cinematic, set `--reveal-glow`
+- `src/pages/HuellaRoja.tsx` — apply slide-left/right pairs + cinematic presets, set `--reveal-glow`
+- `src/pages/HuellaAzul.tsx` — set `--reveal-glow` only
+- `src/components/Footer.tsx` — wrap in cinematic slide-up
+- `src/components/FeatureCard.tsx` — point item variant at the new `cinematicSlideUp` (single-line change)
+
+No new files. No removed files.
+
+## Verification checklist (post-implementation)
+
+1. Scroll Home / Reset / HackBar — sections fade in with slight upward + scale + blur settle, never abrupt.
+2. Recovery Arsenal grid cascades 6 cards within 600ms.
+3. Premium Services accordions enter from the left, 120ms apart.
+4. Pricing tiers pop in with scale-fade.
+5. Heroes are visible immediately, no entrance animation.
+6. About HackBar image and text enter from opposite sides as a pair.
+7. OS "Reduce Motion" → all reveals collapse to static (existing guard).
+8. `?nomotion=1` URL flag → same static behavior (existing test hook).
+9. No layout shift / CLS regression — transforms only, no height changes.
+10. No double-fade or competing animations on any element.

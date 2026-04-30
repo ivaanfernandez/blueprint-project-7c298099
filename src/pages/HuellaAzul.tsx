@@ -8,7 +8,7 @@ const HuellaAzul = () => (
       canonical="https://blueprintproject.com/huella-azul"
     />
     <style>{`
-      .lab-hero-wrapper { width: 100%; padding: 0 16px; background: #050610; min-height: 100vh; }
+      .lab-hero-wrapper { --reveal-glow: rgba(26,107,255,0.4); width: 100%; padding: 0 16px; background: #050610; min-height: 100vh; }
       .lab-hero {
         min-height: 100vh;
         border-radius: 24px;
