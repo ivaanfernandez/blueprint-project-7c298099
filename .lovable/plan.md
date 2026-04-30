@@ -1,99 +1,75 @@
-# Floating Card Heroes — Home, Lab, HackBar
+# Membership Tiers Section — Huella Verde (Reset)
 
-Reset (Huella Verde) is already converted and will not be touched. This plan covers the 3 remaining heroes and flags two issues found while exploring.
+Add a new informational `Membership Tiers` section at the end of the Reset page, after the Premium Services block. Three cards with distinct visual treatments: gray Starter, green-highlighted Medium (with POPULAR badge + shimmer), gold luxury Gold. No CTAs — display-only.
 
-## Issues to confirm before building
+## Scope
+- Edit only `src/pages/HuellaVerde.tsx`.
+- Do not modify Home, Huella Azul (Lab), Huella Roja (HackBar), or any other section of Huella Verde.
 
-### 1. Lab (Huella Azul) is currently a placeholder
-`src/pages/HuellaAzul.tsx` is 14 lines and renders only a centered `HUELLA AZUL` text on black — there is no real hero (no video, no title block, no dock, no background image). Wrapping it in `.lab-hero-wrapper` with a blue glow border will produce a thin blue-bordered black box around centered text, which will look broken rather than premium.
+## Implementation
 
-**Recommendation:** still apply the wrapper so the styling is in place for when the real hero ships, but you should know the visual result on this page will be minimal until the real Lab hero is built.
+### 1. Insert JSX after the `PREMIUM SERVICES` `motion.section` (and before `<HuellaVerdeHUDFooter />`)
 
-### 2. Home hero overlaps with the white section below it
-The hero (`Home.tsx` line 271) is immediately followed by `.home-white-section` (line 430) which uses `marginTop: -24px` (mobile) / `-32px` (desktop) plus rounded top corners to emerge over the hero's black bottom. If we add 16px lateral padding + 24px border-radius to the hero, the white section will still be full-bleed and 16px wider than the hero card on each side, breaking the "card emerges from card" illusion at the seam.
+A new `<motion.section className="reset-membership-section">` containing:
+- Header: eyebrow `[ MEMBERSHIP TIERS ]`, title `Recovery Built for Every Level`, subtitle.
+- Grid `.reset-membership-grid` with 3 `.reset-tier-card` elements:
+  - **STARTER** (`.reset-tier-starter`) — $300/mo, 4 bullets + bonus.
+  - **MEDIUM** (`.reset-tier-medium`) — $500/mo, badge `POPULAR`, 4 bullets + bonus.
+  - **GOLD** (`.reset-tier-gold`) — $1,000/mo, 5 bullets + bonus.
+- Each card has 4 HUD corner-brackets (`.reset-tier-corner-bracket` × tl/tr/bl/br), header (num + name + price block), bullet list (`◆` + label + per-item price on right), and bonus footer with `+ Online Mobility Modules`.
+- Use `scrollReveal` / `scrollStagger` (already imported) for entrance animation, consistent with rest of page.
 
-**Two options:**
-- **A (recommended):** also constrain `.home-white-section` to the same wrapper width (`padding: 0 16px / 12px / 8px` on a parent, or apply matching side padding) so both cards share the same edge. Keep the negative margin so the overlap effect is preserved.
-- **B:** drop the negative-margin overlap on Home only and let the floating hero card sit cleanly above a full-bleed white section with a hard seam.
+Exact bullet data (per spec):
 
-I will assume **Option A** unless you say otherwise.
+```text
+STARTER  $300/mo
+  2× Infrared Sauna       $60
+  2× Adjustments          $140
+  2× Compression Boots    $60
+  2× Muscle Therapy       $70
+  + Online Mobility Modules
 
-## Changes
+MEDIUM   $500/mo  [POPULAR]
+  4× Infrared Sauna       $120
+  4× Adjustments          $280
+  2× Compression Boots    $60
+  2× Muscle Therapy       $70
+  + Online Mobility Modules
 
-### `src/pages/Home.tsx`
-- Wrap the hero `<div>` (lines 271–425) in `<div className="home-hero-wrapper">`, and add `className="home-hero"` to the hero div itself (keeping all existing inline styles, video, overlays, title, fade, GradualBlur untouched).
-- The fixed dock (lines 245–266) sits outside the hero `<div>` and uses `position: fixed` — it stays untouched and will continue to float over the card correctly.
-- To preserve the white-section emergence (Option A above), wrap `.home-white-section` (line 430) in a sibling `<div className="home-white-wrapper">` that mirrors the hero's lateral padding so the white card aligns with the hero card edges. The negative margin and rounded top corners stay.
-- Append CSS to the page's existing `<style>` block:
-
-```css
-.home-hero-wrapper { width: 100%; padding: 0 16px; background: #0a0a0a; }
-.home-hero { border-radius: 24px; overflow: hidden; border: 0.5px solid rgba(255,255,255,0.15); position: relative; }
-.home-hero::after { content:''; position:absolute; inset:0; border-radius:24px; pointer-events:none;
-  box-shadow: 0 0 40px rgba(255,255,255,0.04) inset; z-index:1; }
-.home-white-wrapper { width: 100%; padding: 0 16px; background: #0a0a0a; }
-@media (max-width:1023px) and (min-width:768px) {
-  .home-hero-wrapper, .home-white-wrapper { padding: 0 12px; }
-  .home-hero { border-radius: 20px; }
-}
-@media (max-width:767px) {
-  .home-hero-wrapper, .home-white-wrapper { padding: 0 8px; }
-  .home-hero { border-radius: 16px; }
-}
+GOLD     $1,000/mo
+  Unlimited Sauna         $240+
+  4× Adjustments          $280
+  4× Compression Boots    $60
+  4× Muscle Therapy       $140
+  4× Hyperbaric Chamber   $360
+  + Online Mobility Modules
 ```
 
-### `src/pages/HuellaRoja.tsx`
-HackBar has **two hero sections** — mobile (`.flex md:hidden`, line 455) and desktop (`.hr-hero hidden md:flex`, line 491). Both need to be wrapped so the floating-card effect applies on every viewport.
+### 2. Append CSS to the existing `<style>{`...`}</style>` block in HuellaVerde.tsx
 
-- Wrap both hero `<section>` elements in a shared `<div className="hackbar-hero-wrapper">…</div>` (one wrapper that contains both, since only one is visible at a time per breakpoint). Add `className="hackbar-hero"` to each section (preserving existing classes: `hr-hero hidden md:flex hackbar-hero` and `flex md:hidden hackbar-hero`).
-- The dock (line 440) is `position: fixed` and stays outside — untouched.
-- The "About Blueprint HackBar" section (line 546) is **not** touched; its white background and the dramatic transition from the black hero card to the white About section is preserved as intentional.
-- Append CSS to the page's existing `<style>` block:
+To keep the change page-scoped (matching the existing pattern where all Reset CSS lives inside the page), append the membership styles to the same inline `<style>` already in the file, instead of touching `index.css`.
 
-```css
-.hackbar-hero-wrapper { width: 100%; padding: 0 16px; background: #0a0405; }
-.hackbar-hero { border-radius: 24px; overflow: hidden; border: 0.5px solid rgba(255,59,59,0.3); position: relative; }
-.hackbar-hero::after { content:''; position:absolute; inset:0; border-radius:24px; pointer-events:none;
-  box-shadow: 0 0 40px rgba(255,59,59,0.08) inset; z-index:1; }
-@media (max-width:1023px) and (min-width:768px) {
-  .hackbar-hero-wrapper { padding: 0 12px; }
-  .hackbar-hero { border-radius: 20px; }
-}
-@media (max-width:767px) {
-  .hackbar-hero-wrapper { padding: 0 8px; }
-  .hackbar-hero { border-radius: 16px; }
-}
-```
+CSS additions (summary):
+- `.reset-membership-section` — `#050a05` bg, padding `100px 6%`, radial green glow `::before`.
+- `.reset-membership-header` + eyebrow (Orbitron green), title (Michroma 48px), subtitle (Inter).
+- `.reset-membership-grid` — `grid-template-columns: 1fr 1fr 1fr`, gap 24, max-width 1280, `align-items: stretch`.
+- `.reset-tier-card` base — radius 16, padding `36 28 32`, flex column gap 24, transition for hover lift.
+- `.reset-tier-corner-bracket` (tl/tr/bl/br) — 16×16 absolute, `currentColor` borders.
+- `.reset-tier-header` with bottom border, `.reset-tier-name-block`, `.reset-tier-num` (Orbitron 11px), `.reset-tier-name` (Michroma 18px), `.reset-tier-price-block`, `.reset-tier-price` (Orbitron 36px bold), `.reset-tier-price-suffix`.
+- `.reset-tier-bullets` list (no markers), `.reset-tier-bullet` (justify-between, baseline, padding-left 18, `::before` `◆`), `.reset-tier-bullet-text`, `.reset-tier-bullet-price` (Orbitron 12).
+- `.reset-tier-bonus` with dashed top border, `.reset-tier-bonus-icon`, `.reset-tier-bonus-text`.
+- `.reset-tier-badge` — green `#4ade80` on dark green text `#052e16`, top-right of card.
+- Variant: `.reset-tier-starter` — neutral gray gradient + border, hover lift.
+- Variant: `.reset-tier-medium` — green gradient + `#4ade80` border, glow box-shadow, `transform: scale(1.03)`, animated shimmer via `::before` + `@keyframes medium-shimmer`.
+- Variant: `.reset-tier-gold` — gold gradient + `rgba(212,175,55,0.7)` border, `#fbbf24` accents.
+- Responsive:
+  - Tablet `768–1023px`: grid 2 cols, Medium scale reset to 1, Gold spans 2 cols centered max-width 600.
+  - Mobile `<768px`: stack, section padding `70px 5%`, title 32, Medium `order: -1`, all hover transforms disabled.
 
-### `src/pages/HuellaAzul.tsx`
-Currently a 14-line placeholder. Will wrap the existing `<div>` in `<div className="lab-hero-wrapper"><section className="lab-hero">…</section></div>` and add a small inline `<style>` block scoped to the page:
+### 3. Verification
+- Run typecheck.
+- Confirm no other files are touched (Home, Lab, HackBar, index.css, index.html unchanged).
+- Visually verify section renders below Premium Services and above the HUD footer.
 
-```css
-.lab-hero-wrapper { width: 100%; padding: 0 16px; background: #050610; min-height: 100vh; }
-.lab-hero { min-height: 100vh; border-radius: 24px; overflow: hidden;
-  border: 0.5px solid rgba(26,107,255,0.3); position: relative; background: #000; }
-.lab-hero::after { content:''; position:absolute; inset:0; border-radius:24px; pointer-events:none;
-  box-shadow: 0 0 40px rgba(26,107,255,0.08) inset; z-index:1; }
-@media (max-width:1023px) and (min-width:768px) {
-  .lab-hero-wrapper { padding: 0 12px; }
-  .lab-hero { border-radius: 20px; }
-}
-@media (max-width:767px) {
-  .lab-hero-wrapper { padding: 0 8px; }
-  .lab-hero { border-radius: 16px; }
-}
-```
-
-(See Issue #1 — visual will be a thin blue-bordered card with centered text until the real Lab hero is built.)
-
-### Reset (Huella Verde)
-Already converted. Verified the wrapper `.reset-hero-wrapper` and `.reset-hero` styles are in place with the green border `rgba(74,222,128,0.3)`. **No changes.**
-
-## Out of scope / not touched
-
-- Hero internal content (videos, images, titles, animations, dock icons, GradualBlur, fingerprint cards, HUD elements).
-- Hero heights (`100vh` preserved everywhere).
-- Fixed dock positioning on any page.
-- HackBar About section, RecoveryRoom, white sections content, footers.
-- Reset page.
-- Other components or shared CSS files (`src/index.css`).
+## Files changed
+- `src/pages/HuellaVerde.tsx` (JSX insert + appended CSS in existing `<style>` block)
