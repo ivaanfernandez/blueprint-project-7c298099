@@ -754,59 +754,77 @@ const HuellaVerde = ({ showDock = true }: HuellaVerdeProps) => {
         <motion.section
           {...scrollReveal}
           className="recovery-arsenal-section"
-          style={{ background: "transparent", padding: "72px 7% 0", position: "relative", zIndex: 1, overflow: "hidden" }}
+          style={{ background: "#0a1f0a", padding: "96px 7% 120px", position: "relative", zIndex: 1, overflow: "hidden", isolation: "isolate" }}
         >
-          {/* Atmospheric overlays — match Premium Services ambient bg */}
-          <div aria-hidden="true" style={{ position: "absolute", top: 0, left: "50%", transform: "translateX(-50%)", width: "80%", height: 400, background: "radial-gradient(ellipse at center top, rgba(34,197,94,0.15) 0%, transparent 70%)", pointerEvents: "none", zIndex: 0 }} />
-          <div aria-hidden="true" className="recovery-arsenal-scanlines" style={{ position: "absolute", inset: 0, background: "repeating-linear-gradient(0deg, transparent 0px, transparent 2px, rgba(74,222,128,0.02) 2px, rgba(74,222,128,0.02) 3px)", pointerEvents: "none", zIndex: 0 }} />
+          {/* Layer 1: Radial glow superior verde */}
+          <div aria-hidden="true" style={{ position: "absolute", top: 0, left: "50%", transform: "translateX(-50%)", width: "90%", height: 500, background: "radial-gradient(ellipse at center top, rgba(34,197,94,0.25) 0%, rgba(34,197,94,0.08) 40%, transparent 75%)", pointerEvents: "none", zIndex: 0 }} />
+          {/* Layer 2: Grid pattern HUD */}
+          <div aria-hidden="true" className="hv-grid-pattern" style={{ position: "absolute", inset: 0, backgroundImage: "linear-gradient(rgba(74,222,128,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(74,222,128,0.04) 1px, transparent 1px)", backgroundSize: "40px 40px", pointerEvents: "none", zIndex: 0 }} />
+          {/* Layer 3: Scan lines */}
+          <div aria-hidden="true" className="recovery-arsenal-scanlines" style={{ position: "absolute", inset: 0, background: "repeating-linear-gradient(0deg, transparent 0px, transparent 2px, rgba(74,222,128,0.025) 2px, rgba(74,222,128,0.025) 3px)", pointerEvents: "none", zIndex: 0 }} />
+          {/* Layer 4: Vignette inferior */}
+          <div aria-hidden="true" style={{ position: "absolute", bottom: 0, left: 0, right: 0, height: 200, background: "linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.15) 100%)", pointerEvents: "none", zIndex: 0 }} />
 
-          <motion.h2 {...scrollReveal} style={{ fontFamily: "'Michroma', sans-serif", fontSize: "clamp(28px, 5vw, 42px)", fontWeight: 400, color: "#FFFFFF", textTransform: "uppercase", letterSpacing: "0.05em", margin: "0 0 12px 0", textAlign: "center", textShadow: "0 0 20px rgba(34,197,94,0.3)", position: "relative", zIndex: 1 }}>
-            RECOVERY ROOM
-          </motion.h2>
-          <motion.p {...scrollReveal} style={{ fontFamily: "'Inter', sans-serif", fontSize: 14, color: "rgba(255,255,255,0.45)", textAlign: "center", margin: "0 auto 40px", maxWidth: 600, position: "relative", zIndex: 1 }}>
-            Your Reset zone. Available exclusively for Blueprint Lab members.
-          </motion.p>
+          <div style={{ position: "relative", zIndex: 1 }}>
+            <motion.h2 {...scrollReveal} style={{ fontFamily: "'Michroma', sans-serif", fontSize: "clamp(28px, 5vw, 42px)", fontWeight: 400, color: "#FFFFFF", textTransform: "uppercase", letterSpacing: "0.05em", margin: "0 0 12px 0", textAlign: "center", textShadow: "0 0 20px rgba(34,197,94,0.3)" }}>
+              RECOVERY ROOM
+            </motion.h2>
+            <motion.p {...scrollReveal} style={{ fontFamily: "'Inter', sans-serif", fontSize: 14, color: "rgba(255,255,255,0.45)", textAlign: "center", margin: "0 auto 40px", maxWidth: 600 }}>
+              Your Reset zone. Available exclusively for Blueprint Lab members.
+            </motion.p>
 
-          {/* Grid 6 tiles — responsive */}
-          <motion.div {...scrollStagger} className="recovery-arsenal-grid" style={{ position: "relative", zIndex: 1 }}>
-            {RECOVERY_CARDS.map((card, i) => (
-              <motion.div
-                variants={blurRevealItem}
-                key={card.name}
-                className={`recovery-tile${i === 0 ? " recovery-tile-hero" : ""}`}
-              >
-                <img
-                  src={card.img}
-                  srcSet={(card as { srcSet?: string }).srcSet}
-                  sizes={(card as { sizes?: string }).sizes}
-                  alt={card.name}
-                  loading="lazy"
-                  decoding="async"
-                />
-                {/* Scan line */}
-                <div style={{ position: "absolute", left: 0, right: 0, height: 1, background: "linear-gradient(to right, transparent, rgba(34,197,94,0.4), transparent)", animation: `hvScanLine 5s ease-in-out ${scanDelays[i]}s infinite`, zIndex: 2, pointerEvents: "none" }} />
-                <h3 className="recovery-tile-label">{card.name}</h3>
-              </motion.div>
-            ))}
-          </motion.div>
+            {/* Grid 6 tiles — responsive */}
+            <motion.div {...scrollStagger} className="recovery-arsenal-grid">
+              {RECOVERY_CARDS.map((card, i) => (
+                <motion.div
+                  variants={blurRevealItem}
+                  key={card.name}
+                  className={`recovery-tile${i === 0 ? " recovery-tile-hero" : ""}`}
+                >
+                  <img
+                    src={card.img}
+                    srcSet={(card as { srcSet?: string }).srcSet}
+                    sizes={(card as { sizes?: string }).sizes}
+                    alt={card.name}
+                    loading="lazy"
+                    decoding="async"
+                  />
+                  {/* Scan line */}
+                  <div style={{ position: "absolute", left: 0, right: 0, height: 1, background: "linear-gradient(to right, transparent, rgba(34,197,94,0.4), transparent)", animation: `hvScanLine 5s ease-in-out ${scanDelays[i]}s infinite`, zIndex: 2, pointerEvents: "none" }} />
+                  <h3 className="recovery-tile-label">{card.name}</h3>
+                </motion.div>
+              ))}
+            </motion.div>
+          </div>
         </motion.section>
 
         {/* ── PREMIUM SERVICES ── */}
         <motion.section
           {...scrollReveal}
-          className="hv-servicios"
-          style={{ background: "transparent", padding: "0 7% 72px", position: "relative", zIndex: 1 }}
+          className="premium-services-section hv-servicios"
+          style={{ background: "#0a1f0a", padding: "120px 7% 96px", position: "relative", zIndex: 1, overflow: "hidden", isolation: "isolate" }}
         >
-          <motion.h2 {...scrollReveal} style={{ fontFamily: "'Michroma', sans-serif", fontSize: "clamp(16px, 2vw, 24px)", color: "#FFFFFF", textTransform: "uppercase", letterSpacing: "0.04em", marginBottom: 8, textAlign: "center" }}>
-            PREMIUM SERVICES
-          </motion.h2>
-          <motion.p {...scrollReveal} style={{ fontFamily: "'Inter', sans-serif", fontSize: 14, color: "rgba(255,255,255,0.35)", margin: "0 auto 32px", textAlign: "center", maxWidth: 540 }}>
-            Advanced protocols for members committed to their evolution.
-          </motion.p>
+          {/* Layer 1: Vignette superior */}
+          <div aria-hidden="true" style={{ position: "absolute", top: 0, left: 0, right: 0, height: 200, background: "linear-gradient(to top, transparent 0%, rgba(0,0,0,0.15) 100%)", pointerEvents: "none", zIndex: 0 }} />
+          {/* Layer 2: Radial glow detrás del título */}
+          <div aria-hidden="true" style={{ position: "absolute", top: 60, left: "50%", transform: "translateX(-50%)", width: "70%", height: 300, background: "radial-gradient(ellipse at center, rgba(34,197,94,0.20) 0%, transparent 70%)", pointerEvents: "none", zIndex: 0 }} />
+          {/* Layer 3: Grid pattern HUD */}
+          <div aria-hidden="true" className="hv-grid-pattern" style={{ position: "absolute", inset: 0, backgroundImage: "linear-gradient(rgba(74,222,128,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(74,222,128,0.04) 1px, transparent 1px)", backgroundSize: "40px 40px", pointerEvents: "none", zIndex: 0 }} />
+          {/* Layer 4: Scan lines */}
+          <div aria-hidden="true" style={{ position: "absolute", inset: 0, background: "repeating-linear-gradient(0deg, transparent 0px, transparent 2px, rgba(74,222,128,0.025) 2px, rgba(74,222,128,0.025) 3px)", pointerEvents: "none", zIndex: 0 }} />
 
-          <motion.div {...scrollReveal}>
-            <PremiumServiceAccordion />
-          </motion.div>
+          <div style={{ position: "relative", zIndex: 1 }}>
+            <motion.h2 {...scrollReveal} style={{ fontFamily: "'Michroma', sans-serif", fontSize: "clamp(16px, 2vw, 24px)", color: "#FFFFFF", textTransform: "uppercase", letterSpacing: "0.04em", marginBottom: 8, textAlign: "center" }}>
+              PREMIUM SERVICES
+            </motion.h2>
+            <motion.p {...scrollReveal} style={{ fontFamily: "'Inter', sans-serif", fontSize: 14, color: "rgba(255,255,255,0.35)", margin: "0 auto 32px", textAlign: "center", maxWidth: 540 }}>
+              Advanced protocols for members committed to their evolution.
+            </motion.p>
+
+            <motion.div {...scrollReveal}>
+              <PremiumServiceAccordion />
+            </motion.div>
+          </div>
         </motion.section>
 
         {/* ── MEMBERSHIP TIERS ── */}
