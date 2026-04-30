@@ -216,7 +216,7 @@ const BiometricScan = ({ onComplete }: BiometricScanProps) => {
                 height: "2px",
                 backgroundColor: "#1A6BFF",
                 opacity: 0.9,
-                animation: "bs-scan-line 2s linear",
+                animation: "bs-scan-line 2s linear infinite, bs-scan-breathe 1s ease-in-out infinite",
                 boxShadow: "0 0 8px #1A6BFF",
               }}
             />
