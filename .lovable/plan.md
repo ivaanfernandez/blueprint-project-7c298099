@@ -1,60 +1,69 @@
-## Huella Verde — 3 changes
+## Reset (Huella Verde) Hero — Convert to Floating Card
 
-Scope: only `src/pages/HuellaVerde.tsx` and `src/components/PremiumServiceAccordion.tsx` (used exclusively by Huella Verde). Home, Huella Azul and Huella Roja are not touched.
+Scope: only `src/pages/HuellaVerde.tsx`. No other pages touched.
 
-### 1. Recovery grid: 4 tiles → 6 tiles with responsive layout
+### Context found
 
-In `src/pages/HuellaVerde.tsx`:
+- The hero is the `<section>` at line 299 of `HuellaVerde.tsx`. It currently uses inline styles (`minHeight: 100vh`, full-bleed, `overflow: hidden`), with a `<picture>` background, two radial overlays, the `RESET` title, and a bottom green accent line + `GradualBlur`.
+- The page sits on top of a fixed `.verde-animated-bg` layer (procedural background). The page wrapper (`motion.div` at line 294) uses `backgroundColor: "transparent"`.
+- The RECOVERY ROOM section right after the hero already has `background: "transparent"`, so the procedural bg shows through. There is no solid color clash — but the spec asks the wrapper around the hero to use `#050a05` so the side gutters look continuous with the section below.
 
-- Update the `RECOVERY_CARDS` array to 6 entries, in fixed order:
-  1. INFRARED SAUNA — keep `infraredSaunaImg` (responsive variants preserved)
-  2. ICE BATH THERAPY — keep current Unsplash image
-  3. MOBILITY & BREATHING — keep current Unsplash image
-  4. ADJUSTMENTS & MUSCLE REHAB — reuse the current Massages Unsplash image, only update `name` and `alt`
-  5. HYPERBARIC CHAMBER — `/hyperbaric-chamber.jpg` (image not yet uploaded; will 404 until user uploads it)
-  6. COMPRESSION BOOTS — `/compression-boots.jpg` (image not yet uploaded)
-- Extend `scanDelays` to 6 staggered values.
-- Replace the existing `recovery-grid` markup (currently a 2×2 inline grid) with the new `recovery-arsenal-grid` structure. Tile 1 (Infrared Sauna) gets an extra `recovery-tile-hero` class so mobile can promote it to a full-width hero row.
-- Preserve existing scroll-stagger / blur-reveal motion wrappers and the scan-line decorative element.
+### Change 1 — Wrap hero in a floating card
 
-### 2. CSS for the 6-tile grid
+In `HuellaVerde.tsx`:
 
-In `src/pages/HuellaVerde.tsx` (inside the existing inline `<style>` block, where `.recovery-grid` already lives) or appended to `src/index.css` — using the inline block keeps it scoped with the rest of Huella Verde styles.
+1. Add a `className="reset-hero"` to the existing hero `<section>` (keep all current inline styles and inner content untouched — picture, overlays, title, accent line, GradualBlur all stay identical).
+2. Wrap that `<section>` in a new `<div className="reset-hero-wrapper">…</div>`. No other JSX changes.
 
-Add the rules per the spec:
-- Base: `.recovery-arsenal-grid` (12px gap, max 1400px), `.recovery-tile` (1px green border, glow, 4/3 aspect, hover lift on desktop), `.recovery-tile img` (cover + zoom on hover), gradient overlay via `::before`, `.recovery-tile-label` (Michroma, white, bottom-left).
-- Desktop (≥1024px): `grid-template-columns: 1fr 1fr 1fr`, 2 rows, hero tile behaves like the rest.
-- Tablet (768–1023px): 2 columns × 3 rows.
-- Mobile (<768px): hero tile spans both columns at the top (200px tall), the other 5 tiles flow as 1:1 squares in 2 columns; smaller label font on non-hero tiles.
+### Change 2 — Add CSS inside the existing inline `<style>` block
 
-### 3. Global rename: "Massages & Bodywork" → "Adjustments & Muscle Rehab"
+Append the floating-card rules to the existing `<style>{`…`}</style>` block in `HuellaVerde.tsx` (keeps styles scoped to this page, matches the current pattern):
 
-A repo-wide grep already confirms the only occurrences are inside the recovery grid array (and a CSS comment line `Card 4 — Massages: bottom-right square` in `src/index.css`, which becomes obsolete). The original Unsplash URL is reused under the new label. No file renames are needed.
+```css
+/* ── RESET HERO FLOATING CARD ── */
+.reset-hero-wrapper {
+  width: 100%;
+  padding: 0 16px;
+  background: #050a05;
+}
+.reset-hero {
+  border-radius: 24px;
+  overflow: hidden; /* already inline; reinforced here */
+  border: 0.5px solid rgba(74, 222, 128, 0.3);
+  position: relative;
+}
+.reset-hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 24px;
+  pointer-events: none;
+  box-shadow: 0 0 40px rgba(74, 222, 128, 0.08) inset;
+  z-index: 1;
+}
+@media (max-width: 1023px) and (min-width: 768px) {
+  .reset-hero-wrapper { padding: 0 12px; }
+  .reset-hero { border-radius: 20px; }
+}
+@media (max-width: 767px) {
+  .reset-hero-wrapper { padding: 0 8px; }
+  .reset-hero { border-radius: 16px; }
+}
+```
 
-I will also update the obsolete CSS comment in `src/index.css` so the codebase stays clean (cosmetic only, no rule changes).
+Note: the hero's existing inline `minHeight: 100vh` + `overflow: hidden` are preserved, so video/picture clipping respects the rounded corners. The `position: relative` already exists inline.
 
-### 4. Premium Services card 03
+### Change 3 — RECOVERY ROOM background continuity
 
-In `src/components/PremiumServiceAccordion.tsx`, update the third entry of `SERVICES`:
-
-- `title`: `"CORPORATE RECOVERY PROGRAMS"` → `"RECOVERY PROGRAMS"`
-- `description`: → `"Structured recovery protocols built to optimize how the body restores, adapts, and performs. Each program combines targeted modalities to deliver measurable results in performance, energy, and overall wellbeing."`
-- `stats` (keep the existing icons in the same order):
-  - `RECOVERY TIME` / `-47%` (icon `◈`)
-  - `SLEEP QUALITY` / `+62%` (icon `↑`)
-  - `ENERGY INCREASE` / `+84%` (icon `⌘`)
-  - `STRESS REDUCTION` / `-71%` (icon `✦`)
-
-Cards 01, 02, 04, the `number` field, all styling, hover/expand behavior, and accordion logic remain untouched.
-
-### Pending user actions after deploy
-
-- Upload `/public/hyperbaric-chamber.jpg`
-- Upload `/public/compression-boots.jpg`
-- (Optional) replace tile 4's Unsplash image with a real Adjustments & Muscle Rehab photo at `/public/adjustments-muscle-rehab.jpg` and swap the URL.
+The next section currently uses `background: "transparent"`, which lets the global `.verde-animated-bg` show through. To avoid a visible seam between the `#050a05` wrapper gutters and the section below, change that section's inline `background` from `"transparent"` to `"#050a05"` (line 355). Padding, layout, and content remain unchanged.
 
 ### Files changed
 
-- `src/pages/HuellaVerde.tsx` — RECOVERY_CARDS array, scanDelays, grid JSX, inline CSS additions
-- `src/components/PremiumServiceAccordion.tsx` — SERVICES[2] title/description/stats
-- `src/index.css` — update obsolete `Card 4 — Massages` comment
+- `src/pages/HuellaVerde.tsx` — add wrapper div + `reset-hero` class on hero section, append CSS rules to the inline `<style>` block, change RECOVERY ROOM `background` to `#050a05`.
+
+### Not changed
+
+- `HuellaAzul.tsx`, `HuellaRoja.tsx`, `Home.tsx` — untouched.
+- Hero inner content (picture, overlays, title, animations, GradualBlur, scan line).
+- Hero height, animations, video/picture sources.
+- Dock and any nav.

@@ -285,6 +285,36 @@ const HuellaVerde = ({ showDock = true }: HuellaVerdeProps) => {
             letter-spacing: 0.05em;
           }
         }
+
+        /* ── RESET HERO FLOATING CARD ── */
+        .reset-hero-wrapper {
+          width: 100%;
+          padding: 0 16px;
+          background: #050a05;
+        }
+        .reset-hero {
+          border-radius: 24px;
+          overflow: hidden;
+          border: 0.5px solid rgba(74, 222, 128, 0.3);
+          position: relative;
+        }
+        .reset-hero::after {
+          content: '';
+          position: absolute;
+          inset: 0;
+          border-radius: 24px;
+          pointer-events: none;
+          box-shadow: 0 0 40px rgba(74, 222, 128, 0.08) inset;
+          z-index: 1;
+        }
+        @media (max-width: 1023px) and (min-width: 768px) {
+          .reset-hero-wrapper { padding: 0 12px; }
+          .reset-hero { border-radius: 20px; }
+        }
+        @media (max-width: 767px) {
+          .reset-hero-wrapper { padding: 0 8px; }
+          .reset-hero { border-radius: 16px; }
+        }
       `}</style>
 
       <motion.div
@@ -296,7 +326,8 @@ const HuellaVerde = ({ showDock = true }: HuellaVerdeProps) => {
         <Dock show={showDock} />
 
         {/* ── HERO ── */}
-        <section style={{ minHeight: "100vh", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", position: "relative", overflow: "hidden", background: "transparent" }}>
+        <div className="reset-hero-wrapper">
+        <section className="reset-hero" style={{ minHeight: "100vh", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", position: "relative", overflow: "hidden", background: "transparent" }}>
           {/* Background image (responsive: mobile < 768px → tiny JPG, desktop ≥ 768px → AVIF/WebP/JPG pipeline) */}
           <picture style={{ position: "absolute", inset: 0, zIndex: 0, pointerEvents: "none" }}>
             <source media="(max-width: 767px)" srcSet={heroResetMobile} />
@@ -348,11 +379,12 @@ const HuellaVerde = ({ showDock = true }: HuellaVerdeProps) => {
           {/* Cinematic blur fade-out at hero bottom */}
           <GradualBlur position="bottom" height="6rem" strength={2} divCount={5} opacity={0.9} curve="bezier" zIndex={3} />
         </section>
+        </div>
 
         {/* ── RECOVERY ROOM ── */}
         <motion.section
           {...scrollReveal}
-          style={{ background: "transparent", padding: "72px 7%", position: "relative", zIndex: 1 }}
+          style={{ background: "#050a05", padding: "72px 7%", position: "relative", zIndex: 1 }}
         >
           <motion.h2 {...scrollReveal} style={{ fontFamily: "'Michroma', sans-serif", fontSize: "clamp(28px, 5vw, 42px)", fontWeight: 400, color: "#FFFFFF", textTransform: "uppercase", letterSpacing: "0.05em", margin: "0 0 12px 0", textAlign: "center" }}>
             RECOVERY ROOM
