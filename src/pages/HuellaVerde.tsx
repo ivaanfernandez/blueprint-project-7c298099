@@ -326,7 +326,8 @@ const HuellaVerde = ({ showDock = true }: HuellaVerdeProps) => {
         <Dock show={showDock} />
 
         {/* ── HERO ── */}
-        <section style={{ minHeight: "100vh", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", position: "relative", overflow: "hidden", background: "transparent" }}>
+        <div className="reset-hero-wrapper">
+        <section className="reset-hero" style={{ minHeight: "100vh", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", position: "relative", overflow: "hidden", background: "transparent" }}>
           {/* Background image (responsive: mobile < 768px → tiny JPG, desktop ≥ 768px → AVIF/WebP/JPG pipeline) */}
           <picture style={{ position: "absolute", inset: 0, zIndex: 0, pointerEvents: "none" }}>
             <source media="(max-width: 767px)" srcSet={heroResetMobile} />
