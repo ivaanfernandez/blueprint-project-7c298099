@@ -284,7 +284,8 @@ const Home = ({ showDock }: { showDock: boolean }) => {
       {/* ══════════════════════════════════════════════════════ */}
       {/* ── B: HERO (DEVIALET-INSPIRED) ── */}
       {/* ══════════════════════════════════════════════════════ */}
-      <div style={{
+      <div className="home-hero-wrapper">
+      <div className="home-hero" style={{
         background: "#070612", minHeight: "100vh", position: "relative", overflow: "hidden",
         display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center",
       }}>
