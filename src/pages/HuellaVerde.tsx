@@ -2,7 +2,7 @@ import { useState, useCallback, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import SEO from "@/components/SEO";
-import { scrollReveal, scrollStagger, blurRevealItem } from "@/lib/scrollAnimations";
+// (legacy global reveals replaced by stronger local hv* variants below)
 import type { Variants } from "framer-motion";
 
 /* ── Local stronger reveals for Reset page (more notable than the global ones) ── */
