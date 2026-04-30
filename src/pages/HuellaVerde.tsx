@@ -561,6 +561,48 @@ const HuellaVerde = ({ showDock = true }: HuellaVerdeProps) => {
           0%, 100% { background-position: 0% 0%; }
           50% { background-position: 100% 100%; }
         }
+        /* Sweep diagonal re-disparable al entrar al viewport */
+        .reset-tier-medium::after {
+          content: '';
+          position: absolute;
+          inset: -1px;
+          border-radius: 16px;
+          background: linear-gradient(115deg,
+            transparent 30%,
+            rgba(74, 222, 128, 0.0) 42%,
+            rgba(134, 239, 172, 0.55) 50%,
+            rgba(74, 222, 128, 0.0) 58%,
+            transparent 70%);
+          background-size: 250% 250%;
+          background-position: 150% 150%;
+          mix-blend-mode: screen;
+          pointer-events: none;
+          z-index: 1;
+          opacity: 0;
+        }
+        .reset-tier-medium.is-visible::after {
+          animation: medium-sweep 1.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+        }
+        @keyframes medium-sweep {
+          0%   { background-position: 150% 150%; opacity: 0; }
+          15%  { opacity: 1; }
+          85%  { opacity: 1; }
+          100% { background-position: -50% -50%; opacity: 0; }
+        }
+        /* Pulse de borde sincronizado con el sweep */
+        .reset-tier-medium.is-visible {
+          animation: medium-border-pulse 1.6s ease-out;
+        }
+        @keyframes medium-border-pulse {
+          0%   { box-shadow: 0 0 18px rgba(74, 222, 128, 0.25), inset 0 0 30px rgba(74, 222, 128, 0.05); }
+          50%  { box-shadow: 0 0 38px rgba(74, 222, 128, 0.55), inset 0 0 50px rgba(74, 222, 128, 0.12); }
+          100% { box-shadow: 0 0 18px rgba(74, 222, 128, 0.25), inset 0 0 30px rgba(74, 222, 128, 0.05); }
+        }
+        @media (prefers-reduced-motion: reduce) {
+          .reset-tier-medium::before,
+          .reset-tier-medium::after,
+          .reset-tier-medium.is-visible { animation: none !important; }
+        }
         .reset-tier-gold {
           background: linear-gradient(180deg, rgba(80, 55, 15, 0.85) 0%, rgba(30, 18, 5, 0.95) 100%);
           border: 1px solid rgba(212, 175, 55, 0.7);
