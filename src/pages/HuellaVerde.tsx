@@ -893,9 +893,9 @@ const HuellaVerde = ({ showDock = true }: HuellaVerdeProps) => {
             </p>
           </div>
 
-          <motion.div {...scrollStagger} className="reset-membership-grid">
+          <motion.div {...hvStagger} className="reset-membership-grid">
             {/* CARD 1 — STARTER */}
-            <motion.div variants={blurRevealItem} className="reset-tier-card reset-tier-starter">
+            <motion.div variants={hvItemVariants} className="reset-tier-card reset-tier-starter">
               <span className="reset-tier-corner-bracket reset-tier-corner-tl" />
               <span className="reset-tier-corner-bracket reset-tier-corner-tr" />
               <span className="reset-tier-corner-bracket reset-tier-corner-bl" />
