@@ -678,7 +678,7 @@ const HuellaVerde = ({ showDock = true }: HuellaVerdeProps) => {
           .reset-membership-header { margin-bottom: 40px; }
           .reset-membership-grid { grid-template-columns: 1fr; gap: 24px; }
           .reset-tier-card { padding: 32px 24px 28px 24px; }
-          .reset-tier-medium { transform: scale(1); order: -1; }
+          .reset-tier-medium { transform: scale(1); }
           .reset-tier-medium:hover { transform: scale(1); }
           .reset-tier-name { font-size: 16px; }
           .reset-tier-price { font-size: 30px; }
