@@ -2,35 +2,15 @@ import { useState, useCallback, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import SEO from "@/components/SEO";
-// (legacy global reveals replaced by stronger local hv* variants below)
-import type { Variants } from "framer-motion";
-
-/* ── Local stronger reveals for Reset page (more notable than the global ones) ── */
-const HV_REDUCE = typeof window !== "undefined" && (
-  (typeof document !== "undefined" && document.documentElement?.dataset?.noMotion === "true") ||
-  (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches)
-);
-const HV_VIEWPORT = { once: true, amount: 0.2, margin: "0px 0px -12% 0px" } as const;
-const hvRevealVariants: Variants = HV_REDUCE
-  ? { hidden: { opacity: 1, filter: "blur(0px)", y: 0 }, visible: { opacity: 1, filter: "blur(0px)", y: 0, transition: { duration: 0 } } }
-  : {
-      hidden: { opacity: 0, filter: "blur(14px)", y: 48 },
-      visible: { opacity: 1, filter: "blur(0px)", y: 0, transition: { duration: 0.95, ease: [0.22, 1, 0.36, 1] } },
-    };
-const hvStaggerVariants: Variants = HV_REDUCE
-  ? { hidden: { opacity: 1 }, visible: { opacity: 1, transition: { duration: 0 } } }
-  : {
-      hidden: { opacity: 1 },
-      visible: { opacity: 1, transition: { staggerChildren: 0.14, delayChildren: 0.08 } },
-    };
-const hvItemVariants: Variants = HV_REDUCE
-  ? { hidden: { opacity: 1, filter: "blur(0px)", y: 0 }, visible: { opacity: 1, filter: "blur(0px)", y: 0, transition: { duration: 0 } } }
-  : {
-      hidden: { opacity: 0, filter: "blur(12px)", y: 36 },
-      visible: { opacity: 1, filter: "blur(0px)", y: 0, transition: { duration: 0.85, ease: [0.22, 1, 0.36, 1] } },
-    };
-const hvReveal = { initial: "hidden" as const, whileInView: "visible" as const, viewport: HV_VIEWPORT, variants: hvRevealVariants };
-const hvStagger = { initial: "hidden" as const, whileInView: "visible" as const, viewport: HV_VIEWPORT, variants: hvStaggerVariants };
+import {
+  scrollRevealCinematic as hvReveal,
+  scrollStaggerCinematic as hvStagger,
+  scrollRevealSlideLeft as hvSlideLeft,
+  scrollRevealScaleFade as hvScaleFade,
+  scrollRevealGlow as hvGlow,
+  cinematicSlideUp as hvItemVariants,
+  cinematicScaleFade as hvTierItemVariants,
+} from "@/lib/scrollAnimations";
 import BiometricScanGreen from "@/components/BiometricScanGreen";
 import { TextScramble } from "@/components/ui/text-scramble";
 import BackToHomeButton from "@/components/BackToHomeButton";
