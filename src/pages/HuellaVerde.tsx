@@ -701,7 +701,7 @@ const HuellaVerde = ({ showDock = true }: HuellaVerdeProps) => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.8 }}
-        style={{ backgroundColor: "transparent", minHeight: "100vh", overflowX: "hidden", fontFamily: "'Space Grotesk', sans-serif", position: "relative", zIndex: 1, color: "#FFFFFF" }}
+        style={{ ["--reveal-glow" as never]: "rgba(34,197,94,0.35)", backgroundColor: "transparent", minHeight: "100vh", overflowX: "hidden", fontFamily: "'Space Grotesk', sans-serif", position: "relative", zIndex: 1, color: "#FFFFFF" } as React.CSSProperties}
       >
         <Dock show={showDock} />
 
