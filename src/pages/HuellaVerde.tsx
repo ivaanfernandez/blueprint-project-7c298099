@@ -733,6 +733,114 @@ const HuellaVerde = ({ showDock = true }: HuellaVerdeProps) => {
           </motion.div>
         </motion.section>
 
+        {/* ── MEMBERSHIP TIERS ── */}
+        <motion.section {...scrollReveal} className="reset-membership-section">
+          <div className="reset-membership-header">
+            <p className="reset-membership-eyebrow">[ MEMBERSHIP TIERS ]</p>
+            <h2 className="reset-membership-title">Recovery Built for Every Level</h2>
+            <p className="reset-membership-subtitle">
+              Choose the protocol that matches your performance commitment.
+            </p>
+          </div>
+
+          <motion.div {...scrollStagger} className="reset-membership-grid">
+            {/* CARD 1 — STARTER */}
+            <motion.div variants={blurRevealItem} className="reset-tier-card reset-tier-starter">
+              <span className="reset-tier-corner-bracket reset-tier-corner-tl" />
+              <span className="reset-tier-corner-bracket reset-tier-corner-tr" />
+              <span className="reset-tier-corner-bracket reset-tier-corner-bl" />
+              <span className="reset-tier-corner-bracket reset-tier-corner-br" />
+
+              <div className="reset-tier-header">
+                <div className="reset-tier-name-block">
+                  <span className="reset-tier-num">01</span>
+                  <h3 className="reset-tier-name">STARTER</h3>
+                </div>
+                <div className="reset-tier-price-block">
+                  <div className="reset-tier-price">$300</div>
+                  <div className="reset-tier-price-suffix">/ MONTH</div>
+                </div>
+              </div>
+
+              <ul className="reset-tier-bullets">
+                <li className="reset-tier-bullet"><span className="reset-tier-bullet-text">2× Infrared Sauna</span><span className="reset-tier-bullet-price">$60</span></li>
+                <li className="reset-tier-bullet"><span className="reset-tier-bullet-text">2× Adjustments</span><span className="reset-tier-bullet-price">$140</span></li>
+                <li className="reset-tier-bullet"><span className="reset-tier-bullet-text">2× Compression Boots</span><span className="reset-tier-bullet-price">$60</span></li>
+                <li className="reset-tier-bullet"><span className="reset-tier-bullet-text">2× Muscle Therapy</span><span className="reset-tier-bullet-price">$70</span></li>
+              </ul>
+
+              <div className="reset-tier-bonus">
+                <span className="reset-tier-bonus-icon">+</span>
+                <span className="reset-tier-bonus-text">Online Mobility Modules</span>
+              </div>
+            </motion.div>
+
+            {/* CARD 2 — MEDIUM */}
+            <motion.div variants={blurRevealItem} className="reset-tier-card reset-tier-medium">
+              <div className="reset-tier-badge">POPULAR</div>
+              <span className="reset-tier-corner-bracket reset-tier-corner-tl" />
+              <span className="reset-tier-corner-bracket reset-tier-corner-tr" />
+              <span className="reset-tier-corner-bracket reset-tier-corner-bl" />
+              <span className="reset-tier-corner-bracket reset-tier-corner-br" />
+
+              <div className="reset-tier-header">
+                <div className="reset-tier-name-block">
+                  <span className="reset-tier-num">02</span>
+                  <h3 className="reset-tier-name">MEDIUM</h3>
+                </div>
+                <div className="reset-tier-price-block">
+                  <div className="reset-tier-price">$500</div>
+                  <div className="reset-tier-price-suffix">/ MONTH</div>
+                </div>
+              </div>
+
+              <ul className="reset-tier-bullets">
+                <li className="reset-tier-bullet"><span className="reset-tier-bullet-text">4× Infrared Sauna</span><span className="reset-tier-bullet-price">$120</span></li>
+                <li className="reset-tier-bullet"><span className="reset-tier-bullet-text">4× Adjustments</span><span className="reset-tier-bullet-price">$280</span></li>
+                <li className="reset-tier-bullet"><span className="reset-tier-bullet-text">2× Compression Boots</span><span className="reset-tier-bullet-price">$60</span></li>
+                <li className="reset-tier-bullet"><span className="reset-tier-bullet-text">2× Muscle Therapy</span><span className="reset-tier-bullet-price">$70</span></li>
+              </ul>
+
+              <div className="reset-tier-bonus">
+                <span className="reset-tier-bonus-icon">+</span>
+                <span className="reset-tier-bonus-text">Online Mobility Modules</span>
+              </div>
+            </motion.div>
+
+            {/* CARD 3 — GOLD */}
+            <motion.div variants={blurRevealItem} className="reset-tier-card reset-tier-gold">
+              <span className="reset-tier-corner-bracket reset-tier-corner-tl" />
+              <span className="reset-tier-corner-bracket reset-tier-corner-tr" />
+              <span className="reset-tier-corner-bracket reset-tier-corner-bl" />
+              <span className="reset-tier-corner-bracket reset-tier-corner-br" />
+
+              <div className="reset-tier-header">
+                <div className="reset-tier-name-block">
+                  <span className="reset-tier-num">03</span>
+                  <h3 className="reset-tier-name">GOLD</h3>
+                </div>
+                <div className="reset-tier-price-block">
+                  <div className="reset-tier-price">$1,000</div>
+                  <div className="reset-tier-price-suffix">/ MONTH</div>
+                </div>
+              </div>
+
+              <ul className="reset-tier-bullets">
+                <li className="reset-tier-bullet"><span className="reset-tier-bullet-text">Unlimited Sauna</span><span className="reset-tier-bullet-price">$240+</span></li>
+                <li className="reset-tier-bullet"><span className="reset-tier-bullet-text">4× Adjustments</span><span className="reset-tier-bullet-price">$280</span></li>
+                <li className="reset-tier-bullet"><span className="reset-tier-bullet-text">4× Compression Boots</span><span className="reset-tier-bullet-price">$60</span></li>
+                <li className="reset-tier-bullet"><span className="reset-tier-bullet-text">4× Muscle Therapy</span><span className="reset-tier-bullet-price">$140</span></li>
+                <li className="reset-tier-bullet"><span className="reset-tier-bullet-text">4× Hyperbaric Chamber</span><span className="reset-tier-bullet-price">$360</span></li>
+              </ul>
+
+              <div className="reset-tier-bonus">
+                <span className="reset-tier-bonus-icon">+</span>
+                <span className="reset-tier-bonus-text">Online Mobility Modules</span>
+              </div>
+            </motion.div>
+          </motion.div>
+        </motion.section>
+
         {/* ── HUD LAB FOOTER ── */}
         <HuellaVerdeHUDFooter />
         <BackToHomeButton />
