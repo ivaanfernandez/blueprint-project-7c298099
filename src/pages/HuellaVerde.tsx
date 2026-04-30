@@ -803,7 +803,7 @@ const HuellaVerde = ({ showDock = true }: HuellaVerdeProps) => {
         <motion.section
           {...scrollReveal}
           className="premium-services-section hv-servicios"
-          style={{ background: "#0a1f0a", padding: "120px 7% 96px", position: "relative", zIndex: 1, overflow: "hidden", isolation: "isolate" }}
+          style={{ background: "#0a1f0a", padding: "64px 7% 96px", position: "relative", zIndex: 1, overflow: "hidden", isolation: "isolate" }}
         >
           {/* Atmospheric layers — class-based, GPU-promoted */}
           <div aria-hidden="true" className="hv-atmos hv-atmos-vignette-t" />
