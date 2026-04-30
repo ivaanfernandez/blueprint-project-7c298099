@@ -101,8 +101,8 @@ const RECOVERY_CARDS: Array<{ name: string; img: string; srcSet?: string; sizes?
     sizes: "(max-width: 768px) 100vw, (max-width: 1280px) 40vw, 460px",
   },
   { name: "ICE BATH THERAPY", img: "/ice-bath-therapy.jpg" },
-  { name: "MOBILITY & BREATHING", img: "/mobility-and-breathing.jpg" },
   { name: "ADJUSTMENTS & MUSCLE REHAB", img: "/adjustments-muscle-rehab.jpg" },
+  { name: "MOBILITY & BREATHING", img: "/mobility-and-breathing.jpg" },
   { name: "HYPERBARIC CHAMBER", img: "/hyperbaric-chamber.jpg" },
   { name: "COMPRESSION BOOTS", img: "/compression-boots.jpg" },
 ];
@@ -216,6 +216,7 @@ const HuellaVerde = ({ showDock = true }: HuellaVerdeProps) => {
         /* ── RECOVERY ARSENAL GRID (6 servicios) ── */
         .recovery-arsenal-grid {
           display: grid;
+          grid-template-columns: repeat(2, 1fr);
           gap: 12px;
           width: 100%;
           max-width: 1400px;
@@ -238,6 +239,7 @@ const HuellaVerde = ({ showDock = true }: HuellaVerdeProps) => {
           width: 100%;
           height: 100%;
           object-fit: cover;
+          object-position: center;
           display: block;
           transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
         }
@@ -270,11 +272,13 @@ const HuellaVerde = ({ showDock = true }: HuellaVerdeProps) => {
           margin: 0;
           text-shadow: 0 1px 4px rgba(0, 0, 0, 0.9);
         }
-        @media (min-width: 768px) {
+        @media (hover: hover) {
           .recovery-tile:hover {
             transform: translateY(-4px);
-            border-color: rgba(34, 197, 94, 0.7);
-            box-shadow: 0 8px 32px rgba(34, 197, 94, 0.2);
+            border-color: rgba(74, 222, 128, 0.5);
+            box-shadow:
+              0 12px 32px rgba(0, 0, 0, 0.5),
+              0 0 24px rgba(34, 197, 94, 0.2);
           }
           .recovery-tile:hover img {
             transform: scale(1.05);
@@ -282,16 +286,8 @@ const HuellaVerde = ({ showDock = true }: HuellaVerdeProps) => {
         }
         @media (min-width: 1024px) {
           .recovery-arsenal-grid {
-            grid-template-columns: 1fr 1fr 1fr;
-            grid-template-rows: 1fr 1fr;
+            grid-template-columns: repeat(3, 1fr);
             gap: 16px;
-          }
-          .recovery-tile-hero {
-            grid-column: auto;
-            grid-row: auto;
-          }
-          .recovery-tile {
-            aspect-ratio: 4 / 3;
           }
           .recovery-tile-label {
             font-size: 16px;
@@ -300,45 +296,23 @@ const HuellaVerde = ({ showDock = true }: HuellaVerdeProps) => {
             right: 24px;
           }
         }
-        @media (min-width: 768px) and (max-width: 1023px) {
+        @media (max-width: 1023px) and (min-width: 768px) {
           .recovery-arsenal-grid {
-            grid-template-columns: 1fr 1fr;
-            grid-template-rows: 1fr 1fr 1fr;
-            gap: 12px;
-          }
-          .recovery-tile {
-            aspect-ratio: 4 / 3;
+            gap: 16px;
           }
         }
         @media (max-width: 767px) {
           .recovery-arsenal-grid {
-            grid-template-columns: 1fr 1fr;
-            grid-template-rows: 200px 1fr 1fr 1fr;
-            gap: 10px;
+            gap: 12px;
             padding: 0 4%;
           }
-          .recovery-tile-hero {
-            grid-column: 1 / -1;
-            grid-row: 1;
-            aspect-ratio: auto;
-            height: 200px;
-          }
-          .recovery-tile:not(.recovery-tile-hero) {
-            aspect-ratio: 1 / 1;
-          }
           .recovery-tile-label {
-            font-size: 11px;
-            bottom: 10px;
-            left: 12px;
-            right: 12px;
-            letter-spacing: 0.04em;
-          }
-          .recovery-tile-hero .recovery-tile-label {
-            font-size: 16px;
+            font-size: 12px;
             bottom: 14px;
-            left: 16px;
-            right: 16px;
-            letter-spacing: 0.05em;
+            left: 14px;
+            right: 14px;
+            letter-spacing: 0.04em;
+            line-height: 1.15;
           }
           .recovery-arsenal-section { padding: 64px 6% 72px !important; }
           .premium-services-section { padding: 72px 6% 64px !important; }
@@ -805,7 +779,7 @@ const HuellaVerde = ({ showDock = true }: HuellaVerdeProps) => {
                 <motion.div
                   variants={blurRevealItem}
                   key={card.name}
-                  className={`recovery-tile${i === 0 ? " recovery-tile-hero" : ""}`}
+                  className="recovery-tile"
                 >
                   <img
                     src={card.img}
