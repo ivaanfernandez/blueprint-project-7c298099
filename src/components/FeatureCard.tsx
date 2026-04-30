@@ -164,7 +164,7 @@ const FeatureCard = memo(function FeatureCard({
 
   if (variant === "desktop") {
     return (
-      <motion.div ref={cardRef} variants={blurRevealItem} style={containerStyle}>
+      <motion.div ref={cardRef} variants={cinematicSlideUp} style={containerStyle}>
         <div style={TITLE_ROW_STYLE}>
           <div style={desktopIconBoxStyle}>{icon}</div>
           <div style={TITLE_DESKTOP_STYLE}>{title}</div>
@@ -175,7 +175,7 @@ const FeatureCard = memo(function FeatureCard({
   }
 
   return (
-    <motion.div ref={cardRef} variants={blurRevealItem} style={containerStyle}>
+    <motion.div ref={cardRef} variants={cinematicSlideUp} style={containerStyle}>
       <div style={ICON_BOX_MOBILE_STYLE}>{icon}</div>
       <div style={TEXT_COL_MOBILE_STYLE}>
         <span style={TITLE_MOBILE_STYLE}>{title}</span>
