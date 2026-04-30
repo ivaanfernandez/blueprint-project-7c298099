@@ -884,7 +884,7 @@ const HuellaVerde = ({ showDock = true }: HuellaVerdeProps) => {
         </motion.section>
 
         {/* ── MEMBERSHIP TIERS ── */}
-        <motion.section {...scrollReveal} className="reset-membership-section">
+        <motion.section {...hvReveal} className="reset-membership-section">
           <div className="reset-membership-header">
             <p className="reset-membership-eyebrow">[ MEMBERSHIP TIERS ]</p>
             <h2 className="reset-membership-title">Recovery Built for Every Level</h2>
