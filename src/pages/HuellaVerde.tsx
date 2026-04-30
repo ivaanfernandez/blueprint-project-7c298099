@@ -308,6 +308,8 @@ const HuellaVerde = ({ showDock = true }: HuellaVerdeProps) => {
             right: 16px;
             letter-spacing: 0.05em;
           }
+          .recovery-arsenal-section { padding: 56px 6% 0 !important; }
+          .recovery-arsenal-scanlines { opacity: 0.5; }
         }
 
         /* ── RESET HERO FLOATING CARD ── */
@@ -748,17 +750,22 @@ const HuellaVerde = ({ showDock = true }: HuellaVerdeProps) => {
         {/* ── RECOVERY ROOM ── */}
         <motion.section
           {...scrollReveal}
-          style={{ background: "#050a05", padding: "72px 7%", position: "relative", zIndex: 1 }}
+          className="recovery-arsenal-section"
+          style={{ background: "transparent", padding: "72px 7% 0", position: "relative", zIndex: 1, overflow: "hidden" }}
         >
-          <motion.h2 {...scrollReveal} style={{ fontFamily: "'Michroma', sans-serif", fontSize: "clamp(28px, 5vw, 42px)", fontWeight: 400, color: "#FFFFFF", textTransform: "uppercase", letterSpacing: "0.05em", margin: "0 0 12px 0", textAlign: "center" }}>
+          {/* Atmospheric overlays — match Premium Services ambient bg */}
+          <div aria-hidden="true" style={{ position: "absolute", top: 0, left: "50%", transform: "translateX(-50%)", width: "80%", height: 400, background: "radial-gradient(ellipse at center top, rgba(34,197,94,0.15) 0%, transparent 70%)", pointerEvents: "none", zIndex: 0 }} />
+          <div aria-hidden="true" className="recovery-arsenal-scanlines" style={{ position: "absolute", inset: 0, background: "repeating-linear-gradient(0deg, transparent 0px, transparent 2px, rgba(74,222,128,0.02) 2px, rgba(74,222,128,0.02) 3px)", pointerEvents: "none", zIndex: 0 }} />
+
+          <motion.h2 {...scrollReveal} style={{ fontFamily: "'Michroma', sans-serif", fontSize: "clamp(28px, 5vw, 42px)", fontWeight: 400, color: "#FFFFFF", textTransform: "uppercase", letterSpacing: "0.05em", margin: "0 0 12px 0", textAlign: "center", textShadow: "0 0 20px rgba(34,197,94,0.3)", position: "relative", zIndex: 1 }}>
             RECOVERY ROOM
           </motion.h2>
-          <motion.p {...scrollReveal} style={{ fontFamily: "'Inter', sans-serif", fontSize: 14, color: "rgba(255,255,255,0.45)", textAlign: "center", margin: "0 auto 40px", maxWidth: 600 }}>
+          <motion.p {...scrollReveal} style={{ fontFamily: "'Inter', sans-serif", fontSize: 14, color: "rgba(255,255,255,0.45)", textAlign: "center", margin: "0 auto 40px", maxWidth: 600, position: "relative", zIndex: 1 }}>
             Your Reset zone. Available exclusively for Blueprint Lab members.
           </motion.p>
 
           {/* Grid 6 tiles — responsive */}
-          <motion.div {...scrollStagger} className="recovery-arsenal-grid">
+          <motion.div {...scrollStagger} className="recovery-arsenal-grid" style={{ position: "relative", zIndex: 1 }}>
             {RECOVERY_CARDS.map((card, i) => (
               <motion.div
                 variants={blurRevealItem}
