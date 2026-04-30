@@ -434,6 +434,21 @@ const HuellaRoja = ({ showDock }: { showDock: boolean }) => {
           .lab-corner.tl, .lab-corner.bl { left: 12px !important; }
           .lab-corner.tr, .lab-corner.br { right: 12px !important; }
         }
+
+        /* ── HACKBAR HERO FLOATING CARD ── */
+        .hackbar-hero-wrapper { width: 100%; padding: 0 16px; background: #0a0405; }
+        .hackbar-hero { border-radius: 24px; overflow: hidden; border: 0.5px solid rgba(255,59,59,0.3); position: relative; }
+        .hackbar-hero::after { content: ''; position: absolute; inset: 0; border-radius: 24px; pointer-events: none; box-shadow: 0 0 40px rgba(255,59,59,0.08) inset; z-index: 1; }
+        @media (max-width: 1023px) and (min-width: 768px) {
+          .hackbar-hero-wrapper { padding: 0 12px; }
+          .hackbar-hero { border-radius: 20px; }
+          .hackbar-hero::after { border-radius: 20px; }
+        }
+        @media (max-width: 767px) {
+          .hackbar-hero-wrapper { padding: 0 8px; }
+          .hackbar-hero { border-radius: 16px; }
+          .hackbar-hero::after { border-radius: 16px; }
+        }
       `}</style>
 
       {/* ── DOCK ── */}
@@ -451,8 +466,10 @@ const HuellaRoja = ({ showDock }: { showDock: boolean }) => {
         </div>
       )}
 
+      {/* ═══ HACKBAR HERO FLOATING CARD WRAPPER ═══ */}
+      <div className="hackbar-hero-wrapper">
       {/* ═══ SECTION A: HERO (MOBILE) ═══ */}
-      <section className="flex md:hidden" style={{
+      <section className="hackbar-hero flex md:hidden" style={{
         position: "relative", minHeight: "100vh", width: "100%",
         overflow: "hidden", alignItems: "center", justifyContent: "center",
         backgroundColor: "#0a0a0a",
@@ -488,7 +505,7 @@ const HuellaRoja = ({ showDock }: { showDock: boolean }) => {
       </section>
 
       {/* ═══ SECTION A: HERO (DESKTOP) ═══ */}
-      <section className="hr-hero hidden md:flex" style={{ minHeight: "100vh", alignItems: "center", position: "relative", overflow: "hidden", backgroundColor: "#0a0a0a" }}>
+      <section className="hackbar-hero hr-hero hidden md:flex" style={{ minHeight: "100vh", alignItems: "center", position: "relative", overflow: "hidden", backgroundColor: "#0a0a0a" }}>
         {/* Left column */}
         <div className="hr-hero-left" style={{ flex: "0 0 55%", padding: "80px 0 80px 7%", display: "flex", flexDirection: "column", justifyContent: "center", gap: 16, position: "relative", zIndex: 2 }}>
           {/* Ambient glow — single soft pulsing layer */}
@@ -541,6 +558,7 @@ const HuellaRoja = ({ showDock }: { showDock: boolean }) => {
         {/* Cinematic blur fade-out — desktop hero */}
         <GradualBlur position="bottom" height="6rem" strength={2} divCount={5} opacity={0.9} curve="bezier" zIndex={4} />
       </section>
+      </div>{/* END hackbar-hero-wrapper */}
 
       {/* ═══ ABOUT BLUEPRINT HACKBAR ═══ */}
       <section className="hackbar-about-section">

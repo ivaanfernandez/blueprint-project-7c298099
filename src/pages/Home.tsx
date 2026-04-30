@@ -239,6 +239,22 @@ const Home = ({ showDock }: { showDock: boolean }) => {
             display: flex !important;
           }
         }
+
+        /* ── HOME HERO FLOATING CARD ── */
+        .home-hero-wrapper { width: 100%; padding: 0 16px; background: #0a0a0a; }
+        .home-hero { border-radius: 24px; overflow: hidden; border: 0.5px solid rgba(255,255,255,0.15); position: relative; }
+        .home-hero::after { content: ''; position: absolute; inset: 0; border-radius: 24px; pointer-events: none; box-shadow: 0 0 40px rgba(255,255,255,0.04) inset; z-index: 1; }
+        .home-white-wrapper { width: 100%; padding: 0 16px; background: #0a0a0a; }
+        @media (max-width: 1023px) and (min-width: 768px) {
+          .home-hero-wrapper, .home-white-wrapper { padding: 0 12px; }
+          .home-hero { border-radius: 20px; }
+          .home-hero::after { border-radius: 20px; }
+        }
+        @media (max-width: 767px) {
+          .home-hero-wrapper, .home-white-wrapper { padding: 0 8px; }
+          .home-hero { border-radius: 16px; }
+          .home-hero::after { border-radius: 16px; }
+        }
       `}</style>
 
       {/* ── A: DOCK ── */}
@@ -268,7 +284,8 @@ const Home = ({ showDock }: { showDock: boolean }) => {
       {/* ══════════════════════════════════════════════════════ */}
       {/* ── B: HERO (DEVIALET-INSPIRED) ── */}
       {/* ══════════════════════════════════════════════════════ */}
-      <div style={{
+      <div className="home-hero-wrapper">
+      <div className="home-hero" style={{
         background: "#070612", minHeight: "100vh", position: "relative", overflow: "hidden",
         display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center",
       }}>
@@ -423,10 +440,12 @@ const Home = ({ showDock }: { showDock: boolean }) => {
           zIndex={4}
         />
       </div>
+      </div>{/* END home-hero-wrapper */}
 
 {/* ══════════════════════════════════════════════════════ */}
       {/* ── WHITE ZONE WRAPPER (card emergence over hero black) ── */}
       {/* ══════════════════════════════════════════════════════ */}
+      <div className="home-white-wrapper">
       <div className="home-white-section" style={{
         position: "relative",
         borderTopLeftRadius: window.innerWidth < 768 ? 24 : 32,
@@ -779,6 +798,7 @@ const Home = ({ showDock }: { showDock: boolean }) => {
 
 
       </div>{/* END WHITE ZONE WRAPPER */}
+      </div>{/* END home-white-wrapper */}
 
       {/* ── FOOTER (DARK with hands background) — lazy-mounted: defers ~1MB bg image + dock subtree until user scrolls near bottom ── */}
       <LazyMount rootMargin="500px" placeholderHeight="560px">
