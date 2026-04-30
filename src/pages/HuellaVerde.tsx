@@ -121,6 +121,30 @@ const HuellaVerde = ({ showDock = true }: HuellaVerdeProps) => {
   const handleScanDone = useCallback(() => setScanDone(true), []);
   useLowPerfBackground(".verde-animated-bg");
 
+  // Re-trigger del sweep "POPULAR" cada vez que la card MEDIUM entra al viewport.
+  const mediumCardRef = useRef<HTMLDivElement | null>(null);
+  useEffect(() => {
+    if (!scanDone) return;
+    const node = mediumCardRef.current;
+    if (!node || typeof IntersectionObserver === "undefined") return;
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          // Reinicia las animaciones forzando reflow al togglear la clase.
+          node.classList.remove("is-visible");
+          // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+          node.offsetWidth;
+          node.classList.add("is-visible");
+        } else {
+          node.classList.remove("is-visible");
+        }
+      },
+      { threshold: 0.35 }
+    );
+    io.observe(node);
+    return () => io.disconnect();
+  }, [scanDone]);
+
   if (!scanDone) return <BiometricScanGreen onComplete={handleScanDone} />;
 
   return (
