@@ -1,4 +1,6 @@
 import { Instagram } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { scrollRevealCinematic } from '@/lib/scrollAnimations';
 
 const FooterDots = () => (
   <div style={{ display: 'flex', alignItems: 'center' }}>
@@ -10,7 +12,7 @@ const FooterDots = () => (
 
 const Footer = () => (
   <footer style={{ position: 'relative', zIndex: 10, borderTop: '1px solid rgba(255,255,255,0.06)' }}>
-    <div className="mx-auto max-w-[900px] px-6 pt-10 pb-6 md:px-12 md:pt-12">
+    <motion.div {...scrollRevealCinematic} className="mx-auto max-w-[900px] px-6 pt-10 pb-6 md:px-12 md:pt-12">
       {/* Logo */}
       <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: 8 }}>
         <FooterDots />
