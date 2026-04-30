@@ -850,14 +850,14 @@ const HuellaVerde = ({ showDock = true }: HuellaVerdeProps) => {
           <div aria-hidden="true" className="hv-atmos hv-atmos-scanlines" />
 
           <div style={{ position: "relative", zIndex: 1 }}>
-            <motion.h2 {...hvReveal} style={{ fontFamily: "'Michroma', sans-serif", fontSize: "clamp(16px, 2vw, 24px)", color: "#FFFFFF", textTransform: "uppercase", letterSpacing: "0.04em", marginBottom: 8, textAlign: "center" }}>
+            <motion.h2 {...hvGlow} style={{ fontFamily: "'Michroma', sans-serif", fontSize: "clamp(16px, 2vw, 24px)", color: "#FFFFFF", textTransform: "uppercase", letterSpacing: "0.04em", marginBottom: 8, textAlign: "center" }}>
               PREMIUM SERVICES
             </motion.h2>
             <motion.p {...hvReveal} style={{ fontFamily: "'Inter', sans-serif", fontSize: 14, color: "rgba(255,255,255,0.35)", margin: "0 auto 32px", textAlign: "center", maxWidth: 540 }}>
               Advanced protocols for members committed to their evolution.
             </motion.p>
 
-            <motion.div {...hvReveal}>
+            <motion.div {...hvSlideLeft}>
               <PremiumServiceAccordion />
             </motion.div>
           </div>
