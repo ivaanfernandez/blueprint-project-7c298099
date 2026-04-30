@@ -464,7 +464,7 @@ const Home = ({ showDock }: { showDock: boolean }) => {
         }}>
           {/* Left — Title + Subtitle + Timeline */}
           <div style={{ display: "flex", flexDirection: "column" as const, minHeight: 0 }}>
-            <motion.h2 {...scrollReveal} className="about-title-line" style={{
+            <motion.h2 {...scrollRevealCinematic} className="about-title-line" style={{
               fontFamily: "'Michroma', sans-serif",
               fontSize: "clamp(18px, 2.2vw, 28px)", color: "#000",
               textTransform: "uppercase", lineHeight: 1.12,
@@ -474,7 +474,7 @@ const Home = ({ showDock }: { showDock: boolean }) => {
             </motion.h2>
 
             {/* Features (DESKTOP) — Apple-style frosted white cards */}
-            <motion.div {...scrollStagger} className="about-features-desktop features-stack" style={{ position: "relative", flexGrow: 1, minHeight: 0 }}>
+            <motion.div {...scrollStaggerCinematic} className="about-features-desktop features-stack" style={{ position: "relative", flexGrow: 1, minHeight: 0 }}>
               {[
                 {
                   title: "Elite Training System",
@@ -546,7 +546,7 @@ const Home = ({ showDock }: { showDock: boolean }) => {
             </motion.div>
 
             {/* Mobile features — Apple-style frosted white cards */}
-            <motion.div {...scrollStagger} className="about-features-mobile" style={{ display: "none", flexDirection: "column", padding: "0 16px", gap: 14 }}>
+            <motion.div {...scrollStaggerCinematic} className="about-features-mobile" style={{ display: "none", flexDirection: "column", padding: "0 16px", gap: 14 }}>
               {[
                 {
                   title: "ELITE TRAINING SYSTEM",
@@ -644,7 +644,7 @@ const Home = ({ showDock }: { showDock: boolean }) => {
       {/* ── PROGRAMS SECTION (WHITE) — lazy-mounted: defers 3 pillar cards (image rotators + autoplay video) until user scrolls near ── */}
       <LazyMount rootMargin="400px" placeholderHeight="640px">
       <div className="programs-section" style={{ padding: "56px 7%", position: "relative", zIndex: 1 }}>
-        <motion.h2 {...scrollReveal} style={{
+        <motion.h2 {...scrollRevealCinematic} style={{
           fontFamily: "'Michroma', sans-serif",
           fontSize: "clamp(20px, 2.5vw, 32px)", color: "#000",
           textTransform: "uppercase", textAlign: "center", marginBottom: 40,
@@ -652,7 +652,7 @@ const Home = ({ showDock }: { showDock: boolean }) => {
           CHOOSE YOUR FINGERPRINT
         </motion.h2>
 
-        <motion.div {...scrollStagger} className="programs-grid" style={{
+        <motion.div {...scrollStaggerCinematic} className="programs-grid" style={{
           display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 16,
         }}>
           {[
@@ -661,7 +661,7 @@ const Home = ({ showDock }: { showDock: boolean }) => {
             { name: "Reset", color: "#22C55E", rgba: "34,197,94", img: slider3, video: "/videos/reset-card.mp4", route: "/huella-verde", desc: "Strategic recovery. Optimized sleep, restoration, and rebuilding protocols." },
           ].map((item) => (
             <motion.div
-              variants={blurRevealItem}
+              variants={cinematicSlideUp}
               key={item.name}
               className="pillar-card"
               onClick={() => navigate(item.route)}
@@ -844,7 +844,7 @@ const Home = ({ showDock }: { showDock: boolean }) => {
         }} />
 
         {/* Title */}
-        <motion.h2 {...scrollReveal} style={{
+        <motion.h2 {...scrollRevealCinematic} style={{
           fontFamily: "'Michroma', sans-serif",
           fontSize: "clamp(24px, 4vw, 36px)",
           color: "#FFFFFF",
@@ -858,7 +858,7 @@ const Home = ({ showDock }: { showDock: boolean }) => {
         </motion.h2>
 
         {/* Subtitle */}
-        <motion.p {...scrollReveal} style={{
+        <motion.p {...scrollRevealCinematic} style={{
           fontFamily: "'Inter', sans-serif",
           fontSize: 13,
           fontWeight: 300,
@@ -870,7 +870,7 @@ const Home = ({ showDock }: { showDock: boolean }) => {
         </motion.p>
 
         {/* Buttons */}
-        <motion.div {...scrollStagger} style={{
+        <motion.div {...scrollStaggerCinematic} style={{
           display: "flex",
           justifyContent: "center",
           gap: 14,
@@ -878,7 +878,7 @@ const Home = ({ showDock }: { showDock: boolean }) => {
           ...(window.innerWidth < 768 ? { flexDirection: "column" as const, gap: 10, alignItems: "stretch" as const } : {}),
         }}>
           <motion.a
-            variants={blurRevealItem}
+            variants={cinematicSlideUp}
             href="https://wa.me/19392735708?text=Hola%20Blueprint!%20Vi%20su%20p%C3%A1gina%20web%20y%20estoy%20interesado%20en%20conocer%20m%C3%A1s%20sobre%20los%20planes%20y%20la%20membres%C3%ADa.%20%C2%BFMe%20pueden%20dar%20m%C3%A1s%20informaci%C3%B3n%3F"
             target="_blank"
             rel="noopener noreferrer"
@@ -916,7 +916,7 @@ const Home = ({ showDock }: { showDock: boolean }) => {
           </motion.a>
 
           <motion.a
-            variants={blurRevealItem}
+            variants={cinematicSlideUp}
             href="https://instagram.com/proyectoblueprint"
             target="_blank"
             rel="noopener noreferrer"
