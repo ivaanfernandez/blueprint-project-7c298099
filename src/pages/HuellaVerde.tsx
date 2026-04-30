@@ -113,7 +113,7 @@ const SERVICIOS = [
   { num: "04", name: "RESET RETREATS", desc: "Coming soon: 72-hour immersive experiences with guided detox, therapeutic fasting, extended sauna, deep meditation and full reconnection with nature." },
 ];
 
-const scanDelays = [0, 1, 2, 0.5, 1.5, 2.5];
+
 
 /* ── Component ── */
 const HuellaVerde = ({ showDock = true }: HuellaVerdeProps) => {
