@@ -783,7 +783,7 @@ const HuellaVerde = ({ showDock = true }: HuellaVerdeProps) => {
 
         {/* ── RECOVERY ROOM ── */}
         <motion.section
-          {...scrollReveal}
+          {...hvReveal}
           className="recovery-arsenal-section"
           style={{ background: "#0a1f0a", padding: "96px 7% 64px", position: "relative", zIndex: 1, overflow: "hidden", isolation: "isolate" }}
         >
@@ -792,20 +792,35 @@ const HuellaVerde = ({ showDock = true }: HuellaVerdeProps) => {
           <div aria-hidden="true" className="hv-atmos hv-atmos-grid" />
           <div aria-hidden="true" className="hv-atmos hv-atmos-scanlines" />
           <div aria-hidden="true" className="hv-atmos hv-atmos-vignette-b" />
+          {/* Bridge to Premium — extends radial glow + green wash beyond bottom edge */}
+          <div
+            aria-hidden="true"
+            style={{
+              position: "absolute",
+              left: 0,
+              right: 0,
+              bottom: -120,
+              height: 240,
+              pointerEvents: "none",
+              zIndex: 0,
+              background:
+                "radial-gradient(ellipse 80% 100% at 50% 0%, rgba(34,197,94,0.18), rgba(10,31,10,0) 70%), linear-gradient(to bottom, rgba(10,31,10,0) 0%, #0a1f0a 60%)",
+            }}
+          />
 
           <div style={{ position: "relative", zIndex: 1 }}>
-            <motion.h2 {...scrollReveal} style={{ fontFamily: "'Michroma', sans-serif", fontSize: "clamp(28px, 5vw, 42px)", fontWeight: 400, color: "#FFFFFF", textTransform: "uppercase", letterSpacing: "0.05em", margin: "0 0 12px 0", textAlign: "center", textShadow: "0 0 20px rgba(34,197,94,0.3)" }}>
+            <motion.h2 {...hvReveal} style={{ fontFamily: "'Michroma', sans-serif", fontSize: "clamp(28px, 5vw, 42px)", fontWeight: 400, color: "#FFFFFF", textTransform: "uppercase", letterSpacing: "0.05em", margin: "0 0 12px 0", textAlign: "center", textShadow: "0 0 20px rgba(34,197,94,0.3)" }}>
               RECOVERY ROOM
             </motion.h2>
-            <motion.p {...scrollReveal} style={{ fontFamily: "'Inter', sans-serif", fontSize: 14, color: "rgba(255,255,255,0.45)", textAlign: "center", margin: "0 auto 40px", maxWidth: 600 }}>
+            <motion.p {...hvReveal} style={{ fontFamily: "'Inter', sans-serif", fontSize: 14, color: "rgba(255,255,255,0.45)", textAlign: "center", margin: "0 auto 40px", maxWidth: 600 }}>
               Your Reset zone. Available exclusively for Blueprint Lab members.
             </motion.p>
 
             {/* Grid 6 tiles — responsive */}
-            <motion.div {...scrollStagger} className="recovery-arsenal-grid">
+            <motion.div {...hvStagger} className="recovery-arsenal-grid">
               {RECOVERY_CARDS.map((card, i) => (
                 <motion.div
-                  variants={blurRevealItem}
+                  variants={hvItemVariants}
                   key={card.name}
                   className="recovery-tile"
                 >
@@ -829,10 +844,25 @@ const HuellaVerde = ({ showDock = true }: HuellaVerdeProps) => {
 
         {/* ── PREMIUM SERVICES ── */}
         <motion.section
-          {...scrollReveal}
+          {...hvReveal}
           className="premium-services-section hv-servicios"
           style={{ background: "#0a1f0a", padding: "64px 7% 96px", position: "relative", zIndex: 1, overflow: "hidden", isolation: "isolate" }}
         >
+          {/* Top bridge — mirrors the bottom of Recovery to make the transition seamless */}
+          <div
+            aria-hidden="true"
+            style={{
+              position: "absolute",
+              left: 0,
+              right: 0,
+              top: -120,
+              height: 240,
+              pointerEvents: "none",
+              zIndex: 0,
+              background:
+                "radial-gradient(ellipse 80% 100% at 50% 100%, rgba(34,197,94,0.18), rgba(10,31,10,0) 70%), linear-gradient(to top, rgba(10,31,10,0) 0%, #0a1f0a 60%)",
+            }}
+          />
           {/* Atmospheric layers — class-based, GPU-promoted */}
           <div aria-hidden="true" className="hv-atmos hv-atmos-vignette-t" />
           <div aria-hidden="true" className="hv-atmos hv-atmos-glow-mid" />
@@ -840,14 +870,14 @@ const HuellaVerde = ({ showDock = true }: HuellaVerdeProps) => {
           <div aria-hidden="true" className="hv-atmos hv-atmos-scanlines" />
 
           <div style={{ position: "relative", zIndex: 1 }}>
-            <motion.h2 {...scrollReveal} style={{ fontFamily: "'Michroma', sans-serif", fontSize: "clamp(16px, 2vw, 24px)", color: "#FFFFFF", textTransform: "uppercase", letterSpacing: "0.04em", marginBottom: 8, textAlign: "center" }}>
+            <motion.h2 {...hvReveal} style={{ fontFamily: "'Michroma', sans-serif", fontSize: "clamp(16px, 2vw, 24px)", color: "#FFFFFF", textTransform: "uppercase", letterSpacing: "0.04em", marginBottom: 8, textAlign: "center" }}>
               PREMIUM SERVICES
             </motion.h2>
-            <motion.p {...scrollReveal} style={{ fontFamily: "'Inter', sans-serif", fontSize: 14, color: "rgba(255,255,255,0.35)", margin: "0 auto 32px", textAlign: "center", maxWidth: 540 }}>
+            <motion.p {...hvReveal} style={{ fontFamily: "'Inter', sans-serif", fontSize: 14, color: "rgba(255,255,255,0.35)", margin: "0 auto 32px", textAlign: "center", maxWidth: 540 }}>
               Advanced protocols for members committed to their evolution.
             </motion.p>
 
-            <motion.div {...scrollReveal}>
+            <motion.div {...hvReveal}>
               <PremiumServiceAccordion />
             </motion.div>
           </div>
