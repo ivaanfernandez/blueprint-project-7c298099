@@ -25,15 +25,19 @@ const BiometricScan = ({ onComplete }: BiometricScanProps) => {
         @keyframes bs-fade-in { from { opacity: 0; } to { opacity: 1; } }
         @keyframes bs-fade-out { from { opacity: 1; } to { opacity: 0; } }
         @keyframes bs-scan-line {
-          0% { top: 0; }
-          50% { top: calc(100% - 2px); }
-          100% { top: 0; }
+          0%   { top: 0; opacity: 0.4; }
+          25%  { opacity: 1; }
+          50%  { top: calc(100% - 2px); opacity: 1; }
+          75%  { opacity: 1; }
+          100% { top: 0; opacity: 0.4; }
         }
-
+        @keyframes bs-scan-breathe {
+          0%, 100% { box-shadow: 0 0 6px #1A6BFF, 0 0 12px rgba(26,107,255,0.5); }
+          50%      { box-shadow: 0 0 14px #1A6BFF, 0 0 28px rgba(26,107,255,0.8); }
+        }
         @keyframes bs-glow-pulse {
           0%, 100% { filter: drop-shadow(0 0 8px #1A6BFF); }
-          50% { filter: drop-shadow(0 0 20px #1A6BFF) drop-shadow(0 0 40px #1A6BFF); }
-
+          50%      { filter: drop-shadow(0 0 22px #1A6BFF) drop-shadow(0 0 44px rgba(26,107,255,0.7)); }
         }
         @keyframes bs-ripple {
           0% { transform: translate(-50%, -50%) scale(0); opacity: 0.6; }
@@ -100,7 +104,7 @@ const BiometricScan = ({ onComplete }: BiometricScanProps) => {
             height: "140px",
             opacity: phase >= 1 ? 1 : 0,
             transition: "opacity 0.6s ease",
-            animation: phase === 3 ? "bs-glow-pulse 2s ease-in-out infinite" : undefined,
+            animation: phase === 3 ? "bs-glow-pulse 1s ease-in-out infinite" : undefined,
             filter: phase >= 2 ? "drop-shadow(0 0 12px #1A6BFF)" : undefined,
           }}
         >
@@ -212,7 +216,7 @@ const BiometricScan = ({ onComplete }: BiometricScanProps) => {
                 height: "2px",
                 backgroundColor: "#1A6BFF",
                 opacity: 0.9,
-                animation: "bs-scan-line 2s linear",
+                animation: "bs-scan-line 2s linear infinite, bs-scan-breathe 1s ease-in-out infinite",
                 boxShadow: "0 0 8px #1A6BFF",
               }}
             />
