@@ -779,7 +779,7 @@ const HuellaVerde = ({ showDock = true }: HuellaVerdeProps) => {
                 <motion.div
                   variants={blurRevealItem}
                   key={card.name}
-                  className={`recovery-tile${i === 0 ? " recovery-tile-hero" : ""}`}
+                  className="recovery-tile"
                 >
                   <img
                     src={card.img}
