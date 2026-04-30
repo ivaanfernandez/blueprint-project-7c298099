@@ -818,8 +818,9 @@ const HuellaVerde = ({ showDock = true }: HuellaVerdeProps) => {
                     loading="lazy"
                     decoding="async"
                   />
-                  {/* Scan line */}
-                  <div style={{ position: "absolute", left: 0, right: 0, height: 1, background: "linear-gradient(to right, transparent, rgba(34,197,94,0.4), transparent)", animation: `hvScanLine 5s ease-in-out ${scanDelays[i]}s infinite`, zIndex: 2, pointerEvents: "none" }} />
+                  {/* Scan line — GPU-composited, staggered via --i */}
+                  <div className="hv-scan-line" style={{ ["--i" as never]: i } as React.CSSProperties} />
+
                   <h3 className="recovery-tile-label">{card.name}</h3>
                 </motion.div>
               ))}
