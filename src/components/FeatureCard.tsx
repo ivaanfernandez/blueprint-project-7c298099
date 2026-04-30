@@ -1,6 +1,6 @@
 import { memo, useEffect, useMemo, useRef, useState, ReactNode, CSSProperties } from "react";
 import { motion } from "framer-motion";
-import { blurRevealItem } from "@/lib/scrollAnimations";
+import { cinematicSlideUp } from "@/lib/scrollAnimations";
 
 interface FeatureCardProps {
   icon: ReactNode;
