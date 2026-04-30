@@ -436,16 +436,16 @@ const HuellaRoja = ({ showDock }: { showDock: boolean }) => {
         }
 
         /* ── HACKBAR HERO FLOATING CARD ── */
-        .hackbar-hero-wrapper { width: 100%; padding: 0 16px; background: #0a0405; }
+        .hackbar-hero-wrapper { width: 100%; padding: 16px; background: #0a0405; }
         .hackbar-hero { border-radius: 24px; overflow: hidden; border: 0.5px solid rgba(255,59,59,0.3); position: relative; }
         .hackbar-hero::after { content: ''; position: absolute; inset: 0; border-radius: 24px; pointer-events: none; box-shadow: 0 0 40px rgba(255,59,59,0.08) inset; z-index: 1; }
         @media (max-width: 1023px) and (min-width: 768px) {
-          .hackbar-hero-wrapper { padding: 0 12px; }
+          .hackbar-hero-wrapper { padding: 12px; }
           .hackbar-hero { border-radius: 20px; }
           .hackbar-hero::after { border-radius: 20px; }
         }
         @media (max-width: 767px) {
-          .hackbar-hero-wrapper { padding: 0 8px; }
+          .hackbar-hero-wrapper { padding: 8px; }
           .hackbar-hero { border-radius: 16px; }
           .hackbar-hero::after { border-radius: 16px; }
         }
