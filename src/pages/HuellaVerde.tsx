@@ -113,7 +113,7 @@ const SERVICIOS = [
   { num: "04", name: "RESET RETREATS", desc: "Coming soon: 72-hour immersive experiences with guided detox, therapeutic fasting, extended sauna, deep meditation and full reconnection with nature." },
 ];
 
-const scanDelays = [0, 1, 2, 0.5, 1.5, 2.5];
+
 
 /* ── Component ── */
 const HuellaVerde = ({ showDock = true }: HuellaVerdeProps) => {
@@ -157,15 +157,47 @@ const HuellaVerde = ({ showDock = true }: HuellaVerdeProps) => {
       <div className="verde-animated-bg" aria-hidden="true" />
       <style>{`
         @keyframes hvScanLine {
-          0% { top: 0; opacity: 0; }
-          10% { opacity: 0.2; }
-          90% { opacity: 0.2; }
-          100% { top: 100%; opacity: 0; }
+          0%   { transform: translate3d(0, 0, 0);              opacity: 0; }
+          10%  { opacity: 0.22; }
+          90%  { opacity: 0.22; }
+          100% { transform: translate3d(0, 100cqh, 0);         opacity: 0; }
+        }
+        .recovery-tile { container-type: size; }
+        .hv-scan-line {
+          position: absolute;
+          left: 0;
+          right: 0;
+          top: 0;
+          height: 1px;
+          background: linear-gradient(to right, transparent, rgba(34,197,94,0.4), transparent);
+          z-index: 2;
+          pointer-events: none;
+          will-change: transform, opacity;
+          animation: hvScanLine 5s linear infinite;
+          animation-delay: calc(var(--i, 0) * 0.5s);
+          transform: translateZ(0);
+        }
+        @media (prefers-reduced-motion: reduce) {
+          .hv-scan-line { animation: none; opacity: 0; }
         }
         @keyframes hvFadeUp {
           from { opacity: 0; transform: translateY(20px); }
-          to { opacity: 1; transform: translateY(0); }
+          to   { opacity: 1; transform: translateY(0); }
         }
+        /* Atmospheric layers — promoted to compositor for cheap repaints */
+        .hv-atmos { position: absolute; pointer-events: none; z-index: 0; transform: translateZ(0); will-change: opacity; }
+        .hv-atmos-glow-top   { top: 0; left: 50%; transform: translate3d(-50%,0,0); width: 90%; height: 500px; background: radial-gradient(ellipse at center top, rgba(34,197,94,0.25) 0%, rgba(34,197,94,0.08) 40%, transparent 75%); }
+        .hv-atmos-glow-mid   { top: 60px; left: 50%; transform: translate3d(-50%,0,0); width: 70%; height: 300px; background: radial-gradient(ellipse at center, rgba(34,197,94,0.20) 0%, transparent 70%); }
+        .hv-atmos-grid       { inset: 0; background-image: linear-gradient(rgba(74,222,128,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(74,222,128,0.04) 1px, transparent 1px); background-size: 40px 40px; }
+        .hv-atmos-scanlines  { inset: 0; background: repeating-linear-gradient(0deg, transparent 0px, transparent 2px, rgba(74,222,128,0.025) 2px, rgba(74,222,128,0.025) 3px); }
+        .hv-atmos-vignette-b { bottom: 0; left: 0; right: 0; height: 200px; background: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.15) 100%); }
+        .hv-atmos-vignette-t { top: 0; left: 0; right: 0; height: 200px; background: linear-gradient(to top, transparent 0%, rgba(0,0,0,0.15) 100%); }
+        @media (max-width: 767px) {
+          /* Reduce overdraw on mobile */
+          .hv-atmos-grid { display: none; }
+          .hv-atmos-scanlines { opacity: 0.5; }
+        }
+
         .hv-card { transition: transform 0.3s ease, box-shadow 0.3s ease; }
         .hv-card:hover { transform: translateY(-4px); box-shadow: 0 8px 32px rgba(34,197,94,0.12); }
         @media (max-width: 767px) {
@@ -309,10 +341,7 @@ const HuellaVerde = ({ showDock = true }: HuellaVerdeProps) => {
             letter-spacing: 0.05em;
           }
           .recovery-arsenal-section { padding: 64px 6% 72px !important; }
-          .recovery-arsenal-scanlines { opacity: 0.5; }
           .premium-services-section { padding: 72px 6% 64px !important; }
-          .recovery-arsenal-section .hv-grid-pattern,
-          .premium-services-section .hv-grid-pattern { background-size: 24px 24px !important; }
         }
 
         /* ── RESET HERO FLOATING CARD ── */
@@ -756,14 +785,11 @@ const HuellaVerde = ({ showDock = true }: HuellaVerdeProps) => {
           className="recovery-arsenal-section"
           style={{ background: "#0a1f0a", padding: "96px 7% 120px", position: "relative", zIndex: 1, overflow: "hidden", isolation: "isolate" }}
         >
-          {/* Layer 1: Radial glow superior verde */}
-          <div aria-hidden="true" style={{ position: "absolute", top: 0, left: "50%", transform: "translateX(-50%)", width: "90%", height: 500, background: "radial-gradient(ellipse at center top, rgba(34,197,94,0.25) 0%, rgba(34,197,94,0.08) 40%, transparent 75%)", pointerEvents: "none", zIndex: 0 }} />
-          {/* Layer 2: Grid pattern HUD */}
-          <div aria-hidden="true" className="hv-grid-pattern" style={{ position: "absolute", inset: 0, backgroundImage: "linear-gradient(rgba(74,222,128,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(74,222,128,0.04) 1px, transparent 1px)", backgroundSize: "40px 40px", pointerEvents: "none", zIndex: 0 }} />
-          {/* Layer 3: Scan lines */}
-          <div aria-hidden="true" className="recovery-arsenal-scanlines" style={{ position: "absolute", inset: 0, background: "repeating-linear-gradient(0deg, transparent 0px, transparent 2px, rgba(74,222,128,0.025) 2px, rgba(74,222,128,0.025) 3px)", pointerEvents: "none", zIndex: 0 }} />
-          {/* Layer 4: Vignette inferior */}
-          <div aria-hidden="true" style={{ position: "absolute", bottom: 0, left: 0, right: 0, height: 200, background: "linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.15) 100%)", pointerEvents: "none", zIndex: 0 }} />
+          {/* Atmospheric layers — class-based, GPU-promoted */}
+          <div aria-hidden="true" className="hv-atmos hv-atmos-glow-top" />
+          <div aria-hidden="true" className="hv-atmos hv-atmos-grid" />
+          <div aria-hidden="true" className="hv-atmos hv-atmos-scanlines" />
+          <div aria-hidden="true" className="hv-atmos hv-atmos-vignette-b" />
 
           <div style={{ position: "relative", zIndex: 1 }}>
             <motion.h2 {...scrollReveal} style={{ fontFamily: "'Michroma', sans-serif", fontSize: "clamp(28px, 5vw, 42px)", fontWeight: 400, color: "#FFFFFF", textTransform: "uppercase", letterSpacing: "0.05em", margin: "0 0 12px 0", textAlign: "center", textShadow: "0 0 20px rgba(34,197,94,0.3)" }}>
@@ -789,8 +815,9 @@ const HuellaVerde = ({ showDock = true }: HuellaVerdeProps) => {
                     loading="lazy"
                     decoding="async"
                   />
-                  {/* Scan line */}
-                  <div style={{ position: "absolute", left: 0, right: 0, height: 1, background: "linear-gradient(to right, transparent, rgba(34,197,94,0.4), transparent)", animation: `hvScanLine 5s ease-in-out ${scanDelays[i]}s infinite`, zIndex: 2, pointerEvents: "none" }} />
+                  {/* Scan line — GPU-composited, staggered via --i */}
+                  <div className="hv-scan-line" style={{ ["--i" as never]: i } as React.CSSProperties} />
+
                   <h3 className="recovery-tile-label">{card.name}</h3>
                 </motion.div>
               ))}
@@ -804,14 +831,11 @@ const HuellaVerde = ({ showDock = true }: HuellaVerdeProps) => {
           className="premium-services-section hv-servicios"
           style={{ background: "#0a1f0a", padding: "120px 7% 96px", position: "relative", zIndex: 1, overflow: "hidden", isolation: "isolate" }}
         >
-          {/* Layer 1: Vignette superior */}
-          <div aria-hidden="true" style={{ position: "absolute", top: 0, left: 0, right: 0, height: 200, background: "linear-gradient(to top, transparent 0%, rgba(0,0,0,0.15) 100%)", pointerEvents: "none", zIndex: 0 }} />
-          {/* Layer 2: Radial glow detrás del título */}
-          <div aria-hidden="true" style={{ position: "absolute", top: 60, left: "50%", transform: "translateX(-50%)", width: "70%", height: 300, background: "radial-gradient(ellipse at center, rgba(34,197,94,0.20) 0%, transparent 70%)", pointerEvents: "none", zIndex: 0 }} />
-          {/* Layer 3: Grid pattern HUD */}
-          <div aria-hidden="true" className="hv-grid-pattern" style={{ position: "absolute", inset: 0, backgroundImage: "linear-gradient(rgba(74,222,128,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(74,222,128,0.04) 1px, transparent 1px)", backgroundSize: "40px 40px", pointerEvents: "none", zIndex: 0 }} />
-          {/* Layer 4: Scan lines */}
-          <div aria-hidden="true" style={{ position: "absolute", inset: 0, background: "repeating-linear-gradient(0deg, transparent 0px, transparent 2px, rgba(74,222,128,0.025) 2px, rgba(74,222,128,0.025) 3px)", pointerEvents: "none", zIndex: 0 }} />
+          {/* Atmospheric layers — class-based, GPU-promoted */}
+          <div aria-hidden="true" className="hv-atmos hv-atmos-vignette-t" />
+          <div aria-hidden="true" className="hv-atmos hv-atmos-glow-mid" />
+          <div aria-hidden="true" className="hv-atmos hv-atmos-grid" />
+          <div aria-hidden="true" className="hv-atmos hv-atmos-scanlines" />
 
           <div style={{ position: "relative", zIndex: 1 }}>
             <motion.h2 {...scrollReveal} style={{ fontFamily: "'Michroma', sans-serif", fontSize: "clamp(16px, 2vw, 24px)", color: "#FFFFFF", textTransform: "uppercase", letterSpacing: "0.04em", marginBottom: 8, textAlign: "center" }}>
