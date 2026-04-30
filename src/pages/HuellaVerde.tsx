@@ -788,14 +788,11 @@ const HuellaVerde = ({ showDock = true }: HuellaVerdeProps) => {
           className="recovery-arsenal-section"
           style={{ background: "#0a1f0a", padding: "96px 7% 120px", position: "relative", zIndex: 1, overflow: "hidden", isolation: "isolate" }}
         >
-          {/* Layer 1: Radial glow superior verde */}
-          <div aria-hidden="true" style={{ position: "absolute", top: 0, left: "50%", transform: "translateX(-50%)", width: "90%", height: 500, background: "radial-gradient(ellipse at center top, rgba(34,197,94,0.25) 0%, rgba(34,197,94,0.08) 40%, transparent 75%)", pointerEvents: "none", zIndex: 0 }} />
-          {/* Layer 2: Grid pattern HUD */}
-          <div aria-hidden="true" className="hv-grid-pattern" style={{ position: "absolute", inset: 0, backgroundImage: "linear-gradient(rgba(74,222,128,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(74,222,128,0.04) 1px, transparent 1px)", backgroundSize: "40px 40px", pointerEvents: "none", zIndex: 0 }} />
-          {/* Layer 3: Scan lines */}
-          <div aria-hidden="true" className="recovery-arsenal-scanlines" style={{ position: "absolute", inset: 0, background: "repeating-linear-gradient(0deg, transparent 0px, transparent 2px, rgba(74,222,128,0.025) 2px, rgba(74,222,128,0.025) 3px)", pointerEvents: "none", zIndex: 0 }} />
-          {/* Layer 4: Vignette inferior */}
-          <div aria-hidden="true" style={{ position: "absolute", bottom: 0, left: 0, right: 0, height: 200, background: "linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.15) 100%)", pointerEvents: "none", zIndex: 0 }} />
+          {/* Atmospheric layers — class-based, GPU-promoted */}
+          <div aria-hidden="true" className="hv-atmos hv-atmos-glow-top" />
+          <div aria-hidden="true" className="hv-atmos hv-atmos-grid" />
+          <div aria-hidden="true" className="hv-atmos hv-atmos-scanlines" />
+          <div aria-hidden="true" className="hv-atmos hv-atmos-vignette-b" />
 
           <div style={{ position: "relative", zIndex: 1 }}>
             <motion.h2 {...scrollReveal} style={{ fontFamily: "'Michroma', sans-serif", fontSize: "clamp(28px, 5vw, 42px)", fontWeight: 400, color: "#FFFFFF", textTransform: "uppercase", letterSpacing: "0.05em", margin: "0 0 12px 0", textAlign: "center", textShadow: "0 0 20px rgba(34,197,94,0.3)" }}>
