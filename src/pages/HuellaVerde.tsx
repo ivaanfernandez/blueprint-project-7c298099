@@ -315,6 +315,304 @@ const HuellaVerde = ({ showDock = true }: HuellaVerdeProps) => {
           .reset-hero-wrapper { padding: 0 8px; }
           .reset-hero { border-radius: 16px; }
         }
+
+        /* ═══ MEMBERSHIP TIERS ═══ */
+        .reset-membership-section {
+          width: 100%;
+          background: #050a05;
+          padding: 100px 6%;
+          position: relative;
+        }
+        .reset-membership-section::before {
+          content: '';
+          position: absolute;
+          inset: 0;
+          background: radial-gradient(circle at 50% 30%, rgba(34,197,94,0.06), transparent 70%);
+          pointer-events: none;
+        }
+        .reset-membership-header {
+          max-width: 720px;
+          margin: 0 auto 60px auto;
+          text-align: center;
+          position: relative;
+          z-index: 1;
+        }
+        .reset-membership-eyebrow {
+          font-family: 'Orbitron', monospace;
+          font-size: 11px;
+          letter-spacing: 0.3em;
+          color: #4ade80;
+          text-shadow: 0 0 12px rgba(74, 222, 128, 0.4);
+          margin: 0 0 20px 0;
+          font-weight: 500;
+        }
+        .reset-membership-title {
+          font-family: 'Michroma', sans-serif;
+          font-size: 48px;
+          letter-spacing: -0.01em;
+          color: #ffffff;
+          line-height: 1.1;
+          margin: 0 0 16px 0;
+          font-weight: 400;
+        }
+        .reset-membership-subtitle {
+          font-family: 'Inter', sans-serif;
+          font-size: 16px;
+          color: rgba(255, 255, 255, 0.6);
+          line-height: 1.5;
+          margin: 0;
+          font-weight: 400;
+        }
+        .reset-membership-grid {
+          display: grid;
+          grid-template-columns: 1fr 1fr 1fr;
+          gap: 24px;
+          max-width: 1280px;
+          margin: 0 auto;
+          position: relative;
+          z-index: 1;
+          align-items: stretch;
+        }
+        .reset-tier-card {
+          position: relative;
+          border-radius: 16px;
+          padding: 36px 28px 32px 28px;
+          display: flex;
+          flex-direction: column;
+          gap: 24px;
+          overflow: hidden;
+          transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+                      box-shadow 0.4s ease,
+                      border-color 0.4s ease;
+          cursor: default;
+        }
+        .reset-tier-corner-bracket {
+          position: absolute;
+          width: 16px;
+          height: 16px;
+          pointer-events: none;
+          z-index: 2;
+        }
+        .reset-tier-corner-tl { top: 12px; left: 12px; border-top: 1px solid currentColor; border-left: 1px solid currentColor; }
+        .reset-tier-corner-tr { top: 12px; right: 12px; border-top: 1px solid currentColor; border-right: 1px solid currentColor; }
+        .reset-tier-corner-bl { bottom: 12px; left: 12px; border-bottom: 1px solid currentColor; border-left: 1px solid currentColor; }
+        .reset-tier-corner-br { bottom: 12px; right: 12px; border-bottom: 1px solid currentColor; border-right: 1px solid currentColor; }
+        .reset-tier-header {
+          display: flex;
+          justify-content: space-between;
+          align-items: flex-start;
+          padding-bottom: 24px;
+          border-bottom: 0.5px solid rgba(255, 255, 255, 0.1);
+          position: relative;
+          z-index: 1;
+        }
+        .reset-tier-name-block { display: flex; flex-direction: column; gap: 4px; }
+        .reset-tier-num {
+          font-family: 'Orbitron', monospace;
+          font-size: 11px;
+          letter-spacing: 0.2em;
+          opacity: 0.5;
+          font-weight: 500;
+        }
+        .reset-tier-name {
+          font-family: 'Michroma', sans-serif;
+          font-size: 18px;
+          letter-spacing: 0.1em;
+          margin: 0;
+          font-weight: 400;
+          line-height: 1;
+        }
+        .reset-tier-price-block { text-align: right; }
+        .reset-tier-price {
+          font-family: 'Orbitron', monospace;
+          font-size: 36px;
+          font-weight: 700;
+          line-height: 1;
+          letter-spacing: -0.01em;
+        }
+        .reset-tier-price-suffix {
+          font-family: 'Inter', sans-serif;
+          font-size: 10px;
+          letter-spacing: 0.15em;
+          margin-top: 6px;
+          opacity: 0.5;
+          font-weight: 400;
+        }
+        .reset-tier-bullets {
+          list-style: none;
+          padding: 0;
+          margin: 0;
+          display: flex;
+          flex-direction: column;
+          gap: 14px;
+          flex: 1;
+          position: relative;
+          z-index: 1;
+        }
+        .reset-tier-bullet {
+          display: flex;
+          justify-content: space-between;
+          align-items: baseline;
+          gap: 12px;
+          font-family: 'Inter', sans-serif;
+          font-size: 14px;
+          line-height: 1.4;
+          position: relative;
+          padding-left: 18px;
+        }
+        .reset-tier-bullet::before {
+          content: '◆';
+          position: absolute;
+          left: 0;
+          top: 4px;
+          font-size: 8px;
+          opacity: 0.7;
+        }
+        .reset-tier-bullet-text { color: rgba(255, 255, 255, 0.9); font-weight: 400; }
+        .reset-tier-bullet-price {
+          color: rgba(255, 255, 255, 0.4);
+          font-family: 'Orbitron', monospace;
+          font-size: 12px;
+          letter-spacing: 0.05em;
+          flex-shrink: 0;
+        }
+        .reset-tier-bonus {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          padding-top: 20px;
+          border-top: 0.5px dashed rgba(255, 255, 255, 0.15);
+          font-family: 'Orbitron', monospace;
+          font-size: 11px;
+          letter-spacing: 0.1em;
+          text-transform: uppercase;
+          position: relative;
+          z-index: 1;
+        }
+        .reset-tier-bonus-icon { font-size: 14px; font-weight: 700; }
+        .reset-tier-bonus-text { font-weight: 500; }
+        .reset-tier-badge {
+          position: absolute;
+          top: 0;
+          right: 24px;
+          background: #4ade80;
+          color: #052e16;
+          font-family: 'Orbitron', monospace;
+          font-size: 10px;
+          font-weight: 700;
+          padding: 6px 14px;
+          border-radius: 0 0 8px 8px;
+          letter-spacing: 0.15em;
+          z-index: 3;
+          box-shadow: 0 4px 12px rgba(74, 222, 128, 0.3);
+        }
+        .reset-tier-starter {
+          background: linear-gradient(180deg, rgba(50, 55, 55, 0.5) 0%, rgba(20, 22, 22, 0.85) 100%);
+          border: 0.5px solid rgba(255, 255, 255, 0.12);
+          color: rgba(200, 200, 200, 0.9);
+        }
+        .reset-tier-starter .reset-tier-num,
+        .reset-tier-starter .reset-tier-name,
+        .reset-tier-starter .reset-tier-corner-bracket { color: rgba(200, 200, 200, 0.7); }
+        .reset-tier-starter .reset-tier-price { color: #e5e7eb; }
+        .reset-tier-starter .reset-tier-bullet::before { color: rgba(200, 200, 200, 0.5); }
+        .reset-tier-starter .reset-tier-bonus { color: rgba(200, 200, 200, 0.7); }
+        .reset-tier-starter:hover {
+          border-color: rgba(255, 255, 255, 0.2);
+          transform: translateY(-4px);
+        }
+        .reset-tier-medium {
+          background: linear-gradient(180deg, rgba(15, 80, 40, 0.85) 0%, rgba(8, 30, 20, 0.95) 100%);
+          border: 1px solid #4ade80;
+          box-shadow: 0 0 24px rgba(74, 222, 128, 0.3),
+                      inset 0 0 40px rgba(74, 222, 128, 0.05);
+          transform: scale(1.03);
+          color: #4ade80;
+        }
+        .reset-tier-medium .reset-tier-num,
+        .reset-tier-medium .reset-tier-name,
+        .reset-tier-medium .reset-tier-corner-bracket { color: #4ade80; }
+        .reset-tier-medium .reset-tier-price {
+          color: #4ade80;
+          text-shadow: 0 0 16px rgba(74, 222, 128, 0.6);
+        }
+        .reset-tier-medium .reset-tier-bullet::before { color: #4ade80; }
+        .reset-tier-medium .reset-tier-bonus {
+          color: rgba(74, 222, 128, 0.85);
+          border-color: rgba(74, 222, 128, 0.2);
+        }
+        .reset-tier-medium:hover {
+          transform: scale(1.05);
+          box-shadow: 0 0 32px rgba(74, 222, 128, 0.4),
+                      inset 0 0 50px rgba(74, 222, 128, 0.08);
+        }
+        .reset-tier-medium::before {
+          content: '';
+          position: absolute;
+          inset: -1px;
+          border-radius: 16px;
+          background: linear-gradient(135deg, transparent 30%, rgba(74, 222, 128, 0.15) 50%, transparent 70%);
+          background-size: 300% 300%;
+          animation: medium-shimmer 6s ease-in-out infinite;
+          pointer-events: none;
+          z-index: 0;
+        }
+        @keyframes medium-shimmer {
+          0%, 100% { background-position: 0% 0%; }
+          50% { background-position: 100% 100%; }
+        }
+        .reset-tier-gold {
+          background: linear-gradient(180deg, rgba(80, 55, 15, 0.85) 0%, rgba(30, 18, 5, 0.95) 100%);
+          border: 1px solid rgba(212, 175, 55, 0.7);
+          box-shadow: 0 0 18px rgba(212, 175, 55, 0.18);
+          color: #fbbf24;
+        }
+        .reset-tier-gold .reset-tier-num,
+        .reset-tier-gold .reset-tier-name,
+        .reset-tier-gold .reset-tier-corner-bracket { color: #fbbf24; }
+        .reset-tier-gold .reset-tier-price {
+          color: #fbbf24;
+          text-shadow: 0 0 12px rgba(251, 191, 36, 0.4);
+        }
+        .reset-tier-gold .reset-tier-bullet::before { color: #fbbf24; }
+        .reset-tier-gold .reset-tier-bonus {
+          color: rgba(251, 191, 36, 0.85);
+          border-color: rgba(251, 191, 36, 0.2);
+        }
+        .reset-tier-gold:hover {
+          transform: translateY(-4px);
+          box-shadow: 0 0 28px rgba(212, 175, 55, 0.3);
+          border-color: rgba(212, 175, 55, 0.9);
+        }
+        @media (max-width: 1023px) and (min-width: 768px) {
+          .reset-membership-grid {
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+          }
+          .reset-tier-medium { transform: scale(1); }
+          .reset-tier-gold {
+            grid-column: span 2;
+            max-width: 600px;
+            margin: 0 auto;
+            width: 100%;
+          }
+        }
+        @media (max-width: 767px) {
+          .reset-membership-section { padding: 70px 5%; }
+          .reset-membership-title { font-size: 32px; }
+          .reset-membership-subtitle { font-size: 14px; }
+          .reset-membership-header { margin-bottom: 40px; }
+          .reset-membership-grid { grid-template-columns: 1fr; gap: 24px; }
+          .reset-tier-card { padding: 32px 24px 28px 24px; }
+          .reset-tier-medium { transform: scale(1); order: -1; }
+          .reset-tier-medium:hover { transform: scale(1); }
+          .reset-tier-name { font-size: 16px; }
+          .reset-tier-price { font-size: 30px; }
+          .reset-tier-bullet { font-size: 13px; }
+          .reset-tier-bullet-price { font-size: 11px; }
+          .reset-tier-bonus { font-size: 10px; }
+          .reset-tier-card:hover { transform: none; }
+        }
       `}</style>
 
       <motion.div
@@ -432,6 +730,114 @@ const HuellaVerde = ({ showDock = true }: HuellaVerdeProps) => {
 
           <motion.div {...scrollReveal}>
             <PremiumServiceAccordion />
+          </motion.div>
+        </motion.section>
+
+        {/* ── MEMBERSHIP TIERS ── */}
+        <motion.section {...scrollReveal} className="reset-membership-section">
+          <div className="reset-membership-header">
+            <p className="reset-membership-eyebrow">[ MEMBERSHIP TIERS ]</p>
+            <h2 className="reset-membership-title">Recovery Built for Every Level</h2>
+            <p className="reset-membership-subtitle">
+              Choose the protocol that matches your performance commitment.
+            </p>
+          </div>
+
+          <motion.div {...scrollStagger} className="reset-membership-grid">
+            {/* CARD 1 — STARTER */}
+            <motion.div variants={blurRevealItem} className="reset-tier-card reset-tier-starter">
+              <span className="reset-tier-corner-bracket reset-tier-corner-tl" />
+              <span className="reset-tier-corner-bracket reset-tier-corner-tr" />
+              <span className="reset-tier-corner-bracket reset-tier-corner-bl" />
+              <span className="reset-tier-corner-bracket reset-tier-corner-br" />
+
+              <div className="reset-tier-header">
+                <div className="reset-tier-name-block">
+                  <span className="reset-tier-num">01</span>
+                  <h3 className="reset-tier-name">STARTER</h3>
+                </div>
+                <div className="reset-tier-price-block">
+                  <div className="reset-tier-price">$300</div>
+                  <div className="reset-tier-price-suffix">/ MONTH</div>
+                </div>
+              </div>
+
+              <ul className="reset-tier-bullets">
+                <li className="reset-tier-bullet"><span className="reset-tier-bullet-text">2× Infrared Sauna</span><span className="reset-tier-bullet-price">$60</span></li>
+                <li className="reset-tier-bullet"><span className="reset-tier-bullet-text">2× Adjustments</span><span className="reset-tier-bullet-price">$140</span></li>
+                <li className="reset-tier-bullet"><span className="reset-tier-bullet-text">2× Compression Boots</span><span className="reset-tier-bullet-price">$60</span></li>
+                <li className="reset-tier-bullet"><span className="reset-tier-bullet-text">2× Muscle Therapy</span><span className="reset-tier-bullet-price">$70</span></li>
+              </ul>
+
+              <div className="reset-tier-bonus">
+                <span className="reset-tier-bonus-icon">+</span>
+                <span className="reset-tier-bonus-text">Online Mobility Modules</span>
+              </div>
+            </motion.div>
+
+            {/* CARD 2 — MEDIUM */}
+            <motion.div variants={blurRevealItem} className="reset-tier-card reset-tier-medium">
+              <div className="reset-tier-badge">POPULAR</div>
+              <span className="reset-tier-corner-bracket reset-tier-corner-tl" />
+              <span className="reset-tier-corner-bracket reset-tier-corner-tr" />
+              <span className="reset-tier-corner-bracket reset-tier-corner-bl" />
+              <span className="reset-tier-corner-bracket reset-tier-corner-br" />
+
+              <div className="reset-tier-header">
+                <div className="reset-tier-name-block">
+                  <span className="reset-tier-num">02</span>
+                  <h3 className="reset-tier-name">MEDIUM</h3>
+                </div>
+                <div className="reset-tier-price-block">
+                  <div className="reset-tier-price">$500</div>
+                  <div className="reset-tier-price-suffix">/ MONTH</div>
+                </div>
+              </div>
+
+              <ul className="reset-tier-bullets">
+                <li className="reset-tier-bullet"><span className="reset-tier-bullet-text">4× Infrared Sauna</span><span className="reset-tier-bullet-price">$120</span></li>
+                <li className="reset-tier-bullet"><span className="reset-tier-bullet-text">4× Adjustments</span><span className="reset-tier-bullet-price">$280</span></li>
+                <li className="reset-tier-bullet"><span className="reset-tier-bullet-text">2× Compression Boots</span><span className="reset-tier-bullet-price">$60</span></li>
+                <li className="reset-tier-bullet"><span className="reset-tier-bullet-text">2× Muscle Therapy</span><span className="reset-tier-bullet-price">$70</span></li>
+              </ul>
+
+              <div className="reset-tier-bonus">
+                <span className="reset-tier-bonus-icon">+</span>
+                <span className="reset-tier-bonus-text">Online Mobility Modules</span>
+              </div>
+            </motion.div>
+
+            {/* CARD 3 — GOLD */}
+            <motion.div variants={blurRevealItem} className="reset-tier-card reset-tier-gold">
+              <span className="reset-tier-corner-bracket reset-tier-corner-tl" />
+              <span className="reset-tier-corner-bracket reset-tier-corner-tr" />
+              <span className="reset-tier-corner-bracket reset-tier-corner-bl" />
+              <span className="reset-tier-corner-bracket reset-tier-corner-br" />
+
+              <div className="reset-tier-header">
+                <div className="reset-tier-name-block">
+                  <span className="reset-tier-num">03</span>
+                  <h3 className="reset-tier-name">GOLD</h3>
+                </div>
+                <div className="reset-tier-price-block">
+                  <div className="reset-tier-price">$1,000</div>
+                  <div className="reset-tier-price-suffix">/ MONTH</div>
+                </div>
+              </div>
+
+              <ul className="reset-tier-bullets">
+                <li className="reset-tier-bullet"><span className="reset-tier-bullet-text">Unlimited Sauna</span><span className="reset-tier-bullet-price">$240+</span></li>
+                <li className="reset-tier-bullet"><span className="reset-tier-bullet-text">4× Adjustments</span><span className="reset-tier-bullet-price">$280</span></li>
+                <li className="reset-tier-bullet"><span className="reset-tier-bullet-text">4× Compression Boots</span><span className="reset-tier-bullet-price">$60</span></li>
+                <li className="reset-tier-bullet"><span className="reset-tier-bullet-text">4× Muscle Therapy</span><span className="reset-tier-bullet-price">$140</span></li>
+                <li className="reset-tier-bullet"><span className="reset-tier-bullet-text">4× Hyperbaric Chamber</span><span className="reset-tier-bullet-price">$360</span></li>
+              </ul>
+
+              <div className="reset-tier-bonus">
+                <span className="reset-tier-bonus-icon">+</span>
+                <span className="reset-tier-bonus-text">Online Mobility Modules</span>
+              </div>
+            </motion.div>
           </motion.div>
         </motion.section>
 
