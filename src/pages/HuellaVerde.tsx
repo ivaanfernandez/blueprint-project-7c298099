@@ -875,7 +875,7 @@ const HuellaVerde = ({ showDock = true }: HuellaVerdeProps) => {
 
           <motion.div {...hvStagger} className="reset-membership-grid">
             {/* CARD 1 — STARTER */}
-            <motion.div variants={hvItemVariants} className="reset-tier-card reset-tier-starter">
+            <motion.div variants={hvTierItemVariants} className="reset-tier-card reset-tier-starter">
               <span className="reset-tier-corner-bracket reset-tier-corner-tl" />
               <span className="reset-tier-corner-bracket reset-tier-corner-tr" />
               <span className="reset-tier-corner-bracket reset-tier-corner-bl" />
@@ -906,7 +906,7 @@ const HuellaVerde = ({ showDock = true }: HuellaVerdeProps) => {
             </motion.div>
 
             {/* CARD 2 — MEDIUM */}
-            <motion.div ref={mediumCardRef} variants={hvItemVariants} className="reset-tier-card reset-tier-medium">
+            <motion.div ref={mediumCardRef} variants={hvTierItemVariants} className="reset-tier-card reset-tier-medium">
               <div className="reset-tier-badge">POPULAR</div>
               <span className="reset-tier-corner-bracket reset-tier-corner-tl" />
               <span className="reset-tier-corner-bracket reset-tier-corner-tr" />
@@ -938,7 +938,7 @@ const HuellaVerde = ({ showDock = true }: HuellaVerdeProps) => {
             </motion.div>
 
             {/* CARD 3 — GOLD */}
-            <motion.div variants={hvItemVariants} className="reset-tier-card reset-tier-gold">
+            <motion.div variants={hvTierItemVariants} className="reset-tier-card reset-tier-gold">
               <span className="reset-tier-corner-bracket reset-tier-corner-tl" />
               <span className="reset-tier-corner-bracket reset-tier-corner-tr" />
               <span className="reset-tier-corner-bracket reset-tier-corner-bl" />
