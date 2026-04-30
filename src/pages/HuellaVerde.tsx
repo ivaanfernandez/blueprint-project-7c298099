@@ -958,7 +958,7 @@ const HuellaVerde = ({ showDock = true }: HuellaVerdeProps) => {
             </motion.div>
 
             {/* CARD 3 — GOLD */}
-            <motion.div variants={blurRevealItem} className="reset-tier-card reset-tier-gold">
+            <motion.div variants={hvItemVariants} className="reset-tier-card reset-tier-gold">
               <span className="reset-tier-corner-bracket reset-tier-corner-tl" />
               <span className="reset-tier-corner-bracket reset-tier-corner-tr" />
               <span className="reset-tier-corner-bracket reset-tier-corner-bl" />
