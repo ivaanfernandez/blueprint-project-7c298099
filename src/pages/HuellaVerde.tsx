@@ -285,6 +285,36 @@ const HuellaVerde = ({ showDock = true }: HuellaVerdeProps) => {
             letter-spacing: 0.05em;
           }
         }
+
+        /* ── RESET HERO FLOATING CARD ── */
+        .reset-hero-wrapper {
+          width: 100%;
+          padding: 0 16px;
+          background: #050a05;
+        }
+        .reset-hero {
+          border-radius: 24px;
+          overflow: hidden;
+          border: 0.5px solid rgba(74, 222, 128, 0.3);
+          position: relative;
+        }
+        .reset-hero::after {
+          content: '';
+          position: absolute;
+          inset: 0;
+          border-radius: 24px;
+          pointer-events: none;
+          box-shadow: 0 0 40px rgba(74, 222, 128, 0.08) inset;
+          z-index: 1;
+        }
+        @media (max-width: 1023px) and (min-width: 768px) {
+          .reset-hero-wrapper { padding: 0 12px; }
+          .reset-hero { border-radius: 20px; }
+        }
+        @media (max-width: 767px) {
+          .reset-hero-wrapper { padding: 0 8px; }
+          .reset-hero { border-radius: 16px; }
+        }
       `}</style>
 
       <motion.div
