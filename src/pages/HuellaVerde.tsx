@@ -926,7 +926,7 @@ const HuellaVerde = ({ showDock = true }: HuellaVerdeProps) => {
             </motion.div>
 
             {/* CARD 2 — MEDIUM */}
-            <motion.div ref={mediumCardRef} variants={blurRevealItem} className="reset-tier-card reset-tier-medium">
+            <motion.div ref={mediumCardRef} variants={hvItemVariants} className="reset-tier-card reset-tier-medium">
               <div className="reset-tier-badge">POPULAR</div>
               <span className="reset-tier-corner-bracket reset-tier-corner-tl" />
               <span className="reset-tier-corner-bracket reset-tier-corner-tr" />
