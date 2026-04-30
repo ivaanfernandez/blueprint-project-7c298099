@@ -505,7 +505,7 @@ const HuellaRoja = ({ showDock }: { showDock: boolean }) => {
       </section>
 
       {/* ═══ SECTION A: HERO (DESKTOP) ═══ */}
-      <section className="hr-hero hidden md:flex" style={{ minHeight: "100vh", alignItems: "center", position: "relative", overflow: "hidden", backgroundColor: "#0a0a0a" }}>
+      <section className="hackbar-hero hr-hero hidden md:flex" style={{ minHeight: "100vh", alignItems: "center", position: "relative", overflow: "hidden", backgroundColor: "#0a0a0a" }}>
         {/* Left column */}
         <div className="hr-hero-left" style={{ flex: "0 0 55%", padding: "80px 0 80px 7%", display: "flex", flexDirection: "column", justifyContent: "center", gap: 16, position: "relative", zIndex: 2 }}>
           {/* Ambient glow — single soft pulsing layer */}
