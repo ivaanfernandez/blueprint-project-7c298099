@@ -102,7 +102,7 @@ const RECOVERY_CARDS: Array<{ name: string; img: string; srcSet?: string; sizes?
   },
   { name: "ICE BATH THERAPY", img: "https://images.unsplash.com/photo-1682687220795-796d3f6f7000?w=800&auto=format&fit=crop" },
   { name: "MOBILITY & BREATHING", img: "/mobility-and-breathing.jpg" },
-  { name: "ADJUSTMENTS & MUSCLE REHAB", img: "https://images.unsplash.com/photo-1600334129128-685c5582fd35?w=800&auto=format&fit=crop" },
+  { name: "ADJUSTMENTS & MUSCLE REHAB", img: "/adjustments-muscle-rehab.jpg" },
   { name: "HYPERBARIC CHAMBER", img: "/hyperbaric-chamber.jpg" },
   { name: "COMPRESSION BOOTS", img: "/compression-boots.jpg" },
 ];
