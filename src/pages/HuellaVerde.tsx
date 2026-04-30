@@ -763,7 +763,7 @@ const HuellaVerde = ({ showDock = true }: HuellaVerdeProps) => {
           </motion.p>
 
           {/* Grid 6 tiles — responsive */}
-          <motion.div {...scrollStagger} className="recovery-arsenal-grid">
+          <motion.div {...scrollStagger} className="recovery-arsenal-grid" style={{ position: "relative", zIndex: 1 }}>
             {RECOVERY_CARDS.map((card, i) => (
               <motion.div
                 variants={blurRevealItem}
