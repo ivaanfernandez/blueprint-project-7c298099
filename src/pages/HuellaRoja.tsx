@@ -558,6 +558,7 @@ const HuellaRoja = ({ showDock }: { showDock: boolean }) => {
         {/* Cinematic blur fade-out — desktop hero */}
         <GradualBlur position="bottom" height="6rem" strength={2} divCount={5} opacity={0.9} curve="bezier" zIndex={4} />
       </section>
+      </div>{/* END hackbar-hero-wrapper */}
 
       {/* ═══ ABOUT BLUEPRINT HACKBAR ═══ */}
       <section className="hackbar-about-section">
