@@ -757,7 +757,7 @@ const HuellaVerde = ({ showDock = true }: HuellaVerdeProps) => {
         <motion.section
           {...scrollReveal}
           className="recovery-arsenal-section"
-          style={{ background: "#0a1f0a", padding: "96px 7% 120px", position: "relative", zIndex: 1, overflow: "hidden", isolation: "isolate" }}
+          style={{ background: "#0a1f0a", padding: "96px 7% 64px", position: "relative", zIndex: 1, overflow: "hidden", isolation: "isolate" }}
         >
           {/* Atmospheric layers — class-based, GPU-promoted */}
           <div aria-hidden="true" className="hv-atmos hv-atmos-glow-top" />
