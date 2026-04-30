@@ -157,11 +157,12 @@ const HuellaVerde = ({ showDock = true }: HuellaVerdeProps) => {
       <div className="verde-animated-bg" aria-hidden="true" />
       <style>{`
         @keyframes hvScanLine {
-          0%   { transform: translate3d(0, 0, 0);    opacity: 0; }
+          0%   { transform: translate3d(0, 0, 0);              opacity: 0; }
           10%  { opacity: 0.22; }
           90%  { opacity: 0.22; }
-          100% { transform: translate3d(0, var(--hv-scan-distance, 240px), 0); opacity: 0; }
+          100% { transform: translate3d(0, 100cqh, 0);         opacity: 0; }
         }
+        .recovery-tile { container-type: size; }
         .hv-scan-line {
           position: absolute;
           left: 0;
