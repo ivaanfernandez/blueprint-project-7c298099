@@ -440,10 +440,12 @@ const Home = ({ showDock }: { showDock: boolean }) => {
           zIndex={4}
         />
       </div>
+      </div>{/* END home-hero-wrapper */}
 
 {/* ══════════════════════════════════════════════════════ */}
       {/* ── WHITE ZONE WRAPPER (card emergence over hero black) ── */}
       {/* ══════════════════════════════════════════════════════ */}
+      <div className="home-white-wrapper">
       <div className="home-white-section" style={{
         position: "relative",
         borderTopLeftRadius: window.innerWidth < 768 ? 24 : 32,
