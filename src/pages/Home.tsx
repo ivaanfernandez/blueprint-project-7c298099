@@ -1,7 +1,11 @@
 import { useRef, useState, useEffect, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
-import { scrollReveal, scrollStagger, blurRevealItem } from "@/lib/scrollAnimations";
+import {
+  scrollRevealCinematic,
+  scrollStaggerCinematic,
+  cinematicSlideUp,
+} from "@/lib/scrollAnimations";
 import ProceduralBackgroundWhite from "@/components/ProceduralBackgroundWhite";
 import FooterBackground from "@/components/FooterBackground";
 import FeatureCard from "@/components/FeatureCard";
