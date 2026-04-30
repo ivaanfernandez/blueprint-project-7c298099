@@ -6,6 +6,8 @@ import {
   scrollRevealCinematic as scrollReveal,
   scrollRevealNoShift,
   scrollRevealGlow,
+  scrollRevealSlideLeft,
+  scrollRevealSlideRight,
 } from "@/lib/scrollAnimations";
 import BiometricScanRed from "@/components/BiometricScanRed";
 import { TextScramble } from "@/components/ui/text-scramble";
@@ -750,13 +752,12 @@ const HuellaRoja = ({ showDock }: { showDock: boolean }) => {
       </motion.section>
 
       {/* ═══ SECTION D: MEET THE CHEF ═══ */}
-      <motion.section
-        {...scrollReveal}
+      <section
         style={{ backgroundColor: "#0a0a0a", padding: "0 7% 72px", position: "relative", zIndex: 1 }}
       >
         <div className="hr-chef-row" style={{ display: "flex", alignItems: "flex-start", gap: 40, marginBottom: 40 }}>
-          {/* Left: title + subtitle */}
-          <div className="hr-chef-left" style={{ flex: "0 0 55%", display: "flex", flexDirection: "column", justifyContent: "center", paddingTop: 20 }}>
+          {/* Left: title + subtitle — slides in from the left */}
+          <motion.div {...scrollRevealSlideLeft} className="hr-chef-left" style={{ flex: "0 0 55%", display: "flex", flexDirection: "column", justifyContent: "center", paddingTop: 20 }}>
             <TextScramble
               as="p"
               style={{ fontFamily: "'Michroma', sans-serif", fontSize: "clamp(20px, 3vw, 36px)", color: "#FFFFFF", textTransform: "uppercase", letterSpacing: "0.04em", lineHeight: 1.1, marginBottom: 16 }}
