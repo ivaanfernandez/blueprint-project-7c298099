@@ -308,8 +308,11 @@ const HuellaVerde = ({ showDock = true }: HuellaVerdeProps) => {
             right: 16px;
             letter-spacing: 0.05em;
           }
-          .recovery-arsenal-section { padding: 56px 6% 0 !important; }
+          .recovery-arsenal-section { padding: 64px 6% 72px !important; }
           .recovery-arsenal-scanlines { opacity: 0.5; }
+          .premium-services-section { padding: 72px 6% 64px !important; }
+          .recovery-arsenal-section .hv-grid-pattern,
+          .premium-services-section .hv-grid-pattern { background-size: 24px 24px !important; }
         }
 
         /* ── RESET HERO FLOATING CARD ── */
