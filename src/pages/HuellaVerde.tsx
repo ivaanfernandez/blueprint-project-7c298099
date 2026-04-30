@@ -1,4 +1,4 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import SEO from "@/components/SEO";
@@ -120,6 +120,30 @@ const HuellaVerde = ({ showDock = true }: HuellaVerdeProps) => {
   const [scanDone, setScanDone] = useState(false);
   const handleScanDone = useCallback(() => setScanDone(true), []);
   useLowPerfBackground(".verde-animated-bg");
+
+  // Re-trigger del sweep "POPULAR" cada vez que la card MEDIUM entra al viewport.
+  const mediumCardRef = useRef<HTMLDivElement | null>(null);
+  useEffect(() => {
+    if (!scanDone) return;
+    const node = mediumCardRef.current;
+    if (!node || typeof IntersectionObserver === "undefined") return;
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          // Reinicia las animaciones forzando reflow al togglear la clase.
+          node.classList.remove("is-visible");
+          // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+          node.offsetWidth;
+          node.classList.add("is-visible");
+        } else {
+          node.classList.remove("is-visible");
+        }
+      },
+      { threshold: 0.35 }
+    );
+    io.observe(node);
+    return () => io.disconnect();
+  }, [scanDone]);
 
   if (!scanDone) return <BiometricScanGreen onComplete={handleScanDone} />;
 
@@ -561,6 +585,48 @@ const HuellaVerde = ({ showDock = true }: HuellaVerdeProps) => {
           0%, 100% { background-position: 0% 0%; }
           50% { background-position: 100% 100%; }
         }
+        /* Sweep diagonal re-disparable al entrar al viewport */
+        .reset-tier-medium::after {
+          content: '';
+          position: absolute;
+          inset: -1px;
+          border-radius: 16px;
+          background: linear-gradient(115deg,
+            transparent 30%,
+            rgba(74, 222, 128, 0.0) 42%,
+            rgba(134, 239, 172, 0.55) 50%,
+            rgba(74, 222, 128, 0.0) 58%,
+            transparent 70%);
+          background-size: 250% 250%;
+          background-position: 150% 150%;
+          mix-blend-mode: screen;
+          pointer-events: none;
+          z-index: 1;
+          opacity: 0;
+        }
+        .reset-tier-medium.is-visible::after {
+          animation: medium-sweep 1.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+        }
+        @keyframes medium-sweep {
+          0%   { background-position: 150% 150%; opacity: 0; }
+          15%  { opacity: 1; }
+          85%  { opacity: 1; }
+          100% { background-position: -50% -50%; opacity: 0; }
+        }
+        /* Pulse de borde sincronizado con el sweep */
+        .reset-tier-medium.is-visible {
+          animation: medium-border-pulse 1.6s ease-out;
+        }
+        @keyframes medium-border-pulse {
+          0%   { box-shadow: 0 0 18px rgba(74, 222, 128, 0.25), inset 0 0 30px rgba(74, 222, 128, 0.05); }
+          50%  { box-shadow: 0 0 38px rgba(74, 222, 128, 0.55), inset 0 0 50px rgba(74, 222, 128, 0.12); }
+          100% { box-shadow: 0 0 18px rgba(74, 222, 128, 0.25), inset 0 0 30px rgba(74, 222, 128, 0.05); }
+        }
+        @media (prefers-reduced-motion: reduce) {
+          .reset-tier-medium::before,
+          .reset-tier-medium::after,
+          .reset-tier-medium.is-visible { animation: none !important; }
+        }
         .reset-tier-gold {
           background: linear-gradient(180deg, rgba(80, 55, 15, 0.85) 0%, rgba(30, 18, 5, 0.95) 100%);
           border: 1px solid rgba(212, 175, 55, 0.7);
@@ -776,7 +842,7 @@ const HuellaVerde = ({ showDock = true }: HuellaVerdeProps) => {
             </motion.div>
 
             {/* CARD 2 — MEDIUM */}
-            <motion.div variants={blurRevealItem} className="reset-tier-card reset-tier-medium">
+            <motion.div ref={mediumCardRef} variants={blurRevealItem} className="reset-tier-card reset-tier-medium">
               <div className="reset-tier-badge">POPULAR</div>
               <span className="reset-tier-corner-bracket reset-tier-corner-tl" />
               <span className="reset-tier-corner-bracket reset-tier-corner-tr" />
