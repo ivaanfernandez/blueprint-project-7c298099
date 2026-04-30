@@ -606,9 +606,9 @@ const HuellaRoja = ({ showDock }: { showDock: boolean }) => {
         {...scrollReveal}
         style={{ backgroundColor: "#0a0a0a", padding: "72px 7%", position: "relative", zIndex: 1 }}
       >
-        <p style={{ fontFamily: "'Michroma', sans-serif", fontSize: "clamp(16px, 2vw, 24px)", color: "#FFFFFF", textTransform: "uppercase", letterSpacing: "0.04em", marginBottom: 32, textAlign: "center", width: "100%" }}>
+        <motion.p {...scrollRevealGlow} style={{ fontFamily: "'Michroma', sans-serif", fontSize: "clamp(16px, 2vw, 24px)", color: "#FFFFFF", textTransform: "uppercase", letterSpacing: "0.04em", marginBottom: 32, textAlign: "center", width: "100%" }}>
           FUEL YOUR SYSTEM
-        </p>
+        </motion.p>
         <div className="hr-fuel-grid" style={{ display: "flex", gap: 20 }}>
           <FuelCard
             index={0}
