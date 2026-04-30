@@ -314,8 +314,8 @@ const HuellaVerde = ({ showDock = true }: HuellaVerdeProps) => {
             letter-spacing: 0.04em;
             line-height: 1.15;
           }
-          .recovery-arsenal-section { padding: 64px 6% 72px !important; }
-          .premium-services-section { padding: 72px 6% 64px !important; }
+          .recovery-arsenal-section { padding: 64px 6% 48px !important; }
+          .premium-services-section { padding: 48px 6% 64px !important; }
         }
 
         /* ── RESET HERO FLOATING CARD ── */
@@ -757,7 +757,7 @@ const HuellaVerde = ({ showDock = true }: HuellaVerdeProps) => {
         <motion.section
           {...scrollReveal}
           className="recovery-arsenal-section"
-          style={{ background: "#0a1f0a", padding: "96px 7% 120px", position: "relative", zIndex: 1, overflow: "hidden", isolation: "isolate" }}
+          style={{ background: "#0a1f0a", padding: "96px 7% 64px", position: "relative", zIndex: 1, overflow: "hidden", isolation: "isolate" }}
         >
           {/* Atmospheric layers — class-based, GPU-promoted */}
           <div aria-hidden="true" className="hv-atmos hv-atmos-glow-top" />
@@ -803,7 +803,7 @@ const HuellaVerde = ({ showDock = true }: HuellaVerdeProps) => {
         <motion.section
           {...scrollReveal}
           className="premium-services-section hv-servicios"
-          style={{ background: "#0a1f0a", padding: "120px 7% 96px", position: "relative", zIndex: 1, overflow: "hidden", isolation: "isolate" }}
+          style={{ background: "#0a1f0a", padding: "64px 7% 96px", position: "relative", zIndex: 1, overflow: "hidden", isolation: "isolate" }}
         >
           {/* Atmospheric layers — class-based, GPU-promoted */}
           <div aria-hidden="true" className="hv-atmos hv-atmos-vignette-t" />
