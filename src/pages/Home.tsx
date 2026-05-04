@@ -605,7 +605,7 @@ const Home = ({ showDock }: { showDock: boolean }) => {
                   desc: "Discipline, confidence and focus built through education, pressure and consistency.",
                   rgba: "156,163,175",
                   icon: (
-                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#9CA3AF" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#374151" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                       {/* Brain */}
                       <path d="M9.5 4a3 3 0 0 0-3 3v0a2.5 2.5 0 0 0-1.5 4.5A2.5 2.5 0 0 0 6.5 16 3 3 0 0 0 9.5 19a2.5 2.5 0 0 0 2.5-2.5V5.5A1.5 1.5 0 0 0 10.5 4Z" />
                       <path d="M14.5 4a3 3 0 0 1 3 3v0a2.5 2.5 0 0 1 1.5 4.5A2.5 2.5 0 0 1 17.5 16a3 3 0 0 1-3 3 2.5 2.5 0 0 1-2.5-2.5V5.5A1.5 1.5 0 0 1 13.5 4Z" />
