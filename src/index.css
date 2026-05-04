@@ -269,8 +269,8 @@ All colors MUST be HSL.
 /* ── DESKTOP ≥1024px: About section Option D Aligned ── */
 @media (min-width: 1024px) {
   .about-section-new {
-    padding: 48px 7% !important;
-    max-height: 90vh;
+    padding: 96px 7% 48px !important;
+    max-height: 95vh;
     overflow: hidden;
     display: flex;
     flex-direction: column;
