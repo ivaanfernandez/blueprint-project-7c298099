@@ -185,12 +185,13 @@ const FeatureCard = memo(function FeatureCard({
     return variant === "desktop"
       ? {
           ...shared,
-          padding: "20px 26px",
+          padding: 16,
           height: "100%",
           minHeight: 0,
           display: "flex",
           flexDirection: "column",
           justifyContent: "center",
+          gap: 8,
         }
       : { ...shared, padding: "16px 18px", display: "flex", alignItems: "flex-start", gap: 14 };
   }, [isInView, variant, glowActive]);
