@@ -481,7 +481,7 @@ const Home = ({ showDock }: { showDock: boolean }) => {
                   desc: "Strength, physique, mobility and real progression through structured coaching.",
                   rgba: "26,107,255",
                   icon: (
-                    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#1A6BFF" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#1A6BFF" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                       {/* Dumbbell */}
                       <rect x="2" y="8" width="2.5" height="8" rx="0.6" />
                       <rect x="4.5" y="10" width="1.8" height="4" rx="0.4" />
@@ -496,7 +496,7 @@ const Home = ({ showDock }: { showDock: boolean }) => {
                   desc: "Meals designed to fuel performance, recovery and body composition with real ingredients.",
                   rgba: "255,59,59",
                   icon: (
-                    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#FF3B3B" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#FF3B3B" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                       {/* Plate with fork & knife */}
                       <circle cx="12" cy="12" r="9" />
                       <circle cx="12" cy="12" r="6" />
@@ -512,7 +512,7 @@ const Home = ({ showDock }: { showDock: boolean }) => {
                   desc: "Sauna, cold therapy and mobility systems to restore at a higher level.",
                   rgba: "34,197,94",
                   icon: (
-                    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#22C55E" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#22C55E" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                       <path d="M22 12h-4l-3 9L9 3l-3 9H2" />
                     </svg>
                   ),
@@ -522,7 +522,7 @@ const Home = ({ showDock }: { showDock: boolean }) => {
                   desc: "Discipline, confidence and focus built through education, pressure and consistency.",
                   rgba: "156,163,175",
                   icon: (
-                    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#9CA3AF" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#9CA3AF" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                       {/* Brain */}
                       <path d="M9.5 4a3 3 0 0 0-3 3v0a2.5 2.5 0 0 0-1.5 4.5A2.5 2.5 0 0 0 6.5 16 3 3 0 0 0 9.5 19a2.5 2.5 0 0 0 2.5-2.5V5.5A1.5 1.5 0 0 0 10.5 4Z" />
                       <path d="M14.5 4a3 3 0 0 1 3 3v0a2.5 2.5 0 0 1 1.5 4.5A2.5 2.5 0 0 1 17.5 16a3 3 0 0 1-3 3 2.5 2.5 0 0 1-2.5-2.5V5.5A1.5 1.5 0 0 1 13.5 4Z" />
@@ -553,7 +553,7 @@ const Home = ({ showDock }: { showDock: boolean }) => {
                   title: "ELITE TRAINING SYSTEM",
                   desc: "Strength, physique, mobility and real progression through structured coaching.",
                   icon: (
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1A6BFF" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1A6BFF" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                       {/* Dumbbell */}
                       <rect x="2" y="8" width="2.5" height="8" rx="0.6" />
                       <rect x="4.5" y="10" width="1.8" height="4" rx="0.4" />
@@ -567,7 +567,7 @@ const Home = ({ showDock }: { showDock: boolean }) => {
                   title: "NUTRITION ENGINEERING",
                   desc: "Meals designed to fuel performance, recovery and body composition with real ingredients.",
                   icon: (
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#FF3B3B" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#FF3B3B" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                       {/* Plate with fork & knife */}
                       <circle cx="12" cy="12" r="9" />
                       <circle cx="12" cy="12" r="6" />
@@ -582,7 +582,7 @@ const Home = ({ showDock }: { showDock: boolean }) => {
                   title: "RECOVERY RESET",
                   desc: "Sauna, cold therapy and mobility systems to restore at a higher level.",
                   icon: (
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#22C55E" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#22C55E" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                       <path d="M22 12h-4l-3 9L9 3l-3 9H2" />
                     </svg>
                   ),
@@ -591,7 +591,7 @@ const Home = ({ showDock }: { showDock: boolean }) => {
                   title: "MINDSET UPGRADE",
                   desc: "Discipline, confidence and focus built through education, pressure and consistency.",
                   icon: (
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#9CA3AF" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#9CA3AF" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                       {/* Brain */}
                       <path d="M9.5 4a3 3 0 0 0-3 3v0a2.5 2.5 0 0 0-1.5 4.5A2.5 2.5 0 0 0 6.5 16 3 3 0 0 0 9.5 19a2.5 2.5 0 0 0 2.5-2.5V5.5A1.5 1.5 0 0 0 10.5 4Z" />
                       <path d="M14.5 4a3 3 0 0 1 3 3v0a2.5 2.5 0 0 1 1.5 4.5A2.5 2.5 0 0 1 17.5 16a3 3 0 0 1-3 3 2.5 2.5 0 0 1-2.5-2.5V5.5A1.5 1.5 0 0 1 13.5 4Z" />

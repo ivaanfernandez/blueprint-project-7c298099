@@ -52,9 +52,9 @@ const DESC_DESKTOP_STYLE: CSSProperties = {
 };
 
 const ICON_BOX_MOBILE_STYLE: CSSProperties = {
-  width: 40,
-  height: 40,
-  borderRadius: 12,
+  width: 36,
+  height: 36,
+  borderRadius: 11,
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
@@ -193,9 +193,9 @@ const FeatureCard = memo(function FeatureCard({
 
   const desktopIconBoxStyle = useMemo<CSSProperties>(
     () => ({
-      width: 34,
-      height: 34,
-      borderRadius: 9,
+      width: 30,
+      height: 30,
+      borderRadius: 8,
       background: `rgba(${rgba}, 0.06)`,
       border: `1px solid rgba(${rgba}, 0.1)`,
       display: "flex",
