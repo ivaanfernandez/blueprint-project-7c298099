@@ -98,6 +98,10 @@ const hackbarImages = [
   "/hackbar-card/hackbar-4.jpg",
 ];
 
+const HERO_POSTER_SRC = "/poster_image.jpg";
+const HERO_DESKTOP_VIDEO_SRC = "/hero-bg.mp4";
+const HERO_MOBILE_VIDEO_SRC = "/hero-bg-mobile.mp4";
+
 const Home = ({ showDock }: { showDock: boolean }) => {
   const navigate = useNavigate();
   const aboutRef = useRef<HTMLDivElement>(null);
@@ -124,6 +128,41 @@ const Home = ({ showDock }: { showDock: boolean }) => {
     return () => mq.removeEventListener("change", onChange);
   }, []);
 
+  useEffect(() => {
+    const src = isDesktop ? HERO_DESKTOP_VIDEO_SRC : HERO_MOBILE_VIDEO_SRC;
+    const preloadLink = document.createElement("link");
+    preloadLink.rel = "preload";
+    preloadLink.as = "video";
+    preloadLink.href = src;
+    preloadLink.type = "video/mp4";
+    preloadLink.setAttribute("fetchpriority", "high");
+    document.head.appendChild(preloadLink);
+
+    const warmupVideo = document.createElement("video");
+    warmupVideo.src = src;
+    warmupVideo.poster = HERO_POSTER_SRC;
+    warmupVideo.preload = "auto";
+    warmupVideo.muted = true;
+    warmupVideo.defaultMuted = true;
+    warmupVideo.loop = true;
+    warmupVideo.playsInline = true;
+    warmupVideo.setAttribute("muted", "");
+    warmupVideo.setAttribute("playsinline", "");
+    warmupVideo.setAttribute("webkit-playsinline", "");
+    warmupVideo.style.cssText = "position:fixed;width:1px;height:1px;opacity:0;pointer-events:none;left:-9999px;top:-9999px;";
+    document.body.appendChild(warmupVideo);
+    warmupVideo.load();
+    warmupVideo.play().catch(() => {});
+
+    return () => {
+      preloadLink.remove();
+      warmupVideo.pause();
+      warmupVideo.removeAttribute("src");
+      warmupVideo.load();
+      warmupVideo.remove();
+    };
+  }, [isDesktop]);
+
   // Hero video readiness — crossfade poster→video once enough data is buffered.
   // Defensive: also check readyState on mount in case the video is already cached
   // and the `canplay` event already fired before the listener attached.
@@ -141,6 +180,16 @@ const Home = ({ showDock }: { showDock: boolean }) => {
     setReady: (b: boolean) => void
   ) => {
     if (!v) return () => {};
+    v.preload = "auto";
+    v.muted = true;
+    v.defaultMuted = true;
+    v.playsInline = true;
+    v.setAttribute("muted", "");
+    v.setAttribute("playsinline", "");
+    v.setAttribute("webkit-playsinline", "");
+    v.setAttribute("fetchpriority", "high");
+    v.load();
+
     const markReady = () => setReady(true);
     const events = ["loadeddata", "canplay", "canplaythrough", "playing"] as const;
     events.forEach((ev) => v.addEventListener(ev, markReady));
@@ -149,6 +198,7 @@ const Home = ({ showDock }: { showDock: boolean }) => {
       const p = v.play();
       if (p && typeof p.catch === "function") p.catch(() => {});
     };
+    const playTimeout = window.setTimeout(tryPlay, 50);
     tryPlay();
     if (v.readyState >= 2) setReady(true);
     // Poll fallback (covers cases where no event fires post-mount).
@@ -164,18 +214,21 @@ const Home = ({ showDock }: { showDock: boolean }) => {
     const timeout = window.setTimeout(() => setReady(true), 3000);
     return () => {
       events.forEach((ev) => v.removeEventListener(ev, markReady));
+      window.clearTimeout(playTimeout);
       window.clearInterval(poll);
       window.clearTimeout(timeout);
     };
   };
 
   useEffect(() => {
+    if (loaderActive) return () => {};
     return attachVideoReadiness(desktopVideoRef.current, setDesktopVideoReady);
-  }, [isDesktop]);
+  }, [isDesktop, loaderActive]);
 
   useEffect(() => {
+    if (loaderActive) return () => {};
     return attachVideoReadiness(mobileVideoRef.current, setMobileVideoReady);
-  }, []);
+  }, [loaderActive]);
   useEffect(() => {
     const id = setInterval(
       () => setCurrentAboutImage((p) => (p + 1) % aboutImages.length),
@@ -323,7 +376,7 @@ const Home = ({ showDock }: { showDock: boolean }) => {
         {/* Desktop: poster image + video crossfade */}
         <div className="hidden md:block" style={{ position: "absolute", inset: 0, zIndex: 0 }}>
           <img
-            src="/poster_image.jpg"
+            src={HERO_POSTER_SRC}
             alt=""
             aria-hidden="true"
             fetchPriority="high"
@@ -344,12 +397,13 @@ const Home = ({ showDock }: { showDock: boolean }) => {
           {isDesktop && (
             <video
               ref={desktopVideoRef}
-              src="/hero-bg.mp4"
-              poster="/poster_image.jpg"
+              src={HERO_DESKTOP_VIDEO_SRC}
+              poster={HERO_POSTER_SRC}
               autoPlay
               muted
               loop
               playsInline
+              webkit-playsinline="true"
               preload="auto"
               style={{
                 position: "absolute",
@@ -369,7 +423,7 @@ const Home = ({ showDock }: { showDock: boolean }) => {
         {/* Mobile: poster image + lightweight video crossfade */}
         <div className="block md:hidden" style={{ position: "absolute", inset: 0, zIndex: 0 }}>
           <img
-            src="/poster_image.jpg"
+            src={HERO_POSTER_SRC}
             alt=""
             aria-hidden="true"
             fetchPriority="high"
@@ -389,12 +443,13 @@ const Home = ({ showDock }: { showDock: boolean }) => {
           />
           <video
             ref={mobileVideoRef}
-            src="/hero-bg-mobile.mp4"
-            poster="/poster_image.jpg"
+            src={HERO_MOBILE_VIDEO_SRC}
+            poster={HERO_POSTER_SRC}
             autoPlay
             muted
             loop
             playsInline
+            webkit-playsinline="true"
             preload="auto"
             style={{
               position: "absolute",
