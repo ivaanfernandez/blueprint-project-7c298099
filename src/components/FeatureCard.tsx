@@ -28,27 +28,31 @@ const PREFERS_REDUCED_MOTION =
 
 const TITLE_DESKTOP_STYLE: CSSProperties = {
   fontFamily: "'Rajdhani', sans-serif",
-  fontSize: 18,
+  fontSize: 15,
   fontWeight: 600,
   color: "#000",
-  letterSpacing: "1.5px",
+  letterSpacing: "1.3px",
   textTransform: "uppercase",
+  lineHeight: 1.2,
 };
 
 const TITLE_ROW_STYLE: CSSProperties = {
   display: "flex",
   alignItems: "center",
   gap: 10,
-  marginBottom: 6,
+  marginBottom: 8,
 };
 
 const DESC_DESKTOP_STYLE: CSSProperties = {
   fontFamily: "'Inter', sans-serif",
-  fontSize: 15,
+  fontSize: 13,
   fontWeight: 300,
   color: "#6B7280",
-  lineHeight: 1.6,
-  paddingLeft: 44,
+  lineHeight: 1.5,
+  display: "-webkit-box",
+  WebkitLineClamp: 3,
+  WebkitBoxOrient: "vertical",
+  overflow: "hidden",
 };
 
 const ICON_BOX_MOBILE_STYLE: CSSProperties = {
