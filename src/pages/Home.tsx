@@ -180,6 +180,15 @@ const Home = ({ showDock }: { showDock: boolean }) => {
     setReady: (b: boolean) => void
   ) => {
     if (!v) return () => {};
+    v.preload = "auto";
+    v.muted = true;
+    v.defaultMuted = true;
+    v.playsInline = true;
+    v.setAttribute("muted", "");
+    v.setAttribute("playsinline", "");
+    v.setAttribute("webkit-playsinline", "");
+    v.load();
+
     const markReady = () => setReady(true);
     const events = ["loadeddata", "canplay", "canplaythrough", "playing"] as const;
     events.forEach((ev) => v.addEventListener(ev, markReady));
@@ -188,6 +197,7 @@ const Home = ({ showDock }: { showDock: boolean }) => {
       const p = v.play();
       if (p && typeof p.catch === "function") p.catch(() => {});
     };
+    const playTimeout = window.setTimeout(tryPlay, 50);
     tryPlay();
     if (v.readyState >= 2) setReady(true);
     // Poll fallback (covers cases where no event fires post-mount).
@@ -203,6 +213,7 @@ const Home = ({ showDock }: { showDock: boolean }) => {
     const timeout = window.setTimeout(() => setReady(true), 3000);
     return () => {
       events.forEach((ev) => v.removeEventListener(ev, markReady));
+      window.clearTimeout(playTimeout);
       window.clearInterval(poll);
       window.clearTimeout(timeout);
     };
