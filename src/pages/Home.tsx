@@ -810,7 +810,7 @@ const Home = ({ showDock }: { showDock: boolean }) => {
       <LazyMount rootMargin="500px" placeholderHeight="560px">
       <div className="footer-bg-wrapper" style={{
         position: "relative" as const,
-        backgroundImage: "url('/footer-bg.jpeg')",
+        backgroundImage: "url('/footer-bg.webp')",
         backgroundSize: "cover",
         backgroundPosition: "center center",
         backgroundRepeat: "no-repeat",
