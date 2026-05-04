@@ -187,6 +187,7 @@ const Home = ({ showDock }: { showDock: boolean }) => {
     v.setAttribute("muted", "");
     v.setAttribute("playsinline", "");
     v.setAttribute("webkit-playsinline", "");
+    v.setAttribute("fetchpriority", "high");
     v.load();
 
     const markReady = () => setReady(true);
@@ -402,7 +403,6 @@ const Home = ({ showDock }: { showDock: boolean }) => {
               playsInline
               webkit-playsinline="true"
               preload="auto"
-              fetchPriority="high"
               style={{
                 position: "absolute",
                 inset: 0,
@@ -449,7 +449,6 @@ const Home = ({ showDock }: { showDock: boolean }) => {
             playsInline
             webkit-playsinline="true"
             preload="auto"
-            fetchPriority="high"
             style={{
               position: "absolute",
               inset: 0,
