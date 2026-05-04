@@ -221,12 +221,14 @@ const Home = ({ showDock }: { showDock: boolean }) => {
   };
 
   useEffect(() => {
+    if (loaderActive) return () => {};
     return attachVideoReadiness(desktopVideoRef.current, setDesktopVideoReady);
-  }, [isDesktop]);
+  }, [isDesktop, loaderActive]);
 
   useEffect(() => {
+    if (loaderActive) return () => {};
     return attachVideoReadiness(mobileVideoRef.current, setMobileVideoReady);
-  }, []);
+  }, [loaderActive]);
   useEffect(() => {
     const id = setInterval(
       () => setCurrentAboutImage((p) => (p + 1) % aboutImages.length),
