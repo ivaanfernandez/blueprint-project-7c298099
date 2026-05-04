@@ -458,23 +458,24 @@ const Home = ({ showDock }: { showDock: boolean }) => {
         zIndex: 2,
       }}>
       <div ref={aboutRef} style={{ position: "relative", zIndex: 1 }}>
-        <div className="about-section-new about-grid-desktop" style={{
+        <div className="about-section-new" style={{
           padding: "64px 7%",
           position: "relative", zIndex: 1,
         }}>
-          {/* Left — Title + Subtitle + Timeline */}
-          <div style={{ display: "flex", flexDirection: "column" as const, minHeight: 0 }}>
-            <motion.h2 {...scrollRevealCinematic} className="about-title-line" style={{
-              fontFamily: "'Michroma', sans-serif",
-              fontSize: "clamp(18px, 2.2vw, 28px)", color: "#000",
-              textTransform: "uppercase", lineHeight: 1.12,
-              marginBottom: window.innerWidth < 768 ? 32 : 48, marginTop: 0,
-            }}>
-              BUILT FOR HUMAN EVOLUTION
-            </motion.h2>
+          <motion.h2 {...scrollRevealCinematic} className="about-title-line about-title-top" style={{
+            fontFamily: "'Michroma', sans-serif",
+            fontSize: "clamp(18px, 2.2vw, 28px)", color: "#000",
+            textTransform: "uppercase", lineHeight: 1.12,
+            marginBottom: window.innerWidth < 768 ? 32 : 56, marginTop: 0,
+          }}>
+            BUILT FOR HUMAN EVOLUTION
+          </motion.h2>
 
+          <div className="about-grid-desktop">
+          {/* Left — Cards grid */}
+          <div style={{ display: "flex", flexDirection: "column" as const, minHeight: 0 }}>
             {/* Features (DESKTOP) — Apple-style frosted white cards */}
-            <motion.div {...scrollStaggerCinematic} className="about-features-desktop features-stack" style={{ position: "relative", flexGrow: 1, minHeight: 0 }}>
+            <motion.div {...scrollStaggerCinematic} className="about-features-desktop about-features-grid-2x2" style={{ position: "relative", flexGrow: 1, minHeight: 0 }}>
               {[
                 {
                   title: "Elite Training System",
@@ -638,6 +639,7 @@ const Home = ({ showDock }: { showDock: boolean }) => {
                 }}
               />
             ))}
+          </div>
           </div>
         </div>
       </div>
