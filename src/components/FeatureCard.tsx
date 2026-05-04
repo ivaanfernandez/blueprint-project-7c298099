@@ -34,13 +34,7 @@ const TITLE_DESKTOP_STYLE: CSSProperties = {
   letterSpacing: "1.3px",
   textTransform: "uppercase",
   lineHeight: 1.2,
-};
-
-const TITLE_ROW_STYLE: CSSProperties = {
-  display: "flex",
-  alignItems: "center",
-  gap: 10,
-  marginBottom: 8,
+  textAlign: "center",
 };
 
 const DESC_DESKTOP_STYLE: CSSProperties = {
@@ -49,6 +43,7 @@ const DESC_DESKTOP_STYLE: CSSProperties = {
   fontWeight: 300,
   color: "#6B7280",
   lineHeight: 1.5,
+  textAlign: "center",
   display: "-webkit-box",
   WebkitLineClamp: 3,
   WebkitBoxOrient: "vertical",
