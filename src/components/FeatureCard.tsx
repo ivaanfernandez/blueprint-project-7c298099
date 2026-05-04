@@ -28,18 +28,19 @@ const PREFERS_REDUCED_MOTION =
 
 const TITLE_DESKTOP_STYLE: CSSProperties = {
   fontFamily: "'Rajdhani', sans-serif",
-  fontSize: 15,
+  fontSize: 18,
   fontWeight: 600,
   color: "#000",
   letterSpacing: "1.3px",
   textTransform: "uppercase",
   lineHeight: 1.2,
   textAlign: "center",
+  margin: 0,
 };
 
 const DESC_DESKTOP_STYLE: CSSProperties = {
   fontFamily: "'Inter', sans-serif",
-  fontSize: 13,
+  fontSize: 15,
   fontWeight: 300,
   color: "#6B7280",
   lineHeight: 1.5,
@@ -48,6 +49,7 @@ const DESC_DESKTOP_STYLE: CSSProperties = {
   WebkitLineClamp: 3,
   WebkitBoxOrient: "vertical",
   overflow: "hidden",
+  margin: 0,
 };
 
 const ICON_BOX_MOBILE_STYLE: CSSProperties = {
