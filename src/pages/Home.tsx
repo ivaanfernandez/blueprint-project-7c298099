@@ -98,6 +98,10 @@ const hackbarImages = [
   "/hackbar-card/hackbar-4.jpg",
 ];
 
+const HERO_POSTER_SRC = "/poster_image.jpg";
+const HERO_DESKTOP_VIDEO_SRC = "/hero-bg.mp4";
+const HERO_MOBILE_VIDEO_SRC = "/hero-bg-mobile.mp4";
+
 const Home = ({ showDock }: { showDock: boolean }) => {
   const navigate = useNavigate();
   const aboutRef = useRef<HTMLDivElement>(null);
@@ -123,6 +127,41 @@ const Home = ({ showDock }: { showDock: boolean }) => {
     mq.addEventListener("change", onChange);
     return () => mq.removeEventListener("change", onChange);
   }, []);
+
+  useEffect(() => {
+    const src = isDesktop ? HERO_DESKTOP_VIDEO_SRC : HERO_MOBILE_VIDEO_SRC;
+    const preloadLink = document.createElement("link");
+    preloadLink.rel = "preload";
+    preloadLink.as = "video";
+    preloadLink.href = src;
+    preloadLink.type = "video/mp4";
+    preloadLink.setAttribute("fetchpriority", "high");
+    document.head.appendChild(preloadLink);
+
+    const warmupVideo = document.createElement("video");
+    warmupVideo.src = src;
+    warmupVideo.poster = HERO_POSTER_SRC;
+    warmupVideo.preload = "auto";
+    warmupVideo.muted = true;
+    warmupVideo.defaultMuted = true;
+    warmupVideo.loop = true;
+    warmupVideo.playsInline = true;
+    warmupVideo.setAttribute("muted", "");
+    warmupVideo.setAttribute("playsinline", "");
+    warmupVideo.setAttribute("webkit-playsinline", "");
+    warmupVideo.style.cssText = "position:fixed;width:1px;height:1px;opacity:0;pointer-events:none;left:-9999px;top:-9999px;";
+    document.body.appendChild(warmupVideo);
+    warmupVideo.load();
+    warmupVideo.play().catch(() => {});
+
+    return () => {
+      preloadLink.remove();
+      warmupVideo.pause();
+      warmupVideo.removeAttribute("src");
+      warmupVideo.load();
+      warmupVideo.remove();
+    };
+  }, [isDesktop]);
 
   // Hero video readiness — crossfade poster→video once enough data is buffered.
   // Defensive: also check readyState on mount in case the video is already cached
