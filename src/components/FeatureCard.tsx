@@ -9,6 +9,8 @@ interface FeatureCardProps {
   variant: "desktop" | "mobile";
   /** Tint color for the icon container background (rgba "r,g,b" string). Desktop only. */
   rgba?: string;
+  /** Index in the cascade sequence (0..n). When provided, card receives a one-shot scroll-in glow at index*200ms. */
+  cascadeIndex?: number;
 }
 
 /* ── Static styles (module-scope, never re-created) ── */
@@ -16,6 +18,13 @@ const BASE_SHADOW =
   "0 1px 2px rgba(0, 0, 0, 0.04), 0 4px 12px rgba(0, 0, 0, 0.06), 0 12px 32px rgba(0, 0, 0, 0.05)";
 const ACTIVE_SHADOW =
   "0 2px 4px rgba(0, 0, 0, 0.05), 0 8px 20px rgba(0, 0, 0, 0.08), 0 20px 48px rgba(0, 0, 0, 0.06)";
+const GLOW_SHADOW =
+  "0 0 0 1px #9CA3AF, 0 0 24px rgba(156, 163, 175, 0.45), 0 0 48px rgba(156, 163, 175, 0.15)";
+const GLOW_EASE = "cubic-bezier(0.16, 1, 0.3, 1)";
+const PREFERS_REDUCED_MOTION =
+  typeof window !== "undefined" &&
+  typeof window.matchMedia === "function" &&
+  window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 const TITLE_DESKTOP_STYLE: CSSProperties = {
   fontFamily: "'Rajdhani', sans-serif",
@@ -95,18 +104,21 @@ const FeatureCard = memo(function FeatureCard({
   description,
   variant,
   rgba,
+  cascadeIndex,
 }: FeatureCardProps) {
   const cardRef = useRef<HTMLDivElement | null>(null);
   const [isInView, setIsInView] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
+  const [cascadeGlow, setCascadeGlow] = useState(false);
+  const cascadeFiredRef = useRef(false);
 
-  // Observer is created exactly once per mount (empty deps).
+  // Sustained in-view observer (existing behavior)
   useEffect(() => {
     const card = cardRef.current;
     if (!card || typeof IntersectionObserver === "undefined") return;
 
     const observer = new IntersectionObserver(
       ([entry]) => {
-        // Functional setter avoids re-subscribing to state and skips no-op updates.
         setIsInView((prev) => (prev === entry.isIntersecting ? prev : entry.isIntersecting));
       },
       {
@@ -119,18 +131,51 @@ const FeatureCard = memo(function FeatureCard({
     return () => observer.disconnect();
   }, []);
 
-  // Style only changes when isInView flips — memoized to keep referential equality otherwise.
+  // One-shot cascade glow on scroll-in (per-card, gated by cascadeIndex)
+  useEffect(() => {
+    if (cascadeIndex == null) return;
+    if (PREFERS_REDUCED_MOTION) return;
+    const card = cardRef.current;
+    if (!card || typeof IntersectionObserver === "undefined") return;
+
+    let onTimer: number | undefined;
+    let offTimer: number | undefined;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting || cascadeFiredRef.current) return;
+        cascadeFiredRef.current = true;
+        observer.disconnect();
+        onTimer = window.setTimeout(() => {
+          setCascadeGlow(true);
+          offTimer = window.setTimeout(() => setCascadeGlow(false), 700);
+        }, cascadeIndex * 200);
+      },
+      { threshold: 0.2 }
+    );
+    observer.observe(card);
+
+    return () => {
+      observer.disconnect();
+      if (onTimer) window.clearTimeout(onTimer);
+      if (offTimer) window.clearTimeout(offTimer);
+    };
+  }, [cascadeIndex]);
+
+  const glowActive = isHovered || cascadeGlow;
+
   const containerStyle = useMemo<CSSProperties>(() => {
+    const transitionDur = PREFERS_REDUCED_MOTION ? "0ms" : "400ms";
     const shared: CSSProperties = {
       position: "relative",
       background: "rgba(255, 255, 255, 0.65)",
       backdropFilter: "blur(20px) saturate(180%)",
       WebkitBackdropFilter: "blur(20px) saturate(180%)",
-      border: `1px solid ${isInView ? "rgba(0, 0, 0, 0.1)" : "rgba(0, 0, 0, 0.06)"}`,
+      border: `1px solid ${glowActive ? "#9CA3AF" : isInView ? "rgba(0, 0, 0, 0.1)" : "rgba(0, 0, 0, 0.06)"}`,
       borderRadius: 16,
-      boxShadow: isInView ? ACTIVE_SHADOW : BASE_SHADOW,
-      transform: isInView ? "translateY(-2px)" : "translateY(0)",
-      transition: "box-shadow 0.4s ease, transform 0.4s ease, border-color 0.4s ease",
+      boxShadow: glowActive ? GLOW_SHADOW : isInView ? ACTIVE_SHADOW : BASE_SHADOW,
+      transform: glowActive || isInView ? "translateY(-2px)" : "translateY(0)",
+      transition: `box-shadow ${transitionDur} ${GLOW_EASE}, transform ${transitionDur} ${GLOW_EASE}, border-color ${transitionDur} ${GLOW_EASE}`,
       cursor: "default",
     };
     return variant === "desktop"
@@ -144,9 +189,8 @@ const FeatureCard = memo(function FeatureCard({
           justifyContent: "center",
         }
       : { ...shared, padding: "16px 18px", display: "flex", alignItems: "flex-start", gap: 14 };
-  }, [isInView, variant]);
+  }, [isInView, variant, glowActive]);
 
-  // Desktop icon-tint box depends only on rgba — memoized so it doesn't recreate on every render.
   const desktopIconBoxStyle = useMemo<CSSProperties>(
     () => ({
       width: 34,
@@ -162,9 +206,14 @@ const FeatureCard = memo(function FeatureCard({
     [rgba]
   );
 
+  const hoverHandlers = {
+    onMouseEnter: () => setIsHovered(true),
+    onMouseLeave: () => setIsHovered(false),
+  };
+
   if (variant === "desktop") {
     return (
-      <motion.div ref={cardRef} variants={cinematicSlideUp} style={containerStyle}>
+      <motion.div ref={cardRef} variants={cinematicSlideUp} style={containerStyle} {...hoverHandlers}>
         <div style={TITLE_ROW_STYLE}>
           <div style={desktopIconBoxStyle}>{icon}</div>
           <div style={TITLE_DESKTOP_STYLE}>{title}</div>
@@ -175,7 +224,7 @@ const FeatureCard = memo(function FeatureCard({
   }
 
   return (
-    <motion.div ref={cardRef} variants={cinematicSlideUp} style={containerStyle}>
+    <motion.div ref={cardRef} variants={cinematicSlideUp} style={containerStyle} {...hoverHandlers}>
       <div style={ICON_BOX_MOBILE_STYLE}>{icon}</div>
       <div style={TEXT_COL_MOBILE_STYLE}>
         <span style={TITLE_MOBILE_STYLE}>{title}</span>
