@@ -640,6 +640,7 @@ const Home = ({ showDock }: { showDock: boolean }) => {
               />
             ))}
           </div>
+          </div>
         </div>
       </div>
 
