@@ -533,7 +533,7 @@ const Home = ({ showDock }: { showDock: boolean }) => {
                     </svg>
                   ),
                 },
-              ].map((step) => (
+              ].map((step, i) => (
                 <FeatureCard
                   key={step.title}
                   variant="desktop"
@@ -541,6 +541,7 @@ const Home = ({ showDock }: { showDock: boolean }) => {
                   title={step.title}
                   description={step.desc}
                   rgba={step.rgba}
+                  cascadeIndex={i}
                 />
               ))}
             </motion.div>
