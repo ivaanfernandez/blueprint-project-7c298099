@@ -132,22 +132,49 @@ const Home = ({ showDock }: { showDock: boolean }) => {
   const [desktopVideoReady, setDesktopVideoReady] = useState(false);
   const [mobileVideoReady, setMobileVideoReady] = useState(false);
 
+  // Robust readiness detection: some browsers (Safari, throttled previews)
+  // don't fire `canplay` reliably after a late mount. Listen to multiple
+  // events, kick `.play()` (autoplay can be blocked silently), and poll
+  // `readyState` as a final fallback.
+  const attachVideoReadiness = (
+    v: HTMLVideoElement | null,
+    setReady: (b: boolean) => void
+  ) => {
+    if (!v) return () => {};
+    const markReady = () => setReady(true);
+    const events = ["loadeddata", "canplay", "canplaythrough", "playing"] as const;
+    events.forEach((ev) => v.addEventListener(ev, markReady));
+    // Force a play() — required on some browsers even with autoplay attr.
+    const tryPlay = () => {
+      const p = v.play();
+      if (p && typeof p.catch === "function") p.catch(() => {});
+    };
+    tryPlay();
+    if (v.readyState >= 2) setReady(true);
+    // Poll fallback (covers cases where no event fires post-mount).
+    const poll = window.setInterval(() => {
+      if (v.readyState >= 2) {
+        setReady(true);
+        window.clearInterval(poll);
+      }
+    }, 250);
+    // Hard timeout: reveal the video element after 3s no matter what — if
+    // anything is decoded it'll show; otherwise the poster stays via the
+    // <video poster> attribute.
+    const timeout = window.setTimeout(() => setReady(true), 3000);
+    return () => {
+      events.forEach((ev) => v.removeEventListener(ev, markReady));
+      window.clearInterval(poll);
+      window.clearTimeout(timeout);
+    };
+  };
+
   useEffect(() => {
-    const v = desktopVideoRef.current;
-    if (!v) return;
-    const onReady = () => setDesktopVideoReady(true);
-    v.addEventListener("canplay", onReady);
-    if (v.readyState >= 3) setDesktopVideoReady(true);
-    return () => v.removeEventListener("canplay", onReady);
+    return attachVideoReadiness(desktopVideoRef.current, setDesktopVideoReady);
   }, [isDesktop]);
 
   useEffect(() => {
-    const v = mobileVideoRef.current;
-    if (!v) return;
-    const onReady = () => setMobileVideoReady(true);
-    v.addEventListener("canplay", onReady);
-    if (v.readyState >= 3) setMobileVideoReady(true);
-    return () => v.removeEventListener("canplay", onReady);
+    return attachVideoReadiness(mobileVideoRef.current, setMobileVideoReady);
   }, []);
   useEffect(() => {
     const id = setInterval(
