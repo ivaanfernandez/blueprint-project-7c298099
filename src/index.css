@@ -268,22 +268,33 @@ All colors MUST be HSL.
 
 /* ── DESKTOP ≥1024px: About section Option D Aligned ── */
 @media (min-width: 1024px) {
+  .about-section-new {
+    padding: 48px 7% !important;
+    max-height: 90vh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+
   .about-title-top {
     display: block;
     width: 100%;
     text-align: center;
     white-space: nowrap;
     font-size: clamp(16px, 2vw, 25px) !important;
+    margin-bottom: 24px !important;
   }
 
   .about-grid-desktop {
     display: grid !important;
     grid-template-columns: 1fr 1fr;
-    gap: 32px;
+    gap: 24px;
     align-items: stretch;
     max-width: 1280px;
     margin-left: auto;
     margin-right: auto;
+    flex: 1;
+    min-height: 0;
   }
 
   .about-grid-desktop > div:first-child {
@@ -296,7 +307,7 @@ All colors MUST be HSL.
     display: grid !important;
     grid-template-columns: 1fr 1fr !important;
     grid-template-rows: 1fr 1fr !important;
-    gap: 16px !important;
+    gap: 14px !important;
     flex-grow: 1;
     min-height: 0;
   }
@@ -308,9 +319,8 @@ All colors MUST be HSL.
 
   .rotativo-container {
     width: 100%;
-    height: auto !important;
+    height: 100% !important;
     align-self: stretch;
-    aspect-ratio: 4 / 5 !important;
     max-width: none !important;
     max-height: none !important;
   }
