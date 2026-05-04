@@ -34,13 +34,7 @@ const TITLE_DESKTOP_STYLE: CSSProperties = {
   letterSpacing: "1.3px",
   textTransform: "uppercase",
   lineHeight: 1.2,
-};
-
-const TITLE_ROW_STYLE: CSSProperties = {
-  display: "flex",
-  alignItems: "center",
-  gap: 10,
-  marginBottom: 8,
+  textAlign: "center",
 };
 
 const DESC_DESKTOP_STYLE: CSSProperties = {
@@ -49,6 +43,7 @@ const DESC_DESKTOP_STYLE: CSSProperties = {
   fontWeight: 300,
   color: "#6B7280",
   lineHeight: 1.5,
+  textAlign: "center",
   display: "-webkit-box",
   WebkitLineClamp: 3,
   WebkitBoxOrient: "vertical",
@@ -185,24 +180,26 @@ const FeatureCard = memo(function FeatureCard({
     return variant === "desktop"
       ? {
           ...shared,
-          padding: 16,
+          padding: "20px 16px",
           height: "100%",
           minHeight: 0,
           display: "flex",
           flexDirection: "column",
+          alignItems: "center",
           justifyContent: "center",
-          gap: 8,
+          textAlign: "center",
+          gap: 10,
         }
       : { ...shared, padding: "16px 18px", display: "flex", alignItems: "flex-start", gap: 14 };
   }, [isInView, variant, glowActive]);
 
   const desktopIconBoxStyle = useMemo<CSSProperties>(
     () => ({
-      width: 30,
-      height: 30,
-      borderRadius: 8,
-      background: `rgba(${rgba}, 0.06)`,
-      border: `1px solid rgba(${rgba}, 0.1)`,
+      width: 44,
+      height: 44,
+      borderRadius: 10,
+      background: `rgba(${rgba}, 0.08)`,
+      border: `1px solid rgba(${rgba}, 0.12)`,
       display: "flex",
       alignItems: "center",
       justifyContent: "center",
@@ -219,10 +216,8 @@ const FeatureCard = memo(function FeatureCard({
   if (variant === "desktop") {
     return (
       <motion.div ref={cardRef} variants={cinematicSlideUp} style={containerStyle} {...hoverHandlers}>
-        <div style={TITLE_ROW_STYLE}>
-          <div style={desktopIconBoxStyle}>{icon}</div>
-          <div style={TITLE_DESKTOP_STYLE}>{title}</div>
-        </div>
+        <div style={desktopIconBoxStyle}>{icon}</div>
+        <div style={TITLE_DESKTOP_STYLE}>{title}</div>
         <div style={DESC_DESKTOP_STYLE}>{description}</div>
       </motion.div>
     );
