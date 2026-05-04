@@ -373,7 +373,7 @@ const Home = ({ showDock }: { showDock: boolean }) => {
         {/* Desktop: poster image + video crossfade */}
         <div className="hidden md:block" style={{ position: "absolute", inset: 0, zIndex: 0 }}>
           <img
-            src="/poster_image.jpg"
+            src={HERO_POSTER_SRC}
             alt=""
             aria-hidden="true"
             fetchPriority="high"
@@ -394,13 +394,16 @@ const Home = ({ showDock }: { showDock: boolean }) => {
           {isDesktop && (
             <video
               ref={desktopVideoRef}
-              src="/hero-bg.mp4"
-              poster="/poster_image.jpg"
+              src={HERO_DESKTOP_VIDEO_SRC}
+              poster={HERO_POSTER_SRC}
               autoPlay
               muted
+              defaultMuted
               loop
               playsInline
+              webkit-playsinline="true"
               preload="auto"
+              fetchPriority="high"
               style={{
                 position: "absolute",
                 inset: 0,
@@ -419,7 +422,7 @@ const Home = ({ showDock }: { showDock: boolean }) => {
         {/* Mobile: poster image + lightweight video crossfade */}
         <div className="block md:hidden" style={{ position: "absolute", inset: 0, zIndex: 0 }}>
           <img
-            src="/poster_image.jpg"
+            src={HERO_POSTER_SRC}
             alt=""
             aria-hidden="true"
             fetchPriority="high"
@@ -439,13 +442,16 @@ const Home = ({ showDock }: { showDock: boolean }) => {
           />
           <video
             ref={mobileVideoRef}
-            src="/hero-bg-mobile.mp4"
-            poster="/poster_image.jpg"
+            src={HERO_MOBILE_VIDEO_SRC}
+            poster={HERO_POSTER_SRC}
             autoPlay
             muted
+            defaultMuted
             loop
             playsInline
+            webkit-playsinline="true"
             preload="auto"
+            fetchPriority="high"
             style={{
               position: "absolute",
               inset: 0,
