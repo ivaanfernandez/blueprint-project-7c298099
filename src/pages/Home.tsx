@@ -398,7 +398,6 @@ const Home = ({ showDock }: { showDock: boolean }) => {
               poster={HERO_POSTER_SRC}
               autoPlay
               muted
-              defaultMuted
               loop
               playsInline
               webkit-playsinline="true"
@@ -446,7 +445,6 @@ const Home = ({ showDock }: { showDock: boolean }) => {
             poster={HERO_POSTER_SRC}
             autoPlay
             muted
-            defaultMuted
             loop
             playsInline
             webkit-playsinline="true"
