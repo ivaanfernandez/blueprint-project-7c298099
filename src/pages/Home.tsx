@@ -602,13 +602,14 @@ const Home = ({ showDock }: { showDock: boolean }) => {
                     </svg>
                   ),
                 },
-              ].map((c) => (
+              ].map((c, i) => (
                 <FeatureCard
                   key={c.title}
                   variant="mobile"
                   icon={c.icon}
                   title={c.title}
                   description={c.desc}
+                  cascadeIndex={i}
                 />
               ))}
             </motion.div>
