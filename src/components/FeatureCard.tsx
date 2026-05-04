@@ -9,6 +9,8 @@ interface FeatureCardProps {
   variant: "desktop" | "mobile";
   /** Tint color for the icon container background (rgba "r,g,b" string). Desktop only. */
   rgba?: string;
+  /** Index in the cascade sequence (0..n). When provided, card receives a one-shot scroll-in glow at index*200ms. */
+  cascadeIndex?: number;
 }
 
 /* ── Static styles (module-scope, never re-created) ── */
@@ -16,6 +18,13 @@ const BASE_SHADOW =
   "0 1px 2px rgba(0, 0, 0, 0.04), 0 4px 12px rgba(0, 0, 0, 0.06), 0 12px 32px rgba(0, 0, 0, 0.05)";
 const ACTIVE_SHADOW =
   "0 2px 4px rgba(0, 0, 0, 0.05), 0 8px 20px rgba(0, 0, 0, 0.08), 0 20px 48px rgba(0, 0, 0, 0.06)";
+const GLOW_SHADOW =
+  "0 0 0 1px #9CA3AF, 0 0 24px rgba(156, 163, 175, 0.45), 0 0 48px rgba(156, 163, 175, 0.15)";
+const GLOW_EASE = "cubic-bezier(0.16, 1, 0.3, 1)";
+const PREFERS_REDUCED_MOTION =
+  typeof window !== "undefined" &&
+  typeof window.matchMedia === "function" &&
+  window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 const TITLE_DESKTOP_STYLE: CSSProperties = {
   fontFamily: "'Rajdhani', sans-serif",
