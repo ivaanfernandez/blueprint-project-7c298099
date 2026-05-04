@@ -182,7 +182,7 @@ const FeatureCard = memo(function FeatureCard({
     return variant === "desktop"
       ? {
           ...shared,
-          padding: "20px 16px",
+          padding: "24px 20px",
           height: "100%",
           minHeight: 0,
           display: "flex",
@@ -190,24 +190,26 @@ const FeatureCard = memo(function FeatureCard({
           alignItems: "center",
           justifyContent: "center",
           textAlign: "center",
-          gap: 10,
+          gap: 0,
         }
       : { ...shared, padding: "16px 18px", display: "flex", alignItems: "flex-start", gap: 14 };
   }, [isInView, variant, glowActive]);
 
+  const isMindset = rgba === "156,163,175";
+
   const desktopIconBoxStyle = useMemo<CSSProperties>(
     () => ({
-      width: 44,
-      height: 44,
-      borderRadius: 10,
-      background: `rgba(${rgba}, 0.08)`,
-      border: `1px solid rgba(${rgba}, 0.12)`,
+      width: 64,
+      height: 64,
+      borderRadius: 14,
+      background: isMindset ? "#E5E7EB" : `rgba(${rgba}, 0.08)`,
+      border: isMindset ? "1px solid rgba(0,0,0,0.08)" : `1px solid rgba(${rgba}, 0.12)`,
       display: "flex",
       alignItems: "center",
       justifyContent: "center",
       flexShrink: 0,
     }),
-    [rgba]
+    [rgba, isMindset]
   );
 
   const hoverHandlers = {
@@ -218,9 +220,11 @@ const FeatureCard = memo(function FeatureCard({
   if (variant === "desktop") {
     return (
       <motion.div ref={cardRef} variants={cinematicSlideUp} style={containerStyle} {...hoverHandlers}>
-        <div style={desktopIconBoxStyle}>{icon}</div>
-        <div style={TITLE_DESKTOP_STYLE}>{title}</div>
-        <div style={DESC_DESKTOP_STYLE}>{description}</div>
+        <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 16, width: "100%" }}>
+          <div style={desktopIconBoxStyle}>{icon}</div>
+          <div style={TITLE_DESKTOP_STYLE}>{title}</div>
+          <div style={{ ...DESC_DESKTOP_STYLE, marginTop: -8 }}>{description}</div>
+        </div>
       </motion.div>
     );
   }
